@@ -1,0 +1,732 @@
+// // Shame stylesheet - for any quick CSS hacks that should be tidied at some point
+
+// // Testing example requests
+// .project-list{
+//     > li{
+//         padding:15px 5px;
+//         border-bottom:1px solid #f0f0f0;
+//         margin:0;
+//         @include clearfix;
+//         &.answered{
+//             .btn-vote{
+//                 background:rgba($green,.6);
+//                 color:#fff;
+//                 &:hover{
+//                     background:rgba($green,.8);
+//                 }
+//                 &[disabled="disabled"]{
+//                     opacity:.4;
+//                     &:hover{
+//                         background:rgba($green,.6);
+//                     }
+//                 }
+//             }
+//         }
+//         &:hover{
+//             background:rgba($blue-light,.05);
+//         }
+//     }
+//     .votes-container{
+//         @extend .span2;
+//     }
+//     .info-container{
+//         @extend .span10;
+//         @extend .last;
+//         color:red;
+//     }
+//     .meta-container{
+//         @include clearfix;
+//     }
+//     h3{
+//         color:#999;
+//         font-size:22px;
+//         line-height:25px;
+//         margin-bottom:10px;
+//         font-weight:400;
+//         font-family:Helvetica,Arial,sans-serif;
+//         .when{
+//             color:#ccc;
+//             font-size:14px;
+//             font-weight:normal;
+//         }
+//         a{
+//             text-decoration:none;
+//             font-weight:600;
+//             &:hover{
+//                 text-decoration:underline;
+//             }
+//         }
+//     }
+//     .btn-vote{
+//         padding:0 5px;
+//         line-height:50px;
+//         width:100%;
+//         background:rgba($blue-light,.2);
+//         @include border-radius(3px);
+//         font-size:22px;
+//         font-weight:bold;
+//         border:none;
+//         &:hover{
+//             background:rgba($blue-light,.6);
+//         }
+//         &[disabled="disabled"]{
+//             background:#fcfcfc;
+//             color:#ccc;
+//         }
+//     }
+//     // .btn-primary,.btn-secondary{
+//     //     padding:0 15px;
+//     //     line-height:30px;
+//     // }
+//     .avatar img{
+//         max-height:25px;
+//         vertical-align: middle;
+//     }
+//     .counts{
+//         @include clearfix;
+//         margin:0 0 10px;
+//         padding:0;
+//         list-style: none;
+//         font-size:14px;
+//         li{
+//             display:block;
+//             float:left;
+//             margin-right:10px;
+//             line-height:25px;
+//             &.runs,&.views{
+//                 background:rgba($blue-light,.6);
+//                 @include border-radius(5px);
+//                 padding:0 7px;
+//                 text-align:center;
+//                 color:#fff;
+//             }
+//         }
+//     }
+//     .status{
+//         font-size:14px;
+//     }
+//     .project-tags{
+//         float:left;
+//     }
+//     .project-status{
+//         float:right;
+//         text-align:right;
+//         font-size:14px;
+//         color:#aaa;
+//     }
+// }
+
+
+// // Tooltip hack
+// // Used to point out the files tab to the user until we have time to implement a better solution
+// .tooltip-hack{
+// 	position:absolute;
+// 	left:103%;
+// 	top:5px;
+// 	background:$primary-color;
+// 	color:#fff;
+// 	padding:1px 5px;
+// 	z-index:20;
+//     font-size: 12px;
+//     line-height: 12px;
+//     white-space: nowrap;
+//     @include border-radius(3px);
+//     &:before{
+//     	content: '';
+//     	position: absolute;
+//     	background: transparent;
+//     	border: 6px solid transparent;
+//     	border-right-color: $primary-color;
+//     	margin-left: -12px;
+//   		margin-bottom: -6px;
+//   		right: 100%;
+//  		bottom: 50%;
+//     }
+// }
+
+// .login-email {
+//     padding-right: 20px;
+// }
+
+// .login-image {
+//    width: 30px;
+// }
+
+// #landing-nav-view {
+//     .inline-block {
+//         padding-top: 14px;
+//         padding-right: 10px;
+//         display:inline-block;
+//     }
+// }
+
+// // Right click menu hack
+// // Used to point out to a user that they can right click for additional options in the file browser
+// .menu-tooltip-hack{
+//     // position:absolute;
+//     // left:103%;
+//     // top:5px;
+//     background:$primary-color;
+//     color:#fff;
+//     padding:3px 20px 3px 5px;
+//     z-index:20;
+//     font-size: 12px;
+//     line-height: 12px;
+//     width:80%;
+//     margin:0 auto;
+//     position:relative;
+//     top:-50px;
+//     @include border-radius(3px);
+//     &:before{
+//         content: '';
+//         position: absolute;
+//         background: transparent;
+//         border: 6px solid transparent;
+//         border-bottom-color: $primary-color;
+//         margin-left: -12px;
+//         bottom: 100%;
+//         left: 50%;
+//     }
+//     .btn-icon{
+//         position:absolute;
+//         top:0;
+//         right:0;
+//     }
+// }
+
+// // Slim layout hacks
+// // Testing out a slim layout and overriding styles
+// // Wanted to get this done in 1-2 days hence the hacks
+// #slim{
+
+//     .wrapper{
+//         padding:10px 40px;
+//         position:relative;
+//     }
+
+//     .browse-more{
+//         position:absolute;
+//         top:20px;
+//         right:10px;
+//         max-width:250px;
+//         a{
+//             color:rgba(255,255,255,.6);
+//             &:hover{
+//                 color:white;
+//                 text-decoration:none;
+//             }
+//         }
+//     }
+
+//     header{
+//         background:#198dd2;
+//         h1{
+//             color:#fff;
+//             font-size:36px;
+//             line-height:42px;
+//             margin:0 250px 20px 0;
+//         }
+//     }
+
+//     .runnable{
+//         display:inline-block;
+//         margin-bottom:20px;
+//     }
+
+//     .run-button{
+//         @include border-radius(3px);
+//         border:1px solid darken($cta-primary,10%);
+//         @include box-shadow(inset 0 1px 0 rgba(255,255,255,.2),0 0 10px rgba(0,0,0,.05));
+//         font-size:16px;
+//         text-transform: uppercase;
+//         line-height:36px;
+//         padding:0 15px;
+//         top:0;
+//         i{
+//             font-size:16px;
+//         }
+//         &[disabled=disabled]{
+//             opacity:.2;
+//             @include box-shadow(inset 0 0 20px rgba(0,0,0,.2));
+//             text-shadow:none;
+//         }
+//     }
+//     .btn-fork,.btn-share,.btn-files,.btn-save, .btn-download, .browse-more a{
+//         @include border-radius(3px);
+//         font-size:16px;
+//         line-height:36px;
+//         padding:0 15px;
+//         background:rgba(0,0,0,.05);
+//         border:1px solid rgba(0,0,0,.05);
+//         margin-left:10px;
+//         color:rgba(255,255,255,.8);
+//         font-weight:normal;
+//         top:0;
+//         display:inline-block;
+//         vertical-align: top;
+//         text-decoration: none;
+//         &:hover{
+//             background:rgba(0,0,0,.08);
+//             color:white;
+//         }
+//         &[disabled=disabled]{
+//             opacity:.2;
+//             @include box-shadow(inset 0 0 20px rgba(0,0,0,.2));
+//             text-shadow:none;
+//         }
+//     }
+
+//     header .files-wrapper{
+//         position:relative;
+//         min-height:36px;
+//     }
+
+//     .btn-files{
+//         position:absolute;
+//         top:0;
+//         right:10px;
+//         z-index:10;
+//         font-size:14px;
+//         line-height:30px;
+//         padding:0 10px;
+//     }
+
+//     #code-editor-view{
+//         background:#fff;
+//     }
+
+//     #code-editor #code-editor-view #code{
+//         top: 0px;
+//         padding-top:0px;
+//     }
+
+//     .ui-layout-resizer.ui-layout-resizer-east{
+//         background-image:none !important;
+//         background-color:#fff !important;
+//     }
+
+//     .ui-layout-north.ui-layout-pane.ui-layout-pane-north{
+//         overflow-y:hidden !important;
+//     }
+
+//     .file-tree{
+//         li.selected{
+//             background:#fff;
+//             a{
+//                 color:#666;
+//                 font-weight:bold;
+//             }
+//         }
+//     }
+
+//     .open-file-tabs{
+//         background:#198dd2;
+//         padding-left:40px;
+//         @include box-sizing(border-box);
+//         li{
+//             margin-right:10px;
+//             a{
+//                 @include border-radius(3px 3px 0 0);
+//                 background:rgba(255,255,255,.6);
+//                 font-size:18px;
+//                 line-height:36px;
+//                 padding:0 20px;
+//                 color:#888;
+//             }
+//             &.selected a{
+//                 background:#fff;
+//                 color:#888;
+//             }
+//             .close-file{
+//                 line-height:36px;
+//                 color:rgba(0,0,0,.2);
+//                 &:hover{
+//                     color:rgba(0,0,0,.4);
+//                 }
+//             }
+//         }
+//     }
+
+//     h1{
+//         float:left;
+//         margin-right:10px;
+//     }
+
+// }
+
+// #project-tail-view{
+//     background:#000;
+// }
+
+// // File descriptions
+// #file-readme-view{
+//     background: rgb(253, 251, 228);
+//     padding: 0;
+//     p,h1,h2,h3,ul,li{
+//         margin:0;
+//         padding:0;
+//         font-size:18px;
+//         color:#555;
+
+//     }
+//     .file-desc{
+//         max-width: 800px;
+//         margin:0 20px 0 60px;
+//         padding:20px;
+//         padding-bottom:30px;
+//         // background: #fcf8d4;
+//         // @include border-radius(5px);
+//         // border:1px solid #efdeb0;
+//     }
+//     .btn-show, .btn-hide{
+//         text-decoration: none;
+//     }
+//     .btn-show{
+//         position:absolute;
+//         top:-26px;
+//         left:14px;
+//         color:white;
+//     }
+//     .btn-hide{
+//         position:absolute;
+//         top :22px;
+//         left:25px;
+//         opacity: .30;
+//         &:hover{
+//             opacity: .60;
+//         }
+//     }
+// }
+
+
+// // Testing example requests
+// #slim{
+//     .top{
+//         background:blue;
+//         height:50px;
+//     }
+
+//     .project-meta{
+//         color:rgba(255,255,255,.6);
+//         margin:0 0 20px;
+//         .avatar img{
+//             max-height:25px;
+//             vertical-align: middle;
+//         }
+//         .counts{
+//             @include clearfix;
+//             margin:0 0 10px;
+//             padding:0;
+//             list-style: none;
+//             li{
+//                 display:block;
+//                 float:left;
+//                 margin-right:10px;
+//                 line-height:40px;
+//                 &.runs,&.views{
+//                     background:rgba(255,255,255,.2);
+//                     @include border-radius(5px);
+//                     padding:0 10px;
+//                     text-align:center;
+//                     color:#fff;
+//                 }
+//             }
+//         }
+//     }
+
+//     .anotherwrapper{
+//         padding:10px 10px 10px 40px;
+//         position:relative;
+//     }
+
+//     .top{
+//         background:$blue-dark;
+//         @include background-image(linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0) 50%,rgba(0,0,0,.1) 100%));
+//         @include box-shadow(inset 0 1px 0 rgba(255,255,255,.2),0 1px 3px rgba(0,0,0,.2));
+//         border-bottom:1px solid darken($blue-dark,5%);
+//         @include clearfix;
+//         position:relative;
+//         z-index:1;
+//         margin-bottom:$padding/2;
+//     }
+
+//     .logo{
+//         height:30px;
+//         width:162px;
+//         background:url(../../styles/assets/sprite@2x.png) no-repeat 0 0;
+//         background-size:1000px 1000px;
+//         text-indent:-9999px;
+//         margin:0;
+//         display:inline-block;
+//         float:left;
+//         &:active{
+//             background-position:0 -50px;
+//         }
+//     }
+
+//     .btn-primary.ask{
+//         @include background-image(linear-gradient($red,#f01325));
+//         border-color:#f01325;
+//         line-height:30px;
+//         padding:0 15px;
+//     }
+
+//     #ask-question-form{
+//         label{
+//             display:inline;
+//             color:white;
+//         }
+//         .question-input{
+//             width:400px;
+//             height:30px;
+//             @include box-sizing(border-box);
+//             padding:5px;
+//             outline:none;
+//         }
+//         .question-container{
+//             position:relative;
+//             display:inline-block;
+//         }
+//         .dropdown{
+//             display:block;
+//             max-height:150px;
+//             background-color:white;
+//             overflow:scroll;
+//             position:absolute;
+//             top:100%;
+//             left:0;
+//             width:400px;
+//             ul{
+//                 list-style:none;
+//                 padding:0;
+//                 margin:0;
+//                 li{
+//                     padding:5px 10px;
+//                     font-weight:bold;
+//                     &:hover{
+//                         background:rgba($blue-light,.1);
+//                     }
+//                     .answeredby{
+//                         font-weight:normal;
+//                         font-size:12px;
+//                         display:block;
+//                         .avatar img{
+//                             max-height:20px;
+//                             vertical-align:middle;
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+
+// // Testing out asking and answering runnable howtos
+// // Style the answer/submit button
+// .btn-answer{
+//     @extend .btn-secondary;
+//     background-color:$yellow !important;
+//     background-image: none !important;
+//     padding: 5px 15px;
+//     text-shadow: none;
+//     color: #333;
+//     border-color:darken($cta-secondary,30%);
+// }
+
+// // Facebook login
+// .login-submit{
+//     //margin:20px 0 0;
+// }
+// .btn-fb, .btn-tw{
+//     border: 1px solid rgba(0, 0, 0, 0.5);
+//     @include border-radius(2px);
+//     @include background-image(linear-gradient(#6486cf,#4a6baf));
+//     @include box-shadow(inset 0 1px 2px rgba(255, 255, 255, 0.3), 0 1px 1px rgba(0, 0, 0, 0.1));
+//     color: #fff;
+//     text-shadow:0 1px 0 rgba(0,0,0,.4);
+//     padding:0 15px;
+//     line-height:2em;
+//     font-weight:bold;
+// }
+// .btn-tw{
+//     @include background-image(linear-gradient(#41abe0,#1184bd));
+// }
+
+
+// // Request modal and sign up form
+// // Ask a question modal
+// .request-modal .modal{
+//     width:800px;
+//     .question-input{
+//         width:100%;
+//     }
+//     .project-list{
+//         margin-bottom:20px;
+//         > li{
+//             padding:5px;
+//             background: #fff;
+//             border: 1px solid #ddd;
+//             @include box-sizing(border-box);
+//         }
+//     }
+// }
+
+// // Testing related projects in the sidebar
+// // And asking a question in the sidebar
+// .ui-layout-east{
+//     background:#32373a;
+//     @include box-shadow(inset 10px 0 10px rgba(0,0,0,.2));
+//     padding:10px;
+//     h2{
+//         // margin-top:40px;
+//         color:#fff;
+//     }
+//     .close{
+//         position:absolute;
+//         top:52px;
+//         left:2px;
+//         color:rgba(255,255,255,.4);
+//         background:none;
+//         border:none;
+//         font-size:14px;
+//         &:hover{
+//             color:#fff;
+//         }
+//     }
+//     .project-list{
+//         li{
+//             border-bottom:1px solid rgba(0,0,0,.1);
+//             border-top:1px solid rgba(255,255,255,.05);
+//             padding:10px 0;
+//             &:first-of-type{
+//                 border-top:none;
+//             }
+//             &:last-child{
+//                 border-bottom:none;
+//             }
+//             &:hover{
+//                 background:transparent;
+//             }
+//             .btn-vote{
+//                 font-size:18px;
+//                 padding:0 5px;
+//                 line-height:30px;
+//             }
+//             h3{
+//                 font-size:18px;
+//                 line-height:20px;
+//                 a{
+//                     font-weight:400;
+//                     padding:0;
+//                     &:hover{
+//                         background:transparent;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+// .ask-container{
+//     margin-top:10px;
+//     p{
+//         margin-bottom:5px;
+//     }
+//     label{
+//         color:#fff;
+//         &.ask{
+//             font-size:18px;
+//         }
+//     }
+//     .item{
+//         margin-bottom:10px;
+//     }
+// }
+
+// #comment-form{
+//     margin-bottom:40px;
+// }
+// .comment{
+//     @include clearfix;
+//     margin-bottom:20px;
+// }
+
+// // Test search bar in header
+// #search-bar-view{
+//     background:rgba($blue-light,.2);
+//     @include border-radius(4px);
+//     border:1px solid rgba($blue-light,.4);
+//     padding:10px;
+//     margin-bottom:20px;
+//     label{
+//         font-weight:bold;
+//     }
+//     input{
+//         @include box-shadow(4px);
+//         @include box-sizing(border-box);
+//         @include border-radius(4px);
+//     }
+//     .icon-search{
+//         position:absolute;
+//         right:10px;
+//         top:5px;
+//         color:#ddd;
+//         font-size:32px;
+//     }
+//     .search-auto-complete{
+//         display:none;
+//         position:absolute;
+//         top:100%;
+//         background:#fff;
+//         max-height:300px;
+//         width:100%;
+//         left:0;
+//         @include box-shadow(0 0 10px rgba(0,0,0,.1));
+//         @include border-radius(0 0 5px 5px);
+//         @include box-sizing(border-box);
+//         border:1px solid #ddd;
+//         border-top:none;
+//         ul{
+//             padding:0;
+//             margin:0;
+//             list-style:none;
+//             a{
+//                 display:block;
+//                 padding:10px;
+//                 text-decoration:none;
+//                 &:hover{
+//                     background:rgba($blue-light,.05);
+//                     text-decoration:underline;
+//                 }
+//             }
+//         }
+//     }
+// }
+// .top .search-bar{
+//     float:left;
+//     label{
+//         display:none;
+//     }
+//     #search-bar-view{
+//         margin:0 20px;
+//         background:transparent;
+//         padding:0;
+//         input{
+//             width:400px;
+//             font-size:14px;
+//             padding:5px 10px;
+//         }
+//         .icon-search{
+//             font-size:16px;
+//         }
+//     }
+// }
+
+// // Code annotations
+
+// #code-annotation-view{
+//     color:#fff;
+//     padding-top:250px;
+//     font-size:16px;
+// }
+

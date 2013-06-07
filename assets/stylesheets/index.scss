@@ -1,0 +1,97 @@
+/*@import "fonts/font-awesome/font-awesome.scss";*/
+@import "button";
+@import "popup";
+
+html, body {
+	height: 100%;
+	width : 100%;
+	/*background-color: #202020;*/
+}
+
+#code-editor-view {
+	background: #202020;
+	/* this is necessary for when the last tab is closed */
+}
+
+.display-none {
+	display: none;
+}
+
+.display-none-important {
+	display:none !important;
+}
+
+.clear {
+	clear: both;
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+
+.clearfix {
+	//display: inline-block;
+}
+
+html[xmlns] .clearfix {
+	//display: block;
+}
+
+* html .clearfix {
+	height: 1%;
+}
+/*pnotify customize*/
+
+h4.ui-pnotify-title {
+	margin: 0;
+	font-family: inherit;
+	font-weight: bold;
+	color: inherit;
+	text-rendering: optimizelegibility;
+}
+
+.ui-widget {
+	font-size: 75% !important;
+}
+
+.tail-logs pre {
+	margin: 0;
+	display: inline;
+}
+
+.tail-logs pre.block {
+	display: block;
+}
+
+.tail-logs pre.nowrap {
+	white-space: nowrap;
+}
+
+.tail-logs pre.stderr {
+	color: #d54672;
+}
+
+.tail-logs pre.system {
+	color: #5d6668;
+}
+
+.tail-logs pre.status {
+	color: #6fa92f;
+}
+
+.blocking-backdrop {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1040;
+	background-color: black;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+}

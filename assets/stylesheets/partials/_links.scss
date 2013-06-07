@@ -1,0 +1,217 @@
+//Text links
+a,.btn-text{
+	text-decoration:none;
+	border:none;
+	background:none;
+	color:$primary-color;
+	&:hover{
+		text-decoration:underline;
+	}
+	&.disabled,&.disabled:hover{
+		opacity: 0.3;
+	}
+}
+
+
+/* #################################
+Buttons
+####################################*/
+
+// Generic buttons
+.btn{
+	display:inline-block;
+	padding:0 20px;
+	font-size:14px;
+	line-height:2.4em;
+	font-family:$secondary-font;
+	font-weight:normal;
+	color:#999;
+	background:$cta-tertiary;
+	@include box-shadow(0 1px 0 darken($cta-tertiary,5%));
+	@include border-radius($br);
+	text-transform:capitalize;
+	border:none;
+	cursor:pointer;
+	text-align:center;
+	&:hover,&:focus{
+		text-decoration:none;
+		background:darken($cta-tertiary,2%);
+	}
+	&[disabled=disabled]{
+		text-shadow: 0 1px 0 rgba(255,255,255,.6);
+		color: #ddd;
+		background:rgba(0,0,0,.05);
+	@include box-shadow(0 1px 0 #eee);
+	}
+}
+
+// Primary button
+// What's the main thing you want users to do on this page?
+.btn-primary{
+	@extend .btn;
+	color:#fff;
+	background:$cta-primary;
+	@include box-shadow(0 1px 0 darken($cta-primary,5%));
+	&:hover,&:focus{
+		background:darken($cta-primary,2%);
+	}
+	&:active{
+		
+	}
+}
+
+// Secondary button
+// Usually the main action for a form e.g. save, or secondary actions to the primary
+.btn-secondary{
+	@extend .btn;
+	color:#fff;
+	background:$cta-secondary;
+	@include box-shadow(0 1px 0 darken($cta-secondary,5%));
+	&:hover,&:focus{
+		background:darken($cta-secondary,2%);
+	}
+	&:active{
+
+	}
+}
+
+// Tertiary button
+// Any other buttons that are actions but don't need to be called out
+.btn-tertiary{
+	@extend .btn;
+	&:hover,&:focus{
+		
+	}
+	&:active{
+
+	}
+}
+
+// Small button
+// Makes any of the buttons above smaller
+.btn-small{
+	padding:0 8px;
+	font-size:12px;
+	line-height:1.8em;
+	i{
+		font-size:12px;
+	}
+}
+
+// Bad button
+// If something is perminent or needs a warning e.g. delete
+.btn-bad{
+	@extend .btn;
+	background:$bad-color;
+	@include box-shadow(0 1px 0 darken($bad-color,5%));
+}
+
+
+.btn-channels, .btn-request{
+	display:block;
+	margin:0 5px 10px;
+}
+
+// Github button
+.btn-github{
+    display: inline-block;
+    padding: 0.5em 1em;
+    border: 1px solid #d4d4d4;
+    margin: 0;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 1px 1px 0 #fff;
+    font:14px/normal sans-serif;
+    font-weight:bold;
+    color: #333;
+    white-space: nowrap;
+    cursor: pointer;
+    outline: none;
+    background-color: #ececec;
+    @include background-image(linear-gradient(#f4f4f4, #ececec));
+    border-radius: 0.2em;
+	&:hover,&:focus,&:active{
+	    border-color: #3072b3;
+	    border-bottom-color: #2a65a0;
+	    text-decoration: none;
+	    text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+	    color: #fff;
+	    background-color: #3c8dde;
+	    @include background-image(linear-gradient(#599bdc, #3072b3));
+	}
+	&:active{
+	    border-color: #2a65a0;
+	    border-bottom-color: #3884cd;
+	    background-color: #3072b3;
+	    @include background-image(linear-gradient(#3072b3, #599bdc));
+	}
+}
+
+// Buttons with icons
+.btn-icon{
+	background:transparent;
+	border:none;
+	color:rgba(255,255,255,.6);
+	i{
+		font-size:12px;
+	}
+	&:hover{
+		color:#fff;
+	}
+}
+
+// Collapse panel button
+.btn-collapse{
+	background:transparent;
+	border:none;
+	padding:10px;
+	display:inline-block;
+	position:absolute;
+	bottom:0;
+	right:0;
+	z-index:20;
+	color:rgba(255,255,255,.4);
+	&:hover{
+		color:rgba(255,255,255,.8);
+	}
+}
+
+
+
+
+
+// Vote button
+// Voting up code examples on homepage, search, related examples
+.btn-vote{
+	font-size:16px;
+	text-align:center;
+	color:#888;
+	position:relative;
+	background:transparent;
+	border:none;
+	padding:14px 0 0;
+	&:before{
+		content: "\f0d8";
+		font-family: FontAwesome;
+		font-weight: normal;
+		font-style: normal;
+		-webkit-font-smoothing: antialiased;
+		font-size:22px;
+		position:absolute;
+		top:0;
+		left:50%;
+		margin-left:-6px;
+		color:$cta-secondary;
+		line-height:.8em;
+	}
+	&:hover{
+		&:before{
+			color:darken($cta-secondary,2%);
+		}
+	}
+	&[disabled="disabled"]{
+		&:before{
+			color:#eee;
+		}
+	}
+}

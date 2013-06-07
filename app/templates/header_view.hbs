@@ -1,0 +1,17 @@
+<div class="container">
+  <a class="logo" href="/">Runnable</a>
+  <div id="search-bar-holder" class="search-bar">
+  </div>
+  {{#if user.username}}
+  <nav class="user-nav dropdown">
+    <a href="" class="dropdown-toggle"><img src="/external/images/lee.jpg" alt="" class="thumbnail">&nbsp;{{username}}</a>
+    <div class="dropdown-menu">
+      <a href="">Log out</a>
+    </div>
+  </nav>
+  {{else}}
+  <nav class="user-nav">
+    <a id="header-login-link" href="/login" data-bypass>Log in</a>
+  </nav>
+  {{/if}}
+</div>

@@ -1,0 +1,467 @@
+// Project title
+.title{
+	@include clearfix;
+	position:relative;
+	padding-left:40px;
+	margin:0 0 $padding;
+	.btn-vote{
+		position:absolute;
+		top:0;
+		left:0;
+		width:30px;
+		margin:0 auto;
+	}
+	.title-input{
+		font-size:28px;
+	}
+	.edit-link{
+		font-size:12px;
+	}
+}
+
+// Actions
+.actions{
+	@include clearfix;
+	margin:0 0 $padding;
+}
+
+// Project author
+.author{
+	@include clearfix;
+	line-height:1em;
+	.avatar{
+		float:left;
+		margin:0 5px 5px 0;
+		img{
+			max-width:40px;
+			vertical-align: middle;
+
+		}
+	}
+}
+
+// Tags
+.tags{
+	form{
+		input{
+			@include border-radius($br);
+			padding:2px;
+			width:100px;
+			float:left;
+			margin-right:5px;
+		}
+	}
+}
+
+// Code area
+// Where all the code tabs and file browser are contained
+.code-container{
+	@include clearfix;
+	margin: 0 0 $padding;
+	position:relative;
+	.file-content{
+		@include clearfix;
+		border:1px solid #e8e8e8;
+		@include box-shadow(0 0 0 2px rgba(0,0,0,.05));
+		position:relative;
+	}
+}
+
+// File browser
+// Show file browser button
+.btn-show-file-browser{
+	position:absolute;
+	top:0;
+	right:0;
+	background:#e8e8e8;
+}
+
+.file-browser{
+	background:$file-browser;
+	overflow:visible !important;
+	z-index:12 !important;
+	margin-top:-1px !important;
+}
+
+.nav-file-browser{
+	background:$file-browser;
+	overflow-x:hidden;
+	overflow-y:auto;
+	h3{
+		padding:10px 10px 10px 0;
+		margin-left:25px;
+		position:relative;
+		&:before{
+			font-family: FontAwesome;
+			-webkit-font-smoothing: antialiased;
+			font-size:13px;
+			content: "\f07c"; // Folder open
+			padding-right:3px;
+			position:absolute;
+			right:100%;
+			top:12px;
+		}
+	}
+}
+
+// Set the padding for indentation of child files/folders
+$tree-padding:15px;
+
+.file-tree{
+	list-style:none;
+	margin:5px -4px 0 0;
+	padding:0;
+	position:relative;
+	z-index:4;
+	ul,ol{
+		list-style:none;
+		margin:0;
+		padding:0;
+	}
+	li{
+		position:relative;
+		margin:0;
+		color:$file-browser-off;
+		a{
+			display:block;
+			color:$file-browser-off;
+			padding:5px 0;
+			font-weight:normal;
+			&:hover,&:focus{
+				color:$file-browser-on;
+				text-decoration:none;
+			}
+		}
+		input{
+			max-width:90%;
+			@include box-sizing(border-box);
+			outline:none;
+			margin-right:5px;
+			border: 1px solid darken($file-browser,5%);
+			@include box-shadow(inset 0 1px 4px rgba(0,0,0,.4));
+			padding: 3px;
+			margin: 5px 0;
+		}
+	}
+	li.folder{
+		span.dir{
+			position:relative;
+			padding:5px 0;
+			display:block;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			&:hover,&:focus{
+				color:#fff;
+				cursor:pointer;
+			}
+		}
+		span.dir:before{
+			font-family: Fontello;
+			font-weight: normal;
+			font-style: normal;
+			text-decoration: inherit;
+			-webkit-font-smoothing: antialiased;
+			font-size:16px;
+			content:"\25b8"; // Arrow right
+			//position: absolute;
+			//right: 100%;
+			padding-right: 5px;
+		}
+		&.open{
+			>span{
+				>span.dir:before{
+					content:"\25be"; // Arrow down
+				}
+			}
+		}
+		&.drop-hover >span{
+			// background:#26292b;
+			// @include border-radius(2px);
+			color:#fff;
+		}
+	}
+	li.selected{
+		background:$code-rows;
+		// @include box-shadow(0 1px 0 rgba(255,255,255,.05),inset 0 -1px 5px -1px rgba(0,0,0,.1),inset 0 1px 5px -1px rgba(0,0,0,.1));
+		a{
+			color:$file-browser-on;
+		}
+	}
+	.ui-draggable-dragging{
+		background:#14445f;
+		color:#fff;
+		@include border-radius(25px);
+		padding:0 10px;
+	}
+
+	// Indent each child list item but ensure background spans full width of file browser
+	li{
+		padding-left:10px;
+		li{
+			margin-left:-$tree-padding;
+			padding-left:$tree-padding*2;
+			li{
+				margin-left:-$tree-padding*2;
+				padding-left:$tree-padding*3;
+				li{
+					margin-left:-$tree-padding*3;
+					padding-left:$tree-padding*4;
+					li{
+						margin-left:-$tree-padding*4;
+						padding-left:$tree-padding*5;
+					}
+				}
+			}
+		}
+	}
+}
+
+// Add padding below for right click menu
+.file-tree > li:first-child{
+	padding-bottom: 100px;
+}
+
+// Context menu (right click)
+.context-menu{
+	position:absolute;
+	background:#26292b;
+	@include border-radius(5px);
+	@include box-shadow(inset 0 1px 0 rgba(255,255,255,.1),0 0 10px rgba(0,0,0,.2));
+	padding:5px 0;
+	border:1px solid #1e2022;
+	min-width:150px;
+	z-index:999;
+	.menu-options{
+		list-style:none;
+		padding:0;
+		margin:0;
+		a{
+			display:block;
+			color:rgba(255,255,255,.4);
+			padding:5px 10px;
+			&:hover{
+				background:$primary-color;
+				//@include background-image(linear-gradient(#0c5e91,darken(#0c5e91,5%)));
+				color:#fff;
+				text-decoration:none;
+			}
+			i{
+				font-size:12px !important;
+			}
+		}
+		hr{
+			border:none;
+			border-top:1px solid #1e2022;
+			border-bottom:1px solid rgba(255,255,255,.1);
+		}
+	}
+}
+
+
+// Code editor
+// .toolbar{
+// 	background:$toolbar;
+// 	//@include background-image(linear-gradient(#fafafa,#f3f3f3));
+// 	//@include box-shadow(0 0 3px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,1),inset 1px 0 0 rgba(255,255,255,1));
+// 	height:$toolbar-height;
+// 	@include box-sizing(border-box);
+// 	position:relative;
+// 	z-index:2;
+// 	overflow: visible !important;
+// 	//border-top:1px solid $border-color;
+// }
+
+// #code-editor .toolbar{
+// 	right:-4px;
+// 	margin-left:-4px;
+// }
+
+#code-editor {
+	overflow:visible;
+	z-index:11 !important;
+	#code-editor-view {
+		height: 100%;
+		#code {
+			@include box-sizing(border-box);
+			position:relative;
+			z-index: 1;
+			top: -60px;
+			padding-top: 60px;
+			height: 100%;
+			#code-view {
+				height: 100%;
+				color: white;
+			}
+		}
+	}
+}
+
+// Buttons
+// .btn-share, .btn-save, .btn-fork{
+// 	color:$link-off;
+// 	background:none;
+// 	// @include background-image(linear-gradient(lighten($cta-secondary,1%),darken($cta-secondary,1%)));
+// 	// @include box-shadow(inset 1px 1px 0 rgba(255,255,255,.1));
+// 	// border:1px solid darken($cta-secondary,5%);
+// 	// border-right-width:0;
+// 	border:none;
+// 	//text-shadow:0 1px 0 rgba(255,255,255,.8);
+// 	padding:0 10px;
+// 	// text-transform:capitalize;
+// 	// font-weight:bold;
+// 	line-height:$toolbar-height;
+// 	cursor:pointer;
+// 	position:relative;
+// 	top:-2px;
+// 	font-size:12px;
+// 	font-weight:bold;
+// 	font-family: $secondary-font;
+// 	&:hover,&:focus{
+// 		// @include background-image(linear-gradient(darken($cta-secondary,2%),darken($cta-secondary,4%)));
+// 		color:$link-on;
+// 	}
+// 	&:active{
+// 		// @include box-shadow(inset 1px 1px 0 rgba(255,255,255,.1),inset 0 5px 10px rgba(0,0,0,.1));
+// 		// @include background-image(linear-gradient(darken($cta-secondary,2%),darken($cta-secondary,2%)));
+// 		top:1px;
+// 	}
+// 	&.highlight{ // For highlighting a button
+// 		// @include box-shadow(inset 0 -2px 0 $highlight-color);
+// 		color:$cta-secondary;
+// 	}
+// 	i{
+// 		vertical-align: text-top;
+// 	}
+// }
+
+
+// Buttons
+// .run-button{
+// 	position:relative;
+// 	@include box-shadow(inset 0 1px 0 rgba(255,255,255,.2));
+// 	@include box-sizing(border-box);
+// 	background:$cta-primary;
+// 	border:1px solid darken($cta-primary,5%);
+// 	// border-bottom-color:darken($cta-primary,10%);
+// 	// border-right-color:darken($cta-primary,10%);
+// 	// border-bottom:none;
+// 	color:#fff;
+// 	text-shadow:0 -1px 0 rgba(0,0,0,.2);
+// 	padding:0 10px;
+// 	// text-transform:uppercase;
+// 	font-weight:bold;
+// 	line-height:$toolbar-height - 1px;
+// 	cursor:pointer;
+// 	top:-1px;
+// 	//right:-4px;
+// 	font-size:14px;
+// 	text-transform:uppercase;
+// 	font-family:$secondary-font;
+// 	i{
+// 		margin-right:5px;
+// 		font-size:12px;
+// 		color:rgba(255,255,255,.6);
+// 	}
+// 	&:hover,&:focus{
+// 		background:darken($cta-primary,2%);
+// 	}
+// 	&:active{
+// 		@include box-shadow(inset 0 1px 0 rgba(255,255,255,.2),inset 0 1px 10px rgba(0,0,0,.2));
+// 		//@include background-image(linear-gradient(darken($run-button-dark,2%),darken($run-button-light,2%)));
+// 	}
+// 	&[disabled=disabled], &[disabled=disabled] i{
+// 		text-shadow: 0 1px 0 rgba(255,255,255,.8);
+// 		border-color: transparent;
+// 		color: #ddd;
+// 		background:transparent;
+// 	}
+// }
+
+
+
+// Open files
+.open-file-tabs{
+	@include clearfix;
+	margin:0;
+	padding:0;
+	list-style:none;
+	width:100%;
+	position:relative;
+	li{
+		display:block;
+		float:left;
+		position:relative;
+		a{
+			display:block;
+			float:left;
+			margin-right:5px;
+			padding:10px 25px 10px 10px;
+			//line-height:($toolbar-height);
+			//background:rgba(255,255,255,.1);
+			//@include border-radius(3px 3px 0 0);
+			font-size:14px;
+			background:#fff;
+			border:1px solid #e8e8e8;
+			border-bottom:none;
+			@include border-radius($br $br 0 0);
+			//@include box-shadow(-1px -1px 0 1px rgba(0,0,0,.05),1px 0 0 1px rgba(0,0,0,.05));
+			&:hover{
+				text-decoration:none;
+				border-color:#ccc;
+			}
+		}
+		&.selected{
+			bottom:-1px;
+			z-index:2;
+			a{
+				padding-bottom:12px;
+				color:$font-color-primary;
+				&:hover{
+					border-color:#e8e8e8;
+				}
+			}
+		}
+		.close-file{
+			position:absolute;
+			right:10px;
+			padding:10px 5px;
+			color:rgba(0,0,0,.2);
+			cursor:pointer;
+			&:before{
+				content:"\f00d"; // X
+				font-family: FontAwesome;
+  				font-weight: normal;
+  				font-style: normal;
+  				text-decoration: inherit;
+  				-webkit-font-smoothing: antialiased;
+  				font-size:10px;
+			}
+			&:hover{
+				color:rgba(0,0,0,.4);
+			}
+		}
+	}
+}
+
+// Comments
+// Discussion underneath code
+.comments{
+	margin:0;
+	padding:0;
+	list-style:none;
+	li{
+		@include clearfix;
+		margin:0 0 $padding;
+		.comment-avatar{
+			@extend .span1;
+			img{
+				max-width:50px;
+			}
+		}
+		.comment-text{
+			@extend .span11;
+			@extend .last;
+		}
+	}
+}

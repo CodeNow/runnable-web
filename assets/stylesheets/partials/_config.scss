@@ -1,0 +1,64 @@
+// Set project variables here
+
+$primary-font: "proxima-nova", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$secondary-font: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
+$font-color-primary: #666;
+$font-color-secondary: #999;
+
+$padding: 20px;
+$br: 1px; // Default border-radius
+
+
+/*Gray toolbar top of code and web output*/
+$toolbar-height:30px;
+
+/*Brand colors*/
+$blue-dark:#14445f;
+$blue-light:#6bbff4;
+$green:#6ca52e;
+$red:#fc2a48;
+$yellow:#fcd048;
+
+// Color palette
+$primary-color: #198dd2;
+$secondary-color: $blue-light;
+$highlight-color: $yellow;
+
+/*Link colors*/
+$link-off:#999; /* e.g. subtle links with icons */
+$link-on:#555;
+
+$cta-primary:#72ab20;
+$cta-secondary:#198ad1;
+$cta-tertiary:#e8ecee;
+
+/*Layout colors*/
+$sidebar: #3f4549;
+$sidebar-link-on:#6bbff4;
+$sidebar-link-selected:#32373a;
+
+$header:#32373a;
+
+$file-browser:#3f4549;
+$file-browser-off:#999;
+$file-browser-on:#fff;
+$file-tabs:#32373a;
+$file-tabs-off:#ccc;
+$file-tabs-on:#fff;
+$code:#272822;
+$code-rows:#2f3129;
+
+$toolbar: #f7f7f7;
+$border-color: #e5e5e5;
+
+$console:#000;
+$console-tab:#3f4549;
+$console-tab-off:#999999;
+$console-tab-on:#fff;
+
+$projects-off:#738189;
+$projects-on:darken(#738189,15%);
+
+$good-color: #B2D440;
+$bad-color: #C34D34;

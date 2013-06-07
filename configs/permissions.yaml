@@ -1,0 +1,87 @@
+%YAML 1.2
+---
+Levels:
+  -
+    name: anonymous
+    actions:
+    - login
+    - register
+    - answer
+    - fork
+    - download
+    view:
+    - home
+    - channel
+    - question
+    - project
+    - profile
+    create:
+    - question
+    - project
+    edit:
+    - question
+    - project
+  -
+    name: registered
+    actions:
+    - logout
+    - flag
+    - upvote
+    create:
+    - profile
+    - favorite
+    list:
+    - questions
+    - projects
+    - favorites
+    subcribe:
+    - answers
+    - edits
+    - comments
+    delete:
+    - question
+    - project
+    - favorite
+  -
+    name: trusted user
+    actions:
+    - downvote
+    - post images in readme
+    - post links in readme
+    create:
+    - comment
+    delete:
+    - comment
+  -
+    name: power user
+    edit:
+    - question tags
+    - project tags
+    - project readmes
+  -
+    name: provider
+    view:
+    - channel flags
+    - channel deleted objects
+    delete:
+    - channel questions
+    - channel projects
+    edit:
+    - channel questions
+    - channel projects
+  -
+    name: moderator
+    create:
+    - tags
+    view:
+    - flags
+    - delete objects
+    delete:
+    - tags
+    - questions
+    - comments
+    - projects
+    edit:
+    - questions
+    - comments
+    - projects

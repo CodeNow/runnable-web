@@ -1,0 +1,11 @@
+{
+  "name": "get-friends-with-twitter",
+  "version": "0.0.1",
+  "description": "Demo Twitter app that retrieves the first 5 friends from the specified twitter user.",
+  "dependencies": {
+	"request": "*",
+	"qs": "*",
+	"express": "*"
+   },
+  "engine": "node 0.6.x"
+}

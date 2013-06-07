@@ -1,0 +1,237 @@
+// Dropdown menus
+.dropdown{
+	position:relative;
+	z-index:10;
+	@include clearfix;
+	.dropdown-toggle{
+		position:relative;
+		z-index:11;
+		&:after{
+			content: "\f0d7";
+			font-family: FontAwesome;
+			font-weight: normal;
+			font-style: normal;
+			text-decoration: inherit;
+			-webkit-font-smoothing: antialiased;
+			font-size:16px;
+			margin:0 0 0 5px;
+		}
+	}
+	.dropdown-menu{
+		display:none;
+		position:absolute;
+		top:100%;
+		left:0;
+		width:100%;
+		a{
+			display:block;
+			float:none;
+			@include box-sizing(border-box);
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+			font-weight:normal;
+			&:hover,&:focus{
+				text-decoration:none;
+			}
+		}
+	}
+	&.active{
+		a{
+			background:#fff;
+		}
+		& > ul{
+			background:#fff;
+			@include box-shadow(0 0 50px rgba(0,0,0,.4));
+		}
+	}
+}
+
+// User dropdown navigation
+header .user-nav{
+	float:right;
+	a{
+		background:rgba(255,255,255,.1);
+		padding:5px 10px;
+		line-height:25px;
+		display:block;
+		color:rgba(255,255,255,.8);
+		text-decoration: none;
+		&:hover{
+			color:#fff;
+		}
+	}
+	.thumbnail{
+		display:inline-block;
+		max-width:25px;
+		max-height:25px;
+		text-align:center;
+		float:left;
+		margin-right:10px;
+	}
+	.dropdown-menu{
+		a{
+			display:block;
+			background:$header;
+			line-height:25px;
+			padding:5px 10px;
+			color:rgba(255,255,255,.8);
+			&:hover{
+				color:#fff;
+			}
+		}
+	}
+}
+
+// Tags navigation
+// For individual examples and lists of examples
+.tags-nav{
+	@include clearfix;
+	a{
+		display:inline-block;
+		margin:0 5px 5px 0;
+		@include border-radius($br);
+		background:$cta-tertiary;
+		border:1px solid darken($cta-tertiary,2%);
+		padding:2px;
+		img{
+			max-width:16px;
+			max-height:16px;
+			vertical-align: middle;
+			float:left;
+			margin:0 2px 0 0;
+		}
+	}
+}
+
+
+// Related navigation
+// For individual examples
+.related-nav{
+	ul{
+		list-style:none;
+		margin:0;
+		padding:0;
+		li{
+			margin:0 0 $padding;
+			position:relative;
+			padding-left:40px;
+			.btn-vote{
+				position:absolute;
+				top:0;
+				left:0;
+				width:30px;
+				margin:0 auto;
+			}
+		}
+	}
+}
+
+
+// Project nav
+// List of projects on homepage, search results, channels etc.
+.project-nav{
+	ul{
+		list-style:none;
+		margin:0;
+		padding:0;
+		li{
+			@include clearfix;
+			position:relative;
+			padding:$padding 0 $padding 40px;
+			border-bottom:1px solid #f8f8f8;
+			.btn-vote{
+				position:absolute;
+				top:$padding;
+				left:0;
+				width:30px;
+				margin:0 auto;
+			}
+			h3{
+				font-size:18px;
+			}
+			.tags-nav{
+				font-size:12px;
+				img{
+					max-width:12px;
+				}
+			}
+			.author{
+				.avatar{
+					float:none;
+				}
+				img{
+					max-height:20px;
+				}
+			}
+		}
+	}
+}
+
+
+
+// Footer nav
+// Bottom of every page
+.footer-nav{
+	a{
+		font-size:16px;
+		display:block;
+		float:left;
+		padding:$padding 12px;
+		color:rgba(#000,.4);
+		text-decoration:none;
+		text-transform:capitalize;
+		&:hover,&:focus{
+			color:rgba(#000,.8);
+		}
+	}
+	&:first-child{
+		a{
+			padding-left:0;
+		}
+	}
+}
+
+
+// Social icons
+// Used in footer and team about page
+.social-icons{
+	a{
+		display:block;
+		float:left;
+		margin-right:10px;
+		background:url(assets/sprite@2x.png);
+		background-size:1000px 1000px;
+		text-indent:-9999px;
+		width:28px;
+		height:28px;
+		opacity:.6;
+		&.twitter{
+			background-position:0 -200px;
+		}
+		&.github{
+			background-position:-100px -200px;
+		}
+		&.so{
+			background-position:-200px -200px;
+		}
+		&:hover,&:focus{
+			opacity:1;
+		}
+	}
+}
+
+/*Social icons used in footer*/
+footer .social-icons{
+	float:right;
+	a{
+		margin:$padding 6px;
+	}
+	&:last-child{
+		a{
+			margin-right:0;
+		}
+	}
+}
+
+
