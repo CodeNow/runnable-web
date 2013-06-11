@@ -69,7 +69,10 @@ DataAdapter.prototype.apiDefaults = function(api) {
   // Can specify a particular API to use, falling back to default.
   apiHost = this.options[api.api] || this.options['default'] || this.options || {};
 
-  urlOpts = _.defaults(_.pick(api, 'protocol', 'port', 'query'), _.pick(apiHost, ['protocol', 'port', 'host']));
+  urlOpts = _.defaults(
+    _.pick(api, 'protocol', 'port', 'query'),
+    _.pick(apiHost, ['protocol', 'port', 'host'])
+  );
   urlOpts.pathname = api.path || api.pathname;
 
   api = _.defaults(api, {
@@ -77,7 +80,6 @@ DataAdapter.prototype.apiDefaults = function(api) {
     url: url.format(urlOpts),
     headers: {}
   });
-
   // Add a custom UserAgent so GitHub API doesn't 403 us.
   if (api.headers['User-Agent'] == null) {
     api.headers['User-Agent'] = 'Rendr Api Proxy; Node.js';

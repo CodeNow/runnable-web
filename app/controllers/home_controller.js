@@ -4,8 +4,9 @@ module.exports = {
       user: { model:'User' },
       projects: { collection:'Projects' }
     };
-    this.app.fetch(spec, function (err, result) {
-      callback(err, 'home_view', result);
+
+    this.app.fetch(spec, function (err, results) {
+      callback(err, 'home_view', results);
     });
   }
 };

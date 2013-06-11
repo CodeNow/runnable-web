@@ -8,15 +8,20 @@ var javascriptsDir = 'public';
 var cssDir = javascriptsDir;
 var rendrDir = 'node_modules/rendr';
 var rendrModulesDir = rendrDir + '/node_modules';
+var mergedCSSPath = 'public/styles.css';
 
 module.exports = function(grunt) {
   // Project configuration.
-  grunt.initConfig({
+  var gruntConfig = {
     pkg: grunt.file.readJSON('package.json'),
 
     bgShell: {
       runNode: {
-        cmd: 'node ./node_modules/nodemon/nodemon.js index.js',
+        cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js index.js',
+        bg: true
+      },
+      debugNode: {
+        cmd: 'NODE_PATH=node_modules & node --debug ./node_modules/nodemon/nodemon.js index.js & node-inspector',
         bg: true
       }
     },
@@ -41,6 +46,15 @@ module.exports = function(grunt) {
           fontsDir: fontsDir,
           relativeAssets: true,
           debugInfo: true
+          // outputStyle: 'compact'
+        }
+      }
+    },
+
+    cssmin: {
+      combine: {
+        files: {
+          // mergedCSSPath : ['public/**/*.css'] //set below.
         }
       }
     },
@@ -81,8 +95,8 @@ module.exports = function(grunt) {
         }
       },
       stylesheets: {
-        files: stylesheetsDir + '/**/*.{scss,sass}',
-        tasks: ['compass:server'],
+        files: sassDir + '/**/*.{scss,sass}',
+        tasks: ['compass:server', 'cssmin'],
         options: {
           interrupt: true
         }
@@ -116,18 +130,28 @@ module.exports = function(grunt) {
         }]
       }
     }
-  });
+  };
+  gruntConfig.cssmin.combine.files[mergedCSSPath] = ['public/**/*.css'];
+  grunt.initConfig(gruntConfig);
 
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-bg-shell');
   grunt.loadNpmTasks('grunt-rendr-stitch');
 
-  grunt.registerTask('compile', ['handlebars', 'rendr_stitch', 'compass']);
+  grunt.registerTask('clean-merged-css', 'Delete merged css file before merging new styles', function () {
+    grunt.log.writeln('Deleting file "' + mergedCSSPath);
+    grunt.file['delete'](mergedCSSPath, { force:true });
+  });
+
+  grunt.registerTask('compile', ['handlebars', 'rendr_stitch', 'compass', 'clean-merged-css', 'cssmin']);
 
   // Run the server and watch for file changes
   grunt.registerTask('server', ['bgShell:runNode', 'compile', 'watch']);
+  // Debug
+  grunt.registerTask('debug', ['bgShell:debugNode', 'compile', 'watch']);
 
   // Default task(s).
   grunt.registerTask('default', ['compile']);

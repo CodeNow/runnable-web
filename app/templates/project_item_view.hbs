@@ -1,3 +1,4 @@
+{{#with project}}
 <div id="vote-button-placeholder"></div>
 <h3>
   <a href="/{{_id}}/{{urlFriendly}}">
@@ -7,12 +8,12 @@
 <nav class="tags-nav">
   {{#each tags}}
   <a href="/{{.}}">
-    <img src="/external/images/channels/{{.}}.png" alt="{{.}}">
+    <img src="/images/channels/{{.}}.png" alt="{{.}}">
     <span>{{.}}</span>
   </a>
   {{/each}}
   <a href="/{{friendlyFramework}}">
-    <img src="/external/images/channels/{{friendlyFramework}}.png" alt="">
+    <img src="/images/channels/{{friendlyFramework}}.png" alt="">
     <span>{{friendlyFramework}}</span>
   </a>
 </nav>
@@ -26,3 +27,4 @@
     <time pubdate="pubdate" datetime="{{created}}">{{createdString}}</time>
   </span>
 </div>
+{{/with}}

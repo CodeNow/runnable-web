@@ -1,19 +1,24 @@
 var eson = require('eson');
-
-// Point to current environment/config values
+var os = require('os');
+var path = require('path');
+var uuid = require ('node-uuid');
 var env = process.env.NODE_ENV || 'development';
 
-exports.get = function(env) {
+var readConfigs = function (filename) {
   return eson()
   .use(eson.args())
   .use(eson.env())
   .use(eson.ms)
   .use(eson.replace('{RAND_NUM}', uuid.v4().split('-')[0]))
   .use(eson.replace('{HOME_DIR}', process.env.HOME))
-  .use(eson.replace('{CURR_DIR}', __dirname + '../../configs'))
+  .use(eson.replace('{CURR_DIR}', path.resolve(path.join(__dirname, '/../configs'))))
   .use(eson.replace('{RAND_DIR}', os.tmpDir() + '/' + uuid.v4()))
-  .read(__dirname + '../../configs/' + env + '.json');
+  .read(path.resolve(path.join(__dirname, '..', '..', 'configs/', filename+'.json')));
 };
 
-exports.name = env;
-exports.current = exports.get(env);
+var configs = module.exports = readConfigs(env);
+var portArgIndex = process.argv.indexOf('--port');
+if (~portArgIndex) configs.port = parseInt(process.argv[portArgIndex+1], 10);
+
+module.exports.readConfigs = readConfigs;
+module.exports.current = readConfigs(env);
