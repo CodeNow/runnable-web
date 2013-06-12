@@ -1,3 +1,4 @@
+// Code/project page
 // Project title
 .title{
 	@include clearfix;
@@ -13,9 +14,6 @@
 	}
 	.title-input{
 		font-size:28px;
-	}
-	.edit-link{
-		font-size:12px;
 	}
 }
 
@@ -67,6 +65,17 @@
 	}
 }
 
+.tab-pane{
+	overflow:scroll;
+	@include box-sizing(border-box);
+	min-height:200px;
+	//max-height:500px;
+	&.with-file-browser{
+		width:75%;
+		float:left;
+	}
+}
+
 // File browser
 // Show file browser button
 .btn-show-file-browser{
@@ -74,34 +83,20 @@
 	top:0;
 	right:0;
 	background:#e8e8e8;
+	@include border-radius(0 0 0 $br);
 }
 
 .file-browser{
 	background:$file-browser;
-	overflow:visible !important;
-	z-index:12 !important;
-	margin-top:-1px !important;
-}
-
-.nav-file-browser{
-	background:$file-browser;
+	padding:10px;
 	overflow-x:hidden;
 	overflow-y:auto;
-	h3{
-		padding:10px 10px 10px 0;
-		margin-left:25px;
-		position:relative;
-		&:before{
-			font-family: FontAwesome;
-			-webkit-font-smoothing: antialiased;
-			font-size:13px;
-			content: "\f07c"; // Folder open
-			padding-right:3px;
-			position:absolute;
-			right:100%;
-			top:12px;
-		}
-	}
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	width:25%;
+	@include box-sizing(border-box);
 }
 
 // Set the padding for indentation of child files/folders
@@ -109,7 +104,7 @@ $tree-padding:15px;
 
 .file-tree{
 	list-style:none;
-	margin:5px -4px 0 0;
+	margin:0;
 	padding:0;
 	position:relative;
 	z-index:4;
@@ -127,6 +122,9 @@ $tree-padding:15px;
 			color:$file-browser-off;
 			padding:5px 0;
 			font-weight:normal;
+			white-space:nowrap;
+			text-overflow:ellipsis;
+			overflow:hidden;
 			&:hover,&:focus{
 				color:$file-browser-on;
 				text-decoration:none;
@@ -152,7 +150,7 @@ $tree-padding:15px;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 			&:hover,&:focus{
-				color:#fff;
+				color:$file-browser-on;
 				cursor:pointer;
 			}
 		}
@@ -182,7 +180,8 @@ $tree-padding:15px;
 		}
 	}
 	li.selected{
-		background:$code-rows;
+		background:rgba(0,0,0,.05);
+		@include border-radius($br);
 		// @include box-shadow(0 1px 0 rgba(255,255,255,.05),inset 0 -1px 5px -1px rgba(0,0,0,.1),inset 0 1px 5px -1px rgba(0,0,0,.1));
 		a{
 			color:$file-browser-on;
@@ -197,7 +196,7 @@ $tree-padding:15px;
 
 	// Indent each child list item but ensure background spans full width of file browser
 	li{
-		padding-left:10px;
+		padding-left:15px;
 		li{
 			margin-left:-$tree-padding;
 			padding-left:$tree-padding*2;
@@ -225,11 +224,11 @@ $tree-padding:15px;
 // Context menu (right click)
 .context-menu{
 	position:absolute;
-	background:#26292b;
-	@include border-radius(5px);
-	@include box-shadow(inset 0 1px 0 rgba(255,255,255,.1),0 0 10px rgba(0,0,0,.2));
-	padding:5px 0;
-	border:1px solid #1e2022;
+	background:#fff;
+	@include border-radius($br);
+	@include box-shadow(0 10px 20px rgba(0,0,0,.1));
+	//padding:5px 0;
+	border:1px solid #ddd;
 	min-width:150px;
 	z-index:999;
 	.menu-options{
@@ -238,7 +237,7 @@ $tree-padding:15px;
 		margin:0;
 		a{
 			display:block;
-			color:rgba(255,255,255,.4);
+			color:rgba(0,0,0,.4);
 			padding:5px 10px;
 			&:hover{
 				background:$primary-color;
@@ -249,6 +248,12 @@ $tree-padding:15px;
 			i{
 				font-size:12px !important;
 			}
+		}
+		li:first-child a{
+			@include border-radius($br $br 0 0);
+		}
+		li:last-child a{
+			@include border-radius(0 0 $br $br);
 		}
 		hr{
 			border:none;
@@ -412,10 +417,10 @@ $tree-padding:15px;
 			}
 		}
 		&.selected{
-			bottom:-1px;
+			margin-bottom:-1px;
 			z-index:2;
 			a{
-				padding-bottom:12px;
+				padding-bottom:11px;
 				color:$font-color-primary;
 				&:hover{
 					border-color:#e8e8e8;

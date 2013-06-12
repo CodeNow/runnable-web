@@ -40,6 +40,15 @@ footer{
 // For spacing out related blocks
 .module{
 	@include clearfix;
-	margin:0 0 $padding;
+	margin:0 0 $padding*2;
+}
+
+// Tabbed content areas
+.tab-container{
+	.tab-content{
+		.tab-pane{
+			padding:$padding 0;
+		}
+	}
 }
 

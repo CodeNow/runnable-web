@@ -2,6 +2,10 @@
 form{
 	.item{
 		margin-bottom:$padding;
+		// Remove floats from grid spans
+		&.span1,&.span2,&.span3,&.span4,&.span5,&.span6,&.span7,&.span8,&.span9,&.span10,&.span11,&.span12{
+			float:none;
+		}
 	}
 	label{
 		display:block;
@@ -13,6 +17,7 @@ form{
 		padding:5px;
 		border:1px solid #aaa;
 		outline:none;
+		@include border-radius($br);
 		&:focus{
 			border-color:$blue-light;
 		}
@@ -42,31 +47,22 @@ form{
 
 
 // Search form in header
-header .search-form{
-	float:left;
-	margin:5px 10px;
-	label{
-		display:none;
-	}
+.search-form{
 	input[type=search]{
-		width:300px;
 		padding-left:25px;
-		@include border-radius($br);
-		border:none;
-		height:25px;
-        z-index:998;
+        z-index:98;
         position:relative;
 	}
 	.icon-search{
 		position:absolute;
 		left:5px;
 		top:5px;
-		z-index:999;
+		z-index:99;
 	}
 	.search-auto-complete{
         display:none;
         position:absolute;
-        z-index:997;
+        z-index:97;
         top:100%;
         left:-1px;
         background:#fff;
@@ -93,6 +89,18 @@ header .search-form{
             }
         }
     }
+}
+header .search-form{
+	float:left;
+	margin:5px 10px;
+	label{
+		display:none;
+	}
+	input[type=search]{
+		width:300px;
+		border:none;
+		height:25px;
+	}
 }
 
 
