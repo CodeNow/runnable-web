@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*@import "fonts/font-awesome/font-awesome.scss";*/
 /* line 1, ../assets/stylesheets/button.scss */
 #button {
@@ -802,7 +803,7 @@ li [class*=" icon-"].icon-large, .nav li [class^="icon-"].icon-large,
 /* line 151, ../assets/stylesheets/partials/_icons.scss */
 ul.icons {
   list-style-type: none;
-  text-indent: -0.75em;
+  text-indent: -.75em;
 }
 /* line 157, ../assets/stylesheets/partials/_icons.scss */
 ul.icons li [class^="icon-"],
@@ -3508,7 +3509,7 @@ header:after {
 }
 /* line 22, ../assets/stylesheets/partials/_layout.scss */
 .logo:active {
-  background-position: 0 -33.33333px;
+  background-position: 0 -33.333333px;
 }
 
 /* line 28, ../assets/stylesheets/partials/_layout.scss */
