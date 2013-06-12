@@ -1,15 +1,16 @@
 var path = require('path');
 // in
-var sassDir = 'assets/stylesheets';
+var sassDir   = 'assets/stylesheets';
 var sassIndex = path.join(sassDir, 'index.scss');
-var fontsDir = 'assets/stylesheets/assets/fonts';
+var fontsDir  = 'assets/stylesheets/assets/fonts';
 // out
-var imagesDir = 'public/images';
-var javascriptsDir = 'public';
-var cssDir = javascriptsDir;
-var rendrDir = 'node_modules/rendr';
+var imagesDir       = 'public/images';
+var javascriptsDir  = 'public';
+var cssDir          = javascriptsDir + '/.css';
+var rendrDir        = 'node_modules/rendr';
 var rendrModulesDir = rendrDir + '/node_modules';
-var mergedCSSPath = 'public/index.css';
+var compassCSS      = 'public/.css/index.css';
+var mergedCSSPath   = 'public/styles/index.css';
 
 module.exports = function(grunt) {
   // Project configuration.
@@ -57,7 +58,7 @@ module.exports = function(grunt) {
     cssmin: {
       combine: {
         files: {
-          // mergedCSSPath : ['public/**/*.css'] //set below.
+          // mergedCSSPath : compassCSS // set below
         }
       }
     },
@@ -99,7 +100,7 @@ module.exports = function(grunt) {
       },
       stylesheets: {
         files: sassDir + '/**/*.{scss,sass}',
-        tasks: ['compass:server', 'cssmin'],
+        tasks: ['clean-merged-css', 'compass:server', 'move-css'],
         options: {
           interrupt: true
         }
@@ -134,7 +135,7 @@ module.exports = function(grunt) {
       }
     }
   };
-  gruntConfig.cssmin.combine.files[mergedCSSPath] = [mergedCSSPath]; //minifies css
+  gruntConfig.cssmin.combine.files[mergedCSSPath] = [compassCSS]; //minifies css
   grunt.initConfig(gruntConfig);
 
   grunt.loadNpmTasks('grunt-contrib-compass');
@@ -145,18 +146,24 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-rendr-stitch');
 
   grunt.registerTask('clean-merged-css', 'Delete merged css file before merging new styles', function () {
-    grunt.log.writeln('Deleting file "' + mergedCSSPath);
+    grunt.log.writeln('Deleting file "' + mergedCSSPath + '"');
     grunt.file['delete'](mergedCSSPath, { force:true });
   });
 
+  grunt.registerTask('move-css', 'Copy compass index.css to styles dir in public', function () {
+    grunt.log.writeln('Copying file "' + compassCSS + '" to "' + mergedCSSPath + '"');
+    grunt.file.copy(compassCSS, mergedCSSPath);
+  });
+
+  // Compile - shared tasks
   grunt.registerTask('compile', ['handlebars', 'rendr_stitch', 'clean-merged-css', 'compass']);
-  grunt.registerTask('build', ['compile', 'cssmin']);
 
   // Run the server and watch for file changes
-  grunt.registerTask('server', ['bgShell:runNode', 'compile', 'watch']);
+  grunt.registerTask('server', ['bgShell:runNode', 'compile', 'move-css', 'watch']);
   // Debug
-  grunt.registerTask('debug', ['bgShell:debugNode', 'compile', 'watch']);
-
+  grunt.registerTask('debug', ['bgShell:debugNode', 'compile', 'move-css', 'watch']);
+  // Build for production
+  grunt.registerTask('build', ['compile', 'cssmin']);
   // Default task(s).
   grunt.registerTask('default', ['build']);
 };
