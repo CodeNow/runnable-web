@@ -34,7 +34,9 @@
     "nodemon": "~0.7.6",
     "mocha": "~1.9.0",
     "should": "~1.2.2",
-    "console-trace": "numbcoder/console-trace"
+    "console-trace": "numbcoder/console-trace",
+    "generator-rendr": "tjmehta/generator-rendr",
+    "subl": "tjmehta/node-subl"
   },
   "engines": {
     "node": ">=0.8"

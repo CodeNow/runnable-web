@@ -22,7 +22,7 @@ module.exports = function(grunt) {
         bg: true
       },
       debugNode: {
-        cmd: 'NODE_PATH=node_modules & node --debug ./node_modules/nodemon/nodemon.js index.js & node-inspector',
+        cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js --debug index.js & node-inspector',
         bg: true
       }
     },
