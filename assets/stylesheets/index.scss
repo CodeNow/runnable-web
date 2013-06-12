@@ -1,97 +1,39 @@
-/*@import "fonts/font-awesome/font-awesome.scss";*/
-@import "button";
-@import "popup";
+/* Reset styles with normalize*/
+@import "partials/reset";
 
-html, body {
-	height: 100%;
-	width : 100%;
-	/*background-color: #202020;*/
-}
+/* Configure variables and reusable code */
+@import "compass/css3";
+@import "partials/config";
+@import "partials/mixins";
 
-#code-editor-view {
-	background: #202020;
-	/* this is necessary for when the last tab is closed */
-}
+/* Reusable modules */
+@import "partials/grid";
+@import "partials/type";
+@import "partials/media";
+@import "partials/icons";
+@import "partials/links";
+@import "partials/notifications";
+@import "partials/other";
+@import "partials/modals";
+@import "partials/forms";
+@import "partials/nav";
 
-.display-none {
-	display: none;
-}
+/* Layout */
+@import "partials/layout";
+//@import "partials/channels";
+@import "partials/code";
+@import "partials/weboutput";
+@import "partials/console";
+//@import "partials/header";
+@import "partials/about";
 
-.display-none-important {
-	display:none !important;
-}
+/* Styles for other use cases */
+//@import "partials/responsive";
+//@import "partials/retina";
 
-.clear {
-	clear: both;
-}
+/* Support for IE */
+//@import "partials/ie";
 
-.clearfix:after {
-	content: ".";
-	display: block;
-	clear: both;
-	visibility: hidden;
-	line-height: 0;
-	height: 0;
-}
+/* Quick hacks */
+//@import "partials/shame";
 
-.clearfix {
-	//display: inline-block;
-}
-
-html[xmlns] .clearfix {
-	//display: block;
-}
-
-* html .clearfix {
-	height: 1%;
-}
-/*pnotify customize*/
-
-h4.ui-pnotify-title {
-	margin: 0;
-	font-family: inherit;
-	font-weight: bold;
-	color: inherit;
-	text-rendering: optimizelegibility;
-}
-
-.ui-widget {
-	font-size: 75% !important;
-}
-
-.tail-logs pre {
-	margin: 0;
-	display: inline;
-}
-
-.tail-logs pre.block {
-	display: block;
-}
-
-.tail-logs pre.nowrap {
-	white-space: nowrap;
-}
-
-.tail-logs pre.stderr {
-	color: #d54672;
-}
-
-.tail-logs pre.system {
-	color: #5d6668;
-}
-
-.tail-logs pre.status {
-	color: #6fa92f;
-}
-
-.blocking-backdrop {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 1040;
-	background-color: black;
-	opacity: 0.8;
-	filter: alpha(opacity=80);
-}

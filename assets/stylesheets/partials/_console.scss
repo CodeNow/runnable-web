@@ -27,38 +27,38 @@
 
 
 // Tabs for controlling terminal/output
-.console-tabs{
-	list-style:none;
-	margin:0;
-	padding:0;
-	@include clearfix;
-	width:100%;
-	position:relative;
-	li{
-		float:left;
-		width:50%;
-		button{
-			display:block;
-			width:100%;
-			line-height:$toolbar-height;
-			height:$toolbar-height;
-			float:left;
-			padding:0 10px;
-			background:$console-tab;
-			color:$console-tab-off;
-			text-align:left;
-			border:none;
-			text-transform:uppercase;
-			@include box-sizing(border-box);
-			&:hover,&:focus{
-				color:$console-tab-on;
-			}
-		}
-		&.selected{
-			button{
-				color:$console-tab-off;
-				background:transparent;
-			}
-		}
-	}
-}
+// .console-tabs{
+// 	list-style:none;
+// 	margin:0;
+// 	padding:0;
+// 	@include clearfix;
+// 	width:100%;
+// 	position:relative;
+// 	li{
+// 		float:left;
+// 		width:50%;
+// 		button{
+// 			display:block;
+// 			width:100%;
+// 			line-height:$toolbar-height;
+// 			height:$toolbar-height;
+// 			float:left;
+// 			padding:0 10px;
+// 			background:$console-tab;
+// 			color:$console-tab-off;
+// 			text-align:left;
+// 			border:none;
+// 			text-transform:uppercase;
+// 			@include box-sizing(border-box);
+// 			&:hover,&:focus{
+// 				color:$console-tab-on;
+// 			}
+// 		}
+// 		&.selected{
+// 			button{
+// 				color:$console-tab-off;
+// 				background:transparent;
+// 			}
+// 		}
+// 	}
+// }

@@ -1,0 +1,58 @@
+// About us and other content pages
+
+.member,.investor{
+	@extend .span2;
+	margin-bottom:$padding/2;
+	h4,p{
+		margin:10px 0;
+	}
+	img{
+		min-width:100%;
+	}
+}
+
+.member-hidden-image {
+	height:0;
+	width:0;
+	float:left;
+}
+
+
+.section{
+	@extend .module;
+}
+
+
+// API Providers
+
+.provider-contact{
+	@include background-image(linear-gradient(#fff,#eee));
+	@include border-radius($br);
+	@include box-shadow(0 0 10px rgba(0,0,0,.1));//0 1px 3px rgba(0,0,0,.1)
+	padding:20px;
+	border:1px solid #ddd;
+	border-bottom-color:#ccc;
+}
+
+
+.feature-live,.feature-insights,.feature-adoption{
+	margin-bottom:$padding;
+	&:before{
+		display:block;
+		float:left;
+		content:"";
+		width:100px;
+		height:100px;
+		background:url(assets/sprite@2x.png) no-repeat;
+		background-size:1000px 1000px;
+	}
+}
+.feature-live:before{
+	background-position:0 -250px;
+}
+.feature-adoption:before{
+	background-position:0 -350px;
+}
+.feature-insights:before{
+	background-position:0 -450px;
+}

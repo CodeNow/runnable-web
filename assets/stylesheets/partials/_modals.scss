@@ -1,6 +1,6 @@
 // Lightbox covers full screen with semi-transparent color
 .lightbox{
-	background:rgba(#252525,.9);
+	background:rgba(0,0,0,.9);
 	position:fixed;
 	z-index:100;
 	top:0;
@@ -12,12 +12,12 @@
 // Modal shows middle of screen
 .modal{
 	@include clearfix;
-	@include box-shadow(0 0 10px rgba(0,0,0,.2));
-	margin:5% auto 0;
-	width:500px;
+	@include box-shadow(0 0 20px rgba(0,0,0,.1));
+	margin:50px auto 0;
+	width:600px;
 	.modal-header{
 		padding:0 20px;
-		background:$sidebar;
+		background:$header;
 		position:relative;
 		height:50px;
 		h3{
@@ -119,6 +119,17 @@
 	}
 }
 
+// Log in modal
+// When a user clicks an action that requires them to be logged in
+.login-modal{
+	.modal{
+		width:400px;
+		.btn-github,.btn-facebook{
+			width:200px;
+			text-transform: none;
+		}
+	}
+}
 
 // Friendly image, for friendly modal when things go wrong
 .friendly-image{

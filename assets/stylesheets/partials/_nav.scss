@@ -89,17 +89,31 @@ header .user-nav{
 	@include clearfix;
 	a{
 		display:inline-block;
+		float:left;
 		margin:0 5px 5px 0;
 		@include border-radius($br);
 		background:$cta-tertiary;
 		border:1px solid darken($cta-tertiary,2%);
 		padding:2px;
+		line-height:0;
+		&:hover{
+			text-decoration:none;
+			background:darken($cta-tertiary,2%);
+		}
 		img{
 			max-width:16px;
 			max-height:16px;
 			vertical-align: middle;
-			float:left;
+			//float:left;
 			margin:0 2px 0 0;
+		}
+	}
+	.remove-tag{
+		color:rgba($bad-color,.6);
+		font-size:12px;
+		&:hover{
+			cursor: pointer;
+			color:$bad-color;
 		}
 	}
 }
@@ -221,7 +235,7 @@ header .user-nav{
 	}
 }
 
-/*Social icons used in footer*/
+// Social icons used in footer
 footer .social-icons{
 	float:right;
 	a{
@@ -234,4 +248,87 @@ footer .social-icons{
 	}
 }
 
+// Channel/Stack select
+// New code example modal
+.select-stack-nav{
+	ul{
+		@include clearfix;
+		list-style:none;
+		margin:0 0 $padding;
+		padding:0;
+		li{
+			@extend .span2;
+			text-align:center;
+			&:nth-child(6n){
+				@extend .last;
+			}
+			&:nth-child(6n+1){
+				clear:both;
+				margin-bottom:$padding/2;
+			}
+			a{
+				text-decoration:none;
+				display:block;
+				span{
+					display:block;
+					height:52px;
+					line-height:40px;
+					@include box-sizing(border-box);
+					padding:10px 0;
+					border:1px solid #ccc;
+					background:#fff;
+					//@include background-image(linear-gradient(#fff,#f2f2f2));
+					@include box-shadow(0 1px 3px (rgba(0,0,0,.1)));
+					@include clearfix;
+					margin-bottom:5px;
+				}
+				img{
+					max-height:30px;
+					max-width:60%;
+				}
+				&:hover,&:focus{
+					color:$primary-color;
+					span{
+						border-color:$blue-light;
+					}
+				}
+			}
+		}
+	}
+}
 
+// Tabbed navigation
+.tab-nav{
+	@include clearfix;
+	margin:0;
+	padding:0;
+	list-style:none;
+	width:100%;
+	position:relative;
+	border-bottom:1px solid #e8e8e8;
+	a{
+		display:block;
+		float:left;
+		margin-right:5px;
+		padding:10px;
+		font-size:14px;
+		background:#fff;
+		border:1px solid #e8e8e8;
+		border-bottom:none;
+		@include border-radius($br $br 0 0);
+		&:hover{
+			text-decoration:none;
+			border-color:#ccc;
+		}
+		&.selected{
+			position:relative;
+			margin-bottom:-1px;
+			z-index:2;
+			padding-bottom:11px;
+			color:$font-color-primary;
+			&:hover{
+				border-color:#e8e8e8;
+			}
+		}
+	}
+}
