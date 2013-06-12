@@ -11,13 +11,15 @@
     <link rel="canonical" href="{{locals.page.canonical}}">
     {{/if}}
     <meta name="fragment" content="!">
-    <link href="/styles.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/index.css" media="screen" rel="stylesheet" type="text/css" />
   </head>
 
   <body class="">
-    {{view "header_view" context=locals}}
-    {{{body}}}
-     {{view "footer_view" context=locals }}
+    {{view "header_view" model=locals.user context=locals}}
+    <section id=content>
+      {{{body}}}
+    </section>
+    {{view "footer_view"}}
     <script src="/mergedAssets.js"></script>
     <script>
     (function() {

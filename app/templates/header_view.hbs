@@ -1,7 +1,6 @@
 <div class="container">
   <a class="logo" href="/">Runnable</a>
-  <div id="search-bar-holder" class="search-bar">
-  </div>
+  {{view "search_bar_view" collection=projectsCollection}}
   {{#if user.username}}
   <nav class="user-nav dropdown">
     <a href="" class="dropdown-toggle"><img src="/images/lee.jpg" alt="" class="thumbnail">&nbsp;{{username}}</a>

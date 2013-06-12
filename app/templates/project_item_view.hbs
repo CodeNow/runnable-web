@@ -1,5 +1,5 @@
-{{#with project}}
-<div id="vote-button-placeholder"></div>
+{{view "vote_view" model=model}}
+{{#with json}}
 <h3>
   <a href="/{{_id}}/{{urlFriendly}}">
     {{name}}

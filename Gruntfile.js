@@ -1,6 +1,7 @@
 var path = require('path');
 // in
 var sassDir = 'assets/stylesheets';
+var sassIndex = path.join(sassDir, 'index.scss');
 var fontsDir = 'assets/stylesheets/assets/fonts';
 // out
 var imagesDir = 'public/images';
@@ -8,7 +9,7 @@ var javascriptsDir = 'public';
 var cssDir = javascriptsDir;
 var rendrDir = 'node_modules/rendr';
 var rendrModulesDir = rendrDir + '/node_modules';
-var mergedCSSPath = 'public/styles.css';
+var mergedCSSPath = 'public/index.css';
 
 module.exports = function(grunt) {
   // Project configuration.
@@ -30,6 +31,7 @@ module.exports = function(grunt) {
       compile: {
         options: {
           sassDir: sassDir,
+          specify: [sassIndex],
           cssDir: cssDir,
           imagesDir: imagesDir,
           javascriptsDir: javascriptsDir,
@@ -40,12 +42,13 @@ module.exports = function(grunt) {
       server: {
         options: {
           sassDir: sassDir,
+          specify: [sassIndex],
           cssDir: cssDir,
           imagesDir: imagesDir,
           javascriptsDir: javascriptsDir,
-          fontsDir: fontsDir,
-          relativeAssets: true,
-          debugInfo: true
+          fontsDir: fontsDir
+          // relativeAssets: true
+          // debugInfo: true
           // outputStyle: 'compact'
         }
       }
@@ -68,7 +71,7 @@ module.exports = function(grunt) {
             return filename.replace('app/templates/', '').replace('.hbs', '');
           }
         },
-        src: "app/templates/*.hbs",
+        src: "app/templates/**/*.hbs",
         dest: "app/templates/compiledTemplates.js",
         filter: function(filepath) {
           var filename = path.basename(filepath);
@@ -131,7 +134,7 @@ module.exports = function(grunt) {
       }
     }
   };
-  gruntConfig.cssmin.combine.files[mergedCSSPath] = ['public/**/*.css'];
+  gruntConfig.cssmin.combine.files[mergedCSSPath] = [mergedCSSPath]; //minifies css
   grunt.initConfig(gruntConfig);
 
   grunt.loadNpmTasks('grunt-contrib-compass');
@@ -146,7 +149,8 @@ module.exports = function(grunt) {
     grunt.file['delete'](mergedCSSPath, { force:true });
   });
 
-  grunt.registerTask('compile', ['handlebars', 'rendr_stitch', 'compass', 'clean-merged-css', 'cssmin']);
+  grunt.registerTask('compile', ['handlebars', 'rendr_stitch', 'clean-merged-css', 'compass']);
+  grunt.registerTask('build', ['compile', 'cssmin']);
 
   // Run the server and watch for file changes
   grunt.registerTask('server', ['bgShell:runNode', 'compile', 'watch']);
@@ -154,5 +158,5 @@ module.exports = function(grunt) {
   grunt.registerTask('debug', ['bgShell:debugNode', 'compile', 'watch']);
 
   // Default task(s).
-  grunt.registerTask('default', ['compile']);
+  grunt.registerTask('default', ['build']);
 };
