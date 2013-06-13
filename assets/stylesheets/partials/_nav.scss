@@ -93,15 +93,15 @@ header .user-nav{
 		margin:0 5px 5px 0;
 		@include border-radius($br);
 		background:$cta-tertiary;
-		border:1px solid darken($cta-tertiary,2%);
-		padding:2px;
+		border:1px solid darken($cta-tertiary,3%);
+		padding:2px 5px;
 		line-height:0;
 		&:hover{
 			text-decoration:none;
 			background:darken($cta-tertiary,2%);
 		}
 		img{
-			max-width:16px;
+			//max-width:16px;
 			max-height:16px;
 			vertical-align: middle;
 			//float:left;

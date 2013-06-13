@@ -2,9 +2,13 @@
 
 .member,.investor{
 	@extend .span2;
-	margin-bottom:$padding/2;
-	h4,p{
-		margin:10px 0;
+	margin-bottom:$padding;
+	h4{
+		margin:0;
+		font-size:16px;
+	}
+	p{
+		margin:0 0 5px;
 	}
 	img{
 		min-width:100%;

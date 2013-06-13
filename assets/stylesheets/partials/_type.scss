@@ -37,17 +37,18 @@ h2 {
 }
 
 h3 {
-    font-size: 18px;
-    margin:0 0 5px;
-    font-family: $primary-font;
+    font-size: 22px;
+    margin:0 0 10px;
+    font-family: $secondary-font;
     color:$font-color-primary;
     text-transform:capitalize;
     font-weight:normal;
 }
 
 h4 {
-    font-size: 16px;
-    margin:0 0 5px;
+    font-size: 18px;
+    margin:0 0 10px;
+    font-family: $secondary-font;
     color:$font-color-primary;
     text-transform:capitalize;
     font-weight:normal;
@@ -63,4 +64,5 @@ h5 {
 p {
     margin:0 0 $padding;
     font-size:16px;
+    line-height:1.6;
 }
