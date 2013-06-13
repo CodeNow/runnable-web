@@ -6,3 +6,4 @@ public/styles/index.css
 npm-debug.log
 .sass-cache
 .css
+assets/vendor/bower/
