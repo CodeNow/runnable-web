@@ -1,0 +1,17 @@
+{{#unless editMode}}
+  {{#with project}}
+  {{name}}
+  {{#if isOwner}}
+  <a href="" class="edit-link">Edit</a>
+  {{/if}}
+  {{/with}}
+{{else}}
+  {{#with project}}
+  <form>
+    <div class="item">
+      <input type="text" class="title-input" name="name" autofocus placeholder="Give your code example a title" value="{{name}}" />
+    </div>
+    <button class="btn-secondary">Save title</button>
+  </form>
+  {{/with}}
+{{/unless}}

@@ -1,6 +1,5 @@
 module.exports = {
   index: function(params, callback) {
-    console.log(this);
     var spec = {
       user: { model:'User', params:params },
       projects: { collection:'Projects', params:params }

@@ -1,7 +1,4 @@
-var _ = require('underscore');
 var BaseView = require('./base_view');
-var _super = BaseView.prototype;
-
 
 module.exports = BaseView.extend({
   tagName: 'button',
@@ -10,7 +7,7 @@ module.exports = BaseView.extend({
     'click': 'vote'
   },
   postRender: function () {
-    if (this.model.toJSON().voted) {
+    if (this.model.get('voted')) {
       this.$el.attr('disabled', 'disabled');
     }
   },
@@ -26,4 +23,4 @@ module.exports = BaseView.extend({
   }
 });
 
-module.exports.id = 'VoteView';
+module.exports.id = 'VoteButtonView';
