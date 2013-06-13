@@ -8,7 +8,6 @@ module.exports = BaseView.extend({
     // render should only occur once!
     this.setHeight(this.minHeight);
     this.editor = ace.edit(this.el);
-    console.log(this.el);
     var session = this.editor.getSession();
     this.listenTo(session, 'change', this.onChange.bind(this));
   },

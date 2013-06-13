@@ -1,6 +1,4 @@
 module.exports = function(match) {
-  console.log(match.toString());
-  console.log((new Error()).stack);
   match('',               'home#index');
   match('providers',      'home#providers');
   match('about',          'home#about');

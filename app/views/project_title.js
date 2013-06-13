@@ -2,6 +2,9 @@ var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
   tagName: 'h1',
+  postRender: function () {
+    console.log('projectId debug:', this.app.utils.base64ToHex(this.model.id));
+  },
   getTemplateData: function () {
     return {
       project : this.model.toJSON(),

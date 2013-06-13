@@ -1,5 +1,8 @@
 <ul class="open-file-tabs">
-  <li class="selected"><a href="">index.html</a><i class="close-file"></i></li>
-  <li><a href="">server.js</a><i class="close-file"></i></li>
-  <li><a href="">styles.css</a><i class="close-file"></i></li>
+  {{#each files}}
+  <li {{#if_eq _id compare=../selectedId}}class="selected"{{/if_eq}}>
+    <a href="javascript:void(0);">{{name}}</a>
+    <i data-id="{{path}}" class="close-file"></i>
+  </li>
+  {{/each}}
 </ul>

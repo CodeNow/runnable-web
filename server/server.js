@@ -8,9 +8,28 @@ var express = require('express'),
     rendrServer = require('rendr').server,
     rendrMw = require('rendr/server/middleware'),
     viewEngine = require('rendr/server/viewEngine'),
+    Handlebars = viewEngine.Handlebars,
     app;
 
+// Add Handlebars helpers
+addHandlebarsHelpers();
+
 app = express();
+
+if (process.env.NODE_ENV == 'development') {
+  var liveReloadPort = 35731;
+  var mergedCSSPath   = 'public/styles/index.css';
+  // Create a live reload server instance
+  var lrserver = require('tiny-lr')();
+  // Listen on port 35729
+  lrserver.listen(liveReloadPort, function(err) { console.log('LR Server Started'); });
+  // Then later trigger files or POST to localhost:35729/changed
+  lrserver.changed({body:{files:[
+    'public/mergedAssets.js',
+    mergedCSSPath,
+    'public/images/*.*'
+  ]}});
+}
 
 //
 // Initialize our server
@@ -53,7 +72,7 @@ function initMiddleware() {
     app.use(express.logger());
     app.use(express.bodyParser());
     if (process.env.NODE_ENV == 'development')
-      app.use(require('./middleware/liveReload')({port:35731}));
+      app.use(require('./middleware/liveReload')({port:liveReloadPort}));
     app.use(app.router);
     app.use(mw.errorHandler());
   });
@@ -112,4 +131,14 @@ function buildRendrRoutes(app) {
     // Attach the route to the Express server.
     app.get(path, fnChain);
   });
+}
+
+function addHandlebarsHelpers() {
+
+  Handlebars.registerHelper('if_eq', function(context, options) {
+    if (context == options.hash.compare)
+      return options.fn(this);
+    return options.inverse(this);
+  });
+
 }

@@ -53,7 +53,6 @@ module.exports = function liveReload(opt) {
     var inject = res.write = function(string, encoding) {
       if (string !== undefined) {
         var body = string instanceof Buffer ? string.toString(encoding) : string;
-        console.log(body);
         if (!snippetExists(body)) {
           res.push(body.replace(/<\/body>/, function(w) {
             return getSnippet() + w;

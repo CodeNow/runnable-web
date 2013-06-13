@@ -99,9 +99,12 @@ module.exports = function(grunt) {
     },
 
     watch: {
+      options: {
+        livereload: 35731
+      },
       scripts: {
         files: 'app/**/*.js',
-        tasks: ['rendr_stitch'],
+        tasks: ['handlebars', 'rendr_stitch'],
         options: {
           interrupt: true
         }
@@ -120,18 +123,19 @@ module.exports = function(grunt) {
           interrupt: true
         }
       },
-      livereload: {
-        files: [
-          'app/**/*.js',
-          'assets/**/*.*',
-          'public/images/*.*'
-        ],
-        tasks: ['livereload']
-      }
+      // livereload: {
+      //   files: [
+      //     'public/mergedAssets.js',
+      //     mergedCSSPath,
+      //     'public/images/*.*'
+      //   ],
+      //   options: {
+      //     livereload: 35731
+      //   },
+      //   tasks: []
+      // }
     },
-    livereload: {
-      port: 35731
-    },
+
     rendr_stitch: {
       compile: {
         options: {
@@ -167,7 +171,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-bg-shell');
   grunt.loadNpmTasks('grunt-rendr-stitch');
-  grunt.loadNpmTasks('grunt-contrib-livereload');
 
   grunt.registerTask('clean-merged-css', 'Delete merged css file before merging new styles', function () {
     grunt.log.writeln('Deleting file "' + mergedCSSPath + '"');
@@ -183,7 +186,7 @@ module.exports = function(grunt) {
   grunt.registerTask('compile', ['handlebars', 'rendr_stitch', 'clean-merged-css', 'compass']);
 
   // Shared tasks for server and debug
-  grunt.registerTask('dev-mode', ['compile', 'move-css', 'livereload-start', 'watch']);
+  grunt.registerTask('dev-mode', ['compile', 'move-css', 'watch']);
   // Run the server and watch for file changes
   grunt.registerTask('server', ['bgShell:runNode', 'dev-mode']);
   // Debug
