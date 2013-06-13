@@ -4,17 +4,17 @@
       {{view "vote_button_view" model=project}}
       {{view "project_title_view" model=project context=.}}
     </section>
+    {{!if something}}
+    {{view "publish_warning_view" model=project}}
+    {{!if}}
+    <section class="actions">
+      {{view "run_button" model=project}}
+      {{view "save_button" model=project}}
+      {{view "fork_button" model=project}}
+      {{view "download_button" model=project}}
+      {{view "edit_button" model=project}}
+    </section>
   </article>
-  {{!if something}}
-  {{view "publish_warning_view" model=project}}
-  {{!if}}
-  <section class="actions">
-    {{view "run_button" model=project}}
-    {{view "save_button" model=project}}
-    {{view "fork_button" model=project}}
-    {{view "download_button" model=project}}
-    {{view "edit_button" model=project}}
-  </section>
   <aside class="span3 last">
 
     <p><a href="" class="btn-secondary block">New code example</a></p>
