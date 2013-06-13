@@ -11,6 +11,21 @@ var rendrDir        = 'node_modules/rendr';
 var rendrModulesDir = rendrDir + '/node_modules';
 var compassCSS      = 'public/.css/index.css';
 var mergedCSSPath   = 'public/styles/index.css';
+//stitch
+var frontendScripts = [
+  'assets/vendor/*.js',
+  'assets/vendor/bower/ace-builds/src-min-noconflict/ace.js',
+  'assets/vendor/bower/ace-builds/src-min-noconflict/theme-textmate.js',
+  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/javascript',
+  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/php',
+  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/python',
+  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/json',
+  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/markdown',
+  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/html',
+  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/jade',
+  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/css',
+  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/stylus'
+];
 
 module.exports = function(grunt) {
   // Project configuration.
@@ -104,15 +119,23 @@ module.exports = function(grunt) {
         options: {
           interrupt: true
         }
+      },
+      livereload: {
+        files: [
+          'app/**/*.js',
+          'assets/**/*.*',
+          'public/images/*.*'
+        ],
+        tasks: ['livereload']
       }
     },
-
+    livereload: {
+      port: 35731
+    },
     rendr_stitch: {
       compile: {
         options: {
-          dependencies: [
-            'assets/vendor/**/*.js'
-          ],
+          dependencies: frontendScripts,
           npmDependencies: {
             underscore: '../rendr/node_modules/underscore/underscore.js',
             backbone: '../rendr/node_modules/backbone/backbone.js',
@@ -144,6 +167,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-bg-shell');
   grunt.loadNpmTasks('grunt-rendr-stitch');
+  grunt.loadNpmTasks('grunt-contrib-livereload');
 
   grunt.registerTask('clean-merged-css', 'Delete merged css file before merging new styles', function () {
     grunt.log.writeln('Deleting file "' + mergedCSSPath + '"');
@@ -155,13 +179,15 @@ module.exports = function(grunt) {
     grunt.file.copy(compassCSS, mergedCSSPath);
   });
 
-  // Compile - shared tasks
+  // Compile - shared tasks for all
   grunt.registerTask('compile', ['handlebars', 'rendr_stitch', 'clean-merged-css', 'compass']);
 
+  // Shared tasks for server and debug
+  grunt.registerTask('dev-mode', ['compile', 'move-css', 'livereload-start', 'watch']);
   // Run the server and watch for file changes
-  grunt.registerTask('server', ['bgShell:runNode', 'compile', 'move-css', 'watch']);
+  grunt.registerTask('server', ['bgShell:runNode', 'dev-mode']);
   // Debug
-  grunt.registerTask('debug', ['bgShell:debugNode', 'compile', 'move-css', 'watch']);
+  grunt.registerTask('debug', ['bgShell:debugNode', 'dev-mode']);
   // Build for production
   grunt.registerTask('build', ['compile', 'cssmin']);
   // Default task(s).

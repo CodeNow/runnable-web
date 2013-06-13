@@ -23,4 +23,4 @@ module.exports = BaseView.extend({
   }
 });
 
-module.exports.id = 'VoteButtonView';
+module.exports.id = 'VoteButton';

@@ -47,10 +47,13 @@ function initMiddleware() {
     app.engine('js', viewEngine);
 
     // set the middleware stack
-    app.use(express.compress());
+    if (process.env.NODE_ENV != 'development')
+      app.use(express.compress());
     app.use(express.static(__dirname + '/../public'));
     app.use(express.logger());
     app.use(express.bodyParser());
+    if (process.env.NODE_ENV == 'development')
+      app.use(require('./middleware/liveReload')({port:35731}));
     app.use(app.router);
     app.use(mw.errorHandler());
   });

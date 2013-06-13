@@ -23,4 +23,4 @@ module.exports = BaseView.extend({
   }
 });
 
-module.exports.id = 'ProjectTitleView';
+module.exports.id = 'ProjectTitle';

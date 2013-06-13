@@ -30,6 +30,7 @@
     "grunt-contrib-handlebars": "git://github.com/spikebrehm/grunt-contrib-handlebars#0395c6fa9c765616af34cafad377572196068cf8",
     "grunt-rendr-stitch": "~0.0.6",
     "grunt-contrib-watch": "~0.3.1",
+    "grunt-contrib-livereload": "0.1.2",
     "grunt-bg-shell": "~2.0.1",
     "nodemon": "~0.7.6",
     "mocha": "~1.9.0",

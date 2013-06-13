@@ -1,11 +1,11 @@
 <div class="container">
   <article class="span9">
     <section class="title">
-      {{view "vote_button_view" model=project}}
-      {{view "project_title_view" model=project context=.}}
+      {{view "vote_button" model=project}}
+      {{view "project_title" model=project}}
     </section>
     {{!if something}}
-    {{view "publish_warning_view" model=project}}
+    {{view "publish_warning" model=project}}
     {{!if}}
     <section class="actions">
       {{view "run_button" model=project}}
@@ -13,6 +13,15 @@
       {{view "fork_button" model=project}}
       {{view "download_button" model=project}}
       {{view "edit_button" model=project}}
+    </section>
+    <section class="code-container">
+      {{view "file_tabs" model=project}}
+      <div class="file-content">
+        {{view "code_editor" model=project}}
+        {{! collection=project.openFiles }}
+        <button class="btn-tertiary btn-small btn-show-file-browser"><i class="icon-folder-open"></i> Show file browser</button>
+        {{view "file_tree" model=project}}
+      </div>
     </section>
   </article>
   <aside class="span3 last">
