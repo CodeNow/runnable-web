@@ -15,8 +15,40 @@
     {{view "download_button" model=project}}
     {{view "edit_button" model=project}}
   </section>
-  <aside class="span3">
+  <aside class="span3 last">
 
+    <p><a href="" class="btn-secondary block">New code example</a></p>
+
+    <section class="module">
+      {{view "project_owner" model=project}}
+      {{view "project_stats" model=project}}
+    </section>
+
+    <section class="module tags">
+      <h3>Tags</h3>
+      {{view "project_tags_list" model=project}}
+      {{view "project_new_tag_form" model=project}}
+    </section>
+
+    <section class="module">
+      <h3>Related examples</h3>
+      <nav class="related-nav">
+        <ul>
+          <li>
+            <button class="btn-vote">833</button>
+            <a href="">Login auth using sessions in express - Node.js</a>
+          </li>
+          <li>
+            <button class="btn-vote">833</button>
+            <a href="">Login auth using sessions in express - Node.js</a>
+          </li>
+          <li>
+            <button class="btn-vote">2</button>
+            <a href="">One liner</a>
+          </li>
+        </ul>
+      </nav>
+    </section>
 
   </aside>
 </div>
