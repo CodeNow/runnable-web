@@ -1,37 +1,29 @@
 var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
-  className: 'code-editor',
-  minHeight: 300,
-  maxHeight: 550,
+  className:"code-container",
   postRender: function () {
-    // render should only occur once!
-    this.setHeight(this.minHeight);
-    this.editor = ace.edit(this.el);
-    var session = this.editor.getSession();
-    this.listenTo(session, 'change', this.onChange.bind(this));
-  },
-  onChange: function () {
-    this.adjustHeightToContents();
-  },
-  adjustHeightToContents: function () {
-    var editor = this.editor;
-    var min = this.minHeight;
-    var max = this.maxHeight;
-    var newHeight = editor.getSession().getScreenLength()
-      * editor.renderer.lineHeight
-      + editor.renderer.scrollBar.getWidth();
-    if (newHeight < min) newHeight = min;
-    if (newHeight > max) newHeight = max;
-    this.setHeight(newHeight+"px");
-    this.editor.resize();
-  },
-  setHeight: function (height) {
-    if (typeof height == 'number') {
-      height = height + 'px'; // assume px
+    /// Beware: Fragile code ahead.
+    /// Beware: Fragile code ahead.
+    if (!this.clientSide) { // first render clientside only..
+      // first client side postRender
+      var view = this;
+      this.clientSide = true;
+      this.model.rootDir.fetch({
+        success: function () {
+          view.render(); // this pull will populate openFiles auto (in project constructor).
+        },
+        error: function () {
+          alert('Error, please refresh page.');
+        }
+      });
     }
-    this.el.style.height = height;
-    // this.$('#editor-section').height(height.toString() + "px");
+  },
+  getTemplateData: function () {
+    return {
+      clientSide : this.clientSide,
+      project    : this.model
+    };
   }
 });
 

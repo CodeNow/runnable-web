@@ -15,10 +15,10 @@ var utils = {
   add: function(prev, curr) { return prev+curr; },
   and: function(prev, curr) { return prev+curr; },
   addAll: function() {
-    return Array.prototype.slice.apply(arguments).reduce(App.utils.add);
+    return Array.prototype.slice.apply(arguments).reduce(utils.add);
   },
   andAll: function() {
-    return Array.prototype.slice.apply(arguments).reduce(App.utils.and);
+    return Array.prototype.slice.apply(arguments).reduce(utils.and);
   },
   hexToBase64: function(str) {
     var plus = /\+/g;
@@ -45,15 +45,15 @@ var utils = {
   isHex: function(str) {
     var strSplit = str.split('');
     var parseHex = function(v) { return parseInt(v,16); };
-    var parseHexIsFinite = App.utils.compose(parseHex, isFinite);
-    return strSplit.map(parseHexIsFinite).reduce(App.utils.and);
+    var parseHexIsFinite = utils.compose(parseHex, isFinite);
+    return strSplit.map(parseHexIsFinite).reduce(utils.and);
   },
   isObjectId: function(str) {
-    return (str.length === 24 && App.utils.isHex(str));
+    return (str.length === 24 && utils.isHex(str));
   },
   isObjectId64: function(str) {
-    str = App.utils.base64ToHex(str);
-    return App.utils.isObjectId(str);
+    str = utils.base64ToHex(str);
+    return utils.isObjectId(str);
   },
   notEmptyString: function(thing) {
     return (thing !== '');
@@ -62,11 +62,11 @@ var utils = {
     return (thing !== null && thing !== undefined);
   },
   defaultValue: function(thing, defaultVal) {
-    return App.utils.exists(thing) ? thing : defaultVal;
+    return utils.exists(thing) ? thing : defaultVal;
   },
   pathJoin: function() {
     var args = Array.prototype.slice.apply(arguments);
-    var ret  = args.filter(App.utils.exists).join('/')
+    var ret  = args.filter(utils.exists).join('/')
       .replace(/(\/){2,}/g, '/') //replace double slashes
       .replace(/^(http(s){0,1}[:]\/)([^\/])/, '$1/$3') //fix links whose double slashes were replaced
     ;
@@ -114,15 +114,15 @@ var utils = {
     });
     newStr += (str.substring(lastIndex));
 
-    if (App.utils.exists(capitalize)) {
-      return capitalize? App.utils.capitalize(newStr) : App.utils.uncapitalize(newStr);
+    if (utils.exists(capitalize)) {
+      return capitalize? utils.capitalize(newStr) : utils.uncapitalize(newStr);
     }
     else {
       return newStr;
     }
   },
   unCamelCase : function(str, delimeter, capitalize) {
-    delimeter = App.utils.exists(delimeter) ? delimeter : '-';
+    delimeter = utils.exists(delimeter) ? delimeter : '-';
     var regex = /[A-Z]/g;
     var newStr = '';
     var lastIndex = 0;
@@ -137,8 +137,8 @@ var utils = {
     });
     newStr += (str.substring(lastIndex));
 
-    if (App.utils.exists(capitalize)) {
-      return capitalize? App.utils.capitalize(newStr) : App.utils.uncapitalize(newStr);
+    if (utils.exists(capitalize)) {
+      return capitalize? utils.capitalize(newStr) : utils.uncapitalize(newStr);
     }
     else {
       return newStr;

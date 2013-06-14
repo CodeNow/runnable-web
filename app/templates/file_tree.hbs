@@ -1,1 +1,16 @@
-your content here.
+{{view "file_tree_item" fs=dir}}
+<ul {{#unless open}}class="display-none"{{/unless}}>
+  {{#exists contents}}
+    {{#each contents}}
+      {{#if_eq type compare="dir"}}
+        {{view "file_tree" dir=.}}
+      {{else}}
+        {{view "file_tree_item" fs=.}}
+      {{/if_eq}}
+    {{else}}
+      <li class="empty">(empty)</li>
+    {{/each}}
+  {{else}}
+    <li class='loading'>loading</li>
+  {{/exists}}
+</ul>

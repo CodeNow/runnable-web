@@ -1,16 +1,14 @@
 var Fs = require('./fs');
 var Super = Fs.prototype;
-var App;
+var App = require('../app').prototype; //hacky..
 
 module.exports = Fs.extend({
   initialize: function (attrs, options) {
-    Super.initialize.apply(this, arguments);
-    App = this.app;
     if (attrs && App.utils.exists(attrs.content)) {
       this.hasUnsavedChanges(false);
     }
     this.on('change:content', this.onChangeContent, this);
-    return _super.initialize.apply(this, arguments);
+    return Super.initialize.apply(this, arguments);
   },
   dispose: function () {
     this.off('change:contents');

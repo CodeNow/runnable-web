@@ -20,7 +20,7 @@ function DataAdapter(options) {
 //
 DataAdapter.prototype.request = function(req, api, options, callback) {
   var _this = this, start, end;
-
+  console.log(api.url)
   if (arguments.length === 3) {
     callback = options;
     options = {};

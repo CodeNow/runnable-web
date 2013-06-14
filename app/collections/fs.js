@@ -1,9 +1,12 @@
-var Base = require('./base');
+// var Base = require('./base');
+var Base = require('backbone').Collection;
 var File = require('../models/file');
 var Dir  = require('../models/dir');
 var Super = Base.prototype;
 
+
 module.exports = Base.extend({
+  // url: function () { return '/projects/' + this.project.id + '/files' + this.path; },
   url: function () { return '/api/projects/' + this.project.id + '/files' + this.path; },
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);

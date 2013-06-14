@@ -7,11 +7,11 @@ module.exports = Base.extend({
   urlRoot: '/projects',
   initialize: function (model, options) {
     Super.initialize.apply(this, arguments);
-    debugger;
     var self = this;
     // Initialize openFiles and rootDir
     this.openFiles = new FileCollection(null, {project:this});
-    this.rootDir = new DirModel(null, {project:this});
+    this.rootDir = new DirModel({path:'/'}, { project:this, silent:true });
+    // Events
     this.rootDir.on('change:contents', function () {
       this.rootDir.set({open:true}, {silent:true}); // opens rootDir by default, if it has contents
       var defaultFilepaths = this.get('defaultFile');
@@ -23,6 +23,9 @@ module.exports = Base.extend({
         });
       }
     }, this);
+  },
+  onChangeRootDir: function () {
+    this.rootDir.set(this.get('rootDirectory'));
   }
 });
 

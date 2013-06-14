@@ -1,9 +1,12 @@
 var Fs = require('./fs');
 var Super = Fs.prototype;
+var App = require('../app').prototype; //hacky..
 
 module.exports = Fs.extend({
   initialize: function (attrs, options) {
+    console.log(attrs);
     Super.initialize.apply(this, arguments);
+    this.project = this.project || attrs && attrs.project || options && options.project; // hacky for rendr
     var FSCollection = require('../collections/fs');
 
     this.contentsCollection = new FSCollection([], {
@@ -25,7 +28,9 @@ module.exports = Fs.extend({
     this.contentsCollection.reset(this.get('contents'));
   },
   onChangePath: function () {
-    var thisOldPath = this.previousAttributes().path;
+    var prevAttributes = this.previousAttributes();
+    if (prevAttributes.toJSON) prevAttributes = prevAttributes.toJSON();
+    var thisOldPath = prevAttributes.path;
     var thisNewPath = this.get('path');
     this.contentsCollection.forEach(function (fsModel) {
       var newFSPath = fsModel.get('path').replace(thisOldPath, thisNewPath);
@@ -35,7 +40,7 @@ module.exports = Fs.extend({
   onChangeContentsCollection: function () {
     this.set('contents', this.contentsCollection.toJSON(), {silent:true}); // must be silent to prevent inf loop
   },
-  contents: function (val, options) {
+  collection: function (val, options) { // RENDR!! renamed to collection from contents..bc render is doing some crazy retrieval of model attributes to object properties..
     if (val) { //set
       this.contentsCollection.update(val, options);
       return this;
@@ -48,13 +53,13 @@ module.exports = Fs.extend({
     var self = this;
     var newPath = model.get('path');
     var err;
-    if (this.contents().get(newPath)) {
+    if (this.collection().get(newPath)) {
       err = new Error('Path already exists');
       cb(err);
     }
     else {
       if (!this.isNew()) { // if the parentDir isNew it's contents will be fetched later, so leave contents empty
-        this.contents().add(model);
+        this.collection().add(model);
       }
       model.save(null, {
         type: "POST",

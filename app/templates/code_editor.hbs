@@ -1,0 +1,16 @@
+{{#if clientSide}}
+{{view "file_tabs" model=project}}
+<div class="file-content">
+  {{view "code" model=project}}
+  <button class="btn-tertiary btn-small btn-show-file-browser"><i class="icon-folder-open"></i> Show file browser</button>
+  <div>
+    <h4>File Browser</h4>
+    <a class="edit-link">Hide</a>
+    <nav class="file-tree">
+      <ul>
+        {{view "file_tree" model=project}}
+      </ul>
+    </nav>
+  </div>
+</div>
+{{/if}}

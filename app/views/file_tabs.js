@@ -1,13 +1,17 @@
 var BaseView = require('./base_view');
 
+var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName: 'nav',
   className: 'file-tabs',
-  postRender: function () {
-    var files = this.model.openFiles; //collection
+  postInitialize: function () {
+    // this function is being invoked twice - once when not attached to dom...?
+    if (this.parentView)
+      this.openFiles = this.model.openFiles;
+  },
+  getTemplateData: function () {
     return {
-      files : files.toJSON(),
-      selectedId: files.selectedFile().id
+      files : this.model.openFiles.toJSON()
     };
   }
 });

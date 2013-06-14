@@ -1,10 +1,13 @@
-var Base = require('./base');
+// var Base = require('./base');
+var Base = require('backbone').Model;
 var Super = Base.prototype;
+var App = require('../app').prototype; //hacky..
 
 module.exports = Base.extend({
   idAttribute: 'path',
+  // url: function () { return '/projects/' + this.project.id + '/files' + (this.get(this.idAttribute) || ''); }, //backbone url encodes the id val by default..
   url: function () { return '/api/projects/' + this.project.id + '/files' + (this.get(this.idAttribute) || ''); }, //backbone url encodes the id val by default..
-  intialize: function (attrs, options) {
+  initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
     this.project = options && options.project;
     this.parentDir  = options && options.parentDir;
@@ -24,7 +27,7 @@ module.exports = Base.extend({
     fsPathSplit     = fsPathSplit.filter(notEmptyStr); // first item will be emptystr bc path starts with /
     while (fsPathSplit.length) {
       fsName = fsPathSplit.shift();
-      fsModel = fsModel.contents().getByName(fsName);
+      fsModel = fsModel.collection().getByName(fsName);
       if (!fsModel) {
         //FAILING HERE
         return null;
@@ -54,13 +57,13 @@ module.exports = Base.extend({
       if (oldParentPath !== newParentPath) { //only move if the path actually changes
         oldParentDir = this.getPath(oldParentPath);
         newParentDir = this.getPath(newParentPath);
-        oldParentDir.contents().remove(this.rollbackAttr('path', {silent:true}));
+        oldParentDir.collection().remove(this.rollbackAttr('path', {silent:true}));
         var reAddToOpenFiles;
         if (this.project && this.project.openFiles.get(this.id)) {
           reAddToOpenFiles = true;
           this.project.openFiles.remove(this);
         }
-        newParentDir.contents().add(this.set('path', newPath, {silent:true})); // TODO: figure out improvement vs if
+        newParentDir.collection().add(this.set('path', newPath, {silent:true})); // TODO: figure out improvement vs if
         if (this.project && reAddToOpenFiles) {
           this.project.openFiles.add(this);
         }
@@ -104,7 +107,7 @@ module.exports = Base.extend({
       }
       var parentDirPath = this.parentDir && this.parentDir.get('path');
       var newFilePath = App.utils.pathJoin(parentDirPath, attrs.name);
-      var fsModelAtNewFilePath = this.parentDir.contents().get(newFilePath);
+      var fsModelAtNewFilePath = this.parentDir.collection().get(newFilePath);
       if (this.parentDir && (fsModelAtNewFilePath && fsModelAtNewFilePath !== this)) {
         // sibling exists at new file path. and the file is not the file itself (could be pushed first then removed if request fails)
         return 'File/dir with name "'+attrs.name+'" already exists.';
@@ -208,7 +211,7 @@ module.exports = Base.extend({
         App.utils.parseJSON(function (err, jsonErr) {
           if (err) {}
         });
-        if (self.parentDir) self.parentDir.contents().add(self);
+        if (self.parentDir) self.parentDir.collection().add(self);
         err = new Error('Error deleting '+self.get('type')+'.');
         cb(err);
       }

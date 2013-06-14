@@ -141,4 +141,10 @@ function addHandlebarsHelpers() {
     return options.inverse(this);
   });
 
+  Handlebars.registerHelper('exists', function(context, options) {
+    if (context !== null && context !== undefined)
+      return options.fn(this);
+    return options.inverse(this);
+  });
+
 }

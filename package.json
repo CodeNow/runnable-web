@@ -13,6 +13,7 @@
     "url": "git://github.com/airbnb/rendr-app-template.git"
   },
   "dependencies": {
+    "backbone": "*",
     "express": "~>3",
     "underscore": "~1.4.4",
     "async": "~0.1.22",

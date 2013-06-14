@@ -1,10 +1,13 @@
 var File = require('../models/file');
-var Base = require('./base');
+// var Base = require('./base');
+var Base = require('backbone').Collection;
 var Super = Base.prototype;
+var App = require('../app').prototype; //hacky..
 
 module.exports = Base.extend({
   model: File,
   initialize: function (attrs, options) {
+    Super.initialize.apply(this, arguments);
     this.project = options && options.project;
     this.on('add', this.onAdd, this);
     // this.on('remove', this.onRemove, this);
@@ -13,7 +16,6 @@ module.exports = Base.extend({
     this.on('change:content change:savedContent', this.onChangeContent, this);
     this.once('add', this.firstAdd);
     this.previouslyHadUnsavedChanges = false;
-    Super.initialize.apply(this, arguments);
   },
   comparator: 'sort',
   dispose: function () {
@@ -44,7 +46,7 @@ module.exports = Base.extend({
   },
   onAdd: function (model) {
     model.on('destroy', this.onModelDestroyed, this);
-    model.set('sort', this.orderCount++);
+    // model.set('sort', this.orderCount++);
     if (this.length === 1) { // if first model added set as selected
       this.selectedFile(model);
     }

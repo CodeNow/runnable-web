@@ -14,15 +14,7 @@
       {{view "download_button" model=project}}
       {{view "edit_button" model=project}}
     </section>
-    <section class="code-container">
-      {{view "file_tabs" model=project}}
-      <div class="file-content">
-        {{view "code_editor" model=project}}
-        {{! collection=project.openFiles }}
-        <button class="btn-tertiary btn-small btn-show-file-browser"><i class="icon-folder-open"></i> Show file browser</button>
-        {{view "file_tree" model=project}}
-      </div>
-    </section>
+    {{view "code_editor" model=project}}
   </article>
   <aside class="span3 last">
 

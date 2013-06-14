@@ -1,5 +1,6 @@
 var BaseView = require('./base_view');
 
+var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName: 'h1',
   postRender: function () {

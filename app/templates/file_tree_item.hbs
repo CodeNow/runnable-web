@@ -1,1 +1,10 @@
-your content here.
+{{#if isRoot}}
+  <span class="name {{type}}" href="" data-id="{{path}}" title="{{projectName}}">{{projectName}}</span>
+{{else}}
+  {{#if_eq type compare='dir'}}
+  <span class="name {{type}}" href="" data-id="{{path}}" title="{{name}}">{{name}}</span>
+  {{else}}
+  <a class="name {{type}}" href="" data-id="{{path}}" title="{{name}}">{{name}}</a>
+  {{/if_eq}}
+  <input class="name-input display-none" value="{{name}}" />
+{{/if}}
