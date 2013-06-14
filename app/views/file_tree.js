@@ -20,6 +20,10 @@ module.exports = BaseView.extend({
       dir: this.dir,
       contents: this.dir.get('contents') && this.dir.collection().toArray()
     };
+  },
+  postRender: function () {
+    if (this.dir.get('open'))
+      this.$el.addClass('open');
   }
 });
 
