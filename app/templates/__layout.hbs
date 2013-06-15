@@ -25,6 +25,7 @@
     (function() {
       var App = window.App = new (require('app/app'))({{json appData}});
       App.bootstrapData({{json bootstrappedData}});
+      boot = {{json bootstrappedData}};
       App.start();
     })();
     </script>

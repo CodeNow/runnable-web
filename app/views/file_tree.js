@@ -1,29 +1,29 @@
 var BaseView = require('./base_view');
 
+var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName: 'li',
   className: 'folder',
-  postInitialize: function () {
-    // this function is being invoked twice - once when not attached to dom...?
-    if (!this.parentView) return;
-
-    if (this.model) {
-      // root file tree, model is project
-      this.dir = this.model.rootDir;
-    }
-    else {
-      this.dir = this.options.dir;
-    }
+  postHydrate: function () {
+    // clientside
+    // postHydrate is the place to attach data events
+    this.path = this.options.path || '/';
+    this.dir = this.model.rootDir.getPath(this.path);
   },
   getTemplateData: function () {
+    // be careful postHydrate has only been called before frontend render but not backend!
+    // this means, the only data you can rely on is this.model and this.options binded to this view.
+    this.path = this.path || this.options.path || '/';
+    this.dir  = this.dir  || this.model.rootDir.getPath(this.path);
     return {
-      dir: this.dir,
-      contents: this.dir.get('contents') && this.dir.collection().toArray()
+      dirJSON  : this.dir.toJSON(),
+      contents : this.dir.collection().toArray(),
+      project  : this.model
     };
   },
   postRender: function () {
-    if (this.dir.get('open'))
-      this.$el.addClass('open');
+    // clientside postHydrate and getTemplateData have occured.
+    if (this.dir.get('open')) this.$el.addClass('open');
   }
 });
 

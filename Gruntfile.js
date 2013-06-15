@@ -103,7 +103,7 @@ module.exports = function(grunt) {
         livereload: 35731
       },
       scripts: {
-        files: 'app/**/*.js',
+        files: ['app/**/*.js', '!node_modules/rendr/node_modules/*', 'node_modules/rendr/**/*.js'],
         tasks: ['handlebars', 'rendr_stitch'],
         options: {
           interrupt: true

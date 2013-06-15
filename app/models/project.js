@@ -23,9 +23,16 @@ module.exports = Base.extend({
         });
       }
     }, this);
+    if (this.get('rootDirectory')) {
+      this.onChangeRootDir();
+    }
+    else {
+      this.listenToOnce(this, 'change:rootDirectory', this.onChangeRootDir.bind(this));
+    }
   },
   onChangeRootDir: function () {
     this.rootDir.set(this.get('rootDirectory'));
+    // this.unset('rootDirectory');
   }
 });
 

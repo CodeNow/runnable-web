@@ -3,8 +3,15 @@ var BaseView = require('./base_view');
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName: 'h1',
+  postInitialize: function () {
+    b1 = this;
+  },
   postRender: function () {
     console.log('projectId debug:', this.app.utils.base64ToHex(this.model.id));
+    tj = this;
+    this.model.on('change', function () {
+      this.render();
+    }, this);
   },
   getTemplateData: function () {
     return {

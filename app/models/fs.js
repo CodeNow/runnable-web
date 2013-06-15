@@ -1,7 +1,8 @@
 // var Base = require('./base');
-var Base = require('backbone').Model;
+var Base = require('backbone').Model; // THIS IS A BACKBONE MODEL -- NOT RENDR
 var Super = Base.prototype;
 var App = require('../app').prototype; //hacky..
+var _ = require('underscore');
 
 module.exports = Base.extend({
   idAttribute: 'path',
@@ -13,6 +14,11 @@ module.exports = Base.extend({
     this.parentDir  = options && options.parentDir;
     this.listenTo(this, 'change:name', this.onChangeName.bind(this));
     this.listenTo(this, 'change:path', this.onPathChange.bind(this));
+  },
+  toJSON: function () {
+    return _.extend(Super.toJSON.apply(this, arguments), {
+      isRootDir: this.isRootDir()
+    });
   },
   getRootDir: function () {
     return this.project.rootDir;
