@@ -1,16 +1,16 @@
 {
   "name": "Runnable-Web",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Runnable-Web",
   "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "mocha --ui bdd --reporter spec  ./test --recursive",
+    "test": "./node_modules/.bin/mocha --ui bdd --reporter spec",
     "start": "DEBUG=app:* node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/airbnb/rendr-app-template.git"
+    "url": "git://github.com/CodeNow/runnable-web.git"
   },
   "dependencies": {
     "backbone": "*",

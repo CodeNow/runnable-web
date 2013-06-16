@@ -17,8 +17,5 @@ var readConfigs = function (filename) {
 };
 
 var configs = module.exports = readConfigs(env);
-var portArgIndex = process.argv.indexOf('--port');
-if (~portArgIndex) configs.port = parseInt(process.argv[portArgIndex+1], 10);
-
 module.exports.readConfigs = readConfigs;
 module.exports.current = readConfigs(env);

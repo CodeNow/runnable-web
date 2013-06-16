@@ -80,24 +80,10 @@ DataAdapter.prototype.apiDefaults = function(api) {
     url: url.format(urlOpts),
     headers: {}
   });
-  // Add a custom UserAgent so GitHub API doesn't 403 us.
-  if (api.headers['User-Agent'] == null) {
-    api.headers['User-Agent'] = 'Rendr Api Proxy; Node.js';
-  }
 
   if (api.body != null) {
     api.json = api.body;
   }
-
-  // basicAuth = process.env.BASIC_AUTH;
-  // if (basicAuth != null) {
-  //   authParts = basicAuth.split(':');
-  //   api.auth = {
-  //     username: authParts[0],
-  //     password: authParts[1],
-  //     sendImmediately: true
-  //   };
-  // }
 
   return api;
 };
