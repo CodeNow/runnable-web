@@ -13,9 +13,8 @@ module.exports = {
         callback(err);
       }
       else if (!results || !results.project) {
-        // Project fetch failed -- bc probably a Channel Route
-        throw 'this doesnt work';
-        // controller.app.req.next();
+        // TODO:
+        // figure out how to "next()";
       }
       else if (params.name != results.project.get('name')) {
         // Name in url does not match project -- Redirect to Correct URL
@@ -24,24 +23,6 @@ module.exports = {
         controller.redirectTo(urlWithName);
       }
       else {
-        // project view
-        // traverse file tree models and add them to results for prepop -> memory store
-        var app = results.project.app;
-        (function addDirAndChildrenToResults (dir) {
-          results[dir.cid] = dir;
-          console.log('added', dir.get('path'));
-          dir.collection().forEach(function (fs) {
-            if (fs.isDir()) {
-              addDirAndChildrenToResults(fs);
-            }
-            else { // file
-              fs.app = app;
-              results[fs.cid] = fs;
-              console.log('added', fs.get('path'));
-            }
-          });
-        })(results.project.rootDir);
-
         callback(err, results);
       }
     });

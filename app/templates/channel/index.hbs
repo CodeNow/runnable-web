@@ -1,1 +1,20 @@
-channel page.
+<div class="container">
+  <h1>{{channel}} Examples</h1>
+  <div class="span9">
+    <nav class="project-nav">
+      <ul>
+      {{#each projects.models}}
+      {{view "project_item_view" model=.}}
+      {{/each}}
+      </ul>
+    </nav>
+  </div>
+  <div class="span3 last">
+    <section class="module">
+      <h3>Tags</h3>
+      <nav class="tags-nav">
+        <a data-bypass href="/facebook"><span class="thumbnail"><img src="/images/channels/facebook.png" alt="Facebook"></span> Facebook</a><a data-bypass href="/twitter"><span class="thumbnail"><img src="/images/channels/twitter.png" alt="Twitter"></span> Twitter</a><a data-bypass href="/google"><span class="thumbnail"><img src="/images/channels/google.png" alt="Google"></span> Google</a><a data-bypass href="/paypal"><span class="thumbnail"><img src="/images/channels/paypal.png" alt="MongoDB"></span> PayPal</a><a data-bypass href="/node-mongodb-native"><span class="thumbnail"><img src="/images/channels/node-mongodb-native.png" alt="MongoDB"></span> MongoDB</a><a data-bypass href="/angularjs"><span class="thumbnail"><img src="/images/channels/angularjs.png" alt="AngularJS"></span> AngularJS</a><a data-bypass href="/codeigniter"><span class="thumbnail"><img src="/images/channels/codeigniter.png" alt="Codeigniter"></span> Codeigniter</a><a data-bypass href="/express"><span class="thumbnail"><img src="/images/channels/express.png" alt="Express"></span> Express</a><a data-bypass href="/nodejs"><span class="thumbnail"><img src="/images/channels/nodejs.png" alt="Node.js"></span> Node.js Examples</a><a data-bypass href="/php"><span class="thumbnail"><img src="/images/channels/php.png" alt="PHP"></span> PHP Examples</a><a data-bypass href="/python"><span class="thumbnail"><img src="/images/channels/python.png" alt="Python"></span> Python Examples</a><a data-bypass href="/jquery"><span class="thumbnail"><img src="/images/channels/jquery.png" alt="jQuery"></span> jQuery</a>
+      </nav>
+    </section>
+  </div>
+</div>
