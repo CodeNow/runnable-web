@@ -36,6 +36,14 @@ module.exports = Base.extend({
         callbacks.error(error); //down here so that it's out of the try catch..
       }
     });
+  },
+  alreadyVotedOn  : function (project) {
+    project = (project.toJSON) ? project.toJSON() : project;
+    return ~(this.get('projectVotes') || []).indexOf(project._id);
+  },
+  isOwnerOfProject: function (project) {
+    project = (project.toJSON) ? project.toJSON() : project;
+    return this.id == project.owner;
   }
 });
 module.exports.id = 'User';

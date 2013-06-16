@@ -7,7 +7,7 @@ module.exports = {
         collection : 'Projects',
         params     : {
           page: params.page,
-          sort: 'votes.length'
+          sort: '-voteCount'
         }
       }
     };

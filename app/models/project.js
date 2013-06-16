@@ -2,6 +2,8 @@ var Base = require('./base');
 var FileCollection = require('../collections/files');
 var DirModel = require('./dir');
 var Super = Base.prototype;
+var utils = require('../app').prototype.utils; //hacky..
+var _ = require('underscore');
 
 module.exports = Base.extend({
   urlRoot: '/projects',
@@ -29,10 +31,51 @@ module.exports = Base.extend({
     else {
       this.listenToOnce(this, 'change:rootDirectory', this.onChangeRootDir.bind(this));
     }
+    // VoteCount
+    this.listenTo(this, 'change:votes', this.onChangeVotes.bind(this));
   },
   onChangeRootDir: function () {
     this.rootDir.set(this.get('rootDirectory'));
     // this.unset('rootDirectory');
+  },
+  onChangeVotes: function () {
+    var votes = this.get('votes') || [];
+    this.set('voteCount', votes.length);
+    this.set('voted', this.hasUserVoted());
+  },
+  hasUserVoted: function (userId) {
+    if (typeof userId == 'object' && userId.id) userId = userId.id;
+    userId = userId || this.app.user.id; // default to current user if no id specified
+    var votes = this.get('votes') || [];
+    return ~votes.indexOf(userId);
+  },
+  isUserOwner: function (userId) {
+    if (typeof userId == 'object' && userId.id) userId = userId.id;
+    userId = userId || this.app.user.id; // default to current user if no id specified
+    return (this.get('owner') == userId);
+  },
+  vote: function (cb) {
+    var user = this.app.user;
+    if (this.isUserOwner(user)) {
+      cb(new Error('You cannot vote on your own example, you silly goose'));
+    }
+    else if (this.hasUserVoted(user)) {
+      cb(new Error('You already voted, you crazy monkey'));
+    }
+    else {
+      var voteUrl = [this.url(), 'votes'].join('/');
+      var self = this;
+      var options = _.extend(
+        { url : voteUrl },
+        utils.successErrorToCB(cb)
+      );
+      var attrs = {
+        votes     : _.clone(this.get('votes') || []),
+        voteCount : this.get('voteCount')+1
+      };
+      attrs.votes.push(user.id);
+      this.save(attrs, options);
+    }
   }
 });
 

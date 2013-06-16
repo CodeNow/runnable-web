@@ -143,6 +143,26 @@ var utils = {
     else {
       return newStr;
     }
+  },
+  successToCB : function (cb) {
+    return function (model, response, options) {
+      cb(null, response);
+    };
+  },
+  errorToCB : function (cb) {
+    return function (model, xhr, options) {
+      utils.parseJSON(xhr.responseText, function (err, json) {
+        if (err) { cb(new Error('Error, please try again.')); } else {
+          cb(null, json);
+        }
+      });
+    };
+  },
+  successErrorToCB: function (cb) {
+    return {
+      success: utils.successToCB(cb),
+      error  : utils.errorToCB(cb)
+    };
   }
 };
 

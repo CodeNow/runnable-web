@@ -6,8 +6,11 @@ module.exports = BaseView.extend({
   events: {
     'click': 'vote'
   },
+  postHydrate: function () {
+    this.listenTo(this.model, 'change:votes', this.render.bind(this));
+  },
   postRender: function () {
-    if (this.model.get('voted')) {
+    if (this.model.hasUserVoted() || this.model.isUserOwner()) {
       this.$el.attr('disabled', 'disabled');
     }
   },
@@ -15,9 +18,7 @@ module.exports = BaseView.extend({
     var self = this;
     this.model.vote(function (err) {
       if (err) {
-        alert(err);
-      } else {
-        self.render();
+        alert(err.message);
       }
     });
   }

@@ -4,7 +4,6 @@ var App = require('../app').prototype; //hacky..
 
 module.exports = Fs.extend({
   initialize: function (attrs, options) {
-    console.log(attrs);
     Super.initialize.apply(this, arguments);
     this.project = this.project || attrs && attrs.project || options && options.project; // hacky for rendr
     var FSCollection = require('../collections/fs');
