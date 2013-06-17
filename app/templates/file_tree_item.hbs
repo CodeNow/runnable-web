@@ -1,6 +1,7 @@
-{{#if fsJSON.isRootDir}}
-  <span class="name {{fsJSON.type}}" href="" data-id="{{fsJSON.path}}" title="{{projectJSON.name}}">{{projectJSON.name}}</span>
-{{else}}
+{{!#if fsJSON.isRootDir}}
+  {{!<span class="name {{fsJSON.type}" href="" data-id="{{fsJSON.path}" title="{{projectJSON.name}">{{projectJSON.name}</span>}}
+{{!else}}
+{{#unless fsJSON.isRootDir}}
 {{#with fsJSON}}
   {{#if_eq type compare='dir'}}
   <span class="name {{type}}" href="" data-id="{{path}}" title="{{name}}">{{name}}</span>
@@ -9,4 +10,4 @@
   {{/if_eq}}
   <input class="name-input display-none" value="{{name}}" />
 {{/with}}
-{{/if}}
+{{/unless}}

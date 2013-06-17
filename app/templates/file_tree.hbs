@@ -1,20 +1,20 @@
 {{view "file_tree_item" model=project path=dirJSON.path}}
 <nav class="file_tree">
-  <ul {{#unless dirJSON.open}}class="display-none"{{/unless}}>
-    {{#exists dirJSON.contents}}
-      {{#each dirJSON.contents}}
-        {{#if_eq type compare="dir"}}
-          {{view "file_tree" model=../../project path=path}}
-        {{else}}
-          <li>
-          {{view "file_tree_item" model=../../project path=path}}
-        {{/if_eq}}
-          </li>
+<ul {{#unless dirJSON.open}}class="display-none"{{/unless}}>
+  {{#exists dirJSON.contents}}
+    {{#each dirJSON.contents}}
+      {{#if_eq type compare="dir"}}
+        {{view "file_tree" model=../../project path=path}}
       {{else}}
-        <li class="empty">(empty)</li>
-      {{/each}}
+        <li>
+        {{view "file_tree_item" model=../../project path=path}}
+      {{/if_eq}}
+        </li>
     {{else}}
-      <li class='loading'>loading</li>
-    {{/exists}}
-  </ul>
+      <li class="empty">(empty)</li>
+    {{/each}}
+  {{else}}
+    <li class='loading'>loading</li>
+  {{/exists}}
+</ul>
 </nav>
