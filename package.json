@@ -8,17 +8,13 @@
     "test": "mocha --ui bdd --reporter spec  ./test --recursive",
     "start": "DEBUG=app:* node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/airbnb/rendr-app-template.git"
-  },
   "dependencies": {
     "backbone": "*",
     "express": "~>3",
     "underscore": "~1.4.4",
     "async": "~0.1.22",
     "request": "~2.16",
-    "rendr": "codenow/rendr",
+    "rendr": "https://github.com/codenow/rendr/tarball/master",
     "debug": "*",
     "eson": "0.4.1",
     "uuid": "~1.4.1",
