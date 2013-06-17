@@ -9,6 +9,10 @@ module.exports = BaseView.extend({
     /// and it has the current user.
     this.app.user = this.model;
   },
+  postHydrate: function () {
+    // read long comment above, postHydrate - same reason for clientside
+    this.app.user = this.model;
+  },
   getTemplateData: function () {
     return {
       user: this.model.toJSON(),
