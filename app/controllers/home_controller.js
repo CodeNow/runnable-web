@@ -1,8 +1,15 @@
+var _ = require('underscore');
 module.exports = {
   index: function(params, callback) {
     var spec = {
-      user: { model:'User', params:params },
-      projects: { collection:'Projects', params:params }
+      user: { model:'User', params:{} },
+      projects: {
+        collection : 'Projects',
+        params     : {
+          page: params.page,
+          sort: '-voteCount'
+        }
+      }
     };
     this.app.fetch(spec, function (err, results) {
       callback(err, results);
@@ -10,8 +17,7 @@ module.exports = {
   },
   jobs: function (params, callback) {
     var spec = {
-      user: { model:'User', params:params },
-      projects: { collection:'Projects', params:params }
+      user: { model:'User', params:params }
     };
     this.app.fetch(spec, function (err, results) {
       callback(err, results);
@@ -19,8 +25,7 @@ module.exports = {
   },
   privacy: function (params, callback) {
     var spec = {
-      user: { model:'User', params:params },
-      projects: { collection:'Projects', params:params }
+      user: { model:'User', params:params }
     };
     this.app.fetch(spec, function (err, results) {
       callback(err, results);
@@ -28,8 +33,7 @@ module.exports = {
   },
   about: function (params, callback) {
     var spec = {
-      user: { model:'User', params:params },
-      projects: { collection:'Projects', params:params }
+      user: { model:'User', params:params }
     };
     this.app.fetch(spec, function (err, results) {
       callback(err, results);
@@ -37,8 +41,7 @@ module.exports = {
   },
   providers: function (params, callback) {
     var spec = {
-      user: { model:'User', params:params },
-      projects: { collection:'Projects', params:params }
+      user: { model:'User', params:params }
     };
     this.app.fetch(spec, function (err, results) {
       callback(err, results);

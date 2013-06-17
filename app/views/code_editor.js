@@ -1,28 +1,30 @@
 var BaseView = require('./base_view');
 
+// ATTN the purpose of this view is to ensure that the rootDir for the
+// currently loading project has been fetched for its sub views.
+// Important for push state navigation from any "project list" page
+// to a "single project page"
 module.exports = BaseView.extend({
   className:"code-container",
-  postRender: function () {
-    /// Beware: Fragile code ahead.
-    /// Beware: Fragile code ahead.
-    if (!this.clientSide) { // first render clientside only..
-      // first client side postRender
-      var view = this;
-      this.clientSide = true;
+  postHydrate: function () {
+    // clientside
+    // postHydrate is the place to attach data events and frontend additional data retrieval
+    if (this.model.rootDir.isNew()) {
+      // this fetch is necessary when navigating from any "project list" page to a "single project page" (push state)
+      // since rootDirectory is only returned with the project response from our single project api rest call.
       this.model.rootDir.fetch({
         success: function () {
-          view.render(); // this pull will populate openFiles auto (in project constructor).
-        },
+          this.render();
+        }.bind(this),
         error: function () {
-          alert('Error, please refresh page.');
+          alert('Error fetching example files, please refresh page.');
         }
       });
     }
   },
   getTemplateData: function () {
     return {
-      clientSide : this.clientSide,
-      project    : this.model
+      project : this.model
     };
   }
 });

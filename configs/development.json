@@ -20,7 +20,12 @@
   },
 
   "rendrApp": {
-    "someProperty": "someValue"
+    "mixpanel" : {
+      "key": "de848319a0091fb3a5876184d81a40ec"
+    },
+    "googleAnalytics" : {
+      "id": "UA-36631837-2"
+    }
   },
 
   "cookieKey": "runnable.sid",

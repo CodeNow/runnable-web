@@ -1,8 +1,9 @@
 // var Base = require('./base');
-var Base = require('backbone').Collection;
+var Base = require('backbone').Collection; // THIS IS A BACKBONE COLLECTION -- NOT RENDR
 var File = require('../models/file');
 var Dir  = require('../models/dir');
 var Super = Base.prototype;
+var App = require('../app').prototype; //hacky..
 
 
 module.exports = Base.extend({

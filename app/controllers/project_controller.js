@@ -7,15 +7,14 @@ module.exports = {
     };
     // require('subl').openError(new Error());
     // console.log(new Error().stack);
-    // debugger;
     this.app.fetch(spec, function (err, results) {
       // console.log(err, results);
       if (err) {
         callback(err);
       }
       else if (!results || !results.project) {
-        // Project fetch failed -- bc probably a Channel Route
-        controller.app.req.next();
+        // TODO:
+        // figure out how to "next()";
       }
       else if (params.name != results.project.get('name')) {
         // Name in url does not match project -- Redirect to Correct URL
@@ -24,7 +23,6 @@ module.exports = {
         controller.redirectTo(urlWithName);
       }
       else {
-        // project view
         callback(err, results);
       }
     });

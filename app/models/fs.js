@@ -1,7 +1,8 @@
 // var Base = require('./base');
-var Base = require('backbone').Model;
+var Base = require('backbone').Model; // THIS IS A BACKBONE MODEL -- NOT RENDR
 var Super = Base.prototype;
 var App = require('../app').prototype; //hacky..
+var _ = require('underscore');
 
 module.exports = Base.extend({
   idAttribute: 'path',
@@ -13,6 +14,11 @@ module.exports = Base.extend({
     this.parentDir  = options && options.parentDir;
     this.listenTo(this, 'change:name', this.onChangeName.bind(this));
     this.listenTo(this, 'change:path', this.onPathChange.bind(this));
+  },
+  toJSON: function () {
+    return _.extend(Super.toJSON.apply(this, arguments), {
+      isRootDir: this.isRootDir()
+    });
   },
   getRootDir: function () {
     return this.project.rootDir;
@@ -27,7 +33,7 @@ module.exports = Base.extend({
     fsPathSplit     = fsPathSplit.filter(notEmptyStr); // first item will be emptystr bc path starts with /
     while (fsPathSplit.length) {
       fsName = fsPathSplit.shift();
-      fsModel = fsModel.collection().getByName(fsName);
+      fsModel = fsModel.contents().getByName(fsName);
       if (!fsModel) {
         //FAILING HERE
         return null;
@@ -57,13 +63,13 @@ module.exports = Base.extend({
       if (oldParentPath !== newParentPath) { //only move if the path actually changes
         oldParentDir = this.getPath(oldParentPath);
         newParentDir = this.getPath(newParentPath);
-        oldParentDir.collection().remove(this.rollbackAttr('path', {silent:true}));
+        oldParentDir.contents().remove(this.rollbackAttr('path', {silent:true}));
         var reAddToOpenFiles;
         if (this.project && this.project.openFiles.get(this.id)) {
           reAddToOpenFiles = true;
           this.project.openFiles.remove(this);
         }
-        newParentDir.collection().add(this.set('path', newPath, {silent:true})); // TODO: figure out improvement vs if
+        newParentDir.contents().add(this.set('path', newPath, {silent:true})); // TODO: figure out improvement vs if
         if (this.project && reAddToOpenFiles) {
           this.project.openFiles.add(this);
         }
@@ -107,7 +113,7 @@ module.exports = Base.extend({
       }
       var parentDirPath = this.parentDir && this.parentDir.get('path');
       var newFilePath = App.utils.pathJoin(parentDirPath, attrs.name);
-      var fsModelAtNewFilePath = this.parentDir.collection().get(newFilePath);
+      var fsModelAtNewFilePath = this.parentDir.contents().get(newFilePath);
       if (this.parentDir && (fsModelAtNewFilePath && fsModelAtNewFilePath !== this)) {
         // sibling exists at new file path. and the file is not the file itself (could be pushed first then removed if request fails)
         return 'File/dir with name "'+attrs.name+'" already exists.';
@@ -211,7 +217,7 @@ module.exports = Base.extend({
         App.utils.parseJSON(function (err, jsonErr) {
           if (err) {}
         });
-        if (self.parentDir) self.parentDir.collection().add(self);
+        if (self.parentDir) self.parentDir.contents().add(self);
         err = new Error('Error deleting '+self.get('type')+'.');
         cb(err);
       }

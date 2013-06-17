@@ -12,20 +12,25 @@ var rendrModulesDir = rendrDir + '/node_modules';
 var compassCSS      = 'public/.css/index.css';
 var mergedCSSPath   = 'public/styles/index.css';
 //stitch
+var aceScripts = [
+  'assets/bower/ace-builds/src-min-noconflict/ace.js',
+  'assets/bower/ace-builds/src-min-noconflict/theme-textmate.js',
+  'assets/vendor/aceWithFuckingSemicolons/ext-modelist.js',
+  'assets/vendor/aceWithFuckingSemicolons/mode-javascript.js',
+  'assets/vendor/aceWithFuckingSemicolons/mode-php.js',
+  'assets/vendor/aceWithFuckingSemicolons/mode-python.js',
+  'assets/vendor/aceWithFuckingSemicolons/mode-json.js',
+  'assets/vendor/aceWithFuckingSemicolons/mode-markdown.js',
+  'assets/vendor/aceWithFuckingSemicolons/mode-html.js',
+  'assets/vendor/aceWithFuckingSemicolons/mode-jade.js',
+  'assets/vendor/aceWithFuckingSemicolons/mode-css.js'
+  // 'assets/bower/ace-builds/src-min-noconflict/mode-stylus.js'
+];
 var frontendScripts = [
   'assets/vendor/*.js',
-  'assets/vendor/bower/ace-builds/src-min-noconflict/ace.js',
-  'assets/vendor/bower/ace-builds/src-min-noconflict/theme-textmate.js',
-  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/javascript',
-  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/php',
-  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/python',
-  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/json',
-  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/markdown',
-  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/html',
-  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/jade',
-  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/css',
-  'assets/vendor/bower/ace-builds/src-min-noconflict/ace/mode/stylus'
-];
+  'assets/bower/frontend-track/frontend-track.js'
+]
+.concat(aceScripts);
 
 module.exports = function(grunt) {
   // Project configuration.
@@ -103,7 +108,7 @@ module.exports = function(grunt) {
         livereload: 35731
       },
       scripts: {
-        files: 'app/**/*.js',
+        files: ['app/**/*.js', '!node_modules/rendr/node_modules/*', 'node_modules/rendr/**/*.js'],
         tasks: ['handlebars', 'rendr_stitch'],
         options: {
           interrupt: true
@@ -149,6 +154,7 @@ module.exports = function(grunt) {
           aliases: [
             {from: rendrDir + '/client', to: 'rendr/client'},
             {from: rendrDir + '/shared', to: 'rendr/shared'}
+            // {from: aceDir,               to:'ace'}
           ]
         },
         files: [{
