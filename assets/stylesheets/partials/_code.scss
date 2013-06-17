@@ -94,16 +94,25 @@
 }
 
 .file-browser{
-	background:$file-browser;
-	padding:10px;
-	overflow-x:hidden;
-	overflow-y:auto;
+	background:#eff2f3;
 	position:absolute;
 	top:0;
 	right:0;
 	bottom:0;
 	width:25%;
 	@include box-sizing(border-box);
+}
+
+.file-browser-toolbar{
+	position:absolute;
+	top:0;
+	right:0;
+	z-index:5;
+	button{
+		float:left;
+		@extend .btn-tertiary;
+		@extend .btn-small;
+	}
 }
 
 // Set the padding for indentation of child files/folders
@@ -113,8 +122,13 @@ $tree-padding:15px;
 	list-style:none;
 	margin:0;
 	padding:0;
+	padding-top:25px;
 	position:relative;
 	z-index:4;
+	overflow-x:hidden;
+	overflow-y:auto;
+	height:100%;
+	@include box-sizing(border-box);
 	ul,ol{
 		list-style:none;
 		margin:0;
@@ -202,7 +216,7 @@ $tree-padding:15px;
 
 	// Indent each child list item but ensure background spans full width of file browser
 	li{
-		padding-left:15px;
+		padding-left:0;
 		li{
 			margin-left:-$tree-padding;
 			padding-left:$tree-padding*2;
@@ -223,7 +237,7 @@ $tree-padding:15px;
 }
 
 // Hide the first item, which is the project's folder name
-nav.file-tree > ul > li > span > .dir{
+nav.file-tree > ul > li > span{
     display:none;
 }
 
