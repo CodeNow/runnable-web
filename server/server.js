@@ -2,6 +2,7 @@
 // Home of the main server object
 //
 var express = require('express'),
+    connectRedis = require('connect-redis'),
     env = require('./lib/env'),
     mw = require('./middleware'),
     DataAdapter = require('./lib/data_adapter'),
@@ -13,6 +14,9 @@ var express = require('express'),
 
 // Add Handlebars helpers
 addHandlebarsHelpers();
+
+// sessions storage
+redisStore = connectRedis(express);
 
 app = express();
 
@@ -69,6 +73,18 @@ function initMiddleware() {
     if (process.env.NODE_ENV != 'development')
       app.use(express.compress());
     app.use(express.static(__dirname + '/../public'));
+    app.use(express.cookieParser());
+    app.use(express.session({
+      key: env.current.cookieKey,
+      secret: env.current.cookieSecret,
+      store: new redisStore,
+        ttl: env.current.cookieExpires,
+      cookie: {
+        path: '/',
+        httpOnly: false,
+        maxAge: env.current.cookieExpires
+      }
+    }));
     app.use(express.logger());
     app.use(express.bodyParser());
     if (process.env.NODE_ENV == 'development')

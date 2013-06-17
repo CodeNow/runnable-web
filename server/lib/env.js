@@ -16,6 +16,7 @@ var readConfigs = function (filename) {
   .read(path.resolve(path.join(__dirname, '..', '..', 'configs/', filename+'.json')));
 };
 
-var configs = module.exports = readConfigs(env);
-module.exports.readConfigs = readConfigs;
-module.exports.current = readConfigs(env);
+module.exports = {
+  readConfigs: readConfigs,
+  current: readConfigs(env)
+};

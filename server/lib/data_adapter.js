@@ -1,5 +1,6 @@
 var utils = require('rendr/server/utils'),
     _ = require('underscore'),
+    cookie = require('cookie'),
     url = require('url'),
     request = require('request'),
     debug = require('debug')('app:DataAdapter'),
@@ -31,8 +32,13 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
     convertErrorCode: true,
     allow4xx: false
   });
-
+;
   api = this.apiDefaults(api);
+
+  if (req.session.access_token) {
+    api.headers.cookie = "runnable.sid=" + req.session.access_token;
+  }
+
   start = new Date().getTime();
   request(api, function(err, response, body) {
     if (err) return callback(err);
@@ -40,6 +46,12 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
 
     debug('%s %s %s %sms', api.method.toUpperCase(), api.url, response.statusCode, end - start);
     debug('%s', inspect(response.headers));
+
+    if (response.headers['set-cookie']) {
+      var setCookie = response.headers['set-cookie'];
+      var parsed = cookie.parse(setCookie.toString());
+      req.session.access_token = parsed['runnable.sid'];
+    }
 
     if (options.convertErrorCode) {
       err = _this.getErrForResponse(response, {allow4xx: options.allow4xx});
@@ -65,6 +77,8 @@ DataAdapter.prototype.apiDefaults = function(api) {
     api.url = api.path;
     delete api.path;
   }
+
+  api.jar = false;
 
   // Can specify a particular API to use, falling back to default.
   apiHost = this.options[api.api] || this.options['default'] || this.options || {};
