@@ -83,10 +83,6 @@ module.exports = BaseView.extend({
     this.editor.resize();
   },
   setHeight: function (height) {
-    console.log('height',height)
-    console.log('height',height)
-    console.log('height',height)
-    console.log('height',height)
     if (typeof height == 'number') {
       height = height + 'px'; // assume px
     }
