@@ -137,6 +137,7 @@ $tree-padding:15px;
 	li{
 		margin:0;
 		color:$file-browser-off;
+		position:relative;
 		a{
 			display:block;
 			color:$file-browser-off;
@@ -159,6 +160,26 @@ $tree-padding:15px;
 			@include box-shadow(inset 0 1px 4px rgba(0,0,0,.4));
 			padding: 3px;
 			margin: 5px 0;
+		}
+		button{
+			position:absolute;
+			right:10px;
+			top:0;
+			background:none;
+			border:none;
+			display:none;
+			color:#999;
+			padding:5px 0;
+			line-height:22px;
+			i{
+				font-size:12px;
+			}
+		}
+		&:hover > button{
+			display:block;
+			&:hover{
+				color:#666;
+			}
 		}
 	}
 	li.folder{
