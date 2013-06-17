@@ -9,18 +9,12 @@ module.exports = Base.extend({
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
     this.project = options && options.project;
-    this.on('add', this.onAdd, this);
+    // events
+    this.listenTo(this, 'add', this.onAdd.bind(this));
+    this.listenTo(this, 'add remove', this.onAddRemove.bind(this));
     // this.on('remove', this.onRemove, this);
-    this.orderCount = 0;
-    this.on('add remove', this.onAddRemove, this);
-    this.on('change:content change:savedContent', this.onChangeContent, this);
-    this.once('add', this.firstAdd);
-    this.previouslyHadUnsavedChanges = false;
-  },
-  comparator: 'sort',
-  dispose: function () {
-    this.off('change:content change:savedContent', this.onChangeContent, this);
-    this.off('add remove', this.onAddRemove, this);
+    this.listenTo(this, 'change:content change:savedContent', this.onChangeContent.bind(this));
+    this.listenToOnce(this, 'add', this.firstAdd.bind(this));
   },
   firstAdd: function (fileModel) {
     this.selectedFileModel = fileModel; // this is the default file basically.
@@ -45,13 +39,13 @@ module.exports = Base.extend({
     }
   },
   onAdd: function (model) {
-    model.on('destroy', this.onModelDestroyed, this);
-    // model.set('sort', this.orderCount++);
+    this.listenTo(model, 'destroy', this.onModelDestroyed.bind(this));
     if (this.length === 1) { // if first model added set as selected
       this.selectedFile(model);
     }
   },
   onModelDestroyed: function (model) {
+    this.stopListening(model);
     this.remove(model);
   },
   setSelectedFile: function (fileModel, options) {
