@@ -11,7 +11,7 @@ module.exports = BaseView.extend({
     // you can attach events here since render only occurs once for this view
     var openFiles = this.model.openFiles;
     this.setFile(openFiles.selectedFile());
-    this.listenTo(openFiles, 'select:file', this.setFile.bind());
+    this.listenTo(openFiles, 'select:file', this.setFile.bind(this));
   },
   setFile: function (file) {
     // detach previous file events/session
