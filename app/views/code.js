@@ -40,9 +40,9 @@ module.exports = BaseView.extend({
     }
     else {
       // init file session
-      var session = file.editorSession = ace.createEditSession(atob(fileModel.get('content')));
+      var session = file.editorSession = ace.createEditSession(atob(file.get('content')));
       editor.setSession(session);
-      session.setMode(this.getMode(filename));
+      session.setMode(this.getMode(file.get('name')));
       session.setTabSize(2);
       session.setUseSoftTabs(true);
       this.listenTo(session, 'change',           this.onEdit.bind(this));
@@ -51,12 +51,18 @@ module.exports = BaseView.extend({
     }
     // always
     this.$el.show();
-    thie.editor.focus();
+    this.editor.focus();
+  },
+  onScrollLeft: function() {
+    Track.event('Code View', 'Editor Scroll Left', {projectId: this.model.id});
+  },
+  onScrollTop: function() {
+    Track.event('Code View', 'Editor Scroll Tops', {projectId: this.model.id});
   },
   getMode: function (filename) {
     this.modelist = this.modelist || ace.require('ace/ext/modelist');
     var modeInfo = this.modelist.getModeForPath(filename);
-    var mode = ace.require('ace/mode/'+modeinfo.mode) || ace.require('ace/mode/markdown'); //default
+    var mode = ace.require(modeInfo.mode) || ace.require('ace/mode/markdown'); //default
 
     return (new mode.Mode());
   },
