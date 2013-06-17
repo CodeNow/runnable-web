@@ -1,11 +1,11 @@
 var BaseView = require('./base_view');
 module.exports = BaseView.extend({
-  className: 'code-editor span9',
-  minHeight: 300,
-  maxHeight: 550,
+  className: 'tab-pane with-file-browser',
+  // minHeight: 300,
+  // maxHeight: 550,
   postRender: function () {
     // render should only occur once for this view, setFile is what updates the editor.
-    this.setHeight(this.minHeight);
+    // this.setHeight(this.minHeight);
     this.editor = ace.edit(this.el);
     this.editor.setTheme(ace.require('ace/theme-textmate'));
     // you can attach events here since render only occurs once for this view
@@ -24,6 +24,7 @@ module.exports = BaseView.extend({
     }
     else {
       this.attachFile(file);
+      this.adjustHeightToContents();
     }
   },
   detachFile: function (file) {
@@ -82,6 +83,10 @@ module.exports = BaseView.extend({
     this.editor.resize();
   },
   setHeight: function (height) {
+    console.log('height',height)
+    console.log('height',height)
+    console.log('height',height)
+    console.log('height',height)
     if (typeof height == 'number') {
       height = height + 'px'; // assume px
     }
