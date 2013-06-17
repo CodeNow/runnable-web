@@ -1,6 +1,6 @@
 var BaseView = require('./base_view');
 module.exports = BaseView.extend({
-  className: 'code-editor',
+  className: 'code-editor span9',
   minHeight: 300,
   maxHeight: 550,
   postRender: function () {
