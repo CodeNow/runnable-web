@@ -1,8 +1,9 @@
 var BaseView = require('./base_view');
 
+var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName:'header',
-  postHydrate: function () {
+  postInitialize: function () {
     /// ATTN this is where the user is set on the app for all the other views
     /// until we find a better location.. since this is the first view initialize
     /// and it has the current user.

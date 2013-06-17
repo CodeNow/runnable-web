@@ -43,14 +43,13 @@ module.exports = Base.extend({
     this.set('voted', this.hasUserVoted());
   },
   hasUserVoted: function (userId) {
+    userId = userId || this.app.user; // default to current user if no id specified
+    if (!userId) return;
     if (typeof userId == 'object' && userId.id) userId = userId.id;
-    userId = userId || this.app.user.id; // default to current user if no id specified
     var votes = this.get('votes') || [];
     return ~votes.indexOf(userId);
   },
   isOwner: function (userId) {
-    if (typeof userId == 'object' && userId.id) userId = userId.id;
-    userId = userId || this.app.user.id; // default to current user if no id specified
     return (this.get('owner') == userId);
   },
   vote: function (cb) {

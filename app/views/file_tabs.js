@@ -5,7 +5,7 @@ module.exports = BaseView.extend({
   tagName: 'nav',
   className: 'file-tabs',
   events: {
-    'click li > a'          : 'tabClick',
+    'click li > a:not(.selected)'          : 'tabClick',
     'click .close-file'     : 'tabClose'
   },
   postHydrate: function() {
@@ -20,11 +20,24 @@ module.exports = BaseView.extend({
       files : this.model.openFiles.toJSON()
     };
   },
-  tabClick: function () {
-    debugger;
+  tabClick: function (evt) {
+    this.$el.removeClass('selected');
+    var fileId = $(evt.currentTarget).data('id');
+    this.fileCollection.selectedFile(fileId);
+    Track.event('File Tabs View', 'Selected File', {
+      file     :fileId,
+      projectId:this.projectModel.id
+    });
   },
   tabClose: function () {
-
+    evt.stopPropagation();
+    var fileId = $(evt.currentTarget).data('id');
+    var fileModel = this.fileCollection.get(fileId);
+    this.fileCollection.remove(fileModel);
+    Track.event('File Tabs View', 'Closed File', {
+      file     : fileId,
+      projectId: this.projectModel.id
+    });
   }
 });
 
