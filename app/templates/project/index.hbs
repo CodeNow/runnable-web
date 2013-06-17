@@ -33,6 +33,8 @@
       {{view "project_stats" model=project}}
     </section>
 
+    {{#if projects.attributes.tags}}
+    {{#if projects.attributes.tags.length}}
     <section class="module tags">
       <h3>Tags</h3>
       {{view "project_tags" model=project editMode=editMode}}
@@ -40,6 +42,8 @@
       {{view "project_new_tag_form" model=project}}
       {{/if}}
     </section>
+    {{/if}}
+    {{/if}}
 
     {{#if related.length}}
     <section class="module">

@@ -65,7 +65,7 @@ module.exports = Base.extend({
       cb(new Error('You already voted, you crazy monkey'));
     }
     else {
-      var voteUrl = [this.url(), 'votes'].join('/');
+      var voteUrl = [_.result(this, 'url'), 'votes'].join('/');
       var self = this;
       var options = _.extend(
         { url : voteUrl },
