@@ -6,7 +6,6 @@ var utils = require('../app').prototype.utils; //hacky..
 var _ = require('underscore');
 
 module.exports = Base.extend({
-  urlRoot: '/projects',
   initialize: function (model, options) {
     Super.initialize.apply(this, arguments);
     var self = this;
@@ -49,7 +48,7 @@ module.exports = Base.extend({
     var votes = this.get('votes') || [];
     return ~votes.indexOf(userId);
   },
-  isUserOwner: function (userId) {
+  isOwner: function (userId) {
     if (typeof userId == 'object' && userId.id) userId = userId.id;
     userId = userId || this.app.user.id; // default to current user if no id specified
     return (this.get('owner') == userId);

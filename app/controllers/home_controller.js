@@ -11,8 +11,7 @@ module.exports = {
       projects: {
         collection : 'Projects',
         params     : {
-          page: params.page,
-          sort: '-voteCount'
+          sort: 'votes'
         }
       }
     };

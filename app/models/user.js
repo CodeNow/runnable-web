@@ -1,15 +1,9 @@
 var Base = require('./base');
 
 module.exports = Base.extend({
-  urlRoot: '/users',
-  defaults: {
-    _id: 'me'
-  },
+  urlRoot: '/users/me',
   isRegistered : function(){
     return this.get('permission_level') >= 1;
-  },
-  isOwner : function (model) {
-    return model.get('owner') == this.get('_id');
   },
   isModerator : function () {
     return this.get('permission_level') >= 5;
@@ -37,13 +31,16 @@ module.exports = Base.extend({
       }
     });
   },
-  alreadyVotedOn  : function (project) {
-    project = (project.toJSON) ? project.toJSON() : project;
-    return ~(this.get('projectVotes') || []).indexOf(project._id);
+  vote: function (project) {
+    if (hasVoted(project)) { return false; } else {
+      var votes = this.get('projectVotes') || [];
+      votes.push(project._id);
+      return true;
+    }
   },
-  isOwnerOfProject: function (project) {
-    project = (project.toJSON) ? project.toJSON() : project;
-    return this.id == project.owner;
+  hasVoted: function (project) {
+    var votes = this.get('projectVotes') || [];
+    return votes.indexOf(project._id) !== -1;
   }
 });
 module.exports.id = 'User';

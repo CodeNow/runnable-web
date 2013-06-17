@@ -3,13 +3,7 @@ var Project = require('../models/project')
 
 module.exports = Base.extend({
   model: Project,
-  url: function () {
-    return (this.page) ? '/projects/page/'+this.page : '/projects';
-  },
-  parse: function (response) {
-    this.paging = response.paging;
-    return response.data;
-  }
+  url: '/runnables'
 });
 
 module.exports.id = 'Projects';
