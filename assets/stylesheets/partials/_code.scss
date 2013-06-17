@@ -220,6 +220,11 @@ $tree-padding:15px;
 	}
 }
 
+// Hide the first item, which is the project's folder name
+nav.file-tree > ul > li > span > .dir{
+    display:none;
+}
+
 // Add padding below for right click menu
 .file-tree > li:first-child{
 	padding-bottom: 100px;
