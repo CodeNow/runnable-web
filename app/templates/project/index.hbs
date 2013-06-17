@@ -4,9 +4,9 @@
       {{view "vote_button" model=project}}
       {{view "project_title" model=project}}
     </section>
-    {{!if something}}
+    {{#if unpublished}}
     {{view "publish_warning" model=project}}
-    {{!if}}
+    {{/if}}
     <section class="actions">
       {{view "run_button" model=project}}
       {{view "save_button" model=project}}
@@ -21,10 +21,10 @@
   <aside class="span3 last">
 
     <div class="module">
-      {{!view "new_example_button"}}
+      {{view "new_example_button"}}
     </div>
 
-    <section class="module">
+    <section class="module display-none">
       {{view "project_owner" model=project}}
       {{view "project_stats" model=project}}
     </section>
@@ -32,7 +32,9 @@
     <section class="module tags">
       <h3>Tags</h3>
       {{view "project_tags_list" model=project}}
+      {{#if unpublished}}
       {{view "project_new_tag_form" model=project}}
+      {{/if}}
     </section>
 
     <section class="module">

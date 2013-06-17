@@ -5,10 +5,8 @@ module.exports = {
       user: { model:'User', params:{} },
       project: { model:'Project', params:params }
     };
-    // require('subl').openError(new Error());
-    // console.log(new Error().stack);
+
     this.app.fetch(spec, function (err, results) {
-      // console.log(err, results);
       if (err) {
         callback(err);
       }
@@ -23,8 +21,12 @@ module.exports = {
         controller.redirectTo(urlWithName);
       }
       else {
+        results.unpublished = results.project.get('unpublished'); // for showing publish warning etc
         callback(err, results);
       }
     });
+  },
+  "new": function(params, callback) {
+    callback();
   }
 };
