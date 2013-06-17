@@ -4,7 +4,7 @@
       {{view "vote_button" model=project}}
       {{view "project_title" model=project}}
     </section>
-    {{#if unpublished}}
+    {{#if projectJSON.unpublished}}
     {{view "publish_warning" model=project}}
     {{/if}}
     <section class="actions">
@@ -12,7 +12,11 @@
       {{view "save_button" model=project}}
       {{view "fork_button" model=project}}
       {{view "download_button" model=project}}
+      {{#unless editMode}}
+      {{#if_eq projectJSON.owner compare=user.id}}
       {{view "edit_button" model=project}}
+      {{/if_eq}}
+      {{/unless}}
     </section>
     {{! <div class="code-container">
     </div> }}
@@ -31,31 +35,23 @@
 
     <section class="module tags">
       <h3>Tags</h3>
-      {{view "project_tags_list" model=project}}
-      {{#if unpublished}}
+      {{view "project_tags" model=project editMode=editMode}}
+      {{#if editMode}}
       {{view "project_new_tag_form" model=project}}
       {{/if}}
     </section>
 
+    {{#if related.length}}
     <section class="module">
       <h3>Related examples</h3>
       <nav class="related-nav">
         <ul>
-          <li>
-            <button class="btn-vote">833</button>
-            <a href="">Login auth using sessions in express - Node.js</a>
-          </li>
-          <li>
-            <button class="btn-vote">833</button>
-            <a href="">Login auth using sessions in express - Node.js</a>
-          </li>
-          <li>
-            <button class="btn-vote">2</button>
-            <a href="">One liner</a>
-          </li>
+          {{#each related.models}}
+          {{view "project_item_small" model=.}}
+          {{/each}}
         </ul>
       </nav>
     </section>
-
+    {{/if}}
   </aside>
 </div>

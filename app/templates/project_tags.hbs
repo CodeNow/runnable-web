@@ -1,0 +1,6 @@
+{{#each tags}}
+<a href=""><img src="/images/channels/{{.}}.png" alt=""> {{.}}</a>
+{{#if editMode}}
+<i class="icon-remove remove-tag"></i>
+{{/if}}
+{{/each}}

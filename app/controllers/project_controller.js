@@ -1,3 +1,5 @@
+var _ = require('underscore');
+
 module.exports = {
   index: function(params, callback) {
     var controller = this;
@@ -21,8 +23,26 @@ module.exports = {
         controller.redirectTo(urlWithName);
       }
       else {
-        results.unpublished = results.project.get('unpublished'); // for showing publish warning etc
-        callback(err, results);
+        var tags = results.project.get('tags');
+        if (tags && tags.length) {
+          // If project has tags, fetch related projects
+          var spec2 = {
+            related: {
+              collection:'Projects',
+              params:{
+                tags:tags[0],
+                limit: 5,
+                sort: '-voteCount'
+              }
+            }
+          };
+          controller.app.fetch(spec2, function (err, results2) {
+            callback(err, _.extend(results, results2));
+          });
+        }
+        else {
+          callback(err, results);
+        }
       }
     });
   },
