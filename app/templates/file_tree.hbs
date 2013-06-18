@@ -1,5 +1,4 @@
 {{view "file_tree_item" model=project path=dirJSON.path}}
-<nav class="file_tree">
 <ul {{#unless dirJSON.open}}class="display-none"{{/unless}}>
   {{#exists dirJSON.contents}}
     {{#each dirJSON.contents}}
@@ -18,4 +17,3 @@
     <li class='loading'>loading</li>
   {{/exists}}
 </ul>
-</nav>

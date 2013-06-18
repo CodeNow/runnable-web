@@ -17,8 +17,25 @@ module.exports = Base.extend({
   },
   toJSON: function () {
     return _.extend(Super.toJSON.apply(this, arguments), {
-      isRootDir: this.isRootDir()
+      isRootDir  : this.isRootDir(),
+      downloadURL: this.getDownloadUrl(),
+      niceType   : this.niceType()
     });
+  },
+  validate: function (attrs, options) {
+    if (attrs.name !== undefined) {
+      var name = attrs.name, err;
+      if (!this.parentDir)
+        err = 'cannot rename root folder';
+      if (!name)
+        err = 'filename cannot be empty'; //or null
+      var fsWithName = this.parentDir.contents().getByName(name);
+      if (fsWithName)
+        err = '"'+fsWithName.id+'" already exists';
+      if (name.length > 25)
+        err = 'name can only be 25 chars max';
+      return err;
+    }
   },
   getRootDir: function () {
     return this.project.rootDir;
@@ -42,12 +59,17 @@ module.exports = Base.extend({
 
     return fsModel;
   },
+  getByName: function () {
+    throw "getByName is on dir.contents()";
+  },
   getDownloadUrl: function () {
     return this.url().replace('/files', '/zip');
   },
   onPathChange: function () {
-    var FileModel = require('models/FileModel');
-    var DirModel  = require('models/DirModel');
+    // this whole function sucks..
+    // but it does alot so be careful editing it.
+    var FileModel = require('./file');
+    var DirModel  = require('./dir');
     var nameRegex = new RegExp(App.utils.escapeRegExp(this.get('name'))+'$');
     var oldPath = this.previousAttributes().path;
     var newPath = this.get('path');
@@ -75,6 +97,11 @@ module.exports = Base.extend({
         }
         this.parentDir = newParentDir;
       }
+      else {
+        newParentDir = this.getPath(newParentPath);
+        newParentDir.contents()._byId[newPath] = newParentDir.contents()._byId[oldPath];
+        delete newParentDir.contents()._byId[oldPath];
+      }
     }
     return this;
   },
@@ -86,6 +113,12 @@ module.exports = Base.extend({
     var relPath = pathSplit.join('/');
     this.set('path', App.utils.pathJoin(relPath, name));
     //Fix this
+  },
+  niceType: function () {
+    if (this.isDir())
+      return 'folder';
+    else
+      return 'file';
   },
   isDir: function () {
     return Boolean(this.get('type')=='dir');
@@ -103,23 +136,6 @@ module.exports = Base.extend({
     this.set(attr, prevVal, options);
     return this;
   },
-  validate: function (attrs, options) {
-    if (attrs.name) {
-      if (attrs.name.trim().length === 0) {
-        return "Name cannot be all spaces";
-      }
-      if (attrs.name.trim().length !== attrs.name.length) {
-        return "Name cannot contain spaces at beginning or end";
-      }
-      var parentDirPath = this.parentDir && this.parentDir.get('path');
-      var newFilePath = App.utils.pathJoin(parentDirPath, attrs.name);
-      var fsModelAtNewFilePath = this.parentDir.contents().get(newFilePath);
-      if (this.parentDir && (fsModelAtNewFilePath && fsModelAtNewFilePath !== this)) {
-        // sibling exists at new file path. and the file is not the file itself (could be pushed first then removed if request fails)
-        return 'File/dir with name "'+attrs.name+'" already exists.';
-      }
-    }
-  },
   rename: function (name, cb) {
     var self = this;
     var err;
@@ -134,6 +150,7 @@ module.exports = Base.extend({
         this.save({name:name}, {
           type: 'put',
           url : oldURL,
+          validate: false,
           success: function (model) {
             if (model.attributes.type === 'file') {
               Track.event('File system', 'Renamed file', {
@@ -150,7 +167,7 @@ module.exports = Base.extend({
           },
           error: function (model, xhr) {
             self.rollbackAttr('name');
-            err = new Error('Error renaming '+self.get('type')+'.');
+            err = new Error('Error renaming '+self.niceType()+'.');
             cb(err);
           }
         });
