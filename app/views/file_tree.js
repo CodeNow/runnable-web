@@ -30,6 +30,12 @@ module.exports = BaseView.extend({
     // clientside postHydrate and getTemplateData have occured.
     if (this.dir.get('open')) this.$el.addClass('open');
     this.$contentsUL = this.$('ul').first();
+    // droppable
+    this.$el.droppable({
+      greedy: true,
+      drop: this.onDrop.bind(this),
+      hoverClass: 'drop-hover'
+    });
   },
   slideUpHeight: function () {
     this.$el.removeClass('open');
@@ -81,7 +87,9 @@ module.exports = BaseView.extend({
     var $itemDropped = $(ui.draggable).find('[data-id]');
     var fsPath = $itemDropped.data('id');
     if (fsPath) {
-      this._forkIfUserIsNotProjectOwner(function (err, data) {
+      // this._forkIfUserIsNotProjectOwner(function (err, data) {
+      // TODO!
+      return;
         if (err) {
           self.displayErrorIfExists('Error moving.');
         }
@@ -90,7 +98,7 @@ module.exports = BaseView.extend({
             self.displayErrorIfExists(err);
           });
         }
-      });
+      // });
     }
   }
 });
