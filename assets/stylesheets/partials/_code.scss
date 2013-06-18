@@ -214,10 +214,12 @@ $tree-padding:15px;
 				}
 			}
 		}
-		&.drop-hover >span{
+		&.drop-hover > span > span{
 			// background:#26292b;
 			// @include border-radius(2px);
 			color:#fff;
+			background:rgba($primary-color,.8);
+
 		}
 	}
 	li.selected{
@@ -233,6 +235,7 @@ $tree-padding:15px;
 		color:#fff;
 		@include border-radius(25px);
 		padding:0 10px;
+		z-index:10;
 		a{
 			padding:0;
 			color:#fff;
