@@ -20,6 +20,7 @@ var aceScripts = [
 ];
 var frontendScripts = [
   'assets/vendor/*.js',
+  'assets/vendor/jquery-ui/js/*.js',
   'assets/bower/frontend-track/frontend-track.js'
 ]
 .concat(aceScripts);
@@ -101,13 +102,13 @@ module.exports = function(grunt) {
       },
       scripts: {
         files: ['app/**/*.js', '!node_modules/rendr/node_modules/*', 'node_modules/rendr/**/*.js'],
-        tasks: ['handlebars', 'rendr_stitch'],
+        tasks: ['rendr_stitch'],
         options: {
           interrupt: true
         }
       },
       templates: {
-        files: 'app/**/*.hbs',
+        files: ['!app/templates/compiledTemplates.js', 'app/templates/**/*.js'],
         tasks: ['handlebars'],
         options: {
           interrupt: true

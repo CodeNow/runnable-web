@@ -1,5 +1,6 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
+var FileMenu = require('./file_menu');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
@@ -29,6 +30,12 @@ module.exports = BaseView.extend({
     // clientside postHydrate and getTemplateData have occured.
     if (this.dir.get('open')) this.$el.addClass('open');
     this.$contentsUL = this.$('ul').first();
+    // droppable
+    this.$el.droppable({
+      greedy: true,
+      drop: this.onDrop.bind(this),
+      hoverClass: 'drop-hover'
+    });
   },
   slideUpHeight: function () {
     this.$el.removeClass('open');
@@ -71,6 +78,28 @@ module.exports = BaseView.extend({
   close: function () {
     this.dir.set('open', false);
     this.slideUpHeight();
+  },
+  onDrop: function (evt, ui) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    this.$el.removeClass('drop-hover');
+    var self = this;
+    var $itemDropped = $(ui.draggable).find('[data-id]');
+    var fsPath = $itemDropped.data('id');
+    if (fsPath) {
+      // this._forkIfUserIsNotProjectOwner(function (err, data) {
+      // TODO!
+      return;
+        if (err) {
+          self.displayErrorIfExists('Error moving.');
+        }
+        else{
+          self.dirModel.moveIn(fsPath, function (err) {
+            self.displayErrorIfExists(err);
+          });
+        }
+      // });
+    }
   }
 });
 

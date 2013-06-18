@@ -1,0 +1,19 @@
+<ul class="menu-options">
+  {{#unless createOnly}}
+  <li><a href="javascript:void(0)" class="rename" href=""><i class="icon-pencil"></i> Rename</a></li>
+  <li><a href="javascript:void(0)" class="delete" href=""><i class="icon-trash"></i> Delete</a></li>
+  <hr>
+  {{/unless}}
+  <li>
+    <a href="javascript:void(0)" class="create-file" href="">
+      <i class="icon-doc-add"></i> New file</a>
+  </li>
+  <li>
+    <a href="javascript:void(0)" class="create-dir" href="">
+      <i class="icon-folder-add"></i> New folder</a>
+  </li>
+  <li>
+    <a href="javascript:void(0)" class="download" href="{{fsJSON.downloadUrl}}" data-bypass>
+      <i class="icon-download-alt"></i> Download {{fsJSON.niceType}}</a>
+  </li>
+</ul>

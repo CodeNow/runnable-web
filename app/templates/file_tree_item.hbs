@@ -1,13 +1,20 @@
 {{!#if fsJSON.isRootDir}}
   {{!<span class="name {{fsJSON.type}" href="" data-id="{{fsJSON.path}" title="{{projectJSON.name}">{{projectJSON.name}</span>}}
 {{!else}}
-{{#unless fsJSON.isRootDir}}
+{{#if editMode}}
 {{#with fsJSON}}
-  {{#if_eq type compare='dir'}}
-  <span class="name {{type}}" href="" data-id="{{path}}" title="{{name}}">{{name}}</span>
-  {{else}}
-  <a class="name {{type}}" href="" data-id="{{path}}" title="{{name}}">{{name}}</a>
-  {{/if_eq}}
-  <input class="name-input display-none" value="{{name}}" />
+  <form>
+    <input class="name-input" name='name' value="{{name}}" />
+  </form>
 {{/with}}
-{{/unless}}
+{{else}}
+{{#with fsJSON}}
+  {{#unless fsJSON.isRootDir}}
+    {{#if_eq type compare='dir'}}
+    <span class="name {{type}}" href="" data-id="{{path}}" title="{{path}}">{{name}}</span>
+    {{else}}
+    <a class="name {{type}}" href="" data-id="{{path}}" title="{{path}}">{{name}}</a>
+    {{/if_eq}}
+  {{/unless}}
+{{/with}}
+{{/if}}
