@@ -28,13 +28,7 @@ module.exports = BaseView.extend({
   postRender: function () {
     // clientside postHydrate and getTemplateData have occured.
     if (this.dir.get('open')) this.$el.addClass('open');
-    this.initHeight();
-  },
-  initHeight: function () {
-    // init height from auto to number for css transition;
-    var $contentsUL  =
-    this.$contentsUL = this.$el.find('ul').first();
-    $contentsUL.height($contentsUL.height());
+    this.$contentsUL = this.$('ul').first();
   },
   slideUpHeight: function () {
     this.$el.removeClass('open');

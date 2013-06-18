@@ -4,15 +4,19 @@
       {{view "vote_button" model=project}}
       {{view "project_title" model=project}}
     </section>
-    {{!if something}}
+    {{#if projectJSON.unpublished}}
     {{view "publish_warning" model=project}}
-    {{!if}}
+    {{/if}}
     <section class="actions">
       {{view "run_button" model=project}}
       {{view "save_button" model=project}}
       {{view "fork_button" model=project}}
       {{view "download_button" model=project}}
+      {{#unless editMode}}
+      {{#if_eq projectJSON.owner compare=user.id}}
       {{view "edit_button" model=project}}
+      {{/if_eq}}
+      {{/unless}}
     </section>
     {{! <div class="code-container">
     </div> }}
@@ -21,39 +25,37 @@
   <aside class="span3 last">
 
     <div class="module">
-      {{!view "new_example_button"}}
+      {{view "new_example_button"}}
     </div>
 
-    <section class="module">
+    <section class="module display-none">
       {{view "project_owner" model=project}}
       {{view "project_stats" model=project}}
     </section>
 
+    {{#if projects.attributes.tags}}
+    {{#if projects.attributes.tags.length}}
     <section class="module tags">
       <h3>Tags</h3>
-      {{view "project_tags_list" model=project}}
+      {{view "project_tags" model=project editMode=editMode}}
+      {{#if editMode}}
       {{view "project_new_tag_form" model=project}}
+      {{/if}}
     </section>
+    {{/if}}
+    {{/if}}
 
+    {{#if related.length}}
     <section class="module">
       <h3>Related examples</h3>
       <nav class="related-nav">
         <ul>
-          <li>
-            <button class="btn-vote">833</button>
-            <a href="">Login auth using sessions in express - Node.js</a>
-          </li>
-          <li>
-            <button class="btn-vote">833</button>
-            <a href="">Login auth using sessions in express - Node.js</a>
-          </li>
-          <li>
-            <button class="btn-vote">2</button>
-            <a href="">One liner</a>
-          </li>
+          {{#each related.models}}
+          {{view "project_item_small" model=.}}
+          {{/each}}
         </ul>
       </nav>
     </section>
-
+    {{/if}}
   </aside>
 </div>

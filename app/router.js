@@ -22,6 +22,22 @@ Router.prototype.postInitialize = function() {
     return options.inverse(this);
   });
 
+  // set up ace worker urls
+  var config = ace.require("ace/config"); // or simply ace.config
+  [
+    'javascript',
+    'coffee',
+    'json',
+    'lua',
+    'php',
+    'xquery'
+  ]
+  .forEach(function (worker) {
+    config.setModuleUrl(
+        "ace/mode/"+worker+"_worker",
+        "/ace/worker-"+worker+".js"
+    );
+  });
 };
 
 Router.prototype.trackImpression = function() {

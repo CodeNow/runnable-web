@@ -1,3 +1,5 @@
+var _ = require('underscore');
+
 module.exports = {
   index: function(params, callback) {
     var controller = this;
@@ -5,10 +7,8 @@ module.exports = {
       user: { model:'User', params:{} },
       project: { model:'Project', params:params }
     };
-    // require('subl').openError(new Error());
-    // console.log(new Error().stack);
+
     this.app.fetch(spec, function (err, results) {
-      // console.log(err, results);
       if (err) {
         callback(err);
       }
@@ -23,8 +23,30 @@ module.exports = {
         controller.redirectTo(urlWithName);
       }
       else {
-        callback(err, results);
+        var tags = results.project.get('tags');
+        if (tags && tags.length) {
+          // If project has tags, fetch related projects
+          var spec2 = {
+            related: {
+              collection:'Projects',
+              params:{
+                tags:tags[0],
+                limit: 5,
+                sort: '-voteCount'
+              }
+            }
+          };
+          controller.app.fetch(spec2, function (err, results2) {
+            callback(err, _.extend(results, results2));
+          });
+        }
+        else {
+          callback(err, results);
+        }
       }
     });
+  },
+  "new": function(params, callback) {
+    callback();
   }
 };

@@ -18,7 +18,7 @@
     "underscore": "~1.4.4",
     "async": "~0.1.22",
     "request": "~2.16",
-    "rendr": "CodeNow/rendr",
+    "rendr": "https://github.com/CodeNow/rendr/tarball/master",
     "debug": "*",
     "eson": "0.4.1",
     "uuid": "~1.4.1",

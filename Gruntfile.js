@@ -15,15 +15,7 @@ var mergedCSSPath   = 'public/styles/index.css';
 var aceScripts = [
   'assets/bower/ace-builds/src-min-noconflict/ace.js',
   'assets/bower/ace-builds/src-min-noconflict/theme-textmate.js',
-  'assets/vendor/aceWithFuckingSemicolons/ext-modelist.js',
-  'assets/vendor/aceWithFuckingSemicolons/mode-javascript.js',
-  'assets/vendor/aceWithFuckingSemicolons/mode-php.js',
-  'assets/vendor/aceWithFuckingSemicolons/mode-python.js',
-  'assets/vendor/aceWithFuckingSemicolons/mode-json.js',
-  'assets/vendor/aceWithFuckingSemicolons/mode-markdown.js',
-  'assets/vendor/aceWithFuckingSemicolons/mode-html.js',
-  'assets/vendor/aceWithFuckingSemicolons/mode-jade.js',
-  'assets/vendor/aceWithFuckingSemicolons/mode-css.js'
+  'assets/vendor/aceWithFuckingSemicolons/*.js'
   // 'assets/bower/ace-builds/src-min-noconflict/mode-stylus.js'
 ];
 var frontendScripts = [
