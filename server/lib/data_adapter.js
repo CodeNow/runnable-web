@@ -34,7 +34,7 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
 ;
   api = this.apiDefaults(api);
 
-  if (req.session.access_token) {
+  if (req.session && req.session.access_token) {
     api.headers['runnable-token'] = req.session.access_token;
   }
 
@@ -46,9 +46,11 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
     debug('%s %s %s %sms', api.method.toUpperCase(), api.url, response.statusCode, end - start);
     debug('%s', inspect(response.headers));
 
-    if ((api.path == '/users' || api.path == '/token') && api.method == 'POST') {
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        req.session.access_token = body.access_token;
+    if (req.session) {
+      if ((api.path == '/users' || api.path == '/token') && api.method == 'POST') {
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          req.session.access_token = body.access_token;
+        }
       }
     }
 
