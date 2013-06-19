@@ -25,7 +25,8 @@
     "node-uuid": "~1.4.0",
     "redis": "~0.8.3",
     "connect-redis": "~1.4.5",
-    "cookie": "~0.1.0"
+    "cookie": "~0.1.0",
+    "Faker": "~0.5.11"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

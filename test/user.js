@@ -1,6 +1,7 @@
 var should = require("should");
 var globals = require('rendr/shared/globals');
 var env = require('../server/lib/env');
+var faker = require('Faker');
 var Fetcher = require('rendr/shared/fetcher');
 var adapter = require('../server/lib/data_adapter');
 var server = require('rendr/server/server');
@@ -93,8 +94,9 @@ describe('User', function() {
 
   it('should cache the access_token when a token is successfully granted', function (cb) {
 
+    var email = faker.Internet.email();
     var user = new User({
-      email: 'jeff@runnable.com',
+      email: email,
       password: 'mypass'
     }, {
       urlRoot: '/users',
@@ -113,7 +115,7 @@ describe('User', function() {
         user.app.req.session.should.have.property('access_token');
 
         var user2 = new User({
-          email: 'jeff@runnable.com',
+          email: email,
           password: 'mypass'
         }, {
           url: '/token',
