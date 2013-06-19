@@ -46,11 +46,9 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
     debug('%s %s %s %sms', api.method.toUpperCase(), api.url, response.statusCode, end - start);
     debug('%s', inspect(response.headers));
 
-    if ((req.path == '/users' || req.path == '/token') && req.method == 'POST') {
+    if ((api.path == '/users' || api.path == '/token') && api.method == 'POST') {
       if (response.statusCode == 200 || response.statusCode == 201) {
-        var object = JSON.parse(body);
-        console.log(object.access_token);
-        req.session.access_token = object.access_token;
+        req.session.access_token = body.access_token;
       }
     }
 

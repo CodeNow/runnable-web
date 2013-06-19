@@ -9,6 +9,7 @@ var User = require('../app/models/user');
 var Users = require('../app/collections/users');
 
 server.dataAdapter = new adapter(env.current.api);
+var fetcher = new Fetcher({ });
 
 describe('User', function() {
 
@@ -20,7 +21,7 @@ describe('User', function() {
         req: {
           session: { } // no access token cached
         },
-        fetcher: new Fetcher({ })
+        fetcher: fetcher
       }
     });
 
@@ -45,7 +46,7 @@ describe('User', function() {
         req: {
           session: { } // no access token cached
         },
-        fetcher: new Fetcher({ })
+        fetcher: fetcher
       }
     });
 
@@ -63,6 +64,88 @@ describe('User', function() {
   });
 
 
+  it('should cache the access_token returned when a user is created', function (cb) {
+
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { } // no access token cached
+        },
+        fetcher: fetcher
+      }
+    });
+
+    user.save({ }, {
+      wait: true,
+      success: function (model, response, options) {
+
+        user.app.req.session.should.have.property('access_token');
+
+        cb();
+      },
+      error: function (model, xhr, options) {
+        cb(new Error('could not create user'));
+      }
+    });
+
+  });
+
+  it('should cache the access_token when a token is successfully granted', function (cb) {
+
+    var user = new User({
+      email: 'jeff@runnable.com',
+      password: 'mypass'
+    }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { } // no access token cached
+        },
+        fetcher: fetcher
+      }
+    });
+
+    user.save({ }, {
+      wait: true,
+      success: function (model, response, options) {
+
+        user.app.req.session.should.have.property('access_token');
+
+        var user2 = new User({
+          email: 'jeff@runnable.com',
+          password: 'mypass'
+        }, {
+          url: '/token',
+          app: {
+            req: {
+              session: { }
+            },
+            fetcher: fetcher
+          }
+        });
+
+        user2.save({ }, {
+          wait: true,
+          success: function (model, response, options) {
+            response.should.have.property('access_token');
+            user2.app.req.session.should.have.property('access_token');
+            cb();
+          },
+          error: function (model, xhr, options) {
+            console.log(xhr);
+            cb(new Error('could not get an access token for user'));
+          }
+        });
+      },
+      error: function (model, xhr, options) {
+        cb(new Error('could not create a new registered user'));
+      }
+    });
+
+  });
+
+
   it('should fetch a users information if a valid access token is provided', function (cb) {
 
     var user = new User({ }, {
@@ -71,7 +154,7 @@ describe('User', function() {
         req: {
           session: { } // no access token cached
         },
-        fetcher: new Fetcher({ })
+        fetcher: fetcher
       }
     });
 
