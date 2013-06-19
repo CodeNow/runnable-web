@@ -35,7 +35,7 @@ module.exports = BaseView.extend({
     }
     if (!this.fs.isRootDir()) {
       this.$el.draggable({
-        opacity: 0.7,
+        opacity: .8,
         helper: "clone",
         containment: "#file-tree"
       });
