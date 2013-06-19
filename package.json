@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --ui bdd --reporter spec",
+    "test": "NODE_ENV=development ./node_modules/.bin/mocha --ui bdd --reporter spec",
     "start": "DEBUG=app:* node index.js"
   },
   "repository": {
