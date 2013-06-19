@@ -21,7 +21,6 @@ function DataAdapter(options) {
 //
 DataAdapter.prototype.request = function(req, api, options, callback) {
   var _this = this, start, end;
-  console.log(api.url)
   if (arguments.length === 3) {
     callback = options;
     options = {};
@@ -36,7 +35,7 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
   api = this.apiDefaults(api);
 
   if (req.session.access_token) {
-    api.headers.cookie = "runnable.sid=" + req.session.access_token;
+    api.headers['runnable-token'] = req.session.access_token;
   }
 
   start = new Date().getTime();
@@ -47,10 +46,12 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
     debug('%s %s %s %sms', api.method.toUpperCase(), api.url, response.statusCode, end - start);
     debug('%s', inspect(response.headers));
 
-    if (response.headers['set-cookie']) {
-      var setCookie = response.headers['set-cookie'];
-      var parsed = cookie.parse(setCookie.toString());
-      req.session.access_token = parsed['runnable.sid'];
+    if ((req.path == '/users' || req.path == '/token') && req.method == 'POST') {
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        var object = JSON.parse(body);
+        console.log(object.access_token);
+        req.session.access_token = object.access_token;
+      }
     }
 
     if (options.convertErrorCode) {

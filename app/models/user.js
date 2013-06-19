@@ -1,7 +1,6 @@
 var Base = require('./base');
 
 module.exports = Base.extend({
-  urlRoot: '/users/me',
   isRegistered : function(){
     return this.get('permission_level') >= 1;
   },

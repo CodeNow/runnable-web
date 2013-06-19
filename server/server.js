@@ -51,11 +51,11 @@ exports.init = function init(options, callback) {
 // options
 // - port
 //
-exports.start = function start(options) {
+exports.start = function start(options, cb) {
   options = options || {};
   var port = options.port || 3000;
   console.log('attempt listen on port '+ port);
-  app.listen(port);
+  app.listen(port, cb);
   console.log("server pid " + process.pid + " listening on port " + port + " in " + app.settings.env + " mode");
 };
 

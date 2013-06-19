@@ -7,5 +7,7 @@ var port = config.port;
 
 server.init({}, function(err) {
   if (err) throw err;
-  server.start({port: port});
+  server.start({port: port}, function(err){
+    if (err) { console.log(err); }
+  });
 });
