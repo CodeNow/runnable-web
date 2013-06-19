@@ -46,5 +46,13 @@ module.exports = {
     this.app.fetch(spec, function (err, results) {
       callback(err, results);
     });
+  },
+  blob : function (params, callback) {
+    var spec = {
+      user: { model:'User', params:params }
+    };
+    this.app.fetch(spec, function (err, results) {
+      callback(err, results);
+    });
   }
 };

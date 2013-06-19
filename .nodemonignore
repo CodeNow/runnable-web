@@ -1,4 +1,6 @@
 /public/*
 /assets/*
 app/templates/compiledTemplates.js
-
+app/templates/*
+/app/templates/compiledTemplates.js
+/app/templates/*

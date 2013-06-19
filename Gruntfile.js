@@ -108,7 +108,7 @@ module.exports = function(grunt) {
         }
       },
       templates: {
-        files: ['!app/templates/compiledTemplates.js', 'app/templates/**/*.js'],
+        files: ['!app/templates/compiledTemplates.js', 'app/templates/**/*.hbs'],
         tasks: ['handlebars'],
         options: {
           interrupt: true
