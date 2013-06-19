@@ -7,7 +7,6 @@ var adapter = require('../server/lib/data_adapter');
 var server = require('rendr/server/server');
 
 var User = require('../app/models/user');
-var Users = require('../app/collections/users');
 
 server.dataAdapter = new adapter(env.current.api);
 var fetcher = new Fetcher({ });
