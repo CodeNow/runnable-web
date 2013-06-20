@@ -67,18 +67,19 @@ function fetch(spec, options, callback) {
       }
     });
   }
-  var cb = function (err, result) {
-    if (err) {
-      if (err.status === 401) {
-        createUser(function (err) {
-          if (err) { callback(err); } else {
-            app.fetch.call(app, spec, options, callback);
-          }
-        });
-      }
-      else {
-        callback(err);
-      }
+  var cb = function (err, results) {
+    if (err && err.status === 401) {
+      // "user not created" error, create user and try again.
+      createUser(function (err) {
+        if (err) { callback(err); } else {
+          app.fetch.call(app, spec, options, function (err, results) {
+            callback(err, results);
+          });
+        }
+      });
+    }
+    else {
+      callback(err, results);
     }
   };
   app.fetch.call(app, spec, options, cb);

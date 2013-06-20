@@ -1,0 +1,17 @@
+machine:
+  environment:
+    NODE_ENV: circle
+dependencies:
+  override:
+    - nvm install 0.10.10
+    - nvm alias default 0.10.10
+    - curl -sL --user "Runnable-Bot:pass4now20" https://github.com/CodeNow/api-server/tarball/v0.1.0 > api_server.tar.gz
+    - tar -xvf api_server.tar.gz
+    - cd CodeNow-api-server-22fa9acb4295f4bf03723d5529946f2be835cc1b; make install; make build; NODE_ENV=circle make start &
+    - npm install
+    - rm -rf ./node_modules/rendr
+    - npm install rendr
+    - rvm use 1.9.3 default
+    - gem install compass
+    - ./node_modules/.bin/bower install
+    - ./node_modules/.bin/grunt

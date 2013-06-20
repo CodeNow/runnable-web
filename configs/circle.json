@@ -1,0 +1,34 @@
+{
+
+  "port": 3000,
+
+  "cookieKey": "runnable.sid",
+  "cookieSecret": "$up3r,$3<r3t",
+  "cookieExpires": "1 year",
+
+  "assets": {
+    "minify": false,
+    "cdn": {
+      "protocol": "http",
+      "cnames": ["localhost"],
+      "pathPrefix": ""
+    }
+  },
+
+  "api": {
+    "default": {
+      "host": "localhost:3000",
+      "protocol": "http"
+    }
+  },
+
+  "rendrApp": {
+    "mixpanel" : {
+      "key": "de848319a0091fb3a5876184d81a40ec"
+    },
+    "googleAnalytics" : {
+      "id": "UA-36631837-2"
+    }
+  }
+
+}
