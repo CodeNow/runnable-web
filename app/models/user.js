@@ -10,23 +10,19 @@ module.exports = Base.extend({
   canEdit: function (model) {
     return this.isModerator() || this.isOwner(model);
   },
-  register: function(data, callbacks) {
-    var self = this;
-    this.save(data, {
+  register: function(email, password, cb) {
+    this.save({
+      email: email,
+      password: password
+    }, {
       wait: true,
       success: function(model, response, options) {
-        Track.event('User', 'Registered');
-        callbacks.success(model);
+        // Track.event('User', 'Registered');
+        cb();
       },
       error: function(model, XHR) {
-        try {
-          error = JSON.parse(XHR.responseText);
-        }
-        catch(err) {
-          callbacks.error(new Error('Uh oh, an error occurred. Try again later.'));
-          return;
-        }
-        callbacks.error(error); //down here so that it's out of the try catch..
+        var error = JSON.parse(XHR.responseText);
+        cb(null, error.message);
       }
     });
   },

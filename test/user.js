@@ -146,7 +146,6 @@ describe('User', function() {
 
   });
 
-
   it('should fetch a users information if a valid access token is provided', function (cb) {
 
     var user = new User({ }, {
@@ -179,6 +178,102 @@ describe('User', function() {
       }
     });
 
+  });
+
+  it('should be able to create a registered user', function (cb) {
+
+    var email = faker.Internet.email();
+    var user = new User({
+      email: email,
+      password: 'mypass'
+    }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    user.save({ }, { wait: true });
+    user.on('change', function () {
+      var registered = user.isRegistered();
+      registered.should.equal(true);
+      cb();
+    });
+
+  });
+
+  it('should be able to create an anonymous user', function (cb) {
+
+    var email = faker.Internet.email();
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    user.save({ }, { wait: true });
+    user.on('change', function () {
+      var registered = user.isRegistered();
+      registered.should.equal(false);
+      cb();
+    });
+
+  });
+
+  it('should be able to create an anonymous user', function (cb) {
+
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    user.save({ }, { wait: true });
+    user.on('change', function () {
+      var registered = user.isRegistered();
+      registered.should.equal(false);
+      cb();
+    });
+
+  });
+
+  it('should be able to register an anonymous user', function (cb) {
+
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    user.save({ }, { wait: true });
+    user.once('change', function () {
+      var registered = user.isRegistered();
+      registered.should.equal(false);
+
+      var email = faker.Internet.email();
+      user.register(email, '1234', function (err) {
+        if (err) { cb(err); } else {
+          var registered = user.isRegistered();
+          registered.should.equal(true);
+          cb();
+        }
+      });
+    });
   });
 
 });
