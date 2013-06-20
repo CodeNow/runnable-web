@@ -26,7 +26,8 @@
     "redis": "~0.8.3",
     "connect-redis": "~1.4.5",
     "cookie": "~0.1.0",
-    "Faker": "~0.5.11"
+    "Faker": "~0.5.11",
+    "grunt-cli": "~0.1.9"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
