@@ -68,4 +68,27 @@ describe('Project', function() {
 
   });
 
+  it('should be able to destroy a runnable', function (cb) {
+
+    var project = new Project({ }, { app: app });
+    project.save({}, {
+      wait: true,
+      success: function (model, xhr, body) {
+        project.destroy({
+          wait: true,
+          success: function () {
+            cb();
+          },
+          error: function () {
+            cb(new Error('error destroying runnable'));
+          }
+        });
+      },
+      error: function () {
+        cb(new Error('error creating a new runnable'));
+      }
+    });
+
+  });
+
 });
