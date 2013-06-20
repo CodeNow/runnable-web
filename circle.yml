@@ -5,7 +5,7 @@ dependencies:
   override:
     - nvm install 0.10.10
     - nvm alias default 0.10.10
-    - curl -sL --user "Runnable-Bot:pass4now20" https://github.com/CodeNow/api-server/tarball/v0.1.2 > api_server.tar.gz
+    - curl -sL --user "Runnable-Bot:pass4now20" https://github.com/CodeNow/api-server/archive/v0.1.2.tar.gz > api_server.tar.gz
     - tar -xvf api_server.tar.gz
     - mkdir ~/.runnable
     - mkdir ~/.runnable/volumes
