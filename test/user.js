@@ -7,6 +7,7 @@ var adapter = require('../server/lib/data_adapter');
 var server = require('rendr/server/server');
 
 var User = require('../app/models/user');
+var Project = require('../app/models/project');
 
 server.dataAdapter = new adapter(env.current.api);
 var fetcher = new Fetcher({ });
@@ -335,5 +336,122 @@ describe('User', function() {
 
     });
   });
+
+
+  it('should be able to vote on a runnable', function (cb) {
+
+    var app = {
+      req: {
+        session: { }
+      },
+      fetcher: fetcher
+    };
+
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: app
+    });
+
+    var user2 = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    // create user
+    user.save({}, { wait: true });
+    user.once('change', function () {
+
+      // create 2nd user
+      user2.save({}, { wait: true });
+      user2.once('change', function () {
+
+        // create a runnable
+        var project = new Project({ }, { app: app });
+        project.save({}, { wait: true });
+        project.once('change', function() {
+
+          // vote on first users runnable
+          user2.vote(project, function (err) {
+            if (err) { cb(new Error(err)); } else {
+
+              cb();
+            }
+          });
+
+        });
+
+      });
+
+    });
+
+  });
+
+  it('should not be able to vote twice on the same runnable', function (cb) {
+
+    var app = {
+      req: {
+        session: { }
+      },
+      fetcher: fetcher
+    };
+
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: app
+    });
+
+    var user2 = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    // create user
+    user.save({}, { wait: true });
+    user.once('change', function () {
+
+      // create 2nd user
+      user2.save({}, { wait: true });
+      user2.once('change', function () {
+
+        // create a runnable
+        var project = new Project({ }, { app: app });
+        project.save({}, { wait: true });
+        project.once('change', function() {
+
+          // vote on first users runnable
+          user2.vote(project, function (err) {
+            if (err) { cb(new Error(err)); } else {
+
+              // vote on first users runnable
+              user2.vote(project, function (err) {
+                if (err) {
+                  err.should.equal('You have already voted on this project')
+                  cb();
+                } else {
+                  cb(new Error('should not be able to vote twice'));
+                }
+              });
+
+            }
+          });
+
+        });
+
+      });
+
+    });
+
+  });
+
 
 });
