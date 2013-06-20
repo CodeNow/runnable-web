@@ -36,7 +36,7 @@ module.exports = function(grunt) {
         bg: true
       },
       debugNode: {
-        cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js --debug index.js & node-inspector',
+        cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js --debug index.js & ./node_modules/nodemon/nodemon.js -d 1 -x node-inspector index.js',
         bg: true
       }
     },

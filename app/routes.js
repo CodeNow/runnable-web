@@ -3,6 +3,7 @@ module.exports = function(match) {
   match('page/:page',           'home#index');
   match('providers',            'home#providers');
   match('about',                'home#about');
+  // match('login',                'home#about');
   match('jobs',                 'home#jobs');
   match('privacy',              'home#privacy');
   match(':_id',                 'project#index');

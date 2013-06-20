@@ -6,6 +6,7 @@ var utils = require('../app').prototype.utils; //hacky..
 var _ = require('underscore');
 
 module.exports = Base.extend({
+  urlRoot: 'runnables',
   initialize: function (model, options) {
     Super.initialize.apply(this, arguments);
     var self = this;
