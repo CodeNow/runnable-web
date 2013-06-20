@@ -20,9 +20,8 @@ module.exports = Base.extend({
         // Track.event('User', 'Registered');
         cb();
       },
-      error: function(model, XHR) {
-        var error = JSON.parse(XHR.responseText);
-        cb(null, error.message);
+      error: function(model, body) {
+        cb(body.message);
       }
     });
   },

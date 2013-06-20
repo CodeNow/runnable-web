@@ -134,7 +134,6 @@ describe('User', function() {
             cb();
           },
           error: function (model, xhr, options) {
-            console.log(xhr);
             cb(new Error('could not get an access token for user'));
           }
         });
@@ -207,28 +206,6 @@ describe('User', function() {
 
   it('should be able to create an anonymous user', function (cb) {
 
-    var email = faker.Internet.email();
-    var user = new User({ }, {
-      urlRoot: '/users',
-      app: {
-        req: {
-          session: { }
-        },
-        fetcher: fetcher
-      }
-    });
-
-    user.save({ }, { wait: true });
-    user.on('change', function () {
-      var registered = user.isRegistered();
-      registered.should.equal(false);
-      cb();
-    });
-
-  });
-
-  it('should be able to create an anonymous user', function (cb) {
-
     var user = new User({ }, {
       urlRoot: '/users',
       app: {
@@ -273,6 +250,89 @@ describe('User', function() {
           cb();
         }
       });
+    });
+  });
+
+  it('should report an error if user is already registered', function (cb) {
+
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    user.save({ }, { wait: true });
+    user.once('change', function () {
+      var registered = user.isRegistered();
+      registered.should.equal(false);
+
+      var email = faker.Internet.email();
+      user.register(email, '1234', function (err) {
+        if (err) { cb(err); } else {
+          var registered = user.isRegistered();
+          registered.should.equal(true);
+          user.register(email, '1234', function (err) {
+            if (err) {
+              err.should.equal('you are already registered');
+              cb();
+            } else {
+              cb(new Error('should not allow user to register twice'));
+            }
+          });
+        }
+      });
+    });
+
+  });
+
+  it('should report an error if email address already exists', function (cb) {
+
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    var user2 = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    var email = faker.Internet.email()
+    user.save({
+      email: email,
+      password: 'mypass'
+    }, { wait: true });
+
+    user.once('change', function () {
+
+      user2.save({
+        email: email,
+        password: '1234'
+      },{
+        wait: true,
+        error: function (model, body, options) {
+          body.should.have.property('message', 'user already exists');
+          cb();
+        },
+        success: function () {
+          cb(new Error('should not allow user to register with same email address'));
+        }
+      });
+
     });
   });
 
