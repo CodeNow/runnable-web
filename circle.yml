@@ -6,4 +6,6 @@ dependencies:
     - tar -xvf api_server.tar.gz
     - cd CodeNow-api-server-22fa9acb4295f4bf03723d5529946f2be835cc1b; make install; make build; NODE_ENV=circle make start &
     - npm install
+    - rvm use 1.9.3 default
+    - gem install compass
     - ./node_modules/.bin/grunt
