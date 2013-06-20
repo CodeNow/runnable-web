@@ -25,6 +25,16 @@
 	}
 }
 
+.terminal{
+	background:#111;
+	padding:10px;
+	resize:vertical;
+	color:#fff;
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+	margin-top:10px;
+	overflow:auto;
+}
+
 
 // Tabs for controlling terminal/output
 // .console-tabs{

@@ -1,0 +1,34 @@
+table{
+	width:100%;
+	th,td{
+		text-align:left;
+		padding:8px 5px;
+	}
+	th{
+		border-top:1px solid #ccc;
+		border-bottom:1px solid #ccc;
+	}
+}
+
+// Data table e.g. stats
+table.data{
+	th{
+		background:#e8ecee;
+		border-top:1px solid #d9e0e3;
+		border-bottom:1px solid #d9e0e3;
+		color:#999;
+		font-weight:normal;
+	}
+	tbody{
+		td{
+			border-bottom:1px solid #f8f8f8;
+		}
+		.selected td{
+			background:$primary-color;
+			color:#fff;
+			a{
+				color:#fff;
+			}
+		}
+	}
+}

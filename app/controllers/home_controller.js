@@ -14,6 +14,7 @@ module.exports = {
       projects: {
         collection : 'Projects',
         params     : {
+          sort: '-votes'
         }
       }
     };
@@ -42,6 +43,13 @@ module.exports = {
   },
 
   providers: function (params, callback) {
+    var spec = {
+      user: { model:'User', params:{} }
+    };
+    fetch.call(this, spec, callback);
+  },
+
+  blob: function (params, callback) {
     var spec = {
       user: { model:'User', params:{} }
     };
