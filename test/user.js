@@ -7,6 +7,7 @@ var adapter = require('../server/lib/data_adapter');
 var server = require('rendr/server/server');
 
 var User = require('../app/models/user');
+var Project = require('../app/models/project');
 
 server.dataAdapter = new adapter(env.current.api);
 var fetcher = new Fetcher({ });
@@ -134,7 +135,6 @@ describe('User', function() {
             cb();
           },
           error: function (model, xhr, options) {
-            console.log(xhr);
             cb(new Error('could not get an access token for user'));
           }
         });
@@ -145,7 +145,6 @@ describe('User', function() {
     });
 
   });
-
 
   it('should fetch a users information if a valid access token is provided', function (cb) {
 
@@ -180,5 +179,279 @@ describe('User', function() {
     });
 
   });
+
+  it('should be able to create a registered user', function (cb) {
+
+    var email = faker.Internet.email();
+    var user = new User({
+      email: email,
+      password: 'mypass'
+    }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    user.save({ }, { wait: true });
+    user.on('change', function () {
+      var registered = user.isRegistered();
+      registered.should.equal(true);
+      cb();
+    });
+
+  });
+
+  it('should be able to create an anonymous user', function (cb) {
+
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    user.save({ }, { wait: true });
+    user.on('change', function () {
+      var registered = user.isRegistered();
+      registered.should.equal(false);
+      cb();
+    });
+
+  });
+
+  it('should be able to register an anonymous user', function (cb) {
+
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    user.save({ }, { wait: true });
+    user.once('change', function () {
+      var registered = user.isRegistered();
+      registered.should.equal(false);
+
+      var email = faker.Internet.email();
+      user.register(email, '1234', function (err) {
+        if (err) { cb(err); } else {
+          var registered = user.isRegistered();
+          registered.should.equal(true);
+          cb();
+        }
+      });
+    });
+  });
+
+  it('should report an error if user is already registered', function (cb) {
+
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    user.save({ }, { wait: true });
+    user.once('change', function () {
+      var registered = user.isRegistered();
+      registered.should.equal(false);
+
+      var email = faker.Internet.email();
+      user.register(email, '1234', function (err) {
+        if (err) { cb(err); } else {
+          var registered = user.isRegistered();
+          registered.should.equal(true);
+          user.register(email, '1234', function (err) {
+            if (err) {
+              err.should.equal('you are already registered');
+              cb();
+            } else {
+              cb(new Error('should not allow user to register twice'));
+            }
+          });
+        }
+      });
+    });
+
+  });
+
+  it('should report an error if email address already exists', function (cb) {
+
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    var user2 = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    var email = faker.Internet.email()
+    user.save({
+      email: email,
+      password: 'mypass'
+    }, { wait: true });
+
+    user.once('change', function () {
+
+      user2.save({
+        email: email,
+        password: '1234'
+      },{
+        wait: true,
+        error: function (model, body, options) {
+          body.should.have.property('message', 'user already exists');
+          cb();
+        },
+        success: function () {
+          cb(new Error('should not allow user to register with same email address'));
+        }
+      });
+
+    });
+  });
+
+
+  it('should be able to vote on a runnable', function (cb) {
+
+    var app = {
+      req: {
+        session: { }
+      },
+      fetcher: fetcher
+    };
+
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: app
+    });
+
+    var user2 = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    // create user
+    user.save({}, { wait: true });
+    user.once('change', function () {
+
+      // create 2nd user
+      user2.save({}, { wait: true });
+      user2.once('change', function () {
+
+        // create a runnable
+        var project = new Project({ }, { app: app });
+        project.save({}, { wait: true });
+        project.once('change', function() {
+
+          // vote on first users runnable
+          user2.vote(project, function (err) {
+            if (err) { cb(new Error(err)); } else {
+
+              cb();
+            }
+          });
+
+        });
+
+      });
+
+    });
+
+  });
+
+  it('should not be able to vote twice on the same runnable', function (cb) {
+
+    var app = {
+      req: {
+        session: { }
+      },
+      fetcher: fetcher
+    };
+
+    var user = new User({ }, {
+      urlRoot: '/users',
+      app: app
+    });
+
+    var user2 = new User({ }, {
+      urlRoot: '/users',
+      app: {
+        req: {
+          session: { }
+        },
+        fetcher: fetcher
+      }
+    });
+
+    // create user
+    user.save({}, { wait: true });
+    user.once('change', function () {
+
+      // create 2nd user
+      user2.save({}, { wait: true });
+      user2.once('change', function () {
+
+        // create a runnable
+        var project = new Project({ }, { app: app });
+        project.save({}, { wait: true });
+        project.once('change', function() {
+
+          // vote on first users runnable
+          user2.vote(project, function (err) {
+            if (err) { cb(new Error(err)); } else {
+
+              // vote on first users runnable
+              user2.vote(project, function (err) {
+                if (err) {
+                  err.should.equal('You have already voted on this project')
+                  cb();
+                } else {
+                  cb(new Error('should not be able to vote twice'));
+                }
+              });
+
+            }
+          });
+
+        });
+
+      });
+
+    });
+
+  });
+
 
 });

@@ -1,4 +1,5 @@
 var Base = require('./base');
+var BaseCollection = require('../collections/base');
 
 module.exports = Base.extend({
   urlRoot: '/users',
@@ -11,36 +12,65 @@ module.exports = Base.extend({
   canEdit: function (model) {
     return this.isModerator() || this.isOwner(model);
   },
-  register: function(data, callbacks) {
-    var self = this;
-    this.save(data, {
+  register: function(email, password, cb) {
+    this.save({
+      email: email,
+      password: password
+    }, {
       wait: true,
       success: function(model, response, options) {
-        Track.event('User', 'Registered');
-        callbacks.success(model);
+        // Track.event('User', 'Registered');
+        cb && cb();
       },
-      error: function(model, XHR) {
-        try {
-          error = JSON.parse(XHR.responseText);
-        }
-        catch(err) {
-          callbacks.error(new Error('Uh oh, an error occurred. Try again later.'));
-          return;
-        }
-        callbacks.error(error); //down here so that it's out of the try catch..
+      error: function(model, body) {
+        cb && cb(body.message);
       }
     });
   },
-  vote: function (project) {
-    if (hasVoted(project)) { return false; } else {
-      var votes = this.get('projectVotes') || [];
-      votes.push(project._id);
-      return true;
+  vote: function (project, cb) {
+    var self = this;
+    var applyVote = function () {
+      var match = self.votes.findWhere({ runnable: project.id });
+      if (match) {
+        cb && cb('You have already voted on this project');
+      } else {
+        self.votes.create({
+          runnable: project.id
+        });
+        self.votes.once('sync', function () {
+          cb && cb();
+        });
+      }
+    };
+    if (!this.votes) {
+      this.votes = new BaseCollection([ ], {
+        model: Base,
+        app: this.app,
+        url: '/users/' + this.id + '/votes'
+      });
+      this.votes.fetch();
+      this.votes.once('sync', applyVote);
+    } else {
+      applyVote();
     }
   },
-  hasVoted: function (project) {
-    var votes = this.get('projectVotes') || [];
-    return votes.indexOf(project._id) !== -1;
+  hasVoted: function (project, cb) {
+    var self = this;
+    var checkVote = function () {
+      var match = self.votes.findWhere({ runnable: project.id });
+      cb(null, match !== null && match !== undefined);
+    };
+    if (!this.votes) {
+      this.votes = new BaseCollection([ ], {
+        app: this.app,
+        model: Base,
+        url: '/users/' + this.id + '/votes'
+      });
+      this.votes.fetch();
+      this.votes.once('sync', checkVote);
+    } else {
+      checkVote();
+    }
   }
 });
 module.exports.id = 'User';
