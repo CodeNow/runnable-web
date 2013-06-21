@@ -36,7 +36,7 @@ module.exports = function(grunt) {
         bg: true
       },
       debugNode: {
-        cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js --debug index.js & node-inspector',
+        cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js --debug index.js & ./node_modules/nodemon/nodemon.js -d 1 -x node-inspector index.js',
         bg: true
       }
     },
@@ -142,7 +142,8 @@ module.exports = function(grunt) {
             underscore: '../rendr/node_modules/underscore/underscore.js',
             backbone: '../rendr/node_modules/backbone/backbone.js',
             handlebars: '../rendr/node_modules/handlebars/dist/handlebars.runtime.js',
-            async: '../rendr/node_modules/async/lib/async.js'
+            async: '../rendr/node_modules/async/lib/async.js',
+            moment: '../moment/moment.js'
           },
           aliases: [
             {from: rendrDir + '/client', to: 'rendr/client'},

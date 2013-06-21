@@ -1,47 +1,66 @@
 var _ = require('underscore');
+var fetch = require('./fetch');
+var utils = require('../utils');
 
 module.exports = {
   index: function(params, callback) {
+    console.log(this.currentRoute);
     var controller = this;
     var spec = {
-      user: { model:'User', params:{} },
-      project: { model:'Project', params:params }
+      user: {
+        model:'User',
+        params:{
+          _id: 'me'
+        }
+      },
+      project: {
+        model : 'Project',
+        params: {
+          _id: params._id
+        }
+      }
     };
 
-    this.app.fetch(spec, function (err, results) {
+    fetch.call(this, spec, function (err, results) {
       if (err) {
-        callback(err);
+        console.log('ERROR!', err);
+        callback(err, results);
       }
       else if (!results || !results.project) {
         // TODO:
         // figure out how to "next()";
-      }
-      else if (params.name != results.project.get('name')) {
-        // Name in url does not match project -- Redirect to Correct URL
-        var project = results.project;
-        var urlWithName = [project.id, project.get('name')].join('/');
-        controller.redirectTo(urlWithName);
+        console.log('miss what')
       }
       else {
-        var tags = results.project.get('tags');
-        if (tags && tags.length) {
-          // If project has tags, fetch related projects
-          var spec2 = {
-            related: {
-              collection:'Projects',
-              params:{
-                tags:tags[0],
-                limit: 5,
-                sort: '-voteCount'
-              }
-            }
-          };
-          controller.app.fetch(spec2, function (err, results2) {
-            callback(err, _.extend(results, results2));
-          });
+        var projectUrlName = utils.urlFriendly(results.project.get('name'));
+        if (params.name != projectUrlName) {
+          // Name in url does not match project -- Redirect to Correct URL
+          var project = results.project;
+          var urlWithName = [project.id, projectUrlName].join('/');
+          console.log('REDIRECT', urlWithName)
+          controller.redirectTo(urlWithName);
         }
         else {
-          callback(err, results);
+          var tags = results.project.get('tags');
+          if (tags && tags.length) {
+            // If project has tags, fetch related projects
+            var spec2 = {
+              related: {
+                collection:'Projects',
+                params:{
+                  'tags.name': tags[0].name,
+                  limit: 5,
+                  sort: '-votes'
+                }
+              }
+            };
+            fetch(spec2, function (err, results2) {
+              callback(err, _.extend(results, results2));
+            });
+          }
+          else {
+            callback(err, results);
+          }
         }
       }
     });

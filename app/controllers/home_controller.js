@@ -1,58 +1,60 @@
 var _ = require('underscore');
+var fetch = require('./fetch');
+
+
 module.exports = {
   index: function(params, callback) {
     var spec = {
-      user: { model:'User', params:{} },
+      user    : {
+        model  : 'User',
+        params : {
+          _id: 'me'
+        }
+      },
       projects: {
         collection : 'Projects',
         params     : {
-          page: params.page,
-          sort: '-voteCount'
+          sort: '-votes'
         }
       }
     };
-    this.app.fetch(spec, function (err, results) {
-      callback(err, results);
-    });
+    fetch.call(this, spec, callback);
   },
+
   jobs: function (params, callback) {
     var spec = {
-      user: { model:'User', params:params }
+      user: { model:'User', params:{_id: 'me'} }
     };
-    this.app.fetch(spec, function (err, results) {
-      callback(err, results);
-    });
+    fetch.call(this, spec, callback);
   },
+
   privacy: function (params, callback) {
     var spec = {
-      user: { model:'User', params:params }
+      user: { model:'User', params:{_id: 'me'} }
     };
-    this.app.fetch(spec, function (err, results) {
-      callback(err, results);
-    });
+    fetch.call(this, spec, callback);
   },
+
   about: function (params, callback) {
     var spec = {
-      user: { model:'User', params:params }
+      user: { model:'User', params:{_id: 'me'} }
     };
-    this.app.fetch(spec, function (err, results) {
-      callback(err, results);
-    });
+    fetch.call(this, spec, callback);
   },
+
   providers: function (params, callback) {
+    console.log(this.currentRoute)
     var spec = {
-      user: { model:'User', params:params }
+      user: { model:'User', params:{_id: 'me'} }
     };
-    this.app.fetch(spec, function (err, results) {
-      callback(err, results);
-    });
+    fetch.call(this, spec, callback);
   },
-  blob : function (params, callback) {
+
+  blob: function (params, callback) {
+    console.log('BLOBBBB');
     var spec = {
-      user: { model:'User', params:params }
+      user: { model:'User', params:{_id: 'me'} }
     };
-    this.app.fetch(spec, function (err, results) {
-      callback(err, results);
-    });
+    fetch.call(this, spec, callback);
   }
 };

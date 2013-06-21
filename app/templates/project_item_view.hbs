@@ -1,7 +1,7 @@
 {{view "vote_button" model=model}}
 {{#with json}}
 <h3>
-  <a href="/{{_id}}/{{urlFriendly}}">
+  <a href="/{{_id}}/{{urlFriendly name}}">
     {{name}}
   </a>
 </h3>
@@ -12,19 +12,19 @@
     <span>{{.}}</span>
   </a>
   {{/each}}
-  <a href="/{{friendlyFramework}}">
-    <img src="/images/channels/{{friendlyFramework}}.png" alt="">
-    <span>{{friendlyFramework}}</span>
+  <a href="/{{urlFriendly framework}}">
+    <img src="/images/channels/{{urlFriendly framework}}.png" alt="">
+    <span>{{niceFramework}}</span>
   </a>
 </nav>
 <div class="author right">
   <span class="avatar">
-    <img src="http://gravatar.com/avatar/{{ownerObject.email_md5}}" alt="{{ownerObject.username}}">
+    <img src="http://gravatar.com/avatar/{{ownerJSON.email_md5}}" alt="{{ownerJSON.username}}">
   </span>
   <span>
-    <strong>{{ownerObject.username}}</strong>
+    <strong>{{ownerJSON.username}}</strong>
     published
-    <time pubdate="pubdate" datetime="{{created}}">{{createdString}}</time>
+    <time pubdate="pubdate" datetime="{{created}}">{{niceCreated}}</time>
   </span>
 </div>
 {{/with}}

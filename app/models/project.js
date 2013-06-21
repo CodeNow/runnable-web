@@ -4,9 +4,10 @@ var DirModel = require('./dir');
 var Super = Base.prototype;
 var utils = require('../app').prototype.utils; //hacky..
 var _ = require('underscore');
+var moment = require('moment');
 
 module.exports = Base.extend({
-  urlRoot: '/projects',
+  urlRoot: 'runnables',
   initialize: function (model, options) {
     Super.initialize.apply(this, arguments);
     var self = this;
@@ -31,53 +32,55 @@ module.exports = Base.extend({
     else {
       this.listenToOnce(this, 'change:rootDirectory', this.onChangeRootDir.bind(this));
     }
-    // VoteCount
-    this.listenTo(this, 'change:votes', this.onChangeVotes.bind(this));
+  },
+  defaults: {
+    votes: 0
+  },
+  virtuals: {
+    'niceFramework' : 'niceFramework',
+    'niceCreated'   : 'niceCreated'
+  },
+  toJSON: function () {
+    var data = Super.toJSON.call(this);
+    _.each(this.virtuals, function (key, i) {
+      var val = this.virtuals[key];
+      data[key] = this[val]();
+    }.bind(this));
+    return data;
   },
   onChangeRootDir: function () {
     this.rootDir.set(this.get('rootDirectory'));
     // this.unset('rootDirectory');
   },
-  onChangeVotes: function () {
-    var votes = this.get('votes') || [];
-    this.set('voteCount', votes.length);
-    this.set('voted', this.hasUserVoted());
-  },
-  hasUserVoted: function (userId) {
+  isOwner: function (userId) {
     userId = userId || this.app.user; // default to current user if no id specified
     if (!userId) return;
-    if (typeof userId == 'object' && userId.id) userId = userId.id;
-    var votes = this.get('votes') || [];
-    return ~votes.indexOf(userId);
-  },
-  isUserOwner: function (userId) {
-    userId = userId || this.app.user; // default to current user if no id specified
-    if (!userId) return;
-    if (typeof userId == 'object' && userId.id) userId = userId.id;
+    if (userId.id) userId = userId.id;
     return (this.get('owner') == userId);
   },
-  vote: function (cb) {
-    var user = this.app.user;
-    if (this.isUserOwner(user)) {
-      cb(new Error('You cannot vote on your own example, you silly goose'));
-    }
-    else if (this.hasUserVoted(user)) {
-      cb(new Error('You already voted, you crazy monkey'));
-    }
-    else {
-      var voteUrl = [_.result(this, 'url'), 'votes'].join('/');
-      var self = this;
-      var options = _.extend(
-        { url : voteUrl },
-        utils.successErrorToCB(cb)
-      );
-      var attrs = {
-        votes     : _.clone(this.get('votes') || []),
-        voteCount : this.get('voteCount')+1
-      };
-      attrs.votes.push(user.id);
-      this.save(attrs, options);
-    }
+  isUserOwner: function (userId) {
+    this.isOwner(this, arguments);
+  },
+  niceFramework: function () {
+    var friendlyFrameworks = {
+      'node.js'  : 'Node.js',
+      'php'      : 'PHP',
+      'python'   : 'Python'
+    };
+    return friendlyFrameworks[this.get('framework')];
+  },
+  niceCreated: function () {
+    return moment(this.get('created')).fromNow();
+  },
+  incVote: function () {
+    votes = this.get('votes') + 1;
+    this.set('votes', votes);
+    return this;
+  },
+  decVote: function () {
+    votes = this.get('votes') - 1;
+    this.set('votes', votes);
+    return this;
   }
 });
 

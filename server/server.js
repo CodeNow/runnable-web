@@ -2,6 +2,7 @@
 // Home of the main server object
 //
 var express = require('express'),
+    connectRedis = require('connect-redis'),
     env = require('./lib/env'),
     mw = require('./middleware'),
     DataAdapter = require('./lib/data_adapter'),
@@ -13,6 +14,9 @@ var express = require('express'),
 
 // Add Handlebars helpers
 addHandlebarsHelpers();
+
+// sessions storage
+redisStore = connectRedis(express);
 
 app = express();
 
@@ -47,11 +51,11 @@ exports.init = function init(options, callback) {
 // options
 // - port
 //
-exports.start = function start(options) {
+exports.start = function start(options, cb) {
   options = options || {};
   var port = options.port || 3000;
   console.log('attempt listen on port '+ port);
-  app.listen(port);
+  app.listen(port, cb);
   console.log("server pid " + process.pid + " listening on port " + port + " in " + app.settings.env + " mode");
 };
 
@@ -69,6 +73,18 @@ function initMiddleware() {
     if (process.env.NODE_ENV != 'development')
       app.use(express.compress());
     app.use(express.static(__dirname + '/../public'));
+    app.use(express.cookieParser());
+    app.use(express.session({
+      key: env.current.cookieKey,
+      secret: env.current.cookieSecret,
+      store: new redisStore,
+        ttl: env.current.cookieExpires,
+      cookie: {
+        path: '/',
+        httpOnly: false,
+        maxAge: env.current.cookieExpires
+      }
+    }));
     app.use(express.logger());
     app.use(express.bodyParser());
     if (process.env.NODE_ENV == 'development')
@@ -134,6 +150,7 @@ function buildRendrRoutes(app) {
 }
 
 function addHandlebarsHelpers() {
+  var utils = require('../app/utils');
 
   Handlebars.registerHelper('if_eq', function(context, options) {
     if (context == options.hash.compare)
@@ -147,4 +164,9 @@ function addHandlebarsHelpers() {
     return options.inverse(this);
   });
 
+  Handlebars.registerHelper('urlFriendly', function (str) {
+    str = utils.urlFriendly(str);
+
+    return new Handlebars.SafeString(str);
+  });
 }

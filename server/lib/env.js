@@ -16,9 +16,7 @@ var readConfigs = function (filename) {
   .read(path.resolve(path.join(__dirname, '..', '..', 'configs/', filename+'.json')));
 };
 
-var configs = module.exports = readConfigs(env);
-var portArgIndex = process.argv.indexOf('--port');
-if (~portArgIndex) configs.port = parseInt(process.argv[portArgIndex+1], 10);
-
-module.exports.readConfigs = readConfigs;
-module.exports.current = readConfigs(env);
+module.exports = {
+  readConfigs: readConfigs,
+  current: readConfigs(env)
+};

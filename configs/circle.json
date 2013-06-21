@@ -1,6 +1,11 @@
-// Config settings for NODE_ENV=development
+{
 
-exports.config = {
+  "port": 3000,
+
+  "cookieKey": "runnable.sid",
+  "cookieSecret": "$up3r,$3<r3t",
+  "cookieExpires": "1 year",
+
   "assets": {
     "minify": false,
     "cdn": {
@@ -12,7 +17,7 @@ exports.config = {
 
   "api": {
     "default": {
-      "host": "localhost:3030/api",
+      "host": "localhost:3000",
       "protocol": "http"
     }
   },
@@ -25,4 +30,5 @@ exports.config = {
       "id": "UA-36631837-2"
     }
   }
-};
+
+}

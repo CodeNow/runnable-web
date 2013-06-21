@@ -1,5 +1,6 @@
 var utils = require('rendr/server/utils'),
     _ = require('underscore'),
+    cookie = require('cookie'),
     url = require('url'),
     request = require('request'),
     debug = require('debug')('app:DataAdapter'),
@@ -20,7 +21,6 @@ function DataAdapter(options) {
 //
 DataAdapter.prototype.request = function(req, api, options, callback) {
   var _this = this, start, end;
-  console.log(api.url)
   if (arguments.length === 3) {
     callback = options;
     options = {};
@@ -31,8 +31,13 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
     convertErrorCode: true,
     allow4xx: false
   });
-
+;
   api = this.apiDefaults(api);
+
+  if (req.session && req.session.access_token) {
+    api.headers['runnable-token'] = req.session.access_token;
+  }
+
   start = new Date().getTime();
   request(api, function(err, response, body) {
     if (err) return callback(err);
@@ -40,6 +45,14 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
 
     debug('%s %s %s %sms', api.method.toUpperCase(), api.url, response.statusCode, end - start);
     debug('%s', inspect(response.headers));
+
+    if (req.session) {
+      if ((api.path == '/users' || api.path == '/token') && api.method == 'POST') {
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          req.session.access_token = body.access_token;
+        }
+      }
+    }
 
     if (options.convertErrorCode) {
       err = _this.getErrForResponse(response, {allow4xx: options.allow4xx});
@@ -66,6 +79,8 @@ DataAdapter.prototype.apiDefaults = function(api) {
     delete api.path;
   }
 
+  api.jar = false;
+
   // Can specify a particular API to use, falling back to default.
   apiHost = this.options[api.api] || this.options['default'] || this.options || {};
 
@@ -80,24 +95,10 @@ DataAdapter.prototype.apiDefaults = function(api) {
     url: url.format(urlOpts),
     headers: {}
   });
-  // Add a custom UserAgent so GitHub API doesn't 403 us.
-  if (api.headers['User-Agent'] == null) {
-    api.headers['User-Agent'] = 'Rendr Api Proxy; Node.js';
-  }
 
   if (api.body != null) {
     api.json = api.body;
   }
-
-  // basicAuth = process.env.BASIC_AUTH;
-  // if (basicAuth != null) {
-  //   authParts = basicAuth.split(':');
-  //   api.auth = {
-  //     username: authParts[0],
-  //     password: authParts[1],
-  //     sendImmediately: true
-  //   };
-  // }
 
   return api;
 };

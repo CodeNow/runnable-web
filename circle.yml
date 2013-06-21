@@ -1,0 +1,19 @@
+machine:
+  environment:
+    NODE_ENV: circle
+dependencies:
+  override:
+    - nvm install 0.10.12
+    - nvm alias default 0.10.12
+    - curl -sL --user "Runnable-Bot:pass4now20" https://github.com/CodeNow/api-server/archive/v0.1.2.tar.gz > api_server.tar.gz
+    - tar -xvf api_server.tar.gz
+    - mkdir ~/.runnable
+    - mkdir ~/.runnable/volumes
+    - cd api-server-0.1.2; make install; make build; NODE_ENV=production make start &
+    - npm install
+    - rm -rf ./node_modules/rendr
+    - npm install rendr
+    - rvm use 1.9.3 default
+    - gem install compass
+    - ./node_modules/.bin/bower install
+    - ./node_modules/.bin/grunt

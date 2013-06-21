@@ -1,15 +1,29 @@
 var Base = require('./base');
+var BaseCollection = require('../collections/base');
+var Super = BaseCollection.prototype;
 
 module.exports = Base.extend({
   urlRoot: '/users',
-  defaults: {
-    _id: 'me'
+  initialize: function (attrs, options) {
+    Super.initialize.apply(this, arguments);
+    if (attrs.votes) {
+      this.createVotesCollection(attrs.votes);
+    }
+    else {
+      this.listenToOnce(this, 'change:votes', function (model) {
+        this.createVotesCollection(model.get('votes'));
+      }.bind(this));
+    }
+  },
+  createVotesCollection: function (votes) {
+    this.votes = new BaseCollection(votes, {
+      app: this.app,
+      model: Base,
+      url: '/users/' + this.id + '/votes'
+    });
   },
   isRegistered : function(){
     return this.get('permission_level') >= 1;
-  },
-  isOwner : function (model) {
-    return model.get('owner') == this.get('_id');
   },
   isModerator : function () {
     return this.get('permission_level') >= 5;
@@ -17,33 +31,77 @@ module.exports = Base.extend({
   canEdit: function (model) {
     return this.isModerator() || this.isOwner(model);
   },
-  register: function(data, callbacks) {
-    var self = this;
-    this.save(data, {
+  register: function(email, password, cb) {
+    cb = cb || function () {};
+    this.save({
+      email: email,
+      password: password
+    }, {
       wait: true,
       success: function(model, response, options) {
-        Track.event('User', 'Registered');
-        callbacks.success(model);
+        // Track.event('User', 'Registered');
+        cb();
       },
-      error: function(model, XHR) {
-        try {
-          error = JSON.parse(XHR.responseText);
-        }
-        catch(err) {
-          callbacks.error(new Error('Uh oh, an error occurred. Try again later.'));
-          return;
-        }
-        callbacks.error(error); //down here so that it's out of the try catch..
+      error: function(model, body) {
+        cb(body.message);
       }
     });
   },
-  alreadyVotedOn  : function (project) {
-    project = (project.toJSON) ? project.toJSON() : project;
-    return ~(this.get('projectVotes') || []).indexOf(project._id);
+  vote: function (project, cb) {
+    var self = this;
+    cb = cb || function(){};
+    var applyVote = function () {
+      var match = self.votes.findWhere({ runnable: project.id });
+      if (match) {
+        cb('You have already voted on this project');
+      } else {
+        project.incVote();
+        console.log(project.id);
+        debugger;
+        self.votes.create({
+          runnable: project.id
+        }, {
+          success: function () {
+            cb();
+          },
+          error: function () {
+            project.decVote();
+            cb('Error voting on project');
+          }
+        });
+      }
+    };
+    if (!this.votes) {
+      var currentVotes = this.get('votes') || [];
+      this.votes = new BaseCollection(currentVotes, {
+        model: Base,
+        app: this.app,
+        url: '/users/' + this.id + '/votes'
+      });
+      this.votes.fetch();
+      this.listenToOnce(this.votes, 'sync', applyVote);
+    } else {
+      applyVote();
+    }
   },
-  isOwnerOfProject: function (project) {
-    project = (project.toJSON) ? project.toJSON() : project;
-    return this.id == project.owner;
+  hasVoted: function (project, cb) {
+    var self = this;
+    cb = cb || function(){};
+    var checkVote = function () {
+      var match = self.votes.findWhere({ runnable: project.id });
+      cb(null, match !== null && match !== undefined);
+    };
+    if (!this.votes) {
+      this.createVotesCollection([]);
+      this.votes.fetch();
+      this.listenToOnce(this.votes, 'sync', checkVote);
+    } else {
+      checkVote();
+    }
+  },
+  isOwnerOf: function (project) {
+    owner = (project.toJSON) ? project.get('owner') : project.owner;
+    return this.id == owner;
   }
 });
 module.exports.id = 'User';
