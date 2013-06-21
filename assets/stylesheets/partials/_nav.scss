@@ -332,3 +332,12 @@ footer .social-icons{
 		}
 	}
 }
+
+// Pagination
+.pagination{
+	margin-bottom:$padding;
+	@include clearfix;
+	.previous,.next{
+		@extend .btn;
+	}
+}
