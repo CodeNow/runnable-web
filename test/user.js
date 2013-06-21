@@ -376,9 +376,11 @@ describe('User', function() {
         project.once('change', function() {
 
           // vote on first users runnable
+          var voteCount =  project.get('votes');
           user2.vote(project, function (err) {
             if (err) { cb(new Error(err)); } else {
-
+              project.get('votes').should.equal(1);
+              should.exist(user2.votes.findWhere({ runnable:project.id }));
               cb();
             }
           });

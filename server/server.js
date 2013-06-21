@@ -150,6 +150,7 @@ function buildRendrRoutes(app) {
 }
 
 function addHandlebarsHelpers() {
+  var utils = require('../app/utils');
 
   Handlebars.registerHelper('if_eq', function(context, options) {
     if (context == options.hash.compare)
@@ -163,4 +164,9 @@ function addHandlebarsHelpers() {
     return options.inverse(this);
   });
 
+  Handlebars.registerHelper('urlFriendly', function (str) {
+    str = utils.urlFriendly(str);
+
+    return new Handlebars.SafeString(str);
+  });
 }

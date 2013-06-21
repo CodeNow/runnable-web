@@ -4,8 +4,8 @@ module.exports = function(match) {
   match('providers',            'home#providers');
   match('about',                'home#about');
   match('jobs',                 'home#jobs');
-  match('blob',                 'home#blob');
   match('privacy',              'home#privacy');
+  match('blob',                 'home#blob');
   match(':_id',                 'project#index');
   match(':_id/:name',           'project#index');
   match(':channel',             'channel#index');

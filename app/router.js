@@ -9,6 +9,7 @@ Router.prototype.__proto__ = BaseClientRouter.prototype;
 
 Router.prototype.postInitialize = function() {
   this.on('action:start', this.trackImpression, this);
+
   // Register Handlebars helpers here for now
   Handlebars.registerHelper('if_eq', function(context, options) {
     if (context == options.hash.compare)
@@ -20,6 +21,13 @@ Router.prototype.postInitialize = function() {
     if (context !== null && context !== undefined)
       return options.fn(this);
     return options.inverse(this);
+  });
+
+  var utils = this.app.utils;
+  Handlebars.registerHelper('urlFriendly', function (str) {
+    str = utils.urlFriendly(str);
+
+    return new Handlebars.SafeString(str);
   });
 
   // set up ace worker urls
