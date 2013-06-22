@@ -1,3 +1,4 @@
+var global = this;
 var utils = module.exports = {
   capitalize: function (str) {
     return typeof str == 'string' && str.length && str[0].toUpperCase() + str.slice(1);
@@ -179,5 +180,39 @@ var utils = module.exports = {
       .toLowerCase()
     ;
     return encodeURIComponent(str);
+  },
+  base64ToHex: function(base64) {
+    if (global.isServer) {
+      if (!utils.exists(base64)) return null;
+      var minus = /-/g;
+      var underscore = /_/g;
+      return (new Buffer(base64.toString().replace(minus,'+').replace(underscore,'/'), 'base64')).toString('hex');
+    }
+    else {
+      var dash = /-/g;
+      var underscore = /_/g;
+      try {
+        for (var i = 0, bin = atob(base64.replace(dash,'+').replace(underscore,'/').replace(/[ \r\n]+$/, "")), hex = []; i < bin.length; ++i) {
+          var tmp = bin.charCodeAt(i).toString(16);
+          if (tmp.length === 1) tmp = "0" + tmp;
+          hex[hex.length] = tmp;
+        }
+        return hex.join("");
+      }
+      catch (err) {
+        return false;
+      }
+    }
+  },
+
+  isObjectId: function (str) {
+    // console.log(str.length)
+    // console.log(Boolean(str.match))
+    // console.log(str.match(/^[a-fA-F0-9]{24}$/))
+    return Boolean(str && str.length === 24 && str.match && str.match(/^[a-fA-F0-9]{24}$/));
+  },
+
+  isObjectId64: function (str) {
+    return Boolean(str && str.length === 16 && utils.isObjectId(utils.base64ToHex(str)));
   }
 };

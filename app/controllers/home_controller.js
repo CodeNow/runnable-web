@@ -13,7 +13,7 @@ module.exports = {
       projects: {
         collection : 'Projects',
         params     : {
-          sort: '-votes'
+          sort: 'votes'
         }
       }
     };
