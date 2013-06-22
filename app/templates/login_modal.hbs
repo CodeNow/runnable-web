@@ -1,0 +1,27 @@
+<article class="modal">
+  <section class="modal-header">
+    <h3>{{header}}</h3>
+    <button type="button" class="btn-close"><i class="icon-remove"></i></button>
+  </section>
+  <section class="modal-body">
+    <div class="modal-content">
+      <p>Don't have an account? <a class="signup-link" href="/invite">Sign up here</a>.</p>
+      <form id="login-form">
+        <div class="item span8">
+          <label for="username">Username or email</label>
+          <input type="text" name="username" autofocus>
+        </div>
+        <div class="item span8">
+          <label for="password">Password</label>
+          <input type="password" name="password">
+        </div>
+        {{! <div class="item">
+          <label><input type="checkbox">&nbsp;Remember me</label>
+        </div> }}
+        <div class="actions">
+          <button class="btn-secondary">Sign in</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</article>

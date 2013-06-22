@@ -1,7 +1,6 @@
 var _ = require('underscore');
 var fetch = require('./fetch');
 
-
 module.exports = {
   index: function(params, callback) {
     var spec = {
@@ -43,15 +42,22 @@ module.exports = {
   },
 
   providers: function (params, callback) {
-    console.log(this.currentRoute)
     var spec = {
       user: { model:'User', params:{_id: 'me'} }
     };
     fetch.call(this, spec, callback);
   },
 
+  logout: function () {
+    // force serverside hit for clientside (pushstate)
+    if (typeof window !== "undefined" && window !== null) {
+      window.location = '/logout';
+    }
+    this.app.req.session.destroy();
+    this.redirectTo('/');
+  },
+
   blob: function (params, callback) {
-    console.log('BLOBBBB');
     var spec = {
       user: { model:'User', params:{_id: 'me'} }
     };

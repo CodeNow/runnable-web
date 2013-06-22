@@ -1,8 +1,10 @@
 var Base = require('./base');
 var BaseCollection = require('../collections/base');
 var Super = BaseCollection.prototype;
+var utils = require('../utils');
+var _     = require('underscore');
 
-module.exports = Base.extend({
+var User = module.exports = Base.extend({
   urlRoot: '/users',
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
@@ -31,21 +33,36 @@ module.exports = Base.extend({
   canEdit: function (model) {
     return this.isModerator() || this.isOwner(model);
   },
-  register: function(email, password, cb) {
+  register: function(email, username, password, cb) {
     cb = cb || function () {};
+    var cbOptions = utils.successErrorToCB(cb);
     this.save({
       email: email,
+      username: username,
       password: password
     }, {
       wait: true,
-      success: function(model, response, options) {
-        // Track.event('User', 'Registered');
-        cb();
-      },
-      error: function(model, body) {
-        cb(body.message);
-      }
+      method: 'POST',
+      url   : '/users',
+      success: cbOptions.success,
+      error  : cbOptions.error
     });
+  },
+  login: function (emailUsername, password, cb) {
+    cb = cb || function () {};
+    var auth = new Base({
+      email: emailUsername,
+      password: password
+    }, {
+      url: '/token',
+      app: this.app
+    });
+    var cbOpts = this.app.utils.successErrorToCB;
+    auth.save({}, cbOpts(function (err) {
+      if (err) {
+        alert(err);
+      }
+    }));
   },
   vote: function (project, cb) {
     var self = this;
@@ -56,8 +73,6 @@ module.exports = Base.extend({
         cb('You have already voted on this project');
       } else {
         project.incVote();
-        console.log(project.id);
-        debugger;
         self.votes.create({
           runnable: project.id
         }, {

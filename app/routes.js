@@ -5,6 +5,7 @@ module.exports = function(match) {
   match('about',                'home#about');
   match('jobs',                 'home#jobs');
   match('privacy',              'home#privacy');
+  match('logout',               'home#logout');
   match('blob',                 'home#blob');
   match(':_id',                 'project#index');
   match(':_id/:name',           'project#index');

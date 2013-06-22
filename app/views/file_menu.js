@@ -12,10 +12,6 @@ module.exports = BaseView.extend({
     'click .create-dir'  : 'createDir',
     'click .download'    : 'downloadFS'
   },
-  postInitialize: function () {
-    $('body').append(this.$el);
-    this.render();
-  },
   postRender: function () {
     this.attachWindowEvents();
     this.$el.css(_.pick(this.options, 'top', 'left'));

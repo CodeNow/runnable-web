@@ -1,6 +1,7 @@
-var BaseView = require('./base_view');
+var ModalView = require('./modal_view');
 
-module.exports = BaseView.extend({
+module.exports = ModalView.extend({
+  className: 'lightbox',
   events: {
     'click .btn-cancel' : this.remove,
     'click .btn-close'  : this.remove,

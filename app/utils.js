@@ -149,11 +149,17 @@ var utils = module.exports = {
   },
   errorToCB : function (cb) {
     return function (model, xhr, options) {
-      utils.parseJSON(xhr.responseText, function (err, json) {
-        if (err) { cb(new Error('Error, please try again.')); } else {
-          cb(null, json);
-        }
-      });
+      if (xhr.message) {
+        cb(xhr.message);
+      }
+      else {
+        utils.parseJSON(xhr.responseText, function (err, json) {
+          var defaultMessage = 'Error, please try again.';
+          if (err) { cb(defaultMessage); } else {
+            cb(json.message || defaultMessage);
+          }
+        });
+      }
     };
   },
   successErrorToCB: function (cb) {
