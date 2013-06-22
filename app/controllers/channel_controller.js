@@ -13,7 +13,7 @@ module.exports = {
         collection : 'Projects',
         params     : {
           sort: 'votes',
-          tags: params.channel
+          channel: params.channel
         }
       }
     };
