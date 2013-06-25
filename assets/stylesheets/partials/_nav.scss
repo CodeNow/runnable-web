@@ -83,6 +83,22 @@ header .user-nav{
 	}
 }
 
+// Header nav
+// Beside the search bar
+.header-nav{
+	float:left;
+	margin:5px 0;
+	a{
+		line-height:25px;
+		padding:5px 7px;
+		color:#ccc;
+		&:hover{
+			color:#fff;
+			text-decoration:none;
+		}
+	}
+}
+
 // Tags navigation
 // For individual examples and lists of examples
 .tags-nav{
@@ -147,7 +163,7 @@ header .user-nav{
 .project-nav{
 	ul{
 		list-style:none;
-		margin:0;
+		margin:0 0 $padding;
 		padding:0;
 		li{
 			@include clearfix;

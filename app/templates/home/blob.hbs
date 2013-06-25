@@ -150,47 +150,79 @@
 </footer>
 
 <div class="container">
-	<p>############## Markup for my code examples page #######################</p>
-
+	<p>############## Markup for lists of code examples #######################</p>
+	<nav class="project-nav">
+		<ul>
+			<li>
+					<button id="vote-button-view" class="btn-vote" disabled="disabled"> 0</button>
+					<h3><a href="">How to do something with Codeigniter</a></h3>
+					<nav class="tags-nav">
+			  		<a href="/Nodejs">
+			    		<img src="/external/images/channels/Nodejs.png" alt="">
+			    		<span>Nodejs</span>
+			  		</a>
+			  		<a href="/Nodejs">
+			    		<img src="/external/images/channels/Nodejs.png" alt="">
+			    		<span>Codeigniter</span>
+			  		</a>
+			  		<a href="/Nodejs">
+			    		<img src="/external/images/channels/Nodejs.png" alt="">
+			    		<span>PHP</span>
+			  		</a>
+					</nav>
+					<div class="author">
+			  		Published <time pubdate="pubdate" datetime="2013-01-28T18:52:08.169Z">4 months ago</time>
+			  	</div>
+			</li>
+			<li>
+					<button id="vote-button-view" class="btn-vote" disabled="disabled"> 0</button>
+					<h3><a href="">How to do something with Codeigniter</a></h3>
+					<nav class="tags-nav">
+			  		<a href="/Nodejs">
+			    		<img src="/external/images/channels/Nodejs.png" alt="">
+			    		<span>Nodejs</span>
+			  		</a>
+			  		<a href="/Nodejs">
+			    		<img src="/external/images/channels/Nodejs.png" alt="">
+			    		<span>Codeigniter</span>
+			  		</a>
+			  		<a href="/Nodejs">
+			    		<img src="/external/images/channels/Nodejs.png" alt="">
+			    		<span>PHP</span>
+			  		</a>
+					</nav>
+					<div class="author">
+			  		Published <time pubdate="pubdate" datetime="2013-01-28T18:52:08.169Z">4 months ago</time>
+			  	</div>
+			</li>
+			<li>
+					<button id="vote-button-view" class="btn-vote" disabled="disabled"> 0</button>
+					<h3><a href="">How to do something with Codeigniter</a></h3>
+					<nav class="tags-nav">
+			  		<a href="/Nodejs">
+			    		<img src="/external/images/channels/Nodejs.png" alt="">
+			    		<span>Nodejs</span>
+			  		</a>
+			  		<a href="/Nodejs">
+			    		<img src="/external/images/channels/Nodejs.png" alt="">
+			    		<span>Codeigniter</span>
+			  		</a>
+			  		<a href="/Nodejs">
+			    		<img src="/external/images/channels/Nodejs.png" alt="">
+			    		<span>PHP</span>
+			  		</a>
+					</nav>
+					<div class="author">
+			  		Published <time pubdate="pubdate" datetime="2013-01-28T18:52:08.169Z">4 months ago</time>
+			  	</div>
+			</li>
+		</ul>
+	</nav>
 	<nav class="pagination">
 		<a href="" class="previous"><i class="icon-chevron-left"></i> Previous page</a>
 		<a href="" class="next">Next page <i class="icon-chevron-right"></i></a>
 	</nav>
 
-	<div class="tab-container">
-		<nav class="tab-nav">
-			<a href="" class="selected">Published</a>
-			<a href="">Drafts</a>
-		</nav>
-		<div class="tab-content">
-			<div class="tab-pane">
-				<p>These code examples are published and are accessible through our homepage or search.</p>
-				<nav class="project-nav">
-					<ul>
-						<li>
-							<div class="span8">
-								<button id="vote-button-view" class="btn-vote" disabled="disabled"> 0</button>
-								<h3><a href="">How to do something with Codeigniter</a></h3>
-								<nav class="tags-nav">
-						  		<a href="/Nodejs">
-						    		<img src="/external/images/channels/Nodejs.png" alt="">
-						    		<span>Nodejs</span>
-						  		</a>
-								</nav>
-								<div class="author">
-						  		Published <time pubdate="pubdate" datetime="2013-01-28T18:52:08.169Z">4 months ago</time>
-						  	</div>
-						  </div>
-						  <div class="span4 last alignright">
-						  	<button class="btn-tertiary">Unpublish</button>
-						  	<button class="btn-bad">Delete example</button>
-						  </div>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</div>
 </div>
 
 <div class="container">
@@ -206,6 +238,7 @@
 					<thead>
 						<tr>
 							<th></th>
+							<th scope="col">Votes</th>
 							<th scope="col">Views</th>
 							<th scope="col">Runs</th>
 							<th scope="col">Copies</th>
@@ -215,12 +248,13 @@
 					</thead>
 					<tfoot>
 						<tr>
-							<td colspan="6" class="alignright"><select><option>Actions...</option><option>Unpublish</option><option>Delete</option></select></td>
+							<td colspan="7" class="alignright"><select><option>Actions...</option><option>Unpublish</option><option>Delete</option></select></td>
 						</tr>
 					</tfoot>
 					<tbody>
 						<tr>
 							<td><a href="">How to validate forms with Codeigniter</a></td>
+							<td>19</td>
 							<td>3,500</td>
 							<td>500</td>
 							<td>400</td>
@@ -229,6 +263,7 @@
 						</tr>
 						<tr class="selected">
 							<td><a href="">How to upload a file using jQuery and PHP</a></td>
+							<td>19</td>
 							<td>1,230</td>
 							<td>738</td>
 							<td>126</td>
@@ -237,6 +272,7 @@
 						</tr>
 						<tr>
 							<td><a href="">Insert a record using MongoDB and Node.js</a></td>
+							<td>19</td>
 							<td>367</td>
 							<td>89</td>
 							<td>57</td>
@@ -245,6 +281,7 @@
 						</tr>
 						<tr>
 							<td><a href="">Render ejs with Express and Node.js</a></td>
+							<td>19</td>
 							<td>12,434</td>
 							<td>5,302</td>
 							<td>903</td>
@@ -258,6 +295,16 @@
 	</div>
 </div>
 
+<div class="container">
+	<p>############## Modals #######################</p>
+	<ul>
+		<li><button onclick="$('#new-file-modal-view').show();">New File</button></li>
+		<li><button onclick="$('#login').show();">Sign Up</button></li>
+		<li><button onclick="$('#answer-modal-view').show();">New Code Example</button></li>
+		<li><button onclick="$('.').show();"></button></li>
+	</ul>
+</div>
+
 <!-- Context menu -->
 <div id="file-context-menu-view" class="context-menu" style="display: block; top: 560px; left: 660px;"><ul class="menu-options">
 
@@ -268,6 +315,15 @@
 </div>
 
 <div class="modals">
+
+	<!-- For demo purposes -->
+	<script>
+	window.onload=function(){
+		$('.btn-close').click(function(){
+			$('.lightbox').hide();
+		});
+	};
+	</script>
 
 	<!-- New file/folder -->
 	<div id="new-file-modal-view" class="new-file-modal lightbox display-none">
@@ -284,7 +340,6 @@
 	        </div>
 	        <div class="actions">
 	          <button class="btn-secondary">Save file</button>
-	          <button class="btn-text btn-cancel">Cancel</button>
 	        </div>
 	      </form>
 	    </section>
@@ -292,7 +347,7 @@
 	</div>
 
 	<!-- Login -->
-	<div class="lightbox display-none login-modal">
+	<div id="login" class="lightbox display-none login-modal">
 		<article class="modal">
 		  <section class="modal-header">
 		    <h3>Sign in to save your example</h3>
@@ -332,9 +387,8 @@
 			--> }}
 
 			<!-- If user wants to sign up manually -->
-		    <!--
 		    <div class="modal-content">
-		      <p>Already have an account? <a href="">Sign in here</a>.</p>
+		      <p>Already have an account? <a href="">Log in here</a>.</p>
 		      <form id="login-form">
 		        <div class="item span8">
 		          <label for="username">Username</label>
@@ -353,7 +407,6 @@
 		        </div>
 		      </form>
 		    </div>
-			-->
 
 		  </section>
 		</article>
@@ -369,17 +422,17 @@
 			<section class="modal-body">
 				<div class="modal-content">
 
-		  		<section class="module">
-		    		<h3>Start with an existing project</h3>
-		    		<form class="search-form">
-						  <label for="search-bar-form-input">Search for a similar project, fork it and start editing.</label>
-						  <div class="relative">
-						  	<input id="search-bar-form-input" type="search" autofocus placeholder="Search for runnable code examples"></input><i class="icon-search"></i>
-						  	<div id="search-bar-form-dropdown" class="search-auto-complete">
-						  		<ul id="search-bar-form-dropdown-suggestions">
-						  		</ul>
-						  	</div>
-						  </div>
+			  		<section class="module">
+			    		<h3>Start with an existing project</h3>
+			    		<form class="search-form">
+							<label for="search-bar-form-input">Search for a similar project, fork it and start editing.</label>
+							  <div class="relative">
+							  	<input id="search-bar-form-input" type="search" autofocus placeholder="Search for runnable code examples"></input><i class="icon-search"></i>
+							  	<div id="search-bar-form-dropdown" class="search-auto-complete">
+							  		<ul id="search-bar-form-dropdown-suggestions">
+							  		</ul>
+							  	</div>
+							  </div>
 						</form>
 					</section>
 
@@ -388,10 +441,17 @@
 						<p>Select your language or framework and we'll give you the base files.</p>
 						<nav class="select-stack-nav">
 							<ul>
-				        <li><a href="javascript:void(0);" data-link="/new/node.js" data-bypass=""><span><img src="/images/channels/node.png" alt="Node" title="Node"></span>Node.js</a></li>
+				        <li><a href="javascript:void(0);" data-link="/new/node.js" data-bypass=""><span><img src="/images/channels/nodejs.png" alt="Node" title="Node"></span>Node.js</a></li>
 				        <li><a href="javascript:void(0);" data-link="/new/php" data-bypass=""><span><img src="/images/channels/php.png" alt="PHP" title="PHP"></span>PHP</a></li>
 				        <li><a href="javascript:void(0);" data-link="/new/python" data-bypass=""><span><img src="/images/channels/python.png" alt="Python" title="Python"></span>Python</a></li>
+				        <li><a href="javascript:void(0);" data-link="/new/python" data-bypass=""><span><img src="/images/channels/codeigniter.png" alt="Python" title="Python"></span>Codeigniter</a></li>
+				        <li><a href="javascript:void(0);" data-link="/new/python" data-bypass=""><span><img src="/images/channels/jquery.png" alt="Python" title="Python"></span>jQuery</a></li>
 				      </ul>
 						</nav>
 					</section>
+				</div>
+			</section>
+		</div>
+	</div>
+
 
