@@ -16,7 +16,6 @@ module.exports = ModalView.extend({
   },
   remove: function () {
     this.trigger('remove');
-    debugger;
     Super.remove.apply(this, arguments);
   },
   submitNewFile: function (evt) {

@@ -22,8 +22,8 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     return {
-      user: this.model.toJSON(),
-      projectsCollection: this.options.context.projects
+      user: this.model.toJSON()//,
+      //projectsCollection: this.options.context.projects
     };
   },
   openLogin: function () {
