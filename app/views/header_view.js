@@ -13,7 +13,11 @@ module.exports = BaseView.extend({
   postHydrate: function () {
     // read long comment above, postHydrate - same reason for clientside
     this.app.user = this.model;
-    this.listenTo(this.model, 'change:username', this.render.bind(this));
+    this.listenTo(this.model, 'change:username', function () {
+      //user is changing, we need to reload backbone application to re-load index page with
+      //user's credentials for analytics, and for this view
+      window.location.reload();
+    });
     this.listenTo(this.model, 'change:gravitar', this.render.bind(this));
   },
   events: {
@@ -21,6 +25,7 @@ module.exports = BaseView.extend({
     'click .dropdown-toggle' : 'toggleDropdown'
   },
   getTemplateData: function () {
+    console.log(this.options);
     return {
       user: this.model.toJSON(),
       projectsCollection: this.options.context.projects
