@@ -24,7 +24,6 @@ module.exports = BaseView.extend({
     'click .dropdown-toggle' : 'toggleDropdown'
   },
   getTemplateData: function () {
-    console.log(this.options);
     return {
       user: this.model.toJSON(),
       projectsCollection: this.options.context.projects
