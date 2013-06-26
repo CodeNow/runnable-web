@@ -57,12 +57,16 @@ module.exports = {
                 }
               };
               fetch.call(self, spec2, function (err, results2) {
+                console.log('foo', _.extend(results, results2, {
+                  action: params.action
+                }))
                 callback(err, _.extend(results, results2, {
                   action: params.action
                 }));
               });
             }
             else {
+              results.action = params.action;
               callback(err, results);
             }
           }
