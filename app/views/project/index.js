@@ -7,6 +7,7 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     var options = this.options;
     var project = options.project;
+    console.log('projectOptions:', options);
     return _.extend(options, {
       projectJSON: project.toJSON(),
       editMode   : options.editMode || project.get('unpublished')
