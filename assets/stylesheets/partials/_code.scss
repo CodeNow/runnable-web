@@ -520,6 +520,9 @@ nav.file-tree > ul > li > span{
 		.comment-text{
 			@extend .span11;
 			@extend .last;
+			.name{
+				font-weight:bold;
+			}
 		}
 	}
 }

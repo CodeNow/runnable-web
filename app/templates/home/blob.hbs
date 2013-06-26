@@ -58,8 +58,17 @@
 				      <img class="avatar" alt="Henry" src="http://www.gravatar.com/avatar/">
 				    </div>
 				    <div class="comment-text">
-				      <div class="name"><strong>Anon</strong></div>
+				      <div class="name">Anon</div>
 				      <div class="text">Wow this was super useful, thanks!</div>
+				    </div>
+				  </li>
+				  <li>
+				    <div class="comment-avatar">
+				      <img class="avatar" alt="Henry" src="http://www.gravatar.com/avatar/">
+				    </div>
+				    <div class="comment-text">
+				      <div class="name">MrCode2013</div>
+				      <div class="text">Excellent overview of how to do horizontal sliders. However I'm confused how it would work if I wanted a vertical slider. Can you explain?</div>
 				    </div>
 				  </li>
 				</ul>
@@ -75,6 +84,7 @@
 				  <div class="item">
 				    <label for="email">Email (optional)</label>
 				    <input type="email" name="email">
+				    <p class="note">We use this for your Gravatar only</p>
 				  </div>
 				  <div class="item">
 				    <label for="text">Comment</label>
@@ -87,23 +97,23 @@
 		</article>
 		<aside class="span3 last">
 
-			<p><a href="" class="btn-secondary block">New code example</a></p>
+			{{! <p><a href="" class="btn-secondary block">New code example</a></p> }}
 
-			<section class="module">
+			{{! <section class="module">
 
 				<ul class="stats nolist">
 					<li><i class="icon-eye-open"></i> 1,290 views</li>
 					<li><i class="icon-play"></i> 54 runs</li>
 				</ul>
-			</section>
+			</section> }}
 
 			<section class="module tags">
 				<h3>Tags</h3>
 				<nav class="tags-nav">
-					<a href=""><img src="/external/images/channels/facebook.png" alt=""> Facebook</a>
-					<a href=""><img src="/external/images/channels/nodejs.png" alt=""> Node.js</a>
-					<a href=""><img src="/external/images/channels/codeigniter.png" alt=""> Codeigniter</a>
-					<a href=""><img src="/external/images/channels/jquery.png" alt=""> jQuery <i class="icon-remove remove-tag"></i></a>
+					<a href=""><img src="/images/channels/facebook.png" alt=""> Facebook</a>
+					<a href=""><img src="/images/channels/nodejs.png" alt=""> Node.js</a>
+					<a href=""><img src="/images/channels/codeigniter.png" alt=""> Codeigniter</a>
+					<a href=""><img src="/images/channels/jquery.png" alt=""> jQuery <i class="icon-remove remove-tag"></i></a>
 				</nav>
 				<form>
 					<input type="text"> <button class="btn-secondary btn-small left"><i class="icon-plus"></i> Add tag</button>
@@ -151,78 +161,91 @@
 
 <div class="container">
 	<p>############## Markup for lists of code examples #######################</p>
-	<nav class="project-nav">
-		<ul>
-			<li>
-					<button id="vote-button-view" class="btn-vote" disabled="disabled"> 0</button>
-					<h3><a href="">How to do something with Codeigniter</a></h3>
-					<nav class="tags-nav">
-			  		<a href="/Nodejs">
-			    		<img src="/external/images/channels/Nodejs.png" alt="">
-			    		<span>Nodejs</span>
-			  		</a>
-			  		<a href="/Nodejs">
-			    		<img src="/external/images/channels/Nodejs.png" alt="">
-			    		<span>Codeigniter</span>
-			  		</a>
-			  		<a href="/Nodejs">
-			    		<img src="/external/images/channels/Nodejs.png" alt="">
-			    		<span>PHP</span>
-			  		</a>
-					</nav>
-					<div class="author">
-			  		Published <time pubdate="pubdate" datetime="2013-01-28T18:52:08.169Z">4 months ago</time>
-			  	</div>
-			</li>
-			<li>
-					<button id="vote-button-view" class="btn-vote" disabled="disabled"> 0</button>
-					<h3><a href="">How to do something with Codeigniter</a></h3>
-					<nav class="tags-nav">
-			  		<a href="/Nodejs">
-			    		<img src="/external/images/channels/Nodejs.png" alt="">
-			    		<span>Nodejs</span>
-			  		</a>
-			  		<a href="/Nodejs">
-			    		<img src="/external/images/channels/Nodejs.png" alt="">
-			    		<span>Codeigniter</span>
-			  		</a>
-			  		<a href="/Nodejs">
-			    		<img src="/external/images/channels/Nodejs.png" alt="">
-			    		<span>PHP</span>
-			  		</a>
-					</nav>
-					<div class="author">
-			  		Published <time pubdate="pubdate" datetime="2013-01-28T18:52:08.169Z">4 months ago</time>
-			  	</div>
-			</li>
-			<li>
-					<button id="vote-button-view" class="btn-vote" disabled="disabled"> 0</button>
-					<h3><a href="">How to do something with Codeigniter</a></h3>
-					<nav class="tags-nav">
-			  		<a href="/Nodejs">
-			    		<img src="/external/images/channels/Nodejs.png" alt="">
-			    		<span>Nodejs</span>
-			  		</a>
-			  		<a href="/Nodejs">
-			    		<img src="/external/images/channels/Nodejs.png" alt="">
-			    		<span>Codeigniter</span>
-			  		</a>
-			  		<a href="/Nodejs">
-			    		<img src="/external/images/channels/Nodejs.png" alt="">
-			    		<span>PHP</span>
-			  		</a>
-					</nav>
-					<div class="author">
-			  		Published <time pubdate="pubdate" datetime="2013-01-28T18:52:08.169Z">4 months ago</time>
-			  	</div>
-			</li>
-		</ul>
-	</nav>
-	<nav class="pagination">
-		<a href="" class="previous"><i class="icon-chevron-left"></i> Previous page</a>
-		<a href="" class="next">Next page <i class="icon-chevron-right"></i></a>
-	</nav>
-
+	<aside class="span3">
+		<h3>Filter Tags</h3>
+		<nav class="tags-filter">
+			<a href="" class="selected"><img src="/images/channels/jquery.png" alt=""> jQuery (33) <i class="icon-remove remove-tag"></i></a>
+			<a href="" class="selected"><img src="/images/channels/facebook.png" alt=""> Facebook (22) <i class="icon-remove remove-tag"></i></a>
+			<a href=""><img src="/images/channels/nodejs.png" alt=""> Node.js (13)</a>
+			<a href=""><img src="/images/channels/codeigniter.png" alt=""> Codeigniter (3)</a>
+			<a href="">Tag without image (1)</a>
+			<a href="">+ Show More</a>
+		</nav>
+	</aside>
+	<article class="span9 last">
+		<h3>19 Code examples found</h3>
+		<nav class="project-nav">
+			<ul>
+				<li>
+						<button id="vote-button-view" class="btn-vote" disabled="disabled"> 0</button>
+						<h3><a href="">How to do something with Codeigniter</a></h3>
+						<nav class="tags-nav">
+				  		<a href="/Nodejs">
+				    		<img src="/external/images/channels/Nodejs.png" alt="">
+				    		<span>Nodejs</span>
+				  		</a>
+				  		<a href="/Nodejs">
+				    		<img src="/external/images/channels/Nodejs.png" alt="">
+				    		<span>Codeigniter</span>
+				  		</a>
+				  		<a href="/Nodejs">
+				    		<img src="/external/images/channels/Nodejs.png" alt="">
+				    		<span>PHP</span>
+				  		</a>
+						</nav>
+						<div class="author">
+				  		Published <time pubdate="pubdate" datetime="2013-01-28T18:52:08.169Z">4 months ago</time>
+				  	</div>
+				</li>
+				<li>
+						<button id="vote-button-view" class="btn-vote" disabled="disabled"> 0</button>
+						<h3><a href="">How to do something with Codeigniter</a></h3>
+						<nav class="tags-nav">
+				  		<a href="/Nodejs">
+				    		<img src="/external/images/channels/Nodejs.png" alt="">
+				    		<span>Nodejs</span>
+				  		</a>
+				  		<a href="/Nodejs">
+				    		<img src="/external/images/channels/Nodejs.png" alt="">
+				    		<span>Codeigniter</span>
+				  		</a>
+				  		<a href="/Nodejs">
+				    		<img src="/external/images/channels/Nodejs.png" alt="">
+				    		<span>PHP</span>
+				  		</a>
+						</nav>
+						<div class="author">
+				  		Published <time pubdate="pubdate" datetime="2013-01-28T18:52:08.169Z">4 months ago</time>
+				  	</div>
+				</li>
+				<li>
+						<button id="vote-button-view" class="btn-vote" disabled="disabled"> 0</button>
+						<h3><a href="">How to do something with Codeigniter</a></h3>
+						<nav class="tags-nav">
+				  		<a href="/Nodejs">
+				    		<img src="/external/images/channels/Nodejs.png" alt="">
+				    		<span>Nodejs</span>
+				  		</a>
+				  		<a href="/Nodejs">
+				    		<img src="/external/images/channels/Nodejs.png" alt="">
+				    		<span>Codeigniter</span>
+				  		</a>
+				  		<a href="/Nodejs">
+				    		<img src="/external/images/channels/Nodejs.png" alt="">
+				    		<span>PHP</span>
+				  		</a>
+						</nav>
+						<div class="author">
+				  		Published <time pubdate="pubdate" datetime="2013-01-28T18:52:08.169Z">4 months ago</time>
+				  	</div>
+				</li>
+			</ul>
+		</nav>
+		<nav class="pagination">
+			<a href="" class="previous"><i class="icon-chevron-left"></i> Previous page</a>
+			<a href="" class="next">Next page <i class="icon-chevron-right"></i></a>
+		</nav>
+	</article>
 </div>
 
 <div class="container">
