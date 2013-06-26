@@ -105,16 +105,57 @@ header .user-nav{
 	@include clearfix;
 	a{
 		display:inline-block;
-		float:left;
+		//float:left;
 		margin:0 5px 5px 0;
 		@include border-radius($br);
 		background:$cta-tertiary;
 		border:1px solid darken($cta-tertiary,3%);
-		padding:2px 5px;
-		line-height:0;
+		padding:0 5px;
+		//line-height:0;
 		&:hover{
 			text-decoration:none;
 			background:darken($cta-tertiary,2%);
+		}
+		img{
+			//max-width:16px;
+			max-height:16px;
+			vertical-align: middle;
+			//float:left;
+			margin:0 2px 0 0;
+		}
+	}
+	.remove-tag{
+		color:rgba($bad-color,.6);
+		font-size:12px;
+		&:hover{
+			cursor: pointer;
+			color:$bad-color;
+		}
+	}
+}
+
+// Tags filter
+// For code results and lists
+.tags-filter{
+	@include clearfix;
+	a{
+		display:inline-block;
+		float:left;
+		clear:both;
+		margin:0 5px 5px 0;
+		@include border-radius($br);
+		padding:2px 5px;
+		//line-height:0;
+		&:hover{
+			//text-decoration:none;
+			//background:darken($cta-tertiary,2%);
+		}
+		&.selected{
+			background:$cta-tertiary;
+			border:1px solid darken($cta-tertiary,3%);
+			&:hover{
+				text-decoration:none;
+			}
 		}
 		img{
 			//max-width:16px;
