@@ -7,7 +7,7 @@ var _ = require('underscore');
 module.exports = Base.extend({
   idAttribute: 'path',
   // url: function () { return '/projects/' + this.project.id + '/files' + (this.get(this.idAttribute) || ''); }, //backbone url encodes the id val by default..
-  url: function () { return '/api/projects/' + this.project.id + '/files' + (this.get(this.idAttribute) || ''); }, //backbone url encodes the id val by default..
+  url: function () { return '/api/runnables/' + this.project.id + '/files' + (this.get(this.idAttribute) || ''); }, //backbone url encodes the id val by default..
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
     this.project = options && options.project;
