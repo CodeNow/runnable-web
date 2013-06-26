@@ -5,7 +5,8 @@ var channelController = require('./channel_controller');
 
 module.exports = {
   index: function(params, callback) {
-    if (!utils.isObjectId64(params._id)) {
+    var self = this;
+    if (params._id.length != 16) {//TODO Re-implemented(!utils.isObjectId64(params._id)) {
       // redirect to channel page
       var channelParams = { channel:params._id };
       channelController.index.call(this, channelParams, callback);
@@ -28,6 +29,7 @@ module.exports = {
       };
 
       fetch.call(this, spec, function (err, results) {
+
         if (err) {
           callback(err);
         }
@@ -55,7 +57,7 @@ module.exports = {
                 }
               }
             };
-            fetch(spec2, function (err, results2) {
+            fetch.call(self, spec2, function (err, results2) {
               callback(err, _.extend(results, results2));
             });
           }

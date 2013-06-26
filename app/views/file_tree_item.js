@@ -66,7 +66,6 @@ module.exports = BaseView.extend({
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
     this.fs.rename(formData.name, function (err) {
-      debugger;
       if (err) {
         this.showError(err);
       }

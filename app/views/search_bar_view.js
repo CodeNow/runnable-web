@@ -32,7 +32,7 @@ module.exports = BaseView.extend({
       return new RegExp(word, 'i');
     });
 
-    this.collection.toJSON().forEach(function (project) {
+    /*this.collection.toJSON().forEach(function (project) {
       var matchCount = 0;
       allWords.forEach(function (word) {
         if (word.test(project.name)) {
@@ -42,7 +42,7 @@ module.exports = BaseView.extend({
       if (matchCount === allWords.length) {
         results.push(project);
       }
-    });
+    });*/
 
     return results;
   },

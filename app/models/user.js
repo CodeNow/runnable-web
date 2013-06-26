@@ -50,6 +50,8 @@ var User = module.exports = Base.extend({
   },
   login: function (emailUsername, password, cb) {
     cb = cb || function () {};
+    var cbOptions = utils.successErrorToCB(cb);
+    var self = this;
     var auth = new Base({
       email: emailUsername,
       password: password
@@ -62,6 +64,8 @@ var User = module.exports = Base.extend({
       if (err) {
         alert(err);
       }
+      self.set('_id', 'me');
+      self.fetch(cbOptions);
     }));
   },
   vote: function (project, cb) {
