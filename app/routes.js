@@ -7,6 +7,7 @@ module.exports = function(match) {
   match('privacy',              'home#privacy');
   match('logout',               'home#logout');
   match('blob',                 'home#blob');
+  match('new',                  'home#new');
   match(':_id',                 'project#index');
   match(':_id/:name',           'project#index');
   match(':channel',             'channel#index');

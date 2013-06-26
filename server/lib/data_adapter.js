@@ -40,22 +40,13 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
 
   start = new Date().getTime();
   request(api, function(err, response, body) {
-
-    // ** EPIC YASH FIX **
-    // BODY is sometimes a string
-    // and its sometimes JSON
-    // Go Figure
-    // Removing this causes misery
-    var json_body;
-    try {
-      json_body = JSON.parse(body);
-    }
-    catch (e) {
-      //do nothing
-    }
-
-  body = json_body || body;
     if (err) return callback(err);
+
+    // Removing this causes misery
+    try {
+      body = JSON.parse(body);
+    } catch (e) {}
+
     end = new Date().getTime();
 
     debug('%s %s %s %sms', api.method.toUpperCase(), api.url, response.statusCode, end - start);
