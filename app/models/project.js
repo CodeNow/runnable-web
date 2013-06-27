@@ -20,6 +20,7 @@ module.exports = Base.extend({
       {"content": "RG9jcyBhdCBbbm9kZWpzLm9yZ10oaHR0cDovL25vZGVqcy5vcmcp", "name": "README.md", "path": "/README.md", "type":"file"},
       {"content": "ewogICJuYW1lIjogIkhlbGxvV29ybGQiLAogICJhdXRob3IiOiAiUnVubmFibGUiLAogICJ2ZXJzaW9uIjogIjAuMC4xIiwKICAiZGVzY3JpcHRpb24iOiAiUnVubmFibGUgU2FtcGxlIEFwcGxpY2F0aW9uIiwKICAiZGVwZW5kZW5jaWVzIjogewogICAgImV4cHJlc3MiOiAiMi54IgogICB9LAogICJlbmdpbmUiOiAibm9kZSAwLjYueCIKfQ==", "name": "package.json", "path": "/package.json", "type":"file"},
       {"content": "dmFyIGh0dHAgPSByZXF1aXJlKCdodHRwJyk7Cmh0dHAuY3JlYXRlU2VydmVyKGZ1bmN0aW9uIChyZXEsIHJlcykgewogIHJlcy53cml0ZUhlYWQoMjAwLCB7J0NvbnRlbnQtVHlwZSc6ICd0ZXh0L3BsYWluJ30pOwogIHJlcy5lbmQoJ0hlbGxvIFdvcmxkXG4nKTsKfSkubGlzdGVuKHByb2Nlc3MuZW52Lk9QRU5TSElGVF9OT0RFSlNfUE9SVCwgcHJvY2Vzcy5lbnYuT1BFTlNISUZUX05PREVKU19JUCk7CmNvbnNvbGUubG9nKCdIZWxsbyBLaXR0eScpOw==", "name": "server.js", "path": "/server.js","type":"file"}
+      // {"contents": [{"content": "RG9jcyBhdCBbbm9kZWpzLm9yZ10oaHR0cDovL25vZGVqcy5vcmcp", "name": "README.md", "path": "/folder1/README.md", "type":"file"}], "name": "folder1", "path": "/", "type":"dir"}
       ]});
     self.openFiles.add(self.rootDir.getPath('/server.js'));
     self.openFiles.add(self.rootDir.getPath('/package.json'));
