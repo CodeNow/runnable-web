@@ -62,6 +62,10 @@ module.exports = BaseView.extend({
       this.listenTo(session, 'change',           this.onEdit.bind(this));
       this.listenTo(session, 'changeScrollLeft', this.onScrollLeft.bind(this));
       this.listenTo(session, 'changeScrollTop',  this.onScrollTop.bind(this));
+
+      // session.getMarkers(true).forEach(function (marker) {
+      //   session.removeMarker(marker);
+      // });
     }
     // always
     this.$el.show();

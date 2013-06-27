@@ -62,7 +62,7 @@ module.exports = Fs.extend({
       }
   },
   isNew: function () {
-    return !App.utils.exists(this.get('content'));
+    return !App.utils.exists(this.get('contents'));
   },
   saveFile: function (projectId, options, cb) {
     var self = this, data;

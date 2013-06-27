@@ -46,6 +46,7 @@ module.exports = Base.extend({
     return Boolean(this === this.getRootDir());
   },
   getPath: function (fsPath) {
+    console.log("GET HERE SOURCE1");
     var notEmptyStr = function (i) { return i !== ''; };
     var fsPathSplit = fsPath.split('/');
     var fsModel     = this.getRootDir();

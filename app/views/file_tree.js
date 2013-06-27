@@ -15,7 +15,7 @@ module.exports = BaseView.extend({
     this.path = this.options.path;
     this.dir = this.model.rootDir.getPath(this.path);
     this.listenTo(this.dir.contents(), 'reset add remove', this.render.bind(this));
-    this.model.openFiles.on('select:file', this.render.bind(this));
+    // this.model.openFiles.on('select:file', this.render.bind(this));
   },
   getTemplateData: function () {
     // be careful postHydrate has only been called before frontend render but not backend!
@@ -24,7 +24,9 @@ module.exports = BaseView.extend({
     this.dir  = this.dir  || this.model.rootDir.getPath(this.path);
 
     var dirJSON = this.dir.toJSON();
-    dirJSON.open = true;
+    // setTimeout(function () {
+    //   dirJSON.open = true;
+    // }, 5000);
     return {
       dirJSON      : dirJSON,
       project      : this.model,
