@@ -58,8 +58,8 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
     if (err) return callback(err);
     end = new Date().getTime();
 
-    debug('%s %s %s %sms', api.method.toUpperCase(), api.url, response.statusCode, end - start);
-    debug('%s', inspect(response.headers));
+    // debug('%s %s %s %sms', api.method.toUpperCase(), api.url, response.statusCode, end - start);
+    // debug('%s', inspect(response.headers));
 
     if (req.session) {
       if ((api.path == '/users' || api.path == '/token') && api.method == 'POST') {

@@ -38,6 +38,8 @@ module.exports = Base.extend({
     }
   },
   getRootDir: function () {
+    console.log("GET HERE XXX3");
+    // stacktrace();
     return this.project.rootDir;
   },
   isRootDir: function () {

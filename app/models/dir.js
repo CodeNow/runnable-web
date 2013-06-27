@@ -4,6 +4,7 @@ var App = require('../app').prototype; //hacky..
 
 module.exports = Fs.extend({
   initialize: function (attrs, options) {
+    console.log("Initializing DirModel");
     Super.initialize.apply(this, arguments);
     this.project = this.project || attrs && attrs.project || options && options.project; // hacky for rendr
     var FSCollection = require('../collections/fs');
@@ -88,6 +89,7 @@ module.exports = Fs.extend({
     }
   },
   fetch: function () {
+    console.log("GET HERE XXX5. Dir's 'fetch' is getting called");
     return Super.fetch.apply(this, arguments);
   },
   isNew: function () {

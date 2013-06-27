@@ -7,7 +7,15 @@ module.exports = BaseView.extend({
   events: {
     'contextmenu' : 'showMenu',
     'submit form' : 'submitName',
-    'blur input'  : 'escEditMode'
+    'blur input'  : 'escEditMode',
+    'click a' : 'selectFile'
+  },
+  selectFile: function () {
+    this.path = this.options.path || '/';
+    this.fs = this.model.rootDir.getPath(this.path)
+    this.model.openFiles.add(this.fs);
+    this.model.openFiles.selectedFile(this.path);
+    return false;
   },
   postHydrate: function () {
     // clientside

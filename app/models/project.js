@@ -15,17 +15,24 @@ module.exports = Base.extend({
     this.openFiles = new FileCollection(null, {project:this});
     this.rootDir = new DirModel({path:'/'}, { project:this, silent:true });
     // Events
+    console.log("GET HERE XXX1");
+    this.rootDir.set({"name":"", "open": "true", "path": "/", "contents":[{"content": "RG9jcyBhdCBbbm9kZW", "name": "README.md", "path": "/README.md", "type":"file"},{"content": "RG9jcyBhdCBbbm9kZWpzLm9yZ10oaHR0cDovL25vZGVqcy5vcmcpRG9jcyBhdCBbbm9kZWpzLm9yZ10oaHR0cDovL25vZGVqcy5vcmcp", "name": "package.json", "path": "/package.json", "type":"file"},{"content": "RG9jcyBhdCBbbm9kZWpzLm9yZ10oaHR0cDovL25vZGVqcy5vcmcp", "name": "server.js", "path": "/server.js","type":"file"}]});
+    self.openFiles.add(self.rootDir.getPath('/server.js'));
+    self.openFiles.add(self.rootDir.getPath('/package.json'));
+    self.openFiles.setSelectedFile(self.rootDir.getPath('/package.json'));
     this.rootDir.on('change:contents', function () {
-      this.rootDir.set({open:true}, {silent:true}); // opens rootDir by default, if it has contents
-      var defaultFilepaths = this.get('defaultFile');
-      if (defaultFilepaths) {
-        defaultFilepaths.forEach(function (filepath) {
-          if (filepath[0] !== '/') filepath = '/'+filepath; // prepend slash
-          var defaultFile = self.rootDir.getPath(filepath);
-          if (defaultFile) self.openFiles.add(defaultFile); // open default files immediately, if they exist
-        });
-      }
+      console.log("GET HERE XXX2");
+      // this.rootDir.set({open:true}, {silent:true}); // opens rootDir by default, if it has contents
+      // var defaultFilepaths = this.get('defaultFile');
+      // if (defaultFilepaths) {
+      //   defaultFilepaths.forEach(function (filepath) {
+      //     if (filepath[0] !== '/') filepath = '/'+filepath; // prepend slash
+      //     var defaultFile = self.rootDir.getPath(filepath);
+      //     if (defaultFile) self.openFiles.add(defaultFile); // open default files immediately, if they exist
+      //   });
+      // }
     }, this);
+
     if (this.get('rootDirectory')) {
       this.onChangeRootDir();
     }

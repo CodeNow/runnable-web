@@ -12,6 +12,19 @@ module.exports = BaseView.extend({
     var openFiles = this.model.openFiles;
     this.setFile(openFiles.selectedFile());
     this.listenTo(openFiles, 'select:file', this.setFile.bind(this));
+
+
+    var editor = this.editor;
+    var self = this;
+    // setTimeout(function () {
+    //   var session = ace.createEditSession("1234 KALAMAZOO");
+    //   editor.setSession(session);
+    //   session.setTabSize(2);
+    //   session.setUseSoftTabs(true);
+
+    //   self.$el.show();
+    //   self.editor.focus();
+    // }, 2000);
   },
   setFile: function (file) {
     // detach previous file events/session

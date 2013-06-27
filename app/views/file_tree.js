@@ -15,21 +15,27 @@ module.exports = BaseView.extend({
     this.path = this.options.path;
     this.dir = this.model.rootDir.getPath(this.path);
     this.listenTo(this.dir.contents(), 'reset add remove', this.render.bind(this));
+    this.model.openFiles.on('select:file', this.render.bind(this));
   },
   getTemplateData: function () {
     // be careful postHydrate has only been called before frontend render but not backend!
     // this means, the only data you can rely on is this.model and this.options binded to this view.
     this.path = this.path || this.options.path;
     this.dir  = this.dir  || this.model.rootDir.getPath(this.path);
+
+    var dirJSON = this.dir.toJSON();
+    dirJSON.open = true;
     return {
-      dirJSON      : this.dir.toJSON(),
-      project      : this.model
+      dirJSON      : dirJSON,
+      project      : this.model,
+      selectedFile : this.model.openFiles.selectedFile().get("path")
     };
   },
   postRender: function () {
     // clientside postHydrate and getTemplateData have occured.
     if (this.dir.get('open')) this.$el.addClass('open');
     this.$contentsUL = this.$('ul').first();
+    // alert("Get here "+ );
     // droppable
     this.$el.droppable({
       greedy: true,
@@ -69,6 +75,9 @@ module.exports = BaseView.extend({
     var self = this;
     if (this.dir.isNew()) {
       this.dir.fetch({
+        success: function () {
+          // console.log("Just got back from fetching the dir", dir.contents());
+        },
         error: function () {
           alert('error');
         }

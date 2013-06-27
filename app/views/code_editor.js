@@ -14,6 +14,8 @@ module.exports = BaseView.extend({
       // since rootDirectory is only returned with the project response from our single project api rest call.
       this.model.rootDir.fetch({
         success: function () {
+          console.log("Got back from fetching the rootDir");
+          console.dir(this.model.rootDir.contentsCollection);
           this.render();
         }.bind(this),
         error: function () {
@@ -24,7 +26,8 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     return {
-      project : this.model
+      project : this.model,
+      files : this.model.rootDir.contents()
     };
   }
 });
