@@ -30,7 +30,7 @@ module.exports = BaseView.extend({
     return {
       dirJSON      : dirJSON,
       project      : this.model,
-      selectedFile : this.model.openFiles.selectedFile().get("path")
+      selectedFile : null//this.model.openFiles.selectedFile().get("path")
     };
   },
   postRender: function () {
@@ -91,6 +91,7 @@ module.exports = BaseView.extend({
     this.slideUpHeight();
   },
   onDrop: function (evt, ui) {
+    console.log("get Here");
     evt.preventDefault();
     evt.stopPropagation();
     this.$el.removeClass('drop-hover');
@@ -100,17 +101,20 @@ module.exports = BaseView.extend({
     if (fsPath) {
       // this._forkIfUserIsNotProjectOwner(function (err, data) {
       // TODO!
-      return;
-        if (err) {
-          self.displayErrorIfExists('Error moving.');
-        }
-        else{
-          self.dirModel.moveIn(fsPath, function (err) {
+        // if (err) {
+        //   self.displayErrorIfExists('Error moving.');
+        // }
+        // else{
+          console.log(fsPath);
+          self.dir.moveIn(fsPath, function (err) {
             self.displayErrorIfExists(err);
           });
-        }
+        // }
       // });
     }
+  },
+  displayErrorIfExists: function (err) {
+    if (err) alert(err.message || err);
   }
 });
 

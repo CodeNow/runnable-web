@@ -13,20 +13,27 @@ module.exports = BaseView.extend({
     var openFiles = this.model.openFiles;
     var self = this;
     this.listenTo(openFiles, 'add remove change', this.render.bind(this));
-
-    openFiles.on('select:file', function (file) {
-      self.render();
-    });
+    openFiles.on('select:file', this.render.bind(this));
+    this.model.rootDir.on('change:contents',  this.render.bind(this));
   },
+
   getTemplateData: function () {
     // be careful postHydrate has only been called before frontend render but not backend!
     // this means, the only data you can rely on is this.model and this.options binded to this view.
-    console.log(this.model.openFiles.selectedFile().get("path"));
-    console.log(this.model.openFiles.toJSON());
-    return {
-      files : this.model.openFiles.toJSON(),
-      selectedFile: this.model.openFiles.selectedFile().get("path")
-    };
+
+    // console.log(this.model.openFiles.selectedFile().get("path"));
+    // console.log("openFiles are: ",this.model.openFiles.toJSON());
+    if (this.model.openFiles.selectedFile()) {
+      return {
+        files : this.model.openFiles.toJSON(),
+        selectedFile: this.model.openFiles.selectedFile().get("path")
+      };
+    } else {
+      return {
+        files : null,
+        selectedFile: null
+      };
+    }
   },
   tabClick: function (evt) {
     this.$el.removeClass('selected');

@@ -6,8 +6,9 @@ var _ = require('underscore');
 
 module.exports = Base.extend({
   idAttribute: 'path',
-  // url: function () { return '/projects/' + this.project.id + '/files' + (this.get(this.idAttribute) || ''); }, //backbone url encodes the id val by default..
-  url: function () { return '/api/runnables/' + this.project.id + '/files' + (this.get(this.idAttribute) || ''); }, //backbone url encodes the id val by default..
+  // /users/me/runnables/:runnableid/files
+  // /users/me/runnables/UaA06sqkSJhHAAAW/readDir
+  url: function () { return '/api/users/me/runnables/' + this.project.id + '/readDir?path=' + (this.get(this.idAttribute) || ''); }, //backbone url encodes the id val by default..
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
     this.project = options && options.project;
@@ -38,7 +39,6 @@ module.exports = Base.extend({
     }
   },
   getRootDir: function () {
-    console.log("GET HERE XXX3");
     // stacktrace();
     return this.project.rootDir;
   },
@@ -201,7 +201,7 @@ module.exports = Base.extend({
         model.set('path', oldPath); // reset path and path onchange will handle the rest.
         App.utils.parseJSON(xhr.responseText, function (err, jsonErr) {
           if (err) { callbackGenericError(); } else {
-            if (jsonErr.code === 'EEXISTS') {
+            if (jsonErr.code === 'EXISTS') {
               err = new Error('Error: path already exists.');
               cb(err);
             }

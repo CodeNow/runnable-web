@@ -54,7 +54,7 @@ module.exports = BaseView.extend({
     }
     else {
       // init file session
-      var session = file.editorSession = ace.createEditSession(atob(file.get('content')));
+      var session = file.editorSession = ace.createEditSession(file.get('content'));
       editor.setSession(session);
       session.setMode(this.getMode(file.get('name')));
       session.setTabSize(2);

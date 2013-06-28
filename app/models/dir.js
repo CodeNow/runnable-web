@@ -126,6 +126,10 @@ module.exports = Fs.extend({
     var thisPath     = this.get('path');
     var newPath      = App.utils.pathJoin(thisPath, fsName);
     var fsModel;
+
+    console.log("newPath", newPath);
+    console.log("fsParentPath", fsParentPath);
+
     if (thisPath.indexOf(fsPath) === 0 && !App.utils.exists(thisPath[fsPath.length])) {
       cb(); // fs is this.. cant drop in self
     }

@@ -61,6 +61,8 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
     // debug('%s %s %s %sms', api.method.toUpperCase(), api.url, response.statusCode, end - start);
     // debug('%s', inspect(response.headers));
 
+    console.log("TOKEN IS", req.session.access_token);
+
     if (req.session) {
       if ((api.path == '/users' || api.path == '/token') && api.method == 'POST') {
         if (response.statusCode == 200 || response.statusCode == 201) {
