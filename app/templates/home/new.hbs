@@ -1,0 +1,10 @@
+<h1>new</h1>
+<form>
+  <label>Fork existing</label>
+  <input>
+</form>
+<ul>
+{{#each channels.models}}
+{{view "channel_item_view" model=.}}
+{{/each}}
+</ul>
