@@ -3,6 +3,7 @@ var File = require('../models/file');
 var Base = require('backbone').Collection; // THIS IS A BACKBONE COLLECTION -- NOT RENDR
 var Super = Base.prototype;
 var App = require('../app').prototype; //hacky..
+var async = require('async');
 
 module.exports = Base.extend({
   model: File,
@@ -28,6 +29,7 @@ module.exports = Base.extend({
     }
   },
   onChangeContent: function (model) {
+    console.log("onChangeContent called in files.js");
     var unsavedChanges = model.hasUnsavedChanges();
     if (model.previouslyHadUnsavedChanges !== unsavedChanges) {
       if (!unsavedChanges) {

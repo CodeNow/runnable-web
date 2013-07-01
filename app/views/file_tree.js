@@ -27,11 +27,19 @@ module.exports = BaseView.extend({
     // setTimeout(function () {
     //   dirJSON.open = true;
     // }, 5000);
-    return {
-      dirJSON      : dirJSON,
-      project      : this.model,
-      selectedFile : null//this.model.openFiles.selectedFile().get("path")
-    };
+    if (this.model.openFiles.selectedFile()) {
+      return {
+        dirJSON      : dirJSON,
+        project      : this.model,
+        selectedFile : this.model.openFiles.selectedFile().get("path")
+      };
+    } else {
+      return {
+        dirJSON      : dirJSON,
+        project      : this.model,
+        selectedFile : null//this.model.openFiles.selectedFile().get("path")
+      };
+    }
   },
   postRender: function () {
     // clientside postHydrate and getTemplateData have occured.
@@ -91,7 +99,6 @@ module.exports = BaseView.extend({
     this.slideUpHeight();
   },
   onDrop: function (evt, ui) {
-    console.log("get Here");
     evt.preventDefault();
     evt.stopPropagation();
     this.$el.removeClass('drop-hover');

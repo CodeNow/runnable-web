@@ -4,7 +4,7 @@ var File = require('../models/file');
 var Dir  = require('../models/dir');
 var Super = Base.prototype;
 var App = require('../app').prototype; //hacky..
-
+var async = require('async');
 
 module.exports = Base.extend({
   // url: function () { return '/projects/' + this.project.id + '/files' + this.path; },

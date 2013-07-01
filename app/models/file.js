@@ -72,16 +72,20 @@ module.exports = Fs.extend({
     }
     options = options || {};
     if (!this.hasUnsavedChanges()) { cb(); } else {
+
+      $.post('/api/users/me/runnables/' +projectId + '/changeFile', self.toJSON());
+
       // has unsaved changes
-      App.socket.emit('writeProject', projectId, self.toJSON(), function(err) {
-        if (err) {
-          cb(err);
-        }
-        else {
-          self.hasUnsavedChanges(false);
-          cb();
-        }
-      });
+      // App.socket.emit('writeProject', projectId, self.toJSON(), function(err) {
+      //   if (err) {
+      //     cb(err);
+      //   }
+      //   else {
+      //     self.hasUnsavedChanges(false);
+      //     cb();
+      //   }
+      // });
+
     }
   }
 });

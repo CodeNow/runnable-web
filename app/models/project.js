@@ -14,18 +14,6 @@ module.exports = Base.extend({
     // Initialize openFiles and rootDir
     this.openFiles = new FileCollection(null, {project:this});
     this.rootDir = new DirModel({path:'/'}, { project:this, silent:true });
-    // Events
-    // this.rootDir.set({"name":"", "type":"dir", "open": "false", "path": "/", "contents":[
-    //   {"content": "RG9jcyBhdCBbbm9kZWpzLm9yZ10oaHR0cDovL25vZGVqcy5vcmcp", "name": "README.md", "path": "/README.md", "type":"file"},
-    //   {"content": "ewogICJuYW1lIjogIkhlbGxvV29ybGQiLAogICJhdXRob3IiOiAiUnVubmFibGUiLAogICJ2ZXJzaW9uIjogIjAuMC4xIiwKICAiZGVzY3JpcHRpb24iOiAiUnVubmFibGUgU2FtcGxlIEFwcGxpY2F0aW9uIiwKICAiZGVwZW5kZW5jaWVzIjogewogICAgImV4cHJlc3MiOiAiMi54IgogICB9LAogICJlbmdpbmUiOiAibm9kZSAwLjYueCIKfQ==", "name": "package.json", "path": "/package.json", "type":"file"},
-    //   {"content": "dmFyIGh0dHAgPSByZXF1aXJlKCdodHRwJyk7Cmh0dHAuY3JlYXRlU2VydmVyKGZ1bmN0aW9uIChyZXEsIHJlcykgewogIHJlcy53cml0ZUhlYWQoMjAwLCB7J0NvbnRlbnQtVHlwZSc6ICd0ZXh0L3BsYWluJ30pOwogIHJlcy5lbmQoJ0hlbGxvIFdvcmxkXG4nKTsKfSkubGlzdGVuKHByb2Nlc3MuZW52Lk9QRU5TSElGVF9OT0RFSlNfUE9SVCwgcHJvY2Vzcy5lbnYuT1BFTlNISUZUX05PREVKU19JUCk7CmNvbnNvbGUubG9nKCdIZWxsbyBLaXR0eScpOw==", "name": "server.js", "path": "/server.js","type":"file"},
-    //   {"contents": [{"content": "cy5vcmcp", "name": "README2.md", "path": "/folder1/README.md", "type":"file"}], "name": "folder1", "path": "/folder1", "type":"dir"},
-    //   {"contents": [{"contents": [{"contents": [{"contents": [], "name": "folder5", "path": "/folder2/folder3/folder4/folder5", "type":"dir"}], "name": "folder4", "path": "/folder2/folder3/folder4", "type":"dir"}], "name": "folder3", "path": "/folder2/folder3", "type":"dir"}], "name": "folder2", "path": "/folder2", "type":"dir"}
-    //   // {"contents": [{"content": "RG9jcyBhdCBbbm9kZWpzLm9yZ10oaHR0cDovL25vZGVqcy5vcmcp", "name": "README.md", "path": "/folder1/README.md", "type":"file"}], "name": "folder1", "path": "/", "type":"dir"}
-    //   ]});
-    self.openFiles.add(self.rootDir.getPath('/server.js'));
-    self.openFiles.add(self.rootDir.getPath('/package.json'));
-    self.openFiles.setSelectedFile(self.rootDir.getPath('/package.json'));
 
     this.rootDir.on('change:contents', function () {
       this.rootDir.set({open:true}, {silent:true}); // opens rootDir by default, if it has contents

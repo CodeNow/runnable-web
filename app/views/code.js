@@ -6,6 +6,7 @@ module.exports = BaseView.extend({
   postRender: function () {
     // render should only occur once for this view, setFile is what updates the editor.
     // this.setHeight(this.minHeight);
+    var self = this;
     this.editor = ace.edit(this.el);
     this.editor.setTheme(ace.require('ace/theme-textmate'));
     // you can attach events here since render only occurs once for this view
@@ -13,9 +14,12 @@ module.exports = BaseView.extend({
     this.setFile(openFiles.selectedFile());
     this.listenTo(openFiles, 'select:file', this.setFile.bind(this));
 
+    this.model.rootDir.on("change:contents", function () {
+      self.fileModel = self.model.openFiles.selectedFile();
+      console.log("setting this editors fileModel", self.fileModel);
+    });
 
     var editor = this.editor;
-    var self = this;
     // setTimeout(function () {
     //   var session = ace.createEditSession("1234 KALAMAZOO");
     //   editor.setSession(session);
@@ -86,6 +90,8 @@ module.exports = BaseView.extend({
   },
   onEdit: function () {
     this.adjustHeightToContents();
+    var value = this.editor.getValue();
+    this.fileModel.set('content', value);
   },
   adjustHeightToContents: function () {
     var editor = this.editor;
