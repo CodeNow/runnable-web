@@ -70,5 +70,36 @@ module.exports = {
   },
   "new": function(params, callback) {
     callback();
+  },
+  output: function (params, callback) {
+    var controller = this;
+    var spec = {
+      user: {
+        model:'User',
+        params:{
+          _id: 'me'
+        }
+      },
+      project: {
+        model : 'Project',
+        params: {
+          _id: params._id
+        }
+      }
+    };
+
+    fetch.call(this, spec, function (err, results) {
+      if (err) {
+        callback(err);
+      }
+      else if (!results || !results.project) {
+        err = {status:404};
+        callback(err);
+      }
+      else {
+        // If project has tags, fetch related projects
+        callback(err, results);
+      }
+    });
   }
 };
