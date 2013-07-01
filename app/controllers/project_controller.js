@@ -153,6 +153,8 @@ module.exports = {
       }
       else {
         // If project has tags, fetch related projects
+        results.noHeader = 1;
+        results.noFooter = 1;
         callback(err, results);
       }
     });

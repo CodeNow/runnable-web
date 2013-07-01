@@ -15,11 +15,22 @@
   </head>
 
   <body class="">
-    {{view "header_view" model=locals.user context=locals}}
+    {{#exists locals.noHeader}}
+      <!-- don't draw anything -->
+    {{else}}
+      {{view "header_view" model=locals.user context=locals}}
+    {{/exists}}
+
     <section id="content">
     {{{body}}}
     </section>
-    {{view "footer_view"}}
+
+      <body class="">
+    {{#exists locals.noFooter}}
+      <!-- don't draw anything -->
+    {{else}}
+      {{view "footer_view" model=locals.user context=locals}}
+    {{/exists}}
 
     <script>
       var CONFIG = window.CONFIG = {{json app}};
