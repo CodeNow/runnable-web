@@ -124,10 +124,11 @@ var preRendrMiddleware = [
 ];
 
 function buildApiRoutes(app) {
-  var fnChain = preRendrMiddleware.concat(rendrMw.apiProxy());
-  fnChain.forEach(function(fn) {
-    app.use('/api', fn);
-  });
+  rendrMw.apiProxy(app, preRendrMiddleware);
+  // var fnChain = preRendrMiddleware.concat(rendrMw.apiProxy());
+  // fnChain.forEach(function(fn) {
+  //   app.use('/api', fn);
+  // });
 }
 
 function buildRendrRoutes(app) {

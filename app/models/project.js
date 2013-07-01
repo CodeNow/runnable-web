@@ -7,7 +7,7 @@ var _ = require('underscore');
 var moment = require('moment');
 
 module.exports = Base.extend({
-  urlRoot: 'runnables',
+  urlRoot: '/runnables',
   initialize: function (model, options) {
     Super.initialize.apply(this, arguments);
     var self = this;

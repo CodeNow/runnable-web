@@ -36,26 +36,18 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
 
   if (req.session && req.session.access_token) {
     api.headers['runnable-token'] = req.session.access_token;
+    console.log("Access Token: " + req.session.access_token);
   }
 
   start = new Date().getTime();
   request(api, function(err, response, body) {
-
-    // ** EPIC YASH FIX **
-    // BODY is sometimes a string
-    // and its sometimes JSON
-    // Go Figure
-    // Removing this causes misery
-    var json_body;
-    try {
-      json_body = JSON.parse(body);
-    }
-    catch (e) {
-      //do nothing
-    }
-
-  body = json_body || body;
     if (err) return callback(err);
+
+    // Removing this causes misery
+    try {
+      body = JSON.parse(body);
+    } catch (e) {}
+
     end = new Date().getTime();
 
     // debug('%s %s %s %sms', api.method.toUpperCase(), api.url, response.statusCode, end - start);

@@ -9,7 +9,7 @@ module.exports = BaseView.extend({
     var project = options.project;
     return _.extend(options, {
       projectJSON: project.toJSON(),
-      editMode   : options.editMode || project.get('unpublished')
+      editMode   : options.action === 'edit' || project.get('unpublished')
     });
   }
 });
