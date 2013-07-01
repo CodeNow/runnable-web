@@ -36,6 +36,7 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
 
   if (req.session && req.session.access_token) {
     api.headers['runnable-token'] = req.session.access_token;
+    console.log("Access Token: " + req.session.access_token);
   }
 
   start = new Date().getTime();
