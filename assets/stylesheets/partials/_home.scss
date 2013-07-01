@@ -1,0 +1,11 @@
+// Homepage styles
+.home-title{
+	background:$primary-color;
+	margin:-$padding*2 0 $padding*2;
+	padding:$padding;
+	h1{
+		margin:$padding 0;
+		line-height:auto;
+		color:#fff;
+	}
+}
