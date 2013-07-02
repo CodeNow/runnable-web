@@ -12,4 +12,4 @@ module.exports = BaseView.extend({
   }
 });
 
-module.exports.id = 'ProjectItemView';
+module.exports.id = 'RunnableItemView';

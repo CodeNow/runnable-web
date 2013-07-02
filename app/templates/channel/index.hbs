@@ -3,8 +3,8 @@
   <div class="span9">
     <nav class="project-nav">
       <ul>
-      {{#each projects.models}}
-      {{view "project_item_view" model=.}}
+      {{#each runnables.models}}
+      {{view "runnable_item_view" model=.}}
       {{/each}}
       </ul>
     </nav>

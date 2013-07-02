@@ -145,7 +145,7 @@ var utils = module.exports = {
   },
   successToCB : function (cb) {
     return function (model, response, options) {
-      cb(null, response);
+      cb(null, model, response);
     };
   },
   errorToCB : function (cb) {

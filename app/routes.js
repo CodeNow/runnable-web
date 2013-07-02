@@ -8,12 +8,12 @@ module.exports = function(match) {
   match('logout',               'home#logout');
   match('blob',                 'home#blob');
   match('new',                  'home#new');
-  match('new/:channel',         'project#new');
-  match('new/:_id',             'project#new');
-  match(':_id',                 'project#index');
-  match(':_id/output',          'project#output');
-  match(':_id/:name',           'project#index');
-  match(':_id/:name/:action',   'project#index');
+  match('new/:channel',         'runnable#new');
+  match('new/:_id',             'runnable#new');
+  match(':_id',                 'runnable#index');
+  match(':_id/output',          'runnable#output');
+  match(':_id/:name',           'runnable#index');
+  match(':_id/:name/:action',   'runnable#index');
   match(':channel',             'channel#index');
   match(':channel/page/:page',  'channel#index');
 };

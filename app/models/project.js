@@ -7,7 +7,6 @@ var _ = require('underscore');
 var moment = require('moment');
 
 module.exports = Base.extend({
-  urlRoot: '/runnables',
   initialize: function (model, options) {
     Super.initialize.apply(this, arguments);
     var self = this;
@@ -40,14 +39,6 @@ module.exports = Base.extend({
   virtuals: {
     'niceFramework' : 'niceFramework',
     'niceCreated'   : 'niceCreated'
-  },
-  toJSON: function () {
-    var data = Super.toJSON.call(this);
-    _.each(this.virtuals, function (key, i) {
-      var val = this.virtuals[key];
-      data[key] = this[val]();
-    }.bind(this));
-    return data;
   },
   onChangeRootDir: function () {
     this.rootDir.set(this.get('rootDirectory'));

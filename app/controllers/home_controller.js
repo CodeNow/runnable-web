@@ -10,14 +10,18 @@ module.exports = {
           _id: 'me'
         }
       },
-      projects: {
-        collection : 'Projects',
+      runnables: {
+        collection : 'Images',
         params     : {
           sort: 'votes'
         }
       }
     };
-    fetch.call(this, spec, callback);
+    fetch.call(this, spec, function (err, results) {
+      debugger;
+      console.log(results.runnables.at(0));
+      callback(err, results);
+    });
   },
 
   jobs: function (params, callback) {
