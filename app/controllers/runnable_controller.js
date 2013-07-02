@@ -1,15 +1,68 @@
 var _ = require('underscore');
+var async = require('async');
 var fetch = require('./fetch');
 var utils = require('../utils');
 var channelController = require('./channel_controller');
-var async = require('async');
+var Container = require('../models/container');
 
-function fetchContainer (projectId, cb) {
-  var options = utils.successErrorToCB(cb)
-  var container = new Container();
-  container.save({
-    parent:projectId // TODO: FROM
-  }, options)
+function fetchContainer (image, callback) {
+  var self = this;
+  var app = this.app;
+
+  async.waterfall([
+    // fetchContainer currently retrieve same container over and over
+    // only works if user is NOT owner of parent.
+    // function container (cb) {
+    //   var spec = {
+    //     container: {
+    //       collection: 'Containers',
+    //       params: {
+    //         parent: image.id
+    //       }
+    //     }
+    //   };
+    //   fetch.call(self, spec, function (err, results) {
+    //     if (err) { cb(err); } else {
+    //       if (results && results.container && results.container.length) {
+    //         cb(null, results.container.at(0));
+    //       }
+    //       else {
+    //         // existing container not found
+    //         var container = new Container({}, { app:app });
+    //         var options = _.extend(utils.successErrorToCB(cb), {
+    //           url: "/users/me/runnables?from="+image.id
+    //         })
+    //         container.save({}, options);
+    //       }
+    //     }
+    //   });
+    // },
+    function container (cb) {
+      // HARDCODED ALTERNATIVE FOR NOW PULLS THE SAME CONTAINER OVER AND OVER
+      var spec = {
+        container: {
+          model: 'Container',
+          params: {
+            _id: "Ucy_ptNl9xtOzyYt"
+          }
+        }
+      }
+      fetch.call(self, spec, function (err, results) {
+        cb(err, results && results.container);
+      });
+    },
+    function rootDir (container, cb) {
+      function fetchCallback (err, model) {
+        console.log(container.rootDir.toJSON());
+        cb(err, container); // callsback container.. not dir.
+      }
+      var options = _.extend(utils.successErrorToCB(fetchCallback), {
+        url: "/users/me/runnables?from="+image.id
+      });
+      container.rootDir.fetch(options);
+    }
+  ], callback);
+
 }
 
 function fetchRelated (tag, cb) {
@@ -50,13 +103,17 @@ module.exports = {
               }
             },
             image: {
-              model : 'Runnable',
+              model : 'Image',
               params: {
                 _id: params._id
               }
             }
           };
-          fetch.call(this, spec, callback);
+          fetch.call(self, spec, function (err, results) {
+            cb(err, results && _.extend(results, {
+              action : params.action
+            }));
+          });
         },
         function check404 (results, cb) {
           if (!results || !results.image) {
@@ -77,31 +134,28 @@ module.exports = {
             cb(null, results);
           }
         },
-        function getContainer (results, cb) {
-          var image = results.image;
-          fetchContainer(image._id, function (err, container) {
+        function container (results, cb) {
+          fetchContainer.call(self, results.image, function (err, container) {
             cb(err, container && _.extend(results, {
               container: container
             }))
           });
         },
-        function getRelated (results, cb) {
+        function related (results, cb) {
           // If project has tags, fetch related projects
-          var tags = project.get('tags');
-          var tag = tags && tags[0] && tags[0].name;
-          if (tag) {
-            fetchRelated.call(self, tag, function (err, related) {
-              callback(err, _.extend(results, {
-                related: related,
-                action : params.action
-              }));
-            });
-          }
-          else {
-            callback(null, _.extend(results, {
-              action: params.action
-            }));
-          }
+          // var tags = project.get('tags');
+          // var tag = tags && tags[0] && tags[0].name;
+          // if (tag) {
+          //   fetchRelated.call(self, tag, function (err, related) {
+          //     cb(err, related && _.extend(results, {
+          //       related: related
+          //     }));
+          //   });
+          // }
+          // else {
+            console.log(results.user.id);
+            cb(null, results);
+          // }
         }
       ], callback);
     }

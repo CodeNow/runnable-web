@@ -1,6 +1,6 @@
 var Fs = require('./fs');
 var Super = Fs.prototype;
-var App = require('../app').prototype; //hacky..
+var utils = require('../utils');
 
 module.exports = Fs.extend({
   initialize: function (attrs, options) {
@@ -72,7 +72,7 @@ module.exports = Fs.extend({
             err = new Error('Error adding '+model.get('name')+'.');
             cb(err);
           };
-          App.utils.parseJSON(xhr.responseText, function (err, rspErr) {
+          utils.parseJSON(xhr.responseText, function (err, rspErr) {
             if (err) { callbackGenericError(err); } else {
               err = rspErr;
               if (rspErr.code == 'EEXISTS') {
@@ -93,10 +93,10 @@ module.exports = Fs.extend({
     return Super.fetch.apply(this, arguments);
   },
   isNew: function () {
-    return !App.utils.exists(this.get('contents'));
+    return !utils.exists(this.get('contents'));
   },
   addFile: function (filename, cb) {
-    var newPath = App.utils.pathJoin(this.get('path'), filename);
+    var newPath = utils.pathJoin(this.get('path'), filename);
     var err;
     var options = { parentDir:this, project:this.project };
     var model = new FileModel({
@@ -108,7 +108,7 @@ module.exports = Fs.extend({
     this.addModel(model, cb);
   },
   addDir: function (dirname, cb) {
-    var newPath = App.utils.pathJoin(this.get('path'), dirname);
+    var newPath = utils.pathJoin(this.get('path'), dirname);
     var err;
     var options = { parentDir:this, project:this.project };
     var model = new DirModel({
@@ -124,13 +124,13 @@ module.exports = Fs.extend({
     var fsName       = fsPathSplit.pop();
     var fsParentPath = fsPathSplit.join('/') || '/';
     var thisPath     = this.get('path');
-    var newPath      = App.utils.pathJoin(thisPath, fsName);
+    var newPath      = utils.pathJoin(thisPath, fsName);
     var fsModel;
 
     console.log("newPath", newPath);
     console.log("fsParentPath", fsParentPath);
 
-    if (thisPath.indexOf(fsPath) === 0 && !App.utils.exists(thisPath[fsPath.length])) {
+    if (thisPath.indexOf(fsPath) === 0 && !utils.exists(thisPath[fsPath.length])) {
       cb(); // fs is this.. cant drop in self
     }
     else if (thisPath.indexOf(fsPath) === 0 && thisPath[fsPath.length] == '/') {

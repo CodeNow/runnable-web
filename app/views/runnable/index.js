@@ -6,12 +6,11 @@ module.exports = BaseView.extend({
   className:'content',
   getTemplateData: function () {
     var options = this.options;
-    var project = options.project;
     return _.extend(options, {
-      projectJSON: project.toJSON(),
-      editMode   : options.action === 'edit' || project.get('unpublished')
+      imageJSON : options.image.toJSON(),
+      editMode  : options.action === 'edit'
     });
   }
 });
 
-module.exports.id = "project/index";
+module.exports.id = "runnable/index";

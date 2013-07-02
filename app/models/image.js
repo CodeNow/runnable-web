@@ -9,7 +9,6 @@ module.exports = Runnable.extend({
   },
   virtuals: function () {
     var virtuals = _.clone(_.result(Super, 'virtuals'));
-    console.log(virtuals);
     return _.extend(virtuals, {
       niceFramework : 'niceFramework'
     });

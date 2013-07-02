@@ -10,8 +10,8 @@ module.exports = Runnable.extend({
     Super.initialize.apply(this, arguments);
     var self = this;
     // Initialize openFiles and rootDir
-    this.openFiles = new FileCollection(null, {project:this});
-    this.rootDir = new DirModel({path:'/'}, { project:this, silent:true });
+    this.openFiles = new FileCollection(null, {project:this, app:this.app});
+    this.rootDir = new DirModel({path:'/'}, { project:this, silent:true, app:this.app });
 
     this.rootDir.on('change:contents', function () {
       this.rootDir.set({open:true}, {silent:true}); // opens rootDir by default, if it has contents
@@ -36,6 +36,10 @@ module.exports = Runnable.extend({
     var virtuals = _.clone(Super.virtuals);
     return _.extend(virtuals, {});
   },
+  onChangeRootDir: function () {
+    this.rootDir.set(this.get('rootDirectory'));
+    // this.unset('rootDirectory');
+  }
 });
 
 module.exports.id = "Container";

@@ -18,8 +18,6 @@ module.exports = {
       }
     };
     fetch.call(this, spec, function (err, results) {
-      debugger;
-      console.log(results.runnables.at(0));
       callback(err, results);
     });
   },

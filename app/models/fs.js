@@ -1,8 +1,7 @@
-// var Base = require('./base');
-var Base = require('backbone').Model; // THIS IS A BACKBONE MODEL -- NOT RENDR
-var Super = Base.prototype;
-var App = require('../app').prototype; //hacky..
 var _ = require('underscore');
+var Base = require('./base');
+var utils = require('../utils');
+var Super = Base.prototype;
 
 module.exports = Base.extend({
   idAttribute: 'path',
@@ -46,7 +45,6 @@ module.exports = Base.extend({
     return Boolean(this === this.getRootDir());
   },
   getPath: function (fsPath) {
-    console.log("GET HERE SOURCE1");
     var notEmptyStr = function (i) { return i !== ''; };
     var fsPathSplit = fsPath.split('/');
     var fsModel     = this.getRootDir();
@@ -73,12 +71,12 @@ module.exports = Base.extend({
     // but it does alot so be careful editing it.
     var FileModel = require('./file');
     var DirModel  = require('./dir');
-    var nameRegex = new RegExp(App.utils.escapeRegExp(this.get('name'))+'$');
+    var nameRegex = new RegExp(utils.escapeRegExp(this.get('name'))+'$');
     var oldPath = this.previousAttributes().path;
     var newPath = this.get('path');
     if (oldPath) {
       var oldName = this.previousAttributes().name;
-      var oldNameRegex = new RegExp(App.utils.escapeRegExp(oldName)+'$');
+      var oldNameRegex = new RegExp(utils.escapeRegExp(oldName)+'$');
       var oldParentPath, newParentPath, oldParentDir, newParentDir, newFSModel;
       if (oldName) {
         oldParentPath = oldPath.replace(oldNameRegex, ''); // change name triggers change path..
@@ -114,7 +112,7 @@ module.exports = Base.extend({
     var pathSplit = path.split('/');
     pathSplit.pop();
     var relPath = pathSplit.join('/');
-    this.set('path', App.utils.pathJoin(relPath, name));
+    this.set('path', utils.pathJoin(relPath, name));
     //Fix this
   },
   niceType: function () {
@@ -199,7 +197,7 @@ module.exports = Base.extend({
           cb(err);
         };
         model.set('path', oldPath); // reset path and path onchange will handle the rest.
-        App.utils.parseJSON(xhr.responseText, function (err, jsonErr) {
+        utils.parseJSON(xhr.responseText, function (err, jsonErr) {
           if (err) { callbackGenericError(); } else {
             if (jsonErr.code === 'EXISTS') {
               err = new Error('Error: path already exists.');
@@ -234,7 +232,7 @@ module.exports = Base.extend({
         cb(null, model);
       },
       error: function (model, xhr) {
-        App.utils.parseJSON(function (err, jsonErr) {
+        utils.parseJSON(function (err, jsonErr) {
           if (err) {}
         });
         if (self.parentDir) self.parentDir.contents().add(self);

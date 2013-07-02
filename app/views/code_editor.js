@@ -6,24 +6,6 @@ var BaseView = require('./base_view');
 // to a "single project page"
 module.exports = BaseView.extend({
   className:"code-container",
-  postHydrate: function () {
-    // clientside
-    // postHydrate is the place to attach data events and frontend additional data retrieval
-    if (this.model.rootDir.isNew()) {
-      // this fetch is necessary when navigating from any "project list" page to a "single project page" (push state)
-      // since rootDirectory is only returned with the project response from our single project api rest call.
-      this.model.rootDir.fetch({
-        success: function () {
-          console.log("Got back from fetching the rootDir");
-          console.dir(this.model.rootDir.contentsCollection);
-          this.render();
-        }.bind(this),
-        error: function () {
-          alert('Error fetching example files, please refresh page.');
-        }
-      });
-    }
-  },
   getTemplateData: function () {
     return {
       project : this.model,

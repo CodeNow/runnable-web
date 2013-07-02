@@ -33,11 +33,17 @@ module.exports = function(grunt) {
     bgShell: {
       runNode: {
         cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js index.js',
-        bg: true
+        bg: true,
+        execOpts: {
+          maxBuffer: 1000*1024
+        }
       },
       debugNode: {
         cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js --debug index.js & ./node_modules/nodemon/nodemon.js -d 1 -x node-inspector index.js',
-        bg: true
+        bg: true,
+        execOpts: {
+          maxBuffer: 1000*1024
+        }
       }
     },
 
