@@ -53,12 +53,12 @@ function fetchContainer (image, callback) {
     },
     function rootDir (container, cb) {
       function fetchCallback (err, model) {
-        console.log(container.rootDir.toJSON());
+        console.log(container.rootDir == model);
+        console.log(model.toJSON());
         cb(err, container); // callsback container.. not dir.
       }
-      var options = _.extend(utils.successErrorToCB(fetchCallback), {
-        url: "/users/me/runnables?from="+image.id
-      });
+      var options = _.extend(utils.successErrorToCB(fetchCallback));
+      debugger;
       container.rootDir.fetch(options);
     }
   ], callback);

@@ -11,27 +11,26 @@ module.exports = Base.extend({
     Super.initialize.apply(this, arguments);
     var self = this;
     // Initialize openFiles and rootDir
-    this.openFiles = new FileCollection(null, {project:this});
-    this.rootDir = new DirModel({path:'/'}, { project:this, silent:true });
-
+    this.openFiles = new FileCollection(null, { project:this, app:this.app });
+    this.rootDir = new DirModel({path:'/'}, { project:this, app:this.app, silent:true });
     this.rootDir.on('change:contents', function () {
-      this.rootDir.set({open:true}, {silent:true}); // opens rootDir by default, if it has contents
-      var defaultFilepaths = this.get('defaultFile');
-      if (defaultFilepaths) {
-        defaultFilepaths.forEach(function (filepath) {
-          if (filepath[0] !== '/') filepath = '/'+filepath; // prepend slash
-          var defaultFile = self.rootDir.getPath(filepath);
-          if (defaultFile) self.openFiles.add(defaultFile); // open default files immediately, if they exist
-        });
-      }
+      debugger;
+      // this.rootDir.set({open:true}, {silent:true}); // opens rootDir by default, if it has contents
+      // var defaultFilepaths = this.get('defaultFile');
+      // if (defaultFilepaths) {
+      //   defaultFilepaths.forEach(function (filepath) {
+      //     if (filepath[0] !== '/') filepath = '/'+filepath; // prepend slash
+      //     var defaultFile = self.rootDir.getPath(filepath);
+      //     if (defaultFile) self.openFiles.add(defaultFile); // open default files immediately, if they exist
+      //   });
+      // }
     }, this);
 
     if (this.get('rootDirectory')) {
-      this.onChangeRootDir();
+      this.onChangeRootDirectory();
     }
-    else {
-      this.listenToOnce(this, 'change:rootDirectory', this.onChangeRootDir.bind(this));
-    }
+    this.listenTo(this, 'change:rootDirectory', this.onChangeRootDirectory.bind(this));
+    this.listenTo(this.rootDir, 'change', this.onChangeRootDirModel.bind(this));
   },
   defaults: {
     votes: 0
@@ -40,7 +39,10 @@ module.exports = Base.extend({
     'niceFramework' : 'niceFramework',
     'niceCreated'   : 'niceCreated'
   },
-  onChangeRootDir: function () {
+  onChangeRootDirModel: function () {
+    this.set('rootDirectory', this.rootDir.toJSON(), {silent:true});
+  },
+  onChangeRootDirectory: function () {
     this.rootDir.set(this.get('rootDirectory'));
     // this.unset('rootDirectory');
   },

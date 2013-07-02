@@ -7,7 +7,7 @@ module.exports = Base.extend({
   idAttribute: 'path',
   // /users/me/runnables/:runnableid/files
   // /users/me/runnables/UaA06sqkSJhHAAAW/readDir
-  url: function () { return '/api/users/me/runnables/' + this.project.id + '/readDir?path=' + (this.get(this.idAttribute) || ''); }, //backbone url encodes the id val by default..
+  url: function () { return '/users/me/runnables/' + this.project.id + '/readDir?path=' + (this.get(this.idAttribute) || ''); }, //backbone url encodes the id val by default..
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
     this.project = options && options.project;

@@ -1,6 +1,5 @@
 var File = require('../models/file');
-// var Base = require('./base');
-var Base = require('backbone').Collection; // THIS IS A BACKBONE COLLECTION -- NOT RENDR
+var Base = require('./base');
 var Super = Base.prototype;
 var App = require('../app').prototype; //hacky..
 var async = require('async');

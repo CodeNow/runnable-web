@@ -11,10 +11,10 @@
     {{view "publish_warning" model=image}}
     {{/if}}
     <section class="actions">
-      {{view "run_button" model=image}}
-      {{view "save_button" model=image}}
-      {{view "fork_button" model=image}}
-      {{view "download_button" model=image}}
+      {{! view "run_button" model=image}}
+      {{! view "save_button" model=image}}
+      {{! view "fork_button" model=image}}
+      {{! view "download_button" model=image}}
       {{#unless editMode}}
       {{#if_eq projectJSON.owner compare=user.id}}
       {{view "edit_button" model=image}}

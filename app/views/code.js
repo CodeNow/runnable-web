@@ -13,11 +13,10 @@ module.exports = BaseView.extend({
     var openFiles = this.model.openFiles;
     this.setFile(openFiles.selectedFile());
     this.listenTo(openFiles, 'select:file', this.setFile.bind(this));
-
-    this.model.rootDir.on("change:contents", function () {
-      self.fileModel = self.model.openFiles.selectedFile();
-      console.log("setting this editors fileModel", self.fileModel);
-    });
+    // // this.model.rootDir.on("change:contents", function () {
+    //   self.fileModel = self.model.openFiles.selectedFile();
+    //   console.log("setting this editors fileModel", self.fileModel);
+    // // });
 
     var editor = this.editor;
     // setTimeout(function () {
