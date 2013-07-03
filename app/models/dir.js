@@ -11,7 +11,8 @@ module.exports = Fs.extend({
 
     this.contents = new FSCollection([], {
       project   : this.project,
-      parentDir : this
+      parentDir : this,
+      app       : this.app
     });
     this.listenTo(this.contents, 'change add remove', this.onChangeContents.bind(this));
     this.listenTo(this, 'change:contents', this.onChangeContentsJSON.bind(this))

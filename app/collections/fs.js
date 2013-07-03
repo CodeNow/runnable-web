@@ -1,9 +1,8 @@
-// var Base = require('./base');
-var Base = require('backbone').Collection; // THIS IS A BACKBONE COLLECTION -- NOT RENDR
+var Base = require('./base');
 var File = require('../models/file');
 var Dir  = require('../models/dir');
 var Super = Base.prototype;
-var App = require('../app').prototype; //hacky..
+var utils = require('../utils');
 var async = require('async');
 
 module.exports = Base.extend({
@@ -72,7 +71,7 @@ module.exports = Base.extend({
   getByName: function (name) {
     if (!this.parentDir) throw new Error('cant get by name if not parent dir');
     var currPath = this.parentDir.get('path');
-    var path = App.utils.pathJoin(currPath, name);
+    var path = utils.pathJoin(currPath, name);
     return this.get(path);
   },
   add: function () {

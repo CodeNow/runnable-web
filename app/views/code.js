@@ -11,7 +11,6 @@ module.exports = BaseView.extend({
     this.editor.setTheme(ace.require('ace/theme-textmate'));
     // you can attach events here since render only occurs once for this view
     var openFiles = this.model.openFiles;
-    debugger;
     this.setFile(openFiles.selectedFile());
     this.listenTo(openFiles, 'select:file', this.setFile.bind(this));
 
