@@ -3,11 +3,12 @@ var BaseView = require('./base_view');
 module.exports = BaseView.extend({
   tagName: 'button',
   className: 'run-button btn-primary',
-  postInitialize: function () {
-    b2 = this;
+  events: {
+    'click' : 'click'
   },
-  postRender: function () {
-    tj2 = this;
+  click: function () {
+    var url = '/'+this.model.id+'/output';
+    window.open(url, '_blank')
   }
 });
 
