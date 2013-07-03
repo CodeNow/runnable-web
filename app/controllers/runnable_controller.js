@@ -25,7 +25,7 @@ function fetchUserAndProject (imageId, callback) {
 
 function fetchContainer (containerId, callback) {
   var self = this;
-  // HARDCODED ALTERNATIVE FOR NOW PULLS THE SAME CONTAINER OVER AND OVER
+  // HARDCODED FOR NOW PULLS THE SAME CONTAINER OVER AND OVER
   containerId = "Ucy_ptNl9xtOzyYt"
 
   async.waterfall([
@@ -215,6 +215,14 @@ module.exports = {
         });
       }
     ], callback);
+  },
+  container: function (params, callback) {
+    // var spec = {
+    //   collection: {collection: 'Collection', params: params}
+    // };
+    // this.app.fetch(spec, function(err, result) {
+    //   callback(err, '<% _.underscored(this.name) %>_index_view', result);
+    // });
+    callback();
   }
-
 };

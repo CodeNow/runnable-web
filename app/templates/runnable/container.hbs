@@ -1,16 +1,13 @@
+
 <div class="container">
   <article class="span9">
     <section class="title">
-      {{view "vote_button" model=image}}
-      {{view "runnable_title" model=image}}
+      {{view "runnable_title" model=container}}
     </section>
+    {{view "publish_warning" model=container}}
     <section class="actions">
       {{view "run_button" model=container}}
-      {{#if_eq image.attributes.owner compare=user.id}}
-      {{view "edit_button" model=container}}
-      {{else}}
-      {{view "fork_button" model=container}}
-      {{/if_eq}}
+      {{view "save_button" model=container}}
       {{view "download_button" model=container}}
     </section>
     {{view "code_editor" model=container}}
@@ -22,15 +19,15 @@
     </div>
 
     <section class="module display-none">
-      {{view "runnable_owner" model=image}}
-      {{!view "project_stats" model=image}}
+      {{view "runnable_owner" model=container}}
     </section>
 
-    {{#if image.attributes.tags}}
-    {{#if image.attributes.tags.length}}
+    {{#if container.attributes.tags}}
+    {{#if container.attributes.tags.length}}
     <section class="module tags">
       <h3>Tags</h3>
-      {{view "runnable_tags" model=image editMode=editMode}}
+      {{view "runnable_tags" model=container editMode=true}}
+      {{view "runnable_new_tag_form" model=container}}
     </section>
     {{/if}}
     {{/if}}
@@ -41,7 +38,7 @@
       <nav class="related-nav">
         <ul>
           {{#each related.models}}
-          {{view "project_item_small" model=.}}
+          {{view "runnable_item_small" model=.}}
           {{/each}}
         </ul>
       </nav>

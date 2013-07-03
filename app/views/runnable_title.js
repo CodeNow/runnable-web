@@ -3,19 +3,15 @@ var BaseView = require('./base_view');
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName: 'h1',
-  postInitialize: function () {
-    b1 = this;
-  },
   postRender: function () {
-    console.log('projectId debug:', this.app.utils.base64ToHex(this.model.id));
-    tj = this;
+    console.log('runnableId debug:', this.app.utils.base64ToHex(this.model.id));
     this.model.on('change', function () {
       this.render();
     }, this);
   },
   getTemplateData: function () {
     return {
-      project : this.model.toJSON(),
+      runnable : this.model.toJSON(),
       editMode: this.editMode
     };
   },
@@ -26,12 +22,12 @@ module.exports = BaseView.extend({
   submitName: function (evt) {
     var $form = $(evt.currentTarget);
     var formData = $form.serializeObject;
-    var project = this.model;
-    project.saveAttribute('name', formData.name, {
+    var runnable = this.model;
+    runnable.saveAttribute('name', formData.name, {
       success : function () {},
       error   : function () {}
     });
   }
 });
 
-module.exports.id = 'ProjectTitle';
+module.exports.id = 'RunnableTitle';

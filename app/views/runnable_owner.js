@@ -5,4 +5,4 @@ module.exports = BaseView.extend({
 	className: 'author'
 });
 
-module.exports.id = "ProjectOwner";
+module.exports.id = "RunnableOwner";

@@ -4,10 +4,9 @@ module.exports = BaseView.extend({
   tagName:'li',
   getTemplateData: function () {
     return {
-      projectJSON: this.model.toJSON(),
-      project: this.model
+      image: this.model
     };
   }
 });
 
-module.exports.id = "ProjectItemSmall";
+module.exports.id = "RunnableItemSmall";

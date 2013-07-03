@@ -19,4 +19,4 @@ module.exports = BaseView.extend({
   }
 });
 
-module.exports.id = "ProjectTags";
+module.exports.id = "RunnableTags";

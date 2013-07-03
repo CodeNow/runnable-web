@@ -4,4 +4,4 @@ module.exports = BaseView.extend({
 	tagName: 'form'
 });
 
-module.exports.id = 'ProjectNewTagForm';
+module.exports.id = 'RunnableNewTagForm';
