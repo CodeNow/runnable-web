@@ -1,4 +1,6 @@
 var BaseView = require('./base_view');
+var _ = require('underscore');
+
 module.exports = BaseView.extend({
   className: 'tab-pane with-file-browser',
   // minHeight: 300,
@@ -75,9 +77,9 @@ module.exports = BaseView.extend({
     return (new mode.Mode());
   },
   onEdit: function () {
-    this.adjustHeightToContents();
+    _.debounce(this.adjustHeightToContents(), 100, true);
     var value = this.editor.getValue();
-    this.fileModel.set('content', value);
+    this.file.set('content', value);
   },
   adjustHeightToContents: function () {
     var editor = this.editor;
