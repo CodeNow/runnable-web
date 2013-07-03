@@ -1,7 +1,7 @@
 var File = require('../models/file');
 var Base = require('./base');
 var Super = Base.prototype;
-var App = require('../app').prototype; //hacky..
+var utils = require('../utils');
 var async = require('async');
 
 module.exports = Base.extend({
@@ -72,7 +72,7 @@ module.exports = Base.extend({
   },
   selectedFile: function (fileModel, options) {
     var filePath;
-    if (App.utils.exists(fileModel)) {
+    if (utils.exists(fileModel)) {
       this.setSelectedFile(fileModel, options);
     }
     else {
@@ -91,7 +91,7 @@ module.exports = Base.extend({
     // Always
     fileModel.loseUnsavedChanges();           // Reset unsavedChanges for file
     Super.remove.apply(this, arguments);     // remove The Model
-    if (App.utils.exists(nextIndex)) {
+    if (utils.exists(nextIndex)) {
       // AFTER it is removed, setSelectedFile bc it can accept undefined and still set the model.
       this.setSelectedFile(this.at(nextIndex));
     }

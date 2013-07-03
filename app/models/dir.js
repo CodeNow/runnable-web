@@ -9,13 +9,13 @@ module.exports = Fs.extend({
     this.project = this.project || attrs && attrs.project || options && options.project; // hacky for rendr
     var FSCollection = require('../collections/fs');
 
-    this.contentsCollection = new FSCollection([], {
+    this.contents = new FSCollection([], {
       project   : this.project,
       parentDir : this
     });
-    this.contentsCollection.on('change add remove', this.onChangeContentsCollection, this);
-    this.on('change:contents', this.onChangeContents, this);
-    this.on('change:path', this.onChangePath, this);
+    this.listenTo(this.contents, 'change add remove', this.onChangeContents.bind(this));
+    this.listenTo(this, 'change:contents', this.onChangeContentsJSON.bind(this))
+    this.listenTo(this, 'change:path', this.onChangePath.bind(this));
     if (attrs && attrs.contents)
       this.onChangeContents();
   },
@@ -24,30 +24,21 @@ module.exports = Fs.extend({
       type: 'dir'
     };
   },
-  onChangeContents: function () {
-    this.contentsCollection.reset(this.get('contents'));
+  onChangeContentsJSON: function () {
+    this.contents.reset(this.get('contents'));
   },
   onChangePath: function () {
     var prevAttributes = this.previousAttributes();
     if (prevAttributes.toJSON) prevAttributes = prevAttributes.toJSON();
     var thisOldPath = prevAttributes.path;
     var thisNewPath = this.get('path');
-    this.contentsCollection.forEach(function (fsModel) {
+    this.contents.forEach(function (fsModel) {
       var newFSPath = fsModel.get('path').replace(thisOldPath, thisNewPath);
       fsModel.set('path', newFSPath);
     });
   },
-  onChangeContentsCollection: function () {
-    this.set('contents', this.contentsCollection.toJSON(), {silent:true}); // must be silent to prevent inf loop
-  },
-  contents: function (val, options) { // RENDR!! renamed to collection from contents..bc render is doing some crazy retrieval of model attributes to object properties..
-    if (val) { //set
-      this.contentsCollection.update(val, options);
-      return this;
-    }
-    else { //get
-      return this.contentsCollection;
-    }
+  onChangeContents: function () {
+    this.set('contents', this.contents.toJSON(), {silent:true}); // must be silent to prevent inf loop
   },
   addModel: function (model, cb) {
     var self = this;

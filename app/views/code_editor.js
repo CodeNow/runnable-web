@@ -6,13 +6,10 @@ var BaseView = require('./base_view');
 // to a "single project page"
 module.exports = BaseView.extend({
   className:"code-container",
-  postHydrate: function () {
-    debugger;
-  },
   getTemplateData: function () {
     return {
       project : this.model,
-      files : this.model.rootDir.contents()
+      files : this.model.rootDir.contents
     };
   }
 });

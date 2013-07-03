@@ -14,7 +14,8 @@ module.exports = BaseView.extend({
     // postHydrate is the place to attach data events
     this.path = this.options.path;
     this.dir = this.model.rootDir.getPath(this.path);
-    this.listenTo(this.dir.contents(), 'reset add remove', this.render.bind(this));
+    this.listenTo(this.dir.contents, 'reset add remove', this.render.bind(this));
+    // below is what was highlighting the active files.. too slow..renders whole tree
     // this.model.openFiles.on('select:file', this.render.bind(this));
   },
   getTemplateData: function () {

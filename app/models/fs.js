@@ -29,7 +29,7 @@ module.exports = Base.extend({
         err = 'cannot rename root folder';
       if (!name)
         err = 'filename cannot be empty'; //or null
-      var fsWithName = this.parentDir.contents().getByName(name);
+      var fsWithName = this.parentDir.contents.getByName(name);
       if (fsWithName)
         err = '"'+fsWithName.id+'" already exists';
       if (name.length > 25)
@@ -51,7 +51,7 @@ module.exports = Base.extend({
     fsPathSplit     = fsPathSplit.filter(notEmptyStr); // first item will be emptystr bc path starts with /
     while (fsPathSplit.length) {
       fsName = fsPathSplit.shift();
-      fsModel = fsModel.contents().getByName(fsName);
+      fsModel = fsModel.contents.getByName(fsName);
       if (!fsModel) {
         //FAILING HERE
         return null;
@@ -61,7 +61,7 @@ module.exports = Base.extend({
     return fsModel;
   },
   getByName: function () {
-    throw "getByName is on dir.contents()";
+    throw "getByName is on dir.contents";
   },
   getDownloadUrl: function () {
     return this.url().replace('/files', '/zip');
@@ -86,13 +86,13 @@ module.exports = Base.extend({
       if (oldParentPath !== newParentPath) { //only move if the path actually changes
         oldParentDir = this.getPath(oldParentPath);
         newParentDir = this.getPath(newParentPath);
-        oldParentDir.contents().remove(this.rollbackAttr('path', {silent:true}));
+        oldParentDir.contents.remove(this.rollbackAttr('path', {silent:true}));
         var reAddToOpenFiles;
         if (this.project && this.project.openFiles.get(this.id)) {
           reAddToOpenFiles = true;
           this.project.openFiles.remove(this);
         }
-        newParentDir.contents().add(this.set('path', newPath, {silent:true})); // TODO: figure out improvement vs if
+        newParentDir.contents.add(this.set('path', newPath, {silent:true})); // TODO: figure out improvement vs if
         if (this.project && reAddToOpenFiles) {
           this.project.openFiles.add(this);
         }
@@ -100,8 +100,8 @@ module.exports = Base.extend({
       }
       else {
         newParentDir = this.getPath(newParentPath);
-        newParentDir.contents()._byId[newPath] = newParentDir.contents()._byId[oldPath];
-        delete newParentDir.contents()._byId[oldPath];
+        newParentDir.contents._byId[newPath] = newParentDir.contents._byId[oldPath];
+        delete newParentDir.contents._byId[oldPath];
       }
     }
     return this;
@@ -235,7 +235,7 @@ module.exports = Base.extend({
         utils.parseJSON(function (err, jsonErr) {
           if (err) {}
         });
-        if (self.parentDir) self.parentDir.contents().add(self);
+        if (self.parentDir) self.parentDir.contents.add(self);
         err = new Error('Error deleting '+self.get('type')+'.');
         cb(err);
       }

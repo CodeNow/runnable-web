@@ -23,6 +23,15 @@ module.exports = BaseView.extend({
     this.path = this.options.path || '/';
     this.fs = this.model.rootDir.getPath(this.path);
     this.listenTo(this.fs, 'change', this.render.bind(this));
+    this.listenTo(this.model.openFiles, 'select:file', this.highlightSelected.bind(this));
+  },
+  highlightSelected: function (selectedFile) {
+    if (this.fs == selectedFile) {
+      this.$el.parent().addClass('selected');
+    }
+    else {
+      this.$el.parent().removeClass('selected');
+    }
   },
   getTemplateData: function () {
     // be careful postHydrate has only been called before frontend render but not backend!

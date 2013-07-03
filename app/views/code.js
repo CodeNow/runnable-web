@@ -11,23 +11,11 @@ module.exports = BaseView.extend({
     this.editor.setTheme(ace.require('ace/theme-textmate'));
     // you can attach events here since render only occurs once for this view
     var openFiles = this.model.openFiles;
+    debugger;
     this.setFile(openFiles.selectedFile());
     this.listenTo(openFiles, 'select:file', this.setFile.bind(this));
-    // // this.model.rootDir.on("change:contents", function () {
-    //   self.fileModel = self.model.openFiles.selectedFile();
-    //   console.log("setting this editors fileModel", self.fileModel);
-    // // });
 
     var editor = this.editor;
-    // setTimeout(function () {
-    //   var session = ace.createEditSession("1234 KALAMAZOO");
-    //   editor.setSession(session);
-    //   session.setTabSize(2);
-    //   session.setUseSoftTabs(true);
-
-    //   self.$el.show();
-    //   self.editor.focus();
-    // }, 2000);
   },
   setFile: function (file) {
     // detach previous file events/session
