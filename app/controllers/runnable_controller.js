@@ -5,7 +5,7 @@ var utils = require('../utils');
 var channelController = require('./channel_controller');
 var Container = require('../models/container');
 
-function fetchUserAndProject (imageId, cb) {
+function fetchUserAndProject (imageId, callback) {
   var spec = {
     user: {
       model:'User',
@@ -20,11 +20,7 @@ function fetchUserAndProject (imageId, cb) {
       }
     }
   };
-  fetch.call(this, spec, function (err, results) {
-    cb(err, results && _.extend(results, {
-      action : params.action
-    }));
-  });
+  fetch.call(this, spec, callback);
 }
 
 function fetchContainer (containerId, callback) {
@@ -133,7 +129,10 @@ module.exports = {
           // }
           // else {
             console.log(results.user.id);
-            cb(null, results);
+            cb(null, _.extend(results,{
+              action : params.action
+            }));
+
           // }
         }
       ], callback);
