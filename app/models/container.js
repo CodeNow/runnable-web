@@ -39,7 +39,6 @@ module.exports = Runnable.extend({
       if (fs.isFile()) firstFile = fs;
       return Boolean(firstFile);
     });
-    console.log(firstFile.id);
     if (firstFile) {
       this.openFiles.add(firstFile);
     }

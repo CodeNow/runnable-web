@@ -117,7 +117,8 @@ module.exports = Base.extend({
     });
     async.forEach(fileModels, function(fileModel, acb) {
       if (fileModel.hasUnsavedChanges()) {
-        fileModel.saveFile(projectId, acb);
+        var options = utils.successErrorToCB(acb);
+        fileModel.save({}, options);
       }
       else {
         acb();

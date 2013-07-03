@@ -7,7 +7,8 @@ module.exports = Base.extend({
   idAttribute: 'path',
   // /users/me/runnables/:runnableid/files
   // /users/me/runnables/UaA06sqkSJhHAAAW/readDir
-  url: function () { return '/users/me/runnables/' + this.project.id + '/readDir?path=' + (this.get(this.idAttribute) || ''); }, //backbone url encodes the id val by default..
+  // url: function () { return '/users/me/runnables/' + this.project.id + '/readDir?path=' + (this.get(this.idAttribute) || ''); }, //backbone url encodes the id val by default..
+  url: function () { return '/users/me/runnables/' + this.project.id + '/files2' + this.id; },
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
     this.project = options && options.project;
@@ -30,7 +31,7 @@ module.exports = Base.extend({
       if (!name)
         err = 'filename cannot be empty'; //or null
       var fsWithName = this.parentDir.contents.getByName(name);
-      if (fsWithName)
+      if (fsWithName && fsWithName != this)
         err = '"'+fsWithName.id+'" already exists';
       if (name.length > 25)
         err = 'name can only be 25 chars max';

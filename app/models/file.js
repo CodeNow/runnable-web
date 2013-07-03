@@ -62,32 +62,32 @@ module.exports = Fs.extend({
       }
   },
   isNew: function () {
-    return !App.utils.exists(this.get('contents'));
-  },
-  saveFile: function (projectId, options, cb) {
-    var self = this, data;
-    if (typeof options == 'function') {
-      cb = options;
-      options = undefined;
-    }
-    options = options || {};
-    if (!this.hasUnsavedChanges()) { cb(); } else {
-
-      $.post('/api/users/me/runnables/' +projectId + '/changeFile', self.toJSON());
-
-      // has unsaved changes
-      // App.socket.emit('writeProject', projectId, self.toJSON(), function(err) {
-      //   if (err) {
-      //     cb(err);
-      //   }
-      //   else {
-      //     self.hasUnsavedChanges(false);
-      //     cb();
-      //   }
-      // });
-
-    }
+    return !App.utils.exists(this.get('content'));
   }
+  // saveFile: function (projectId, options, cb) {
+  //   var self = this, data;
+  //   if (typeof options == 'function') {
+  //     cb = options;
+  //     options = undefined;
+  //   }
+  //   options = options || {};
+  //   if (!this.hasUnsavedChanges()) { cb(); } else {
+
+  //     $.post('/api/users/me/runnables/' +projectId + '/changeFile', self.toJSON());
+
+  //     // has unsaved changes
+  //     // App.socket.emit('writeProject', projectId, self.toJSON(), function(err) {
+  //     //   if (err) {
+  //     //     cb(err);
+  //     //   }
+  //     //   else {
+  //     //     self.hasUnsavedChanges(false);
+  //     //     cb();
+  //     //   }
+  //     // });
+
+  //   }
+  // }
 });
 
 module.exports.id = "File";
