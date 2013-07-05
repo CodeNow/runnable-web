@@ -70,7 +70,6 @@ function fetchRelated (tag, cb) {
 
 module.exports = {
   index: function(params, callback) {
-    console.log('hey')
     var self = this;
     if (params._id.length != 16) {//TODO Re-implemented(!utils.isObjectId64(params._id)) {
       // redirect to channel page
@@ -110,14 +109,12 @@ module.exports = {
           });
         },
         function files (results, cb) {
-          cb(null, results);
-          return;
           var container = results.container;
           var options = utils.successErrorToCB(function (err) {
 
             cb(err, results); // rootDir is a child of container.. so already is passed along
           });
-          container.rootDir.contents.parseDebug = true;
+          container.rootDir.contents.debugParse = true;
           container.rootDir.contents.fetch(options);
         },
         function related (results, cb) {
@@ -133,7 +130,6 @@ module.exports = {
           // }
           // else {
             console.log(results.container.rootDir.contents.toJSON());
-            console.log(results);
             cb(null, results);
 
           // }

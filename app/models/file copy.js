@@ -3,7 +3,6 @@ var Super = Fs.prototype;
 var App = require('../app').prototype; //hacky..
 
 module.exports = Fs.extend({
-
 });
 
 // module.exports = Fs.extend({

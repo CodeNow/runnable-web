@@ -4,10 +4,7 @@ var utils = require('../utils');
 var Super = Base.prototype;
 
 module.exports = Base.extend({
-  initialize: function () {
-    Super.initialize.apply(this, arguments);
-    this.project = options && options.project;
-  }
+
 });
 
 // module.exports = Base.extend({

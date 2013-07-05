@@ -6,8 +6,9 @@ module.exports = RendrBase.extend({
   idAttribute: '_id',
   virtuals: {},
   parse: function (response) {
-    if (this.parseDebug)
-      console.log(response)
+    if (this.debugParse) {
+      console.log(response);
+    }
     return Super.parse.apply(this, arguments);
   },
   toJSON: function () {
