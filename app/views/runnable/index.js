@@ -3,10 +3,7 @@ var _ = require('underscore');
 
 module.exports = BaseView.extend({
   tagName:'section',
-  className:'content',
-  getTemplateData: function () {
-    return this.options;
-  }
+  className:'content'
 });
 
 module.exports.id = "runnable/index";

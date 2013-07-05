@@ -21,12 +21,10 @@ module.exports = BaseView.extend({
     // be careful postHydrate has only been called before frontend render but not backend!
     // this means, the only data you can rely on is this.model and this.options binded to this view.
 
-    // console.log(this.model.openFiles.selectedFile().get("path"));
-    // console.log("openFiles are: ",this.model.openFiles.toJSON());
-    if (this.model.openFiles.selectedFile()) {
+    if (this.model.openFiles.selectedFile) {
       return {
         files : this.model.openFiles.toJSON(),
-        selectedFile: this.model.openFiles.selectedFile().get("path")
+        selectedFile: this.model.openFiles.selectedFile.get("path")
       };
     } else {
       return {

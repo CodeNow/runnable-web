@@ -8,8 +8,9 @@ module.exports = BaseView.extend({
   className:"code-container",
   getTemplateData: function () {
     return {
-      project : this.model,
-      files : this.model.rootDir.contents
+      container : this.model,
+      rootDir   : this.model.rootDir,
+      files     : this.model.rootDir.contents
     };
   }
 });

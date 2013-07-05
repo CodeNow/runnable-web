@@ -1,6 +1,6 @@
-{{view "file_tabs" model=project fileCollection=files}}
+{{!view "file_tabs" model=project fileCollection=files}}
 <div class="file-content">
-  {{view "code" model=project}}
+  {{!view "code" model=project}}
   <button class="btn-tertiary btn-small btn-show-file-browser">
     <i class="icon-folder-open"></i> Show file browser</button>
   <div class="file-browser">
@@ -10,7 +10,10 @@
     </nav>
     <nav class="file-tree">
       <ul>
-        {{view "file_tree" model=project path='/'}}
+        <li class={{rootDir.attributes.type}}>
+          {{view "file_tree_item" model=rootDir}}
+          {{view "file_tree" collection=rootDir.contents path='/'}}
+        </li>
       </ul>
     </nav>
   </div>

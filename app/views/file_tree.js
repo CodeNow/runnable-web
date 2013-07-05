@@ -4,45 +4,22 @@ var FileMenu = require('./file_menu');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
-  tagName: 'li',
-  className: 'folder',
+  tagName: 'ul',
+  className: 'display-none',
   events: {
     'click span.dir' : 'toggle'
-  },
-  postHydrate: function () {
-    // clientside
-    // postHydrate is the place to attach data events
-    this.path = this.options.path;
-    this.dir = this.model.rootDir.getPath(this.path);
-    this.listenTo(this.dir.contents, 'reset add remove', this.render.bind(this));
-    // below is what was highlighting the active files.. too slow..renders whole tree
-    // this.model.openFiles.on('select:file', this.render.bind(this));
   },
   getTemplateData: function () {
     // be careful postHydrate has only been called before frontend render but not backend!
     // this means, the only data you can rely on is this.model and this.options binded to this view.
-    this.path = this.path || this.options.path;
-    this.dir  = this.dir  || this.model.rootDir.getPath(this.path);
-
-    var dirJSON = this.dir.toJSON();
-    // setTimeout(function () {
-    //   dirJSON.open = true;
-    // }, 5000);
-    if (this.model.openFiles.selectedFile()) {
-      return {
-        dirJSON      : dirJSON,
-        project      : this.model,
-        selectedFile : this.model.openFiles.selectedFile().get("path")
-      };
-    } else {
-      return {
-        dirJSON      : dirJSON,
-        project      : this.model,
-        selectedFile : null//this.model.openFiles.selectedFile().get("path")
-      };
+    return {
+      name = this.options.name;
+      collection = this.options.collection
     }
   },
   postRender: function () {
+    //todo: remove display-none
+
     // clientside postHydrate and getTemplateData have occured.
     if (this.dir.get('open')) this.$el.addClass('open');
     this.$contentsUL = this.$('ul').first();

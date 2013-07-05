@@ -12,7 +12,9 @@ module.exports = Fs.extend({
       url : _.result(this, 'urlRoot'),
       params : {
         path : this.get('path')
-      }
+      },
+      container: options.container,
+      path     : this.get('path')
     });
   },
   defaults: {

@@ -6,12 +6,12 @@ var utils = require('../utils');
 var async = require('async');
 
 module.exports = Base.extend({
-  initialize: function () {
+  initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
     this.model = function (attrs, opts) {
       var model;
       opts = opts || {};
-      opts.container   = this.options.container;
+      opts.container = options.container;
       if (!attrs.dir) {
         model = new File(attrs, opts);
       }
