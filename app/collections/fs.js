@@ -7,18 +7,17 @@ var async = require('async');
 
 module.exports = Base.extend({
   initialize: function () {
+    Super.initialize.apply(this, arguments);
     this.model = function (attrs, opts) {
       var model;
       opts = opts || {};
-      opts.project   = self.project;
-      opts.parentDir = self.parentDir;
+      opts.container   = this.options.container;
       if (!attrs.dir) {
         model = new File(attrs, opts);
       }
       else {
         model = new Dir(attrs, opts);
       }
-
       return model;
     };
   }

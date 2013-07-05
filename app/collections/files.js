@@ -5,7 +5,12 @@ var utils = require('../utils');
 var async = require('async');
 
 module.exports = Base.extend({
-  model: File
+  model: File,
+  // you shouldn't fetch this .. cause the models will be disconnected from the tree
+  // url: function () {
+  //   var containerId = this.options.container.id || this.options.container._id;
+  //   return ['/users/me/runnables/', containerId, '/files?path=', this.path, '&open=true'].join('');
+  // }
 });
 
 // module.exports = Base.extend({

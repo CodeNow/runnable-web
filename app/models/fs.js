@@ -4,9 +4,9 @@ var utils = require('../utils');
 var Super = Base.prototype;
 
 module.exports = Base.extend({
-  initialize: function () {
-    Super.initialize.apply(this, arguments);
-    this.project = options && options.project;
+  urlRoot: function () {
+    var containerId = this.options.container.id || this.options.container._id;
+    return ['/users/me/runnables/', containerId, '/files'].join('');
   }
 });
 

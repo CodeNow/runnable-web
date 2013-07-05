@@ -19,5 +19,5 @@ module.exports = RendrBase.extend({
       data[key] = this[val]();
     }
     return data;
-  },
+  }
 });
