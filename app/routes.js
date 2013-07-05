@@ -14,7 +14,6 @@ module.exports = function(match) {
   match(':_id/output',          'runnable#output');
   match(':_id/:name',           'runnable#index');
   match('me/:_id',              'runnable#container');
-  match(':_id/:name/:action',   'runnable#index');
   match(':channel',             'channel#index');
   match(':channel/page/:page',  'channel#index');
 };

@@ -1,12 +1,12 @@
 {{#unless editMode}}
-  {{#with project}}
+  {{#with runnable}}
   {{name}}
   {{#if isOwner}}
   <a href="" class="edit-link">Edit</a>
   {{/if}}
   {{/with}}
 {{else}}
-  {{#with project}}
+  {{#with runnable}}
   <form>
     <div class="item">
       <input type="text" class="title-input" name="name" autofocus placeholder="Give your code example a title" value="{{name}}" />

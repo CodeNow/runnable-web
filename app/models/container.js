@@ -11,7 +11,7 @@ module.exports = Runnable.extend({
     var self = this;
     // Initialize openFiles and rootDir
     this.openFiles = new FileCollection(null, {project:this, app:this.app});
-    this.rootDir = new DirModel({path:'/'}, { project:this, silent:true, app:this.app });
+    this.rootDir = new DirModel({path:'/', name:""}, { project:this, silent:true, app:this.app });
 
     // keep rootDir and rootDirJSON in sync
     this.listenTo(this, 'change:rootDirJSON', this.onChangeRootDirJSON.bind(this));

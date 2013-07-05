@@ -5,13 +5,18 @@ var Super = RendrBase.prototype;
 module.exports = RendrBase.extend({
   idAttribute: '_id',
   virtuals: {},
+  parse: function (response) {
+    if (this.parseDebug)
+      console.log(response)
+    return Super.parse.apply(this, arguments);
+  },
   toJSON: function () {
     var data = Super.toJSON.call(this);
     var virtuals = _.result(this, 'virtuals');
-    _.each(virtuals, function (key, i) {
+    for (var key in virtuals) {
       var val = virtuals[key];
       data[key] = this[val]();
-    }.bind(this));
+    }
     return data;
   },
 });

@@ -1,6 +1,7 @@
 var Fs = require('./fs');
 var Super = Fs.prototype;
 var utils = require('../utils');
+var _ = require('underscore');
 
 module.exports = Fs.extend({
   initialize: function (attrs, options) {
@@ -12,7 +13,11 @@ module.exports = Fs.extend({
     this.contents = new FSCollection([], {
       project   : this.project,
       parentDir : this,
-      app       : this.app
+      app       : this.app,
+      url       : _.result(this, 'urlRoot'),
+      params    : {
+        path : this.get('path')
+      }
     });
     this.listenTo(this.contents, 'change add remove', this.onChangeContents.bind(this));
     this.listenTo(this, 'change:contents', this.onChangeContentsJSON.bind(this))
@@ -22,6 +27,7 @@ module.exports = Fs.extend({
   },
   defaults: function () {
     return {
+      dir : true,
       type: 'dir'
     };
   },

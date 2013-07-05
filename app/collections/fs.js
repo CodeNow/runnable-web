@@ -7,7 +7,8 @@ var async = require('async');
 
 module.exports = Base.extend({
   // url: function () { return '/projects/' + this.project.id + '/files' + this.path; },
-  url: function () { return '/api/projects/' + this.project.id + '/files' + this.path; },
+  // url: function () { return '/api/projects/' + this.project.id + '/files' + this.path; },
+  url: function () { return ['/users/me/runnables/', this.project.id, '/files?path=', this.path].join(''); },
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
     this._idAttr = File.prototype.idAttribute; //backbone bug hack to make idAttr still work for the collection when its model is dynamically determined

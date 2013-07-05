@@ -8,20 +8,25 @@ module.exports = Base.extend({
   // /users/me/runnables/:runnableid/files
   // /users/me/runnables/UaA06sqkSJhHAAAW/readDir
   // url: function () { return '/users/me/runnables/' + this.project.id + '/readDir?path=' + (this.get(this.idAttribute) || ''); }, //backbone url encodes the id val by default..
-  url: function () { return '/users/me/runnables/' + this.project.id + '/files2' + this.id; },
+  // url: function () { return '/users/me/runnables/' + this.project.id + '/files2' + this.id; },
+  urlRoot: function () { return ['/users/me/runnables', this.project.id, 'files'].join('/'); },
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
     this.project = options && options.project;
     this.parentDir  = options && options.parentDir;
     this.listenTo(this, 'change:name', this.onChangeName.bind(this));
     this.listenTo(this, 'change:path', this.onPathChange.bind(this));
+    if (this.dir) {
+      this.set('type', 'dir');
+    }
+    else {
+      this.set('type', 'file');
+    }
   },
-  toJSON: function () {
-    return _.extend(Super.toJSON.apply(this, arguments), {
-      isRootDir  : this.isRootDir(),
-      downloadURL: this.getDownloadUrl(),
-      niceType   : this.niceType()
-    });
+  virtuals: {
+    isRootDir  : 'isRootDir',
+    downloadURL: 'getDownloadUrl',
+    niceType   : 'niceType'
   },
   validate: function (attrs, options) {
     if (attrs.name !== undefined) {
@@ -65,7 +70,8 @@ module.exports = Base.extend({
     throw "getByName is on dir.contents";
   },
   getDownloadUrl: function () {
-    return this.url().replace('/files', '/zip');
+    var url = _.result(this, 'url');
+    return url.replace('/files', '/zip');
   },
   onPathChange: function () {
     // this whole function sucks..
@@ -148,7 +154,7 @@ module.exports = Base.extend({
     else {
       err = this.validate({name:name});
       if (err) { cb(err); } else {
-        var oldURL = this.url();
+        var oldURL = _.result(this, 'url');
         this.save({name:name}, {
           type: 'put',
           url : oldURL,
@@ -178,7 +184,7 @@ module.exports = Base.extend({
   },
   move: function (newPath, cb) {
     var self = this;
-    var oldURL = this.url();
+    var oldURL = _.result(this, 'url');
     var oldPath = this.get('path');
     this.save({ path:newPath }, {
       type: 'put',

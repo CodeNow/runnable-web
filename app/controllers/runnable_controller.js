@@ -5,7 +5,7 @@ var utils = require('../utils');
 var channelController = require('./channel_controller');
 var Container = require('../models/container');
 
-function fetchUserAndProject (imageId, callback) {
+function fetchUserAndImage (imageId, callback) {
   var spec = {
     user: {
       model:'User',
@@ -24,40 +24,32 @@ function fetchUserAndProject (imageId, callback) {
 }
 
 function fetchContainer (containerId, callback) {
-  var self = this;
-  // HARDCODED FOR NOW PULLS THE SAME CONTAINER OVER AND OVER
-  containerId = "Ucy_ptNl9xtOzyYt"
-
-  async.waterfall([
-    function container (cb) {
-      var spec = {
-        container: {
-          model: 'Container',
-          params: {
-            _id: containerId
-          }
-        }
+  var spec = {
+    container: {
+      model: 'Container',
+      params: {
+        _id: containerId
       }
-      fetch.call(self, spec, function (err, results) {
-        cb(err, results && results.container);
-      });
-    },
-    function rootDir (container, cb) {
-      function fetchCallback (err, model) {
-        cb(err, container); // callsback container.. not dir.
-      }
-      var options = _.extend(utils.successErrorToCB(fetchCallback));
-      container.rootDir.fetch(options);
     }
-  ], callback);
+  }
+  fetch.call(this, spec, function (err, results) {
+    callback(err, results && results.container);
+  });
 }
 
-function fetchContainerByImage (image, callback) {
+function createContainerFromImage (imageId, callback) {
   var self = this;
   var app = this.app;
-  //do something with the image
-  var containerId = 'bogus';
-  fetchContainer.call(this, containerId, callback);
+  if (true) {
+    // HARDCODED FOR NOW PULLS THE SAME CONTAINER OVER AND OVER
+    fetchContainer.call(this, "UdcnToI_TdJ1AAAG", callback);
+  }
+  else {
+    //do something with the image
+    var container = new Container({}, { app:app });
+    var options = utils.successErrorToCB(callback);
+    container.save({ from:imageId }, options);
+  }
 }
 
 function fetchRelated (tag, cb) {
@@ -78,6 +70,7 @@ function fetchRelated (tag, cb) {
 
 module.exports = {
   index: function(params, callback) {
+    console.log('hey')
     var self = this;
     if (params._id.length != 16) {//TODO Re-implemented(!utils.isObjectId64(params._id)) {
       // redirect to channel page
@@ -89,7 +82,7 @@ module.exports = {
       var req = self.app.req;
 
       async.waterfall([
-        fetchUserAndProject.bind(this, params._id),
+        fetchUserAndImage.bind(this, params._id),
         function check404 (results, cb) {
           if (!results || !results.image) {
             cb({ status:404 });
@@ -110,11 +103,22 @@ module.exports = {
           }
         },
         function container (results, cb) {
-          fetchContainer.call(self, results.image, function (err, container) {
+          createContainerFromImage.call(self, results.image._id, function (err, container) {
             cb(err, container && _.extend(results, {
               container: container
-            }))
+            }));
           });
+        },
+        function files (results, cb) {
+          cb(null, results);
+          return;
+          var container = results.container;
+          var options = utils.successErrorToCB(function (err) {
+
+            cb(err, results); // rootDir is a child of container.. so already is passed along
+          });
+          container.rootDir.contents.parseDebug = true;
+          container.rootDir.contents.fetch(options);
         },
         function related (results, cb) {
           // If project has tags, fetch related projects
@@ -128,10 +132,9 @@ module.exports = {
           //   });
           // }
           // else {
-            console.log(results.user.id);
-            cb(null, _.extend(results,{
-              action : params.action
-            }));
+            console.log(results.container.rootDir.contents.toJSON());
+            console.log(results);
+            cb(null, results);
 
           // }
         }
