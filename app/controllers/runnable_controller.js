@@ -40,15 +40,15 @@ function fetchContainer (containerId, callback) {
 function createContainerFromImage (imageId, callback) {
   var self = this;
   var app = this.app;
-  if (true) {
+  if (false) {
     // HARDCODED FOR NOW PULLS THE SAME CONTAINER OVER AND OVER
     fetchContainer.call(this, "UdcnToI_TdJ1AAAG", callback);
   }
   else {
-    //do something with the image
     var container = new Container({}, { app:app });
     var options = utils.successErrorToCB(callback);
-    container.save({ from:imageId }, options);
+    container.url = _.result(container, 'url') + '?from=' + imageId;
+    container.save({}, options);
   }
 }
 
@@ -102,7 +102,7 @@ module.exports = {
           }
         },
         function container (results, cb) {
-          createContainerFromImage.call(self, results.image._id, function (err, container) {
+          createContainerFromImage.call(self, results.image.id, function (err, container) {
             cb(err, container && _.extend(results, {
               container: container
             }));
@@ -180,7 +180,6 @@ module.exports = {
         if (err) {
           callback(err);
         } else {
-          // hackish likely a change to api-server to clean up
           var defaultProject = results.channel.get('0').defaultProject;
           redirectToProject(defaultProject);
         }
