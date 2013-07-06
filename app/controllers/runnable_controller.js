@@ -45,21 +45,10 @@ function createContainerFromImage (imageId, callback) {
     fetchContainer.call(this, "UdcnToI_TdJ1AAAG", callback);
   }
   else {
-    //do something with the image
     var container = new Container({}, { app:app });
     var options = utils.successErrorToCB(callback);
-    // debugger;
     container.url = _.result(container, 'url') + '?from=' + imageId;
-    console.log("Saving ...");
-    container.save(options,
-    {
-      success : function () {
-        console.log("Done saving");
-      },
-      error: function (model, response) {
-        console.log("Error saving", response);
-      }
-    });
+    container.save({}, options);
   }
 }
 
@@ -94,8 +83,6 @@ module.exports = {
       async.waterfall([
         fetchUserAndImage.bind(this, params._id),
         function check404 (results, cb) {
-          console.log('hey 1');
-
           if (!results || !results.image) {
             cb({ status:404 });
           }
@@ -104,8 +91,6 @@ module.exports = {
           }
         },
         function nameInUrl (results, cb) {
-          console.log('hey 2');
-
           var image = results.image;
           var urlFriendlyName = utils.urlFriendly(results.image.get('name'));
           if (params.name != urlFriendlyName) {
@@ -117,9 +102,6 @@ module.exports = {
           }
         },
         function container (results, cb) {
-          console.log('hey 3');
-
-          console.log(results.image.attributes, results.image.id);
           createContainerFromImage.call(self, results.image.id, function (err, container) {
             cb(err, container && _.extend(results, {
               container: container
@@ -127,17 +109,11 @@ module.exports = {
           });
         },
         function files (results, cb) {
-          console.log('hey 4');
-
-          cb(null, results);
-          return;
-          var container = results.container;
-          var options = utils.successErrorToCB(function (err) {
-
-            cb(err, results); // rootDir is a child of container.. so already is passed along
-          });
-          container.rootDir.contents.parseDebug = true;
-          container.rootDir.contents.fetch(options);
+          function fetchCallback (err) {
+            cb(err, results); // callback results.. not dir.
+          }
+          var options = utils.successErrorToCB(fetchCallback);
+          results.container.rootDir.fetch(options);
         },
         function related (results, cb) {
           // If project has tags, fetch related projects
@@ -203,7 +179,6 @@ module.exports = {
         if (err) {
           callback(err);
         } else {
-          // hackish likely a change to api-server to clean up
           var defaultProject = results.channel.get('0').defaultProject;
           redirectToProject(defaultProject);
         }
