@@ -5,6 +5,10 @@ var Super = RendrBase.prototype;
 module.exports = RendrBase.extend({
   idAttribute: '_id',
   virtuals: {},
+  initialize: function (attrs, options) {
+    Super.initialize.apply(this, arguments);
+    _.extend(this, _.pick(options, 'urlRoot'));
+  },
   parse: function (response) {
     if (this.debugParse) {
       console.log(response);

@@ -4,7 +4,6 @@ var fetch = require('./fetch');
 var utils = require('../utils');
 var channelController = require('./channel_controller');
 var Container = require('../models/container');
-var Dir = require('../models/dir');
 
 function fetchUserAndImage (imageId, callback) {
   var spec = {
@@ -50,25 +49,7 @@ function createContainerFromImage (imageId, callback) {
     var options = utils.successErrorToCB(callback);
     container.url = _.result(container, 'url') + '?from=' + imageId;
     container.save({}, options);
-
   }
-}
-
-function fetchRootDirForContainer (containerId, callback) {
-  console.log('fetchRootDirForContainer')
-  var rootDir = new Dir({
-    path : "/",
-    name : "",
-    dir  : true
-  }, {
-    app: this.app,
-    urlRoot: ['/users/me/runnables/', containerId, '/files'].join('')
-  });
-  var options = utils.successErrorToCB(function (err) {
-    console.log('hey');
-    callback(err, rootDir); // callback rootDir, not contents.
-  });
-  rootDir.contents.fetch(options);
 }
 
 function fetchRelated (tag, cb) {
@@ -122,17 +103,27 @@ module.exports = {
         },
         function container (results, cb) {
           createContainerFromImage.call(self, results.image.id, function (err, container) {
-            cb(err, _.extend(results, {
+            cb(err, container && _.extend(results, {
               container: container
             }));
           });
         },
         function files (results, cb) {
-          fetchRootDirForContainer.call(self, results.container.id, function (err, rootDir) {
-            cb(err, _.extend(results, {
-              rootDir: rootDir
-            }));
-          })
+<<<<<<< HEAD
+          var container = results.container;
+          var options = utils.successErrorToCB(function (err) {
+
+            cb(err, results); // rootDir is a child of container.. so already is passed along
+          });
+          container.rootDir.contents.debugParse = true;
+          container.rootDir.contents.fetch(options);
+=======
+          function fetchCallback (err) {
+            cb(err, results); // callback results.. not dir.
+          }
+          var options = utils.successErrorToCB(fetchCallback);
+          results.container.rootDir.fetch(options);
+>>>>>>> master
         },
         function related (results, cb) {
           // If project has tags, fetch related projects

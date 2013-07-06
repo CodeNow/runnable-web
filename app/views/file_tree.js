@@ -4,8 +4,8 @@ var FileMenu = require('./file_menu');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
-  tagName: 'ul',
-  className: 'display-none',
+  tagName: 'li',
+  className: 'folder',
   events: {
     'click span.dir' : 'toggle'
   },

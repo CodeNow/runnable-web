@@ -1,0 +1,17 @@
+{{#exists collection}}
+  {{#each collection.models}}
+    {{#with .}}
+      {{#if attributes.dir}}
+        {{view "file_tree" model=.}}
+      {{else}}
+        {{view "file_tree_item" model=.}}
+      {{/if}}
+    {{/with}}
+  {{else}}
+    <li class="empty">(empty)</li>
+  {{/each}}
+{{else}}
+  <ul>
+    <li class='loading'>loading</li>
+  </ul>
+{{/exists}}
