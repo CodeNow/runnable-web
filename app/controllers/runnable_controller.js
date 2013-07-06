@@ -55,9 +55,11 @@ function createContainerFromImage (imageId, callback) {
     {
       success : function () {
         console.log("Done saving");
+        callback();
       },
       error: function (model, response) {
         console.log("Error saving", response);
+        callback();
       }
     });
   }
