@@ -49,6 +49,7 @@ function createContainerFromImage (imageId, callback) {
     var options = utils.successErrorToCB(callback);
     container.url = _.result(container, 'url') + '?from=' + imageId;
     container.save({}, options);
+
   }
 }
 
