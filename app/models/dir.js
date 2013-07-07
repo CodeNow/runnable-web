@@ -1,24 +1,43 @@
-var Fs = require('./fs');
-var Super = Fs.prototype;
+var Base = require('./base');
+var Super = Base.prototype;
 var utils = require('../utils');
 var _ = require('underscore');
 
-module.exports = Fs.extend({
+module.exports = Base.extend({
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
+    var containerId = options.containerId;
     var FSCollection = require('../collections/fs');
     this.contents = new FSCollection(null, {
       app : this.app,
       url : _.result(this, 'urlRoot'),
-      params : {
-        path : this.get('path')
+      params : {                    // params are used with render hydrate
+        path : this.get('path'),
+        containerId: containerId
       },
-      container: options.container,
-      path     : this.get('path')
+      containerId: containerId,
+      path       : this.get('path')
     });
+
+    this.listenTo(this.contents, 'change add remove', this.onChangeContentsCollection.bind(this));
+    this.listenTo(this, 'change:contents', this.onChangeContents.bind(this));
+
+    if (attrs && attrs.contents) {
+      this.onChangeContents(); //trigger
+    }
   },
   defaults: {
     type: 'dir'
+  },
+  onChangeContentsCollection: function () {
+    // keep data as property as well so that it works with rendr hydration
+    this.set('contents', this.contents.toJSON(), { silent:true });
+  },
+  onChangeContents: function () {
+    this.contents.reset(this.get('contents'), { silent:true });
+  },
+  isNew: function () {
+    return Boolean(this.get('contents'));
   }
 });
 

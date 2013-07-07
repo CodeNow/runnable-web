@@ -1,10 +1,13 @@
-var Fs = require('./fs');
-var Super = Fs.prototype;
+var Base = require('./base');
+var Super = Base.prototype;
 var App = require('../app').prototype; //hacky..
 
-module.exports = Fs.extend({
+module.exports = Base.extend({
   defaults: {
     type: 'file'
+  },
+  isNew: function () {
+    return Boolean(this.get('content'));
   }
 });
 

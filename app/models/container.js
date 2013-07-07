@@ -1,5 +1,5 @@
 var Runnable = require('./runnable');
-var FileCollection = require('../collections/files');
+var FileCollection = require('../collections/open_files');
 var DirModel = require('./dir');
 var _ = require('underscore');
 var Super = Runnable.prototype;

@@ -1,4 +1,10 @@
-{{!view "file_tabs" model=project fileCollection=files}}
+<nav class="file-tabs">
+  <ul class="open-file-tabs">
+    {{#each defaultFiles.models}}
+    {{view "file_tab" model=.}}
+    {{/each}}
+  </ul>
+</nav>
 <div class="file-content">
   {{!view "code" model=project}}
   <button class="btn-tertiary btn-small btn-show-file-browser">
@@ -9,9 +15,7 @@
       <button class="hint--bottom" data-hint="Hide file browser"><i class="icon-collapse-alt"></i></button>
     </nav>
     <nav class="file-tree">
-      <ul>
-        {{view "file_tree" model=rootDir}}
-      </ul>
+      {{view "fs_list" collection=rootDirContents open=true}}
     </nav>
   </div>
 </div>

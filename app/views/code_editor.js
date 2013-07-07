@@ -7,11 +7,8 @@ var BaseView = require('./base_view');
 module.exports = BaseView.extend({
   className:"code-container",
   getTemplateData: function () {
-    return {
-      container : this.model,
-      rootDir   : this.model.rootDir,
-      files     : this.model.rootDir.contents
-    };
+    // only rendered once.. passes through context
+    return this.options.context;
   }
 });
 

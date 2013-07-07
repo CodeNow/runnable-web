@@ -1,25 +1,14 @@
 var Base = require('./base');
-var File = require('../models/file');
-var Dir  = require('../models/dir');
 var Super = Base.prototype;
 var utils = require('../utils');
 var async = require('async');
+var Fs = require('../models/fs');
 
 module.exports = Base.extend({
-  initialize: function (attrs, options) {
-    Super.initialize.apply(this, arguments);
-    this.model = function (attrs, opts) {
-      var model;
-      opts = opts || {};
-      opts.container = options.container;
-      if (!attrs.dir) {
-        model = new File(attrs, opts);
-      }
-      else {
-        model = new Dir(attrs, opts);
-      }
-      return model;
-    };
+  model: Fs,
+  url  : function () {
+    return '/users/me/runnables/:containerId/files'
+      .replace(':containerId', this.options.containerId);
   }
 });
 
@@ -104,4 +93,4 @@ module.exports = Base.extend({
 
 // });
 
-module.exports.id = "Fss";
+module.exports.id = "Fs";

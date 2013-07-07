@@ -32,7 +32,7 @@ function fetchContainer (containerId, callback) {
         _id: containerId
       }
     }
-  }
+  };
   fetch.call(this, spec, function (err, results) {
     callback(err, results && results.container);
   });
@@ -41,9 +41,10 @@ function fetchContainer (containerId, callback) {
 function createContainerFromImage (imageId, callback) {
   var self = this;
   var app = this.app;
-  if (false) {
+  if (true) {
     // HARDCODED FOR NOW PULLS THE SAME CONTAINER OVER AND OVER
-    fetchContainer.call(this, "UdcnToI_TdJ1AAAG", callback);
+    console.log('hit!');
+    fetchContainer.call(this, "Udk837efFfw3AAAG", callback);
   }
   else {
     var container = new Container({}, { app:app });
@@ -54,21 +55,24 @@ function createContainerFromImage (imageId, callback) {
   }
 }
 
-function fetchRootDirForContainer (containerId, callback) {
-  console.log('fetchRootDirForContainer')
-  var rootDir = new Dir({
-    path : "/",
-    name : "",
-    dir  : true
-  }, {
-    app: this.app,
-    urlRoot: ['/users/me/runnables/', containerId, '/files'].join('')
-  });
-  var options = utils.successErrorToCB(function (err) {
-    console.log('hey');
-    callback(err, rootDir); // callback rootDir, not contents.
-  });
-  rootDir.contents.fetch(options);
+function fetchFilesForContainer (containerId, callback) {
+  var spec = {
+    rootDirContents: {
+      collection: 'Fs',
+      params: {
+        containerId: containerId,
+        path       : '/'
+      }
+    },
+    defaultFiles: {
+      collection: 'OpenFiles',
+      params: {
+        containerId: containerId,
+        'default'  : true
+      }
+    }
+  };
+  fetch.call(this, spec, callback);
 }
 
 function fetchRelated (tag, cb) {
@@ -83,7 +87,7 @@ function fetchRelated (tag, cb) {
     }
   };
   fetch.call(this, spec, function (err, results) {
-    cb(err, results && results.related)
+    cb(err, results && results.related);
   });
 }
 
@@ -96,7 +100,6 @@ module.exports = {
       channelController.index.call(this, channelParams, callback);
     }
     else {
-      var self = this;
       var req = self.app.req;
 
       async.waterfall([
@@ -128,11 +131,9 @@ module.exports = {
           });
         },
         function files (results, cb) {
-          fetchRootDirForContainer.call(self, results.container.id, function (err, rootDir) {
-            cb(err, _.extend(results, {
-              rootDir: rootDir
-            }));
-          })
+          fetchFilesForContainer.call(self, results.container.id, function (err, fileResults) {
+            cb(err, _.extend(results, fileResults));
+          });
         },
         function related (results, cb) {
           // If project has tags, fetch related projects
@@ -146,15 +147,28 @@ module.exports = {
           //   });
           // }
           // else {
-            console.log(results.container.rootDir.contents.toJSON());
+            // console.log(results.rootDir.contents.toJSON());
+            // if(results.defaultFiles.at(0)) results.defaultFiles.at(0).set('selected', true);
+            // var testopts = utils.successErrorToCB(function () {
+            //   console.log.call(console, 'test fetch file thing', arguments[0], arguments[1])
+            // })
+            // results.defaultFiles.at(1).fetch(testopts)
+            console.log(results.defaultFiles.at(0))
+            console.log(results.defaultFiles.at(0).url)
             cb(null, results);
 
           // }
         }
-      ], callback);
+      ], function (err, data) {
+        debugger;
+        console.log('doneee')
+        console.log('doneee')
+        console.log('doneee')
+        callback(err, data);
+      });
     }
   },
-  new: function(params, callback) {
+  'new': function(params, callback) {
     var controller = this;
     console.log(params);
     if (params.channel.length === 16 ) {

@@ -1,5 +1,7 @@
 var BaseClientRouter = require('rendr/client/router');
 var Handlebars = require('handlebars');
+var Backbone   = require('backbone');
+var _ = require('underscore');
 
 var Router = module.exports = function Router(options) {
   BaseClientRouter.call(this, options);
@@ -8,6 +10,8 @@ var Router = module.exports = function Router(options) {
 Router.prototype.__proto__ = BaseClientRouter.prototype;
 
 Router.prototype.postInitialize = function() {
+  this.app.dispatch = _.clone(Backbone.Events);
+
   this.on('action:start', this.trackImpression, this);
 
   // Register Handlebars helpers here for now

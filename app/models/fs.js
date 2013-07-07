@@ -1,12 +1,26 @@
 var _ = require('underscore');
 var Base = require('./base');
+var File = require('./file');
+var Dir = require('./dir');
 var utils = require('../utils');
 var Super = Base.prototype;
 
 module.exports = Base.extend({
-  urlRoot: function () {
-    var containerId = this.options.container.id || this.options.container._id;
-    return ['/users/me/runnables/', containerId, '/files'].join('');
+  initialize: function (attrs) {
+    // rendr assumes collection only hold one type of model bc of this we will
+    // have to use fs model for both dirs and files...
+    var Child = {};
+    if (attrs.dir || attrs.type == 'dir') {
+      Child = Dir.prototype;
+    }
+    else {
+      Child = File.prototype;
+    }
+    _.extend(this, _.omit(Child, 'initialize', 'constructor'));
+    if (Child.initialize) {
+      Child.initialize.apply(this, arguments);
+    }
+    Super.initialize.apply(this, arguments);
   }
 });
 

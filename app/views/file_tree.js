@@ -10,12 +10,7 @@ module.exports = BaseView.extend({
     'click span.dir' : 'toggle'
   },
   getTemplateData: function () {
-    // be careful postHydrate has only been called before frontend render but not backend!
-    // this means, the only data you can rely on is this.model and this.options binded to this view.
-    return {
-      name = this.options.name;
-      collection = this.options.collection
-    }
+    return this.options;
   },
   postRender: function () {
     //todo: remove display-none
