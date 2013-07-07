@@ -1,13 +1,13 @@
 var Base = require('./base');
 var Super = Base.prototype;
-var App = require('../app').prototype; //hacky..
+var utils = require('../utils');
 
 module.exports = Base.extend({
   defaults: {
     type: 'file'
   },
-  isNew: function () {
-    return Boolean(this.get('content'));
+  unFetched: function () {
+    return !utils.exists(this.get('content'));
   }
 });
 

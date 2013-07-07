@@ -1,12 +1,6 @@
-<nav class="file-tabs">
-  <ul class="open-file-tabs">
-    {{#each defaultFiles.models}}
-    {{view "file_tab" model=.}}
-    {{/each}}
-  </ul>
-</nav>
+{{view "file_tabs" collection=defaultFiles}}
 <div class="file-content">
-  {{!view "code" model=project}}
+  {{view "code" collection=defaultFiles}}
   <button class="btn-tertiary btn-small btn-show-file-browser">
     <i class="icon-folder-open"></i> Show file browser</button>
   <div class="file-browser">

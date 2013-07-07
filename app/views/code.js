@@ -1,4 +1,5 @@
 var BaseView = require('./base_view');
+var utils = require('../utils');
 var _ = require('underscore');
 
 module.exports = BaseView.extend({
@@ -6,17 +7,16 @@ module.exports = BaseView.extend({
   // minHeight: 300,
   // maxHeight: 550,
   postRender: function () {
-    // render should only occur once for this view, setFile is what updates the editor.
+    // render should only occur once for this view,
+    // setFile is what updates the editor.
     // this.setHeight(this.minHeight);
     var self = this;
     this.editor = ace.edit(this.el);
     this.editor.setTheme(ace.require('ace/theme-textmate'));
     // you can attach events here since render only occurs once for this view
-    var openFiles = this.model.openFiles;
+    var openFiles = this.collection;
     this.setFile(openFiles.selectedFile());
     this.listenTo(openFiles, 'select:file', this.setFile.bind(this));
-
-    var editor = this.editor;
   },
   setFile: function (file) {
     // detach previous file events/session
@@ -40,24 +40,41 @@ module.exports = BaseView.extend({
   },
   attachFile: function (file) {
     var editor = this.editor;
+    var options, session;
     if (file.editorSession) {
+      this.hideLoader();
       // resume session if session exists
       editor.setSession(file.editorSession);
     }
     else {
       // init file session
-      var session = file.editorSession = ace.createEditSession(file.get('content'));
-      editor.setSession(session);
-      session.setMode(this.getMode(file.get('name')));
-      session.setTabSize(2);
-      session.setUseSoftTabs(true);
-      this.listenTo(session, 'change',           this.onEdit.bind(this));
-      this.listenTo(session, 'changeScrollLeft', this.onScrollLeft.bind(this));
-      this.listenTo(session, 'changeScrollTop',  this.onScrollTop.bind(this));
-
-      // session.getMarkers(true).forEach(function (marker) {
-      //   session.removeMarker(marker);
-      // });
+      var createSession = function () {
+        session = file.editorSession = ace.createEditSession(file.get('content'));
+        editor.setSession(session);
+        session.setMode(this.getMode(file.get('name')));
+        session.setTabSize(2);
+        session.setUseSoftTabs(true);
+        this.listenTo(session, 'change',           this.onEdit.bind(this));
+        this.listenTo(session, 'changeScrollLeft', this.onScrollLeft.bind(this));
+        this.listenTo(session, 'changeScrollTop',  this.onScrollTop.bind(this));
+      }.bind(this);
+      // fetch file if unfetched -- maybe change this to always?
+      if (file.unFetched()) {
+        this.showLoader();
+        options = utils.successErrorToCB(function (err) {
+          this.hideLoader();
+          if (err) {
+            this.showError(err);
+          }
+          else {
+            createSession();
+          }
+        }.bind(this));
+        file.fetch(options);
+      }
+      else {
+        createSession();
+      }
     }
     // always
     this.$el.show();
@@ -101,8 +118,16 @@ module.exports = BaseView.extend({
     console.log(height);
     console.log(this.$('.ace_content').height());
     this.$('.ace_content').height(height);
+  },
+  hideLoader: function () {
+    console.log('hide loader');
+  },
+  showLoader: function () {
+    console.log('show loader');
+  },
+  showError: function (err) {
+    alert(err);
   }
-
 });
 
 module.exports.id = "Code";

@@ -8,20 +8,19 @@ module.exports = BaseView.extend({
   },
   postInitialize: function () {
     var file = this.options.model;
-    console.log(file && file.get('selected'));
-    console.log(file && file.get('selected'));
-    console.log(file && file.get('selected'));
-    console.log(file && file.get('selected'));
-    console.log(file && file.get('selected'));
     if (file && file.get('selected')) {
       this.className = 'selected';
     }
+  },
+  postHydrate: function () {
+    // change:selected is listened to in file_tabs
+    this.listenTo(this.model, 'change:name', this.render.bind(this));
   },
   select: function () {
     this.model.set('selected', true);
   },
   close: function () {
-    this.model.collection.remove(model);
+    this.model.collection.remove(this.model);
   }
 });
 

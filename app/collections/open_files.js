@@ -11,22 +11,17 @@ module.exports = Base.extend({
       .replace(':containerId', this.options.containerId);
   },
   initialize: function () {
+    Super.initialize.apply(this, arguments)
     this.listenTo(this, 'change:selected', this.onChangeSelected.bind(this));
     this.listenTo(this, 'remove', this.onRemove.bind(this));
     this.listenTo(this, 'add', this.onAdd.bind(this));
-    // initial selected file
-    // if (this.at(0)) {
-    //   console.log('boom')
-    //   console.log('boom')
-    //   console.log('boom')
-    //   this.at(0).set('selected', true);
-    // }
-    // else {
-    //   console.log('boomdsa')
-    //   console.log('boomdas')
-    //   console.log('boomdsa')
-    // }
-    Super.initialize.apply(this, arguments)
+    if (!this.app)
+      debugger;
+    var dispatch = this.app.dispatch;
+    if (dispatch) {
+      // clientside only beware!
+      this.listenTo(dispatch, 'open:file', this.add.bind(this));
+    }
   },
   onChangeSelected: function (selectedFile) {
     // unselect other files when new file selected
@@ -42,13 +37,16 @@ module.exports = Base.extend({
 
       this.trigger('select:file', selectedFile);
     }
-    else if (!this.findWhere({ selected:true })) {
+    else if (!this.selectedFile()) {
       // no more files open
       this.trigger('select:file', null);
     }
   },
+  selectedFile: function () {
+    return this.findWhere({ selected:true });
+  },
   onRemove: function (fileRemoved) {
-    fileRemoved.set('selected', false);
+    fileRemoved.set('selected', null);
   },
   onAdd: function (fileAdded) {
     fileAdded.set('selected', true);

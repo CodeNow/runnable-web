@@ -2,6 +2,7 @@ var Base = require('./base');
 var Super = Base.prototype;
 var utils = require('../utils');
 var _ = require('underscore');
+var utils = require('../utils');
 
 module.exports = Base.extend({
   initialize: function (attrs, options) {
@@ -36,8 +37,9 @@ module.exports = Base.extend({
   onChangeContents: function () {
     this.contents.reset(this.get('contents'), { silent:true });
   },
-  isNew: function () {
-    return Boolean(this.get('contents'));
+  unFetched: function () {
+    // this will change probably
+    return utils.exists(this.get('contents'));
   }
 });
 

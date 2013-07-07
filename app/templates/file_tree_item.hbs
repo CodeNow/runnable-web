@@ -10,9 +10,9 @@
 {{else}}
 {{#with model.attributes}}
   {{#if_eq type compare='dir'}}
-  <span class="name {{type}}" href="" data-id="{{_id}}" title="{{path}}{{name}}">{{name}}</span>
+  <span class="name {{type}}" href="" title="{{path}}{{name}}">{{name}}</span>
   {{else}}
-  <a class="name {{type}}" href="" data-id="{{_id}}" title="{{path}}{{name}}">{{name}}</a>
+  <a class="name {{type}}" href="javascript:void(0);" title="{{path}}{{name}}">{{name}}</a>
   {{/if_eq}}
 {{/with}}
 {{/if}}

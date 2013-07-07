@@ -62,14 +62,7 @@
 		border:1px solid #e8e8e8;
 		@include box-shadow(0 0 0 2px rgba(0,0,0,.05));
 		position:relative;
-		min-height: 300px;
-		.code-editor {
-			// ace initial height before ace script replaces the dif
-			height: 300px;
-			// -webkit-transition: height 1s ease;
-			// -moz-transition: height 1s ease;
-			// transition: height 1s ease;
-		}
+		min-height: 200px; /* should match tab-pane min-height */
 	}
 }
 
