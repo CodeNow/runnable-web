@@ -1,8 +1,0 @@
-<ul class="open-file-tabs">
-  {{#each files}}
-  <li {{#if_eq path compare=../selectedFile}}class="selected"{{/if_eq}}>
-    <a href="javascript:void(0);" data-id="{{path}}">{{name}}</a>
-    <i data-id="{{path}}" class="close-file"></i>
-  </li>
-  {{/each}}
-</ul>
