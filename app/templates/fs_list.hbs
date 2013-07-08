@@ -1,4 +1,4 @@
-{{#exists collection}}
+{{#if collection.fetched}}
   {{#each collection.models}}
     {{#if attributes.dir}}
       {{view "file_tree" model=.}}
@@ -12,4 +12,4 @@
   {{/each}}
 {{else}}
   <li class='loading'>loading</li>
-{{/exists}}
+{{/if}}

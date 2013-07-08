@@ -1,8 +1,8 @@
 var Base = require('./base');
-var BaseCollection = require('../collections/base');
-var Super = BaseCollection.prototype;
+var Super = Base.prototype;
 var utils = require('../utils');
 var _     = require('underscore');
+var BaseCollection = require('../collections/base');
 
 var User = module.exports = Base.extend({
   urlRoot: '/users',

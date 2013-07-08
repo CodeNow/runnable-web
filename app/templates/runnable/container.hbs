@@ -1,4 +1,3 @@
-
 <div class="container">
   <article class="span9">
     <section class="title">
@@ -7,10 +6,10 @@
     {{view "publish_warning" model=container}}
     <section class="actions">
       {{view "run_button" model=container}}
-      {{view "save_button" model=container}}
+      {{view "save_button" collection=defaultFiles}}
       {{view "download_button" model=container}}
     </section>
-    {{view "code_editor" model=container}}
+    {{view "code_editor" context=.}}
   </article>
   <aside class="span3 last">
 
@@ -30,19 +29,6 @@
       {{view "runnable_new_tag_form" model=container}}
     </section>
     {{/if}}
-    {{/if}}
-
-    {{#if related.length}}
-    <section class="module">
-      <h3>Related examples</h3>
-      <nav class="related-nav">
-        <ul>
-          {{#each related.models}}
-          {{view "runnable_item_small" model=.}}
-          {{/each}}
-        </ul>
-      </nav>
-    </section>
     {{/if}}
   </aside>
 </div>

@@ -14,6 +14,7 @@ module.exports = BaseView.extend({
   },
   postHydrate: function () {
     // change:selected is listened to in file_tabs
+    console.log(this.model.id);
     this.listenTo(this.model, 'change:name', this.render.bind(this));
   },
   select: function () {

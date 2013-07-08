@@ -1,32 +1,21 @@
 var _ = require('underscore');
 var Base = require('./base');
-var File = require('./file');
-var Dir = require('./dir');
 var utils = require('../utils');
 var Super = Base.prototype;
 
+// gets url from collection
 module.exports = Base.extend({
-  initialize: function (attrs) {
-    // rendr assumes collection only hold one type of model bc of this we will
-    // have to use fs model for both dirs and files...
-    var Child = {};
-    if (attrs.dir || attrs.type == 'dir') {
-      Child = Dir.prototype;
-    }
-    else {
-      Child = File.prototype;
-    }
-    _.extend(this, _.omit(Child, 'initialize', 'constructor'));
-    if (Child.initialize) {
-      Child.initialize.apply(this, arguments);
-    }
-    Super.initialize.apply(this, arguments);
-  },
   isFile: function () {
-    return Boolean(this.type === 'file' || !this.dir);
+    return (this.get('type') === 'file' || !this.get('dir'));
   },
   isDir: function () {
-    return Boolean(this.type === 'dir' || this.dir);
+    return (this.get('type') === 'dir' || this.get('dir'));
+  },
+  isRootDir: function () {
+    return (this.get('path') == '/' && this.get('name') == '');
+  },
+  fullPath: function () {
+    return utils.pathJoin(this.get('path'), this.get('name'));
   }
 });
 

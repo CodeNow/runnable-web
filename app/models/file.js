@@ -1,4 +1,4 @@
-var Base = require('./base');
+var Base = require('./fs'); //!FS
 var Super = Base.prototype;
 var utils = require('../utils');
 

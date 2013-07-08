@@ -1,4 +1,4 @@
-var Base = require('./base');
+var Base = require('./fs'); //!FS
 var Super = Base.prototype;
 var utils = require('../utils');
 var _ = require('underscore');
@@ -7,41 +7,42 @@ var utils = require('../utils');
 module.exports = Base.extend({
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
-    var containerId = options.containerId;
     var FSCollection = require('../collections/fs');
+    var path = this.fullPath();
+    var containerId = attrs.containerId;
     this.contents = new FSCollection(null, {
       app : this.app,
-      url : _.result(this, 'urlRoot'),
+      url : _.result(this.collection, 'url'),
       params : {                    // params are used with render hydrate
-        path : this.get('path'),
-        containerId: containerId
+        path : path,
+        containerId: containerId,
+        url : _.result(this.collection, 'url')
       },
       containerId: containerId,
-      path       : this.get('path')
+      path       : path
     });
-
-    this.listenTo(this.contents, 'change add remove', this.onChangeContentsCollection.bind(this));
-    this.listenTo(this, 'change:contents', this.onChangeContents.bind(this));
-
-    if (attrs && attrs.contents) {
-      this.onChangeContents(); //trigger
-    }
   },
   defaults: {
     type: 'dir'
-  },
-  onChangeContentsCollection: function () {
-    // keep data as property as well so that it works with rendr hydration
-    this.set('contents', this.contents.toJSON(), { silent:true });
-  },
-  onChangeContents: function () {
-    this.contents.reset(this.get('contents'), { silent:true });
-  },
-  unFetched: function () {
-    // this will change probably
-    return utils.exists(this.get('contents'));
   }
 });
+
+// if fetch has nested contents use this ::
+// initialize:
+//    this.listenTo(this.contents, 'change add remove', this.onChangeContentsCollection.bind(this));
+//    this.listenTo(this, 'change:contents', this.onChangeContents.bind(this));
+//    if (attrs && attrs.contents) {
+//      this.onChangeContents(); //trigger
+//    }
+// methods:
+//   onChangeContentsCollection: function () {
+//     // keep data as property as well so that it works with rendr hydration
+//     this.set('contents', this.contents.toJSON(), { silent:true });
+//   },
+//   onChangeContents: function () {
+//     this.contents.reset(this.get('contents'), { silent:true });
+//   },
+
 
 // module.exports = Fs.extend({
 //   initialize: function (attrs, options) {

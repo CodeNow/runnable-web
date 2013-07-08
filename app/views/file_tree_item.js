@@ -10,12 +10,12 @@ module.exports = BaseView.extend({
     'contextmenu' : 'showMenu',
     'submit form' : 'submitName',
     'blur input'  : 'escEditMode',
-    'click a'     : 'selectFile'
+    'click a'     : 'click'
   },
   getTemplateData: function () {
     return this.options;
   },
-  selectFile: function () {
+  click: function () {
     if (this.model.isFile()) {
       this.app.dispatch.trigger('open:file', this.model);
     }
@@ -44,7 +44,7 @@ module.exports = BaseView.extend({
     this.model.destroy();
   },
   create: function (type) {
-    var collection = this.model.collection || this.parentView.collection;
+    var dir = this.parentView.model;
     this.newFileModal = new NewFileModal({
       collection : collection,
       type: type,

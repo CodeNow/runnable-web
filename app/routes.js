@@ -10,10 +10,10 @@ module.exports = function(match) {
   match('new',                  'home#new');
   match('new/:channel',         'runnable#new');
   match('new/:_id',             'runnable#new');
+  match('me/:_id',              'runnable#container');
   match(':_id',                 'runnable#index');
   match(':_id/output',          'runnable#output');
   match(':_id/:name',           'runnable#index');
-  match('me/:_id',              'runnable#container');
   match(':channel',             'channel#index');
   match(':channel/page/:page',  'channel#index');
 };

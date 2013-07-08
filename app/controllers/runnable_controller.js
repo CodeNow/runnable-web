@@ -24,6 +24,24 @@ function fetchUserAndImage (imageId, callback) {
   fetch.call(this, spec, callback);
 }
 
+function fetchUserAndContainer (containerId, callback) {
+  var spec = {
+    user: {
+      model:'User',
+      params:{
+        _id: 'me'
+      }
+    },
+    container: {
+      model : 'Container',
+      params: {
+        _id: containerId
+      }
+    }
+  };
+  fetch.call(this, spec, callback);
+}
+
 function fetchContainer (containerId, callback) {
   var spec = {
     container: {
@@ -44,7 +62,7 @@ function createContainerFromImage (imageId, callback) {
   if (true) {
     // HARDCODED FOR NOW PULLS THE SAME CONTAINER OVER AND OVER
     console.log('hit!');
-    fetchContainer.call(this, "Udk837efFfw3AAAG", callback);
+    fetchContainer.call(this, "UdsGESncnjgIAAAG", callback);
   }
   else {
     var container = new Container({}, { app:app });
@@ -56,14 +74,18 @@ function createContainerFromImage (imageId, callback) {
 }
 
 function fetchFilesForContainer (containerId, callback) {
-  var spec = {
-    rootDirContents: {
-      collection: 'Fs',
-      params: {
-        containerId: containerId,
-        path       : '/'
-      }
-    },
+  var app = this.app;
+  var rootDir = new Dir({
+    _id : 'root', // needs an id else it wont be stored by rendr
+    path: '/',
+    name: '',
+    dir : true,
+    open: true,
+    containerId: containerId
+  }, {
+    app: app
+  });
+  var defaultFilesSpec = {
     defaultFiles: {
       collection: 'OpenFiles',
       params: {
@@ -71,8 +93,42 @@ function fetchFilesForContainer (containerId, callback) {
         'default'  : true
       }
     }
-  };
-  fetch.call(this, spec, callback);
+  }
+  async.parallel([
+    function (cb) {
+      var opts = utils.successErrorToCB(cb);
+      rootDir.contents.fetch(opts);
+    },
+    fetch.bind(this, defaultFilesSpec)
+  ],
+  function (err, data) {
+    if (err) { callback(err); } else {
+      // so now you have the root dir it's contents
+      // and defaultFiles
+      // TODO: build default files off root dir here
+      var results = data[1]; // defaultFiles
+      (function traverseTreeAndAddToResults (dir) {
+        // doesnt matter what the key is just must be unique
+        console.log('dir:'+dir.id);
+        results['dir:'+dir.id] = dir;
+        var contents = dir.contents;
+        var path;
+        if (contents) {
+          path = contents.options.params.path;
+          console.log(dir.get('path'));
+          console.log('fsc:'+path);
+          results['fsc:'+path] = contents;
+          contents.forEach(function (fs) {
+            if (fs.isDir()) {
+              traverseTreeAndAddToResults(fs);
+            }
+          });
+        }
+      })(rootDir);
+      results.rootDir = rootDir;
+      callback(err, results);
+    }
+  });
 }
 
 function fetchRelated (tag, cb) {
@@ -155,6 +211,13 @@ module.exports = {
             // results.defaultFiles.at(1).fetch(testopts)
             console.log(results.defaultFiles.at(0))
             console.log(results.defaultFiles.at(0).url)
+            //DEFAULT FILES IS RETURNING DIRS AND ALL FILES?
+            var defaultFiles = results.defaultFiles.filter(function (fs) {
+              return fs.get('default') && fs.isFile();
+            });
+            results.defaultFiles.reset(defaultFiles);
+            var firstDefault = results.defaultFiles.at(0);
+            if (firstDefault) firstDefault.set('selected', true);
             cb(null, results);
 
           // }
@@ -242,12 +305,37 @@ module.exports = {
     ], callback);
   },
   container: function (params, callback) {
-    // var spec = {
-    //   collection: {collection: 'Collection', params: params}
-    // };
-    // this.app.fetch(spec, function(err, result) {
-    //   callback(err, '<% _.underscored(this.name) %>_index_view', result);
-    // });
-    callback();
+    var self = this;
+    async.waterfall([
+      fetchUserAndContainer.bind(this, params._id),
+      function check404 (results, cb) {
+        if (!results || !results.container) {
+          cb({ status:404 });
+        }
+        else {
+          cb(null, results);
+        }
+      },
+      function files (results, cb) {
+        fetchFilesForContainer.call(self, results.container.id, function (err, fileResults) {
+          cb(err, _.extend(results, fileResults));
+        });
+      }
+    ], function (err, results) {
+      if (err) { callback(err); } else {
+
+        console.log(results.defaultFiles.at(0));
+        console.log(results.defaultFiles.at(0).url);
+        //DEFAULT FILES IS RETURNING DIRS AND ALL FILES?
+        var defaultFiles = results.defaultFiles.filter(function (fs) {
+          return fs.get('default') && fs.isFile();
+        });
+        results.defaultFiles.reset(defaultFiles);
+        var firstDefault = results.defaultFiles.at(0);
+        if (firstDefault) firstDefault.set('selected', true);
+
+        callback(err, results);
+      }
+    });
   }
 };

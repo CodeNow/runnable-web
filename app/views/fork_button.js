@@ -7,8 +7,7 @@ module.exports = BaseView.extend({
     'click' : 'saveAndOpenContainerPage'
   },
   saveAndOpenContainerPage: function () {
-    debugger;
-    this.model.openFiles.saveAll(function (err) {
+    this.collection.saveAll(function (err) {
       if (err) {
         alert(err);
       }

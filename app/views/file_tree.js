@@ -1,30 +1,48 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
 var FileMenu = require('./file_menu');
+var utils = require('../utils');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName: 'li',
   className: 'folder',
   events: {
-    'click span.dir' : 'toggle'
+    'click span.dir:first' : 'toggle'
   },
   getTemplateData: function () {
     return this.options;
   },
+  openClass: function () {
+    if (this.model && this.model.get('open')) {
+      if (this.$el)
+        this.$el.addClass('open');
+      else
+        this.className = 'folder open';
+    }
+    else {
+      if (this.$el)
+        this.$el.removeClass('open');
+      else
+        this.className = 'folder';
+    }
+  },
+  postInitialize: function () {
+    this.openClass();
+  },
   postRender: function () {
+    this.openClass();
     //todo: remove display-none
-
+    debugger;
     // clientside postHydrate and getTemplateData have occured.
-    if (this.dir.get('open')) this.$el.addClass('open');
     this.$contentsUL = this.$('ul').first();
     // alert("Get here "+ );
     // droppable
-    this.$el.droppable({
-      greedy: true,
-      drop: this.onDrop.bind(this),
-      hoverClass: 'drop-hover'
-    });
+    // this.$el.droppable({
+    //   greedy: true,
+    //   drop: this.onDrop.bind(this),
+    //   hoverClass: 'drop-hover'
+    // });
   },
   slideUpHeight: function () {
     this.$el.removeClass('open');
@@ -39,36 +57,32 @@ module.exports = BaseView.extend({
     }.bind(this));
   },
   toggle: function (evt) {
-    var clickedId = $(evt.currentTarget).data('id');
-    if (this.dir.id == clickedId && !this.animating) {
-      this.animating = true;
-      if (this.dir.get('open')) {
-        this.close();
-      }
-      else {
-        this.open();
-      }
+    this.animating = true;
+    if (this.model.get('open')) {
+      this.close();
     }
-    return this;
+    else {
+      this.open();
+    }
   },
   open: function () {
-    this.dir.set('open', true);
+    this.model.set('open', true);
     this.slideDownHeight();
     // fetch the dir contents if not fetched.
     var self = this;
-    if (this.dir.isNew()) {
-      this.dir.fetch({
-        success: function () {
-          // console.log("Just got back from fetching the dir", dir.contents());
-        },
-        error: function () {
-          alert('error');
-        }
-      });
+    var fileList = _.findWhere(this.childViews, {name:'fs_list'});
+    var collection = fileList.collection;
+    if (collection.unFetched()) {
+      this.showLoader();
+      var options = utils.successErrorToCB(function (err) {
+        this.hideLoader();
+        if (err) this.showError(err);
+      }.bind(this));
+      collection.fetch(options);
     }
   },
   close: function () {
-    this.dir.set('open', false);
+    this.model.set('open', false);
     this.slideUpHeight();
   },
   onDrop: function (evt, ui) {
@@ -82,19 +96,25 @@ module.exports = BaseView.extend({
       // this._forkIfUserIsNotProjectOwner(function (err, data) {
       // TODO!
         // if (err) {
-        //   self.displayErrorIfExists('Error moving.');
+        //   self.showError('Error moving.');
         // }
         // else{
           console.log(fsPath);
           self.dir.moveIn(fsPath, function (err) {
-            self.displayErrorIfExists(err);
+            if (err) self.showError(err);
           });
         // }
       // });
     }
   },
-  displayErrorIfExists: function (err) {
-    if (err) alert(err.message || err);
+  showLoader: function () {
+    //TODO
+  },
+  hideLoader: function () {
+    //TODO
+  },
+  showError: function (err) {
+    alert(err);
   }
 });
 

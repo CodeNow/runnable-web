@@ -1,11 +1,11 @@
-var Fs = require('../models/fs');
+var File = require('../models/file');
 var Base = require('./base');
 var Super = Base.prototype;
 var utils = require('../utils');
 var async = require('async');
 
 module.exports = Base.extend({
-  model: Fs,
+  model: File,
   url  : function () {
     return '/users/me/runnables/:containerId/files'
       .replace(':containerId', this.options.containerId);
