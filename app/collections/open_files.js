@@ -14,10 +14,20 @@ module.exports = Base.extend({
     Super.initialize.apply(this, arguments)
     this.listenTo(this, 'change:selected', this.onChangeSelected.bind(this));
     this.listenTo(this, 'add', this.onAdd.bind(this));
+    // dispatch is clientside only beware!
     var dispatch = this.app.dispatch;
     if (dispatch) {
-      // clientside only beware!
-      this.listenTo(dispatch, 'open:file', this.add.bind(this));
+      this.listenTo(dispatch, 'open:file', this.openFile.bind(this));
+    }
+  },
+  openFile: function (file) {
+    if (file) {
+      if (~this.indexOf(file)) {
+        file.set('selected', true);
+      }
+      else {
+        this.add(file);
+      }
     }
   },
   onChangeSelected: function (selectedFile) {
@@ -65,7 +75,8 @@ module.exports = Base.extend({
     if (!utils.exists(index)) throw new Error('index required');
     if (index < 0) index = 0;
     if (index > this.length) index = this.length;
-
+    var nextFile = this.at(index);
+    if (nextFile) nextFile.set('selected', true);
   },
   onAdd: function (fileAdded) {
     fileAdded.set('selected', true);

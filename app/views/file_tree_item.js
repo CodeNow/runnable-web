@@ -15,7 +15,9 @@ module.exports = BaseView.extend({
     return this.options;
   },
   selectFile: function () {
-    this.app.dispatch.trigger('open:file', this.model);
+    if (this.model.isFile()) {
+      this.app.dispatch.trigger('open:file', this.model);
+    }
   },
   showMenu: function (evt) {
     evt.preventDefault(); // prevent browser context menu

@@ -21,6 +21,12 @@ module.exports = Base.extend({
       Child.initialize.apply(this, arguments);
     }
     Super.initialize.apply(this, arguments);
+  },
+  isFile: function () {
+    return Boolean(this.type === 'file' || !this.dir);
+  },
+  isDir: function () {
+    return Boolean(this.type === 'dir' || this.dir);
   }
 });
 
