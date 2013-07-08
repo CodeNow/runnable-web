@@ -160,10 +160,6 @@ module.exports = {
           // }
         }
       ], function (err, data) {
-        debugger;
-        console.log('doneee')
-        console.log('doneee')
-        console.log('doneee')
         callback(err, data);
       });
     }

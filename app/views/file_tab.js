@@ -20,7 +20,10 @@ module.exports = BaseView.extend({
     this.model.set('selected', true);
   },
   close: function () {
-    this.model.collection.remove(this.model);
+    // note! you cannot rely on this.model.collection to be openFiles
+    // since the model belongs to two collection (folderFile, openFiles)
+    // it could point to either.
+    this.parentView.collection.remove(this.model);
   }
 });
 

@@ -34,7 +34,8 @@ module.exports = BaseView.extend({
     this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
   },
   postHydrate: function () {
-    this.listenTo(this.model, 'change:selected', this.highlightIfSelected);
+    this.listenTo(this.model, 'change:name', this.render.bind(this));
+    this.listenTo(this.model, 'change:selected', this.highlightIfSelected.bind(this));
   },
   highlightIfSelected: function () {
     if (this.model.get('selected')) {

@@ -13,10 +13,7 @@ module.exports = Base.extend({
   initialize: function () {
     Super.initialize.apply(this, arguments)
     this.listenTo(this, 'change:selected', this.onChangeSelected.bind(this));
-    this.listenTo(this, 'remove', this.onRemove.bind(this));
     this.listenTo(this, 'add', this.onAdd.bind(this));
-    if (!this.app)
-      debugger;
     var dispatch = this.app.dispatch;
     if (dispatch) {
       // clientside only beware!
@@ -45,8 +42,30 @@ module.exports = Base.extend({
   selectedFile: function () {
     return this.findWhere({ selected:true });
   },
-  onRemove: function (fileRemoved) {
-    fileRemoved.set('selected', null);
+  beforeRemove: function (fileRemoved) {
+    if (fileRemoved && fileRemoved.get('selected')) {
+      var removedIndex = this.indexOf(fileRemoved);
+      fileRemoved.set('selected', null);
+      setTimeout(function () {
+        // timeout to ensure remove has completed
+        this.selectFileAt(removedIndex-1);
+      }.bind(this), 0);
+    }
+  },
+  remove: function (models) {
+    if (!Array.isArray(models)) {
+      models = [models];
+    }
+    models.forEach(function (file) {
+      this.beforeRemove(file);
+      Super.remove.apply(this, arguments);
+    }, this);
+  },
+  selectFileAt: function (index) {
+    if (!utils.exists(index)) throw new Error('index required');
+    if (index < 0) index = 0;
+    if (index > this.length) index = this.length;
+
   },
   onAdd: function (fileAdded) {
     fileAdded.set('selected', true);
