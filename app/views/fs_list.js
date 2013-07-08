@@ -10,6 +10,9 @@ module.exports = BaseView.extend({
       this.className = "";
     }
   },
+  postHydrate: function () {
+    this.listenTo(this.collection, 'add remove', this.render.bind());
+  },
   getTemplateData: function () {
     return {
       collection: this.options.collection

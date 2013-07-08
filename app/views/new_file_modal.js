@@ -1,42 +1,46 @@
+var _ = require('underscore');
 var ModalView = require('./modal_view');
+var Fs = require('../models/fs');
+var utils = require('../utils');
+var Super = ModalView.prototype;
 
 module.exports = ModalView.extend({
   className: 'lightbox',
-  events: {
-    'click .btn-cancel' : this.remove,
-    'click .btn-close'  : this.remove,
-    'submit form'      : this.submitNewFile
-  },
+  events: _.extend(Super.events, {
+    'click .btn-cancel' : 'remove',
+    'submit form'       : 'submit'
+  }),
   postInitialize: function () {
     $('body').append(this.$el);
     this.render();
   },
   getTemplateData: function () {
-    return this.model.toJSON();
+    return this.options;
   },
-  remove: function () {
-    this.trigger('remove');
-    Super.remove.apply(this, arguments);
-  },
-  submitNewFile: function (evt) {
+  submit: function (evt) {
     evt.preventDefault();
-    var formData = $(evt.currentTarget);
-    var err = this.model.validate(formData);
+    // TODO: break out fs back into file and dir, when fs colleciton is changed back too - // if (this.options.type == 'dir' || this.options.type == 'folder')
+    var type = this.options.type;
+    var model = new Fs({}, { app: this.app });
+    var data = $(evt.currentTarget).serializeObject();
+    data = _.extend(data, {
+      'dir'     : (type == 'folder' || type == 'dir'),
+      'path'    : this.collection.params.path,
+      'content' : " " // init file content to blank..
+    });
+    var options = utils.successErrorToCB(this.saveCallback.bind(this));
+    options.url = _.result(this.collection, 'url');
+    model.save(data, options);
+  },
+  saveCallback: function (err, model) {
     if (err) {
-      // show err
       alert(err);
     }
     else {
-      var cb = this.saveCallback.bind(this);
-      this.model.save(formData, this.app.utils.successErrorToCB(cb));
-      this.remove();
-    }
-  },
-  saveCallback: function (err) {
-    if (err) {
-      alert(err.message);
-    }
-    else {
+      this.collection.add(model);
+      if (model.isFile()) {
+        this.app.dispatch.trigger('open:file', model);
+      }
       this.remove();
     }
   }

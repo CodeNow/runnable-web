@@ -6,6 +6,9 @@ var Fs = require('../models/fs');
 
 module.exports = Base.extend({
   model: Fs,
+  initialize: function () {
+    Super.initialize.apply(this, arguments);
+  },
   url  : function () {
     return '/users/me/runnables/:containerId/files'
       .replace(':containerId', this.options.containerId);

@@ -1,7 +1,6 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
 var Super = BaseView.prototype;
-var NewFileModal = require('./new_file_modal');
 
 module.exports = BaseView.extend({
   className: 'context-menu',
@@ -30,18 +29,13 @@ module.exports = BaseView.extend({
     this.trigger('rename');
   },
   del: function () {
-    this.model.remove();
+    this.trigger('delete');
   },
   createFile: function () {
-    var dir = this.model.isDir() ? this.model : this.model.parentDir();
-    this.newFileModal = new NewFileModal({
-      model: this.model
-    });
+    this.trigger('create', 'file');
   },
   createDir: function () {
-    this.newFileModal = new NewFileModal({
-      model: this.model
-    });
+    this.trigger('create', 'folder');
   },
   remove: function () {
     this.detachWindowEvents();

@@ -1,6 +1,7 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
 var FileMenu = require('./file_menu');
+var NewFileModal = require('./new_file_modal');
 var utils = require('../utils');
 
 module.exports = BaseView.extend({
@@ -28,12 +29,27 @@ module.exports = BaseView.extend({
     var menu = this.menu = new FileMenu({
       model: this.model,
       top  : evt.pageY,
-      left : evt.pageX
-    }, {
+      left : evt.pageX,
       app:this.app
     });
     this.listenToOnce(menu, 'rename', this.setEditMode.bind(this, true));
+    this.listenToOnce(menu, 'delete', this.destroyModel.bind(this, true));
+    this.listenToOnce(menu, 'create', this.create.bind(this));
     this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
+  },
+  destroyModel: function () {
+    var options = utils.successErrorToCB(function (err) {
+      if (err) this.showError(err);
+    }.bind(this));
+    this.model.destroy();
+  },
+  create: function (type) {
+    var collection = this.model.collection || this.parentView.collection;
+    this.newFileModal = new NewFileModal({
+      collection : collection,
+      type: type,
+      app:this.app
+    });
   },
   postHydrate: function () {
     this.listenTo(this.model, 'change:name', this.render.bind(this));
@@ -79,8 +95,6 @@ module.exports = BaseView.extend({
       }
     }.bind(this));
     options.patch = true;
-    console.log(formData);
-    debugger;
     this.model.save(formData, options);
   },
   showError: function (err) {

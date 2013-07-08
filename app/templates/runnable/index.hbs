@@ -9,7 +9,7 @@
       {{#if_eq image.attributes.owner compare=user.id}}
       {{view "edit_button" model=container}}
       {{else}}
-      {{view "fork_button" model=container}}
+      {{view "fork_button" collection=defaultFiles containerId=container.id}}
       {{/if_eq}}
       {{view "download_button" model=container}}
     </section>
