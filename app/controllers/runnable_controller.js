@@ -73,7 +73,7 @@ function fetchImage (imageId, callback) {
 function createContainerFromImage (imageId, callback) {
   var self = this;
   var app = this.app;
-  if (true) {
+  if (false) {
     // HARDCODED FOR NOW PULLS THE SAME CONTAINER OVER AND OVER
     console.log('hit!');
     fetchContainer.call(this, "UduGQNJ_RwZkAAAR", callback);
