@@ -9,8 +9,9 @@
       <button class="hint--bottom" data-hint="Hide file browser"><i class="icon-collapse-alt"></i></button>
     </nav>
     <nav class="file-tree">
-      {{!view "fs_list" collection=rootDirContents open=true}}
-      {{view "file_tree" model=rootDir}}
+      <ul>
+        {{view "file_tree" model=rootDir}}
+      </ul>
     </nav>
   </div>
 </div>

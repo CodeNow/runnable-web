@@ -1,13 +1,16 @@
 var Runnable = require('./runnable');
 var _ = require('underscore');
 var Super = Runnable.prototype;
+var utils = require('../utils');
 
-module.exports = Runnable.extend({
-  urlRoot: '/users/me/runnables',
-  // virtuals: function () {
-  //   var virtuals = _.clone(_.result(Super, 'virtuals'));
-  //   return _.extend(virtuals, {});
-  // }
+var Container = module.exports = Runnable.extend({
+  urlRoot: '/users/me/runnables'
 });
+
+module.exports.destroyById = function (containerId, cb) {
+  var container = new Container({_id:containerId}, {app:this.app});
+  var options = utils.successErrorToCb(cb);
+  container.destroy(options);
+};
 
 module.exports.id = "Container";

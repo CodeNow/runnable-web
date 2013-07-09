@@ -6,7 +6,7 @@ module.exports = ModalView.extend({
   className: 'lightbox login-modal',
   defaultHeader: "Sign in to Runnable",
   postInitialize: function (options) {
-    this.header = this.options.header || this.defaultHeader
+    this.header = this.options.header || this.defaultHeader;
   },
   events: _.extend(Super.events, {
     'click .signup-link' : 'openSignup',
@@ -25,7 +25,7 @@ module.exports = ModalView.extend({
   getTemplateData: function () {
     return {
       header: this.header
-    }
+    };
   },
   login: function (evt) {
     evt.preventDefault();

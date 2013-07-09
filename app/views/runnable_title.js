@@ -3,6 +3,12 @@ var BaseView = require('./base_view');
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName: 'h1',
+  events: {
+    'click': 'click'
+  },
+  click: function () {
+    debugger;
+  },
   postRender: function () {
     console.log('runnableId debug:', this.app.utils.base64ToHex(this.model.id));
     this.model.on('change', function () {

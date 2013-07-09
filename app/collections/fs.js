@@ -25,9 +25,17 @@ module.exports = Base.extend({
     else {
       this.setFetched();
     }
+    if (!this.params) {
+      console.log((new Error()).stack);
+    }
+    console.log('')
+    console.log('')
+    console.log('PARAMS')
+    console.log(this.params)
+    console.log('')
+    console.log('')
     // since model is a function must set idAttribute manually
     this._idAttr = File.prototype.idAttribute;
-    debugger;
   },
   url  : function () {
     var containerId = this.options.containerId || this.params.containerId;

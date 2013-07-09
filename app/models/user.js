@@ -50,8 +50,8 @@ var User = module.exports = Base.extend({
   },
   login: function (emailUsername, password, cb) {
     cb = cb || function () {};
-    var cbOptions = utils.successErrorToCB(cb);
     var self = this;
+    var cbToOpts = utils.successErrorToCB;
     var auth = new Base({
       email: emailUsername,
       password: password
@@ -59,13 +59,13 @@ var User = module.exports = Base.extend({
       url: '/token',
       app: this.app
     });
-    var cbOpts = this.app.utils.successErrorToCB;
-    auth.save({}, cbOpts(function (err) {
-      if (err) {
-        alert(err);
+    auth.save({}, cbToOpts(function (err) {
+      if (err) { cb(err); } else {
+        var options = cbToOpts(cb);
+        self.fetch(_.extend(options, {
+          url: '/users/me'
+        }));
       }
-      self.set('_id', 'me');
-      self.fetch(cbOptions);
     }));
   },
   vote: function (project, cb) {

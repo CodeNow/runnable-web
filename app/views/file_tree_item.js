@@ -44,7 +44,7 @@ module.exports = BaseView.extend({
     this.model.destroy();
   },
   create: function (type) {
-    var dir = this.parentView.model;
+    var collection = this.parentView.collection;
     this.newFileModal = new NewFileModal({
       collection : collection,
       type: type,

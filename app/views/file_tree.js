@@ -1,6 +1,7 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
-var FileMenu = require('./file_menu');
+// var FileMenu = require('./file_menu');
+// var NewFileModal = require('./new_file_modal');
 var utils = require('../utils');
 
 var Super = BaseView.prototype;
@@ -9,7 +10,32 @@ module.exports = BaseView.extend({
   className: 'folder',
   events: {
     'click span.dir:first' : 'toggle'
+    // 'contextmenu' : 'contextMenu'
   },
+  // contextMenu: function (evt) {
+  //   evt.preventDefault(); // prevent browser context menu
+  //   if (this.menu) {
+  //     this.menu.remove();
+  //     this.menu = null;
+  //   }
+  //   var menu = this.menu = new FileMenu({
+  //     createOnly: true,
+  //     model: this.model,
+  //     top  : evt.pageY,
+  //     left : evt.pageX,
+  //     app:this.app
+  //   });
+  //   this.listenToOnce(menu, 'create', this.create.bind(this));
+  //   this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
+  // },
+  // create: function (type) {
+  //   var dir = this.parentView.model;
+  //   this.newFileModal = new NewFileModal({
+  //     collection : collection,
+  //     type: type,
+  //     app:this.app
+  //   });
+  // },
   getTemplateData: function () {
     return this.options;
   },
@@ -112,9 +138,6 @@ module.exports = BaseView.extend({
   },
   hideLoader: function () {
     //TODO
-  },
-  showError: function (err) {
-    alert(err);
   }
 });
 

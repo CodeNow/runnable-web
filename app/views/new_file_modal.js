@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var ModalView = require('./modal_view');
-var Fs = require('../models/fs');
+var File = require('../models/file');
+var Dir = require('../models/dir');
 var utils = require('../utils');
 var Super = ModalView.prototype;
 
@@ -20,13 +21,17 @@ module.exports = ModalView.extend({
   submit: function (evt) {
     evt.preventDefault();
     // TODO: break out fs back into file and dir, when fs colleciton is changed back too - // if (this.options.type == 'dir' || this.options.type == 'folder')
-    var type = this.options.type;
-    var model = new Fs({}, { app: this.app });
     var data = $(evt.currentTarget).serializeObject();
+    var type = this.options.type;
+    var dir  = (type == 'folder' || type == 'dir');
+    var model = (dir)
+      ? new Dir({}, {app:this.app})
+      : new File({}, {app:this.app});
+    debugger;
     data = _.extend(data, {
-      'dir'     : (type == 'folder' || type == 'dir'),
-      'path'    : this.collection.params.path,
-      'content' : " " // init file content to blank..
+      dir     : dir,
+      path    : this.collection.params.path,
+      content : " " // init file content to blank..
     });
     var options = utils.successErrorToCB(this.saveCallback.bind(this));
     options.url = _.result(this.collection, 'url');

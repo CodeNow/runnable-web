@@ -56,6 +56,20 @@ function fetchContainer (containerId, callback) {
   });
 }
 
+function fetchImage (imageId, callback) {
+  var spec = {
+    image: {
+      model: 'Image',
+      params: {
+        _id: imageId
+      }
+    }
+  };
+  fetch.call(this, spec, function (err, results) {
+    callback(err, results && results.image);
+  });
+}
+
 function createContainerFromImage (imageId, callback) {
   var self = this;
   var app = this.app;
@@ -75,8 +89,10 @@ function createContainerFromImage (imageId, callback) {
 
 function fetchFilesForContainer (containerId, callback) {
   var app = this.app;
+  // rootDir needs an id else rendr wont store it in model_store,
+  // also id cannot conflict with any other dir in rendr model_store
   var rootDir = new Dir({
-    _id : 'root', // needs an id else it wont be stored by rendr
+    _id : 'root'+containerId,
     path: '/',
     name: '',
     dir : true,
@@ -85,6 +101,7 @@ function fetchFilesForContainer (containerId, callback) {
   }, {
     app: app
   });
+
   var defaultFilesSpec = {
     defaultFiles: {
       collection: 'OpenFiles',
@@ -93,7 +110,7 @@ function fetchFilesForContainer (containerId, callback) {
         'default'  : true
       }
     }
-  }
+  };
   async.parallel([
     function (cb) {
       var opts = utils.successErrorToCB(cb);
@@ -295,7 +312,7 @@ module.exports = {
       },
       function container (results, cb) {
         fetchContainer.call(self, results.image, function (err, container) {
-          cb(err, container && _.extend(results, {
+          cb(err, _.extend(results, {
             container: container,
             noHeader : 1,
             noFooter : 1
@@ -308,6 +325,14 @@ module.exports = {
     var self = this;
     async.waterfall([
       fetchUserAndContainer.bind(this, params._id),
+      function parentImage (results, cb) {
+        var imageId = results.container.get('parent');
+        fetchImage.call(self, imageId, function (err, image) {
+          cb(err, _.extend(results, {
+            image: image
+          }));
+        });
+      },
       function check404 (results, cb) {
         if (!results || !results.container) {
           cb({ status:404 });
@@ -324,6 +349,7 @@ module.exports = {
     ], function (err, results) {
       if (err) { callback(err); } else {
 
+        console.log(results.image);
         console.log(results.defaultFiles.at(0));
         console.log(results.defaultFiles.at(0).url);
         //DEFAULT FILES IS RETURNING DIRS AND ALL FILES?

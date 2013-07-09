@@ -1,26 +1,19 @@
-var Runnable = require('./runnable');
 var _ = require('underscore');
+var Runnable = require('./runnable');
+var utils = require('../utils');
 var Super = Runnable.prototype;
+var Container = require('./container');
 
 module.exports = Runnable.extend({
   urlRoot: '/runnables',
   defaults: {
     votes: 0
   },
-  virtuals: function () {
-    var virtuals = _.clone(_.result(Super, 'virtuals'));
-    return _.extend(virtuals, {
-      niceFramework : 'niceFramework'
-    });
-  },
-  niceFramework: function () {
-    var friendlyFrameworks = {
-      'node.js'  : 'Node.js',
-      'php'      : 'PHP',
-      'python'   : 'Python'
-    };
-    return friendlyFrameworks[this.get('framework')];
-  },
+  // virtuals: function () {
+  //   var virtuals = _.clone(_.result(Super, 'virtuals'));
+  //   return _.extend(virtuals, {
+  //   });
+  // },
   incVote: function () {
     votes = this.get('votes') + 1;
     this.set('votes', votes);
@@ -30,6 +23,22 @@ module.exports = Runnable.extend({
     votes = this.get('votes') - 1;
     this.set('votes', votes);
     return this;
+  },
+  publishFromContainer: function (containerId, callback) {
+    var app = this.app;
+    var cb = function (err, image) {
+      if (err) { callback(err); } else {
+        //destroy container
+        Container.destroyById(containerId, function () {}); // we dont care about the callback;
+        callback(null, image);
+      }
+    };
+    var url = _.result(image, 'url')+'?from='+containerId;
+    var options = utils.successErrorToCB();
+    options = _.extend(options, {
+      url: url
+    });
+    image.save({}, options);
   }
 });
 

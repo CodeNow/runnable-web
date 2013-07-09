@@ -22,7 +22,7 @@ module.exports = BaseView.extend({
   },
   close: function () {
     // note! you cannot rely on this.model.collection to be openFiles
-    // since the model belongs to two collection (folderFile, openFiles)
+    // since the model belongs to two collection (dirContents, openFiles)
     // it could point to either.
     this.parentView.collection.remove(this.model);
   }
