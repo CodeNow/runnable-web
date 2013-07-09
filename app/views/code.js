@@ -6,6 +6,14 @@ module.exports = BaseView.extend({
   className: 'tab-pane with-file-browser',
   // minHeight: 300,
   // maxHeight: 550,
+  getTemplateData: function () {
+    //for serverside render
+    var selectedFile = this.collection.selectedFile()
+    var code = (selectedFile && selectedFile.get('content')) || '';
+    return {
+      code: code
+    };
+  },
   postRender: function () {
     // render should only occur once for this view,
     // setFile is what updates the editor.

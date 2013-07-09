@@ -8,10 +8,12 @@ module.exports = Base.extend({
   model: File,
   url  : function () {
     return '/users/me/runnables/:containerId/files'
-      .replace(':containerId', this.options.containerId);
+      .replace(':containerId', this.containerId);
   },
-  initialize: function () {
+  initialize: function (models, options) {
     Super.initialize.apply(this, arguments)
+    this.containerId = options.containerId;
+
     this.listenTo(this, 'change:selected', this.onChangeSelected.bind(this));
     this.listenTo(this, 'add', this.onAdd.bind(this));
     // dispatch is clientside only beware!

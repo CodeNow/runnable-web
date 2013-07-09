@@ -16,7 +16,7 @@ module.exports = Base.extend({
   },
   niceCreated: function () {
     return moment(this.get('created')).fromNow();
-  },
+  }
 });
 
 module.exports.id = "Runnable";

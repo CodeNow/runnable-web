@@ -3,7 +3,7 @@ var _ = require('underscore');
 var Super = Runnable.prototype;
 var utils = require('../utils');
 
-module.exports = Runnable.extend({
+var Container = module.exports = Runnable.extend({
   urlRoot: '/users/me/runnables',
   run: function (runCB) {
     var options = utils.successErrorToCB(function (err, model) {
@@ -11,10 +11,12 @@ module.exports = Runnable.extend({
     });
     this.save({running: true}, options);
   }
-  // virtuals: function () {
-  //   var virtuals = _.clone(_.result(Super, 'virtuals'));
-  //   return _.extend(virtuals, {});
-  // }
 });
+
+module.exports.destroyById = function (containerId, cb) {
+  var container = new Container({_id:containerId}, {app:this.app});
+  var options = utils.successErrorToCb(cb);
+  container.destroy(options);
+};
 
 module.exports.id = "Container";

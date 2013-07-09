@@ -7,7 +7,9 @@ module.exports = RendrBase.extend({
   virtuals: {},
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
-    _.extend(this, _.pick(options, 'urlRoot'));
+    if (options) {
+      _.extend(this, _.pick(options, 'urlRoot'));
+    }
   },
   parse: function (response) {
     if (this.debugParse) {

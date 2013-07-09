@@ -12,7 +12,8 @@ module.exports = BaseView.extend({
         alert(err);
       }
       else {
-        // open container
+        // this can be changed to push state
+        window.location.href = '/me/'+this.options.container;
       }
     });
   }
