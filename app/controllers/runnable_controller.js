@@ -76,7 +76,7 @@ function createContainerFromImage (imageId, callback) {
   if (true) {
     // HARDCODED FOR NOW PULLS THE SAME CONTAINER OVER AND OVER
     console.log('hit!');
-    fetchContainer.call(this, "UdsGESncnjgIAAAG", callback);
+    fetchContainer.call(this, "UduGQNJ_RwZkAAAR", callback);
   }
   else {
     var container = new Container({}, { app:app });
@@ -313,8 +313,8 @@ module.exports = {
         fetch.call(self, spec, cb);
       },
       function container (results, cb) {
-        fetchContainer.call(self, results.image, function (err, container) {
-          cb(err, _.extend(results, {
+        fetchContainer.call(self, params._id, function (err, container) {
+          cb(err, container && _.extend(results, {
             container: container,
             noHeader : 1,
             noFooter : 1
