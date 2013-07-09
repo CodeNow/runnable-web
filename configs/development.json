@@ -17,7 +17,7 @@
 
   "api": {
     "default": {
-      "host": "localhost:3030",
+      "host": "harbourmaster.runnableapp.dev:3030",
       "protocol": "http"
     }
   },
