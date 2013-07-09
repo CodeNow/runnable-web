@@ -59,7 +59,6 @@ module.exports = BaseView.extend({
   postRender: function () {
     this.openClass();
     //todo: remove display-none
-    debugger;
     // clientside postHydrate and getTemplateData have occured.
     this.$contentsUL = this.$('ul').first();
     // alert("Get here "+ );
@@ -98,12 +97,13 @@ module.exports = BaseView.extend({
     var self = this;
     var fileList = _.findWhere(this.childViews, {name:'fs_list'});
     var collection = fileList.collection;
-    if (collection.unFetched()) {
+    if (!collection.fetched) {
       this.showLoader();
       var options = utils.successErrorToCB(function (err) {
         this.hideLoader();
         if (err) this.showError(err);
       }.bind(this));
+      options.data = collection.params; // VERY IMPORTANT! - ask TJ.
       collection.fetch(options);
     }
   },

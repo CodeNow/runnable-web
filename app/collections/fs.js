@@ -11,8 +11,7 @@ module.exports = Base.extend({
     this.model = function (attrs, opts) {
       var opts = opts || {};
       opts.app = self.app;
-      var params = self.options.params || self.params;
-      attrs.containerId = params.containerId;
+      attrs.containerId = self.containerId;
       return (attrs.dir)
         ? new Dir(attrs, opts)
         : new File(attrs, opts);
@@ -24,7 +23,7 @@ module.exports = Base.extend({
     this.containerId = options.containerId;
 
     if (!this.length) {
-      this.listenToOnce(this, 'reset sync change add', this.setFetched.bind(this));
+      this.listenToOnce(this, 'sync change add', this.setFetched.bind(this));
     }
     else {
       this.setFetched();
@@ -36,9 +35,7 @@ module.exports = Base.extend({
   },
   setFetched: function () {
     this.fetched = true;
-  },
-  unFetched: function () {
-    return Boolean(this.fetched);
+    debugger;
   }
 });
 

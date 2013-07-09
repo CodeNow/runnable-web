@@ -115,7 +115,7 @@ function fetchFilesForContainer (containerId, callback) {
     function (cb) {
       var opts = utils.successErrorToCB(cb);
       console.log(rootDir.contents.params);
-      opts.data = rootDir.contents.params;
+      opts.data = rootDir.contents.params; // VERY IMPORTANT! - ask TJ.
       rootDir.contents.fetch(opts);
     },
     fetch.bind(this, defaultFilesSpec)

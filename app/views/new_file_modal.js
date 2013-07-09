@@ -21,21 +21,20 @@ module.exports = ModalView.extend({
   submit: function (evt) {
     evt.preventDefault();
     // TODO: break out fs back into file and dir, when fs colleciton is changed back too - // if (this.options.type == 'dir' || this.options.type == 'folder')
-    var data = $(evt.currentTarget).serializeObject();
     var type = this.options.type;
     var dir  = (type == 'folder' || type == 'dir');
-    var model = (dir)
-      ? new Dir({}, {app:this.app})
-      : new File({}, {app:this.app});
-    debugger;
+    var data = $(evt.currentTarget).serializeObject();
     data = _.extend(data, {
       dir     : dir,
       path    : this.collection.params.path,
       content : " " // init file content to blank..
     });
+    var model = (dir)
+      ? new Dir(data, {app:this.app})
+      : new File(data, {app:this.app});
     var options = utils.successErrorToCB(this.saveCallback.bind(this));
     options.url = _.result(this.collection, 'url');
-    model.save(data, options);
+    model.save({}, options);
   },
   saveCallback: function (err, model) {
     if (err) {
