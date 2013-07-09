@@ -360,7 +360,7 @@ module.exports = {
         });
         results.defaultFiles.reset(defaultFiles);
         var firstDefault = results.defaultFiles.at(0);
-        if (firstDefault) firstDefault.set('selected', true);
+        // if (firstDefault) firstDefault.set('selected', true);
         callback(err, results);
       }
     });

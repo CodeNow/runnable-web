@@ -7,7 +7,6 @@ var utils = require('../utils');
 module.exports = BaseView.extend({
   tagName: 'span',
   events: {
-    'contextmenu' : 'showMenu',
     'submit form' : 'submitName',
     'blur input'  : 'escEditMode',
     'click a'     : 'click'
@@ -20,40 +19,10 @@ module.exports = BaseView.extend({
       this.app.dispatch.trigger('open:file', this.model);
     }
   },
-  showMenu: function (evt) {
-    evt.preventDefault(); // prevent browser context menu
-    if (this.menu) {
-      this.menu.remove();
-      this.menu = null;
-    }
-    var menu = this.menu = new FileMenu({
-      model: this.model,
-      top  : evt.pageY,
-      left : evt.pageX,
-      app:this.app
-    });
-    this.listenToOnce(menu, 'rename', this.setEditMode.bind(this, true));
-    this.listenToOnce(menu, 'delete', this.destroyModel.bind(this, true));
-    this.listenToOnce(menu, 'create', this.create.bind(this));
-    this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
-  },
-  destroyModel: function () {
-    var options = utils.successErrorToCB(function (err) {
-      if (err) this.showError(err);
-    }.bind(this));
-    this.model.destroy();
-  },
-  create: function (type) {
-    var collection = this.parentView.collection;
-    this.newFileModal = new NewFileModal({
-      collection : collection,
-      type: type,
-      app:this.app
-    });
-  },
   postHydrate: function () {
     this.listenTo(this.model, 'change:name', this.render.bind(this));
     this.listenTo(this.model, 'change:selected', this.highlightIfSelected.bind(this));
+    this.listenTo(this.model, 'rename', this.setEditMode.bind(this, true));
   },
   highlightIfSelected: function () {
     if (this.model.get('selected')) {

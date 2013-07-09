@@ -1,7 +1,7 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
-// var FileMenu = require('./file_menu');
-// var NewFileModal = require('./new_file_modal');
+var FileMenu = require('./file_menu');
+var NewFileModal = require('./new_file_modal');
 var utils = require('../utils');
 
 var Super = BaseView.prototype;
@@ -9,33 +9,45 @@ module.exports = BaseView.extend({
   tagName: 'li',
   className: 'folder',
   events: {
-    'click span.dir:first' : 'toggle'
-    // 'contextmenu' : 'contextMenu'
+    'click span.dir:first' : 'toggle',
+    'contextmenu' : 'contextMenu'
   },
-  // contextMenu: function (evt) {
-  //   evt.preventDefault(); // prevent browser context menu
-  //   if (this.menu) {
-  //     this.menu.remove();
-  //     this.menu = null;
-  //   }
-  //   var menu = this.menu = new FileMenu({
-  //     createOnly: true,
-  //     model: this.model,
-  //     top  : evt.pageY,
-  //     left : evt.pageX,
-  //     app:this.app
-  //   });
-  //   this.listenToOnce(menu, 'create', this.create.bind(this));
-  //   this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
-  // },
-  // create: function (type) {
-  //   var dir = this.parentView.model;
-  //   this.newFileModal = new NewFileModal({
-  //     collection : collection,
-  //     type: type,
-  //     app:this.app
-  //   });
-  // },
+  contextMenu: function (evt, createOnly) {
+    evt.preventDefault(); // prevent browser context menu
+    if (this.menu) {
+      this.menu.remove();
+      this.menu = null;
+    }
+    var collection = _.findWhere(this.childViews, {name:'fs_list'}).collection;
+    var modelId = $(evt.target).data('id');
+    var model = collection.get(modelId);
+    model = model || this.model;
+    var menu = this.menu = new FileMenu({
+      createOnly: this.model.isRootDir(),
+      model: model,
+      top  : evt.pageY,
+      left : evt.pageX,
+      app  : this.app
+    });
+    this.listenToOnce(menu, 'rename', model.trigger.bind(model, 'rename'));
+    this.listenToOnce(menu, 'delete', this.del.bind(this, model));
+    this.listenToOnce(menu, 'create', this.create.bind(this));
+    this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
+  },
+  del: function (model) {
+    var options = utils.successErrorToCB(function (err) {
+      if (err) this.showError(err);
+    }.bind(this));
+    model.destroy();
+  },
+  create: function (type) {
+    var collection = _.findWhere(this.childViews, {name:'fs_list'}).collection;
+    this.newFileModal = new NewFileModal({
+      collection : collection,
+      type: type,
+      app:this.app
+    });
+  },
   getTemplateData: function () {
     return this.options;
   },
