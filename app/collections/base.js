@@ -5,6 +5,7 @@ var _ = require('underscore')
 module.exports = RendrBase.extend({
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
+    debugger;
     if (options) {
       _.extend(this, _.pick(options, 'params'));
     }

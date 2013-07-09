@@ -12,11 +12,9 @@ module.exports = Base.extend({
     var containerId = attrs.containerId;
     this.contents = new FSCollection(null, {
       app : this.app,
-      url : _.result(this.collection, 'url'),
       params : {                    // params are used with render hydrate
         path : path,
         containerId: containerId,
-        url : _.result(this.collection, 'url')
       },
       containerId: containerId,
       path       : path

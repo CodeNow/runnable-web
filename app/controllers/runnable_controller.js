@@ -114,6 +114,8 @@ function fetchFilesForContainer (containerId, callback) {
   async.parallel([
     function (cb) {
       var opts = utils.successErrorToCB(cb);
+      console.log(rootDir.contents.params);
+      opts.data = rootDir.contents.params;
       rootDir.contents.fetch(opts);
     },
     fetch.bind(this, defaultFilesSpec)
@@ -239,8 +241,8 @@ module.exports = {
 
           // }
         }
-      ], function (err, data) {
-        callback(err, data);
+      ], function (err, results) {
+        callback(err, results);
       });
     }
   },
@@ -359,7 +361,6 @@ module.exports = {
         results.defaultFiles.reset(defaultFiles);
         var firstDefault = results.defaultFiles.at(0);
         if (firstDefault) firstDefault.set('selected', true);
-
         callback(err, results);
       }
     });
