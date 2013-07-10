@@ -7,15 +7,15 @@ module.exports = BaseView.extend({
     'click' : 'saveAndOpenContainerPage'
   },
   saveAndOpenContainerPage: function () {
-    this.collection.saveAll(function (err) {
-      if (err) {
-        alert(err);
-      }
-      else {
+    // this.collection.saveAll(function (err) {
+      // if (err) {
+      //   alert(err);
+      // }
+      // else {
         // this can be changed to push state
-        window.location.href = '/me/'+this.options.container;
-      }
-    });
+        window.location.href = '/me/'+this.options.containerid;
+      // }
+    // });
   }
 });
 

@@ -1,9 +1,8 @@
 {{#unless editMode}}
   {{#with runnable}}
   {{name}}
-  {{#if isOwner}}
-  <a href="" class="edit-link">Edit</a>
-  {{/if}}
+    <h1>{{isOwner}}</h1>
+    <a href="javascript:void(0);" class="edit-link">Edit</a>
   {{/with}}
 {{else}}
   {{#with runnable}}

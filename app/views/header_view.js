@@ -9,10 +9,13 @@ module.exports = BaseView.extend({
     /// until we find a better location.. since this is the first view initialize
     /// and it has the current user.
     this.app.user = this.model;
+    console.log("HeaderView postInitialize this.app.user", this.app.user);
   },
   postHydrate: function () {
     // read long comment above, postHydrate - same reason for clientside
     this.app.user = this.model;
+    console.log("HeaderView postHydrate this.app.user", this.app.user);
+
     this.listenTo(this.model, 'change:username', function () {
       //hack until TJ finds a subsetter location
       window.location.reload();

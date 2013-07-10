@@ -351,9 +351,9 @@ module.exports = {
     ], function (err, results) {
       if (err) { callback(err); } else {
 
-        console.log(results.image);
-        console.log(results.defaultFiles.at(0));
-        console.log(results.defaultFiles.at(0).url);
+        // console.log(results.image);
+        // console.log(results.defaultFiles.at(0));
+        // console.log(results.defaultFiles.at(0).url);
         //DEFAULT FILES IS RETURNING DIRS AND ALL FILES?
         var defaultFiles = results.defaultFiles.filter(function (fs) {
           return fs.get('default') && fs.isFile();
