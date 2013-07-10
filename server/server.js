@@ -77,7 +77,7 @@ function initMiddleware() {
     app.use(express.session({
       key: env.current.cookieKey,
       secret: env.current.cookieSecret,
-      store: new redisStore,
+      store: new redisStore(env.current.redis),
         ttl: env.current.cookieExpires,
       cookie: {
         path: '/',
