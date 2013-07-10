@@ -6,7 +6,7 @@ module.exports = BaseView.extend({
     console.log("http://" + this.model.get("terminal"));
 
     $('.web-iframe').attr('src', "http://" + this.model.get("web"));
-    $('.project-tail-iframe').attr('src', "http://" + this.model.get("terminal"));
+    $('.project-tail-iframe').attr('src', "http://" + this.model.get("logs"));
   }
 });
 
