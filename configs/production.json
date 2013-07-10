@@ -2,6 +2,10 @@
 
   "port": 3000,
   "ipaddress": "10.0.1.42",
+  "redis": {
+    "port": 6379,
+    "ipaddress": "10.0.1.15"
+  },
 
   "cookieKey": "runnable.sid",
   "cookieSecret": "$up3r,$3<r3t",
