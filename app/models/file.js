@@ -14,36 +14,38 @@ var obj = {
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
     this.listenTo(this, 'change:content', this.onChangeContent.bind(this));
-    this.listenTo(this, 'sync', this.unsaved.bind(this, false)); // on sync set unsaved to false
-    this.unsaved(false);
+    this.listenTo(this, 'sync', this.updateSaved.bind(this)); // on sync set unsaved to false
+    this.updateSaved();
   },
   loseUnsavedChanges: function () {
-    if (this.hasUnsavedChanges()) {
-      this.set('content', this.get('savedContent'));
+    debugger;
+    if (this.unsaved()) {
+      this.set('content', this.savedContent);
       this.editorSession = null; //clear out editor session
     }
     return this;
   },
-  _checkUnsaved: function (val) {
+  _checkUnsaved: function () {
     return this.savedContent != this.get('content');
+  },
+  updateSaved: function () {
+    this.savedContent = this.get('content');
+    this.unsaved(false);
   },
   unsaved: function (bool) {
     if (utils.exists(bool)) {
-      if (!bool) this.savedContent = this.get('content'); //saved
-      this._unsaved = bool; //set
-      this.trigger('unsaved', bool);
+      var prevUnsaved = this._unsaved;
+      if (prevUnsaved != bool) {
+        this._unsaved = bool; //set
+        this.trigger('unsaved:content', bool);
+      }
     }
     else {
       return this._unsaved; //get
     }
   },
   onChangeContent: function () {
-    var prevUnsaved = this.unsaved();
-    var unsaved = this._checkUnsaved();
-
-    if (prevUnsaved !== unsaved) {
-      this.unsaved(unsaved);
-    }
+    this.unsaved(this._checkUnsaved());
   }
 };
 
