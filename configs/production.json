@@ -18,8 +18,8 @@
 
   "api": {
     "default": {
-      "host": "10.0.1.54",
-      "protocol": "https"
+      "host": "10.0.1.54:3000",
+      "protocol": "http"
     }
   }
 
