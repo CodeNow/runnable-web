@@ -7,7 +7,6 @@ module.exports = BaseView.extend({
     this.listenTo(this.collection, 'add remove change:selected', this.render.bind(this));
   },
   getTemplateData: function () {
-    debugger;
     return this.options;
   }
 });

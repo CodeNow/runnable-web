@@ -22,9 +22,10 @@ module.exports = BaseView.extend({
     var collection = _.findWhere(this.childViews, {name:'fs_list'}).collection;
     var modelId = $(evt.target).data('id');
     var model = collection.get(modelId);
+    var createOnly = !Boolean(modelId); // if grey area clicked don't show rename or delete..could be confusing to user
     model = model || this.model;
     var menu = this.menu = new FileMenu({
-      createOnly: this.model.isRootDir(),
+      createOnly: createOnly,
       model: model,
       top  : evt.pageY,
       left : evt.pageX,

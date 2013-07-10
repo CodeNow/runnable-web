@@ -6,9 +6,6 @@ module.exports = BaseView.extend({
   events: {
     'click': 'click'
   },
-  click: function () {
-    debugger;
-  },
   postRender: function () {
     console.log('runnableId debug:', this.app.utils.base64ToHex(this.model.id));
     this.model.on('change', function () {

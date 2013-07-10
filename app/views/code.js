@@ -67,7 +67,6 @@ module.exports = BaseView.extend({
         this.listenTo(session, 'changeScrollTop',  this.onScrollTop.bind(this));
       }.bind(this);
       // fetch file if unfetched -- maybe change this to always?
-      debugger;
       if (file.unFetched()) {
         this.showLoader();
         options = utils.successErrorToCB(function (err) {
