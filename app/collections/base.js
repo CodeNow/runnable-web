@@ -15,4 +15,15 @@ module.exports = RendrBase.extend({
     }
     return Super.parse.apply(this, arguments);
   },
+  _prepareModel: function(attrs, options) {
+    // BACKBONE BUG WORKAROUND
+    // collection.fetch options -> collection.set -> _prepareModel -> model.set
+    // collection.fetch options should not be sent to set... especially not the url
+    // since I am not super familiar with _prepareModel I have only removed url for now.
+    delete options.url; // collection options url should not be passed to model!
+    var model;
+    model = Super._prepareModel.call(this, attrs, options);
+    model.app = this.app;
+    return model;
+  }
 });

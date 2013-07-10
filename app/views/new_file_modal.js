@@ -27,7 +27,8 @@ module.exports = ModalView.extend({
     data = _.extend(data, {
       dir     : dir,
       path    : this.collection.params.path,
-      content : " " // init file content to blank..
+      content : " ", // init file content to blank..
+      containerId: this.collection.params.containerId
     });
     var model = (dir)
       ? new Dir(data, {app:this.app})
@@ -41,6 +42,11 @@ module.exports = ModalView.extend({
       alert(err);
     }
     else {
+      // ASK TJ ABOUT STORE
+      model.store(); // since this model created after page load.. and is used bind to a view in a (re)render..
+      if (model.isDir()) {
+        model.contents.store(); // since this model created after page load.. and is used bind to a view in a (re)render..
+      }
       this.collection.add(model);
       if (model.isFile()) {
         this.app.dispatch.trigger('open:file', model);

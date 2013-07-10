@@ -76,7 +76,8 @@ function createContainerFromImage (imageId, callback) {
   if (true) {
     // HARDCODED FOR NOW PULLS THE SAME CONTAINER OVER AND OVER
     console.log('hit!');
-    fetchContainer.call(this, "UduGQNJ_RwZkAAAR", callback);
+    // fetchContainer.call(this, "UduGQNJ_RwZkAAAR", callback);
+    fetchContainer.call(this, "UdyCVDjBjrkbAAAG", callback);
   }
   else {
     var container = new Container({}, { app:app });
@@ -114,7 +115,6 @@ function fetchFilesForContainer (containerId, callback) {
   async.parallel([
     function (cb) {
       var opts = utils.successErrorToCB(cb);
-      console.log(rootDir.contents.params);
       opts.data = rootDir.contents.params; // VERY IMPORTANT! - ask TJ.
       rootDir.contents.fetch(opts);
     },
@@ -126,6 +126,7 @@ function fetchFilesForContainer (containerId, callback) {
       // and defaultFiles
       // TODO: build default files off root dir here
       var results = data[1]; // defaultFiles
+      results.rootDir = rootDir;
       (function traverseTreeAndAddToResults (dir) {
         // doesnt matter what the key is just must be unique
         console.log('dir:'+dir.id);
@@ -144,7 +145,6 @@ function fetchFilesForContainer (containerId, callback) {
           });
         }
       })(rootDir);
-      results.rootDir = rootDir;
       callback(err, results);
     }
   });

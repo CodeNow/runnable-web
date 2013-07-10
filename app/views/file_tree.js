@@ -14,6 +14,7 @@ module.exports = BaseView.extend({
   },
   contextMenu: function (evt, createOnly) {
     evt.preventDefault(); // prevent browser context menu
+    evt.stopPropagation();
     if (this.menu) {
       this.menu.remove();
       this.menu = null;
@@ -111,11 +112,22 @@ module.exports = BaseView.extend({
     var collection = fileList.collection;
     if (!collection.fetched) {
       this.showLoader();
-      var options = utils.successErrorToCB(function (err) {
+      var options = utils.successErrorToCB(function (err, collection) {
         this.hideLoader();
-        if (err) this.showError(err);
+        if (err) {
+          this.showError(err);
+        }
+        else {
+          collection.forEach(function (model) {
+            model.store(); // VERY IMPORTANT! - ask TJ.
+            if (model.isDir())
+              model.contents.store();
+          });
+          collection.trigger('sync');
+        }
       }.bind(this));
       options.data = collection.params; // VERY IMPORTANT! - ask TJ.
+      options.silent = true; // silent until all the models are for sure in store..
       collection.fetch(options);
     }
   },

@@ -1,15 +1,18 @@
 var Base = require('./fs'); //!FS
 var Super = Base.prototype;
 var utils = require('../utils');
+var _ = require('underscore');
 
-module.exports = Base.extend({
+var obj = {
   defaults: {
     type: 'file'
   },
   unFetched: function () {
     return !utils.exists(this.get('content'));
   }
-});
+};
+
+module.exports = Base.extend(obj);
 
 // module.exports = Fs.extend({
 //   initialize: function (attrs, options) {
