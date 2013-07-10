@@ -55,7 +55,7 @@ exports.start = function start(options, cb) {
   options = options || {};
   var port = options.port || 3000;
   console.log('attempt listen on port '+ port);
-  app.listen(port, cb);
+  app.listen(port, options.ipaddress, cb);
   console.log("server pid " + process.pid + " listening on port " + port + " in " + app.settings.env + " mode");
 };
 
