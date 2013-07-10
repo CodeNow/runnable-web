@@ -2,8 +2,8 @@
   <div class="span9">
     <nav class="project-nav">
       <ul>
-      {{#each runnables.models}}
-      {{view "runnable_item_view" model=.}}
+      {{#each images.models}}
+        {{view "runnable_item_view" model=.}}
       {{/each}}
       </ul>
     </nav>

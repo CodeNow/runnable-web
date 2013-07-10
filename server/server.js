@@ -170,4 +170,10 @@ function addHandlebarsHelpers() {
 
     return new Handlebars.SafeString(str);
   });
+
+  Handlebars.registerHelper('dateAgo', function (str) {
+    var moment = require('moment');
+    str = moment(str).fromNow();
+    return new Handlebars.SafeString(str);
+  });
 }
