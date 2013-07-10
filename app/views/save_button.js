@@ -8,18 +8,17 @@ module.exports = BaseView.extend({
     'click div' : 'saveAll'
   },
   postRender: function () {
-    this.listenTo(this.collection, "hasUnsavedChanges", this.hasUnsavedChanges.bind(this));
-    this.listenTo(this.collection, "noUnsavedChanges", this.noUnsavedChanges.bind(this));
+    this.listenTo(this.collection, "unsaved", this.onChangeUnsaved.bind(this));
   },
   saveAll :function () {
     console.log("Trying to save all");
     this.collection.saveAll(function (){});
   },
-  hasUnsavedChanges: function () {
-    this.$el.css('color', 'blue');
-  },
-  noUnsavedChanges: function () {
-    this.$el.css('color', 'gray');
+  onChangeUnsaved: function (bool) {
+    if (bool)
+      this.$el.css('color', 'blue');
+    else
+      this.$el.css('color', 'gray');
   }
  });
 

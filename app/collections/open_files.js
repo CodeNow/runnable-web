@@ -15,6 +15,7 @@ module.exports = Base.extend({
     this.containerId = options.containerId;
 
     this.listenTo(this, 'change:selected', this.onChangeSelected.bind(this));
+    this.listenTo(this, 'unsaved:content', this.onUnsavedContent.bind(this));
     this.listenTo(this, 'add', this.onAdd.bind(this));
     // dispatch is clientside only beware!
     var dispatch = this.app.dispatch;
@@ -22,8 +23,28 @@ module.exports = Base.extend({
       this.listenTo(dispatch, 'open:file', this.openFile.bind(this));
     }
   },
+  _unsaved: false,
+  _checkUnsaved: function () {
+    return this.some(function (file) {
+      return file.unsaved();
+    });
+  },
+  unsaved: function (bool) {
+    if (utils.exists(bool)) {
+      var prevUnsaved = this._unsaved;
+      if (prevUnsaved != bool) {
+        this._unsaved = bool; //set
+        this.trigger('unsaved', bool);
+      }
+    }
+    else {
+      return this._unsaved; //get
+    }
+  },
+  onUnsavedContent: function () {
+    this.unsaved(this._checkUnsaved());
+  },
   openFile: function (file) {
-    debugger;
     if (file) {
       if (~this.indexOf(file)) {
         file.set('selected', true);
@@ -56,11 +77,12 @@ module.exports = Base.extend({
     return this.findWhere({ selected:true });
   },
   beforeRemove: function (fileRemoved) {
-    if (fileRemoved && fileRemoved.get('selected')) {
+    fileRemoved.loseUnsavedChanges();
+    // update selected file
+    if (fileRemoved.get('selected')) {
       var removedIndex = this.indexOf(fileRemoved);
       fileRemoved.set('selected', null);
-      setTimeout(function () {
-        // timeout to ensure remove has completed
+      setTimeout(function () {             // timeout to ensure remove has completed
         this.selectFileAt(removedIndex-1);
       }.bind(this), 0);
     }
@@ -83,6 +105,25 @@ module.exports = Base.extend({
   },
   onAdd: function (fileAdded) {
     fileAdded.set('selected', true);
+  },
+  saveAll: function (cb) {
+    if (this.unsaved()) {
+      var unsavedFiles = this.toArray().filter(function (file) {
+        return file.unsaved();
+      });
+      async.forEach(unsavedFiles, function (file, acb) {
+        if (file.unsaved()) {
+          var options = utils.successErrorToCB(acb);
+          file.save({}, options);
+        }
+        else {
+          cb();
+        }
+      }, cb);
+    }
+    else {
+      cb();
+    }
   }
 });
 

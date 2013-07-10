@@ -77,7 +77,7 @@ function initMiddleware() {
     app.use(express.session({
       key: env.current.cookieKey,
       secret: env.current.cookieSecret,
-      store: new redisStore,
+      store: new redisStore(env.current.redis),
         ttl: env.current.cookieExpires,
       cookie: {
         path: '/',
@@ -168,6 +168,12 @@ function addHandlebarsHelpers() {
   Handlebars.registerHelper('urlFriendly', function (str) {
     str = utils.urlFriendly(str);
 
+    return new Handlebars.SafeString(str);
+  });
+
+  Handlebars.registerHelper('dateAgo', function (str) {
+    var moment = require('moment');
+    str = moment(str).fromNow();
     return new Handlebars.SafeString(str);
   });
 }

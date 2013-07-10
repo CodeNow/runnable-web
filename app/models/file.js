@@ -7,8 +7,45 @@ var obj = {
   defaults: {
     type: 'file'
   },
+  _unsaved: false,
   unFetched: function () {
     return !utils.exists(this.get('content'));
+  },
+  initialize: function (attrs, options) {
+    Super.initialize.apply(this, arguments);
+    this.listenTo(this, 'change:content', this.onChangeContent.bind(this));
+    this.listenTo(this, 'sync', this.updateSaved.bind(this)); // on sync set unsaved to false
+    this.updateSaved();
+  },
+  loseUnsavedChanges: function () {
+    debugger;
+    if (this.unsaved()) {
+      this.set('content', this.savedContent);
+      this.editorSession = null; //clear out editor session
+    }
+    return this;
+  },
+  _checkUnsaved: function () {
+    return this.savedContent != this.get('content');
+  },
+  updateSaved: function () {
+    this.savedContent = this.get('content');
+    this.unsaved(false);
+  },
+  unsaved: function (bool) {
+    if (utils.exists(bool)) {
+      var prevUnsaved = this._unsaved;
+      if (prevUnsaved != bool) {
+        this._unsaved = bool; //set
+        this.trigger('unsaved:content', bool);
+      }
+    }
+    else {
+      return this._unsaved; //get
+    }
+  },
+  onChangeContent: function () {
+    this.unsaved(this._checkUnsaved());
   }
 };
 

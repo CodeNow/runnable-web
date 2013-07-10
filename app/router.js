@@ -34,6 +34,12 @@ Router.prototype.postInitialize = function() {
     return new Handlebars.SafeString(str);
   });
 
+  Handlebars.registerHelper('dateAgo', function (str) {
+    var moment = require('moment');
+    str = moment(str).fromNow();
+    return new Handlebars.SafeString(str);
+  });
+
   // set up ace worker urls
   var config = ace.require("ace/config"); // or simply ace.config
   [
