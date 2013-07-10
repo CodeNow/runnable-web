@@ -19,7 +19,10 @@ module.exports = {
     };
     var self = this;
     fetch.call(this, spec, function (err, results) {
-      if (err) { callback(err); } else {
+      if (err || results.images.length === 0) {
+        // if err or no images found, go ahead and callback
+        callback(err, results);
+      } else {
         var userIds = results.images.map(function (run) {
           return run.get('owner');
         });
