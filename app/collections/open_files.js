@@ -23,7 +23,6 @@ module.exports = Base.extend({
     }
   },
   openFile: function (file) {
-    debugger;
     if (file) {
       if (~this.indexOf(file)) {
         file.set('selected', true);
@@ -83,6 +82,28 @@ module.exports = Base.extend({
   },
   onAdd: function (fileAdded) {
     fileAdded.set('selected', true);
+  },
+  unsaved: function () {
+    return this.reduce(function (m1, m2) {
+      return m1.unsaved && m2.unsaved;
+    });
+  },
+  saveAll: function (cb) {
+    if (this.unsaved()) {
+      var files = this.toArray();
+      async.forEach(files, function (file, acb) {
+        if (file.unsaved()) {
+          var options = utils.successErrorToCB(acb);
+          file.save({}, options);
+        }
+        else {
+          cb();
+        }
+      }, cb);
+    }
+    else {
+      cb();
+    }
   }
 });
 
