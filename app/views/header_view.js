@@ -4,18 +4,7 @@ var LoginModal = require('./login_modal');
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName:'header',
-  postInitialize: function () {
-    /// ATTN this is where the user is set on the app for all the other views
-    /// until we find a better location.. since this is the first view initialize
-    /// and it has the current user.
-    this.app.user = this.model;
-    console.log("HeaderView postInitialize this.app.user", this.app.user);
-  },
   postHydrate: function () {
-    // read long comment above, postHydrate - same reason for clientside
-    this.app.user = this.model;
-    console.log("HeaderView postHydrate this.app.user", this.app.user);
-
     this.listenTo(this.model, 'change:username', function () {
       //hack until TJ finds a subsetter location
       window.location.reload();

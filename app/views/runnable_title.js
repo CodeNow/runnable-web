@@ -1,5 +1,6 @@
 var BaseView = require('./base_view');
 var utils = require('../utils');
+var Image = require('../models/image');
 var _ = require('underscore');
 
 var Super = BaseView.prototype;
@@ -19,8 +20,10 @@ module.exports = BaseView.extend({
     }, this);
   },
   getTemplateData: function () {
+    var user = this.app.user;
+    var noEdit = (this.model instanceof Image); // for now never show edit button for image
     return _.extend(this.options, {
-      isOwner: true //this.app.user.isOwnerOf(this.model)
+      isOwner: !noEdit && user.isOwnerOf(this.model)
     });
   },
   clickEdit: function (evt) {

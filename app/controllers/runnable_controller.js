@@ -70,7 +70,7 @@ function fetchImage (imageId, callback) {
   });
 }
 
-function createContainerFromImage (imageId, callback) {
+function createContainerFrom (imageIdOrTemplateName, callback) {
   var self = this;
   var app = this.app;
   if (false) {
@@ -82,7 +82,7 @@ function createContainerFromImage (imageId, callback) {
   else {
     var container = new Container({}, { app:app });
     var options = utils.successErrorToCB(callback);
-    container.url = _.result(container, 'url') + '?from=' + imageId;
+    container.url = _.result(container, 'url') + '?from=' + imageIdOrTemplateName;
     container.save({}, options);
 
   }
@@ -199,7 +199,7 @@ module.exports = {
           }
         },
         function container (results, cb) {
-          createContainerFromImage.call(self, results.image.id, function (err, container) {
+          createContainerFrom.call(self, results.image.id, function (err, container) {
             cb(err, _.extend(results, {
               container: container
             }));
@@ -247,56 +247,13 @@ module.exports = {
     }
   },
   'new': function(params, callback) {
-    var controller = this;
-    console.log(params);
-    if (params.channel.length === 16 ) {
-      redirectToProject(params.channel);
-    } else {
-      redirectToChannel(params.channel);
-    }
-    function redirectToProject (projectId) {
-      var spec = {
-        project: {
-          model : 'Project',
-          params: {
-            _id: projectId
-          }
-        }
-      };
-      fetch.call(controller, spec, function (err, results) {
-        if (err) {
-          callback(err);
-        } else {
-          console.log(results);
-          var project = results.image;
-          controller.redirectTo('/' +
-            project.get('_id') + '/' +
-            utils.urlFriendly(project.get('name')) + '/edit');
-        }
-      });
-    }
-
-    function redirectToChannel (channel) {
-      var spec = {
-        channel: {
-          model : 'Channel',
-          params: {
-            tag: channel
-          }
-        }
-      };
-      fetch.call(controller, spec, function (err, results) {
-        if (err) {
-          callback(err);
-        } else {
-          var defaultProject = results.channel.get('0').defaultProject;
-          redirectToProject(defaultProject);
-        }
-      });
-    }
+    createContainerFrom.call(this, params.from, function (err, container) {
+      if (err) { callback(err); } else {
+        controller.redirectTo('/me/'+containerId);
+      }
+    });
   },
-
- output: function (params, callback) {
+  output: function (params, callback) {
     var self = this;
 
     async.waterfall([

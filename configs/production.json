@@ -14,8 +14,8 @@
   "assets": {
     "minify": true,
     "cdn": {
-      "protocol": "https",
-      "cnames": ["cdn.runnable.com"],
+      "protocol": "http",
+      "cnames": ["localhost"],
       "pathPrefix": ""
     }
   },
@@ -24,6 +24,15 @@
     "default": {
       "host": "10.0.1.54:3000",
       "protocol": "http"
+    }
+  },
+
+  "rendrApp": {
+    "mixpanel" : {
+      "key": "8790acfcca0cab43adebbc796f1d4f96"
+    },
+    "googleAnalytics" : {
+      "id": "UA-36631837-1"
     }
   }
 

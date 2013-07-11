@@ -92,18 +92,12 @@ module.exports = {
     fetch.call(this, spec, callback);
   },
 
-  new: function (params, callback) {
+  'new': function (params, callback) {
     var spec = {
       user    : {
         model  : 'User',
         params : {
           _id: 'me'
-        }
-      },
-      projects: {
-        collection : 'Projects',
-        params     : {
-          sort: 'votes'
         }
       },
       channels: {
