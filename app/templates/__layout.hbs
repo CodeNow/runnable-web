@@ -15,6 +15,9 @@
   </head>
 
   <body class="">
+    <!-- leave me at top -->
+    {{view "app_user" model=locals.user}}
+
     {{#exists locals.noHeader}}
       <!-- don't draw anything -->
     {{else}}

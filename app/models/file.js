@@ -18,7 +18,6 @@ var obj = {
     this.updateSaved();
   },
   loseUnsavedChanges: function () {
-    debugger;
     if (this.unsaved()) {
       this.set('content', this.savedContent);
       this.editorSession = null; //clear out editor session
