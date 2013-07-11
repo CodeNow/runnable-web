@@ -1,10 +1,17 @@
 <div class="container">
-  <a class="logo" href="/">Runnable</a>
+  <a class='logo-link' href="/">
+    <span class="logo"></span>
+    <span class="logo-only"></span>
+    Runnable
+  </a>
   {{!view "search_bar_view" collection=images}}
   {{! <nav class="header-nav">
     <a href="/">Browse All</a>
     <a href="/new">Publish Code</a>
   </nav> }}
+  <nav class="header-nav">
+    <span class="loader display-none">Loading..</span>
+  </nav>
   {{#if user.username}}
   <nav class="user-nav dropdown">
     <a href="javascript:void(0);" class="dropdown-toggle">

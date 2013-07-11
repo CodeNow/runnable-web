@@ -247,9 +247,10 @@ module.exports = {
     }
   },
   'new': function(params, callback) {
+    var self = this;
     createContainerFrom.call(this, params.from, function (err, container) {
       if (err) { callback(err); } else {
-        controller.redirectTo('/me/'+containerId);
+        self.redirectTo('/me/'+container.id);
       }
     });
   },

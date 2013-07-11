@@ -10,10 +10,21 @@ module.exports = BaseView.extend({
       window.location.reload();
     });
     this.listenTo(this.model, 'change:gravitar', this.render.bind(this));
+    this.listenTo(this.app, 'change:loading', this.loader.bind(this))
   },
   events: {
     'click #header-login-link' : 'openLogin',
     'click .dropdown-toggle' : 'toggleDropdown'
+  },
+  loader: function (model, loading) {
+    var $loader = this.$('.logo-only');
+    console.log($loader)
+    if (loading) {
+      $loader.addClass('loading');
+    }
+    else {
+      $loader.removeClass('loading');
+    }
   },
   getTemplateData: function () {
     return {
