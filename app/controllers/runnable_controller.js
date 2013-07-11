@@ -247,14 +247,13 @@ module.exports = {
     }
   },
   'new': function(params, callback) {
-    var controller = this;
-    createContainerFrom(params.from, function (err, container) {
+    createContainerFrom.call(this, params.from, function (err, container) {
       if (err) { callback(err); } else {
         controller.redirectTo('/me/'+containerId);
       }
     });
   },
- output: function (params, callback) {
+  output: function (params, callback) {
     var self = this;
 
     async.waterfall([
