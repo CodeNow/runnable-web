@@ -97,7 +97,7 @@ module.exports = Base.extend({
     if (index > this.length) index = this.length;
     var nextFile = this.at(index);
     if (nextFile) nextFile.set('selected', true);
-    this.trigger('select:file', nextFile);
+    this.trigger('select:file', nextFile); // gets triggered even if null
   },
   onAdd: function (fileAdded) {
     fileAdded.set('selected', true);
