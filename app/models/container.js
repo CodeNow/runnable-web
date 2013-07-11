@@ -10,13 +10,22 @@ var Container = module.exports = Runnable.extend({
       runCB(err);
     });
     this.save({running: true}, options);
+  },
+  destroyById: function (containerId, callback) {
+    var container = this.app.fetcher.modelStore.get('container', containerId, true);
+    var options = utils.successErrorToCB(destroyCallback.bind(this));
+    function destroyCallback(err, container) {
+      if (err) {
+        callback(err);
+      }
+      else {
+        container.destroy(options);
+        callback();
+      }
+    }
   }
 });
 
-module.exports.destroyById = function (containerId, cb) {
-  var container = new Container({_id:containerId}, {app:this.app});
-  var options = utils.successErrorToCb(cb);
-  container.destroy(options);
-};
+if (global.window) global.window.dd = module.exports.destroyById
 
 module.exports.id = "Container";

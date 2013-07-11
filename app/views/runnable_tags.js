@@ -1,6 +1,7 @@
 var BaseView = require('./base_view');
 var BaseCollection = require('../collections/base');
 var utils = require('../utils');
+var global = this;
 
 module.exports = BaseView.extend({
   tagName: 'nav',
@@ -8,14 +9,21 @@ module.exports = BaseView.extend({
   events: {
     'click .remove-tag' : 'removeTag',
   },
+  postInitialize: function () {
+    if (global.window) {
+      this.$('img').on('error', this.missingImage.bind(this));
+    }
+  },
   postHydrate: function () {
     this.collection = new BaseCollection(this.model.get('tags'), {
       app: this.app,
       url: '/users/me/runnables/'+this.model.id+'/tags'
     });
-    this.listenTo(this.collection, 'add remove reset', this.render.bind(this));
     this.listenTo(this.model, 'change:tags', this.onChange.bind(this));
-    this.$('img').on('error', this.missingImage.bind(this));
+  },
+  syncAndRender: function () {
+    this.model.set('tags', this.collection.toJSON());
+    this.render();
   },
   missingImage: function (evt) {
     debugger;
@@ -31,6 +39,7 @@ module.exports = BaseView.extend({
     var options = utils.successErrorToCB(destroyCallback.bind(this));
     var tag = this.collection.get(tagId);
     tag.destroy(options);
+
     function destroyCallback (err) {
       if (err) {
         this.showError(err);

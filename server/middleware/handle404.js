@@ -1,3 +1,4 @@
+var path = require('path');
 //
 // Show a 404
 //
@@ -7,18 +8,7 @@ module.exports = function() {
 
     // Respond with HTML
     if (req.accepts('html')) {
-      res.send("<!doctype html>\
-        <html>\
-        <head>\
-         <title>Page not found</title>\
-        </head>\
-        <body>\
-          <h1>Page not found</h1>\
-          <p>Could not find page at <pre>" + req.url + "</pre></p>\
-          <small>Error 404</small>\
-        </body>\
-        </html>\
-      ");
+      res.sendfile(path.join(__dirname, '/404.htm'));
 
     // Respond with JSON
     } else if (req.accepts('json')) {

@@ -26,19 +26,21 @@ module.exports = Runnable.extend({
   },
   publishFromContainer: function (containerId, callback) {
     var app = this.app;
-    var cb = function (err, image) {
-      if (err) { callback(err); } else {
-        //destroy container
-        Container.destroyById(containerId, function () {}); // we dont care about the callback;
-        callback(null, image);
-      }
-    };
+    var image = this;
     var url = _.result(image, 'url')+'?from='+containerId;
-    var options = utils.successErrorToCB();
+    var options = utils.successErrorToCB(saveCallback.bind(this));
     options = _.extend(options, {
       url: url
     });
     image.save({}, options);
+    function saveCallback (err, image) {
+      if (err) { callback(err); } else {
+        //destroy container
+        var container = new Container({}, {app:this.app}); // destroyById requires app.. so thats why we have to initialize a container instance here.
+        container.destroyById(containerId, function () {}); // we dont care about the callback;
+        callback(null, image);
+      }
+    }
   }
 });
 

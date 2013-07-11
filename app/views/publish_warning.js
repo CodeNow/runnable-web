@@ -23,20 +23,22 @@ module.exports = BaseView.extend({
     image.publishFromContainer(this.options.containerid, this.publishCallback.bind(this));
   },
   publishBack: function () {
-    if (!this.isOwner()) { // this shouldn't ever happen..
+    if (!this.app.user.isOwnerOf(this.model)) { // this shouldn't ever happen..
       this.showError('You cannot publish back since you are not the owner of the original runnable');
       return;
     }
     // this.model is container's parent image
-    this.model.publishFromContainer(this.options.containerid, this.publishCallback.bind(this));
-  },
-  publishCallback: function (err, image) {
-    if (err) {
-      this.showError(err);
-    }
-    else {
-      // could do backbone pushstate too... just dont know how from a rendr view..
-      window.location.href = '/'+image.id;
+    debugger;
+    this.model.publishFromContainer(this.options.containerid, publishCallback.bind(this));
+    function publishCallback (err, image) {
+      if (err) {
+        this.showError(err);
+      }
+      else {
+        debugger;
+        // could do backbone pushstate too... just dont know how from a rendr view..
+        window.location.href = '/'+image.id;
+      }
     }
   }
 });

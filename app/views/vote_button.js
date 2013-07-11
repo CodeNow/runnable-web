@@ -23,7 +23,7 @@ module.exports = BaseView.extend({
     var self = this;
     this.app.user.vote(this.model, function (errMessage) {
       if (errMessage) {
-        this.showError(errMessage);
+        self.showError(errMessage);
       }
     });
   }
