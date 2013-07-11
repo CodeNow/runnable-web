@@ -100,12 +100,6 @@ module.exports = {
           _id: 'me'
         }
       },
-      projects: {
-        collection : 'Projects',
-        params     : {
-          sort: 'votes'
-        }
-      },
       channels: {
         collection : 'Channels',
         params: {}

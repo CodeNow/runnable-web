@@ -254,12 +254,12 @@ module.exports = {
     } else {
       redirectToChannel(params.channel);
     }
-    function redirectToProject (projectId) {
+    function redirectToProject (containerId) {
       var spec = {
         project: {
-          model : 'Project',
+          model : 'Image',
           params: {
-            _id: projectId
+            _id: containerId
           }
         }
       };
@@ -275,7 +275,6 @@ module.exports = {
         }
       });
     }
-
     function redirectToChannel (channel) {
       var spec = {
         channel: {
