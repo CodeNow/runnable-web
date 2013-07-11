@@ -52,6 +52,7 @@ module.exports = Base.extend({
       else {
         this.add(file);
       }
+      this.trigger('select:file', file);
     }
   },
   onChangeSelected: function (selectedFile) {
@@ -65,12 +66,6 @@ module.exports = Base.extend({
         .forEach(function (file) {
           file.set('selected', null);
         });
-
-      this.trigger('select:file', selectedFile);
-    }
-    else if (!this.selectedFile()) {
-      // no more files open
-      this.trigger('select:file', null);
     }
   },
   selectedFile: function () {
@@ -102,6 +97,7 @@ module.exports = Base.extend({
     if (index > this.length) index = this.length;
     var nextFile = this.at(index);
     if (nextFile) nextFile.set('selected', true);
+    this.trigger('select:file', nextFile); // gets triggered even if null
   },
   onAdd: function (fileAdded) {
     fileAdded.set('selected', true);

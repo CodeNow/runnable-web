@@ -25,12 +25,14 @@ var fetch = module.exports = function (spec, options, callback) {
       createUser(function (err) {
         if (err) { callback(err); } else {
           app.fetch.call(app, spec, options, function (err, results) {
+            if (results.user) app.user = results.user;// find some place better for this
             callback(err, results);
           });
         }
       });
     }
     else {
+      if (results.user) app.user = results.user;// find some place better for this
       callback(err, results);
     }
   };

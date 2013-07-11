@@ -1,5 +1,7 @@
 var _ = require('underscore');
 var fetch = require('./fetch');
+var utils = require('../utils');
+var global = this;
 
 module.exports = {
   index: function(params, callback) {
@@ -77,12 +79,15 @@ module.exports = {
   },
 
   logout: function () {
-    // force serverside hit for clientside (pushstate)
-    if (typeof window !== "undefined" && window !== null) {
+    if (utils.exists(global.window)) {
+      // force serverside hit for clientside (pushstate)
+      // so that session can be destroyed
       window.location = '/logout';
     }
-    this.app.req.session.destroy();
-    this.redirectTo('/');
+    else {
+      this.app.req.session.destroy();
+      this.redirectTo('/');
+    }
   },
 
   blob: function (params, callback) {
