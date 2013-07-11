@@ -1,16 +1,16 @@
 {{#unless editMode}}
-  {{#with runnable}}
-  {{name}}
-    <h1>{{isOwner}}</h1>
-    <a href="javascript:void(0);" class="edit-link">Edit</a>
-  {{/with}}
+  {{model.attributes.name}}
+  {{#if isOwner}}
+  <a href="" class="edit-link">Edit</a>
+  {{/if}}
 {{else}}
-  {{#with runnable}}
+  {{#with model.attributes}}
   <form>
     <div class="item">
       <input type="text" class="title-input" name="name" autofocus placeholder="Give your code example a title" value="{{name}}" />
     </div>
-    <button class="btn-secondary">Save title</button>
+    <button class="btn-tertiary btn-cancel">Cancel</button>
+    <button class="btn-primary">Save title</button>
   </form>
   {{/with}}
 {{/unless}}
