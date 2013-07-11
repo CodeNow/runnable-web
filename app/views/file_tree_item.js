@@ -34,7 +34,7 @@ module.exports = BaseView.extend({
   },
   postRender: function () {
     this.highlightIfSelected();
-    if (this.editMode) {
+    if (this.options.editmode) {
       this.$('input').focus();
     }
     // if (!this.fs.isRootDir()) {
@@ -46,7 +46,7 @@ module.exports = BaseView.extend({
     // }
   },
   setEditMode: function (bool) {
-    this.options.editMode = bool;
+    this.options.editmode = bool;
     this.render();
   },
   escEditMode: function () {
