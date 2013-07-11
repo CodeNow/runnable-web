@@ -5,10 +5,6 @@ var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName:'header',
   postHydrate: function () {
-    this.listenTo(this.model, 'change:username', function () {
-      //hack until TJ finds a subsetter location
-      window.location.reload();
-    });
     this.listenTo(this.model, 'change:gravitar', this.render.bind(this));
     this.listenTo(this.app, 'change:loading', this.loader.bind(this))
   },

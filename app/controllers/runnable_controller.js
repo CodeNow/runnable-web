@@ -75,7 +75,6 @@ function createContainerFrom (imageIdOrTemplateName, callback) {
   var app = this.app;
   if (false) {
     // HARDCODED FOR NOW PULLS THE SAME CONTAINER OVER AND OVER
-    console.log('hit!');
     // fetchContainer.call(this, "UduGQNJ_RwZkAAAR", callback);
     fetchContainer.call(this, "UdyCVDjBjrkbAAAG", callback);
   }
@@ -129,14 +128,11 @@ function fetchFilesForContainer (containerId, callback) {
       results.rootDir = rootDir;
       (function traverseTreeAndAddToResults (dir) {
         // doesnt matter what the key is just must be unique
-        console.log('dir:'+dir.id);
         results['dir:'+dir.id] = dir;
         var contents = dir.contents;
         var path;
         if (contents) {
           path = contents.options.params.path;
-          console.log(dir.get('path'));
-          console.log('fsc:'+path);
           results['fsc:'+path] = contents;
           contents.forEach(function (fs) {
             if (fs.isDir()) {
@@ -222,14 +218,10 @@ module.exports = {
           //   });
           // }
           // else {
-            // console.log(results.rootDir.contents.toJSON());
             // if(results.defaultFiles.at(0)) results.defaultFiles.at(0).set('selected', true);
             // var testopts = utils.successErrorToCB(function () {
-            //   console.log.call(console, 'test fetch file thing', arguments[0], arguments[1])
             // })
             // results.defaultFiles.at(1).fetch(testopts)
-            console.log(results.defaultFiles.at(0))
-            console.log(results.defaultFiles.at(0).url)
             //DEFAULT FILES IS RETURNING DIRS AND ALL FILES?
             var defaultFiles = results.defaultFiles.filter(function (fs) {
               return fs.get('default') && fs.isFile();
@@ -309,9 +301,6 @@ module.exports = {
     ], function (err, results) {
       if (err) { callback(err); } else {
 
-        // console.log(results.image);
-        // console.log(results.defaultFiles.at(0));
-        // console.log(results.defaultFiles.at(0).url);
         //DEFAULT FILES IS RETURNING DIRS AND ALL FILES?
         var defaultFiles = results.defaultFiles.filter(function (fs) {
           return fs.get('default') && fs.isFile();
