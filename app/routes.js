@@ -8,8 +8,7 @@ module.exports = function(match) {
   match('logout',               'home#logout');
   match('blob',                 'home#blob');
   match('new',                  'home#new');
-  match('new/:channel',         'runnable#new');
-  match('new/:_id',             'runnable#new');
+  match('new/:from',            'runnable#new');
   match('me/:_id',              'runnable#container');
   match(':_id',                 'runnable#index');
   match(':_id/output',          'runnable#output');

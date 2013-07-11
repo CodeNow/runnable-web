@@ -92,7 +92,7 @@ module.exports = {
     fetch.call(this, spec, callback);
   },
 
-  new: function (params, callback) {
+  'new': function (params, callback) {
     var spec = {
       user    : {
         model  : 'User',
