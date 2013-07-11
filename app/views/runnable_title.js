@@ -1,19 +1,14 @@
 var BaseView = require('./base_view');
 var utils = require('../utils');
+var _ = require('underscore');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName: 'h1',
   events: {
-    'click .edit-link': 'editClicked',
+    'click .edit-link': 'clickEdit',
+    'click .btn-cancel': 'escEditMode',
     'submit form' : 'submitName'
-  },
-  postInitialize: function () {
-    this._editMode = this.options.editMode;
-  },
-  editClicked: function () {
-    console.log('hey')
-    this.editMode(true);
   },
   postRender: function () {
     console.log('runnableId debug:', this.app.utils.base64ToHex(this.model.id));
@@ -24,34 +19,37 @@ module.exports = BaseView.extend({
     }, this);
   },
   getTemplateData: function () {
-    return {
-      runnable : this.model.toJSON(),
-      editMode: this.editMode(),
-      isOwner: true//this.app.user.isOwnerOf(this.model)
-    };
+    return _.extend(this.options, {
+      isOwner: true //this.app.user.isOwnerOf(this.model)
+    });
   },
-  editMode: function (bool) {
-    if (utils.exists(bool)) {
-      this._editMode = bool;
-      // this.render();
-    }
-    else {
-      return this._editMode;
-    }
+  clickEdit: function (evt) {
+    evt.preventDefault();
+    this.setEditMode(true);
+  },
+  escEditMode: function () {
+    this.setEditMode(false);
+  },
+  setEditMode: function (bool) {
+    this.options.editMode = bool;
+    this.render();
   },
   submitName: function (evt) {
     evt.preventDefault();
+    evt.stopPropagation();
     var formData = $(evt.currentTarget).serializeObject();
     var options = utils.successErrorToCB(function (err) {
       if (err) {
-        this.editMode(true);
         this.showError(err);
-      }
-      else {
-        this.editMode(false);
+        this.setEditMode(true); //reverts back to edit mode
+        this.setTimeout(function () {
+          // after render
+          this.$('.title-input').val(formData.name);
+        }.bind(this), 3);
       }
     }.bind(this));
     this.model.save(formData,  options);
+    this.setEditMode(false);
   }
 });
 
