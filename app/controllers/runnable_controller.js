@@ -168,6 +168,8 @@ module.exports = {
     if (params._id.length != 16) {//TODO Re-implemented(!utils.isObjectId64(params._id)) {
       // redirect to channel page
       var channelParams = { channel:params._id };
+      this.currentRoute.action= 'index';
+      this.currentRoute.controller= 'channel';
       channelController.index.call(this, channelParams, callback);
     }
     else {
