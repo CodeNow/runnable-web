@@ -31,7 +31,8 @@
     },
     "googleAnalytics" : {
       "id": "UA-36631837-2"
-    }
+    },
+    "pageSize" : 25
   }
 
 }

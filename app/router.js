@@ -79,7 +79,6 @@ Router.prototype.postInitialize = function() {
 
 Router.prototype.handleError = function (err) {
   var viewPath;
-  debugger;
   if (err.status && err.status === 404 && err.status === 403) {
     // 404 path
     viewPath = '404';
@@ -87,6 +86,7 @@ Router.prototype.handleError = function (err) {
   else {
     viewPath = '500';
   }
+  this.appView.$content = $('html');
   var View = this.getView(viewPath);
   this.currentView = new View();
   this.renderView();
@@ -96,7 +96,6 @@ Router.prototype.getRenderCallback = function () {
   var self = this;
   var callback = Super.getRenderCallback.apply(this, arguments); // pass on if no err
   return function(err, viewPath, locals) {
-    debugger;
     if (err) {
       self.handleError(err);
     }

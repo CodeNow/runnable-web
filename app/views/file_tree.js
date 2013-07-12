@@ -33,6 +33,9 @@ module.exports = BaseView.extend({
     });
     this.listenToOnce(menu, 'rename', model.trigger.bind(model, 'rename'));
     this.listenToOnce(menu, 'delete', this.del.bind(this, model));
+    this.listenToOnce(menu, 'default', this.def.bind(this, model));
+    this.listenToOnce(menu, 'undefault', this.undefault.bind(this, model));
+    this.listenToOnce(menu, 'delete', this.del.bind(this, model));
     this.listenToOnce(menu, 'create', this.create.bind(this));
     this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
   },
@@ -40,7 +43,20 @@ module.exports = BaseView.extend({
     var options = utils.successErrorToCB(function (err) {
       if (err) this.showError(err);
     }.bind(this));
-    model.destroy();
+    model.destroy(options);
+  },
+  def: function (model) {
+    var options = utils.successErrorToCB(function (err) {
+      if (err) this.showError(err);
+    }.bind(this));
+    debugger;
+    model.save({'default':true}, options);
+  },
+  undefault: function (model) {
+    var options = utils.successErrorToCB(function (err) {
+      if (err) this.showError(err);
+    }.bind(this));
+    model.save({'default':false}, options);
   },
   create: function (type) {
     var collection = _.findWhere(this.childViews, {name:'fs_list'}).collection;

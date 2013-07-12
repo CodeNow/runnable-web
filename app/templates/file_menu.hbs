@@ -2,6 +2,11 @@
   {{#unless createOnly}}
   <li><a href="javascript:void(0)" class="rename" href=""><i class="icon-pencil"></i> Rename</a></li>
   <li><a href="javascript:void(0)" class="delete" href=""><i class="icon-trash"></i> Delete</a></li>
+  {{#if model.attributes.default}}
+  <li><a href="javascript:void(0)" class="default" href=""><i class="icon-star"></i> Set: Opened by Default</a></li>
+  {{else}}
+  <li><a href="javascript:void(0)" class="undefault" href=""><i class="icon-star"></i> Set: Closed by Default</a></li>
+  {{/if}}
   <hr>
   {{/unless}}
   <li>
