@@ -8,8 +8,6 @@ module.exports = BaseView.extend({
   },
   preRender: function () {
     // preRender is called before .getAttributes so setting attributes here still works
-    debugger;
-    debugger;
     var user = this.app.user;
     if (user.hasVoted(this.model) || user.isOwnerOf(this.model)) {
       this.attributes = {

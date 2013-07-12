@@ -240,7 +240,22 @@ module.exports = {
       });
     }
   },
-  'new': function(params, callback) {
+  'new': function (params, callback) {
+    var spec = {
+      user    : {
+        model  : 'User',
+        params : {
+          _id: 'me'
+        }
+      },
+      channels: {
+        collection : 'Channels',
+        params: {}
+      }
+    };
+    fetch.call(this, spec, callback);
+  },
+  newFrom: function(params, callback) {
     var self = this;
     createContainerFrom.call(this, params.from, function (err, container) {
       if (err) { callback(err); } else {
