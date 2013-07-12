@@ -1,13 +1,5 @@
 <div class="container">
-  <div class="span9">
-    <nav class="project-nav">
-      <ul>
-      {{#each images.models}}
-        {{view "runnable_item_view" model=.}}
-      {{/each}}
-      </ul>
-    </nav>
-  </div>
+  {{view "runnable_list" collection=images className="span9"}}
   <div class="span3 last">
     <section class="module">
       <h3>Tags</h3>
