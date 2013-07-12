@@ -17,6 +17,10 @@ module.exports = {
         params     : {
           sort: 'votes'
         }
+      },
+      channels: {
+        collection : 'Channels',
+        params     : {}
       }
     };
     var self = this;

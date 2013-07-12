@@ -70,21 +70,13 @@ function fetchImage (imageId, callback) {
   });
 }
 
-function createContainerFrom (imageIdOrTemplateName, callback) {
+function createContainerFrom (imageIdOrChannelName, callback) {
   var self = this;
   var app = this.app;
-  if (false) {
-    // HARDCODED FOR NOW PULLS THE SAME CONTAINER OVER AND OVER
-    // fetchContainer.call(this, "UduGQNJ_RwZkAAAR", callback);
-    fetchContainer.call(this, "UdyCVDjBjrkbAAAG", callback);
-  }
-  else {
-    var container = new Container({}, { app:app });
-    var options = utils.successErrorToCB(callback);
-    container.url = _.result(container, 'url') + '?from=' + imageIdOrTemplateName;
-    container.save({}, options);
-
-  }
+  var container = new Container({}, { app:app });
+  var options = utils.successErrorToCB(callback);
+  container.url = _.result(container, 'url') + '?from=' + imageIdOrChannelName;
+  container.save({}, options);
 }
 
 function fetchFilesForContainer (containerId, callback) {
@@ -151,7 +143,7 @@ function fetchRelated (tag, cb) {
     related: {
       collection:'Projects',
       params: {
-        'tags': tag,
+        tags: tag,
         limit: 5,
         sort: 'votes'
       }

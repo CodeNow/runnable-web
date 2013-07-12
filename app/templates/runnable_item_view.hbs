@@ -1,7 +1,7 @@
 {{view "vote_button" model=model}}
 {{#with model.attributes}}
 <h3>
-  <a href="/{{_id}}/{{urlFriendly name}}">
+  <a href="/{{_id}}/{{name}}">
     {{name}}
   </a>
 </h3>
@@ -9,10 +9,7 @@
 {{#if tags.length}}
 <nav class="tags-nav">
   {{#each tags}}
-  <a href="/{{urlFriendly name}}">
-    <img class="display-none" src="/images/channels/{{urlFriendly name}}.png" alt="{{name}}">
-    <span>{{name}}</span>
-  </a>
+  {{view "tag_link" data=.}}
   {{/each}}
 </nav>
 {{/if}}
