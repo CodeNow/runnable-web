@@ -1,0 +1,20 @@
+<div class="container">
+  <article>
+    <section class="title" style="padding-left:0;">
+      <h1>New Runnable</h1>
+    </section>
+    <ul class="channel-list">
+      {{#each channels.models}}
+      {{view "channel_item_view" model=.}}
+      {{/each}}
+      <span>
+        <span class="tile">
+          <form>
+            <label>Fork existing</label>
+            <input name='id' placeholder="Runnable Id">
+          </form>
+        </span>
+      </span>
+    </ul>
+  </article>
+</div>
