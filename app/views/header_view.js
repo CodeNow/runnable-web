@@ -24,7 +24,7 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     return {
-      user: this.model.toJSON()//,
+      user: this.model && this.model.toJSON()//,
       //projectsCollection: this.options.context.projects
     };
   },

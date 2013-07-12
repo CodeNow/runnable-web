@@ -8,7 +8,7 @@ module.exports = function() {
 
     // Respond with HTML
     if (req.accepts('html')) {
-      res.sendfile(path.join(__dirname, '/404.htm'));
+      res.sendfile(path.join(__dirname, '/../../app/templates/404.hbs'));
 
     // Respond with JSON
     } else if (req.accepts('json')) {

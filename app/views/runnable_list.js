@@ -7,13 +7,17 @@ module.exports = BaseView.extend({
     if (this.options.className) this.attributes.className = this.options.className;
   },
   getTemplateData: function () {
-    var page = this.collection.params.page || 1;
+    var paramPage = this.collection.options.page || this.collection.params.page;
+    var page = (paramPage+1) || 1;
     var showPrev = page >= 2;
-    var showNext = this.collection.length == 25; // if collection has max limit of models (25)
+    var showNext = this.collection.length == this.app.get('pageSize'); // if collection has max limit of models (25)
     var channel = this.collection.params.channel;
     var baseHref = (channel) ? '/channel/' : '/';
-    var prevLink = showPrev && baseHref && page >= 3 && baseHref+'page/'+(page-1);
-    var nextLink = showNext && baseHref+'page/'+(page+1);
+    var prevLink;
+    if (showPrev) prevLink = baseHref
+    if (page >= 3) prevLink = baseHref+'page/'+(page-1);
+    var nextLink;
+    if (showNext) nextLink = baseHref+'page/'+(page+1);
     return _.extend(this.options, {
       prevLink: prevLink,
       nextLink: nextLink
