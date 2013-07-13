@@ -14,6 +14,7 @@ Router.prototype.postInitialize = function() {
   this.app.dispatch = _.clone(Backbone.Events);
 
   this.on('action:start', this.trackImpression, this);
+  this.on('action:end', this.scrollTop, this);
 
   // Register Handlebars helpers here for now
   Handlebars.registerHelper('if_eq', function(context, options) {
@@ -109,4 +110,8 @@ Router.prototype.trackImpression = function() {
   if (window._gaq) {
     _gaq.push(['_trackPageview']);
   }
+};
+
+Router.prototype.scrollTop = function (app, loading) {
+  $(document).scrollTop(0);
 };
