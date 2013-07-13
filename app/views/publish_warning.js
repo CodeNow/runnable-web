@@ -36,7 +36,7 @@ module.exports = BaseView.extend({
     }
     else {
       // could do backbone pushstate too... just dont know how from a rendr view..
-      window.location.href = '/'+image.id;
+      this.app.router.navigate('/'+image.id, true);
     }
   }
 });
