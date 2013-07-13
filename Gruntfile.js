@@ -82,6 +82,18 @@ module.exports = function(grunt) {
       }
     },
 
+    uglify: {
+      build: {
+        options: {
+          preserveComemnts: false,
+          report: true
+        },
+        files: {
+          'public/mergedAssets.js' : ['public/mergedAssets.js']
+        }
+      }
+    },
+
     handlebars: {
       compile: {
         options: {
@@ -172,6 +184,7 @@ module.exports = function(grunt) {
   grunt.initConfig(gruntConfig);
 
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
@@ -198,7 +211,7 @@ module.exports = function(grunt) {
   // Debug
   grunt.registerTask('debug', ['bgShell:debugNode', 'dev-mode']);
   // Build for production
-  grunt.registerTask('build', ['compile', 'cssmin']);
+  grunt.registerTask('build', ['compile', 'cssmin', 'uglify']);
   // Default task(s).
   grunt.registerTask('default', ['build']);
 };
