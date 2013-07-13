@@ -3,9 +3,7 @@ var BaseView = require('./base_view');
 module.exports = BaseView.extend({
   tagName:'li',
   getTemplateData: function () {
-    return {
-      image: this.model
-    };
+    return this.options
   }
 });
 

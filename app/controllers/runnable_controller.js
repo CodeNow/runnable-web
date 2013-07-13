@@ -107,12 +107,14 @@ function fetchFilesForContainer (containerId, callback) {
     function (cb) {
       var opts = utils.successErrorToCB(cb);
       opts.data = rootDir.contents.params; // VERY IMPORTANT! - ask TJ.
+      console.log(rootDir.contents.params);
       rootDir.contents.fetch(opts);
     },
     fetch.bind(this, defaultFilesSpec)
   ],
   function (err, data) {
     if (err) { callback(err); } else {
+      debugger;
       // so now you have the root dir it's contents
       // and defaultFiles
       // TODO: build default files off root dir here
@@ -133,25 +135,31 @@ function fetchFilesForContainer (containerId, callback) {
           });
         }
       })(rootDir);
+
+      // Select first default file
+      var firstDefault = results.defaultFiles.at(0);
+      if (firstDefault) firstDefault.set('selected', true);
+
       callback(err, results);
     }
   });
 }
 
-function fetchRelated (tag, cb) {
+function fetchRelated (tags, cb) {
+  var tagNames = tags.map(function (tag) {
+    return tag.name
+  });
   var spec = {
     related: {
-      collection:'Projects',
+      collection:'Images',
       params: {
-        tags: tag,
+        tags: tagNames,
         limit: 5,
         sort: 'votes'
       }
     }
   };
-  fetch.call(this, spec, function (err, results) {
-    cb(err, results && results.related);
-  });
+  fetch.call(this, spec, cb);
 }
 
 module.exports = {
@@ -201,31 +209,11 @@ module.exports = {
           });
         },
         function related (results, cb) {
-          // If project has tags, fetch related projects
-          // var tags = project.get('tags');
-          // var tag = tags && tags[0] && tags[0].name;
-          // if (tag) {
-          //   fetchRelated.call(self, tag, function (err, related) {
-          //     cb(err, related && _.extend(results, {
-          //       related: related
-          //     }));
-          //   });
-          // }
-          // else {
-            // if(results.defaultFiles.at(0)) results.defaultFiles.at(0).set('selected', true);
-            // var testopts = utils.successErrorToCB(function () {
-            // })
-            // results.defaultFiles.at(1).fetch(testopts)
-            //DEFAULT FILES IS RETURNING DIRS AND ALL FILES?
-            var defaultFiles = results.defaultFiles.filter(function (fs) {
-              return fs.get('default') && fs.isFile();
+          var tags = results.container.attributes.tags;
+          // if (tags.length) {
+            fetchRelated.call(self, tags, function (err, relatedResults) {
+              cb(err, _.extend(results, relatedResults));
             });
-            results.defaultFiles.reset(defaultFiles);
-            var firstDefault = results.defaultFiles.at(0);
-            if (firstDefault) firstDefault.set('selected', true);
-            cb(null, results);
-
-          // }
         }
       ], function (err, results) {
         callback(err, results);
@@ -307,18 +295,6 @@ module.exports = {
           cb(err, _.extend(results, fileResults));
         });
       }
-    ], function (err, results) {
-      if (err) { callback(err); } else {
-
-        //DEFAULT FILES IS RETURNING DIRS AND ALL FILES?
-        var defaultFiles = results.defaultFiles.filter(function (fs) {
-          return fs.get('default') && fs.isFile();
-        });
-        results.defaultFiles.reset(defaultFiles);
-        var firstDefault = results.defaultFiles.at(0);
-        // if (firstDefault) firstDefault.set('selected', true);
-        callback(err, results);
-      }
-    });
+    ], callback);
   }
 };
