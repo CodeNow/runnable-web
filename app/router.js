@@ -14,6 +14,7 @@ Router.prototype.postInitialize = function() {
   this.app.dispatch = _.clone(Backbone.Events);
 
   this.on('action:start', this.trackImpression, this);
+  this.on('action:start', this.scrollTop, this);
   this.on('action:end', this.scrollTop, this);
 
   // Register Handlebars helpers here for now
