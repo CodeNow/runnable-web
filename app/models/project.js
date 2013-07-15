@@ -13,8 +13,7 @@ module.exports = Base.extend({
     // Initialize openFiles and rootDir
     this.openFiles = new FileCollection(null, { project:this, app:this.app });
     this.rootDir = new DirModel({path:'/'}, { project:this, app:this.app, silent:true });
-    this.rootDir.on('change:contents', function () {
-      debugger;
+    // this.rootDir.on('change:contents', function () {
       // this.rootDir.set({open:true}, {silent:true}); // opens rootDir by default, if it has contents
       // var defaultFilepaths = this.get('defaultFile');
       // if (defaultFilepaths) {
@@ -24,7 +23,7 @@ module.exports = Base.extend({
       //     if (defaultFile) self.openFiles.add(defaultFile); // open default files immediately, if they exist
       //   });
       // }
-    }, this);
+    // }, this);
 
     if (this.get('rootDirectory')) {
       this.onChangeRootDirectory();

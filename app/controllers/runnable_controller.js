@@ -114,7 +114,6 @@ function fetchFilesForContainer (containerId, callback) {
   ],
   function (err, data) {
     if (err) { callback(err); } else {
-      debugger;
       // so now you have the root dir it's contents
       // and defaultFiles
       // TODO: build default files off root dir here

@@ -9,8 +9,6 @@ module.exports = Base.extend({
   initialize: function (model, options) {
     var self = this;
     this.model = function (attrs, opts) {
-      if (opts.url)
-        debugger;
       var opts = opts || {};
       opts.app = self.app;
       attrs.containerId = self.containerId;

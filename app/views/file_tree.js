@@ -49,7 +49,6 @@ module.exports = BaseView.extend({
     var options = utils.successErrorToCB(function (err) {
       if (err) this.showError(err);
     }.bind(this));
-    debugger;
     model.save({'default':true}, options);
   },
   undefault: function (model) {
