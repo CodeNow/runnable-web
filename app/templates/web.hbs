@@ -1,10 +1,3 @@
-<div class="navigation toolbar">
-  <div class="top-pad">
-    <div class="server-address">/</div><input class="gray-bar address-bar" type="text" value=""></input>
-    <button class="toolbar-action back-button" title="Back"><i class="icon-arrow-left"></i></button>
-    <button class="toolbar-action refresh-button" title="Refresh web output"><i class="icon-repeat"></i></button>
-    {{! <button class="toolbar-action info-button active right tooltip-ne" title="Show/hide project information"><i class="icon-info-sign"></i></button> }}
-  </div>
-</div>
+{{view "web_navigation"}}
 <iframe class="web-iframe" src="{{url}}" frameborder="0" height='100%' width='100%'>
 </iframe>

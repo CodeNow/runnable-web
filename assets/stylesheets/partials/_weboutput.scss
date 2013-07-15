@@ -20,7 +20,7 @@
 	&.active{
 		color:$primary-color;
 	}
-	&.disabled{
+	&:disabled{
 		color:#ddd;
 		text-shadow: 0 1px 0 rgba(255,255,255,.6);
 		cursor:default;
@@ -68,7 +68,7 @@
 		@include border-radius(3px 0 0 3px);
 		vertical-align: top;
 		@include box-sizing(border-box);
-		&.disabled{
+		&:disabled{
 			opacity:.5;
 		}
 	}

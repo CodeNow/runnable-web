@@ -11,6 +11,7 @@ module.exports = BaseView.extend({
     console.log("CONTAINER ID: ", this.model.id);
   },
   click: function () {
+    debugger;
     var url = '/'+this.model.id+'/output';
     var self = this;
     this.model.run(function (err) {

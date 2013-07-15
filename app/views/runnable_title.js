@@ -5,11 +5,11 @@ var _ = require('underscore');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
-  tagName: 'h1',
+  tagName: 'div',
   events: {
     'click .edit-link': 'clickEdit',
-    'click .btn-cancel': 'escEditMode',
-    'submit form' : 'submitName'
+    'submit form'      : 'submitName',
+    'click .btn-cancel': 'escEditMode'
   },
   postRender: function () {
     console.log('runnableId debug:', this.app.utils.base64ToHex(this.model.id));
@@ -52,7 +52,10 @@ module.exports = BaseView.extend({
       }
     }.bind(this));
     this.model.save(formData,  options);
-    this.setEditMode(false);
+    var self = this;
+    setTimeout(function () {
+      self.setEditMode(false);
+    }, 10);
   }
 });
 
