@@ -20,7 +20,7 @@
 
   "api": {
     "default": {
-      "host": "harbourmaster.runnableapp.dev:3030",
+      "host": "api.runnableapp.com",
       "protocol": "http"
     }
   },
@@ -33,7 +33,7 @@
       "id": "UA-36631837-2"
     },
     "pageSize" : 25,
-    "domain": "runnableapp.dev"
+    "domain": "runnableapp.com"
   }
 
 }
