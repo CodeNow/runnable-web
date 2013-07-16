@@ -46,6 +46,7 @@ module.exports = Base.extend({
   },
   openFile: function (file) {
     if (file) {
+      debugger;
       if (~this.indexOf(file)) {
         file.set('selected', true);
       }
