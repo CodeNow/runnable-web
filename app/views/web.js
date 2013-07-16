@@ -10,7 +10,13 @@ module.exports = BaseView.extend({
   },
   postHydrate: function () {
     //clientside
+    var self = this;
     this.baseUrl = "http://" + this.model.get("docker_id") + "." + this.app.get('domain');
+    window.addEventListener("message", function (event) {
+      if (event.data === 'Refresh') {
+        self.setIframeSrcPath('');
+      }
+    }, false);
   },
   postRender: function () {
     var navigationView = _.findWhere(this.childViews, {name:'web_navigation'});

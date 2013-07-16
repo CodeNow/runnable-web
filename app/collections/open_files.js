@@ -21,6 +21,7 @@ module.exports = Base.extend({
     var dispatch = this.app.dispatch;
     if (dispatch) {
       this.listenTo(dispatch, 'open:file', this.openFile.bind(this));
+      this.listenTo(dispatch, 'saveAll', this.saveAll.bind(this));
     }
   },
   _unsaved: false,

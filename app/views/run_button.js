@@ -12,11 +12,13 @@ module.exports = BaseView.extend({
   },
   click: function () {
     var url = '/'+this.model.id+'/output';
-    var self = this;
+    var windowName = this.model.id+'output';
+    var popup = window.open(url, windowName);
     this.model.run(function (err) {
-      if (!err) {
-        var windowName = self.model.id+'output';
-        window.open(url, windowName);
+      if (err) {
+        popup.close();
+      } else {
+        popup.postMessage("Refresh", "*");
       }
     });
   }
