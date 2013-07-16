@@ -7,8 +7,8 @@ module.exports = function(match) {
   match('privacy',              'home#privacy');
   match('logout',               'home#logout');
   match('blob',                 'home#blob');
-  match('new',                  'home#new');
-  match('new/:from',            'runnable#new');
+  match('new',                  'runnable#new');
+  match('new/:from',            'runnable#newFrom');
   match('me/:_id',              'runnable#container');
   match(':_id',                 'runnable#index');
   match(':_id/output',          'runnable#output');

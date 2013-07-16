@@ -10,17 +10,55 @@ header{
 	background:$header;
 }
 
-.logo{
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+.logo-link {
 	height:20px;
 	width:108px;
-	background:url(assets/sprite@2x.png) no-repeat 0 0;
-	background-size:666.66px 666.66px;
-	text-indent:-9999px;
 	display:inline-block;
 	float:left;
+	text-indent:-9999px;
 	margin:8px 0 5px;
 	&:active{
 		background-position:0 -33.4px;
+	}
+	.logo{
+		height:20px;
+		width:108px;
+		background:url(assets/sprite@2x.png) no-repeat 0 0;
+		background-size:666.66px 666.66px;
+		display:inline-block;
+		float:left;
+		&:active{
+			background-position:0 -33.4px;
+		}
+	}
+	.logo-only {
+		height:20px;
+		width:20px;
+		background:url(assets/sprite@2x.png) no-repeat 0 0;
+		background-size:666.66px 666.66px;
+		float:left;
+		position:relative;
+		margin-top: -20px;
+		z-index: 10;
+		display: none;
+		&:active{
+			background-position:0 -33.4px;
+		}
+		&.loading {
+			display:inline-block;
+		  -webkit-animation-name:             rotate;
+		  -webkit-animation-duration:         .5s;
+		  -webkit-animation-iteration-count:  infinite;
+		  -webkit-animation-timing-function:  linear;
+		}
 	}
 }
 

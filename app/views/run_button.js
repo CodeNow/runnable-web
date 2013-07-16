@@ -15,7 +15,7 @@ module.exports = BaseView.extend({
     var self = this;
     this.model.run(function (err) {
       if (!err) {
-        var windowName = this.model.id+'output';
+        var windowName = self.model.id+'output';
         window.open(url, windowName);
       }
     });

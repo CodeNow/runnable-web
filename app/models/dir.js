@@ -15,6 +15,7 @@ module.exports = Base.extend({
       params : {                    // params are used with render hydrate
         path : path,
         containerId: containerId,
+        content: true // include file contents by default
       },
       containerId: containerId,
       path       : path

@@ -1,17 +1,14 @@
 <div class="container">
-  <div class="span9">
-    <nav class="project-nav">
-      <ul>
-      {{#each images.models}}
-        {{view "runnable_item_view" model=.}}
-      {{/each}}
-      </ul>
-    </nav>
-  </div>
+  {{view "runnable_list" collection=images className="span9"}}
   <div class="span3 last">
     <section class="module">
       <h3>Tags</h3>
       <nav class="tags-nav">
+        {{#each channels.models}}
+        {{view "tag_link" model=.}}
+        {{/each}}
+      </nav>
+      {{! <nav class="tags-nav">
         <a href="/facebook"><span class="thumbnail"><img src="/images/channels/facebook.png" alt="Facebook"></span> Facebook</a>
         <a href="/twitter"><span class="thumbnail"><img src="/images/channels/twitter.png" alt="Twitter"></span> Twitter</a>
         <a href="/google"><span class="thumbnail"><img src="/images/channels/google.png" alt="Google"></span> Google</a>
@@ -24,7 +21,7 @@
         <a href="/php"><span class="thumbnail"><img src="/images/channels/php.png" alt="PHP"></span> PHP Examples</a>
         <a href="/python"><span class="thumbnail"><img src="/images/channels/python.png" alt="Python"></span> Python Examples</a>
         <a href="/jquery"><span class="thumbnail"><img src="/images/channels/jquery.png" alt="jQuery"></span> jQuery</a>
-      </nav>
+      </nav> }}
     </section>
   </div>
 </div>

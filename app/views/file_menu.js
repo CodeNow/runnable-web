@@ -7,6 +7,8 @@ module.exports = BaseView.extend({
   events: {
     'click .rename'      : 'rename',
     'click .delete'      : 'del',
+    'click .default'     : 'default',
+    'click .undefault'   : 'undefault',
     'click .create-file' : 'createFile',
     'click .create-dir'  : 'createDir',
     'click .download'    : 'downloadFS'
@@ -22,7 +24,7 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     return {
       createOnly: this.options.createOnly,
-      fsJSON    : this.model.toJSON()
+      model     : this.model.toJSON() //fs file or dir
     };
   },
   rename: function () {
@@ -30,6 +32,12 @@ module.exports = BaseView.extend({
   },
   del: function () {
     this.trigger('delete');
+  },
+  default: function () {
+    this.trigger('default');
+  },
+  undefault: function () {
+    this.trigger('undefault');
   },
   createFile: function () {
     this.trigger('create', 'file');

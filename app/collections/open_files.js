@@ -11,7 +11,7 @@ module.exports = Base.extend({
       .replace(':containerId', this.containerId);
   },
   initialize: function (models, options) {
-    Super.initialize.apply(this, arguments)
+    Super.initialize.apply(this, arguments);
     this.containerId = options.containerId;
 
     this.listenTo(this, 'change:selected', this.onChangeSelected.bind(this));
@@ -54,9 +54,9 @@ module.exports = Base.extend({
       }
     }
   },
-  onChangeSelected: function (selectedFile) {
+  onChangeSelected: function (selectedFile, selected) {
     // unselect other files when new file selected
-    if (selectedFile.get('selected')) {
+    if (selected) {
       this
         .where({ selected:true })
         .filter(function (file) {
@@ -65,12 +65,6 @@ module.exports = Base.extend({
         .forEach(function (file) {
           file.set('selected', null);
         });
-
-      this.trigger('select:file', selectedFile);
-    }
-    else if (!this.selectedFile()) {
-      // no more files open
-      this.trigger('select:file', null);
     }
   },
   selectedFile: function () {
@@ -101,7 +95,12 @@ module.exports = Base.extend({
     if (index < 0) index = 0;
     if (index > this.length) index = this.length;
     var nextFile = this.at(index);
-    if (nextFile) nextFile.set('selected', true);
+    if (nextFile) {
+      nextFile.set('selected', true);
+    }
+    else {
+      this.trigger('change:selected', null, true); // gets triggered even if null
+    }
   },
   onAdd: function (fileAdded) {
     fileAdded.set('selected', true);

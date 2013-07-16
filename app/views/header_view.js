@@ -5,19 +5,26 @@ var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName:'header',
   postHydrate: function () {
-    this.listenTo(this.model, 'change:username', function () {
-      //hack until TJ finds a subsetter location
-      window.location.reload();
-    });
     this.listenTo(this.model, 'change:gravitar', this.render.bind(this));
+    this.listenTo(this.app, 'change:loading', this.loader.bind(this));
   },
   events: {
     'click #header-login-link' : 'openLogin',
     'click .dropdown-toggle' : 'toggleDropdown'
   },
+  loader: function (model, loading) {
+    var $loader = this.$('.logo-only');
+    console.log($loader);
+    if (loading) {
+      $loader.addClass('loading');
+    }
+    else {
+      $loader.removeClass('loading');
+    }
+  },
   getTemplateData: function () {
     return {
-      user: this.model.toJSON()//,
+      user: this.model && this.model.toJSON()//,
       //projectsCollection: this.options.context.projects
     };
   },

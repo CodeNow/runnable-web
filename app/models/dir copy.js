@@ -20,7 +20,7 @@ module.exports = Fs.extend({
       }
     });
     this.listenTo(this.contents, 'change add remove', this.onChangeContents.bind(this));
-    this.listenTo(this, 'change:contents', this.onChangeContentsJSON.bind(this))
+    this.listenTo(this, 'change:contents', this.onChangeContentsJSON.bind(this));
     this.listenTo(this, 'change:path', this.onChangePath.bind(this));
     if (attrs && attrs.contents)
       this.onChangeContents();

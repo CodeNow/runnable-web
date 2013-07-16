@@ -114,7 +114,7 @@ function initLibs(callback) {
 function buildRoutes(app) {
   buildApiRoutes(app);
   buildRendrRoutes(app);
-  app.get(/^(?!\/api\/)/, mw.handle404());
+  app.get(/^(?!\/api\/)/, mw.handle404.handle404);
 }
 
 // Insert these methods before Rendr method chain for all routes, plus API.

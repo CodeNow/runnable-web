@@ -1,6 +1,6 @@
 var RendrBase = require('rendr/shared/base/collection');
 var Super = RendrBase.prototype;
-var _ = require('underscore')
+var _ = require('underscore');
 
 module.exports = RendrBase.extend({
   initialize: function (attrs, options) {

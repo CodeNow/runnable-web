@@ -12,7 +12,7 @@ module.exports = Base.extend({
     return (this.get('type') === 'dir' || this.get('dir'));
   },
   isRootDir: function () {
-    return (this.get('path') == '/' && this.get('name') == '');
+    return (this.get('path') == '/' && this.get('name') === '');
   },
   fullPath: function () {
     return utils.pathJoin(this.get('path'), this.get('name'));

@@ -82,6 +82,18 @@ module.exports = function(grunt) {
       }
     },
 
+    uglify: {
+      build: {
+        options: {
+          preserveComemnts: false,
+          report: true
+        },
+        files: {
+          'public/mergedAssets.js' : ['public/mergedAssets.js']
+        }
+      }
+    },
+
     handlebars: {
       compile: {
         options: {
@@ -166,31 +178,36 @@ module.exports = function(grunt) {
           ]
         }]
       }
+    },
+
+    jshint: {
+      all: ['app/**/*.js']
     }
   };
   gruntConfig.cssmin.combine.files[mergedCSSPath] = [compassCSS]; //minifies css
   grunt.initConfig(gruntConfig);
 
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-bg-shell');
   grunt.loadNpmTasks('grunt-rendr-stitch');
-
+  // delete old css
   grunt.registerTask('clean-merged-css', 'Delete merged css file before merging new styles', function () {
     grunt.log.writeln('Deleting file "' + mergedCSSPath + '"');
     grunt.file['delete'](mergedCSSPath, { force:true });
   });
-
+  // move css
   grunt.registerTask('move-css', 'Copy compass index.css to styles dir in public', function () {
     grunt.log.writeln('Copying file "' + compassCSS + '" to "' + mergedCSSPath + '"');
     grunt.file.copy(compassCSS, mergedCSSPath);
   });
-
+  // jshint
+  grunt.registerTask('jshint', ['jshint:all']);
   // Compile - shared tasks for all
   grunt.registerTask('compile', ['handlebars', 'rendr_stitch', 'clean-merged-css', 'compass']);
-
   // Shared tasks for server and debug
   grunt.registerTask('dev-mode', ['compile', 'move-css', 'watch']);
   // Run the server and watch for file changes
@@ -198,7 +215,7 @@ module.exports = function(grunt) {
   // Debug
   grunt.registerTask('debug', ['bgShell:debugNode', 'dev-mode']);
   // Build for production
-  grunt.registerTask('build', ['compile', 'cssmin']);
+  grunt.registerTask('build', ['compile', 'cssmin', 'uglify']);
   // Default task(s).
   grunt.registerTask('default', ['build']);
 };

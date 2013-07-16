@@ -2,6 +2,7 @@ var BaseClientRouter = require('rendr/client/router');
 var Handlebars = require('handlebars');
 var Backbone   = require('backbone');
 var _ = require('underscore');
+var Super = BaseClientRouter.prototype;
 
 var Router = module.exports = function Router(options) {
   BaseClientRouter.call(this, options);
@@ -13,6 +14,8 @@ Router.prototype.postInitialize = function() {
   this.app.dispatch = _.clone(Backbone.Events);
 
   this.on('action:start', this.trackImpression, this);
+  this.on('action:start', this.scrollTop, this);
+  this.on('action:end', this.scrollTop, this);
 
   // Register Handlebars helpers here for now
   Handlebars.registerHelper('if_eq', function(context, options) {
@@ -76,8 +79,40 @@ Router.prototype.postInitialize = function() {
   };
 };
 
+Router.prototype.handleError = function (err) {
+  var viewPath;
+  if (err.status && err.status === 404 && err.status === 403) {
+    // 404 path
+    viewPath = '404';
+  }
+  else {
+    viewPath = '500';
+  }
+  this.appView.$content = $('html');
+  var View = this.getView(viewPath);
+  this.currentView = new View();
+  this.renderView();
+};
+
+Router.prototype.getRenderCallback = function () {
+  var self = this;
+  var callback = Super.getRenderCallback.apply(this, arguments); // pass on if no err
+  return function(err, viewPath, locals) {
+    if (err) {
+      self.handleError(err);
+    }
+    else {
+      callback(err, viewPath, locals);
+    }
+  };
+};
+
 Router.prototype.trackImpression = function() {
   if (window._gaq) {
     _gaq.push(['_trackPageview']);
   }
+};
+
+Router.prototype.scrollTop = function (app, loading) {
+  $(document).scrollTop(0);
 };

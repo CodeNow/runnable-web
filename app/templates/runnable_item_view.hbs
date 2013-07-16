@@ -9,10 +9,7 @@
 {{#if tags.length}}
 <nav class="tags-nav">
   {{#each tags}}
-  <a href="/{{urlFriendly name}}">
-    <img src="/images/channels/{{urlFriendly name}}.png" alt="{{name}}">
-    <span>{{name}}</span>
-  </a>
+  {{view "tag_link" data=.}}
   {{/each}}
 </nav>
 {{/if}}

@@ -1,3 +1,9 @@
-{{#with json}}
-<a href="/new/{{tag}}" title="{{description}}">{{title}}</a>
+{{#with model.attributes}}
+<a href="/new/{{name}}" class='ruby' data-bypass>
+  <span class="tile">
+    <img class="display-none" src="/images/channels/{{urlFriendly name}}.png" alt="{{name}}" title="{{name}}">
+    <span class="img">{{name}}</span>
+  </span>
+  <span class="name">{{name}}</span>
+</a>
 {{/with}}

@@ -5,7 +5,7 @@
       {{view "runnable_title" model=image}}
     </section>
     <section class="actions">
-      {{view "run_button" model=container}}
+      {{view "run_button" model=container collection=defaultFiles}}
       {{#if_eq image.attributes.owner compare=user.id}}
       {{view "edit_button" model=container containerid=container.id}}
       {{else}}
@@ -41,7 +41,7 @@
       <nav class="related-nav">
         <ul>
           {{#each related.models}}
-          {{view "project_item_small" model=.}}
+          {{view "runnable_item_small" model=.}}
           {{/each}}
         </ul>
       </nav>

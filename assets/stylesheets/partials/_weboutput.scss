@@ -20,7 +20,7 @@
 	&.active{
 		color:$primary-color;
 	}
-	&.disabled{
+	&:disabled{
 		color:#ddd;
 		text-shadow: 0 1px 0 rgba(255,255,255,.6);
 		cursor:default;
@@ -68,7 +68,7 @@
 		@include border-radius(3px 0 0 3px);
 		vertical-align: top;
 		@include box-sizing(border-box);
-		&.disabled{
+		&:disabled{
 			opacity:.5;
 		}
 	}
@@ -211,4 +211,11 @@ h4.ui-pnotify-title {
 	background-color: black;
 	opacity: 0.8;
 	filter: alpha(opacity=80);
+}
+
+
+iframe.console-output {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 }

@@ -30,9 +30,8 @@ module.exports = ModalView.extend({
       content : " ", // init file content to blank..
       containerId: this.collection.params.containerId
     });
-    var model = (dir)
-      ? new Dir(data, {app:this.app})
-      : new File(data, {app:this.app});
+    var model = (dir) ? new Dir(data, {app:this.app}) :
+      new File(data, {app:this.app});
     var options = utils.successErrorToCB(this.saveCallback.bind(this));
     options.url = _.result(this.collection, 'url');
     model.save({}, options);

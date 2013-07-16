@@ -1,17 +1,20 @@
-var _ = require('underscore');
 var BaseView = require('./base_view');
-var _super = BaseView.prototype;
 
 module.exports = BaseView.extend({
-  tagName:'li',
+  tagName: 'a',
+  preRender: function () {
+    var name = this.options.data && this.options.data.name ||
+      this.options.model && this.options.model.get('name');
+    this.attributes= {
+      href: '/'+name
+    };
+  },
   handleBrokenImages: function (evt) {
-    var self = this;
     this.$('img').each(function (i, img) {
       var clone = new Image();
       // clone.onerror = function () {};
       clone.onload = function () {
         var $img = $(img);
-        self.$('span.img').hide();
         $img.show();
       };
       clone.src = img.src;
@@ -21,8 +24,10 @@ module.exports = BaseView.extend({
     this.handleBrokenImages();
   },
   getTemplateData: function () {
-    return this.options;
+    var name = this.options.data && this.options.data.name ||
+      this.options.model && this.options.model.get('name');
+    return {name:name};
   }
 });
 
-module.exports.id = 'ChannelItemView';
+module.exports.id = "TagLink";

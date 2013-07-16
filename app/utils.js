@@ -26,33 +26,11 @@ var utils = module.exports = {
       str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
     ).replace(plus,'-').replace(slash,'_');
   },
-  base64ToHex: function(str) {
-    var dash = /-/g;
-    var underscore = /_/g;
-    try {
-      for (var i = 0, bin = atob(str.replace(dash,'+').replace(underscore,'/').replace(/[ \r\n]+$/, "")), hex = []; i < bin.length; ++i) {
-        var tmp = bin.charCodeAt(i).toString(16);
-        if (tmp.length === 1) tmp = "0" + tmp;
-        hex[hex.length] = tmp;
-      }
-      return hex.join("");
-    }
-    catch (err) {
-      return false;
-    }
-  },
   isHex: function(str) {
     var strSplit = str.split('');
     var parseHex = function(v) { return parseInt(v,16); };
     var parseHexIsFinite = utils.compose(parseHex, isFinite);
     return strSplit.map(parseHexIsFinite).reduce(utils.and);
-  },
-  isObjectId: function(str) {
-    return (str.length === 24 && utils.isHex(str));
-  },
-  isObjectId64: function(str) {
-    str = utils.base64ToHex(str);
-    return utils.isObjectId(str);
   },
   notEmptyString: function(thing) {
     return (thing !== '');
@@ -182,15 +160,14 @@ var utils = module.exports = {
     return encodeURIComponent(str);
   },
   base64ToHex: function(base64) {
+    var underscore = /_/g;
     if (global.isServer) {
       if (!utils.exists(base64)) return null;
       var minus = /-/g;
-      var underscore = /_/g;
       return (new Buffer(base64.toString().replace(minus,'+').replace(underscore,'/'), 'base64')).toString('hex');
     }
     else {
       var dash = /-/g;
-      var underscore = /_/g;
       try {
         for (var i = 0, bin = atob(base64.replace(dash,'+').replace(underscore,'/').replace(/[ \r\n]+$/, "")), hex = []; i < bin.length; ++i) {
           var tmp = bin.charCodeAt(i).toString(16);

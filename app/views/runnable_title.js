@@ -2,22 +2,20 @@ var BaseView = require('./base_view');
 var utils = require('../utils');
 var Image = require('../models/image');
 var _ = require('underscore');
+var utils = require('../utils');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
-  tagName: 'h1',
+  tagName: 'div',
   events: {
     'click .edit-link': 'clickEdit',
-    'click .btn-cancel': 'escEditMode',
-    'submit form' : 'submitName'
+    'submit form'      : 'submitName',
+    'click .btn-cancel': 'escEditMode'
   },
   postRender: function () {
-    console.log('runnableId debug:', this.app.utils.base64ToHex(this.model.id));
-    console.log('runnableId debug:', this.model);
-
-    this.model.on('change', function () {
-      this.render();
-    }, this);
+    console.log('container:', utils.base64ToHex(this.model.id));
+    console.log('container:', this.model.id);
+    this.listenTo(this.model, 'change', this.render.bind(this));
   },
   getTemplateData: function () {
     var user = this.app.user;
@@ -52,7 +50,10 @@ module.exports = BaseView.extend({
       }
     }.bind(this));
     this.model.save(formData,  options);
-    this.setEditMode(false);
+    var self = this;
+    setTimeout(function () {
+      self.setEditMode(false);
+    }, 10);
   }
 });
 

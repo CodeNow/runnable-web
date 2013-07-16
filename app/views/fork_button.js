@@ -1,4 +1,5 @@
 var BaseView = require('./base_view');
+// var router = require('../router');
 
 module.exports = BaseView.extend({
   tagName: 'button',
@@ -7,15 +8,15 @@ module.exports = BaseView.extend({
     'click' : 'saveAndOpenContainerPage'
   },
   saveAndOpenContainerPage: function () {
-    // this.collection.saveAll(function (err) {
-      // if (err) {
-      //   alert(err);
-      // }
-      // else {
-        // this can be changed to push state
-        window.location.href = '/me/'+this.options.containerid;
-      // }
-    // });
+    var self = this;
+    this.collection.saveAll(function (err) {
+      if (err) {
+        this.showError(err);
+      }
+      else {
+        self.app.router.navigate('/me/'+self.options.containerid, true);
+      }
+    });
   }
 });
 

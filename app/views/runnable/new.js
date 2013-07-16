@@ -16,4 +16,4 @@ module.exports = BaseView.extend({
   }
 });
 
-module.exports.id = "home/new";
+module.exports.id = "runnable/new";
