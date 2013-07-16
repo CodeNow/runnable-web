@@ -1,4 +1,5 @@
 var BaseView = require('./base_view');
+var _ = require('underscore');
 
 module.exports = BaseView.extend({
   id: 'web',
@@ -12,6 +13,7 @@ module.exports = BaseView.extend({
     //clientside
     var self = this;
     this.baseUrl = "http://" + this.model.get("docker_id") + "." + this.app.get('domain');
+    this.setIframeSrcPath('');
     window.addEventListener("message", function (event) {
       if (event.data === 'Refresh') {
         self.setIframeSrcPath('');

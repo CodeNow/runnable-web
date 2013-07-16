@@ -1,38 +1,41 @@
-<!-- leave me at top -->
 {{view "app_user" model=user}}
-<div class="container">
-  <article class="span9">
-    <section class="title">
-      {{view "runnable_title" model=container}}
-    </section>
-    {{view "publish_warning" model=image containerid=container.id}}
-    <section class="actions">
-      {{view "run_button" model=container}}
-      {{view "save_button" collection=defaultFiles}}
-      {{!view "download_button" model=container}}
-    </section>
-    {{view "code_editor" context=.}}
+{{view "header_view" model=user context=.}}
+<section class="content">
+  <div class="container">
+    <article class="span9">
+      <section class="title">
+        {{view "runnable_title" model=container}}
+      </section>
+      {{view "publish_warning" model=image containerid=container.id}}
+      <section class="actions">
+        {{view "run_button" model=container}}
+        {{view "save_button" collection=defaultFiles}}
+        {{!view "download_button" model=container}}
+      </section>
+      {{view "code_editor" context=.}}
 
 
-  </article>
-  <aside class="span3 last">
+    </article>
+    <aside class="span3 last">
 
-    <div class="module">
-      {{view "new_example_button"}}
-    </div>
+      <div class="module">
+        {{view "new_example_button"}}
+      </div>
 
-    <section class="module display-none">
-      {{view "runnable_owner" model=container}}
-    </section>
+      <section class="module display-none">
+        {{view "runnable_owner" model=container}}
+      </section>
 
-    {{!#if container.attributes.tags}}
-    {{!#if container.attributes.tags.length}}
-    <section class="module tags">
-      <h3>Tags</h3>
-      {{view "runnable_tags" model=container editmode=true}}
-      {{view "runnable_new_tag_form" model=container}}
-    </section>
-    {{!/if}}
-    {{!/if}}
-  </aside>
-</div>
+      {{!#if container.attributes.tags}}
+      {{!#if container.attributes.tags.length}}
+      <section class="module tags">
+        <h3>Tags</h3>
+        {{view "runnable_tags" model=container editmode=true}}
+        {{view "runnable_new_tag_form" model=container}}
+      </section>
+      {{!/if}}
+      {{!/if}}
+    </aside>
+  </div>
+</section>
+{{view "footer_view" model=user context=.}}
