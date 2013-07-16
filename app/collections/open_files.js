@@ -54,9 +54,9 @@ module.exports = Base.extend({
       }
     }
   },
-  onChangeSelected: function (selectedFile) {
+  onChangeSelected: function (selectedFile, selected) {
     // unselect other files when new file selected
-    if (selectedFile.get('selected')) {
+    if (selected) {
       this
         .where({ selected:true })
         .filter(function (file) {
