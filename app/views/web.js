@@ -17,6 +17,7 @@ module.exports = BaseView.extend({
     //clientside
     var self = this;
     this.baseUrl = "http://" + this.model.get("docker_id") + "." + this.app.get('domain');
+    this.setIframeSrcPath('');
     window.addEventListener("message", function (event) {
       alert('message:' + event.data);
       if (event.data === 'Refresh') {
