@@ -178,6 +178,10 @@ module.exports = function(grunt) {
           ]
         }]
       }
+    },
+
+    jshint: {
+      all: ['app/**/*.js']
     }
   };
   gruntConfig.cssmin.combine.files[mergedCSSPath] = [compassCSS]; //minifies css
@@ -190,20 +194,20 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-bg-shell');
   grunt.loadNpmTasks('grunt-rendr-stitch');
-
+  // delete old css
   grunt.registerTask('clean-merged-css', 'Delete merged css file before merging new styles', function () {
     grunt.log.writeln('Deleting file "' + mergedCSSPath + '"');
     grunt.file['delete'](mergedCSSPath, { force:true });
   });
-
+  // move css
   grunt.registerTask('move-css', 'Copy compass index.css to styles dir in public', function () {
     grunt.log.writeln('Copying file "' + compassCSS + '" to "' + mergedCSSPath + '"');
     grunt.file.copy(compassCSS, mergedCSSPath);
   });
-
+  // jshint
+  grunt.registerTask('jshint', ['jshint:all']);
   // Compile - shared tasks for all
   grunt.registerTask('compile', ['handlebars', 'rendr_stitch', 'clean-merged-css', 'compass']);
-
   // Shared tasks for server and debug
   grunt.registerTask('dev-mode', ['compile', 'move-css', 'watch']);
   // Run the server and watch for file changes

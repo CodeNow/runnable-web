@@ -47,7 +47,8 @@
     "generator-rendr": "tjmehta/generator-rendr",
     "subl": "tjmehta/node-subl",
     "tiny-lr": "~0.0.4",
-    "grunt-contrib-uglify": "~0.2.2"
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-jshint": "~0.6.0"
   },
   "engines": {
     "node": ">=0.8"

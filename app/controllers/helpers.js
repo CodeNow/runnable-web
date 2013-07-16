@@ -137,7 +137,7 @@ function createContainerFrom (imageIdOrChannelName, callback) {
   var app = this.app;
   var container = new Container({}, { app:app });
   var options = utils.successErrorToCB(callback);
-  container.url = _.result(container, 'url') + '?from=' + imageIdOrChannelName;
+  options.url = _.result(container, 'url') + '?from=' + imageIdOrChannelName;
   container.save({}, options);
 }
 
