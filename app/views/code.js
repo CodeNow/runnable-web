@@ -94,10 +94,12 @@ module.exports = BaseView.extend({
     this.editor.focus();
   },
   onScrollLeft: function() {
-    Track.event('Code View', 'Editor Scroll Left', {projectId: this.model.id});
+    if (this.file)
+    Track.event('Code View', 'Editor Scroll Left', {projectId: this.file.id});
   },
   onScrollTop: function() {
-    Track.event('Code View', 'Editor Scroll Tops', {projectId: this.model.id});
+    if (this.file)
+    Track.event('Code View', 'Editor Scroll Tops', {projectId: this.file.id});
   },
   getMode: function (filename) {
     this.modelist = this.modelist || ace.require('ace/ext/modelist');
