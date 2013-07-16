@@ -26,7 +26,7 @@ module.exports = BaseView.extend({
       clone.onload = function () {
         var $img = $(img);
         $img.show();
-      }
+      };
       clone.src = img.src;
     });
   },

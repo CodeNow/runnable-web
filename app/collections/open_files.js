@@ -11,7 +11,7 @@ module.exports = Base.extend({
       .replace(':containerId', this.containerId);
   },
   initialize: function (models, options) {
-    Super.initialize.apply(this, arguments)
+    Super.initialize.apply(this, arguments);
     this.containerId = options.containerId;
 
     this.listenTo(this, 'change:selected', this.onChangeSelected.bind(this));
@@ -52,7 +52,6 @@ module.exports = Base.extend({
       else {
         this.add(file);
       }
-      this.trigger('select:file', file);
     }
   },
   onChangeSelected: function (selectedFile) {
@@ -96,8 +95,12 @@ module.exports = Base.extend({
     if (index < 0) index = 0;
     if (index > this.length) index = this.length;
     var nextFile = this.at(index);
-    if (nextFile) nextFile.set('selected', true);
-    this.trigger('select:file', nextFile); // gets triggered even if null
+    if (nextFile) {
+      nextFile.set('selected', true);
+    }
+    else {
+      this.trigger('change:selected', null, true); // gets triggered even if null
+    }
   },
   onAdd: function (fileAdded) {
     fileAdded.set('selected', true);

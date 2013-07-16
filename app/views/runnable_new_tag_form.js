@@ -1,6 +1,6 @@
 var BaseView = require('./base_view');
-var BaseModel = require('../models/base')
-var BaseCollection = require('../collections/base')
+var BaseModel = require('../models/base');
+var BaseCollection = require('../collections/base');
 var utils = require('../utils');
 var _ = require('underscore');
 

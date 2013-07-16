@@ -9,12 +9,12 @@ module.exports = Base.extend({
   initialize: function (model, options) {
     var self = this;
     this.model = function (attrs, opts) {
-      var opts = opts || {};
+      opts = opts || {};
       opts.app = self.app;
       attrs.containerId = self.containerId;
-      return (attrs.dir)
-        ? new Dir(attrs, opts)
-        : new File(attrs, opts);
+      return (attrs.dir) ?
+        new Dir(attrs, opts) :
+        new File(attrs, opts);
     };
     this._idAttr = File.prototype.idAttribute; // since model is a function must set idAttribute manually
     this.model.prototype = File.prototype;     // avoid rendr error, jsonKey in _parseModels shared/base/collection

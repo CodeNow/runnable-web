@@ -97,7 +97,7 @@ module.exports = {
           }
         });
       }
-    ], callback)
+    ], callback);
   },
   output: function (params, callback) {
     var self = this;

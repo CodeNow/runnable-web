@@ -14,7 +14,7 @@ module.exports = BaseView.extend({
     var channel = this.collection.params.channel;
     var baseHref = (channel) ? '/channel/' : '/';
     var prevLink;
-    if (showPrev) prevLink = baseHref
+    if (showPrev) prevLink = baseHref;
     if (page >= 3) prevLink = baseHref+'page/'+(page-1);
     var nextLink;
     if (showNext) nextLink = baseHref+'page/'+(page+1);

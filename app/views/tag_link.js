@@ -3,8 +3,8 @@ var BaseView = require('./base_view');
 module.exports = BaseView.extend({
   tagName: 'a',
   preRender: function () {
-    var name = this.options.data && this.options.data.name
-      || this.options.model && this.options.model.get('name');
+    var name = this.options.data && this.options.data.name ||
+      this.options.model && this.options.model.get('name');
     this.attributes= {
       href: '/'+name
     };
@@ -16,7 +16,7 @@ module.exports = BaseView.extend({
       clone.onload = function () {
         var $img = $(img);
         $img.show();
-      }
+      };
       clone.src = img.src;
     });
   },
@@ -24,8 +24,8 @@ module.exports = BaseView.extend({
     this.handleBrokenImages();
   },
   getTemplateData: function () {
-    var name = this.options.data && this.options.data.name
-      || this.options.model && this.options.model.get('name');
+    var name = this.options.data && this.options.data.name ||
+      this.options.model && this.options.model.get('name');
     return {name:name};
   }
 });

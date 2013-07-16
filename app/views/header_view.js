@@ -6,7 +6,7 @@ module.exports = BaseView.extend({
   tagName:'header',
   postHydrate: function () {
     this.listenTo(this.model, 'change:gravitar', this.render.bind(this));
-    this.listenTo(this.app, 'change:loading', this.loader.bind(this))
+    this.listenTo(this.app, 'change:loading', this.loader.bind(this));
   },
   events: {
     'click #header-login-link' : 'openLogin',
@@ -14,7 +14,7 @@ module.exports = BaseView.extend({
   },
   loader: function (model, loading) {
     var $loader = this.$('.logo-only');
-    console.log($loader)
+    console.log($loader);
     if (loading) {
       $loader.addClass('loading');
     }

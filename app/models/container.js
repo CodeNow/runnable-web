@@ -63,6 +63,6 @@ var Container = module.exports = Runnable.extend({
   }
 });
 
-if (global.window) global.window.dd = module.exports.destroyById
+if (global.window) global.window.dd = module.exports.destroyById;
 
 module.exports.id = "Container";

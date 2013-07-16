@@ -1,5 +1,5 @@
-var Channel = require('../models/channel')
-  , Base = require('./base');
+var Channel = require('../models/channel'),
+    Base = require('./base');
 
 module.exports = Base.extend({
   model: Channel,

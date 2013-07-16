@@ -11,9 +11,6 @@ module.exports = BaseView.extend({
     this.history = [];
     this.prevAddress = '';
   },
-  postRender: function () {
-
-  },
   backButtonState: function () {
     if (this.history.length === 0) {
       this.$('.back-button').attr('disabled','disabled');

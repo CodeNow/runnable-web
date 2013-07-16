@@ -92,7 +92,7 @@ Router.prototype.handleError = function (err) {
   var View = this.getView(viewPath);
   this.currentView = new View();
   this.renderView();
-}
+};
 
 Router.prototype.getRenderCallback = function () {
   var self = this;
@@ -104,8 +104,8 @@ Router.prototype.getRenderCallback = function () {
     else {
       callback(err, viewPath, locals);
     }
-  }
-}
+  };
+};
 
 Router.prototype.trackImpression = function() {
   if (window._gaq) {

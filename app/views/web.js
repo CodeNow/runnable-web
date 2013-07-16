@@ -5,12 +5,12 @@ module.exports = BaseView.extend({
   postInitialize: function () {
     if (this.model) {
       //first render..
-      this.baseUrl = "http://" + this.model.get("docker_id") + "." + this.app.get('domain')
+      this.baseUrl = "http://" + this.model.get("docker_id") + "." + this.app.get('domain');
     }
   },
   postHydrate: function () {
     //clientside
-    this.baseUrl = "http://" + this.model.get("docker_id") + "." + this.app.get('domain')
+    this.baseUrl = "http://" + this.model.get("docker_id") + "." + this.app.get('domain');
   },
   postRender: function () {
     var navigationView = _.findWhere(this.childViews, {name:'web_navigation'});

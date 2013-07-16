@@ -8,7 +8,7 @@ module.exports = BaseView.extend({
   // maxHeight: 550,
   getTemplateData: function () {
     //for serverside render
-    var selectedFile = this.collection.selectedFile()
+    var selectedFile = this.collection.selectedFile();
     var code = (selectedFile && selectedFile.get('content')) || '';
     return {
       code: code
@@ -24,7 +24,12 @@ module.exports = BaseView.extend({
     // you can attach events here since render only occurs once for this view
     var openFiles = this.collection;
     this.setFile(openFiles.selectedFile());
-    this.listenTo(openFiles, 'select:file', this.setFile.bind(this));
+    this.listenTo(openFiles, 'change:selected', this.changeSelected.bind(this));
+  },
+  changeSelected: function (model, selected) {
+    if (selected) {
+      this.setFile(model);
+    }
   },
   setFile: function (file) {
     // detach previous file events/session
@@ -110,9 +115,8 @@ module.exports = BaseView.extend({
     var editor = this.editor;
     var min = this.minHeight;
     var max = this.maxHeight;
-    var newHeight = editor.getSession().getScreenLength()
-      * editor.renderer.lineHeight
-      + editor.renderer.scrollBar.getWidth();
+    var newHeight = editor.getSession().getScreenLength() *
+      editor.renderer.lineHeight + editor.renderer.scrollBar.getWidth();
     if (newHeight < min) newHeight = min;
     if (newHeight > max) newHeight = max;
     this.setHeight(newHeight+"px");
