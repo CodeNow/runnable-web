@@ -15,11 +15,11 @@
     </section>
     {{view "code_editor" context=.}}
   </article>
-  <aside class="span3 last">
+  <aside class="span3 last runnable-sidebar">
 
-    <div class="module">
-      {{view "new_example_button"}}
-    </div>
+    <!--<div class="module">
+      {{! {{view "new_example_button"}} }}
+    </div>-->
 
     <section class="module display-none">
       {{view "runnable_owner" model=image}}
@@ -37,7 +37,7 @@
 
     {{#if related.length}}
     <section class="module">
-      <h3>Related examples</h3>
+      <h3>Related code</h3>
       <nav class="related-nav">
         <ul>
           {{#each related.models}}

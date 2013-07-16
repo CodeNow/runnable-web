@@ -87,10 +87,10 @@ header .user-nav{
 // Beside the search bar
 .header-nav{
 	float:left;
-	margin:5px 0;
+	margin:5px;
 	a{
 		line-height:25px;
-		padding:5px 7px;
+		padding:5px 10px;
 		color:#ccc;
 		&:hover{
 			color:#fff;
@@ -104,17 +104,18 @@ header .user-nav{
 .tags-nav{
 	@include clearfix;
 	a{
-		display:inline-block;
-		//float:left;
+		//display:inline-block;
+		float:left;
 		margin:0 5px 5px 0;
-		@include border-radius($br);
-		background:$cta-tertiary;
-		border:1px solid darken($cta-tertiary,3%);
+		@include border-radius(5px);
+		@include background-image(linear-gradient(lighten($cta-tertiary,5%),$cta-tertiary));
+		border:1px solid darken($cta-tertiary,2%);
 		padding:0 5px;
 		//line-height:0;
 		&:hover{
 			text-decoration:none;
-			background:darken($cta-tertiary,2%);
+		@include background-image(linear-gradient(lighten($cta-tertiary,2%),darken($cta-tertiary,2%)));
+			border-color:darken($cta-tertiary,3%);
 		}
 		img{
 			//max-width:16px;
@@ -210,7 +211,7 @@ header .user-nav{
 			@include clearfix;
 			position:relative;
 			padding:$padding 0 $padding 40px;
-			border-bottom:1px solid #f8f8f8;
+			border-bottom:1px solid #eee;
 			.btn-vote{
 				position:absolute;
 				top:$padding;
@@ -219,17 +220,30 @@ header .user-nav{
 				margin:0 auto;
 			}
 			h3{
-				font-size:18px;
+				font-size:22px;
+				margin-bottom:5px;
 			}
 			.tags-nav{
-				font-size:12px;
+				font-size:13px;
+				a{
+					background:none;
+					border:none;
+					padding:0;
+					color:#aaa;
+					margin-right:20px;
+					&:hover{
+						color:$font-color-secondary;
+					}
+				}
 				img{
 					max-width:12px;
 				}
 			}
 			.author{
+				font-size:13px;
 				.avatar{
 					float:none;
+					margin:0;
 				}
 				img{
 					max-height:20px;

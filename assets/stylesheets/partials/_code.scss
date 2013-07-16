@@ -23,6 +23,14 @@
 	margin:0 0 $padding;
 }
 
+// Sidebar
+.runnable-sidebar{
+	h3{
+		border-bottom:3px solid #eee;
+		padding-bottom:3px;
+	}
+}
+
 // Project author
 .author{
 	@include clearfix;
