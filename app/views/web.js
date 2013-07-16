@@ -1,10 +1,6 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
 
-// window.addEventListener("message", function (event) {
-//   alert('message:' + event.data);
-// }, false);
-
 module.exports = BaseView.extend({
   id: 'web',
   postInitialize: function () {
