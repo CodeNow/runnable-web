@@ -14,26 +14,11 @@
     <link href="/styles/index.css" media="screen" rel="stylesheet" type="text/css" />
   </head>
 
-  <body class="">
+  <body id="content">
     <!-- leave me at top -->
     {{view "app_user" model=locals.user}}
 
-    {{#exists locals.noHeader}}
-      <!-- don't draw anything -->
-    {{else}}
-      {{view "header_view" model=locals.user context=locals}}
-    {{/exists}}
-
-    <section id="content">
     {{{body}}}
-    </section>
-
-      <body class="">
-    {{#exists locals.noFooter}}
-      <!-- don't draw anything -->
-    {{else}}
-      {{view "footer_view" model=locals.user context=locals}}
-    {{/exists}}
 
     <script>
       var CONFIG = window.CONFIG = {{json app}};
@@ -81,7 +66,7 @@
       App.start();
     })();
     </script>
+    {{view "app_user" model=locals.user}}
   </body>
   <!-- leave me at bottom -->
-  {{view "app_user" model=locals.user}}
 </html>

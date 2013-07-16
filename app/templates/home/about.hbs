@@ -1,138 +1,142 @@
-<article class="content">
+{{view "header_view" model=user context=.}}
+<div class="container">
+  <article class="content">
 
-    <h1>About Us</h1>
-    <h2>We're a small team based in the Bay Area designing tools for developers</h2>
+      <h1>About Us</h1>
+      <h2>We're a small team based in the Bay Area designing tools for developers</h2>
 
-    <p><img src="/images/team.jpg" alt="Runnable HQ" title="Runnable HQ"></p>
-    <section class="section">
-      <div class="span6">
-        <p>Venture backed cloud development company that is innovating the way developers create, edit, and share code.</p>
-        <p>We take a lean agile approach to product development, constantly validating and learning as we ship.</p>
-      <p><a href="/jobs" class="btn-secondary">We're hiring developers</a></p>
-      </div>
-      <div class="span6 last">
-        <h3>Our stack includes</h3>
-        <p><img src="/images/stack.jpg" alt="Node.js, AWS, Yeoman, Backbone.js, MongoDB, Handlebars, Coffeescript, HTML5, Sass, Express" title="Node.js, AWS, Yeoman, Backbone.js, MongoDB, Handlebars, Coffeescript, HTML5, Sass, Express"></p>
-      </div>
-    </section>
+      <p><img src="/images/team.jpg" alt="Runnable HQ" title="Runnable HQ"></p>
+      <section class="section">
+        <div class="span6">
+          <p>Venture backed cloud development company that is innovating the way developers create, edit, and share code.</p>
+          <p>We take a lean agile approach to product development, constantly validating and learning as we ship.</p>
+        <p><a href="/jobs" class="btn-secondary">We're hiring developers</a></p>
+        </div>
+        <div class="span6 last">
+          <h3>Our stack includes</h3>
+          <p><img src="/images/stack.jpg" alt="Node.js, AWS, Yeoman, Backbone.js, MongoDB, Handlebars, Coffeescript, HTML5, Sass, Express" title="Node.js, AWS, Yeoman, Backbone.js, MongoDB, Handlebars, Coffeescript, HTML5, Sass, Express"></p>
+        </div>
+      </section>
 
-    <section class="section" id="team-members">
-      <h3>The team</h3>
-      <div class="member">
-        <p><img class="member-image" src="/images/yash.jpg" alt="Yash Kumar" title="Yash Kumar">
-          <img src="/images/yash-spin.gif" class="member-hidden-image">
-          <img src="/images/yash.jpg" class="member-hidden-image">
-        </p>
-        <h4>Yash Kumar</h4>
-        <p>Founder</p>
-        <nav class="social-icons">
-          <a href="https://twitter.com/ykumar6" class="twitter" title="Follow Yash on Twitter">Follow @ykumar6</a>
-          <a href="https://github.com/ykumar6" class="github" title="Check out Yash's activity on GitHub">GitHub Yash</a>
-        </nav>
-      </div>
-      <div class="member">
-        <p><img class="member-image" src="/images/tj.jpg" alt="Tejesh Mehta" title="Tejesh Mehta">
-          <img src="/images/tj-spin.gif" class="member-hidden-image">
-          <img src="/images/tj.jpg" class="member-hidden-image">
-        </p>
-        <h4>Tejesh Mehta</h4>
-        <p>Engineer</p>
-        <nav class="social-icons">
-          <a href="https://github.com/tjmehta" class="github" title="Check out TJ's activity on GitHub">GitHub TJ</a>
-        </nav>
-      </div>
-      <div class="member">
-        <p><img class="member-image" src="/images/jeff.jpg" alt="Jeff Kingyens" title="Jeff Kingyens">
-          <img src="/images/jeff-spin.gif" class="member-hidden-image">
-          <img src="/images/jeff.jpg" class="member-hidden-image">
-        </p>
-        <h4>Jeff Kingyens</h4>
-        <p>Engineer</p>
-        <nav class="social-icons">
-          <a href="https://github.com/EnosFeedler" class="github" title="Check out Jeff's activity on GitHub">GitHub Jeff</a>
-        </nav>
-      </div>
-      <div class="member">
-        <p><img class="member-image" src="/images/sundip.jpg" alt="Sundip Patel" title="Sundip Patel">
-          <img src="/images/sundip-spin.gif" class="member-hidden-image">
-          <img src="/images/sundip.jpg" class="member-hidden-image">
-        </p>
-        <h4>Sundip Patel</h4>
-        <p>Product</p>
-        <nav class="social-icons">
-          <a href="https://github.com/sundippatel" class="github" title="Check out Sundip's activity on GitHub">GitHub Sundip</a>
-        </nav>
-      </div>
-      <div class="member">
-        <p><img class="member-image" src="/images/lee.jpg" alt="Lee Munroe" title="Lee Munroe">
-          <img src="/images/lee-spin.gif" class="member-hidden-image">
-          <img src="/images/lee.jpg" class="member-hidden-image">
-        </p>
-        <h4>Lee Munroe</h4>
-        <p>Designer</p>
-        <nav class="social-icons">
-          <a href="http://twitter.com/leemunroe" class="twitter" title="Follow on Twitter">Follow @leemunroe</a>
-          <a href="http://github.com/leemunroe" class="github" title="Check out Lee's activity on GitHub">GitHub Lee</a>
-        </nav>
-      </div>
-      <div class="clear member">
-        <p><img class="member-image" src="/images/henry.jpg" alt="Henry Allen-Tilford" title="Henry Allen-Tilford">
-          <img src="/images/henry-spin.gif" class="member-hidden-image">
-          <img src="/images/henry.jpg" class="member-hidden-image">
-        </p>
-        <h4>Henry Allen-Tilford</h4>
-        <p>Engineer</p>
-        <nav class="social-icons">
-          <a href="http://github.com/generalhenry" class="github" title="Check out Henry's activity on GitHub">GitHub Lee</a>
-          <a href="http://stackoverflow.com/users/491845/generalhenry" class="so" title="Henry on Stack Overflow">Henry on Stack Overflow</a>
-        </nav>
-      </div>
-      <div class="member">
-        <p><img class="member-image" src="/images/praful.jpg" alt="Praful Rana" title="Praful Rana">
-          <img src="/images/praful-spin.gif" class="member-hidden-image">
-          <img src="/images/praful.jpg" class="member-hidden-image">
-        </p>
-        <h4>Praful Rana</h4>
-        <p>Engineer</p>
-        <nav class="social-icons">
-          <a href="http://twitter.com/prafulrana" class="twitter" title="Follow on Twitter">Follow @prafulrana</a>
-          <a href="http://github.com/prafulrana" class="github" title="Check out Praful's activity on GitHub">GitHub Praful</a>
-        </nav>
-      </div>
-    </section>
+      <section class="section" id="team-members">
+        <h3>The team</h3>
+        <div class="member">
+          <p><img class="member-image" src="/images/yash.jpg" alt="Yash Kumar" title="Yash Kumar">
+            <img src="/images/yash-spin.gif" class="member-hidden-image">
+            <img src="/images/yash.jpg" class="member-hidden-image">
+          </p>
+          <h4>Yash Kumar</h4>
+          <p>Founder</p>
+          <nav class="social-icons">
+            <a href="https://twitter.com/ykumar6" class="twitter" title="Follow Yash on Twitter">Follow @ykumar6</a>
+            <a href="https://github.com/ykumar6" class="github" title="Check out Yash's activity on GitHub">GitHub Yash</a>
+          </nav>
+        </div>
+        <div class="member">
+          <p><img class="member-image" src="/images/tj.jpg" alt="Tejesh Mehta" title="Tejesh Mehta">
+            <img src="/images/tj-spin.gif" class="member-hidden-image">
+            <img src="/images/tj.jpg" class="member-hidden-image">
+          </p>
+          <h4>Tejesh Mehta</h4>
+          <p>Engineer</p>
+          <nav class="social-icons">
+            <a href="https://github.com/tjmehta" class="github" title="Check out TJ's activity on GitHub">GitHub TJ</a>
+          </nav>
+        </div>
+        <div class="member">
+          <p><img class="member-image" src="/images/jeff.jpg" alt="Jeff Kingyens" title="Jeff Kingyens">
+            <img src="/images/jeff-spin.gif" class="member-hidden-image">
+            <img src="/images/jeff.jpg" class="member-hidden-image">
+          </p>
+          <h4>Jeff Kingyens</h4>
+          <p>Engineer</p>
+          <nav class="social-icons">
+            <a href="https://github.com/EnosFeedler" class="github" title="Check out Jeff's activity on GitHub">GitHub Jeff</a>
+          </nav>
+        </div>
+        <div class="member">
+          <p><img class="member-image" src="/images/sundip.jpg" alt="Sundip Patel" title="Sundip Patel">
+            <img src="/images/sundip-spin.gif" class="member-hidden-image">
+            <img src="/images/sundip.jpg" class="member-hidden-image">
+          </p>
+          <h4>Sundip Patel</h4>
+          <p>Product</p>
+          <nav class="social-icons">
+            <a href="https://github.com/sundippatel" class="github" title="Check out Sundip's activity on GitHub">GitHub Sundip</a>
+          </nav>
+        </div>
+        <div class="member">
+          <p><img class="member-image" src="/images/lee.jpg" alt="Lee Munroe" title="Lee Munroe">
+            <img src="/images/lee-spin.gif" class="member-hidden-image">
+            <img src="/images/lee.jpg" class="member-hidden-image">
+          </p>
+          <h4>Lee Munroe</h4>
+          <p>Designer</p>
+          <nav class="social-icons">
+            <a href="http://twitter.com/leemunroe" class="twitter" title="Follow on Twitter">Follow @leemunroe</a>
+            <a href="http://github.com/leemunroe" class="github" title="Check out Lee's activity on GitHub">GitHub Lee</a>
+          </nav>
+        </div>
+        <div class="clear member">
+          <p><img class="member-image" src="/images/henry.jpg" alt="Henry Allen-Tilford" title="Henry Allen-Tilford">
+            <img src="/images/henry-spin.gif" class="member-hidden-image">
+            <img src="/images/henry.jpg" class="member-hidden-image">
+          </p>
+          <h4>Henry Allen-Tilford</h4>
+          <p>Engineer</p>
+          <nav class="social-icons">
+            <a href="http://github.com/generalhenry" class="github" title="Check out Henry's activity on GitHub">GitHub Lee</a>
+            <a href="http://stackoverflow.com/users/491845/generalhenry" class="so" title="Henry on Stack Overflow">Henry on Stack Overflow</a>
+          </nav>
+        </div>
+        <div class="member">
+          <p><img class="member-image" src="/images/praful.jpg" alt="Praful Rana" title="Praful Rana">
+            <img src="/images/praful-spin.gif" class="member-hidden-image">
+            <img src="/images/praful.jpg" class="member-hidden-image">
+          </p>
+          <h4>Praful Rana</h4>
+          <p>Engineer</p>
+          <nav class="social-icons">
+            <a href="http://twitter.com/prafulrana" class="twitter" title="Follow on Twitter">Follow @prafulrana</a>
+            <a href="http://github.com/prafulrana" class="github" title="Check out Praful's activity on GitHub">GitHub Praful</a>
+          </nav>
+        </div>
+      </section>
 
-    <section class="section">
-      <h3>Our investors &amp; advisors</h3>
-      <div class="investor">
-        <p><img src="/images/gokul.jpg" alt="Gokul Rajaram" title="Gokul Rajaram"></p>
-        <h4>Gokul Rajaram</h4>
-        <p>Product Director, Facebook</p>
-      </div>
-      <div class="investor">
-        <p><img src="/images/isaac.jpg" alt="Isaac Roth" title="Isaac Roth"></p>
-        <h4>Isaac Roth</h4>
-        <p>PaaS Master @ Red Hat</p>
-      </div>
-      <div class="investor">
-        <p><img src="/images/dave.jpg" alt="Dave McClure" title="Dave McClure"></p>
-        <h4>Dave McClure</h4>
-        <p>Partner @ 500 Startups</p>
-      </div>
-      <div class="investor">
-        <p><img src="/images/hiten.jpg" alt="Hiten Shah" title="Hiten Shah"></p>
-        <h4>Hiten Shah</h4>
-        <p>Founder @ Kissmetrics</p>
-      </div>
-      <div class="investor">
-        <p><img src="/images/mark.jpg" alt="Mark Fernandes" title="Mark Fernandes"></p>
-        <h4>Mark Fernandes</h4>
-        <p>MD @ Sierra Ventures</p>
-      </div>
-    </section>
+      <section class="section">
+        <h3>Our investors &amp; advisors</h3>
+        <div class="investor">
+          <p><img src="/images/gokul.jpg" alt="Gokul Rajaram" title="Gokul Rajaram"></p>
+          <h4>Gokul Rajaram</h4>
+          <p>Product Director, Facebook</p>
+        </div>
+        <div class="investor">
+          <p><img src="/images/isaac.jpg" alt="Isaac Roth" title="Isaac Roth"></p>
+          <h4>Isaac Roth</h4>
+          <p>PaaS Master @ Red Hat</p>
+        </div>
+        <div class="investor">
+          <p><img src="/images/dave.jpg" alt="Dave McClure" title="Dave McClure"></p>
+          <h4>Dave McClure</h4>
+          <p>Partner @ 500 Startups</p>
+        </div>
+        <div class="investor">
+          <p><img src="/images/hiten.jpg" alt="Hiten Shah" title="Hiten Shah"></p>
+          <h4>Hiten Shah</h4>
+          <p>Founder @ Kissmetrics</p>
+        </div>
+        <div class="investor">
+          <p><img src="/images/mark.jpg" alt="Mark Fernandes" title="Mark Fernandes"></p>
+          <h4>Mark Fernandes</h4>
+          <p>MD @ Sierra Ventures</p>
+        </div>
+      </section>
 
-    <section class="section">
-      <h3>Located in the heart of Silicon Valley</h3>
-      <p><iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=459+Hamilton+Ave,+Suite+%23304,+Palo+Alto+94301&amp;aq=&amp;sll=37.752258,-122.437477&amp;sspn=0.318414,0.496445&amp;ie=UTF8&amp;hq=&amp;hnear=459+Hamilton+Ave+%23304,+Palo+Alto,+Santa+Clara,+California+94301&amp;t=m&amp;z=9&amp;iwloc=A&amp;ll=37.447185,-122.158483&amp;output=embed"></iframe></p>
-    </section>
+      <section class="section">
+        <h3>Located in the heart of Silicon Valley</h3>
+        <p><iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=459+Hamilton+Ave,+Suite+%23304,+Palo+Alto+94301&amp;aq=&amp;sll=37.752258,-122.437477&amp;sspn=0.318414,0.496445&amp;ie=UTF8&amp;hq=&amp;hnear=459+Hamilton+Ave+%23304,+Palo+Alto,+Santa+Clara,+California+94301&amp;t=m&amp;z=9&amp;iwloc=A&amp;ll=37.447185,-122.158483&amp;output=embed"></iframe></p>
+      </section>
 
-</article>
+  </article>
+</div>
+{{view "footer_view" model=user context=.}}
