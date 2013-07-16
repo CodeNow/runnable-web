@@ -2,6 +2,7 @@ var BaseView = require('./base_view');
 var utils = require('../utils');
 var Image = require('../models/image');
 var _ = require('underscore');
+var utils = require('../utils');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
@@ -12,12 +13,9 @@ module.exports = BaseView.extend({
     'click .btn-cancel': 'escEditMode'
   },
   postRender: function () {
-    console.log('runnableId debug:', this.app.utils.base64ToHex(this.model.id));
-    console.log('runnableId debug:', this.model);
-
-    this.model.on('change', function () {
-      this.render();
-    }, this);
+    console.log('container:', utils.base64ToHex(this.model.id));
+    console.log('container:', this.model.id);
+    this.listenTo(this.model, 'change', this.render.bind(this));
   },
   getTemplateData: function () {
     var user = this.app.user;
