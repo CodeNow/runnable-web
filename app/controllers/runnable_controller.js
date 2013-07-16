@@ -1,165 +1,17 @@
 var _ = require('underscore');
 var async = require('async');
-var fetch = require('./fetch');
 var utils = require('../utils');
 var channelController = require('./channel_controller');
-var Container = require('../models/container');
-var Dir = require('../models/dir');
+var helpers = require('./helpers');
 
-function fetchUserAndImage (imageId, callback) {
-  var spec = {
-    user: {
-      model:'User',
-      params:{
-        _id: 'me'
-      }
-    },
-    image: {
-      model : 'Image',
-      params: {
-        _id: imageId
-      }
-    }
-  };
-  fetch.call(this, spec, callback);
-}
-
-function fetchUserAndContainer (containerId, callback) {
-  var spec = {
-    user: {
-      model:'User',
-      params:{
-        _id: 'me'
-      }
-    },
-    container: {
-      model : 'Container',
-      params: {
-        _id: containerId
-      }
-    }
-  };
-  fetch.call(this, spec, callback);
-}
-
-function fetchContainer (containerId, callback) {
-  var spec = {
-    container: {
-      model: 'Container',
-      params: {
-        _id: containerId
-      }
-    }
-  };
-  fetch.call(this, spec, function (err, results) {
-    callback(err, results && results.container);
-  });
-}
-
-function fetchImage (imageId, callback) {
-  var spec = {
-    image: {
-      model: 'Image',
-      params: {
-        _id: imageId
-      }
-    }
-  };
-  fetch.call(this, spec, function (err, results) {
-    callback(err, results && results.image);
-  });
-}
-
-function createContainerFrom (imageIdOrChannelName, callback) {
-  var self = this;
-  var app = this.app;
-  var container = new Container({}, { app:app });
-  var options = utils.successErrorToCB(callback);
-  container.url = _.result(container, 'url') + '?from=' + imageIdOrChannelName;
-  container.save({}, options);
-}
-
-function fetchFilesForContainer (containerId, callback) {
-  var app = this.app;
-  // rootDir needs an id else rendr wont store it in model_store,
-  // also id cannot conflict with any other dir in rendr model_store
-  var rootDir = new Dir({
-    _id : 'root'+containerId,
-    path: '/',
-    name: '',
-    dir : true,
-    open: true,
-    containerId: containerId
-  }, {
-    app: app
-  });
-
-  var defaultFilesSpec = {
-    defaultFiles: {
-      collection: 'OpenFiles',
-      params: {
-        containerId: containerId,
-        'default'  : true
-      }
-    }
-  };
-  async.parallel([
-    function (cb) {
-      var opts = utils.successErrorToCB(cb);
-      opts.data = rootDir.contents.params; // VERY IMPORTANT! - ask TJ.
-      console.log(rootDir.contents.params);
-      rootDir.contents.fetch(opts);
-    },
-    fetch.bind(this, defaultFilesSpec)
-  ],
-  function (err, data) {
-    if (err) { callback(err); } else {
-      // so now you have the root dir it's contents
-      // and defaultFiles
-      // TODO: build default files off root dir here
-      var results = data[1]; // defaultFiles
-      results.rootDir = rootDir;
-      (function traverseTreeAndAddToResults (dir) {
-        // doesnt matter what the key is just must be unique
-        results['dir:'+dir.id] = dir;
-        var contents = dir.contents;
-        var path;
-        if (contents) {
-          path = contents.options.params.path;
-          results['fsc:'+path] = contents;
-          contents.forEach(function (fs) {
-            if (fs.isDir()) {
-              traverseTreeAndAddToResults(fs);
-            }
-          });
-        }
-      })(rootDir);
-
-      // Select first default file
-      var firstDefault = results.defaultFiles.at(0);
-      if (firstDefault) firstDefault.set('selected', true);
-
-      callback(err, results);
-    }
-  });
-}
-
-function fetchRelated (tags, cb) {
-  var tagNames = tags.map(function (tag) {
-    return tag.name
-  });
-  var spec = {
-    related: {
-      collection:'Images',
-      params: {
-        tags: tagNames,
-        limit: 5,
-        sort: 'votes'
-      }
-    }
-  };
-  fetch.call(this, spec, cb);
-}
+var fetch = helpers.fetch;
+var fetchUser = helpers.fetchUser;
+var fetchImage = helpers.fetchImage;
+var fetchRelated = helpers.fetchRelated;
+var fetchUserAndImage = helpers.fetchUserAndImage;
+var fetchUserAndContainer = helpers.fetchUserAndContainer;
+var fetchFilesForContainer = helpers.fetchFilesForContainer;
+var createContainerFrom = helpers.createContainerFrom;
 
 module.exports = {
   index: function(params, callback) {
@@ -236,38 +88,20 @@ module.exports = {
   },
   newFrom: function(params, callback) {
     var self = this;
-    createContainerFrom.call(this, params.from, function (err, container) {
-      if (err) { callback(err); } else {
-        self.redirectTo('/me/'+container.id);
+    async.waterfall([
+      fetchUser.bind(this),
+      function container (results, cb) {
+        createContainerFrom.call(self, params.from, function (err, container) {
+          if (err) { callback(err); } else {
+            self.redirectTo('/me/'+container.id);
+          }
+        });
       }
-    });
+    ], callback)
   },
   output: function (params, callback) {
     var self = this;
-
-    async.waterfall([
-      // these will not need to be run sequentially when fetch container always fetches a new container
-      function user (cb) {
-        var spec = {
-          user: {
-            model:'User',
-            params:{
-              _id: 'me'
-            }
-          }
-        };
-        fetch.call(self, spec, cb);
-      },
-      function container (results, cb) {
-        fetchContainer.call(self, params._id, function (err, container) {
-          cb(err, container && _.extend(results, {
-            container: container,
-            noHeader : 1,
-            noFooter : 1
-          }))
-        });
-      }
-    ], callback);
+    fetchUserAndContainer.call(this, params._id, callback);
   },
   container: function (params, callback) {
     var self = this;

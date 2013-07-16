@@ -1,7 +1,9 @@
 var _ = require('underscore');
-var fetch = require('./fetch');
 var utils = require('../utils');
 var global = this;
+var helpers = require('./helpers');
+
+var fetch = helpers.fetch;
 
 module.exports = {
   index: function(params, callback) {

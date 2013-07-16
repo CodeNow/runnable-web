@@ -1,5 +1,7 @@
 var _ = require('underscore');
-var fetch = require('./fetch');
+var helpers = require('./helpers');
+
+var fetch = helpers.fetch;
 
 module.exports = {
   index: function(params, callback) {
@@ -51,5 +53,5 @@ module.exports = {
         });
       }
     });
-  },
+  }
 };
