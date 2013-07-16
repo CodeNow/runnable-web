@@ -5,48 +5,46 @@ var utils = require('../utils');
 
 var Container = module.exports = Runnable.extend({
   urlRoot: '/users/me/runnables',
-  run: function (runCB) {
-    var options = utils.successErrorToCB(function (err, model) {
-      runCB(err);
-    });
+  saveAll: function (cb) {
+    this.app.dispatch.trigger('saveAll', cb);
+  },
+  run: function (cb) {
     // if we aren't running, start
     if (!this.get('running')) {
-      this.save({running: true}, {
-        wait: true,
-        success: function (resp, body, model) {
-          console.log('start successful');
-          runCB();
-        },
-        error: function (resp, body, model) {
-          console.log('start failed');
-          runCB();
-        }
-      });
+      this.start(cb);
     } else {
-      // if we are already running then do a restart
-      var self = this;
-      this.save({running: false}, {
-        wait: true,
-        success: function (resp, body, model) {
-          self.save({running: true}, {
-            wait: true,
-            success: function (resp, body, model) {
-              console.log('restart successful');
-              runCB();
-            },
-            error: function (resp, body, model) {
-              console.log('restart failed: could not restart process');
-              runCB();
-            }
-          });
-        },
-        error: function (resp, body, model) {
-          console.log('restart failed: could not stop process');
-          runCB();
-        }
-      });
-
+      this.restart(cb);
     }
+  },
+  stop: function (cb) {
+    var self = this;
+    var options = utils.successErrorToCB(cb);
+    options.wait = true;
+    this.save({running: false}, options);
+  },
+  start: function (cb) {
+    var self = this;
+    this.saveAll(function (err) {
+      if (err) {
+        cb(err);
+      }
+      else {
+        var options = utils.successErrorToCB(cb);
+        options.wait = true;
+        self.save({running: true}, options);
+      }
+    })
+  },
+  restart: function (cb) {
+    var self = this;
+    this.stop(function (err) {
+      if (err) {
+        cb(err);
+      }
+      else {
+        self.start(cb);
+      }
+    })
   },
   destroyById: function (containerId, callback) {
     var container = this.app.fetcher.modelStore.get('container', containerId, true);
