@@ -43,7 +43,7 @@ module.exports = {
         };
         fetch.call(self, spec2, function (err, userResults) {
           if (err) { callback(err); } else {
-            results = _.extend(results, userResults);
+            results = _.extend(results, userResults, params);
             results.images.forEach(function (run) {
               run.owner = userResults.owners.get(run.get('owner'));
               return run;
