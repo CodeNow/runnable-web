@@ -109,14 +109,6 @@ module.exports = {
     var self = this;
     async.waterfall([
       fetchUserAndContainer.bind(this, params._id),
-      function parentImage (results, cb) {
-        var imageId = results.container.get('parent');
-        fetchImage.call(self, imageId, function (err, image) {
-          cb(err, _.extend(results, {
-            image: image
-          }));
-        });
-      },
       function check404 (results, cb) {
         if (!results || !results.container) {
           cb({ status:404 });
@@ -125,10 +117,14 @@ module.exports = {
           cb(null, results);
         }
       },
-      function files (results, cb) {
-        fetchFilesForContainer.call(self, results.container.id, function (err, fileResults) {
-          cb(err, _.extend(results, fileResults));
-        });
+      function parentAndFiles (results, cb) {
+        async.parallel([
+          fetchImage.bind(self, results.container.get('parent')),
+          fetchFilesForContainer.bind(self, results.container.id)
+        ],
+        function (err, data) {
+          cb(err, _.extend(results, { image:data[0] }, data[1]))
+        })
       }
     ], callback);
   }
