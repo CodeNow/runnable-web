@@ -1,7 +1,7 @@
 {{#if collection.fetched}}
   {{#each collection.models}}
     {{#if attributes.dir}}
-      {{view "file_tree" model=.}}
+      {{view "file_tree" model=. editmode=editmode}}
     {{else}}
       <li>
         {{view "file_tree_item" model=.}}

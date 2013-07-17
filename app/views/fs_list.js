@@ -14,9 +14,7 @@ module.exports = BaseView.extend({
     this.listenTo(this.collection, 'add remove reset sync', this.render.bind());
   },
   getTemplateData: function () {
-    return {
-      collection: this.options.collection
-    };
+    return this.options;
   }
 });
 

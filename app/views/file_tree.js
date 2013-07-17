@@ -12,32 +12,34 @@ module.exports = BaseView.extend({
     'click span.dir:first' : 'toggle',
     'contextmenu' : 'contextMenu'
   },
-  contextMenu: function (evt, createOnly) {
-    evt.preventDefault(); // prevent browser context menu
-    evt.stopPropagation();
-    if (this.menu) {
-      this.menu.remove();
-      this.menu = null;
+  contextMenu: function (evt) {
+    if (this.options.editmode) {
+      evt.preventDefault(); // prevent browser context menu
+      evt.stopPropagation();
+      if (this.menu) {
+        this.menu.remove();
+        this.menu = null;
+      }
+      var collection = _.findWhere(this.childViews, {name:'fs_list'}).collection;
+      var modelId = $(evt.target).data('id');
+      var model = collection.get(modelId);
+      var createOnly = !Boolean(modelId); // if grey area clicked don't show rename or delete..could be confusing to user
+      model = model || this.model;
+      var menu = this.menu = new FileMenu({
+        createOnly: createOnly,
+        model: model,
+        top  : evt.pageY,
+        left : evt.pageX,
+        app  : this.app
+      });
+      this.listenToOnce(menu, 'rename', model.trigger.bind(model, 'rename'));
+      this.listenToOnce(menu, 'delete', this.del.bind(this, model));
+      this.listenToOnce(menu, 'default', this.def.bind(this, model));
+      this.listenToOnce(menu, 'undefault', this.undefault.bind(this, model));
+      this.listenToOnce(menu, 'delete', this.del.bind(this, model));
+      this.listenToOnce(menu, 'create', this.create.bind(this));
+      this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
     }
-    var collection = _.findWhere(this.childViews, {name:'fs_list'}).collection;
-    var modelId = $(evt.target).data('id');
-    var model = collection.get(modelId);
-    createOnly = !Boolean(modelId); // if grey area clicked don't show rename or delete..could be confusing to user
-    model = model || this.model;
-    var menu = this.menu = new FileMenu({
-      createOnly: createOnly,
-      model: model,
-      top  : evt.pageY,
-      left : evt.pageX,
-      app  : this.app
-    });
-    this.listenToOnce(menu, 'rename', model.trigger.bind(model, 'rename'));
-    this.listenToOnce(menu, 'delete', this.del.bind(this, model));
-    this.listenToOnce(menu, 'default', this.def.bind(this, model));
-    this.listenToOnce(menu, 'undefault', this.undefault.bind(this, model));
-    this.listenToOnce(menu, 'delete', this.del.bind(this, model));
-    this.listenToOnce(menu, 'create', this.create.bind(this));
-    this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
   },
   del: function (model) {
     var options = utils.successErrorToCB(function (err) {
@@ -49,12 +51,14 @@ module.exports = BaseView.extend({
     var options = utils.successErrorToCB(function (err) {
       if (err) this.showError(err);
     }.bind(this));
+    options.patch = true;
     model.save({'default':true}, options);
   },
   undefault: function (model) {
     var options = utils.successErrorToCB(function (err) {
       if (err) this.showError(err);
     }.bind(this));
+    options.patch = true;
     model.save({'default':false}, options);
   },
   create: function (type) {

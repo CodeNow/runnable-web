@@ -24,7 +24,8 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     return {
       createOnly: this.options.createOnly,
-      model     : this.model.toJSON() //fs file or dir
+      model     : this.model, //fs file or dir
+      isFile    : this.model.isFile()
     };
   },
   rename: function () {

@@ -15,7 +15,7 @@
         {{/if_eq}}
         {{!view "download_button" model=container}}
       </section>
-      {{view "code_editor" context=.}}
+      {{view "code_editor" context=. editmode=false}}
       {{view "terminal" model=container}}
     </article>
     <aside class="span3 last runnable-sidebar">
@@ -33,7 +33,7 @@
       {{#if image.attributes.tags.length}}
       <section class="module tags">
         <h3>Tags</h3>
-        {{view "runnable_tags" model=image editMode=editMode}}
+        {{view "runnable_tags" model=image editmode=editmode}}
       </section>
       {{/if}}
       {{/if}}
