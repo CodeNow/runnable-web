@@ -1,2 +1,1 @@
-{{!view "vote_button" model=model}}
-<a href="">{{model.attributes.name}}</a>
+<a href="/{{model.id}}/{{urlFriendly model.attributes.name}}">{{model.attributes.name}}</a>
