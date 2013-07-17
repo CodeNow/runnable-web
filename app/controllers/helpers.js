@@ -228,7 +228,6 @@ function fetchFilesForContainer (containerId, callback) {
       // Select first default file
       var firstDefault = results.defaultFiles.at(0);
       if (firstDefault) firstDefault.set('selected', true);
-
       callback(err, results);
     }
   });

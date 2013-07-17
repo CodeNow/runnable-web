@@ -64,12 +64,8 @@ module.exports = {
           ],
           function (err, data) {
             if (err) { cb(err); } else {
-              console.log(results.image.owner);
-              return _.extend(results, data[0], data[1], data[2]);
+              cb(null,  _.extend(results, data[0], data[1], data[2]));
             }
-          });
-          fetchRelated.call(self, tags, function (err, relatedResults) {
-            cb(err, _.extend(results, relatedResults));
           });
         },
       ], function (err, results) {
