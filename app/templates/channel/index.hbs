@@ -1,11 +1,9 @@
 {{view "header_view" model=user context=.}}
 <div class="content">
   <div class="container">
-    <section class="title">
-      <h1>{{channel}} Runnables</h1>
-    </section>
+    <h1>{{channel}} Runnables</h1>
     {{view "runnable_list" collection=images className="span9"}}
-    <div class="span3 last">
+    <aside class="span3 last runnable-sidebar">
       <section class="module">
         <h3>Tags</h3>
         <nav class="tags-nav">
@@ -14,7 +12,7 @@
           {{/each}}
         </nav>
       </section>
-    </div>
+    </aside>
   </div>
 </div>
 {{view "footer_view" model=user context=.}}
