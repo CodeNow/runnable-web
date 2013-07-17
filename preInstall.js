@@ -1,6 +1,4 @@
 // rimraf source -- since this is pre npm install (isaacs/rimraf)
-rimraf.sync = rimrafSync
-
 var path = require("path")
   , fs
 
