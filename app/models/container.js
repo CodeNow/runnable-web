@@ -10,6 +10,7 @@ var Container = module.exports = Runnable.extend({
   },
   run: function (cb) {
     // if we aren't running, start
+    debugger;
     if (!this.get('running')) {
       this.start(cb);
     } else {

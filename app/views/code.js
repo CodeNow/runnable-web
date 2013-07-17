@@ -129,8 +129,6 @@ module.exports = BaseView.extend({
       height = height + 'px'; // assume px
     }
     this.el.style.height = height;
-    console.log(height);
-    console.log(this.$('.ace_content').height());
     this.$('.ace_content').height(height);
   },
   hideLoader: function () {
