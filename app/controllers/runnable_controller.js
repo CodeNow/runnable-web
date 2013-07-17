@@ -8,6 +8,7 @@ var fetch = helpers.fetch;
 var fetchUser = helpers.fetchUser;
 var fetchImage = helpers.fetchImage;
 var fetchRelated = helpers.fetchRelated;
+var fetchOwnerOf = helpers.fetchOwnerOf;
 var fetchUserAndImage = helpers.fetchUserAndImage;
 var fetchUserAndContainer = helpers.fetchUserAndContainer;
 var fetchFilesForContainer = helpers.fetchFilesForContainer;
@@ -54,18 +55,23 @@ module.exports = {
             }));
           });
         },
-        function files (results, cb) {
-          fetchFilesForContainer.call(self, results.container.id, function (err, fileResults) {
-            cb(err, _.extend(results, fileResults));
+        function filesOwnerRelated (results, cb) {
+          var tags = results.container.attributes.tags;
+          async.parallel([
+            fetchFilesForContainer.bind(self, results.container.id),
+            fetchOwnerOf.bind(self, results.image), //image owner
+            fetchRelated.bind(self, tags),
+          ],
+          function (err, data) {
+            if (err) { cb(err); } else {
+              console.log(results.image.owner);
+              return _.extend(results, data[0], data[1], data[2]);
+            }
+          });
+          fetchRelated.call(self, tags, function (err, relatedResults) {
+            cb(err, _.extend(results, relatedResults));
           });
         },
-        function related (results, cb) {
-          var tags = results.container.attributes.tags;
-          // if (tags.length) {
-            fetchRelated.call(self, tags, function (err, relatedResults) {
-              cb(err, _.extend(results, relatedResults));
-            });
-        }
       ], function (err, results) {
         callback(err, results);
       });

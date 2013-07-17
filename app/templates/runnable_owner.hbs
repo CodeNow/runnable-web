@@ -1,1 +1,11 @@
-<span class="avatar"><img src="/external/images/yash.jpg" alt=""></span> <strong>yashkumar</strong> published <time pubdate="pubdate" datetime="2013-03-26T08:00:25+00:00">3 days ago</time>
+<span class="avatar">
+  {{#if model.attributes.gravitar}}
+  <img src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}">
+  {{/if}}
+</span>
+{{#if model.attributes.username}}
+<strong>{{model.attributes.username}}</strong>
+{{else}}
+<strong>Anonymous</strong>
+{{/if}}
+ published <time pubdate="pubdate" datetime="{{created}}">{{dateAgo created}}</time>

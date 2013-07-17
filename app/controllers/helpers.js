@@ -10,6 +10,8 @@ module.exports = {
   'fetchUser':              fetchUser,
   'fetchImage':             fetchImage,
   'fetchContainer':         fetchContainer,
+  'fetchOwnerOf':           fetchOwnerOf,
+  'fetchOwnersFor':         fetchOwnersFor,
   'fetchRelated':           fetchRelated,
   'fetchUserAndImage':      fetchUserAndImage,
   'fetchUserAndContainer':  fetchUserAndContainer,
@@ -118,6 +120,33 @@ function fetchContainer (containerId, callback) {
   });
 }
 
+function fetchOwnersFor (runnables, callback) {
+  var userIds = runnables.map(function (run) {
+    return run.get('owner');
+  });
+  var spec = {
+    owners: {
+      collection: 'Users',
+      params    : {
+        ids: userIds
+      }
+    }
+  };
+  fetch.call(this, spec, function (err, userResults) {
+    if (err) { callback(err); } else {
+      runnables.forEach(function (run) {
+        run.owner = userResults.owners.get(run.get('owner'));
+        return run;
+      });
+      callback(null, userResults);
+    }
+  });
+}
+
+function fetchOwnerOf (runnables, callback) {
+  fetchOwnersFor.call(this, [runnables], callback);
+}
+
 function fetchImage (imageId, callback) {
   var spec = {
     image: {
@@ -156,7 +185,7 @@ function fetchFilesForContainer (containerId, callback) {
     app: app
   });
 
-  var defaultFilesSpec = {
+  var spec = {
     defaultFiles: {
       collection: 'OpenFiles',
       params: {
@@ -171,7 +200,7 @@ function fetchFilesForContainer (containerId, callback) {
       opts.data = rootDir.contents.params; // VERY IMPORTANT! - ask TJ.
       rootDir.contents.fetch(opts);
     },
-    fetch.bind(this, defaultFilesSpec)
+    fetch.bind(this, spec)
   ],
   function (err, data) {
     if (err) { callback(err); } else {

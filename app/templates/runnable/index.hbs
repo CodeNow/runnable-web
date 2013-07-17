@@ -24,8 +24,8 @@
         {{view "new_example_button"}}
       </div>-->
 
-      <section class="module display-none">
-        {{view "runnable_owner" model=image}}
+      <section class="module">
+        {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user'}}
         {{!view "project_stats" model=image}}
       </section>
 

@@ -4,6 +4,7 @@ var global = this;
 var helpers = require('./helpers');
 
 var fetch = helpers.fetch;
+var fetchOwnersFor = helpers.fetchOwnersFor;
 
 module.exports = {
   index: function(params, callback) {
@@ -32,26 +33,8 @@ module.exports = {
         // if err or no images found, go ahead and callback
         callback(err, results);
       } else {
-        var userIds = results.images.map(function (run) {
-          return run.get('owner');
-        });
-        var spec2 = {
-          owners: {
-            collection: 'Users',
-            params    : {
-              ids: userIds
-            }
-          }
-        };
-        fetch.call(self, spec2, function (err, userResults) {
-          if (err) { callback(err); } else {
-            results = _.extend(results, userResults);
-            results.images.forEach(function (run) {
-              run.owner = userResults.owners.get(run.get('owner'));
-              return run;
-            });
-            callback(null, results);
-          }
+        fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
+          callback(err, _.extend(results, ownerResults));
         });
       }
     });
