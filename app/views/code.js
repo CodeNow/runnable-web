@@ -21,6 +21,7 @@ module.exports = BaseView.extend({
     var self = this;
     this.editor = ace.edit(this.el);
     this.editor.setTheme(ace.require('ace/theme-textmate'));
+    this.editor.setShowPrintMargin(false);
     // you can attach events here since render only occurs once for this view
     var openFiles = this.collection;
     this.setFile(openFiles.selectedFile());
