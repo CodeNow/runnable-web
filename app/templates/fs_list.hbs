@@ -1,5 +1,6 @@
 {{#if collection.fetched}}
   {{#each collection.models}}
+    {{#unless attributes.ignore}}
     {{#if attributes.dir}}
       {{view "file_tree" model=. editmode=editmode}}
     {{else}}
@@ -7,6 +8,7 @@
         {{view "file_tree_item" model=.}}
       </li>
     {{/if}}
+    {{/unless}}
   {{else}}
     <li class="empty">(empty)</li>
   {{/each}}

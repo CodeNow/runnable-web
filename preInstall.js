@@ -1,15 +1,3 @@
-// deletes the render from node_modules before every npm install
-var path = require('path');
-rimraf(path.join(__dirname, 'node_modules', 'rendr'), function (err) {
-  if (err) {
-    console.error('NPM PREINSTALL ERROR!! ', err);
-  }
-  else {
-    console.log('NPM PREINSTALL SUCCESS: Squashed Rendr')
-  }
-});
-
-
 // rimraf source -- since this is pre npm install (isaacs/rimraf)
 rimraf.sync = rimrafSync
 
@@ -157,3 +145,14 @@ function rmkids(p, cb) {
     })
   })
 }
+
+// deletes the render from node_modules before every npm install
+var path = require('path');
+rimraf(path.join(__dirname, 'node_modules', 'rendr'), function (err) {
+  if (err) {
+    console.error('NPM PREINSTALL ERROR!! ', err);
+  }
+  else {
+    console.log('NPM PREINSTALL SUCCESS: Squashed Rendr')
+  }
+});
