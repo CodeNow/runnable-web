@@ -88,9 +88,10 @@
 // File browser
 // Show file browser button
 .btn-show-file-browser{
-	position:absolute;
+	position:absolute !important;
 	top:0;
 	right:0;
+	bottom:auto !important;
 	@include border-radius(0 0 0 $br);
 	z-index:10;
 }
@@ -112,8 +113,15 @@
 	z-index:5;
 	button{
 		float:left;
-		@extend .btn-tertiary;
-		@extend .btn-small;
+		color:rgba(0,0,0,.4);
+		padding:0 5px;
+		background:none;
+		border:none;
+		&:hover{
+			color:rgba(0,0,0,.6);
+		}
+		//@extend .btn-tertiary;
+		//@extend .btn-small;
 	}
 }
 
