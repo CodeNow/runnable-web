@@ -14,14 +14,17 @@ module.exports = BaseView.extend({
   postRender: function () {
     this.$showFilesButton = this.$('.btn-show-file-browser');
     this.$fileBrowser = this.$('.file-browser');
+    this.codeView = _.findWhere(this.childViews, {name:'code'});
   },
   showFiles: function (evt) {
     this.$showFilesButton.hide();
     this.$fileBrowser.show();
+    this.codeView.$el.addClass('with-file-browser');
   },
   hideFiles: function (evt) {
     this.$showFilesButton.show();
     this.$fileBrowser.hide();
+    this.codeView.$el.removeClass('with-file-browser');
   },
   getTemplateData: function () {
     // only rendered once.. passes through context

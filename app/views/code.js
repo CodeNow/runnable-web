@@ -3,7 +3,7 @@ var utils = require('../utils');
 var _ = require('underscore');
 
 module.exports = BaseView.extend({
-  className: 'tab-pane with-file-browser',
+  className: 'tab-pane',
   // minHeight: 300,
   // maxHeight: 550,
   getTemplateData: function () {
