@@ -2,6 +2,7 @@ var _ = require('underscore');
 var helpers = require('./helpers');
 
 var fetch = helpers.fetch;
+var fetchOwnersFor = helpers.fetchOwnersFor;
 
 module.exports = {
   index: function(params, callback) {
