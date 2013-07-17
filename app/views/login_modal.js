@@ -4,7 +4,7 @@ var Super = ModalView.prototype;
 
 module.exports = ModalView.extend({
   className: 'lightbox login-modal',
-  defaultHeader: "Sign in to Runnable",
+  defaultHeader: "Log in to Runnable",
   postInitialize: function (options) {
     this.header = this.options.header || this.defaultHeader;
   },
