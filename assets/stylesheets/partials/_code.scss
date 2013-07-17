@@ -23,6 +23,14 @@
 	margin:0 0 $padding;
 }
 
+// Sidebar
+.runnable-sidebar{
+	h3{
+		border-bottom:3px solid #eee;
+		padding-bottom:3px;
+	}
+}
+
 // Project author
 .author{
 	@include clearfix;
@@ -83,8 +91,8 @@
 	position:absolute;
 	top:0;
 	right:0;
-	background:#e8e8e8;
 	@include border-radius(0 0 0 $br);
+	z-index:10;
 }
 
 .file-browser{
@@ -123,6 +131,8 @@ $tree-padding:15px;
 	overflow-y:auto;
 	height:100%;
 	@include box-sizing(border-box);
+	@include box-shadow(-1px 0 2px rgba(0,0,0,.1));
+	border-left:1px solid rgba(0,0,0,.1);
 	ul,ol{
 		list-style:none;
 		margin:0;
@@ -218,7 +228,9 @@ $tree-padding:15px;
 	}
 	li.selected{
 		background:rgba(0,0,0,.05);
-		@include border-radius($br);
+		border-top:1px solid rgba(0,0,0,.08);
+		border-bottom:1px solid rgba(0,0,0,.08);
+		// @include border-radius($br);
 		// @include box-shadow(0 1px 0 rgba(255,255,255,.05),inset 0 -1px 5px -1px rgba(0,0,0,.1),inset 0 1px 5px -1px rgba(0,0,0,.1));
 		a{
 			color:$file-browser-on;
