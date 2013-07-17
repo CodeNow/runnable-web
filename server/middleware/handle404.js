@@ -20,7 +20,7 @@ module.exports.handle404 = function (req, res, next) {
 };
 
 module.exports.handle500 = function (req, res, next) {
-    res.status(404);
+    res.status(500);
 
     // Respond with HTML
     if (req.accepts('html')) {
