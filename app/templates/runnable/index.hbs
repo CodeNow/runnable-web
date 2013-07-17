@@ -25,7 +25,7 @@
       </div>-->
 
       <section class="module">
-        {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user'}}
+        {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created}}
         {{!view "project_stats" model=image}}
       </section>
 
