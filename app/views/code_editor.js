@@ -7,6 +7,22 @@ var _ = require('underscore');
 // to a "single project page"
 module.exports = BaseView.extend({
   className:"code-container",
+  events: {
+    'click .btn-show-file-browser' : 'showFiles',
+    'click .btn-hide-file-browser' : 'hideFiles'
+  },
+  postRender: function () {
+    this.$showFilesButton = this.$('.btn-show-file-browser');
+    this.$fileBrowser = this.$('.file-browser');
+  },
+  showFiles: function (evt) {
+    this.$showFilesButton.hide();
+    this.$fileBrowser.show();
+  },
+  hideFiles: function (evt) {
+    this.$showFilesButton.show();
+    this.$fileBrowser.hide();
+  },
   getTemplateData: function () {
     // only rendered once.. passes through context
     return _.extend(this.options.context, this.options);
