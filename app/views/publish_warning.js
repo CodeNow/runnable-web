@@ -15,7 +15,11 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     return _.extend(this.options, {
-      user: this.app.user
+      user: this.app.user,
+      permissions: {
+        edit: this.app.user.id = this.model.attributes.owner ||
+          this.app.user.attributes.permission_level >= 5
+      }
     });
   },
   publishNew: function () {
