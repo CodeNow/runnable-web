@@ -46,6 +46,7 @@ module.exports = BaseView.extend({
       else {
         collection.add(tagSaved);
         this.$('input').val('');
+        this.$('input').focus();
       }
     }
   },
