@@ -3,9 +3,10 @@
   <img src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}">
   {{/if}}
 </span>
+Published by 
 {{#if model.attributes.username}}
 <strong>{{model.attributes.username}}</strong>
 {{else}}
 <strong>Anonymous</strong>
 {{/if}}
- published <time pubdate="pubdate" datetime="{{created}}">{{dateAgo created}}</time>
+ <time pubdate="pubdate" datetime="{{created}}">{{dateAgo created}}</time>
