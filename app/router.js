@@ -107,6 +107,13 @@ Router.prototype.getRenderCallback = function () {
   };
 };
 
+Router.prototype.getMainView = function(views) {
+  var $content = this.appView.$content;
+  return _.find(views, function(view) {
+    return (view.$el.parent().is($content) && view.name != 'app_user');
+  });
+};
+
 Router.prototype.trackImpression = function() {
   if (window._gaq) {
     _gaq.push(['_trackPageview']);
