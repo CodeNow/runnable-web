@@ -8,11 +8,12 @@
       </section>
       <section class="actions">
         {{view "run_button" model=container collection=defaultFiles}}
-        {{#if_eq image.attributes.owner compare=user.id}}
+        {{#if permissions.edit}}
         {{view "edit_button" model=container containerid=container.id}}
-        {{else}}
+        {{/if}}
+        {{#if permissions.fork}}
         {{view "fork_button" collection=defaultFiles containerid=container.id}}
-        {{/if_eq}}
+        {{/if}}
         {{!view "download_button" model=container}}
       </section>
       {{view "code_editor" context=. editmode=false}}
