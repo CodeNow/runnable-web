@@ -87,7 +87,8 @@ module.exports = function(grunt) {
         options: {
           preserveComments: false,
           report: true,
-          sourceMap: 'public/source-map.js'
+          sourceMap: 'public/source-map.js',
+          sourceMapRoot: '/'
         },
         files: {
           'public/mergedAssets.js' : ['public/mergedAssets.js']
