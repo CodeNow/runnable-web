@@ -1,20 +1,72 @@
-<div class="container">
-  <article>
-    <section class="title" style="padding-left:0;">
-      <h1>New Runnable</h1>
-    </section>
-    <ul class="channel-list">
-      {{#each channels.models}}
-      {{view "channel_item_view" model=.}}
-      {{/each}}
-      <span>
-        <span class="tile">
-          <form>
-            <label>Fork existing</label>
-            <input name='id' placeholder="Runnable Id">
-          </form>
-        </span>
-      </span>
-    </ul>
-  </article>
+{{view "header_view" model=user context=.}}
+<div class="content">
+  <div class="container">
+    <article>
+      <h1>Create &amp; publish code</h1>
+      <div class="span6">
+        <h3>Search &amp; copy existing code</h3>
+        <form>
+          <input name='id' placeholder="Runnable Id">
+        </form>
+      </div>
+      <div class="span6 last">
+        <h3>Write code from scratch</h3>
+        <ul class="channel-list">
+          {{!#each channels.models}}
+          {{!view "channel_item_view" model=.}}
+          {{!/each}}
+          <li>
+            <a href="/new/php">
+              <span class="tile">
+                <img src="/images/channels/php.png" alt="PHP">
+              </span>
+              <span class="name">PHP</span>
+            </a>
+          </li>
+          <li>
+            <a href="/new/nodejs">
+              <span class="tile">
+                <img src="/images/channels/nodejs.png" alt="Node.js">
+              </span>
+              <span class="name">Node.js</span>
+            </a>
+          </li>
+          <li>
+            <a href="/new/python">
+              <span class="tile">
+                <img src="/images/channels/python.png" alt="Python">
+              </span>
+              <span class="name">Python</span>
+            </a>
+          </li>
+          <li>
+            <a href="/new/express">
+              <span class="tile">
+                <img src="/images/channels/express.png" alt="Express">
+              </span>
+              <span class="name">Express</span>
+            </a>
+          </li>
+          <li>
+            <a href="/new/codeigniter">
+              <span class="tile">
+                <img src="/images/channels/codeigniter.png" alt="Codeigniter">
+              </span>
+              <span class="name">Codeigniter</span>
+            </a>
+          </li>
+          <li>
+            <a href="/new/jquery">
+              <span class="tile">
+                <img src="/images/channels/jquery.png" alt="jQuery">
+              </span>
+              <span class="name">jQuery</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </article>
+  </div>
 </div>
+{{view "footer_view" model=user context=.}}
