@@ -85,8 +85,9 @@ module.exports = function(grunt) {
     uglify: {
       build: {
         options: {
-          preserveComemnts: false,
-          report: true
+          preserveComments: false,
+          report: true,
+          sourceMap: '.'
         },
         files: {
           'public/mergedAssets.js' : ['public/mergedAssets.js']
