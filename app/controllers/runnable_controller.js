@@ -68,6 +68,14 @@ module.exports = {
             }
           });
         },
+        function generatePermissions (results, cb) {
+          results.permissions = {
+            edit: image.attributes.owner == user.id || 
+              user.attributes.permission_level >= 5,
+            fork: image.attributes.owner != user.id
+          };
+          cb(null, results);
+        }
       ], function (err, results) {
         callback(err, results);
       });
