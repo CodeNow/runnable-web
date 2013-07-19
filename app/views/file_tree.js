@@ -42,20 +42,20 @@ module.exports = BaseView.extend({
     }
   },
   del: function (model) {
-    var options = utils.successErrorToCB(function (err) {
+    var options = utils.cbOpts(function (err) {
       if (err) this.showError(err);
     }.bind(this));
     model.destroy(options);
   },
   def: function (model) {
-    var options = utils.successErrorToCB(function (err) {
+    var options = utils.cbOpts(function (err) {
       if (err) this.showError(err);
     }.bind(this));
     options.patch = true;
     model.save({'default':true}, options);
   },
   undefault: function (model) {
-    var options = utils.successErrorToCB(function (err) {
+    var options = utils.cbOpts(function (err) {
       if (err) this.showError(err);
     }.bind(this));
     options.patch = true;
@@ -69,28 +69,18 @@ module.exports = BaseView.extend({
       app:this.app
     });
   },
+  postHydrate: function () {
+    this.listenTo(this.app.dispatch, 'sync:files', this.sync.bind(this));
+  },
   getTemplateData: function () {
     return this.options;
   },
-  openClass: function () {
+  preRender: function () {
     if (this.model && this.model.get('open')) {
-      if (this.$el)
-        this.$el.addClass('open');
-      else
-        this.className = 'folder open';
+      this.className = 'folder open';
     }
-    else {
-      if (this.$el)
-        this.$el.removeClass('open');
-      else
-        this.className = 'folder';
-    }
-  },
-  postInitialize: function () {
-    this.openClass();
   },
   postRender: function () {
-    this.openClass();
     //todo: remove display-none
     // clientside postHydrate and getTemplateData have occured.
     this.$contentsUL = this.$('ul').first();
@@ -123,6 +113,20 @@ module.exports = BaseView.extend({
       this.open();
     }
   },
+  sync: function () {
+    if (this.model.get('open')) {
+      var contents = _.findWhere(this.childViews, {name:'fs_list'}).collection;
+      var options = utils.cbOpts(cb, this);
+      this.showLoader();
+      contents.fetch(options);
+      function cb () {
+        this.hideLoader();
+        if (err) {
+          this.showError();
+        }
+      }
+    }
+  },
   open: function () {
     this.model.set('open', true);
     this.slideDownHeight();
@@ -132,7 +136,7 @@ module.exports = BaseView.extend({
     var collection = fileList.collection;
     if (!collection.fetched) {
       this.showLoader();
-      var options = utils.successErrorToCB(function (err, collection) {
+      var options = utils.cbOpts(function (err, collection) {
         this.hideLoader();
         if (err) {
           this.showError(err);

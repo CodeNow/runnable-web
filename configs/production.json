@@ -28,6 +28,7 @@
   },
 
   "rendrApp": {
+    "env" : "production",
     "mixpanel" : {
       "key": "8790acfcca0cab43adebbc796f1d4f96"
     },

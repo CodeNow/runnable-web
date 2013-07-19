@@ -88,6 +88,7 @@ Router.prototype.handleError = function (err) {
   else {
     viewPath = '500';
   }
+  console.log(err.status, 'Error:', err);
   this.appView.$content = $('html');
   var View = this.getView(viewPath);
   this.currentView = new View();
