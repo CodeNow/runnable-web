@@ -20,8 +20,8 @@ redisStore = connectRedis(express);
 
 app = express();
 
-app.config('development', function () {
-  var liveReloadPort = 35731;
+var liveReloadPort = 35731;
+app.configure('development', function () {
   var mergedCSSPath   = 'public/styles/index.css';
   // Create a live reload server instance
   var lrserver = require('tiny-lr')();
