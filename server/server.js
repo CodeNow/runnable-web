@@ -20,7 +20,7 @@ redisStore = connectRedis(express);
 
 app = express();
 
-if (process.env.NODE_ENV == 'development') {
+app.config('development', function () {
   var liveReloadPort = 35731;
   var mergedCSSPath   = 'public/styles/index.css';
   // Create a live reload server instance
@@ -33,7 +33,7 @@ if (process.env.NODE_ENV == 'development') {
     mergedCSSPath,
     'public/images/*.*'
   ]}});
-}
+});
 
 //
 // Initialize our server
@@ -63,35 +63,38 @@ exports.start = function start(options, cb) {
 // Initialize middleware stack
 //
 function initMiddleware() {
-  app.configure(function() {
-    // set up views
-    app.set('views', __dirname + '/../app/views');
-    app.set('view engine', 'js');
-    app.engine('js', viewEngine);
+  // set up views
+  app.set('views', __dirname + '/../app/views');
+  app.set('view engine', 'js');
+  app.engine('js', viewEngine);
+  app.use(require('./middleware/cannon')());
 
-    // set the middleware stack
-    if (process.env.NODE_ENV != 'development')
-      app.use(express.compress());
-    app.use(express.static(__dirname + '/../public'));
-    app.use(express.cookieParser());
-    app.use(express.session({
-      key: env.current.cookieKey,
-      secret: env.current.cookieSecret,
-      store: new redisStore(env.current.redis),
-        ttl: env.current.cookieExpires,
-      cookie: {
-        path: '/',
-        httpOnly: false,
-        maxAge: env.current.cookieExpires
-      }
-    }));
-    app.use(express.logger());
-    app.use(express.bodyParser());
-    if (process.env.NODE_ENV == 'development')
-      app.use(require('./middleware/liveReload')({port:liveReloadPort}));
-    app.use(app.router);
-    app.use(mw.errorHandler());
+  // set the middleware stack
+  app.configure('production', function() {
+    app.use(express.compress());
   });
+  app.use(express.static(__dirname + '/../public'));
+  app.use(express.cookieParser());
+  app.use(express.session({
+    key: env.current.cookieKey,
+    secret: env.current.cookieSecret,
+    store: new redisStore(env.current.redis),
+      ttl: env.current.cookieExpires,
+    cookie: {
+      path: '/',
+      httpOnly: false,
+      maxAge: env.current.cookieExpires
+    }
+  }));
+  app.use(express.logger());
+  app.use(express.bodyParser());
+
+  app.configure('development', function() {
+    app.use(require('./middleware/liveReload')({port:liveReloadPort}));
+  });
+
+  app.use(app.router);
+  app.use(mw.errorHandler());
 }
 
 //

@@ -22,7 +22,7 @@
 
   "api": {
     "default": {
-      "host": "10.0.1.54:3000",
+      "host": "api.runnable.com",
       "protocol": "http"
     }
   },
