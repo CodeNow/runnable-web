@@ -5,6 +5,8 @@ var FilesSync = require('../models/files_sync')
 
 module.exports = BaseView.extend({
   tagName: 'button',
+  className: 'hint--bottom btn-sync-file-browser',
+  attributes: { 'data-hint':'Refresh file browser' },
   events: {
     'click' : 'click'
   },
