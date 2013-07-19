@@ -43,7 +43,7 @@ module.exports = Base.extend({
   },
   globalGet: function (modelId, cb, ctx) {
     this.app.dispatch.trigger('get:fs', modelId, cb, ctx);
-    this.setTimeout(cb.bind(ctx, 'model not found'), 1000); // safety callback if not found anywhere...
+    setTimeout(cb.bind(ctx, 'model not found'), 1000); // safety callback if not found anywhere...
   },
   onGetFs: function (modelId, cb, ctx) {
     if (ctx) cb = cb.bind(ctx);

@@ -43,7 +43,7 @@ module.exports = BaseView.extend({
       if (err) {
         this.showError(err);
         this.setEditMode(true); //reverts back to edit mode
-        this.setTimeout(function () {
+        setTimeout(function () {
           // after render
           this.$('.title-input').val(formData.name);
         }.bind(this), 3);
