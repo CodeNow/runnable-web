@@ -9,7 +9,6 @@ var Container = module.exports = Runnable.extend({
     this.app.dispatch.trigger('saveAll', cb, ctx);
   },
   run: function (cb, ctx) {
-    if (ctx) cb.bind(ctx);
     // if we aren't running, start
     if (!this.get('running')) {
       this.start(cb, ctx);
@@ -26,7 +25,6 @@ var Container = module.exports = Runnable.extend({
   },
   start: function (cb, ctx) {
     if (ctx) cb.bind(ctx);
-    var self = this;
     this.saveAll(function (err) {
       if (err) {
         cb(err);
@@ -34,15 +32,14 @@ var Container = module.exports = Runnable.extend({
       else {
         var options = utils.cbOpts(cb);
         options.wait = true;
-        self.save({running: true}, options);
+        this.save({running: true}, options);
       }
-    })
+    }, this)
   },
   restart: function (cb, ctx) {
-    if (ctx) cb.bind(ctx);
     this.stop(function (err) {
       if (err) {
-        cb(err);
+        cb.call(ctx, err);
       }
       else {
         this.start(cb, ctx);

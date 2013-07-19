@@ -107,8 +107,8 @@ module.exports = Base.extend({
     fileAdded.set('selected', true);
   },
   saveAll: function (cb, ctx) {
+    if (ctx) cb = cb.bind(ctx);
     if (this.unsaved()) {
-      if (ctx) cb.bind(ctx);
       var unsavedFiles = this.toArray().filter(function (file) {
         return file.unsaved();
       });
