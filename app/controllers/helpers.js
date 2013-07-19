@@ -249,7 +249,7 @@ function fetchRelated (tags, cb) {
     related: {
       collection:'Images',
       params: {
-        tags: tagNames,
+        tags: tagNames[0],
         limit: 5,
         sort: 'votes'
       }

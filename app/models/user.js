@@ -31,7 +31,7 @@ var User = module.exports = Base.extend({
     return this.get('permission_level') >= 5;
   },
   canEdit: function (model) {
-    return this.isModerator() || this.isOwner(model);
+    return this.isModerator() || this.isOwnerOf(model);
   },
   register: function(email, username, password, cb) {
     cb = cb || function () {};
