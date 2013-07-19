@@ -20,7 +20,7 @@ redisStore = connectRedis(express);
 
 app = express();
 
-if (process.env.NODE_ENV == 'development') {
+app.config('development', function () {
   var liveReloadPort = 35731;
   var mergedCSSPath   = 'public/styles/index.css';
   // Create a live reload server instance
@@ -33,7 +33,7 @@ if (process.env.NODE_ENV == 'development') {
     mergedCSSPath,
     'public/images/*.*'
   ]}});
-}
+});
 
 //
 // Initialize our server
