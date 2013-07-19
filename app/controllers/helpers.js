@@ -229,8 +229,7 @@ function fetchFilesForContainer (containerId, callback) {
       var firstDefault = results.defaultFiles.at(0);
       if (firstDefault) {
         firstDefault.set('selected', true);
-        if (results['fsc:'+firstDefault.get('path')]) {
-          // if file exists elsewhere it's data should not conflict with another instance of itself..
+        if (results['fsc:'+firstDefault.get('path')].get(firstDefault.id)) {
           results['fsc:'+firstDefault.get('path')].get(firstDefault.id).set('selected', true);
         }
       }
