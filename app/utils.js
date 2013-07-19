@@ -199,5 +199,24 @@ var utils = module.exports = {
 
   isObjectId64: function (str) {
     return Boolean(str && str.length === 16 && utils.isObjectId(utils.base64ToHex(str)));
+  },
+
+  tagsToString: function (tags, prelastword) {
+    prelastword = prelastword || 'and'
+    if (tags.length === 0) {
+      return ''
+    }
+    else if (tags.length === 1) {
+      return tags[0].name
+    }
+    else {
+      tags = tags.map(function (tag) {
+        return tag.name;
+      });
+      var last = tags.pop();
+      tags.join(', ');
+      tags += prelastword + ' ' +last;
+      return tags;
+    }
   }
 };

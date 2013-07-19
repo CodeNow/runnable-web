@@ -52,3 +52,16 @@ ul.channel-list{
     }
   }
 }
+
+.runnable-sidebar ul.channel-list{
+  li{
+    @extend .span6;
+    &:nth-child(2n){
+      @extend .last;
+    }
+    &:nth-child(2n+1){
+      clear:both;
+      margin-bottom:$padding/2;
+    }
+  }
+}
