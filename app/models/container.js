@@ -17,14 +17,14 @@ var Container = module.exports = Runnable.extend({
     }
   },
   stop: function (cb, ctx) {
-    if (ctx) cb.bind(ctx);
+    if (ctx) cb = cb.bind(ctx);
     var self = this;
     var options = utils.cbOpts(cb);
     options.wait = true;
     this.save({running: false}, options);
   },
   start: function (cb, ctx) {
-    if (ctx) cb.bind(ctx);
+    if (ctx) cb = cb.bind(ctx);
     this.saveAll(function (err) {
       if (err) {
         cb(err);
