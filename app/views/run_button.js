@@ -14,13 +14,16 @@ module.exports = BaseView.extend({
     var url = '/'+this.model.id+'/output';
     var windowName = this.model.id+'output';
     var popup = window.open(url, windowName);
+    this.disable(true);
     this.model.run(function (err) {
+      this.disable(false);
       if (err) {
+        this.showError(err);
         popup.close();
       } else {
         popup.postMessage("Refresh", "*");
       }
-    });
+    }, this);
   }
 });
 

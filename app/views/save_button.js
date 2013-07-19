@@ -11,8 +11,12 @@ module.exports = BaseView.extend({
     this.listenTo(this.collection, "unsaved", this.onChangeUnsaved.bind(this));
   },
   saveAll :function () {
-    console.log("Trying to save all");
-    this.collection.saveAll(function (){});
+    this.disable(true);
+    this.collection.saveAll(function (err) {
+      if (err) {
+        this.showError(err);
+      }
+    }, this);
   },
   onChangeUnsaved: function (bool) {
     if (bool)

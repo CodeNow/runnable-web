@@ -12,9 +12,11 @@ module.exports = BaseView.extend({
     var sync = new FilesSync({
       containerId: this.model.id
     });
-    var opts = utils.cbOpts(cb);
+    var opts = utils.cbOpts(cb.bind(this));
+    this.disable(true);
     sync.save({}, opts)
     function cb () {
+      this.disable(false);
       this.app.dispatch.trigger('sync:files');
     }
   }
