@@ -17,7 +17,7 @@ var createContainerFrom = helpers.createContainerFrom;
 module.exports = {
   index: function(params, callback) {
     var self = this;
-    if (params._id.length != 16) {//TODO Re-implemented(!utils.isObjectId64(params._id)) {
+    if (params._id.length !== 16) {//TODO Re-implemented(!utils.isObjectId64(params._id)) {
       // redirect to channel page
       var channelParams = { channel:params._id };
       this.currentRoute.action= 'index';
@@ -25,8 +25,6 @@ module.exports = {
       channelController.index.call(this, channelParams, callback);
     }
     else {
-      var req = self.app.req;
-
       async.waterfall([
         fetchUserAndImage.bind(this, params._id),
         function check404 (results, cb) {
@@ -40,7 +38,7 @@ module.exports = {
         function nameInUrl (results, cb) {
           var image = results.image;
           var urlFriendlyName = utils.urlFriendly(results.image.get('name'));
-          if (params.name != urlFriendlyName) {
+          if (params.name !== urlFriendlyName) {
             var urlWithName = [image.id, urlFriendlyName].join('/');
             self.redirectTo(urlWithName);
           }
@@ -70,15 +68,37 @@ module.exports = {
         },
         function generatePermissions (results, cb) {
           results.permissions = {
-            edit: results.image.attributes.owner == results.user.id || 
+            edit: results.image.attributes.owner === results.user.id ||
               results.user.attributes.permission_level >= 5,
-            fork: results.image.attributes.owner != results.user.id
+            fork: results.image.attributes.owner !== results.user.id
           };
           cb(null, results);
         }
       ], function (err, results) {
-        callback(err, results);
+        if (err) { callback(err); } else {
+          callback(null, addSEO(results));
+        }
       });
+      function addSEO (results) {
+        if (!results || !results.image) {
+          return results;
+        }
+        else {
+          var image = results.image;
+          var tags = utils.tagsToString(image.get('tags'));
+          if (tags !== '') {
+            tags = ' for '+tags;
+          }
+          var description = ['Runnable Code Example: ', image.get('name'), tags].join('');
+          return _.extend(results, {
+            page: {
+              title: image.get('name') + tags,
+              description: description,
+              canonical: 'http://runnable.com'
+            }
+          });
+        }
+      }
     }
   },
   'new': function (params, callback) {
@@ -94,7 +114,22 @@ module.exports = {
         params: {}
       }
     };
-    fetch.call(this, spec, callback);
+    fetch.call(this, spec, function (err, results) {
+      if (err) { callback(err); } else {
+        var tags = utils.tagsToString(results.channels, 'or');
+        if (tags !== '') {
+          tags = 'for '+tags;
+        }
+        var description = 'Create a new Runnable Code Example for' + tags;
+        callback(null, _.extend(results, {
+          page: {
+            title: 'Create a new runnable for JQuery, Codeigniter, NodeJS, Express and more',
+            description: description,
+            canonical: 'http://runnable.com/'
+          }
+        }));
+      }
+    });
   },
   newFrom: function(params, callback) {
     var self = this;
@@ -102,7 +137,7 @@ module.exports = {
       fetchUser.bind(this),
       function container (results, cb) {
         createContainerFrom.call(self, params.from, function (err, container) {
-          if (err) { callback(err); } else {
+          if (err) { cb(err); } else {
             self.redirectTo('/me/'+container.id);
           }
         });
@@ -110,8 +145,18 @@ module.exports = {
     ], callback);
   },
   output: function (params, callback) {
-    var self = this;
-    fetchUserAndContainer.call(this, params._id, callback);
+    fetchUserAndContainer.call(this, params._id, function (err, results) {
+      if (err) { callback(err); } else {
+        var container = results.container;
+        callback(null, _.extend(results, {
+          page: {
+            title: 'Output: '+container.get('name'),
+            description: 'Web and console output for '+container.get('name'),
+            canonical: 'http://runnable.com/'
+          }
+        }));
+      }
+    });
   },
   container: function (params, callback) {
     var self = this;
@@ -131,8 +176,15 @@ module.exports = {
           fetchFilesForContainer.bind(self, results.container.id)
         ],
         function (err, data) {
-          cb(err, _.extend(results, { image:data[0] }, data[1]))
-        })
+          var container = results.container;
+          cb(err, _.extend(results, { image:data[0] }, data[1], {
+            page: {
+              title: 'Unpublished: '+container.get('name'),
+              description: 'Unpublished Runnable Example:' + container.get('name'),
+              canonical: 'http://runnable.com/'
+            }
+          }));
+        });
       }
     ], callback);
   }

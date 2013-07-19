@@ -95,6 +95,19 @@ Router.prototype.handleError = function (err) {
   this.renderView();
 };
 
+Router.prototype.updateMetaInfo = function (meta) {
+  if (!meta) return;
+  if (meta.title) {
+    $('title').html(meta.title);
+  }
+  if (meta.description) {
+    $('meta[name=description]').html(meta.description);
+  }
+  if (meta.canonical) {
+    $('link[rel=canonical]').html(meta.canonical);
+  }
+};
+
 Router.prototype.getRenderCallback = function () {
   var self = this;
   var callback = Super.getRenderCallback.apply(this, arguments); // pass on if no err
@@ -103,6 +116,8 @@ Router.prototype.getRenderCallback = function () {
       self.handleError(err);
     }
     else {
+      var _locals = self.defaultHandlerParams(viewPath, locals, {controller:'', action:''})[1];
+      self.updateMetaInfo(_locals.page);
       callback(err, viewPath, locals);
     }
   };
