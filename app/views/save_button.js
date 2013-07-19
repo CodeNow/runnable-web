@@ -13,6 +13,7 @@ module.exports = BaseView.extend({
   saveAll :function () {
     this.disable(true);
     this.collection.saveAll(function (err) {
+      this.disable(false);
       if (err) {
         this.showError(err);
       }
