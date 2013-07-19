@@ -32,7 +32,7 @@ module.exports = {
         callback(err, results);
       } else {
         fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
-          callback(err, _.extend(results, ownerResults));
+          callback(err, _.extend(results, ownerResults, { channel:params.channel }));
         });
       }
     });

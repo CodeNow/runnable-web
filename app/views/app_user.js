@@ -14,8 +14,11 @@ module.exports = BaseView.extend({
   },
   postHydrate: function () {
     // read long comment above, postHydrate - same reason for clientside
-    this.app.user = this.options.model;
-    console.log("HeaderView postHydrate this.app.user", this.app.user.id);
+
+    if (this.options.model) {
+      this.app.user = this.options.model;
+      console.log("HeaderView postHydrate this.app.user", this.app.user.id);
+    }
   }
 });
 

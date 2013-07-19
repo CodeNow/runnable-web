@@ -5,6 +5,7 @@
     <i class="icon-folder-open"></i> Show file browser</button>
   <div class="file-browser display-none">
     <nav class="file-browser-toolbar">
+      {{view "sync_button" model=container}}
       {{! <button class="hint--bottom" data-hint="File browser options"><i class="icon-cog"></i></button> }}
       <button class="hint--bottom btn-hide-file-browser" data-hint="Hide file browser"><i class="icon-collapse-alt"></i></button>
     </nav>

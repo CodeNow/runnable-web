@@ -85,8 +85,10 @@ module.exports = function(grunt) {
     uglify: {
       build: {
         options: {
-          preserveComemnts: false,
-          report: true
+          preserveComments: false,
+          report: true/*,
+          sourceMap: 'public/source-map.js',
+          sourceMappingURL: '/source-map.js'*/
         },
         files: {
           'public/mergedAssets.js' : ['public/mergedAssets.js']
@@ -215,7 +217,7 @@ module.exports = function(grunt) {
   // Debug
   grunt.registerTask('debug', ['bgShell:debugNode', 'dev-mode']);
   // Build for production
-  grunt.registerTask('build', ['compile', 'cssmin', 'uglify']);
+  grunt.registerTask('build', ['compile', 'cssmin']);
   // Default task(s).
   grunt.registerTask('default', ['build']);
 };

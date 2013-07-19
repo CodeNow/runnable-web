@@ -141,7 +141,15 @@ var utils = module.exports = {
       }
     };
   },
-  successErrorToCB: function (cb) {
+  successErrorToCB: function (cb, context) {
+    if (context) cb = cb.bind(context);
+    return {
+      success: utils.successToCB(cb),
+      error  : utils.errorToCB(cb)
+    };
+  },
+  cbOpts: function (cb, context) {
+    if (context) cb = cb.bind(context);
     return {
       success: utils.successToCB(cb),
       error  : utils.errorToCB(cb)

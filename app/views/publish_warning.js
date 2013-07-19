@@ -15,7 +15,10 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     return _.extend(this.options, {
-      user: this.app.user
+      user: this.app.user,
+      permissions: {
+        edit: this.app.user.canEdit(this.model)
+      }
     });
   },
   publishNew: function () {
@@ -23,7 +26,7 @@ module.exports = BaseView.extend({
     image.publishFromContainer(this.options.containerid, this.publishCallback.bind(this));
   },
   publishBack: function () {
-    if (!this.app.user.isOwnerOf(this.model)) { // this shouldn't ever happen..
+    if (!this.app.user.canEdit(this.model)) { // this shouldn't ever happen..
       this.showError('You cannot publish back since you are not the owner of the original runnable');
       return;
     }

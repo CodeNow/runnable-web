@@ -231,7 +231,9 @@ function fetchFilesForContainer (containerId, callback) {
         firstDefault.set('selected', true);
         if (results['fsc:'+firstDefault.get('path')]) {
           // if file exists elsewhere it's data should not conflict with another instance of itself..
-          results['fsc:'+firstDefault.get('path')].get(firstDefault.id).set('selected', true);
+          if (results['fsc:'+firstDefault.get('path')].get(firstDefault.id)) {
+            results['fsc:'+firstDefault.get('path')].get(firstDefault.id).set('selected', true);
+          }
         }
       }
       callback(err, results);
@@ -247,7 +249,7 @@ function fetchRelated (tags, cb) {
     related: {
       collection:'Images',
       params: {
-        tags: tagNames,
+        channel: tagNames[0],
         limit: 5,
         sort: 'votes'
       }
