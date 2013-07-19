@@ -8,15 +8,16 @@ module.exports = BaseView.extend({
     'click' : 'saveAndOpenContainerPage'
   },
   saveAndOpenContainerPage: function () {
-    var self = this;
+    this.disable(true);
     this.collection.saveAll(function (err) {
+      this.disable(false);
       if (err) {
         this.showError(err);
       }
       else {
-        self.app.router.navigate('/me/'+self.options.containerid, true);
+        this.app.router.navigate('/me/'+this.options.containerid, true);
       }
-    });
+    }, this);
   }
 });
 

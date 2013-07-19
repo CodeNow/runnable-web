@@ -106,19 +106,15 @@ module.exports = Base.extend({
   onAdd: function (fileAdded) {
     fileAdded.set('selected', true);
   },
-  saveAll: function (cb) {
+  saveAll: function (cb, ctx) {
+    if (ctx) cb = cb.bind(ctx);
     if (this.unsaved()) {
       var unsavedFiles = this.toArray().filter(function (file) {
         return file.unsaved();
       });
       async.forEach(unsavedFiles, function (file, acb) {
-        if (file.unsaved()) {
-          var options = utils.successErrorToCB(acb);
-          file.save({}, options);
-        }
-        else {
-          cb();
-        }
+        var options = utils.cbOpts(acb);
+        file.save({}, options);
       }, cb);
     }
     else {
@@ -240,7 +236,7 @@ module.exports = Base.extend({
 //     });
 //     async.forEach(fileModels, function(fileModel, acb) {
 //       if (fileModel.hasUnsavedChanges()) {
-//         var options = utils.successErrorToCB(acb);
+//         var options = utils.cbOpts(acb);
 //         fileModel.save({}, options);
 //       }
 //       else {

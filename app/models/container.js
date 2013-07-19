@@ -5,60 +5,51 @@ var utils = require('../utils');
 
 var Container = module.exports = Runnable.extend({
   urlRoot: '/users/me/runnables',
-  saveAll: function (cb) {
-    this.app.dispatch.trigger('saveAll', cb);
+  saveAll: function (cb, ctx) {
+    this.app.dispatch.trigger('saveAll', cb, ctx);
   },
-  run: function (cb) {
+  run: function (cb, ctx) {
     // if we aren't running, start
-    debugger;
     if (!this.get('running')) {
-      this.start(cb);
+      this.start(cb, ctx);
     } else {
-      this.restart(cb);
+      this.restart(cb, ctx);
     }
   },
-  stop: function (cb) {
+  stop: function (cb, ctx) {
+    if (ctx) cb = cb.bind(ctx);
     var self = this;
-    var options = utils.successErrorToCB(cb);
+    var options = utils.cbOpts(cb);
     options.wait = true;
     this.save({running: false}, options);
   },
-  start: function (cb) {
-    var self = this;
+  start: function (cb, ctx) {
+    if (ctx) cb = cb.bind(ctx);
     this.saveAll(function (err) {
       if (err) {
         cb(err);
       }
       else {
-        var options = utils.successErrorToCB(cb);
+        var options = utils.cbOpts(cb);
         options.wait = true;
-        self.save({running: true}, options);
+        this.save({running: true}, options);
       }
-    })
+    }, this)
   },
-  restart: function (cb) {
-    var self = this;
+  restart: function (cb, ctx) {
     this.stop(function (err) {
       if (err) {
-        cb(err);
+        cb.call(ctx, err);
       }
       else {
-        self.start(cb);
+        this.start(cb, ctx);
       }
-    })
+    }, this);
   },
-  destroyById: function (containerId, callback) {
+  destroyById: function (containerId, callback, ctx) {
     var container = this.app.fetcher.modelStore.get('container', containerId, true);
-    var options = utils.successErrorToCB(destroyCallback.bind(this));
-    function destroyCallback(err, container) {
-      if (err) {
-        callback(err);
-      }
-      else {
-        container.destroy(options);
-        callback();
-      }
-    }
+    var options = utils.cbOpts(callback, ctx);
+    container.destroy(options);
   }
 });
 
