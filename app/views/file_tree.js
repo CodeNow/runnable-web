@@ -81,16 +81,13 @@ module.exports = BaseView.extend({
     }
   },
   postRender: function () {
-    //todo: remove display-none
-    // clientside postHydrate and getTemplateData have occured.
     this.$contentsUL = this.$('ul').first();
-    // alert("Get here "+ );
     // droppable
-    // this.$el.droppable({
-    //   greedy: true,
-    //   drop: this.onDrop.bind(this),
-    //   hoverClass: 'drop-hover'
-    // });
+    this.$el.droppable({
+      greedy: true,
+      drop: this.onDrop.bind(this),
+      hoverClass: 'drop-hover'
+    });
   },
   slideUpHeight: function () {
     this.$el.removeClass('open');
@@ -136,7 +133,12 @@ module.exports = BaseView.extend({
     var collection = fileList.collection;
     if (!collection.fetched) {
       this.showLoader();
-      var options = utils.cbOpts(function (err, collection) {
+      var options = _.extend(utils.cbOpts(cb, this), {
+        data: collection.params, // VERY IMPORTANT! - ask TJ.
+        silent: true             // silent until all the models are for sure in store..
+      });
+      collection.fetch(options);
+      function cb (err, collection) {
         this.hideLoader();
         if (err) {
           this.showError(err);
@@ -144,15 +146,11 @@ module.exports = BaseView.extend({
         else {
           collection.forEach(function (model) {
             model.store(); // VERY IMPORTANT! - ask TJ.
-            if (model.isDir())
-              model.contents.store();
+            if (model.isDir()) model.contents.store();
           });
           collection.trigger('sync');
         }
-      }.bind(this));
-      options.data = collection.params; // VERY IMPORTANT! - ask TJ.
-      options.silent = true; // silent until all the models are for sure in store..
-      collection.fetch(options);
+      }
     }
   },
   close: function () {
@@ -160,6 +158,8 @@ module.exports = BaseView.extend({
     this.slideUpHeight();
   },
   onDrop: function (evt, ui) {
+    debugger;
+    debugger;
     evt.preventDefault();
     evt.stopPropagation();
     this.$el.removeClass('drop-hover');

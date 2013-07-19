@@ -37,13 +37,16 @@ module.exports = BaseView.extend({
     if (this.options.editmode) {
       this.$('input').focus();
     }
-    // if (!this.fs.isRootDir()) {
-    //   this.$el.draggable({
-    //     opacity: .8,
-    //     helper: "clone",
-    //     containment: "#file-tree"
-    //   });
-    // }
+    this.makeDraggable()
+  },
+  makeDraggable: function () {
+    if (!this.model.isRootDir()) {
+      this.$el.draggable({
+        opacity: .8,
+        helper: "clone",
+        containment: "#file-tree"
+      });
+    }
   },
   setEditMode: function (bool) {
     this.options.editmode = bool;
