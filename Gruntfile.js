@@ -217,7 +217,7 @@ module.exports = function(grunt) {
   // Debug
   grunt.registerTask('debug', ['bgShell:debugNode', 'dev-mode']);
   // Build for production
-  grunt.registerTask('build', ['compile', 'cssmin', 'uglify']);
+  grunt.registerTask('build', ['compile', 'cssmin']);
   // Default task(s).
   grunt.registerTask('default', ['build']);
 };
