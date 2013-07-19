@@ -20,7 +20,7 @@
 
   "api": {
     "default": {
-      "host": "api.runnableapp.com",
+      "host": "api.runnable.com",
       "protocol": "http"
     }
   },
