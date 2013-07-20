@@ -1,5 +1,5 @@
 var url = require('url');
-
+var utils = require('../../app/utils');
 
 module.exports = function () {
 	return function (req, res, next) {
@@ -21,6 +21,11 @@ module.exports = function () {
       parsed.pathname = parsed.pathname.replace(/\/$/, '');
     }
 
+    if (checkForChannelProject(parsed.pathname)) {
+      dirty = true;
+      parsed.pathname = parsed.pathname.replace(/^\/[^\/]+\//, '/');
+    }
+
     if (dirty) {
       var newUrl = url.format({
         protocol: parsed.protocol,
@@ -36,3 +41,13 @@ module.exports = function () {
     }
   };
 };
+
+function checkForChannelProject (path) {
+  var parts = path.split('/');
+  var channel = path[1];
+  var id = path[2];
+  return channel && id &&
+    !/me|page|new/.test(channel) &&
+    !utils.isObjectId64(channel) &&
+    utils.isObjectId64(id));
+}
