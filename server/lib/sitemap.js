@@ -14,11 +14,11 @@ module.exports.init = function(app) {
       { url: '/privacy',  changefreq: 'monthly',  priority: 0.1 }
     ];
     async.parallel([
-      function channels (cb) {
+      function channel (cb) {
         request({
           url: 'http://api.runnable.com/channels',
           json: {}
-        }, function (err, projects) {
+        }, function (err, res, channels) {
           if (err) {
             return cb(err);
           }
@@ -32,11 +32,11 @@ module.exports.init = function(app) {
           cb();
         });
       },
-      function projects (cb) {
+      function project (cb) {
         request({
           url: 'http://api.runnable.com/runnables?map=true',
           json: {}
-        }, function (err, projects) {
+        }, function (err, res, projects) {
           if (err) {
             return cb(err);
           }
