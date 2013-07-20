@@ -75,6 +75,11 @@ module.exports = {
           cb(null, results);
         }
       ], function (err, results) {
+        // DEBUG!
+        if(err && err.status) {
+          console.log(err.status);
+          console.log((new Error()).stack);
+        }
         if (err) { callback(err); } else {
           callback(null, addSEO(results));
         }
