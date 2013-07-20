@@ -116,7 +116,7 @@ function initLibs(callback) {
 
 // Attach our routes to our server
 function buildRoutes(app) {
-  sitemap(app);
+  sitemap.init(app);
   buildApiRoutes(app);
   buildRendrRoutes(app);
   app.get(/^(?!\/api\/)/, mw.handle404.handle404);
