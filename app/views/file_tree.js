@@ -82,6 +82,8 @@ module.exports = BaseView.extend({
   },
   postRender: function () {
     this.$contentsUL = this.$('ul').first();
+    var fileList = _.findWhere(this.childViews, {name:'fs_list'});
+    this.collection = fileList.collection;
     // droppable
     this.$el.droppable({
       greedy: true,
@@ -112,7 +114,7 @@ module.exports = BaseView.extend({
   },
   sync: function () {
     if (this.model.get('open')) {
-      var contents = _.findWhere(this.childViews, {name:'fs_list'}).collection;
+      var contents = this.collection;
       var options = utils.cbOpts(cb, this);
       this.showLoader();
       contents.fetch(options);
@@ -129,9 +131,9 @@ module.exports = BaseView.extend({
     this.slideDownHeight();
     // fetch the dir contents if not fetched.
     var self = this;
-    var fileList = _.findWhere(this.childViews, {name:'fs_list'});
-    var collection = fileList.collection;
-    if (!collection.fetched) {
+    var collection = this.collection;
+    // if (!collection.fetched) {
+    if (true) {
       this.showLoader();
       var options = _.extend(utils.cbOpts(cb, this), {
         data: collection.params, // VERY IMPORTANT! - ask TJ.
@@ -158,27 +160,26 @@ module.exports = BaseView.extend({
     this.slideUpHeight();
   },
   onDrop: function (evt, ui) {
-    debugger;
-    debugger;
     evt.preventDefault();
     evt.stopPropagation();
     this.$el.removeClass('drop-hover');
     var self = this;
     var $itemDropped = $(ui.draggable).find('[data-id]');
-    var fsPath = $itemDropped.data('id');
-    if (fsPath) {
-      // this._forkIfUserIsNotProjectOwner(function (err, data) {
-      // TODO!
-        // if (err) {
-        //   self.showError('Error moving.');
-        // }
-        // else{
-          console.log(fsPath);
-          self.dir.moveIn(fsPath, function (err) {
-            if (err) self.showError(err);
-          });
-        // }
-      // });
+    var fsid = $itemDropped.data('id');
+    if (fsid) {
+      var collection = this.collection;
+      collection.globalGet(fsid, function (err, model, fromCollection) {
+        if (err) {
+          this.showError(err);
+        }
+        else {
+          model.moveFromTo(fromCollection, collection, function (err) {
+            if (err) {
+              this.showError(err);
+            }
+          }, this);
+        }
+      }, this)
     }
   },
   showLoader: function () {
