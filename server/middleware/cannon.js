@@ -49,5 +49,5 @@ function checkForChannelProject (path) {
   return channel && id &&
     !/me|page|new/.test(channel) &&
     !utils.isObjectId64(channel) &&
-    utils.isObjectId64(id));
+    utils.isObjectId64(id);
 }
