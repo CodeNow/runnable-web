@@ -23,7 +23,7 @@ module.exports = function () {
 
     if (dirty) {
       var newUrl = url.format({
-        protocal: parsed.protocal,
+        protocol: parsed.protocol,
         hostname: parsed.hostname,
         port: parsed.port,
         pathname: parsed.pathname,
