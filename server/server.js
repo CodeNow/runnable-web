@@ -74,6 +74,7 @@ function initMiddleware() {
   app.configure('production', function() {
     app.use(express.compress());
   });
+  app.use(express.staticCache());
   app.use(express.static(__dirname + '/../public'));
   app.use(express.cookieParser());
   app.use(express.session({
