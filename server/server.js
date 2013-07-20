@@ -10,7 +10,7 @@ var express = require('express'),
     rendrMw = require('rendr/server/middleware'),
     viewEngine = require('rendr/server/viewEngine'),
     Handlebars = viewEngine.Handlebars,
-    sitemap = require('./lib/sitemap');
+    sitemap = require('./lib/sitemap'),
     app;
 
 // Add Handlebars helpers
