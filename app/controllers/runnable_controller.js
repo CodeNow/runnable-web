@@ -20,9 +20,9 @@ module.exports = {
     if (params._id.length !== 16) {//TODO Re-implemented(!utils.isObjectId64(params._id)) {
       // redirect to channel page
       var channelParams = { channel:params._id };
-      this.currentRoute.action= 'index';
-      this.currentRoute.controller= 'channel';
-      channelController.index.call(this, channelParams, callback);
+      channelController.index.call(this, channelParams, function (err, results) {
+        callback(err, 'channel/index', results);
+      });
     }
     else {
       async.waterfall([
@@ -38,7 +38,7 @@ module.exports = {
         function nameInUrl (results, cb) {
           var image = results.image;
           var urlFriendlyName = utils.urlFriendly(results.image.get('name'));
-          if (params.name !== urlFriendlyName) {
+          if (params.name !== urlFriendlyName || params.channel) {
             var urlWithName = [image.id, urlFriendlyName].join('/');
             self.redirectTo(urlWithName);
           }
