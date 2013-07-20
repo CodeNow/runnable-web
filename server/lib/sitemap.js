@@ -1,6 +1,7 @@
 var sitemap = require('sitemap');
 var async = require('async');
 var request = require('request');
+var utils = require('../../app/utils');
 
 module.exports.init = function(app) {
 
@@ -16,24 +17,43 @@ module.exports.init = function(app) {
     ];
     async.parallel([
       function channels (cb) {
-        channels.forEach(function (channel) {
-          urls.push({
-            url: '/' + channel,
-            changefreq: 'daily',
-            priority: 0.5
+        request({
+          url: 'http://api.runnable.com/channels',
+          json: {}
+        }, function (err, projects) {
+          if (err) {
+            return cb(err);
+          }
+          channels.forEach(function (channel) {
+            urls.push({
+              url: '/' + channel.name,
+              changefreq: 'daily',
+              priority: 0.5
+            });
           });
+          cb();
         });
-        cb();
       },
       function projects (cb) {
-        projects.forEach(function (project) {
-          urls.push({
-            url: 'http://runnable.com/' + project._id + '/' + project.urlFriendly,
-            changefreq: 'weekly',
-            priority: 0.6
+        request({
+          url: 'http://api.runnable.com/runnables?map=true',
+          json: {}
+        }, function (err, projects) {
+          if (err) {
+            return cb(err);
+          }
+          projects.forEach(function (project) {
+            urls.push({
+              url: 'http://runnable.com/' + 
+                project._id + 
+                '/' + 
+                utils.urlFriendly(project.name),
+              changefreq: 'weekly',
+              priority: 0.6
+            });
           });
+          cb();
         });
-        cb();
       }
     ], function (err) {
       if (err) {
