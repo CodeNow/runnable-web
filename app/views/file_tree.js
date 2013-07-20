@@ -13,33 +13,35 @@ module.exports = BaseView.extend({
     'contextmenu' : 'contextMenu'
   },
   contextMenu: function (evt) {
+    this.$(document).click();
+    evt.preventDefault(); // prevent browser context menu
+    evt.stopPropagation();
+    if (this.menu) {
+      this.menu.remove();
+      this.menu = null;
+    }
+    var collection = _.findWhere(this.childViews, {name:'fs_list'}).collection;
+    var modelId = $(evt.target).data('id');
+    var model = collection.get(modelId);
+    var createOnly = !Boolean(modelId); // if grey area clicked don't show rename or delete..could be confusing to user
+    model = model || this.model;
+    var menu = this.menu = new FileMenu({
+      createOnly: createOnly,
+      showDefault: this.options.editmode,
+      model: model,
+      top  : evt.pageY,
+      left : evt.pageX,
+      app  : this.app
+    });
+    this.listenToOnce(menu, 'rename', model.trigger.bind(model, 'rename'));
+    this.listenToOnce(menu, 'delete', this.del.bind(this, model));
     if (this.options.editmode) {
-      evt.preventDefault(); // prevent browser context menu
-      evt.stopPropagation();
-      if (this.menu) {
-        this.menu.remove();
-        this.menu = null;
-      }
-      var collection = _.findWhere(this.childViews, {name:'fs_list'}).collection;
-      var modelId = $(evt.target).data('id');
-      var model = collection.get(modelId);
-      var createOnly = !Boolean(modelId); // if grey area clicked don't show rename or delete..could be confusing to user
-      model = model || this.model;
-      var menu = this.menu = new FileMenu({
-        createOnly: createOnly,
-        model: model,
-        top  : evt.pageY,
-        left : evt.pageX,
-        app  : this.app
-      });
-      this.listenToOnce(menu, 'rename', model.trigger.bind(model, 'rename'));
-      this.listenToOnce(menu, 'delete', this.del.bind(this, model));
       this.listenToOnce(menu, 'default', this.def.bind(this, model));
       this.listenToOnce(menu, 'undefault', this.undefault.bind(this, model));
-      this.listenToOnce(menu, 'delete', this.del.bind(this, model));
-      this.listenToOnce(menu, 'create', this.create.bind(this));
-      this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
     }
+    this.listenToOnce(menu, 'delete', this.del.bind(this, model));
+    this.listenToOnce(menu, 'create', this.create.bind(this));
+    this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
   },
   del: function (model) {
     var options = utils.cbOpts(function (err) {
