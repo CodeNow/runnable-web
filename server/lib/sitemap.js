@@ -5,8 +5,6 @@ var utils = require('../../app/utils');
 
 module.exports.init = function(app) {
 
-  var runnable = new Runnable('');
-
   app.get('/sitemap.xml', function (req, res, next) {
     var urls = [
       { url: '/',  changefreq: 'weekly', priority: 0.7 },
