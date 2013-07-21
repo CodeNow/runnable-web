@@ -206,10 +206,26 @@ module.exports = function(grunt) {
     grunt.log.writeln('Copying file "' + compassCSS + '" to "' + mergedCSSPath + '"');
     grunt.file.copy(compassCSS, mergedCSSPath);
   });
-  // jshint
+  // generate channelImages.js
+  grunt.registerTask('channel-images-hash', 'Create channel images hash to prevent 404s', function () {
+    var fs = require('fs');
+    var done = this.async();
+    var imageDir = path.join(__dirname, 'public/images/channels');
+    fs.readdir(imageDir, function (err, files) {
+      var imageHash = {};
+      files.forEach(function (file) {
+        var channelName = file.replace(/[.](png|gif|jpg)$/, '');
+        imageHash[channelName] = true;
+      });
+      var fileString = 'module.exports='+JSON.stringify(imageHash)+';';
+      var hashFile = path.join(__dirname,'app/channelImages.js');
+      fs.writeFile(hashFile, fileString, done);
+    });
+  });
+  // jslint
   grunt.registerTask('jshint', ['jshint:all']);
   // Compile - shared tasks for all
-  grunt.registerTask('compile', ['handlebars', 'rendr_stitch', 'clean-merged-css', 'compass']);
+  grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'rendr_stitch', 'clean-merged-css', 'compass']);
   // Shared tasks for server and debug
   grunt.registerTask('dev-mode', ['compile', 'move-css', 'watch']);
   // Run the server and watch for file changes

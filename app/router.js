@@ -4,6 +4,9 @@ var Backbone   = require('backbone');
 var _ = require('underscore');
 var Super = BaseClientRouter.prototype;
 
+// Add Handlebars helpers
+require('./handlebarsHelpers').add(Handlebars);
+
 var Router = module.exports = function Router(options) {
   BaseClientRouter.call(this, options);
 };
@@ -16,32 +19,6 @@ Router.prototype.postInitialize = function() {
   this.on('action:start', this.trackImpression, this);
   this.on('action:start', this.scrollTop, this);
   this.on('action:end', this.scrollTop, this);
-
-  // Register Handlebars helpers here for now
-  Handlebars.registerHelper('if_eq', function(context, options) {
-    if (context == options.hash.compare)
-      return options.fn(this);
-    return options.inverse(this);
-  });
-
-  Handlebars.registerHelper('exists', function(context, options) {
-    if (context !== null && context !== undefined)
-      return options.fn(this);
-    return options.inverse(this);
-  });
-
-  var utils = this.app.utils;
-  Handlebars.registerHelper('urlFriendly', function (str) {
-    str = utils.urlFriendly(str);
-
-    return new Handlebars.SafeString(str);
-  });
-
-  Handlebars.registerHelper('dateAgo', function (str) {
-    var moment = require('moment');
-    str = moment(str).fromNow();
-    return new Handlebars.SafeString(str);
-  });
 
   // set up ace worker urls
   var config = ace.require("ace/config"); // or simply ace.config

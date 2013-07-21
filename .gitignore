@@ -1,6 +1,7 @@
 node_modules
 public/mergedAssets.js
 app/templates/compiledTemplates.js
+app/channelImages.js
 public/styles/index.css
 .DS_Store
 npm-debug.log

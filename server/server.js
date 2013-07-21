@@ -14,7 +14,7 @@ var express = require('express'),
     app;
 
 // Add Handlebars helpers
-addHandlebarsHelpers();
+require('../app/handlebarsHelpers').add(Handlebars);
 
 // sessions storage
 redisStore = connectRedis(express);
@@ -160,33 +160,5 @@ function buildRendrRoutes(app) {
 
     // Attach the route to the Express server.
     app.get(path, fnChain);
-  });
-}
-
-function addHandlebarsHelpers() {
-  var utils = require('../app/utils');
-
-  Handlebars.registerHelper('if_eq', function(context, options) {
-    if (context == options.hash.compare)
-      return options.fn(this);
-    return options.inverse(this);
-  });
-
-  Handlebars.registerHelper('exists', function(context, options) {
-    if (context !== null && context !== undefined)
-      return options.fn(this);
-    return options.inverse(this);
-  });
-
-  Handlebars.registerHelper('urlFriendly', function (str) {
-    str = utils.urlFriendly(str);
-
-    return new Handlebars.SafeString(str);
-  });
-
-  Handlebars.registerHelper('dateAgo', function (str) {
-    var moment = require('moment');
-    str = moment(str).fromNow();
-    return new Handlebars.SafeString(str);
   });
 }

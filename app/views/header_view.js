@@ -14,7 +14,6 @@ module.exports = BaseView.extend({
   },
   loader: function (model, loading) {
     var $loader = this.$('.logo-only');
-    console.log($loader);
     if (loading) {
       $loader.addClass('loading');
     }
