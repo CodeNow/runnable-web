@@ -77,7 +77,7 @@ function initMiddleware() {
   app.use(express.staticCache());
   app.use(express.static(__dirname + '/../public'));
   app.use(function (req, res, next) {
-    if (/\/(images|styles|ace|external)\/.+/.test(req.url)) {
+    if (/\/(images|styles|scripts|external)\/.+/.test(req.url)) {
       res.send(404); // prevent static 404s from hitting router
     } else {
       next();

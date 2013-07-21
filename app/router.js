@@ -56,7 +56,7 @@ Router.prototype.postInitialize = function() {
   .forEach(function (worker) {
     config.setModuleUrl(
         "ace/mode/"+worker+"_worker",
-        "/ace/worker-"+worker+".js"
+        "/scripts/ace/worker-"+worker+".js"
     );
   });
 
