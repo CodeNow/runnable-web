@@ -65,7 +65,6 @@ var utils = module.exports = {
     return str[0].toLowerCase() + str.slice(1);
   },
   camelCase : function(str, capitalize) {
-    console.log(str);
     var regex = /[ -_][a-z]/g;
     var newStr = '';
     var lastIndex = 0;
@@ -208,10 +207,6 @@ var utils = module.exports = {
   },
   isObjectId64: function (str) {
     str = str && str.toString && str.toString();
-    console.log(str)
-    console.log(Boolean(str && str.length === 16));
-    console.log(Boolean(str && str.length === 16 && utils.base64ToHex(str)));
-    console.log(Boolean(str && str.length === 16 && utils.isObjectId(utils.base64ToHex(str))));
     return Boolean(str && str.length === 16 && utils.isObjectId(utils.base64ToHex(str)));
   },
   tagsToString: function (tags, prelastword) {
