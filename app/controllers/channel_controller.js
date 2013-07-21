@@ -57,5 +57,8 @@ module.exports = {
         });
       }
     }
+  },
+  runnable: function (params, callback) {
+    this.redirectTo(params._id +'/'+ params.name);
   }
 };

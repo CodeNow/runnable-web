@@ -17,12 +17,20 @@ var createContainerFrom = helpers.createContainerFrom;
 module.exports = {
   index: function(params, callback) {
     var self = this;
-    if (params._id.length !== 16) {//TODO Re-implemented(!utils.isObjectId64(params._id)) {
-      // redirect to channel page
-      var channelParams = { channel:params._id };
-      channelController.index.call(this, channelParams, function (err, results) {
-        callback(err, 'channel/index', results);
-      });
+    if (!utils.isObjectId64(params._id)) {
+      var channelParams;
+      if (utils.isObjectId64(params.name)) {
+        // channel runnable page
+        channelParams = { channel:params._id, _id:params.name };
+        channelController.runnable.call(this, channelParams, callback);
+      }
+      else{
+        // channel page
+        channelParams = { channel:params._id };
+        channelController.index.call(this, channelParams, function (err, results) {
+          callback(err, 'channel/index', results);
+        });
+      }
     }
     else {
       async.waterfall([

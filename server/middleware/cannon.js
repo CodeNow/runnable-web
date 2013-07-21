@@ -21,10 +21,10 @@ module.exports = function () {
       parsed.pathname = parsed.pathname.replace(/\/$/, '');
     }
 
-    if (checkForChannelProject(parsed.pathname)) {
-      dirty = true;
-      parsed.pathname = parsed.pathname.replace(/^\/[^\/]+\//, '/');
-    }
+    // if (checkForChannelProject(parsed.pathname)) {
+    //   dirty = true;
+    //   parsed.pathname = parsed.pathname.replace(/^\/[^\/]+\//, '/');
+    // }
 
     if (dirty) {
       var newUrl = url.format({
