@@ -46,7 +46,7 @@ module.exports = {
         function nameInUrl (results, cb) {
           var image = results.image;
           var urlFriendlyName = utils.urlFriendly(results.image.get('name'));
-          if (params.name !== urlFriendlyName || params.channel) {
+          if (encodeURIComponent(params.name) !== urlFriendlyName || params.channel) {
             var urlWithName = [image.id, urlFriendlyName].join('/');
             self.redirectTo(urlWithName);
           }
