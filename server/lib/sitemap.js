@@ -24,7 +24,7 @@ module.exports.init = function(app) {
           }
           channels.forEach(function (channel) {
             urls.push({
-              url: '/' + channel.name,
+              url: 'http://runnable.com/' + channel.name,
               changefreq: 'daily',
               priority: 0.5
             });
@@ -42,9 +42,9 @@ module.exports.init = function(app) {
           }
           projects.forEach(function (project) {
             urls.push({
-              url: 'http://runnable.com/' + 
-                project._id + 
-                '/' + 
+              url: 'http://runnable.com/' +
+                project._id +
+                '/' +
                 utils.urlFriendly(project.name),
               changefreq: 'weekly',
               priority: 0.6
