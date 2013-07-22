@@ -28,7 +28,7 @@ module.exports = RendrView.extend({
               properties = $(evt.currentTarget).serializeData();
             }
             this.trackEvent(actionName, properties);
-          });
+          }.bind(this));
         }).call(this, eventStr);
       }
     }
