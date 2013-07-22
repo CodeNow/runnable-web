@@ -1,9 +1,9 @@
 <form>
   <div class="tab-container">
     <nav class="tab-nav">
-      <a href="/me/published"{{#if ??? }} class="selected"{{/if}}>Published</a>
+      <a href="/me/published"{{#if true }} class="selected"{{/if}}>Published</a>
       {{#if permissions.canEdit}} <!-- not quite right, but close enough -->
-      <a href="/me/drafts"{{#if ??? }} class="selected"{{/if}}>Drafts</a>
+      <a href="/me/drafts"{{#if false }} class="selected"{{/if}}>Drafts</a>
       {{/if}}
     </nav>
     <div class="tab-content">
