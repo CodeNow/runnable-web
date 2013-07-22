@@ -1,8 +1,11 @@
 {{#each tags}}
-<a href="/{{name}}"><img class="display-none" src="/images/channels/{{urlFriendly name}}.png" alt="">
-{{name}}
-{{#if ../editMode}}
-<i data-id="{{_id}}" class="icon-remove remove-tag"></i>
-{{/if}}
+<a href="/{{name}}">
+  {{#channelHasImage name}}
+  <img class="display-none" src="/images/channels/{{name}}.png" alt="">
+  {{/channelHasImage}}
+  {{name}}
+  {{#if ../editMode}}
+  <i data-id="{{_id}}" class="icon-remove remove-tag"></i>
+  {{/if}}
 </a>
 {{/each}}

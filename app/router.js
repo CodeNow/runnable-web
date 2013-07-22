@@ -108,9 +108,7 @@ Router.prototype.getMainView = function(views) {
 };
 
 Router.prototype.trackImpression = function() {
-  if (window._gaq) {
-    _gaq.push(['_trackPageview']);
-  }
+  Track.pageView();
 };
 
 Router.prototype.scrollTop = function (app, loading) {

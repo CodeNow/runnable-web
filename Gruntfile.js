@@ -160,6 +160,7 @@ module.exports = function(grunt) {
           dependencies: frontendScripts,
           npmDependencies: {
             underscore: '../rendr/node_modules/underscore/underscore.js',
+            'underscore.string': '../underscore.string/lib/underscore.string.js',
             backbone: '../rendr/node_modules/backbone/backbone.js',
             handlebars: '../rendr/node_modules/handlebars/dist/handlebars.runtime.js',
             async: '../rendr/node_modules/async/lib/async.js',

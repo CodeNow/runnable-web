@@ -9,3 +9,4 @@ npm-debug.log
 .css
 assets/vendor/bower/
 configs/local.json
+.tern_port
