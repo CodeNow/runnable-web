@@ -1,0 +1,9 @@
+<tr>
+  <td><a href="{{url}}">{{name}}</a></td>
+  <td>{{votes}}</td>
+  <td>{{views}}</td>
+  <td>{{runs}}</td>
+  <td>{{copies}}</td>
+  <td>{{downloads}}</td>
+  <td><input type="checkbox" name="{{_id}}"></td>
+</tr>
