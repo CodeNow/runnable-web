@@ -16,6 +16,31 @@ module.exports = BaseView.extend({
     this.$fileBrowser = this.$('.file-browser');
     this.codeView = _.findWhere(this.childViews, {name:'code'});
   },
+  postHydrate: function () {
+    var model = this.model;
+    var canEdit = this.app.user.canEdit(model);
+    this.app.dispatch.on('copy', function () {
+      if (!canEdit) {
+        var copies = model.get('copies') + 1;
+        model.set('copies', copies);
+        model.save();
+      }
+    });
+    this.app.dispatch.on('paste', function () {
+      if (!canEdit) {
+        var pastes = model.get('pastes') + 1;
+        model.set('pastes', pastes);
+        model.save();
+      }
+    });
+    this.app.dispatch.on('cut', function () {
+      if (!canEdit) {
+        var cuts = model.get('cuts') + 1;
+        model.set('cuts', cuts);
+        model.save();
+      }
+    });
+  },
   showFiles: function (evt) {
     this.$showFilesButton.hide();
     this.$fileBrowser.show();

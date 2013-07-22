@@ -14,28 +14,6 @@ module.exports = Runnable.extend({
   //   return _.extend(virtuals, {
   //   });
   // },
-  initialize: function () {
-    Super.initialize.apply(this, arguments);
-    var self = this;
-    if (this.app && this.app.dispatch) {
-      this.app.dispatch.on('copy', function () {
-        var copies = self.get('copies') + 1;
-        self.set('copies', copies);
-        self.save();
-        console.log('hmmm');
-      });
-      this.app.dispatch.on('paste', function () {
-        var pastes = self.get('pastes') + 1;
-        self.set('pastes', pastes);
-        self.save();
-      });
-      this.app.dispatch.on('cut', function () {
-        var cuts = self.get('cuts') + 1;
-        self.set('cuts', cuts);
-        self.save();
-      });
-    }
-  },
   incVote: function () {
     var votes = this.get('votes') + 1;
     this.set('votes', votes);
