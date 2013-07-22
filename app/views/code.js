@@ -147,13 +147,13 @@ module.exports = BaseView.extend({
     alert(err);
   },
   onCopy: function (evt) {
-    //alert('COPY');
+    this.app.dispatch.trigger('copy');
   },
   onPaste: function (evt) {
-
+    this.app.dispatch.trigger('paste');
   },
   onCut: function (evt) {
-
+    this.app.dispatch.trigger('cut');
   }
 });
 
