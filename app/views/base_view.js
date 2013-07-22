@@ -36,7 +36,7 @@ module.exports = RendrView.extend({
   trackEvent: function (actionName, properties) {
     actionName = _str.humanize(actionName);
     properties = properties || {};
-    TrackEvent(this.viewName(), actionName, properties);
+    Track.event(this.viewName(), actionName, properties);
   },
   trackError: function (actionName, err) {
     if (err && err.message) {
