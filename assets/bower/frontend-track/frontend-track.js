@@ -67,9 +67,10 @@
       return;
     }
     var page = window.location.pathname + window.location.hash;
-    console.log('<EVENT>', eventCategory, '-', eventName);
     properties = properties || {};
     properties['Viewed URL'] = page;
+    //console
+    console.log('<EVENT>', eventCategory, '-', eventName, properties);
     //google analytics
     _gaq.push(['_trackEvent', eventCategory, eventName, page]);
     //mixpanel
