@@ -57,6 +57,6 @@ module.exports = RendrView.extend({
     }
   },
   viewName: function () {
-    return _.str.humanize(this.$el.attr('data-view'));
+    return _str.humanize(this.$el.attr('data-view'));
   }
 });
