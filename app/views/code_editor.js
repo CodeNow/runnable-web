@@ -40,6 +40,13 @@ module.exports = BaseView.extend({
         model.save();
       }
     });
+    this.app.dispatch.on('run', function () {
+      if (!canEdit) {
+        var runs = model.get('runs') + 1;
+        model.set('runs', runs);
+        model.save();
+      }
+    });
   },
   showFiles: function (evt) {
     this.$showFilesButton.hide();

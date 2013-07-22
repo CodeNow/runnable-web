@@ -24,6 +24,7 @@ module.exports = BaseView.extend({
         popup.postMessage("Refresh", "*");
       }
     }, this);
+    this.app.dispatch.trigger('run');
   }
 });
 
