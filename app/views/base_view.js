@@ -36,6 +36,23 @@ module.exports = RendrView.extend({
   trackEvent: function (actionName, properties) {
     actionName = _str.humanize(actionName);
     properties = properties || {};
+    if (this.model) {
+      var model = this.model;
+      var modelName = model.constructor.id || model.constructor.name;
+      properties = _.extend(properties, {
+        dataType: modelName,
+        dataName: model.get('name'),
+        dataId  : model.id
+      });
+    }
+    else if (this.collection) {
+      var collection = this.collection;
+      var collectionName = collection.constructor.id || collection.constructor.name;
+      properties = _.extend(properties, {
+        dataType: collectionName,
+        dataName: JSON.stringify(collection.params)
+      });
+    }
     Track.event(this.viewName(), actionName, properties);
   },
   trackError: function (actionName, err) {
