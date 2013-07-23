@@ -10,6 +10,8 @@ module.exports = function(match) {
   match('new',                  'runnable#new');
   match('new/:from',            'runnable#newFrom');
   match('me/:_id',              'runnable#container');
+  match('me/published',         'user#published');
+  match('me/drafts',            'user#drafts');
   match(':_id',                 'runnable#index');
   match(':_id/output',          'runnable#output');
   match(':_id/:name',           'runnable#index');
