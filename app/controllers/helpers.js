@@ -7,6 +7,7 @@ var utils = require('../utils');
 
 module.exports = {
   'fetch':                  fetch,
+  'fetchWithMe':            fetchWithMe,
   'fetchUser':              fetchUser,
   'fetchImage':             fetchImage,
   'fetchContainer':         fetchContainer,
@@ -56,6 +57,31 @@ function fetch (spec, options, callback) {
     }
   };
   app.fetch.call(app, spec, options, cb);
+}
+
+function fetchWithMe (spec, options, callback) {
+  var app = this.app;
+  if (typeof options == 'function') {
+    callback = options;
+    options = {};
+  }
+  fetchUser.call(this, gotMe);
+  function gotMe (err, results) {
+    if (err) {
+      callback(err);
+    } else {
+      for (var model in spec) {
+        if (model !== 'user') {
+          for (var param in spec[model].params) {
+            if (spec[model].params[param] === 'me') {
+              spec[model].params[param] = results.user.id;
+            }
+          }
+        }
+      }
+      app.fetch.call(app, spec, options, callback);
+    }
+  }
 }
 
 function fetchUser (callback) {

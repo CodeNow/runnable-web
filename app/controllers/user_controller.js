@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var helpers = require('./helpers');
 var utils = require('../utils');
-var fetch = helpers.fetch;
+var fetchWithMe = helpers.fetchWithMe;
 
 module.exports = {
   published: function(params, callback) {
@@ -21,7 +21,7 @@ module.exports = {
       }
     };
     var self = this;
-    fetch.call(this, spec, function (err, results) {
+    fetchWithMe.call(this, spec, function (err, results) {
       if (err) { 
         callback(err); 
       } else {
@@ -58,7 +58,7 @@ module.exports = {
       }
     };
     var self = this;
-    fetch.call(this, spec, function (err, results) {
+    fetchWithMe.call(this, spec, function (err, results) {
       if (err) { 
         callback(err); 
       } else {
