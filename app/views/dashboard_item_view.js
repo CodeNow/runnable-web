@@ -4,4 +4,4 @@ module.exports = BaseView.extend({
 
 });
 
-module.exports.id = "DirView";
+module.exports.id = "dashboard_item_view";
