@@ -12,7 +12,7 @@
         {{view "save_button" collection=defaultFiles}}
         {{!view "download_button" model=container}}
       </section>
-      {{view "code_editor" context=. editmode=true}}
+      {{view "code_editor" context=. editmode=true model=container}}
       {{view "terminal" model=container}}
     </article>
     <aside class="span3 last runnable-sidebar">
