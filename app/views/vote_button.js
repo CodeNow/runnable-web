@@ -15,6 +15,9 @@ module.exports = BaseView.extend({
       };
     }
   },
+  getTemplateData: function () {
+    return this.model.toJSON();
+  },
   postHydrate: function () {
     this.listenTo(this.app.user, 'change:_id', this.render.bind(this));
     this.listenTo(this.model, 'change:votes', this.render.bind(this));
