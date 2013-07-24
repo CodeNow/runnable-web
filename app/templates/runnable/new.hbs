@@ -5,12 +5,14 @@
       <h1>Create &amp; publish code</h1>
       <div class="span6">
         <h3>Search &amp; copy existing code</h3>
+        <p>Find an existing code example, copy it, add your own code then publish it.</p>
         <form>
           <input name='id' placeholder="Runnable Id">
         </form>
       </div>
       <div class="span6 last">
         <h3>Write code from scratch</h3>
+        <p>Select a language or framework below and we'll give you a blank boilerplate to start with.</p>
         <ul class="channel-list">
           {{!#each channels.models}}
           {{!view "channel_item_view" model=.}}

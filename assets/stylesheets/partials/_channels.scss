@@ -36,9 +36,9 @@ ul.channel-list{
         max-height:50px;
       }
       &:hover,&:focus{
-        color:$blue-dark;
+        text-decoration:underline;
         span{
-          border-color:$blue-dark;
+          border-color:$secondary-color;
         }
       }
     }
