@@ -16,6 +16,68 @@ module.exports = BaseView.extend({
     this.$fileBrowser = this.$('.file-browser');
     this.codeView = _.findWhere(this.childViews, {name:'code'});
   },
+  postHydrate: function () {
+    var model = this.model;
+    var canEdit = this.app.user.canEdit(model);
+    if (!canEdit) {
+      var views = model.get('views') + 1;
+      model.set('views', views);
+      model.save({}, {
+        url: '/runnables/' +
+          model.id +
+          '/stats/views',
+        method: 'post'
+      });
+    }
+    this.app.dispatch.on('copy', function () {
+      if (!canEdit) {
+        var copies = model.get('copies') + 1;
+        model.set('copies', copies);
+        model.save({}, {
+          url: '/runnables/' +
+            model.id +
+            '/stats/copies',
+          method: 'post'
+        });
+      }
+    });
+    this.app.dispatch.on('paste', function () {
+      if (!canEdit) {
+        var pastes = model.get('pastes') + 1;
+        model.set('pastes', pastes);
+        model.save({}, {
+          url: '/runnables/' +
+            model.id +
+            '/stats/pastes',
+          method: 'post'
+        });
+      }
+    });
+    this.app.dispatch.on('cut', function () {
+      if (!canEdit) {
+        var cuts = model.get('cuts') + 1;
+        model.set('cuts', cuts);
+        model.save({}, {
+          url: '/runnables/' +
+            model.id +
+            '/stats/cuts',
+          method: 'post'
+        });
+      }
+    });
+    this.app.dispatch.on('run', function () {
+      if (!canEdit) {
+        var runs = model.get('runs') + 1;
+        model.set('runs', runs);
+        model.save({}, {
+          url: '/runnables/' +
+            model.id +
+            '/stats/runs',
+          method: 'post'
+        });
+      }
+    });
+  },
   showFiles: function (evt) {
     this.$showFilesButton.hide();
     this.$fileBrowser.show();

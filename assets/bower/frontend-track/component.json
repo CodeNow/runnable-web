@@ -1,10 +1,10 @@
 {
   "name": "frontend-track",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "frontend-track.js",
   "dependencies": {},
-  "gitHead": "d4e4013262fcb4ba7323324010120ed8638268e5",
-  "_id": "frontend-track@0.1.0",
+  "gitHead": "0885387aa1c3245396f6d7c6e4df5c090e40f76e",
+  "_id": "frontend-track@0.1.1",
   "readme": "ERROR: No README.md file found!",
   "description": "ERROR: No README.md file found!",
   "repository": {

@@ -4,6 +4,9 @@ var Backbone   = require('backbone');
 var _ = require('underscore');
 var Super = BaseClientRouter.prototype;
 
+// Add Handlebars helpers
+require('./handlebarsHelpers').add(Handlebars);
+
 var Router = module.exports = function Router(options) {
   BaseClientRouter.call(this, options);
 };
@@ -16,32 +19,6 @@ Router.prototype.postInitialize = function() {
   this.on('action:start', this.trackImpression, this);
   this.on('action:start', this.scrollTop, this);
   this.on('action:end', this.scrollTop, this);
-
-  // Register Handlebars helpers here for now
-  Handlebars.registerHelper('if_eq', function(context, options) {
-    if (context == options.hash.compare)
-      return options.fn(this);
-    return options.inverse(this);
-  });
-
-  Handlebars.registerHelper('exists', function(context, options) {
-    if (context !== null && context !== undefined)
-      return options.fn(this);
-    return options.inverse(this);
-  });
-
-  var utils = this.app.utils;
-  Handlebars.registerHelper('urlFriendly', function (str) {
-    str = utils.urlFriendly(str);
-
-    return new Handlebars.SafeString(str);
-  });
-
-  Handlebars.registerHelper('dateAgo', function (str) {
-    var moment = require('moment');
-    str = moment(str).fromNow();
-    return new Handlebars.SafeString(str);
-  });
 
   // set up ace worker urls
   var config = ace.require("ace/config"); // or simply ace.config
@@ -56,7 +33,7 @@ Router.prototype.postInitialize = function() {
   .forEach(function (worker) {
     config.setModuleUrl(
         "ace/mode/"+worker+"_worker",
-        "/ace/worker-"+worker+".js"
+        "/scripts/ace/worker-"+worker+".js"
     );
   });
 
@@ -95,6 +72,19 @@ Router.prototype.handleError = function (err) {
   this.renderView();
 };
 
+Router.prototype.updateMetaInfo = function (meta) {
+  if (!meta) return;
+  if (meta.title) {
+    $('title').html(meta.title);
+  }
+  if (meta.description) {
+    $('meta[name=description]').attr('content', meta.description);
+  }
+  if (meta.canonical) {
+    $('link[rel=canonical]').attr('href', meta.canonical);
+  }
+};
+
 Router.prototype.getRenderCallback = function () {
   var self = this;
   var callback = Super.getRenderCallback.apply(this, arguments); // pass on if no err
@@ -103,6 +93,8 @@ Router.prototype.getRenderCallback = function () {
       self.handleError(err);
     }
     else {
+      var _locals = self.defaultHandlerParams(viewPath, locals, {controller:'', action:''})[1];
+      self.updateMetaInfo(_locals.page);
       callback(err, viewPath, locals);
     }
   };
@@ -116,9 +108,7 @@ Router.prototype.getMainView = function(views) {
 };
 
 Router.prototype.trackImpression = function() {
-  if (window._gaq) {
-    _gaq.push(['_trackPageview']);
-  }
+  Track.pageView();
 };
 
 Router.prototype.scrollTop = function (app, loading) {

@@ -6,6 +6,11 @@ module.exports = BaseView.extend({
   className: 'tab-pane',
   // minHeight: 300,
   // maxHeight: 550,
+  events: {
+    'copy': 'onCopy',
+    'paste': 'onPaste',
+    'cut': 'onCut'
+  },
   getTemplateData: function () {
     //for serverside render
     var selectedFile = this.collection.selectedFile();
@@ -140,6 +145,15 @@ module.exports = BaseView.extend({
   },
   showError: function (err) {
     alert(err);
+  },
+  onCopy: function (evt) {
+    this.app.dispatch.trigger('copy');
+  },
+  onPaste: function (evt) {
+    this.app.dispatch.trigger('paste');
+  },
+  onCut: function (evt) {
+    this.app.dispatch.trigger('cut');
   }
 });
 

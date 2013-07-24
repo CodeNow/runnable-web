@@ -23,6 +23,10 @@ module.exports = Base.extend({
   },
   defaults: {
     type: 'dir'
+  },
+  globalGet: function (modelId) {
+    var contents = this.contents;
+    contents.globalGet.apply(contents, arguments);
   }
 });
 

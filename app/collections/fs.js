@@ -28,6 +28,11 @@ module.exports = Base.extend({
     else {
       this.setFetched();
     }
+    var dispatch = this.app.dispatch;
+    if (dispatch) {
+      //clientside only
+      this.listenTo(dispatch, 'get:fs', this.onGetFs.bind(this));
+    }
   },
   url  : function () {
     return '/users/me/runnables/:containerId/files'
@@ -35,6 +40,21 @@ module.exports = Base.extend({
   },
   setFetched: function () {
     this.fetched = true;
+  },
+  globalGet: function (modelId, cb, ctx) {
+    ctx = ctx || this;
+    var timeout = setTimeout(cb.bind(ctx, 'model not found'), 1000); // safety callback if not found anywhere...
+    this.app.dispatch.trigger('get:fs', modelId, function () {
+      clearTimeout(timeout);
+      cb.apply(ctx, arguments);
+    });
+  },
+  onGetFs: function (modelId, cb, ctx) {
+    if (ctx) cb = cb.bind(ctx);
+    var fs = this.get(modelId);
+    if (fs) {
+      cb(null, fs, this);
+    }
   }
 });
 

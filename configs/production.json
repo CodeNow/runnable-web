@@ -22,7 +22,7 @@
 
   "api": {
     "default": {
-      "host": "10.0.1.54:3000",
+      "host": "api.runnable.com",
       "protocol": "http"
     }
   },
@@ -36,7 +36,7 @@
       "id": "UA-36631837-1"
     },
     "pageSize" : 25,
-    "domain": "runnableapp.com"
+    "domain": "runnable.com"
   }
 
 }

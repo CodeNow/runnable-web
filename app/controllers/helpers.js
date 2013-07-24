@@ -7,6 +7,7 @@ var utils = require('../utils');
 
 module.exports = {
   'fetch':                  fetch,
+  'fetchWithMe':            fetchWithMe,
   'fetchUser':              fetchUser,
   'fetchImage':             fetchImage,
   'fetchContainer':         fetchContainer,
@@ -16,11 +17,20 @@ module.exports = {
   'fetchUserAndImage':      fetchUserAndImage,
   'fetchUserAndContainer':  fetchUserAndContainer,
   'fetchFilesForContainer': fetchFilesForContainer,
-  'createContainerFrom':    createContainerFrom
+  'createContainerFrom':    createContainerFrom,
+  'canonical':              canonical
 };
 
 // spec, [options], callback
 // CONTEXT must be controller
+function canonical () {
+  if (isServer) {
+    return 'http://runnable.com' + ((this.app && this.app.req && this.app.req.url) || '');
+  }
+  else {
+    return 'http://runnable.com/' + Backbone.history.fragment;
+  }
+}
 function fetch (spec, options, callback) {
   var app = this.app;
   if (typeof options == 'function') {
@@ -56,6 +66,31 @@ function fetch (spec, options, callback) {
     }
   };
   app.fetch.call(app, spec, options, cb);
+}
+
+function fetchWithMe (spec, options, callback) {
+  var app = this.app;
+  if (typeof options == 'function') {
+    callback = options;
+    options = {};
+  }
+  fetchUser.call(this, gotMe);
+  function gotMe (err, results) {
+    if (err) {
+      callback(err);
+    } else {
+      for (var model in spec) {
+        if (model !== 'user') {
+          for (var param in spec[model].params) {
+            if (spec[model].params[param] === 'me') {
+              spec[model].params[param] = results.user.id;
+            }
+          }
+        }
+      }
+      app.fetch.call(app, spec, options, callback);
+    }
+  }
 }
 
 function fetchUser (callback) {

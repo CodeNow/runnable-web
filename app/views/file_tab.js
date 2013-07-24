@@ -12,6 +12,9 @@ module.exports = BaseView.extend({
       this.className = 'selected';
     }
   },
+  getTemplateData: function () {
+    return this.model.toJSON();
+  },
   postHydrate: function () {
     // change:selected is listened to in file_tabs
     this.listenTo(this.model, 'change:name', this.render.bind(this));

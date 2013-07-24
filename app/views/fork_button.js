@@ -5,9 +5,9 @@ module.exports = BaseView.extend({
   tagName: 'button',
   className: 'btn-fork btn-tertiary',
   events: {
-    'click' : 'saveAndOpenContainerPage'
+    'click' : 'click'
   },
-  saveAndOpenContainerPage: function () {
+  click: function () {
     this.disable(true);
     this.collection.saveAll(function (err) {
       this.disable(false);

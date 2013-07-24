@@ -15,12 +15,12 @@ module.exports = Runnable.extend({
   //   });
   // },
   incVote: function () {
-    votes = this.get('votes') + 1;
+    var votes = this.get('votes') + 1;
     this.set('votes', votes);
     return this;
   },
   decVote: function () {
-    votes = this.get('votes') - 1;
+    var votes = this.get('votes') - 1;
     this.set('votes', votes);
     return this;
   },

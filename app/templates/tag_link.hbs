@@ -1,2 +1,4 @@
-<img class="display-none" src="/images/channels/{{name}}.png" alt="{{name}}">
+{{#channelHasImage name}}
+<img src="/images/channels/{{name}}.png" alt="{{name}}">
+{{/channelHasImage}}
 <span>{{name}}</span>

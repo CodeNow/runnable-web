@@ -1,7 +1,7 @@
-var global = this;
+
 var utils = module.exports = {
   capitalize: function (str) {
-    return typeof str == 'string' && str.length && str[0].toUpperCase() + str.slice(1);
+    return typeof str === 'string' && str.length && str[0].toUpperCase() + str.slice(1);
   },
   compose : function() {
     var funcs = Array.prototype.slice.apply(arguments);
@@ -18,19 +18,6 @@ var utils = module.exports = {
   },
   andAll: function() {
     return Array.prototype.slice.apply(arguments).reduce(utils.and);
-  },
-  hexToBase64: function(str) {
-    var plus = /\+/g;
-    var slash = /\//g;
-    return btoa(String.fromCharCode.apply(null,
-      str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
-    ).replace(plus,'-').replace(slash,'_');
-  },
-  isHex: function(str) {
-    var strSplit = str.split('');
-    var parseHex = function(v) { return parseInt(v,16); };
-    var parseHexIsFinite = utils.compose(parseHex, isFinite);
-    return strSplit.map(parseHexIsFinite).reduce(utils.and);
   },
   notEmptyString: function(thing) {
     return (thing !== '');
@@ -78,7 +65,6 @@ var utils = module.exports = {
     return str[0].toLowerCase() + str.slice(1);
   },
   camelCase : function(str, capitalize) {
-    console.log(str);
     var regex = /[ -_][a-z]/g;
     var newStr = '';
     var lastIndex = 0;
@@ -108,8 +94,9 @@ var utils = module.exports = {
       console.log(match);
       newStr += (str.substring(lastIndex, index));
       lastIndex = index+1;
-      if (index !== 0)
+      if (index !== 0) {
         match = delimeter+match;
+      }
       newStr += match.toLowerCase();
     });
     newStr += (str.substring(lastIndex));
@@ -168,36 +155,82 @@ var utils = module.exports = {
     return encodeURIComponent(str);
   },
   base64ToHex: function(base64) {
+    if (!utils.exists(base64)) return null;
+    return (isServer) ?
+      utils._server_base64ToHex(base64) :
+      utils._client_base64ToHex(base64);
+  },
+  _client_base64ToHex: function (base64) {
+    console.log('CLIENT!')
     var underscore = /_/g;
-    if (global.isServer) {
-      if (!utils.exists(base64)) return null;
-      var minus = /-/g;
-      return (new Buffer(base64.toString().replace(minus,'+').replace(underscore,'/'), 'base64')).toString('hex');
+    var dash = /-/g;
+    try {
+      base64 = base64.replace(dash,'+').replace(underscore,'/').replace(/[ \r\n]+$/, "");
+      for (var i = 0, bin = atob(base64), hex = []; i < bin.length; ++i) {
+        var tmp = bin.charCodeAt(i).toString(16);
+        if (tmp.length === 1) tmp = "0" + tmp;
+        hex[hex.length] = tmp;
+      }
+      return hex.join("");
+    }
+    catch (err) {
+      return false;
+    }
+  },
+  _server_base64ToHex: function (base64) {
+    console.log('SERVER!')
+    var underscore = /_/g;
+    var dash = /-/g;
+    return (new Buffer(base64.toString().replace(dash,'+').replace(underscore,'/'), 'base64')).toString('hex');
+  },
+  hexToBase64: function (hex) {
+    if (!utils.exists(hex)) return null;
+    return (isServer) ?
+      utils._server_hexToBase64(hex) :
+      utils._client_hexToBase64(hex);
+  },
+  _client_hexToBase64: function(hex) {
+    var plus = /\+/g;
+    var slash = /\//g;
+    return btoa(String.fromCharCode.apply(null,
+      hex.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
+    ).replace(plus,'-').replace(slash,'_');
+  },
+  _server_hexToBase64: function (hex) {
+    var plus = /\+/g;
+    var slash = /\//g;
+    return (new Buffer(hex.toString(), 'hex')).toString('base64').replace(plus,'-').replace(slash,'_');
+  },
+  isObjectId: function (str) {
+    str = str.toString && str.toString();
+    return Boolean(str.match(/^[a-fA-F0-9]{24}$/));
+  },
+  isObjectId64: function (str) {
+    str = str && str.toString && str.toString();
+    return Boolean(str && str.length === 16 && utils.isObjectId(utils.base64ToHex(str)));
+  },
+  tagsToString: function (tags, prelastword) {
+    prelastword = prelastword || ','
+    if (tags.length === 0) {
+      return ''
+    }
+    else if (tags.length === 1) {
+      return tags[0].name
     }
     else {
-      var dash = /-/g;
-      try {
-        for (var i = 0, bin = atob(base64.replace(dash,'+').replace(underscore,'/').replace(/[ \r\n]+$/, "")), hex = []; i < bin.length; ++i) {
-          var tmp = bin.charCodeAt(i).toString(16);
-          if (tmp.length === 1) tmp = "0" + tmp;
-          hex[hex.length] = tmp;
-        }
-        return hex.join("");
+      var maxLength = 14;
+      var last;
+      if (tags.length > maxLength) {
+        tags = tags.slice(0, maxLength);
+        last = 'more';
       }
-      catch (err) {
-        return false;
-      }
+      tags = tags.map(function (tag) {
+        return tag.name;
+      });
+      last = last || tags.pop();
+      tags = tags.join(', ');
+      tags += ' ' + prelastword + ' ' +last;
+      return tags;
     }
-  },
-
-  isObjectId: function (str) {
-    // console.log(str.length)
-    // console.log(Boolean(str.match))
-    // console.log(str.match(/^[a-fA-F0-9]{24}$/))
-    return Boolean(str && str.length === 24 && str.match && str.match(/^[a-fA-F0-9]{24}$/));
-  },
-
-  isObjectId64: function (str) {
-    return Boolean(str && str.length === 16 && utils.isObjectId(utils.base64ToHex(str)));
   }
 };

@@ -16,6 +16,25 @@ module.exports = Base.extend({
   },
   fullPath: function () {
     return utils.pathJoin(this.get('path'), this.get('name'));
+  },
+  moveFromTo: function (fromCollection, toCollection, cb, ctx) {
+    if (ctx) cb = cb.bind(ctx);
+    if (fromCollection == toCollection) {
+      cb();
+    }
+    else {
+      var newPath = toCollection.params.path;
+      var options = utils.cbOpts(saveCallback, this);
+      options.patch = true;
+      this.save({ path:newPath }, options);
+      function saveCallback (err, model) {
+        if (err) { cb(err); } else {
+          fromCollection.remove(model);
+          toCollection.add(model);
+          cb(null, model, toCollection);
+        }
+      }
+    }
   }
 });
 

@@ -13,8 +13,6 @@ module.exports = BaseView.extend({
     'click .btn-cancel': 'escEditMode'
   },
   postRender: function () {
-    console.log('container:', utils.base64ToHex(this.model.id));
-    console.log('container:', this.model.id);
     this.listenTo(this.model, 'change', this.render.bind(this));
   },
   getTemplateData: function () {
@@ -39,21 +37,20 @@ module.exports = BaseView.extend({
     evt.preventDefault();
     evt.stopPropagation();
     var formData = $(evt.currentTarget).serializeObject();
-    var options = utils.successErrorToCB(function (err) {
+    var options = utils.cbOpts(cb, this);
+    this.model.save(formData,  options);
+    function cb (err) {
       if (err) {
         this.showError(err);
         this.setEditMode(true); //reverts back to edit mode
-        this.setTimeout(function () {
-          // after render
-          this.$('.title-input').val(formData.name);
+        setTimeout(function () {
+          this.$('.title-input').val(formData.name); // after render
         }.bind(this), 3);
       }
-    }.bind(this));
-    this.model.save(formData,  options);
-    var self = this;
+    }
     setTimeout(function () {
-      self.setEditMode(false);
-    }, 10);
+      this.setEditMode(false);
+    }.bind(this), 10);
   }
 });
 

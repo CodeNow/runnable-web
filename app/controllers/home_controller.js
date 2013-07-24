@@ -1,10 +1,10 @@
 var _ = require('underscore');
 var utils = require('../utils');
-var global = this;
 var helpers = require('./helpers');
 
 var fetch = helpers.fetch;
 var fetchOwnersFor = helpers.fetchOwnersFor;
+var canonical = helpers.canonical;
 
 module.exports = {
   index: function(params, callback) {
@@ -34,38 +34,80 @@ module.exports = {
         callback(err, results);
       } else {
         fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
-          callback(err, _.extend(results, ownerResults));
+          callback(err, _.extend(results, ownerResults, {
+            page: {
+              title: 'Runnable code examples for JQuery, Codeigniter, NodeJS, Express, Python and more',
+              description: 'Runnable code examples for '+utils.tagsToString(results.channels.toJSON(), 'and'),
+              canonical: canonical.call(self)
+            }
+          }));
         });
       }
     });
   },
 
   jobs: function (params, callback) {
+    var self = this;
     var spec = {
       user: { model:'User', params:{_id: 'me'} }
     };
-    fetch.call(this, spec, callback);
+    fetch.call(this, spec, function (err, results) {
+      callback(err, _.extend(results, {
+        page: {
+          title: 'Runnable Jobs',
+          description: 'Runnable Job Postings and Listings',
+          canonical: canonical.call(self)
+        }
+      }));
+    });
   },
 
   privacy: function (params, callback) {
+    var self = this;
     var spec = {
       user: { model:'User', params:{_id: 'me'} }
     };
-    fetch.call(this, spec, callback);
+    fetch.call(this, spec, function (err, results) {
+      callback(err, _.extend(results, {
+        page: {
+          title: 'Runnable Privacy Policy',
+          description: 'Runnable',
+          canonical: canonical.call(self)
+        }
+      }));
+    });
   },
 
   about: function (params, callback) {
+    var self = this;
     var spec = {
       user: { model:'User', params:{_id: 'me'} }
     };
-    fetch.call(this, spec, callback);
+    fetch.call(this, spec, function (err, results) {
+      callback(err, _.extend(results, {
+        page: {
+          title: 'About Runnable',
+          description: 'About Runnable as a company and its team members',
+          canonical: canonical.call(self)
+        }
+      }))
+    });
   },
 
   providers: function (params, callback) {
+    var self = this;
     var spec = {
       user: { model:'User', params:{_id: 'me'} }
     };
-    fetch.call(this, spec, callback);
+    fetch.call(this, spec, function (err, results) {
+      callback(err, _.extend(results, {
+        page: {
+          title: 'Runnable API Providers Contact',
+          description: 'Runnable API providers contact page',
+          canonical: canonical.call(self)
+        }
+      }));
+    });
   },
 
   logout: function () {
@@ -81,9 +123,18 @@ module.exports = {
   },
 
   blob: function (params, callback) {
+    var self = this;
     var spec = {
       user: { model:'User', params:{_id: 'me'} }
     };
-    fetch.call(this, spec, callback);
+    fetch.call(this, spec, function (err, results) {
+      callback(err, _.extend(results, {
+        page: {
+          title: 'Runnable',
+          description: 'Runnable',
+          canonical: canonical.call(self)
+        }
+      }));
+    });
   }
 };

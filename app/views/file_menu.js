@@ -22,11 +22,9 @@ module.exports = BaseView.extend({
     this.$el.css(_.pick(this.options, 'top', 'left'));
   },
   getTemplateData: function () {
-    return {
-      createOnly: this.options.createOnly,
-      model     : this.model, //fs file or dir
-      isFile    : this.model.isFile()
-    };
+    return _.extend(this.options, {
+      isFile: this.model.isFile()
+    });
   },
   rename: function () {
     this.trigger('rename');
