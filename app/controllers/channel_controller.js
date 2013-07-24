@@ -19,7 +19,8 @@ module.exports = {
         collection : 'Images',
         params     : {
           sort: 'votes',
-          channel: params.channel
+          channel: params.channel,
+          page: (params.page && params.page-1) || 0
         }
       },
       channels: {
