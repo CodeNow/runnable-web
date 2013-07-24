@@ -123,7 +123,7 @@ module.exports = {
     };
     fetch.call(this, spec, function (err, results) {
       if (err) { callback(err); } else {
-        var tags = utils.tagsToString(image.get('tags'), 'or');
+        var tags = utils.tagsToString(results.channels, 'or');
         tags = tags ? ' for '+tags : ''
         callback(null, _.extend(results, {
           page: {
