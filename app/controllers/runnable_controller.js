@@ -100,7 +100,7 @@ module.exports = {
         return _.extend(results, {
           page: {
             title      : image.get('name') + tags,
-            description: ['Runnable Code Example:', image.get('name'), tags].join(' '),
+            description: ['Runnable Code Example: ', image.get('name'), tags].join(''),
             canonical: canonical.call(self)
           }
         });
