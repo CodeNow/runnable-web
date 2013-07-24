@@ -114,7 +114,8 @@ module.exports = Base.extend({
       });
       async.forEach(unsavedFiles, function (file, acb) {
         var options = utils.cbOpts(acb);
-        file.save({}, options);
+        options.patch = true;
+        file.save({content:file.get('content')}, options);
       }, cb);
     }
     else {
