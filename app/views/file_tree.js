@@ -10,10 +10,38 @@ module.exports = BaseView.extend({
   className: 'folder',
   events: {
     'click span.dir:first' : 'toggle',
-    'contextmenu' : 'contextMenu'
+    'contextmenu'          : 'contextMenu',
+    'drop'                 : 'uploadFiles',
+    'dragenter'            : 'noop',
+    'dragover'             : 'noop',
+    'dragexit'             : 'noop'
+  },
+  dontTrackEvents: ['dragenter', 'dragover', 'dragexit'],
+  postHydrate: function () {
+    this.listenTo(this.app.dispatch, 'sync:files', this.sync.bind(this));
+  },
+  getTemplateData: function () {
+    return this.options;
+  },
+  preRender: function () {
+    if (this.model && this.model.get('open')) {
+      this.className = 'folder open';
+    }
+  },
+  postRender: function () {
+    this.$contentsUL = this.$('ul').first();
+    var fileList = _.findWhere(this.childViews, {name:'fs_list'});
+    this.collection = fileList.collection;
+    // droppable
+    // this.$el.droppable({
+    //   greedy: true,
+    //   drop: this.onDrop.bind(this),
+    //   hoverClass: 'drop-hover'
+    // });
+    // file drop
   },
   contextMenu: function (evt) {
-    this.$(document).click();
+    this.$(document).click(); // closes other context menus
     evt.preventDefault(); // prevent browser context menu
     evt.stopPropagation();
     if (this.menu) {
@@ -33,33 +61,26 @@ module.exports = BaseView.extend({
       left : evt.pageX,
       app  : this.app
     });
-    this.listenToOnce(menu, 'rename', model.trigger.bind(model, 'rename'));
-    this.listenToOnce(menu, 'delete', this.del.bind(this, model));
-    if (this.options.editmode) {
-      this.listenToOnce(menu, 'default', this.def.bind(this, model));
-      this.listenToOnce(menu, 'undefault', this.undefault.bind(this, model));
-    }
-    this.listenToOnce(menu, 'delete', this.del.bind(this, model));
-    this.listenToOnce(menu, 'create', this.create.bind(this));
+    this.listenToOnce(menu, 'rename',    model.trigger.bind(model, 'rename'));
+    this.listenToOnce(menu, 'delete',    this.del.bind(this, model));
+    this.listenToOnce(menu, 'default',   this.def.bind(this, model));
+    this.listenToOnce(menu, 'undefault', this.undefault.bind(this, model));
+    this.listenToOnce(menu, 'upload',    this.upload.bind(this, model));
+    this.listenToOnce(menu, 'create',    this.create.bind(this));
+    // stop listening
     this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
   },
   del: function (model) {
-    var options = utils.cbOpts(function (err) {
-      if (err) this.showError(err);
-    }.bind(this));
+    var options = utils.cbOpts(this.showIfError, this);
     model.destroy(options);
   },
   def: function (model) {
-    var options = utils.cbOpts(function (err) {
-      if (err) this.showError(err);
-    }.bind(this));
+    var options = utils.cbOpts(this.showIfError, this);
     options.patch = true;
     model.save({'default':true}, options);
   },
   undefault: function (model) {
-    var options = utils.cbOpts(function (err) {
-      if (err) this.showError(err);
-    }.bind(this));
+    var options = utils.cbOpts(this.showIfError, this);
     options.patch = true;
     model.save({'default':false}, options);
   },
@@ -71,27 +92,14 @@ module.exports = BaseView.extend({
       app:this.app
     });
   },
-  postHydrate: function () {
-    this.listenTo(this.app.dispatch, 'sync:files', this.sync.bind(this));
+  upload: function (model) {
+    this.app.dispatch.trigger('show:upload', model);
   },
-  getTemplateData: function () {
-    return this.options;
-  },
-  preRender: function () {
-    if (this.model && this.model.get('open')) {
-      this.className = 'folder open';
-    }
-  },
-  postRender: function () {
-    this.$contentsUL = this.$('ul').first();
-    var fileList = _.findWhere(this.childViews, {name:'fs_list'});
-    this.collection = fileList.collection;
-    // droppable
-    this.$el.droppable({
-      greedy: true,
-      drop: this.onDrop.bind(this),
-      hoverClass: 'drop-hover'
-    });
+  uploadFiles: function (evt) {
+    debugger;
+    evt.stopPropagation();
+    evt.preventDefault();
+    this.app.dispatch.trigger('drop:files', evt, this.model);
   },
   slideUpHeight: function () {
     this.$el.removeClass('open');
@@ -190,6 +198,10 @@ module.exports = BaseView.extend({
   },
   hideLoader: function () {
     //TODO
+  },
+  noop: function (evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
   }
 });
 

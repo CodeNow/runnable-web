@@ -15,6 +15,7 @@ module.exports = BaseView.extend({
     this.$showFilesButton = this.$('.btn-show-file-browser');
     this.$fileBrowser = this.$('.file-browser');
     this.codeView = _.findWhere(this.childViews, {name:'code'});
+    this.showFiles();
   },
   postHydrate: function () {
     var model = this.model;

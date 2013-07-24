@@ -11,7 +11,8 @@ module.exports = BaseView.extend({
     'click .undefault'   : 'undefault',
     'click .create-file' : 'createFile',
     'click .create-dir'  : 'createDir',
-    'click .download'    : 'downloadFS'
+    'click .upload'      : 'upload',
+    'click .download'    : 'download'
   },
   postInitialize: function () {
     $('body').append(this.$el);
@@ -43,6 +44,12 @@ module.exports = BaseView.extend({
   },
   createDir: function () {
     this.trigger('create', 'folder');
+  },
+  upload: function () {
+    this.trigger('upload');
+  },
+  download: function () {
+    this.alert('TODO');
   },
   remove: function () {
     this.detachWindowEvents();

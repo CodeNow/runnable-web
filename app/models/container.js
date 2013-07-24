@@ -50,6 +50,12 @@ var Container = module.exports = Runnable.extend({
     var container = this.app.fetcher.modelStore.get('container', containerId, true);
     var options = utils.cbOpts(callback, ctx);
     container.destroy(options);
+  },
+  uploadURL: function (dirModel) {
+    var containerId = this.id;
+    return (dirModel && dirModel.isDir()) ?
+      '/api/-/users/me/runnables/'+containerId+'?path='+dirModel.fullPath() :
+      '/api/-/users/me/runnables/'+containerId;
   }
 });
 

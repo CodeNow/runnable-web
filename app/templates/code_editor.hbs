@@ -10,6 +10,7 @@
       <button class="hint--bottom btn-hide-file-browser" data-hint="Hide file browser"><i class="icon-collapse-alt"></i></button>
     </nav>
     <nav id="file-tree" class="file-tree">
+      {{view "upload_files" model=container}}
       <ul>
         {{view "file_tree" model=rootDir editmode=editmode}}
       </ul>

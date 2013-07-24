@@ -14,7 +14,12 @@ module.exports = RendrView.extend({
   },
   autoTrackEvents: true,
   trackEvents: function () {
-    if (!isServer && this.events && this.autoTrackEvents) {
+    var autoTrackEvents = this.autoTrackEvents;
+    if (!isServer && this.events && autoTrackEvents) {
+      var eventsToTrack = Array.isArray(autoTrackEvents) ?
+        autoTrackEvents :
+        Object.keys(this.events);
+      eventsToTrack = _.difference(eventsToTrack, this.dontTrackEvents);
       for (var eventStr in this.events) {
         (function (eventStr) {
           var eventSplit, actionName, eventName, viewName, $el;
@@ -25,7 +30,8 @@ module.exports = RendrView.extend({
           $el.on(eventName, function (evt) {
             var properties = {}; //default
             if (eventName === 'submit') {
-              properties = $(evt.currentTarget).serializeData();
+              properties = $(evt.currentTarget).serializeObject();
+              delete properties.password;
             }
             this.trackEvent(actionName, properties);
           }.bind(this));
@@ -63,7 +69,12 @@ module.exports = RendrView.extend({
     Track.event(this.viewName(), actionName +' Error:'+ err);
   },
   showError: function (err) {
-    alert(err);
+    if (err) {
+      alert(err);
+    }
+  },
+  showIfError: function (err) {
+    if (err) this.showError(err);
   },
   showIfError: function (err) {
     if (err) {
