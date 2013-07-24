@@ -2,7 +2,9 @@ var _ = require('underscore');
 var helpers = require('./helpers');
 var utils = require('../utils');
 var fetch = helpers.fetch;
+
 var fetchOwnersFor = helpers.fetchOwnersFor;
+var canonical = helpers.canonical;
 
 module.exports = {
   index: function(params, callback) {
@@ -52,7 +54,7 @@ module.exports = {
           page: {
             title: "Runnable Code Examples for "+results.channel,
             description: 'Runnable Job Postings and Listings',
-            canonical: "http://runnable.com/"+results.channel
+            canonical: canonical.call(self)
           }
         });
       }

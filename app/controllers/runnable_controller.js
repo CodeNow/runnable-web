@@ -13,6 +13,7 @@ var fetchUserAndImage = helpers.fetchUserAndImage;
 var fetchUserAndContainer = helpers.fetchUserAndContainer;
 var fetchFilesForContainer = helpers.fetchFilesForContainer;
 var createContainerFrom = helpers.createContainerFrom;
+var canonical = helpers.canonical;
 
 module.exports = {
   index: function(params, callback) {
@@ -89,32 +90,25 @@ module.exports = {
           console.log((new Error()).stack);
         }
         if (err) { callback(err); } else {
-          callback(null, addSEO(results));
+          callback(null, addSEO(results, self.req));
         }
       });
       function addSEO (results) {
-        if (!results || !results.image) {
-          return results;
-        }
-        else {
-          var image = results.image;
-          var tags = utils.tagsToString(image.get('tags'));
-          if (tags !== '') {
-            tags = ' for '+tags;
+        var image = results.image;
+        var tags = utils.tagsToString(image.get('tags'), 'and');
+        tags = tags ? ' for '+tags : ''
+        return _.extend(results, {
+          page: {
+            title      : image.get('name') + tags,
+            description: ['Runnable Code Example:', image.get('name'), tags].join(' '),
+            canonical: canonical.call(self)
           }
-          var description = ['Runnable Code Example: ', image.get('name'), tags].join('');
-          return _.extend(results, {
-            page: {
-              title: image.get('name') + tags,
-              description: description,
-              canonical: 'http://runnable.com'
-            }
-          });
-        }
+        });
       }
     }
   },
   'new': function (params, callback) {
+    var self = this;
     var spec = {
       user    : {
         model  : 'User',
@@ -129,16 +123,13 @@ module.exports = {
     };
     fetch.call(this, spec, function (err, results) {
       if (err) { callback(err); } else {
-        var tags = utils.tagsToString(results.channels, 'or');
-        if (tags !== '') {
-          tags = 'for '+tags;
-        }
-        var description = 'Create a new Runnable Code Example for' + tags;
+        var tags = utils.tagsToString(image.get('tags'), 'or');
+        tags = tags ? ' for '+tags : ''
         callback(null, _.extend(results, {
           page: {
             title: 'Create a new runnable for JQuery, Codeigniter, NodeJS, Express and more',
-            description: description,
-            canonical: 'http://runnable.com/'
+            description: 'Create a new Runnable Code Example' + tags,
+            canonical: canonical.call(self)
           }
         }));
       }
@@ -158,6 +149,7 @@ module.exports = {
     ], callback);
   },
   output: function (params, callback) {
+    var self = this;
     fetchUserAndContainer.call(this, params._id, function (err, results) {
       if (err) { callback(err); } else {
         var container = results.container;
@@ -165,7 +157,7 @@ module.exports = {
           page: {
             title: 'Output: '+container.get('name'),
             description: 'Web and console output for '+container.get('name'),
-            canonical: 'http://runnable.com/'
+            canonical: canonical.call(self)
           }
         }));
       }
@@ -194,7 +186,7 @@ module.exports = {
             page: {
               title: 'Unpublished: '+container.get('name'),
               description: 'Unpublished Runnable Example:' + container.get('name'),
-              canonical: 'http://runnable.com/'
+              canonical: canonical.call(self)
             }
           }));
         });

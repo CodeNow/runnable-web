@@ -210,7 +210,7 @@ var utils = module.exports = {
     return Boolean(str && str.length === 16 && utils.isObjectId(utils.base64ToHex(str)));
   },
   tagsToString: function (tags, prelastword) {
-    prelastword = prelastword || 'and'
+    prelastword = prelastword || ','
     if (tags.length === 0) {
       return ''
     }
@@ -218,12 +218,18 @@ var utils = module.exports = {
       return tags[0].name
     }
     else {
+      var maxLength = 14;
+      var last;
+      if (tags.length > maxLength) {
+        tags = tags.slice(0, maxLength);
+        last = 'more';
+      }
       tags = tags.map(function (tag) {
         return tag.name;
       });
-      var last = tags.pop();
-      tags.join(', ');
-      tags += prelastword + ' ' +last;
+      last = last || tags.pop();
+      tags = tags.join(', ');
+      tags += ' ' + prelastword + ' ' +last;
       return tags;
     }
   }

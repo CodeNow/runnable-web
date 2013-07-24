@@ -78,10 +78,10 @@ Router.prototype.updateMetaInfo = function (meta) {
     $('title').html(meta.title);
   }
   if (meta.description) {
-    $('meta[name=description]').html(meta.description);
+    $('meta[name=description]').attr('content', meta.description);
   }
   if (meta.canonical) {
-    $('link[rel=canonical]').html(meta.canonical);
+    $('link[rel=canonical]').attr('href', meta.canonical);
   }
 };
 
