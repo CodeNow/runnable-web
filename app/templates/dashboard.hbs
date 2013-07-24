@@ -1,51 +1,52 @@
-<form>
-  <div class="tab-container">
-    <nav class="tab-nav">
-      <a href="/me/published"{{#if true }} class="selected"{{/if}}>Published</a>
-      {{#if permissions.canEdit}} <!-- not quite right, but close enough -->
-      <a href="/me/drafts"{{#if false }} class="selected"{{/if}}>Drafts</a>
-      {{/if}}
-    </nav>
-    <div class="tab-content">
-      <div class="tab-pane">
-        <table class="data">
-          <thead>
-            <tr>
-              <th><!--name--></th>
-              <th scope="col">Votes</th>
-              <th scope="col">Views</th>
-              <th scope="col">Runs</th>
-              <th scope="col">Copies</th>
-              <th scope="col">Downloads</th>
-              <th><!--checkbox--></th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <td colspan="7" class="alignright">
-                <select>
-                  <option>Actions...</option>
-                  <option>Unpublish</option>
-                  <option>Delete</option>
-                </select>
-              </td>
-            </tr>
-          </tfoot>
-          <tbody>
-            {{#each collection.models}}
-              {{view "dashboard_item_view" model=.}}
-            {{/each}}
-          </tbody>
-        </table>
+<div class="container">
+  <h1>Dashboard</h1>
+  <form>
+    <div class="tab-container">
+      <nav class="tab-nav">
+        <a href="/me/published">Published</a>
+        <a href="/me/drafts">Drafts</a>
+      </nav>
+      <div class="tab-content">
+        <div class="tab-pane">
+          <table class="data">
+            <thead>
+              <tr>
+                <th><!--name--></th>
+                <th scope="col">Votes</th>
+                <th scope="col">Views</th>
+                <th scope="col">Runs</th>
+                <th scope="col">Copies</th>
+                <th scope="col">Downloads</th>
+                <th><!--checkbox--></th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan="7" class="alignright">
+                  <select>
+                    <option>Actions...</option>
+                    <option>Unpublish</option>
+                    <option>Delete</option>
+                  </select>
+                </td>
+              </tr>
+            </tfoot>
+            <tbody>
+              {{#each collection.models}}
+                {{view "dashboard_item_view" model=.}}
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
-</form>
-<nav class="pagination">
-  {{#if prevLink}}
-    <a href="{{prevLink}}" class="previous"><i class="icon-chevron-left"></i> Previous page</a>
-  {{/if}}
-  {{#if nextLink}}
-    <a href="{{nextLink}}" class="next">Next page <i class="icon-chevron-right"></i></a>
-  {{/if}}
-</nav>
+  </form>
+  <nav class="pagination">
+    {{#if prevLink}}
+      <a href="{{prevLink}}" class="previous"><i class="icon-chevron-left"></i> Previous page</a>
+    {{/if}}
+    {{#if nextLink}}
+      <a href="{{nextLink}}" class="next">Next page <i class="icon-chevron-right"></i></a>
+    {{/if}}
+  </nav>
+</div>

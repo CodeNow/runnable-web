@@ -75,5 +75,8 @@ module.exports = RendrView.extend({
   },
   viewName: function () {
     return _str.humanize(this.$el.attr('data-view'));
+  },
+  getTemplateData: function () {
+    return this.options;
   }
 });
