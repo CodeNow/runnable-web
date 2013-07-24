@@ -117,14 +117,15 @@ module.exports = BaseView.extend({
   sync: function () {
     if (this.model.get('open')) {
       var contents = this.collection;
-      var options = utils.cbOpts(cb, this);
+      var options = _.extend(utils.cbOpts(cb, this), {
+        data: contents.params,   // VERY IMPORTANT! - ask TJ.
+        silent: true             // silent until all the models are for sure in store..
+      });
       this.showLoader();
       contents.fetch(options);
-      function cb () {
+      function cb (err) {
         this.hideLoader();
-        if (err) {
-          this.showError();
-        }
+        this.showIfError(err);
       }
     }
   },

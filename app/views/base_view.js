@@ -65,6 +65,11 @@ module.exports = RendrView.extend({
   showError: function (err) {
     alert(err);
   },
+  showIfError: function (err) {
+    if (err) {
+      this.showError(err);
+    }
+  },
   disable: function (bool) {
     if (bool) {
       this.$el.attr('disabled', 'disabled');
