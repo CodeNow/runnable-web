@@ -66,6 +66,8 @@
 #web {
 	height: 80%;
 	width : 100%;
+	position:absolute;
+	top:0;
 	//padding-bottom:150px; // Space for the output log
 	overflow: hidden;
 	@include box-sizing(border-box);
