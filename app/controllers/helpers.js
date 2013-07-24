@@ -16,11 +16,20 @@ module.exports = {
   'fetchUserAndImage':      fetchUserAndImage,
   'fetchUserAndContainer':  fetchUserAndContainer,
   'fetchFilesForContainer': fetchFilesForContainer,
-  'createContainerFrom':    createContainerFrom
+  'createContainerFrom':    createContainerFrom,
+  'canonical':              canonical
 };
 
 // spec, [options], callback
 // CONTEXT must be controller
+function canonical () {
+  if (isServer) {
+    return 'http://runnable.com' + ((this.app && this.app.req && this.app.req.url) || '');
+  }
+  else {
+    return 'http://runnable.com/' + Backbone.history.fragment;
+  }
+}
 function fetch (spec, options, callback) {
   var app = this.app;
   if (typeof options == 'function') {

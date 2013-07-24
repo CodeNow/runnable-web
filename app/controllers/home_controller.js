@@ -4,6 +4,7 @@ var helpers = require('./helpers');
 
 var fetch = helpers.fetch;
 var fetchOwnersFor = helpers.fetchOwnersFor;
+var canonical = helpers.canonical;
 
 module.exports = {
   index: function(params, callback) {
@@ -35,9 +36,9 @@ module.exports = {
         fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
           callback(err, _.extend(results, ownerResults, {
             page: {
-              title: 'Runnable code examples for JQuery, Codeigniter, NodeJS, Express and more',
-              description: 'Runnable code examples for '+results.channels.toJSON().join(', ')+', and more',
-              canonical: 'http://runnable.com/'
+              title: 'Runnable code examples for JQuery, Codeigniter, NodeJS, Express, Python and more',
+              description: 'Runnable code examples for '+utils.tagsToString(results.channels.toJSON(), 'and'),
+              canonical: canonical.call(self)
             }
           }));
         });
@@ -46,6 +47,7 @@ module.exports = {
   },
 
   jobs: function (params, callback) {
+    var self = this;
     var spec = {
       user: { model:'User', params:{_id: 'me'} }
     };
@@ -54,7 +56,7 @@ module.exports = {
         page: {
           title: 'Runnable Jobs',
           description: 'Runnable Job Postings and Listings',
-          canonical: 'http://runnable.com/jobs'
+          canonical: canonical.call(self)
         }
       }));
     });
@@ -69,13 +71,14 @@ module.exports = {
         page: {
           title: 'Runnable Privacy Policy',
           description: 'Runnable',
-          canonical: 'http://runnable.com/privacy'
+          canonical: canonical.call(self)
         }
       }));
     });
   },
 
   about: function (params, callback) {
+    var self = this;
     var spec = {
       user: { model:'User', params:{_id: 'me'} }
     };
@@ -84,13 +87,14 @@ module.exports = {
         page: {
           title: 'About Runnable',
           description: 'About Runnable as a company and its team members',
-          canonical: 'http://runnable.com/about'
+          canonical: canonical.call(self)
         }
       }))
     });
   },
 
   providers: function (params, callback) {
+    var self = this;
     var spec = {
       user: { model:'User', params:{_id: 'me'} }
     };
@@ -99,7 +103,7 @@ module.exports = {
         page: {
           title: 'Runnable API Providers Contact',
           description: 'Runnable API providers contact page',
-          canonical: 'http://runnable.com/providers'
+          canonical: canonical.call(self)
         }
       }));
     });
@@ -118,6 +122,7 @@ module.exports = {
   },
 
   blob: function (params, callback) {
+    var self = this;
     var spec = {
       user: { model:'User', params:{_id: 'me'} }
     };
@@ -126,7 +131,7 @@ module.exports = {
         page: {
           title: 'Runnable',
           description: 'Runnable',
-          canonical: 'http://runnable.com/blob'
+          canonical: canonical.call(self)
         }
       }));
     });
