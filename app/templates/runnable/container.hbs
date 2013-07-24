@@ -22,15 +22,11 @@
       <section class="module display-none">
         {{view "runnable_owner" model=container}}
       </section>
-      {{#if container.attributes.tags}}
-      {{#if container.attributes.tags.length}}
       <section class="module tags">
         <h3>Tags</h3>
         {{view "runnable_tags" model=container editmode=true}}
         {{view "runnable_new_tag_form" model=container}}
       </section>
-      {{/if}}
-      {{/if}}
     </aside>
   </div>
 </section>
