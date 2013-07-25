@@ -116,9 +116,12 @@
 	right:0;
 	bottom:0;
 	width:25%;
+	padding-top:25px;
 	@include box-sizing(border-box);
+	@include box-shadow(-1px 0 2px rgba(0,0,0,.1));
+	border-left:1px solid rgba(0,0,0,.1);
 	&.drop-hover{
-		border:1px solid rgba(0,176,229,.3);
+		border:1px solid $primary-color;
 	}
 }
 
@@ -148,15 +151,13 @@ $tree-padding:15px;
 	list-style:none;
 	margin:0;
 	padding:0;
-	padding-top:25px;
+	//padding-top:25px;
 	position:relative;
 	z-index:4;
 	overflow-x:hidden;
 	overflow-y:auto;
 	height:100%;
 	@include box-sizing(border-box);
-	@include box-shadow(-1px 0 2px rgba(0,0,0,.1));
-	border-left:1px solid rgba(0,0,0,.1);
 	ul,ol{
 		list-style:none;
 		margin:0;
@@ -247,7 +248,9 @@ $tree-padding:15px;
 			// @include border-radius(2px);
 			color:#fff;
 			background:rgba($primary-color,.8);
-
+			// @include border-radius(25px);
+			margin-left:-$tree-padding;
+			padding-left:$tree-padding;
 		}
 	}
 	li.selected{
@@ -306,6 +309,16 @@ nav.file-tree > ul > li > span{
 // Add padding below for right click menu
 nav.file-tree > ul > li:first-child{
 	padding-bottom: 100px;
+}
+
+// File upload
+.file-upload{
+	margin:0 10px;
+	padding:5px;
+	background:#f9df8b;
+	border:1px dashed #ffab4b;
+	text-align:center;
+	color:#b48045;
 }
 
 // Context menu (right click)
