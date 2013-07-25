@@ -24,8 +24,7 @@ var frontendScripts = [
   'assets/vendor/*.js',
   'assets/vendor/jquery-ui/js/jquery-1.9.1.js',
   'assets/vendor/jquery-ui/js/jquery-ui-1.10.3.custom.js',
-  'assets/bower/frontend-track/frontend-track.js',
-  'assets/vendor/dropzone/dropzone.js'
+  'assets/bower/frontend-track/frontend-track.js'
 ]
 .concat(aceScripts);
 
@@ -147,7 +146,7 @@ module.exports = function(grunt) {
         }
       },
       stylesheets: {
-        files: _.without([sassDir + '/**/*.{scss,sass}'].concat(minCSS), 'compassCSS'),
+        files: _.without([sassDir + '/**/*.{scss,sass}'].concat(minCSS), compassCSS),
         tasks: ['compass:server', 'concat:dev'],
         options: {
           interrupt: true

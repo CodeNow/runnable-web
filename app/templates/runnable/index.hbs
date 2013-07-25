@@ -1,11 +1,11 @@
 {{view "header_view" model=user context=.}}
 <section class="content">
   <div class="container">
+    <section class="title">
+      {{view "vote_button" model=image}}
+      {{view "runnable_title" model=image}}
+    </section>
     <article class="span9">
-      <section class="title">
-        {{view "vote_button" model=image}}
-        {{view "runnable_title" model=image}}
-      </section>
       <section class="actions">
         {{view "run_button" model=container collection=defaultFiles}}
         {{#if permissions.edit}}
