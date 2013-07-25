@@ -24,8 +24,11 @@ var User = module.exports = Base.extend({
       url: '/users/' + this.id + '/votes'
     });
   },
-  isRegistered : function(){
+  isRegistered : function (){
     return this.get('permission_level') >= 1;
+  },
+  isVerified : function () {
+    return this.get('permission_level') >= 2;
   },
   isModerator : function () {
     return this.get('permission_level') >= 5;

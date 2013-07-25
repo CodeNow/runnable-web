@@ -6,7 +6,9 @@
       <section class="title">
         {{view "runnable_title" model=container}}
       </section>
+      {{#if isVerified}}
       {{view "publish_warning" model=image containerid=container.id}}
+      {{/if}}
       <section class="actions">
         {{view "run_button" model=container}}
         {{view "save_button" collection=defaultFiles}}
@@ -24,8 +26,10 @@
       </section>
       <section class="module tags">
         <h3>Tags</h3>
-        {{view "runnable_tags" model=container editmode=true}}
+        {{view "runnable_tags" model=container editmode=isVerified}}
+        {{#if isVerified}}
         {{view "runnable_new_tag_form" model=container}}
+        {{/if}}
       </section>
     </aside>
   </div>

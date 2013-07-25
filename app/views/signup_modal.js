@@ -7,10 +7,13 @@ module.exports = ModalView.extend({
   postInitialize: function (options) {
     this.header = this.options.header || this.defaultHeader;
   },
-  events: _.extend(Super.events, {
+  events: {
+    'click .modal'      : 'stopPropagation',
+    'click'             : 'close', // closes modal on bg click
+    'click .btn-close'  : 'close',
     'click .login-link': 'openLogin',
     'submit form'      : 'register'
-  }),
+  },
   postRender: function () {
     Super.postRender.apply(this, arguments);
   },
@@ -26,7 +29,7 @@ module.exports = ModalView.extend({
     loginModal.open();
     return false; // stop link
   },
-  register: function (evt) {
+  register: function (evt) { 
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
     if (!formData.username) {
