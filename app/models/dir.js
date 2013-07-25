@@ -34,7 +34,12 @@ module.exports = Base.extend({
     // TODO add support for directories
     // }
     // else {
-    this._uploadFile(urlRoot, fileItem, callback);
+    if (fileItem.size > 5000000) {
+      callback('Sorry "'+fileItem.name+'" is too big (5MB max).');
+    }
+    else {
+      this._uploadFile(urlRoot, fileItem, callback);
+    }
     // }
   },
   _uploadFile: function (urlRoot, file, callback) {

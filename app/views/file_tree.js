@@ -16,7 +16,7 @@ module.exports = BaseView.extend({
     'dragover'             : 'over', //necessary else drop wont work
     'dragleave'            : 'leave'
   },
-  dontTrackEvents: ['dragenter', 'dragend', 'dragover', 'dragleave'],
+  dontTrackEvents: ['dragover', 'dragleave'],
   postHydrate: function () {
     this.listenTo(this.app.dispatch, 'sync:files', this.sync.bind(this));
   },
@@ -35,7 +35,7 @@ module.exports = BaseView.extend({
     // droppable
     this.$el.droppable({
       greedy: true,
-      drop: this.onDrop.bind(this),
+      drop: this.moveDrop.bind(this),
       hoverClass: 'drop-hover'
     });
   },
@@ -114,7 +114,6 @@ module.exports = BaseView.extend({
         var urlRoot = _.result(contents, 'url');
         dir.uploadFile(urlRoot, fileItem, function (err, fileModel) {
           if (!err) contents.add(fileModel);
-          if (_.isArray(fileModel)) fileModel.forEach(contents.add.bind(contents));
           cb(err);
         });
       }
@@ -193,7 +192,7 @@ module.exports = BaseView.extend({
     this.model.set('open', false);
     this.slideUpHeight();
   },
-  onDrop: function (evt, ui) {
+  moveDrop: function (evt, ui) {
     evt.preventDefault();
     evt.stopPropagation();
     this.$el.removeClass('drop-hover');

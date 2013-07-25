@@ -76,6 +76,7 @@ module.exports = BaseView.extend({
           !confirm('This file is huge are you sure you want to open it (might crash or take a looong time)?')
         ) {
           file.trigger('close:file', file);
+          this.file = null;
         }
         else {
           session = file.editorSession = ace.createEditSession(file.get('content'));
