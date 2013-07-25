@@ -21,9 +21,10 @@ module.exports = BaseView.extend({
   },
   onChangeUnsaved: function (bool) {
     if (bool)
-      this.$el.css('color', 'blue');
+      this.$el.removeAttr('disabled');      
     else
-      this.$el.css('color', 'gray');
+      this.$el.attr('disabled','disabled');      
+
   }
  });
 
