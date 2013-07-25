@@ -23,17 +23,26 @@ module.exports = Base.extend({
   moveFromTo: function (fromCollection, toCollection, cb, ctx) {
     if (ctx) cb = cb.bind(ctx);
     if (fromCollection == toCollection) {
-      cb();
+      cb(); // do nothing moving from/to same dir
+    }
+    else if (toCollection.findWhere({name:this.get('name')})) {
+      cb(this.get('name')+' already exists in '+toCollection.params.path);
     }
     else {
       var newPath = toCollection.params.path;
       var options = utils.cbOpts(saveCallback, this);
       options.patch = true;
       this.save({ path:newPath }, options);
+      // assume success
+      fromCollection.remove(this);
+      toCollection.add(this);
       function saveCallback (err, model) {
-        if (err) { cb(err); } else {
-          fromCollection.remove(model);
-          toCollection.add(model);
+        if (err) {
+          // rollback if error
+          toCollection.remove(model);
+          fromCollection.add(model);
+          cb(err);
+        } else {
           cb(null, model, toCollection);
         }
       }
