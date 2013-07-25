@@ -11,7 +11,7 @@ module.exports = BaseView.extend({
     }
   },
   postHydrate: function () {
-    this.listenTo(this.collection, 'add remove reset sync', this.render.bind());
+    this.listenTo(this.collection, 'add remove reset sync', this.render.bind(this));
   },
   getTemplateData: function () {
     return this.options;
