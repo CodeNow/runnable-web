@@ -28,7 +28,8 @@ Router.prototype.postInitialize = function() {
     'json',
     'lua',
     'php',
-    'xquery'
+    'xquery',
+    'css'
   ]
   .forEach(function (worker) {
     config.setModuleUrl(
