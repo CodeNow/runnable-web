@@ -31,6 +31,10 @@ module.exports = BaseView.extend({
     var openFiles = this.collection;
     this.setFile(openFiles.selectedFile());
     this.listenTo(openFiles, 'change:selected', this.changeSelected.bind(this));
+    //debounce events
+    this.adjustHeightToContents = _.debounce(this.adjustHeightToContents, 100, true);
+    this.onScrollLeft = _.debounce(this.onScrollLeft, 200, true);
+    this.onScrollTop = _.debounce(this.onScrollTop, 200, true);
   },
   changeSelected: function (model, selected) {
     if (selected) {
@@ -68,14 +72,22 @@ module.exports = BaseView.extend({
     else {
       // init file session
       var createSession = function () {
-        session = file.editorSession = ace.createEditSession(file.get('content'));
-        editor.setSession(session);
-        session.setMode(this.getMode(file.get('name')));
-        session.setTabSize(2);
-        session.setUseSoftTabs(true);
-        this.listenTo(session, 'change',           this.onEdit.bind(this));
-        this.listenTo(session, 'changeScrollLeft', this.onScrollLeft.bind(this));
-        this.listenTo(session, 'changeScrollTop',  this.onScrollTop.bind(this));
+        if (file.get('content').length > 10000 &&
+          !confirm('This file is huge are you sure you want to open it (might crash or take a looong time)?')
+        ) {
+          file.trigger('close:file', file);
+          this.file = null;
+        }
+        else {
+          session = file.editorSession = ace.createEditSession(file.get('content'));
+          editor.setSession(session);
+          session.setMode(this.getMode(file.get('name')));
+          session.setTabSize(2);
+          session.setUseSoftTabs(true);
+          this.listenTo(session, 'change',           this.onEdit.bind(this));
+          this.listenTo(session, 'changeScrollLeft', this.onScrollLeft.bind(this));
+          this.listenTo(session, 'changeScrollTop',  this.onScrollTop.bind(this));
+        }
       }.bind(this);
       // fetch file if unfetched -- maybe change this to always?
       if (file.unFetched()) {
@@ -115,7 +127,7 @@ module.exports = BaseView.extend({
     return (new mode.Mode());
   },
   onEdit: function () {
-    _.debounce(this.adjustHeightToContents(), 100, true);
+    this.adjustHeightToContents();
     var value = this.editor.getValue();
     this.file.set('content', value);
   },

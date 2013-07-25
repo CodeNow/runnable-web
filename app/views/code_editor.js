@@ -9,12 +9,14 @@ module.exports = BaseView.extend({
   className:"code-container",
   events: {
     'click .btn-show-file-browser' : 'showFiles',
-    'click .btn-hide-file-browser' : 'hideFiles'
+    'click .btn-hide-file-browser' : 'hideFiles',
+    'click .btn-file-options'      : 'showFileMenu'
   },
   postRender: function () {
     this.$showFilesButton = this.$('.btn-show-file-browser');
     this.$fileBrowser = this.$('.file-browser');
     this.codeView = _.findWhere(this.childViews, {name:'code'});
+    this.showFiles();
   },
   postHydrate: function () {
     var model = this.model;
@@ -87,6 +89,10 @@ module.exports = BaseView.extend({
     this.$showFilesButton.show();
     this.$fileBrowser.hide();
     this.codeView.$el.removeClass('with-file-browser');
+  },
+  showFileMenu: function (evt) {
+    var fileRoot = _.findWhere(this.childViews, {name:'file_tree'});
+    fileRoot.contextMenu(evt);
   },
   getTemplateData: function () {
     // only rendered once.. passes through context

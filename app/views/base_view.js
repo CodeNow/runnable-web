@@ -14,23 +14,27 @@ module.exports = RendrView.extend({
   },
   autoTrackEvents: true,
   trackEvents: function () {
-    if (!isServer && this.events && this.autoTrackEvents) {
-      for (var eventStr in this.events) {
-        (function (eventStr) {
-          var eventSplit, actionName, eventName, viewName, $el;
-          eventSplit = eventStr.split(' ');
-          actionName = this.events[eventStr];
-          eventName = eventSplit[0];
-          $el  = eventSplit[1] ? this.$(eventSplit[1]) : this.$el;
-          $el.on(eventName, function (evt) {
-            var properties = {}; //default
-            if (eventName === 'submit') {
-              properties = $(evt.currentTarget).serializeData();
-            }
-            this.trackEvent(actionName, properties);
-          }.bind(this));
-        }).call(this, eventStr);
-      }
+    var autoTrackEvents = this.autoTrackEvents;
+    if (!isServer && this.events && autoTrackEvents) {
+      var eventsToTrack = Array.isArray(autoTrackEvents) ?
+        autoTrackEvents :
+        Object.keys(this.events);
+      eventsToTrack = _.difference(eventsToTrack, this.dontTrackEvents);
+      eventsToTrack.forEach(function (eventStr) {
+        var eventSplit, actionName, eventName, viewName, $el;
+        eventSplit = eventStr.split(' ');
+        actionName = this.events[eventStr];
+        eventName = eventSplit[0];
+        $el  = eventSplit[1] ? this.$(eventSplit[1]) : this.$el;
+        $el.on(eventName, function (evt) {
+          var properties = {}; //default
+          if (eventName === 'submit') {
+            properties = $(evt.currentTarget).serializeObject();
+            delete properties.password;
+          }
+          this.trackEvent(actionName, properties);
+        }.bind(this));
+      }, this);
     }
   },
   trackEvent: function (actionName, properties) {
@@ -62,8 +66,16 @@ module.exports = RendrView.extend({
     actionName = _str.humanize(actionName);
     Track.event(this.viewName(), actionName +' Error:'+ err);
   },
+  showMessage: function (str) {
+    alert(str)
+  },
   showError: function (err) {
-    alert(err);
+    if (err) {
+      alert(err);
+    }
+  },
+  showIfError: function (err) {
+    if (err) this.showError(err);
   },
   showIfError: function (err) {
     if (err) {

@@ -17,6 +17,7 @@ module.exports = Base.extend({
     this.listenTo(this, 'change:selected', this.onChangeSelected.bind(this));
     this.listenTo(this, 'unsaved:content', this.onUnsavedContent.bind(this));
     this.listenTo(this, 'add', this.onAdd.bind(this));
+    this.listenTo(this, 'close:file', this.remove.bind(this));
     // dispatch is clientside only beware!
     var dispatch = this.app.dispatch;
     if (dispatch) {
@@ -54,6 +55,9 @@ module.exports = Base.extend({
         this.add(file);
       }
     }
+  },
+  closeFile: function (file) {
+    this.remove(file);
   },
   onChangeSelected: function (selectedFile, selected) {
     // unselect other files when new file selected

@@ -3,6 +3,7 @@ var _ = require('underscore');
 var FileMenu = require('./file_menu');
 var NewFileModal = require('./new_file_modal');
 var utils = require('../utils');
+var async = require('async');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
@@ -10,10 +11,36 @@ module.exports = BaseView.extend({
   className: 'folder',
   events: {
     'click span.dir:first' : 'toggle',
-    'contextmenu' : 'contextMenu'
+    'contextmenu'          : 'contextMenu',
+    'drop'                 : 'uploadFiles',
+    'dragover'             : 'over', //necessary else drop wont work
+    'dragleave'            : 'leave'
+  },
+  dontTrackEvents: ['dragover', 'dragleave'],
+  postHydrate: function () {
+    this.listenTo(this.app.dispatch, 'sync:files', this.sync.bind(this));
+  },
+  getTemplateData: function () {
+    return this.options;
+  },
+  preRender: function () {
+    if (this.model && this.model.get('open')) {
+      this.className = 'folder open';
+    }
+  },
+  postRender: function () {
+    this.$contentsUL = this.$('ul').first();
+    var fileList = _.findWhere(this.childViews, {name:'fs_list'});
+    this.collection = fileList.collection;
+    // droppable
+    this.$el.droppable({
+      greedy: true,
+      drop: this.moveDrop.bind(this),
+      hoverClass: 'drop-hover'
+    });
   },
   contextMenu: function (evt) {
-    this.$(document).click();
+    this.$(document).click(); // closes other context menus
     evt.preventDefault(); // prevent browser context menu
     evt.stopPropagation();
     if (this.menu) {
@@ -33,65 +60,68 @@ module.exports = BaseView.extend({
       left : evt.pageX,
       app  : this.app
     });
-    this.listenToOnce(menu, 'rename', model.trigger.bind(model, 'rename'));
-    this.listenToOnce(menu, 'delete', this.del.bind(this, model));
-    if (this.options.editmode) {
-      this.listenToOnce(menu, 'default', this.def.bind(this, model));
-      this.listenToOnce(menu, 'undefault', this.undefault.bind(this, model));
-    }
-    this.listenToOnce(menu, 'delete', this.del.bind(this, model));
-    this.listenToOnce(menu, 'create', this.create.bind(this));
+    this.listenToOnce(menu, 'rename',    model.trigger.bind(model, 'rename'));
+    this.listenToOnce(menu, 'delete',    this.del.bind(this, model));
+    this.listenToOnce(menu, 'default',   this.def.bind(this, model));
+    this.listenToOnce(menu, 'undefault', this.undefault.bind(this, model));
+    this.listenToOnce(menu, 'upload',    this.upload.bind(this, model));
+    this.listenToOnce(menu, 'create',    this.create.bind(this));
+    // stop listening
     this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
   },
   del: function (model) {
-    var options = utils.cbOpts(function (err) {
-      if (err) this.showError(err);
-    }.bind(this));
+    var options = utils.cbOpts(this.showIfError, this);
     model.destroy(options);
   },
   def: function (model) {
-    var options = utils.cbOpts(function (err) {
-      if (err) this.showError(err);
-    }.bind(this));
+    var options = utils.cbOpts(this.showIfError, this);
     options.patch = true;
     model.save({'default':true}, options);
   },
   undefault: function (model) {
-    var options = utils.cbOpts(function (err) {
-      if (err) this.showError(err);
-    }.bind(this));
+    var options = utils.cbOpts(this.showIfError, this);
     options.patch = true;
     model.save({'default':false}, options);
   },
   create: function (type) {
-    var collection = _.findWhere(this.childViews, {name:'fs_list'}).collection;
+    var collection = this.collection;
     this.newFileModal = new NewFileModal({
       collection : collection,
       type: type,
       app:this.app
     });
   },
-  postHydrate: function () {
-    this.listenTo(this.app.dispatch, 'sync:files', this.sync.bind(this));
+  upload: function () {
+    this.showMessage('Upload files by dragging them into the file tree.')
   },
-  getTemplateData: function () {
-    return this.options;
-  },
-  preRender: function () {
-    if (this.model && this.model.get('open')) {
-      this.className = 'folder open';
+  uploadFiles: function (evt) {
+    if (!evt.originalEvent.dataTransfer) return; // for move drag and drop
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt = evt.originalEvent;
+    var files = evt.dataTransfer.files;
+    if (!files) {
+      // no browser support
     }
-  },
-  postRender: function () {
-    this.$contentsUL = this.$('ul').first();
-    var fileList = _.findWhere(this.childViews, {name:'fs_list'});
-    this.collection = fileList.collection;
-    // droppable
-    this.$el.droppable({
-      greedy: true,
-      drop: this.onDrop.bind(this),
-      hoverClass: 'drop-hover'
-    });
+    else {
+      this.dragClassOff(evt);
+      var contents = this.collection;
+      var dir = this.model;
+      var self = this;
+      async.forEach(files, eachFile, allDone);
+      function eachFile (fileItem, cb) {
+        self.app.dispatch.trigger('show:upload');
+        var urlRoot = _.result(contents, 'url');
+        dir.uploadFile(urlRoot, fileItem, function (err, fileModel) {
+          if (!err) contents.add(fileModel);
+          cb(err);
+        });
+      }
+      function allDone (err) {
+        self.showIfError(err);
+        self.app.dispatch.trigger('hide:upload');
+      }
+    }
   },
   slideUpHeight: function () {
     this.$el.removeClass('open');
@@ -162,7 +192,7 @@ module.exports = BaseView.extend({
     this.model.set('open', false);
     this.slideUpHeight();
   },
-  onDrop: function (evt, ui) {
+  moveDrop: function (evt, ui) {
     evt.preventDefault();
     evt.stopPropagation();
     this.$el.removeClass('drop-hover');
@@ -190,6 +220,36 @@ module.exports = BaseView.extend({
   },
   hideLoader: function () {
     //TODO
+  },
+  over: function (evt) {
+    this.dragClass(evt);
+  },
+  leave: function (evt) {
+    this.dragClassOff(evt)
+  },
+  dragClass: function (evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    if (this.model.isRootDir()) {
+      $('div.file-browser').addClass('drop-hover');
+    }
+    else {
+      this.$el.addClass('drop-hover');
+    }
+  },
+  dragClassOff: function (evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    if (this.model.isRootDir()) {
+      $('div.file-browser').removeClass('drop-hover');
+    }
+    else {
+      this.$el.removeClass('drop-hover');
+    }
+  },
+  noop: function (evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
   }
 });
 

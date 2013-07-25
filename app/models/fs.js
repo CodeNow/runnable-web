@@ -5,6 +5,9 @@ var Super = Base.prototype;
 
 // gets url from collection
 module.exports = Base.extend({
+  virtuals: {
+    'fullPath' : 'fullPath'
+  },
   isFile: function () {
     return (this.get('type') === 'file' || !this.get('dir'));
   },

@@ -117,6 +117,9 @@
 	bottom:0;
 	width:25%;
 	@include box-sizing(border-box);
+	&.drop-hover{
+		border:1px solid rgba(0,176,229,.3);
+	}
 }
 
 .file-browser-toolbar{
@@ -301,7 +304,7 @@ nav.file-tree > ul > li > span{
 }
 
 // Add padding below for right click menu
-.file-tree > li:first-child{
+nav.file-tree > ul > li:first-child{
 	padding-bottom: 100px;
 }
 
