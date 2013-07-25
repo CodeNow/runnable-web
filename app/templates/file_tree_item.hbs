@@ -2,17 +2,13 @@
   {{!<span class="name {{fsJSON.type}" href="" data-id="{{fsJSON.path}" title="{{projectJSON.name}">{{projectJSON.name}</span>}}
 {{!else}}
 {{#if editmode}}
-{{#with model.attributes}}
 <form>
   <input class="name-input" name='name' value="{{name}}" />
 </form>
-{{/with}}
 {{else}}
-{{#with model.attributes}}
-  {{#if_eq type compare='dir'}}
-  <span class="name {{type}}" data-id="{{_id}}" href="" title="{{path}}{{name}}">{{name}}</span>
+  {{#if dir}}
+  <span class="name {{type}}" data-id="{{_id}}" href="" title="{{fullPath}}">{{name}}</span>
   {{else}}
-  <a class="name {{type}}" data-id="{{_id}}" href="javascript:void(0);" title="{{path}}{{name}}">{{name}}</a>
-  {{/if_eq}}
-{{/with}}
+  <a class="name {{type}}" data-id="{{_id}}" href="javascript:void(0);" title="{{fullPath}}">{{name}}</a>
+  {{/if}}
 {{/if}}

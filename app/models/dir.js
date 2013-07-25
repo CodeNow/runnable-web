@@ -1,11 +1,11 @@
 var Base = require('./fs'); //!FS
 var Super = Base.prototype;
 var utils = require('../utils');
-var _ = require('underscore');
 var utils = require('../utils');
+var File = require('./file');
 
 module.exports = Base.extend({
-  initialize: function (attrs, options) {
+  initialize: function (attrs) {
     Super.initialize.apply(this, arguments);
     var FSCollection = require('../collections/fs');
     var path = this.fullPath();
@@ -24,9 +24,48 @@ module.exports = Base.extend({
   defaults: {
     type: 'dir'
   },
-  globalGet: function (modelId) {
+  globalGet: function () { // (modelId)
     var contents = this.contents;
     contents.globalGet.apply(contents, arguments);
+  },
+  uploadFile: function (urlRoot, fileItem, callback, ctx) {
+    if (ctx) callback = callback.bind(ctx);
+    // if (fileItem.webkitGetAsEntry) {
+    // TODO add support for directories
+    // }
+    // else {
+    this._uploadFile(urlRoot, fileItem, callback);
+    // }
+  },
+  _uploadFile: function (urlRoot, file, callback) {
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+      var fileModel = new File({}, {
+        urlRoot:urlRoot,
+        app:this.app
+      });
+      var options = utils.cbOpts(saveCb);
+      fileModel.save({
+        name: file.name,
+        path: this.fullPath(),
+        content: evt.target.result
+      }, options);
+      function saveCb (err, model) {
+        if (err) { callback(err); } else {
+          model.store(); // must be stored on complete since it is created on frontend
+          callback(null, model)
+        }
+      }
+    }.bind(this);
+    reader.onerror = function (evt) {
+      if (evt.target.error.code === 1) {
+        callback('Directory uploads not supported yet. Send us feedback! :)');
+      }
+      else {
+        callback('Unknown error occurred, please try again later.');
+      }
+    };
+    reader.readAsText(file);
   }
 });
 

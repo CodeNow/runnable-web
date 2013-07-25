@@ -20,23 +20,21 @@ module.exports = RendrView.extend({
         autoTrackEvents :
         Object.keys(this.events);
       eventsToTrack = _.difference(eventsToTrack, this.dontTrackEvents);
-      for (var eventStr in this.events) {
-        (function (eventStr) {
-          var eventSplit, actionName, eventName, viewName, $el;
-          eventSplit = eventStr.split(' ');
-          actionName = this.events[eventStr];
-          eventName = eventSplit[0];
-          $el  = eventSplit[1] ? this.$(eventSplit[1]) : this.$el;
-          $el.on(eventName, function (evt) {
-            var properties = {}; //default
-            if (eventName === 'submit') {
-              properties = $(evt.currentTarget).serializeObject();
-              delete properties.password;
-            }
-            this.trackEvent(actionName, properties);
-          }.bind(this));
-        }).call(this, eventStr);
-      }
+      eventsToTrack.forEach(function (eventStr) {
+        var eventSplit, actionName, eventName, viewName, $el;
+        eventSplit = eventStr.split(' ');
+        actionName = this.events[eventStr];
+        eventName = eventSplit[0];
+        $el  = eventSplit[1] ? this.$(eventSplit[1]) : this.$el;
+        $el.on(eventName, function (evt) {
+          var properties = {}; //default
+          if (eventName === 'submit') {
+            properties = $(evt.currentTarget).serializeObject();
+            delete properties.password;
+          }
+          this.trackEvent(actionName, properties);
+        }.bind(this));
+      }, this);
     }
   },
   trackEvent: function (actionName, properties) {

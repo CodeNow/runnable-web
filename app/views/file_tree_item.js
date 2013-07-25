@@ -12,7 +12,7 @@ module.exports = BaseView.extend({
     'click a'     : 'click'
   },
   getTemplateData: function () {
-    return this.options;
+    return _.extend(this.options, this.options.model.toJSON());;
   },
   click: function () {
     if (this.model.isFile()) {

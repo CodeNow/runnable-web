@@ -3,6 +3,7 @@ var _ = require('underscore');
 var FileMenu = require('./file_menu');
 var NewFileModal = require('./new_file_modal');
 var utils = require('../utils');
+var async = require('async');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
@@ -12,11 +13,12 @@ module.exports = BaseView.extend({
     'click span.dir:first' : 'toggle',
     'contextmenu'          : 'contextMenu',
     'drop'                 : 'uploadFiles',
-    'dragenter'            : 'noop',
-    'dragover'             : 'noop',
-    'dragexit'             : 'noop'
+    'dragover'             : 'noop', //necessary else drop wont work
+    'dragenter'            : 'dragClass',
+    'dragend'              : 'dragClassOff',
+    'dragexit'             : 'dragClassOff'
   },
-  dontTrackEvents: ['dragenter', 'dragover', 'dragexit'],
+  dontTrackEvents: ['dragenter', 'dragend', 'dragover', 'dragexit'],
   postHydrate: function () {
     this.listenTo(this.app.dispatch, 'sync:files', this.sync.bind(this));
   },
@@ -33,12 +35,11 @@ module.exports = BaseView.extend({
     var fileList = _.findWhere(this.childViews, {name:'fs_list'});
     this.collection = fileList.collection;
     // droppable
-    // this.$el.droppable({
-    //   greedy: true,
-    //   drop: this.onDrop.bind(this),
-    //   hoverClass: 'drop-hover'
-    // });
-    // file drop
+    this.$el.droppable({
+      greedy: true,
+      drop: this.onDrop.bind(this),
+      hoverClass: 'drop-hover'
+    });
   },
   contextMenu: function (evt) {
     this.$(document).click(); // closes other context menus
@@ -85,7 +86,7 @@ module.exports = BaseView.extend({
     model.save({'default':false}, options);
   },
   create: function (type) {
-    var collection = _.findWhere(this.childViews, {name:'fs_list'}).collection;
+    var collection = this.collection;
     this.newFileModal = new NewFileModal({
       collection : collection,
       type: type,
@@ -97,9 +98,33 @@ module.exports = BaseView.extend({
   },
   uploadFiles: function (evt) {
     debugger;
+    if (!evt.originalEvent.dataTransfer) return; // for move drag and drop
     evt.stopPropagation();
     evt.preventDefault();
-    this.app.dispatch.trigger('drop:files', evt, this.model);
+    evt = evt.originalEvent;
+    var files = evt.dataTransfer.files;
+    if (!files) {
+      // no browser support
+    }
+    else {
+      var contents = this.collection;
+      var dir = this.model;
+      var self = this;
+      async.forEach(files, eachFile, allDone);
+      function eachFile (fileItem, cb) {
+        self.app.dispatch.trigger('show:upload');
+        var urlRoot = _.result(contents, 'url');
+        dir.uploadFile(urlRoot, fileItem, function (err, fileModel) {
+          if (!err) contents.add(fileModel);
+          if (_.isArray(fileModel)) fileModel.forEach(contents.add.bind(contents));
+          cb(err);
+        });
+      }
+      function allDone (err) {
+        self.showIfError(err);
+        self.app.dispatch.trigger('hide:upload');
+      }
+    }
   },
   slideUpHeight: function () {
     this.$el.removeClass('open');
@@ -198,6 +223,12 @@ module.exports = BaseView.extend({
   },
   hideLoader: function () {
     //TODO
+  },
+  dragClass: function () {
+    console.log('on')
+  },
+  dragClassOff: function () {
+    console.log('off')
   },
   noop: function (evt) {
     evt.preventDefault();
