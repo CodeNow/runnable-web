@@ -72,14 +72,21 @@ module.exports = BaseView.extend({
     else {
       // init file session
       var createSession = function () {
-        session = file.editorSession = ace.createEditSession(file.get('content'));
-        editor.setSession(session);
-        session.setMode(this.getMode(file.get('name')));
-        session.setTabSize(2);
-        session.setUseSoftTabs(true);
-        this.listenTo(session, 'change',           this.onEdit.bind(this));
-        this.listenTo(session, 'changeScrollLeft', this.onScrollLeft.bind(this));
-        this.listenTo(session, 'changeScrollTop',  this.onScrollTop.bind(this));
+        if (file.get('content').length > 10000 &&
+          !confirm('This file is huge are you sure you want to open it (might crash or take a looong time)?')
+        ) {
+          file.trigger('close:file', file);
+        }
+        else {
+          session = file.editorSession = ace.createEditSession(file.get('content'));
+          editor.setSession(session);
+          session.setMode(this.getMode(file.get('name')));
+          session.setTabSize(2);
+          session.setUseSoftTabs(true);
+          this.listenTo(session, 'change',           this.onEdit.bind(this));
+          this.listenTo(session, 'changeScrollLeft', this.onScrollLeft.bind(this));
+          this.listenTo(session, 'changeScrollTop',  this.onScrollTop.bind(this));
+        }
       }.bind(this);
       // fetch file if unfetched -- maybe change this to always?
       if (file.unFetched()) {
