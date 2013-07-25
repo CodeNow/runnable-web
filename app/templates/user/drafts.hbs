@@ -1,3 +1,35 @@
 {{view "header_view" model=user context=.}}
-{{view "dashboard" collection=containers context=.}}
+<div class="container">
+  <h1>Dashboard</h1>
+  <form>
+    <div class="tab-container">
+      <nav class="tab-nav">
+      	{{#if verified}}
+        <a href="/me/published">Published</a>
+        {{/if}}
+        <a href="/me/drafts" class="selected">Drafts</a>
+      </nav>
+      <div class="tab-content">
+        <div class="tab-pane">
+          <table class="data">
+            <thead>
+              <tr>
+                <th><!--name--></th>
+                <th scope="col"><!--Votes--></th>
+                <th scope="col"><!-- Views --></th>
+                <th scope="col"><!-- Runs --></th>
+                <th scope="col"><!-- Copies --></th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each containers.models}}
+                {{view "dashboard_item_view" model=.}}
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 {{view "footer_view" model=user context=.}}

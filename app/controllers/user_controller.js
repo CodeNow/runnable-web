@@ -25,7 +25,11 @@ module.exports = {
       if (err) { 
         callback(err); 
       } else {
-        callback(null, addSEO(results));
+        if (results.user.isVerified()) {
+          callback(null, addSEO(results));
+        } else {
+          self.redirectTo('/me/drafts');
+        }
       }
     });
     function addSEO (results) {
