@@ -117,8 +117,10 @@
 	bottom:0;
 	width:25%;
 	@include box-sizing(border-box);
+	@include box-shadow(-1px 0 2px rgba(0,0,0,.1));
+	border-left:1px solid rgba(0,0,0,.1);
 	&.drop-hover{
-		border:1px solid rgba(0,176,229,.3);
+		border:1px solid $primary-color;
 	}
 }
 
@@ -155,8 +157,6 @@ $tree-padding:15px;
 	overflow-y:auto;
 	height:100%;
 	@include box-sizing(border-box);
-	@include box-shadow(-1px 0 2px rgba(0,0,0,.1));
-	border-left:1px solid rgba(0,0,0,.1);
 	ul,ol{
 		list-style:none;
 		margin:0;
@@ -247,7 +247,9 @@ $tree-padding:15px;
 			// @include border-radius(2px);
 			color:#fff;
 			background:rgba($primary-color,.8);
-
+			// @include border-radius(25px);
+			margin-left:-$tree-padding;
+			padding-left:$tree-padding;
 		}
 	}
 	li.selected{
