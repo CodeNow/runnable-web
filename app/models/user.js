@@ -45,8 +45,8 @@ var User = module.exports = Base.extend({
       password: password
     }, {
       wait: true,
-      method: 'POST',
-      url   : '/users',
+      method: 'PUT',
+      url   : '/users/me',
       success: cbOptions.success,
       error  : cbOptions.error
     });
