@@ -92,7 +92,7 @@ module.exports = BaseView.extend({
     });
   },
   upload: function () {
-    this.showMessage('Upload files by dragging them into the file tree.')
+    this.showMessage('Upload files by dragging them into the file browser.')
   },
   uploadFiles: function (evt) {
     if (!evt.originalEvent.dataTransfer) return; // for move drag and drop
