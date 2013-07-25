@@ -23,7 +23,7 @@
     <script>
       var CONFIG = window.CONFIG = {{json app}};
       var USER   = window.USER   = {{json locals.user}};
-      var _rollbarParams = {"server.environment": "{{app.env}}"};
+      var _rollbarParams = {"server.environment": CONFIG.env};
 
       // <!-- Rollbar Error Tracking -->
       _rollbarParams["notifier.snippet_version"] = "2"; var _rollbar=["4438a220aaf74c7daecd53ebb98ac110", _rollbarParams]; var _ratchet=_rollbar;
