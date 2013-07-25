@@ -13,12 +13,10 @@ module.exports = BaseView.extend({
     'click span.dir:first' : 'toggle',
     'contextmenu'          : 'contextMenu',
     'drop'                 : 'uploadFiles',
-    'dragover'             : 'noop', //necessary else drop wont work
-    'dragenter'            : 'dragClass',
-    'dragend'              : 'dragClassOff',
-    'dragexit'             : 'dragClassOff'
+    'dragover'             : 'over', //necessary else drop wont work
+    'dragleave'            : 'leave'
   },
-  dontTrackEvents: ['dragenter', 'dragend', 'dragover', 'dragexit'],
+  dontTrackEvents: ['dragenter', 'dragend', 'dragover', 'dragleave'],
   postHydrate: function () {
     this.listenTo(this.app.dispatch, 'sync:files', this.sync.bind(this));
   },
@@ -93,11 +91,10 @@ module.exports = BaseView.extend({
       app:this.app
     });
   },
-  upload: function (model) {
-    this.app.dispatch.trigger('show:upload', model);
+  upload: function () {
+    this.showMessage('Upload files by dragging them into the file tree.')
   },
   uploadFiles: function (evt) {
-    debugger;
     if (!evt.originalEvent.dataTransfer) return; // for move drag and drop
     evt.stopPropagation();
     evt.preventDefault();
@@ -107,6 +104,7 @@ module.exports = BaseView.extend({
       // no browser support
     }
     else {
+      this.dragClassOff(evt);
       var contents = this.collection;
       var dir = this.model;
       var self = this;
@@ -224,11 +222,31 @@ module.exports = BaseView.extend({
   hideLoader: function () {
     //TODO
   },
-  dragClass: function () {
-    console.log('on')
+  over: function (evt) {
+    this.dragClass(evt);
   },
-  dragClassOff: function () {
-    console.log('off')
+  leave: function (evt) {
+    this.dragClassOff(evt)
+  },
+  dragClass: function (evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    if (this.model.isRootDir()) {
+      $('div.file-browser').addClass('drop-hover');
+    }
+    else {
+      this.$el.addClass('drop-hover');
+    }
+  },
+  dragClassOff: function (evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    if (this.model.isRootDir()) {
+      $('div.file-browser').removeClass('drop-hover');
+    }
+    else {
+      this.$el.removeClass('drop-hover');
+    }
   },
   noop: function (evt) {
     evt.preventDefault();

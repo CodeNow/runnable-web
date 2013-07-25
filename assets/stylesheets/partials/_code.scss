@@ -117,6 +117,9 @@
 	bottom:0;
 	width:25%;
 	@include box-sizing(border-box);
+	&.drop-hover{
+		border:1px solid rgba(0,176,229,.3);
+	}
 }
 
 .file-browser-toolbar{

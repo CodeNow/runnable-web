@@ -31,6 +31,10 @@ module.exports = BaseView.extend({
     var openFiles = this.collection;
     this.setFile(openFiles.selectedFile());
     this.listenTo(openFiles, 'change:selected', this.changeSelected.bind(this));
+    //debounce events
+    this.adjustHeightToContents = _.debounce(this.adjustHeightToContents, 100, true);
+    this.onScrollLeft = _.debounce(this.onScrollLeft, 200, true);
+    this.onScrollTop = _.debounce(this.onScrollTop, 200, true);
   },
   changeSelected: function (model, selected) {
     if (selected) {
@@ -115,7 +119,7 @@ module.exports = BaseView.extend({
     return (new mode.Mode());
   },
   onEdit: function () {
-    _.debounce(this.adjustHeightToContents(), 100, true);
+    this.adjustHeightToContents();
     var value = this.editor.getValue();
     this.file.set('content', value);
   },

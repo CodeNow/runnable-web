@@ -59,7 +59,7 @@ module.exports = Base.extend({
     }.bind(this);
     reader.onerror = function (evt) {
       if (evt.target.error.code === 1) {
-        callback('Directory uploads not supported yet. Send us feedback! :)');
+        callback('Directory uploads not supported yet, BUT it does support dragging multiple files at once. Send us feedback! :)');
       }
       else {
         callback('Unknown error occurred, please try again later.');

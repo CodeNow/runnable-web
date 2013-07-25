@@ -66,6 +66,9 @@ module.exports = RendrView.extend({
     actionName = _str.humanize(actionName);
     Track.event(this.viewName(), actionName +' Error:'+ err);
   },
+  showMessage: function (str) {
+    alert(str)
+  },
   showError: function (err) {
     if (err) {
       alert(err);
