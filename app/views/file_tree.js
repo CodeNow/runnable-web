@@ -149,7 +149,8 @@ module.exports = BaseView.extend({
       var contents = this.collection;
       var options = _.extend(utils.cbOpts(cb, this), {
         data: contents.params,   // VERY IMPORTANT! - ask TJ.
-        silent: true             // silent until all the models are for sure in store..
+        silent: true,            // silent until all the models are for sure in store..
+        merge: true             // so model 'selected' dont get reset
       });
       this.showLoader();
       contents.fetch(options);
@@ -170,7 +171,8 @@ module.exports = BaseView.extend({
       this.showLoader();
       var options = _.extend(utils.cbOpts(cb, this), {
         data: collection.params, // VERY IMPORTANT! - ask TJ.
-        silent: true             // silent until all the models are for sure in store..
+        silent: true,           // silent until all the models are for sure in store..
+        merge: true             // so model 'selected' dont get reset
       });
       collection.fetch(options);
       function cb (err, collection) {
