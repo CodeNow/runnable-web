@@ -1,1 +1,38 @@
 // Quick hacks that need some love
+@-webkit-keyframes shake {
+  0%, 100% {-webkit-transform: translateX(0);}
+  25%, 75% {-webkit-transform: translateX(-15px);}
+  50% {-webkit-transform: translateX(15px);}
+}
+@-moz-keyframes shake {
+  0%, 100% {-moz-transform: translateX(0);}
+  25% 75% {-moz-transform: translateX(-15px);}
+  50% {-moz-transform: translateX(15px);}
+}
+@-ms-keyframes shake {
+  0%, 100% {-ms-transform: translateX(0);}
+  25% 75% {-ms-transform: translateX(-15px);}
+  50% {-ms-transform: translateX(15px);}
+}
+@-o-keyframes shake {
+  0%, 100% {-o-transform: translateX(0);}
+  25% 75% {-o-transform: translateX(-15px);}
+  50% {-o-transform: translateX(15px);}
+}
+@keyframes shake {
+  0%, 100% {transform: translateX(0);}
+  25% 75% {transform: translateX(-15px);}
+  50% {transform: translateX(15px);}
+}
+.shake {
+  -webkit-animation-name: shake;
+  -moz-animation-name: shake;
+  -ms-animation-name: shake;
+  -o-animation-name: shake;
+  animation-name: shake;
+  -webkit-animation-duration: .75s;
+  -moz-animation-duration: .75s;
+  -ms-animation-duration: .75s;
+  -o-animation-duration: .75s;
+  animation-duration: .75s;
+}

@@ -55,6 +55,9 @@ Router.prototype.postInitialize = function() {
       });
       return o;
   };
+
+  //debounce
+  this.shake = _.debounce(this.shake, 100, true);
 };
 
 Router.prototype.handleError = function (err) {
@@ -115,3 +118,27 @@ Router.prototype.trackImpression = function() {
 Router.prototype.scrollTop = function (app, loading) {
   $(document).scrollTop(0);
 };
+
+Router.prototype.isCurrentRoute = function (fragment) {
+  var currentFragment = Backbone.history.fragment;
+  return currentFragment == fragment ||
+    currentFragment+'/' == fragment ||
+    '/'+currentFragment == fragment ||
+    currentFragment == fragment+'/' ||
+    currentFragment == '/'+fragment;
+};
+
+Router.prototype.navigate = function (fragment) {
+  if (this.isCurrentRoute(fragment)) {
+    this.shake();
+  }
+  Super.navigate.apply(this, arguments);
+}
+
+Router.prototype.shake = function () {
+  var $content = this.appView.$content;
+  $content.removeClass('shake');
+  setTimeout(function () { // settimeout ensures repeated shakes..
+    $content.addClass('shake');
+  }, 0);
+}
