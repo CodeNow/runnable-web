@@ -37,6 +37,7 @@ module.exports = Base.extend({
       if (prevUnsaved != bool) {
         this._unsaved = bool; //set
         this.trigger('unsaved', bool);
+        this.app.dispatch.trigger('unsaved:files', bool);
       }
     }
     else {
