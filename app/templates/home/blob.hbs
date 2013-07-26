@@ -1,4 +1,17 @@
 	<div class="container">
+
+		<div class="notification good">
+			<p>Success! Your code was published. You should share this page with your followers.</p>
+		</div>
+
+		<div class="notification bad">
+			<p>There was a problem publishing your code.</p>
+			<ul>
+				<li>A descriptive title is required</li>
+				<li>At least one tag is required</li>
+			</ul>
+		</div>
+
 		<article class="span9">
 			<!-- <button id='open-blob-modal'>OPEN MODAL</button> -->
 			<section class="title">
@@ -159,26 +172,29 @@
 	</div>
 </footer>
 
-<div class="container">
+<div class="container clearfix">
 	<p>############## Markup for lists of code examples #######################</p>
 	<aside class="span3">
-		<h3>Filter Languages</h3>
-		<nav class="tags-filter">
-			<a href=""><img src="/images/channels/php.png" alt=""> PHP (239)</a>
-			<a href=""><img src="/images/channels/nodejs.png" alt=""> Node.js (13)</a>
-			<a href=""><img src="/images/channels/python.png" alt=""> Python (5)</a>
-			<a href="">+ Show More</a>
-		</nav>
-		<h3>Filter Tags</h3>
-		<nav class="tags-filter">
-			<a href="" class="selected"><img src="/images/channels/codeigniter.png" alt=""> Codeigniter <i class="icon-remove remove-tag"></i></a>
-			<a href=""><img src="/images/channels/jquery.png" alt=""> jQuery (57)</a>
-			<a href=""><img src="/images/channels/facebook.png" alt=""> Facebook (47)</a>
-			<a href=""><img src="/images/channels/google.png" alt=""> Google (13)</a>
-			<a href="">Some made up tag (1)</a>
-			<a href="">AnotherMadeUpTag (1)</a>
-			<a href="">+ Show More</a>
-		</nav>
+		<div class="module">
+			<h3>Filter Languages</h3>
+			<nav class="tags-filter">
+				<a href="" class="selected"><img src="/images/channels/javascript.png" alt=""> Javascript <i class="icon-remove remove-tag"></i></a>
+				<a href=""><img src="/images/channels/php.png" alt=""> PHP (239)</a>
+				<a href=""><img src="/images/channels/nodejs.png" alt=""> Node.js (13)</a>
+				<a href=""><img src="/images/channels/python.png" alt=""> Python (5)</a>
+			</nav>
+		</div>
+		<div class="module">
+			<h3>Related Tags</h3>
+			<nav class="tags-filter">
+				<a href=""><img src="/images/channels/jquery.png" alt=""> jQuery (57)</a>
+				<a href=""><img src="/images/channels/facebook.png" alt=""> Facebook (47)</a>
+				<a href=""><img src="/images/channels/google.png" alt=""> Google (13)</a>
+				<a href="">Some made up tag (1)</a>
+				<a href="">AnotherMadeUpTag (1)</a>
+				<a href="">+ Show More</a>
+			</nav>
+		</div>
 	</aside>
 	<article class="span9 last">
 		<h3>279 Code examples found</h3>

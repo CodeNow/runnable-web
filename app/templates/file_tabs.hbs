@@ -1,8 +1,5 @@
 <ul class="open-file-tabs">
-  {{#each files}}
-  <li {{!#if_eq _id compare=../selectedId}}class="selected"{{!/if_eq}}>
-    <a href="javascript:void(0);" data-id="{{path}}">{{name}}</a>
-    <i data-id="{{path}}" class="close-file"></i>
-  </li>
+  {{#each collection.models}}
+  {{view "file_tab" model=.}}
   {{/each}}
 </ul>

@@ -1,23 +1,34 @@
 <div class="container">
-  <a class="logo" href="/">Runnable</a>
-  {{view "search_bar_view" collection=projectsCollection}}
+  <a class='logo-link' href="/">
+    <span class="logo"></span>
+    <span class="logo-only"></span>
+    Runnable
+  </a>
+  {{!view "search_bar_view" collection=images}}
+  <div class="right">
   <nav class="header-nav">
     <a href="/">Browse All</a>
     <a href="/new">Publish Code</a>
   </nav>
-  {{#if user.username}}
-  <nav class="user-nav dropdown">
-    <a href="javascript:void(0);" class="dropdown-toggle">
-      <img src="{{user.gravitar}}" alt="" class="thumbnail">
-      <span>{{user.username}}</span>
-    </a>
-    <div class="dropdown-menu">
-      <a href="/logout">Log out</a>
-    </div>
+  <nav class="header-nav">
+    <span class="loader display-none">Loading..</span>
   </nav>
-  {{else}}
-  <nav class="user-nav">
-    <a id="header-login-link" href="/login" data-bypass>Log in</a>
-  </nav>
+  {{#if user}}
+    {{#if user.username}}
+    <nav class="user-nav dropdown">
+      <a href="javascript:void(0);" class="dropdown-toggle">
+        <img src="{{user.gravitar}}" alt="" class="thumbnail">
+        <span>{{user.username}}</span>
+      </a>
+      <div class="dropdown-menu">
+        <a href="/logout">Log out</a>
+      </div>
+    </nav>
+    {{else}}
+    <nav class="user-nav">
+      <a id="header-login-link" href="/login" data-bypass>Log in</a>
+    </nav>
+    {{/if}}
   {{/if}}
+  </div>
 </div>

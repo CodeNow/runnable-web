@@ -1,0 +1,17 @@
+{{#if collection.fetched}}
+  {{#each collection.models}}
+    {{#unless attributes.ignore}}
+    {{#if attributes.dir}}
+      {{view "file_tree" model=. editmode=../../../editmode}}
+    {{else}}
+      <li>
+        {{view "file_tree_item" model=.}}
+      </li>
+    {{/if}}
+    {{/unless}}
+  {{else}}
+    <li class="empty">(empty)</li>
+  {{/each}}
+{{else}}
+  <li class='loading'><img src="/images/loading.gif" width="16"></li>
+{{/if}}

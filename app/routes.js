@@ -7,12 +7,16 @@ module.exports = function(match) {
   match('privacy',              'home#privacy');
   match('logout',               'home#logout');
   match('blob',                 'home#blob');
-  match('new',                  'home#new');
-  match('new/:channel',         'project#new');
-  match('new/:_id',             'project#new');
-  match(':_id',                 'project#index');
-  match(':_id/:name',           'project#index');
-  match(':_id/:name/:action',   'project#index');
+  match('new',                  'runnable#new');
+  match('new/:from',            'runnable#newFrom');
+  match('me/published',         'user#published');
+  match('me/drafts',            'user#drafts');
+  match('me/:_id',              'runnable#container');
+  match(':_id',                 'runnable#index');
+  match(':_id/output',          'runnable#output');
+  match(':_id/:name',           'runnable#index');
   match(':channel',             'channel#index');
   match(':channel/page/:page',  'channel#index');
+  match(':channel/:_id',        'channel#runnable'); // note! - hits ':id/:name'
+  match(':channel/:_id/:name',  'channel#runnable');
 };

@@ -1,43 +1,55 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
 var Super = BaseView.prototype;
-var NewFileModal = require('./new_file_modal');
 
 module.exports = BaseView.extend({
   className: 'context-menu',
   events: {
     'click .rename'      : 'rename',
     'click .delete'      : 'del',
+    'click .default'     : 'default',
+    'click .undefault'   : 'undefault',
     'click .create-file' : 'createFile',
     'click .create-dir'  : 'createDir',
-    'click .download'    : 'downloadFS'
+    'click .upload'      : 'upload',
+    'click .download'    : 'download'
+  },
+  postInitialize: function () {
+    $('body').append(this.$el);
+    this.render();
   },
   postRender: function () {
     this.attachWindowEvents();
     this.$el.css(_.pick(this.options, 'top', 'left'));
   },
   getTemplateData: function () {
-    return {
-      createOnly: this.options.createOnly,
-      fsJSON    : this.model.toJSON()
-    };
+    return _.extend(this.options, {
+      isFile: this.model.isFile()
+    });
   },
   rename: function () {
     this.trigger('rename');
   },
   del: function () {
-    this.model.remove();
+    this.trigger('delete');
+  },
+  default: function () {
+    this.trigger('default');
+  },
+  undefault: function () {
+    this.trigger('undefault');
   },
   createFile: function () {
-    var dir = this.model.isDir() ? this.model : this.model.parentDir();
-    this.newFileModal = new NewFileModal({
-      model: this.model
-    });
+    this.trigger('create', 'file');
   },
   createDir: function () {
-    this.newFileModal = new NewFileModal({
-      model: this.model
-    });
+    this.trigger('create', 'folder');
+  },
+  upload: function () {
+    this.trigger('upload');
+  },
+  download: function () {
+    this.alert('TODO');
   },
   remove: function () {
     this.detachWindowEvents();

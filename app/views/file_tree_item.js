@@ -1,39 +1,47 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
 var FileMenu = require('./file_menu');
+var NewFileModal = require('./new_file_modal');
+var utils = require('../utils');
 
 module.exports = BaseView.extend({
   tagName: 'span',
   events: {
-    'contextmenu' : 'showMenu',
     'submit form' : 'submitName',
-    'blur input'  : 'escEditMode'
-  },
-  postHydrate: function () {
-    // clientside
-    // postHydrate is the place to attach data events
-    this.path = this.options.path || '/';
-    this.fs = this.model.rootDir.getPath(this.path);
-    this.listenTo(this.fs, 'change', this.render.bind(this));
+    'blur input'  : 'escEditMode',
+    'click a'     : 'click'
   },
   getTemplateData: function () {
-    // be careful postHydrate has only been called before frontend render but not backend!
-    // this means, the only data you can rely on is this.model and this.options binded to this view.
-    if (!this.fs) {
-      this.path = this.options.path || '/';
-      this.fs = this.model.rootDir.getPath(this.path);
+    return _.extend(this.options, this.options.model.toJSON());;
+  },
+  click: function () {
+    if (this.model.isFile()) {
+      this.app.dispatch.trigger('open:file', this.model);
     }
-    return {
-      fsJSON: this.fs.toJSON(),
-      projectJSON: this.model.toJSON(),
-      editMode: this.editMode
-    };
+  },
+  postHydrate: function () {
+    this.listenTo(this.model, 'change:name', this.render.bind(this));
+    this.listenTo(this.model, 'change:selected', this.highlightIfSelected.bind(this));
+    this.listenTo(this.model, 'rename', this.setEditMode.bind(this, true));
+    this.highlightIfSelected();
+  },
+  highlightIfSelected: function () {
+    if (this.model.get('selected')) {
+      this.$el.parent().addClass('selected');
+    }
+    else {
+      this.$el.parent().removeClass('selected');
+    }
   },
   postRender: function () {
-    if (this.editMode) {
+    this.highlightIfSelected();
+    if (this.options.editmode) {
       this.$('input').focus();
     }
-    if (!this.fs.isRootDir()) {
+    this.makeDraggable()
+  },
+  makeDraggable: function () {
+    if (!this.model.isRootDir()) {
       this.$el.draggable({
         opacity: .8,
         helper: "clone",
@@ -41,22 +49,8 @@ module.exports = BaseView.extend({
       });
     }
   },
-  showMenu: function (evt) {
-    if (this.menu) {
-      this.menu.remove();
-      this.menu = null;
-    }
-    evt.preventDefault();
-    var menu = this.menu = new FileMenu({
-      model: this.fs,
-      top  : evt.pageY,
-      left : evt.pageX
-    });
-    this.listenToOnce(menu, 'rename', this.setEditMode.bind(this, true));
-    this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
-  },
   setEditMode: function (bool) {
-    this.editMode = bool;
+    this.options.editmode = bool;
     this.render();
   },
   escEditMode: function () {
@@ -65,7 +59,7 @@ module.exports = BaseView.extend({
   submitName: function (evt) {
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
-    this.fs.rename(formData.name, function (err) {
+    var options = utils.successErrorToCB(function (err) {
       if (err) {
         this.showError(err);
       }
@@ -73,6 +67,8 @@ module.exports = BaseView.extend({
         this.escEditMode();
       }
     }.bind(this));
+    options.patch = true;
+    this.model.save(formData, options);
   },
   showError: function (err) {
     if (err) {

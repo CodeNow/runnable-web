@@ -1,150 +1,239 @@
-var Fs = require('./fs');
-var Super = Fs.prototype;
-var App = require('../app').prototype; //hacky..
+var Base = require('./fs'); //!FS
+var Super = Base.prototype;
+var utils = require('../utils');
+var utils = require('../utils');
+var File = require('./file');
 
-module.exports = Fs.extend({
-  initialize: function (attrs, options) {
+module.exports = Base.extend({
+  initialize: function (attrs) {
     Super.initialize.apply(this, arguments);
-    this.project = this.project || attrs && attrs.project || options && options.project; // hacky for rendr
     var FSCollection = require('../collections/fs');
-
-    this.contentsCollection = new FSCollection([], {
-      project   : this.project,
-      parentDir : this
-    });
-    this.contentsCollection.on('change add remove', this.onChangeContentsCollection, this);
-    this.on('change:contents', this.onChangeContents, this);
-    this.on('change:path', this.onChangePath, this);
-    if (attrs && attrs.contents)
-      this.onChangeContents();
-  },
-  defaults: function () {
-    return {
-      type: 'dir'
-    };
-  },
-  onChangeContents: function () {
-    this.contentsCollection.reset(this.get('contents'));
-  },
-  onChangePath: function () {
-    var prevAttributes = this.previousAttributes();
-    if (prevAttributes.toJSON) prevAttributes = prevAttributes.toJSON();
-    var thisOldPath = prevAttributes.path;
-    var thisNewPath = this.get('path');
-    this.contentsCollection.forEach(function (fsModel) {
-      var newFSPath = fsModel.get('path').replace(thisOldPath, thisNewPath);
-      fsModel.set('path', newFSPath);
+    var path = this.fullPath();
+    var containerId = attrs.containerId;
+    this.contents = new FSCollection(null, {
+      app : this.app,
+      params : {                    // params are used with render hydrate
+        path : path,
+        containerId: containerId,
+        content: true // include file contents by default
+      },
+      containerId: containerId,
+      path       : path
     });
   },
-  onChangeContentsCollection: function () {
-    this.set('contents', this.contentsCollection.toJSON(), {silent:true}); // must be silent to prevent inf loop
+  defaults: {
+    type: 'dir'
   },
-  contents: function (val, options) { // RENDR!! renamed to collection from contents..bc render is doing some crazy retrieval of model attributes to object properties..
-    if (val) { //set
-      this.contentsCollection.update(val, options);
-      return this;
-    }
-    else { //get
-      return this.contentsCollection;
-    }
+  globalGet: function () { // (modelId)
+    var contents = this.contents;
+    contents.globalGet.apply(contents, arguments);
   },
-  addModel: function (model, cb) {
-    var self = this;
-    var newPath = model.get('path');
-    var err;
-    if (this.contents().get(newPath)) {
-      err = new Error('Path already exists');
-      cb(err);
+  uploadFile: function (urlRoot, fileItem, callback, ctx) {
+    if (ctx) callback = callback.bind(ctx);
+    // if (fileItem.webkitGetAsEntry) {
+    // TODO add support for directories
+    // }
+    // else {
+    if (fileItem.size > 5000000) {
+      callback('Sorry "'+fileItem.name+'" is too big (5MB max).');
     }
     else {
-      if (!this.isNew()) { // if the parentDir isNew it's contents will be fetched later, so leave contents empty
-        this.contents().add(model);
-      }
-      model.save(null, {
-        type: "POST",
-        success: function (model) {
-          cb();
-        },
-        error: function (model, xhr) {
-          var callbackGenericError = function (err) {
-            if (err) console.error(err);
-            err = new Error('Error adding '+model.get('name')+'.');
-            cb(err);
-          };
-          App.utils.parseJSON(xhr.responseText, function (err, rspErr) {
-            if (err) { callbackGenericError(err); } else {
-              err = rspErr;
-              if (rspErr.code == 'EEXISTS') {
-                err = new Error('File/dir already exists.');
-                cb(err);
-              }
-              else {
-                callbackGenericError();
-              }
-            }
-          });
-        }
+      this._uploadFile(urlRoot, fileItem, callback);
+    }
+    // }
+  },
+  _uploadFile: function (urlRoot, file, callback) {
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+      var fileModel = new File({}, {
+        urlRoot:urlRoot,
+        app:this.app
       });
-    }
-  },
-  fetch: function () {
-    return Super.fetch.apply(this, arguments);
-  },
-  isNew: function () {
-    return !App.utils.exists(this.get('contents'));
-  },
-  addFile: function (filename, cb) {
-    var newPath = App.utils.pathJoin(this.get('path'), filename);
-    var err;
-    var options = { parentDir:this, project:this.project };
-    var model = new FileModel({
-      name: filename,
-      path: newPath,
-      type: 'file',
-      content: ''
-    }, options);
-    this.addModel(model, cb);
-  },
-  addDir: function (dirname, cb) {
-    var newPath = App.utils.pathJoin(this.get('path'), dirname);
-    var err;
-    var options = { parentDir:this, project:this.project };
-    var model = new DirModel({
-      name: dirname,
-      path: newPath,
-      type: 'dir'
-    }, options);
-    this.addModel(model, cb);
-  },
-  moveIn: function (fsPath, cb) {
-    var self = this;
-    var fsPathSplit  = fsPath.split('/');
-    var fsName       = fsPathSplit.pop();
-    var fsParentPath = fsPathSplit.join('/') || '/';
-    var thisPath     = this.get('path');
-    var newPath      = App.utils.pathJoin(thisPath, fsName);
-    var fsModel;
-    if (thisPath.indexOf(fsPath) === 0 && !App.utils.exists(thisPath[fsPath.length])) {
-      cb(); // fs is this.. cant drop in self
-    }
-    else if (thisPath.indexOf(fsPath) === 0 && thisPath[fsPath.length] == '/') {
-      cb(); // fs is this.. cant drop in child
-    }
-    else if (thisPath == fsParentPath) {
-      cb(); // fs is already in this dir
-    }
-    else if (this.getPath(newPath)) {
-      cb(new Error('Error moving file: "'+newPath+'" already exists.'));
-    }
-    else {
-      fsModel = this.getPath(fsPath);
-      if (fsModel) {
-        fsModel.move(newPath, cb);
-      } else {
-        cb();
+      var options = utils.cbOpts(saveCb);
+      fileModel.save({
+        name: file.name,
+        path: this.fullPath(),
+        content: evt.target.result
+      }, options);
+      function saveCb (err, model) {
+        if (err) { callback(err); } else {
+          model.store(); // must be stored on complete since it is created on frontend
+          callback(null, model)
+        }
       }
-    }
+    }.bind(this);
+    reader.onerror = function (evt) {
+      if (evt.target.error.code === 1) {
+        callback('Directory uploads not supported yet, BUT it does support dragging multiple files at once. Send us feedback! :)');
+      }
+      else {
+        callback('Unknown error occurred, please try again later.');
+      }
+    };
+    reader.readAsText(file);
   }
 });
+
+// if fetch has nested contents use this ::
+// initialize:
+//    this.listenTo(this.contents, 'change add remove', this.onChangeContentsCollection.bind(this));
+//    this.listenTo(this, 'change:contents', this.onChangeContents.bind(this));
+//    if (attrs && attrs.contents) {
+//      this.onChangeContents(); //trigger
+//    }
+// methods:
+//   onChangeContentsCollection: function () {
+//     // keep data as property as well so that it works with rendr hydration
+//     this.set('contents', this.contents.toJSON(), { silent:true });
+//   },
+//   onChangeContents: function () {
+//     this.contents.reset(this.get('contents'), { silent:true });
+//   },
+
+
+// module.exports = Fs.extend({
+//   initialize: function (attrs, options) {
+//     Super.initialize.apply(this, arguments);
+//     var FSCollection = require('../collections/fs');
+//     this.contents = new FSCollection([], {
+//       project   : this.project,
+//       parentDir : this,
+//       app       : this.app,
+//       url       : _.result(this, 'urlRoot'),
+//       params    : {
+//         path : this.get('path')
+//       }
+//     });
+//     this.listenTo(this.contents, 'change add remove', this.onChangeContents.bind(this));
+//     this.listenTo(this, 'change:contents', this.onChangeContentsJSON.bind(this))
+//     this.listenTo(this, 'change:path', this.onChangePath.bind(this));
+//     if (attrs && attrs.contents)
+//       this.onChangeContents();
+//   },
+//   defaults: function () {
+//     return {
+//       dir : true,
+//       type: 'dir'
+//     };
+//   },
+//   onChangeContentsJSON: function () {
+//     this.contents.reset(this.get('contents'));
+//   },
+//   onChangePath: function () {
+//     var prevAttributes = this.previousAttributes();
+//     if (prevAttributes.toJSON) prevAttributes = prevAttributes.toJSON();
+//     var thisOldPath = prevAttributes.path;
+//     var thisNewPath = this.get('path');
+//     this.contents.forEach(function (fsModel) {
+//       var newFSPath = fsModel.get('path').replace(thisOldPath, thisNewPath);
+//       fsModel.set('path', newFSPath);
+//     });
+//   },
+//   onChangeContents: function () {
+//     this.set('contents', this.contents.toJSON(), {silent:true}); // must be silent to prevent inf loop
+//   },
+//   addModel: function (model, cb) {
+//     var self = this;
+//     var newPath = model.get('path');
+//     var err;
+//     if (this.contents().get(newPath)) {
+//       err = new Error('Path already exists');
+//       cb(err);
+//     }
+//     else {
+//       if (!this.isNew()) { // if the parentDir isNew it's contents will be fetched later, so leave contents empty
+//         this.contents().add(model);
+//       }
+//       model.save(null, {
+//         type: "POST",
+//         success: function (model) {
+//           cb();
+//         },
+//         error: function (model, xhr) {
+//           var callbackGenericError = function (err) {
+//             if (err) console.error(err);
+//             err = new Error('Error adding '+model.get('name')+'.');
+//             cb(err);
+//           };
+//           utils.parseJSON(xhr.responseText, function (err, rspErr) {
+//             if (err) { callbackGenericError(err); } else {
+//               err = rspErr;
+//               if (rspErr.code == 'EEXISTS') {
+//                 err = new Error('File/dir already exists.');
+//                 cb(err);
+//               }
+//               else {
+//                 callbackGenericError();
+//               }
+//             }
+//           });
+//         }
+//       });
+//     }
+//   },
+//   fetch: function () {
+//     console.log("GET HERE XXX5. Dir's 'fetch' is getting called");
+//     return Super.fetch.apply(this, arguments);
+//   },
+//   isNew: function () {
+//     return !utils.exists(this.get('contents'));
+//   },
+//   addFile: function (filename, cb) {
+//     var newPath = utils.pathJoin(this.get('path'), filename);
+//     var err;
+//     var options = { parentDir:this, project:this.project };
+//     var model = new FileModel({
+//       name: filename,
+//       path: newPath,
+//       type: 'file',
+//       content: ''
+//     }, options);
+//     this.addModel(model, cb);
+//   },
+//   addDir: function (dirname, cb) {
+//     var newPath = utils.pathJoin(this.get('path'), dirname);
+//     var err;
+//     var options = { parentDir:this, project:this.project };
+//     var model = new DirModel({
+//       name: dirname,
+//       path: newPath,
+//       type: 'dir'
+//     }, options);
+//     this.addModel(model, cb);
+//   },
+//   moveIn: function (fsPath, cb) {
+//     var self = this;
+//     var fsPathSplit  = fsPath.split('/');
+//     var fsName       = fsPathSplit.pop();
+//     var fsParentPath = fsPathSplit.join('/') || '/';
+//     var thisPath     = this.get('path');
+//     var newPath      = utils.pathJoin(thisPath, fsName);
+//     var fsModel;
+
+//     console.log("newPath", newPath);
+//     console.log("fsParentPath", fsParentPath);
+
+//     if (thisPath.indexOf(fsPath) === 0 && !utils.exists(thisPath[fsPath.length])) {
+//       cb(); // fs is this.. cant drop in self
+//     }
+//     else if (thisPath.indexOf(fsPath) === 0 && thisPath[fsPath.length] == '/') {
+//       cb(); // fs is this.. cant drop in child
+//     }
+//     else if (thisPath == fsParentPath) {
+//       cb(); // fs is already in this dir
+//     }
+//     else if (this.getPath(newPath)) {
+//       cb(new Error('Error moving file: "'+newPath+'" already exists.'));
+//     }
+//     else {
+//       fsModel = this.getPath(fsPath);
+//       if (fsModel) {
+//         fsModel.move(newPath, cb);
+//       } else {
+//         cb();
+//       }
+//     }
+//   }
+// });
 
 module.exports.id = "Dir";

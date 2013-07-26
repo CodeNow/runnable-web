@@ -23,10 +23,19 @@
 	margin:0 0 $padding;
 }
 
+// Sidebar
+.runnable-sidebar{
+	h3{
+		border-bottom:3px solid #eee;
+		padding-bottom:3px;
+	}
+}
+
 // Project author
 .author{
 	@include clearfix;
 	line-height:1em;
+	font-size:14px;
 	.avatar{
 		float:left;
 		margin:0 5px 5px 0;
@@ -62,13 +71,7 @@
 		border:1px solid #e8e8e8;
 		@include box-shadow(0 0 0 2px rgba(0,0,0,.05));
 		position:relative;
-		.code-editor {
-			// ace initial height before ace script replaces the dif
-			height: 300px;
-			// -webkit-transition: height 1s ease;
-			// -moz-transition: height 1s ease;
-			// transition: height 1s ease;
-		}
+		min-height: 200px; /* should match tab-pane min-height */
 	}
 }
 
@@ -86,11 +89,24 @@
 // File browser
 // Show file browser button
 .btn-show-file-browser{
-	position:absolute;
+	position:absolute !important;
 	top:0;
 	right:0;
-	background:#e8e8e8;
+	bottom:auto !important;
 	@include border-radius(0 0 0 $br);
+	z-index:10;
+}
+
+.btn-hide-file-browser{
+	i{
+		font-size:16px;
+	}
+}
+
+.btn-sync-file-browser{
+	i{
+		font-size:14px;
+	}
 }
 
 .file-browser{
@@ -100,7 +116,13 @@
 	right:0;
 	bottom:0;
 	width:25%;
+	padding-top:25px;
 	@include box-sizing(border-box);
+	@include box-shadow(-1px 0 2px rgba(0,0,0,.1));
+	border-left:1px solid rgba(0,0,0,.1);
+	&.drop-hover{
+		border:1px solid $primary-color;
+	}
 }
 
 .file-browser-toolbar{
@@ -108,10 +130,24 @@
 	top:0;
 	right:0;
 	z-index:5;
+	width:100%;
+	@include background-image(linear-gradient(#eaeae9,#dddfdc));
+	border-bottom:1px solid #ccc;
+	@include box-shadow(inset 0 1px 0 rgba(255,255,255,.4),0 1px 2px rgba(0,0,0,.1));
 	button{
 		float:left;
-		@extend .btn-tertiary;
-		@extend .btn-small;
+		color:rgba(0,0,0,.4);
+		padding: 5px 7px;
+		background: none;
+		border: none;
+		border-right: 1px solid rgba(0,0,0,.1);
+		// border-left: 1px solid rgba(255,255,255,.6);
+		@include box-shadow(1px 0 0 rgba(255,255,255,.6));
+		&:hover{
+			color:rgba(0,0,0,.6);
+		}
+		//@extend .btn-tertiary;
+		//@extend .btn-small;
 	}
 }
 
@@ -122,7 +158,7 @@ $tree-padding:15px;
 	list-style:none;
 	margin:0;
 	padding:0;
-	padding-top:25px;
+	//padding-top:25px;
 	position:relative;
 	z-index:4;
 	overflow-x:hidden;
@@ -155,8 +191,8 @@ $tree-padding:15px;
 			max-width:80%;
 			@include box-sizing(border-box);
 			outline:none;
-			border: 1px solid #e8e8e8;
-			@include box-shadow(inset 0 1px 2px rgba(0,0,0,.05));
+			border: 1px solid #ddd;
+			@include box-shadow(inset 0 1px 2px rgba(0,0,0,.1));
 			padding: 3px;
 			margin: 5px 0;
 			background:#fff;
@@ -219,12 +255,16 @@ $tree-padding:15px;
 			// @include border-radius(2px);
 			color:#fff;
 			background:rgba($primary-color,.8);
-
+			// @include border-radius(25px);
+			margin-left:-$tree-padding;
+			padding-left:$tree-padding;
 		}
 	}
 	li.selected{
 		background:rgba(0,0,0,.05);
-		@include border-radius($br);
+		border-top:1px solid rgba(0,0,0,.08);
+		border-bottom:1px solid rgba(0,0,0,.08);
+		// @include border-radius($br);
 		// @include box-shadow(0 1px 0 rgba(255,255,255,.05),inset 0 -1px 5px -1px rgba(0,0,0,.1),inset 0 1px 5px -1px rgba(0,0,0,.1));
 		a{
 			color:$file-browser-on;
@@ -243,7 +283,7 @@ $tree-padding:15px;
 	}
 
 	// Indent each child list item but ensure background spans full width of file browser
-	li{
+	li {
 		padding-left:0;
 		li{
 			margin-left:-$tree-padding;
@@ -257,6 +297,10 @@ $tree-padding:15px;
 					li{
 						margin-left:-$tree-padding*4;
 						padding-left:$tree-padding*5;
+						li{
+							margin-left:-$tree-padding*5;
+							padding-left:$tree-padding*6;
+						}
 					}
 				}
 			}
@@ -270,8 +314,18 @@ nav.file-tree > ul > li > span{
 }
 
 // Add padding below for right click menu
-.file-tree > li:first-child{
+nav.file-tree > ul > li:first-child{
 	padding-bottom: 100px;
+}
+
+// File upload
+.file-upload{
+	margin:10px 10px 0;
+	padding:5px;
+	background:#f9df8b;
+	border:1px dashed #ffab4b;
+	text-align:center;
+	color:#b48045;
 }
 
 // Context menu (right click)

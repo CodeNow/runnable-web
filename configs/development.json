@@ -1,7 +1,10 @@
 {
-
   "port": 3000,
-
+  "ipaddress": "127.0.0.1",
+  "redis": {
+    "port": 6379,
+    "host": "127.0.0.1"
+  },
   "cookieKey": "runnable.sid",
   "cookieSecret": "$up3r,$3<r3t",
   "cookieExpires": "1 year",
@@ -17,18 +20,21 @@
   "rollbar": "bbbd8090514a4b40a0ec53fbed32d882",
   "api": {
     "default": {
-      "host": "api.runnabele.com",
+      "host": "api.runnable.com",
       "protocol": "http"
     }
   },
 
   "rendrApp": {
+    "env": "development",
     "mixpanel" : {
       "key": "de848319a0091fb3a5876184d81a40ec"
     },
     "googleAnalytics" : {
       "id": "UA-36631837-2"
-    }
+    },
+    "pageSize" : 25,
+     "domain": "runnable.com"
   }
 
 }

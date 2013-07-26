@@ -19,10 +19,11 @@
 @import "partials/nav";
 @import "partials/hint";
 @import "partials/tables";
+@import "partials/effects";
 
 /* Layout */
 @import "partials/layout";
-//@import "partials/channels";
+@import "partials/channels";
 @import "partials/code";
 @import "partials/weboutput";
 @import "partials/console";

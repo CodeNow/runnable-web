@@ -25,13 +25,13 @@ Buttons
 .btn{
 	display:inline-block;
 	padding:0 20px;
-	font-size:14px;
-	line-height:2.4em;
+	font-size:16px;
+	line-height:2.6em;
 	font-family:$secondary-font;
 	font-weight:normal;
-	color:#999;
 	background:$cta-tertiary;
-	@include box-shadow(0 1px 0 darken($cta-tertiary,5%));
+	color:#557b91;
+	@include box-shadow(inset 0 -1px 0 rgba(0,0,0,.1));
 	@include border-radius($br);
 	text-transform:capitalize;
 	border:none;
@@ -60,12 +60,12 @@ Buttons
 	@extend .btn;
 	color:#fff;
 	background:$cta-primary;
-	@include box-shadow(0 1px 0 darken($cta-primary,5%));
+	//@include box-shadow(0 1px 0 darken($cta-primary,5%));
 	&:hover,&:focus{
 		background:darken($cta-primary,2%);
 	}
 	&:active{
-		
+
 	}
 }
 
@@ -75,7 +75,7 @@ Buttons
 	@extend .btn;
 	color:#fff;
 	background:$cta-secondary;
-	@include box-shadow(0 1px 0 darken($cta-secondary,5%));
+	//@include box-shadow(0 1px 0 darken($cta-secondary,5%));
 	&:hover,&:focus{
 		background:darken($cta-secondary,2%);
 	}
@@ -89,7 +89,7 @@ Buttons
 .btn-tertiary{
 	@extend .btn;
 	&:hover,&:focus{
-		
+
 	}
 	&:active{
 

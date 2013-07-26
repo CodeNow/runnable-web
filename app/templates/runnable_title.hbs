@@ -1,0 +1,18 @@
+{{#unless editMode}}
+  <h1>
+  {{model.attributes.name}}
+  {{#if isOwner}}
+  <a href="" class="edit-link">Edit</a>
+  {{/if}}
+  </h1>
+{{else}}
+  {{#with model.attributes}}
+  <form action="javascript:void(0);">
+    <div class="item">
+      <input type="text" class="title-input" name="name" autofocus placeholder="Give your code example a title" value="{{name}}" />
+    </div>
+    <button class="btn-secondary" type="submit">Save title</button>
+    <button class="btn-text btn-cancel" type="button">Cancel</button>
+  </form>
+  {{/with}}
+{{/unless}}

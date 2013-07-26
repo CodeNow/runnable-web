@@ -1,0 +1,18 @@
+{{view "vote_button" model=model}}
+{{#with model.attributes}}
+<h3>
+  <a href="/{{_id}}/{{urlFriendly name}}">
+    {{name}}
+  </a>
+</h3>
+{{#if tags}}
+{{#if tags.length}}
+<nav class="tags-nav">
+  {{#each tags}}
+  {{view "tag_link" data=.}}
+  {{/each}}
+</nav>
+{{/if}}
+{{/if}}
+{{view "runnable_item_owner" model=../model.owner model_id=owner model_name='user' created=created}}
+{{/with}}

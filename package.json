@@ -1,12 +1,13 @@
 {
-  "name": "Runnable-Web",
+  "name": "runnableweb",
   "version": "0.1.0",
   "description": "Runnable-Web",
   "private": true,
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --ui bdd --reporter spec",
-    "start": "DEBUG=app:* node index.js"
+    "start": "DEBUG=app:* node index.js",
+    "preinstall": "node preInstall.js"
   },
   "repository": {
     "type": "git",
@@ -31,7 +32,10 @@
     "coffee-script": "~1.6.3",
     "lodash": "~1.2.1",
     "moment": "~2.0.0",
-    "rollbar": "*"
+    "rollbar": "*",
+    "rimraf": "~2.2.1",
+    "sitemap": "~0.6.0",
+    "underscore.string": "~2.3.3"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -47,7 +51,10 @@
     "console-trace": "numbcoder/console-trace",
     "generator-rendr": "tjmehta/generator-rendr",
     "subl": "tjmehta/node-subl",
-    "tiny-lr": "~0.0.4"
+    "tiny-lr": "~0.0.4",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-concat": "~0.3.0"
   },
   "engines": {
     "node": ">=0.8"

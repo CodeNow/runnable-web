@@ -2,6 +2,15 @@
   {{#unless createOnly}}
   <li><a href="javascript:void(0)" class="rename" href=""><i class="icon-pencil"></i> Rename</a></li>
   <li><a href="javascript:void(0)" class="delete" href=""><i class="icon-trash"></i> Delete</a></li>
+  {{#if showDefault}}
+  {{#if isFile}}
+    {{#if model.attributes.default}}
+    <li><a href="javascript:void(0)" class="undefault" href=""><i class="icon-star"></i> Set: Closed by Default</a></li>
+    {{else}}
+    <li><a href="javascript:void(0)" class="default" href=""><i class="icon-star"></i> Set: Opened by Default</a></li>
+    {{/if}}
+  {{/if}}
+  {{/if}}
   <hr>
   {{/unless}}
   <li>
@@ -13,7 +22,13 @@
       <i class="icon-folder-add"></i> New folder</a>
   </li>
   <li>
+    <a href="javascript:void(0)" class="upload" href="">
+      <i class="icon-upload-alt"></i> Upload</a>
+  </li>
+  <!--
+  <li>
     <a href="javascript:void(0)" class="download" href="{{fsJSON.downloadUrl}}" data-bypass>
       <i class="icon-download-alt"></i> Download {{fsJSON.niceType}}</a>
   </li>
+  -->
 </ul>

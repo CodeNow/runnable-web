@@ -1,4 +1,5 @@
 var path = require('path');
+var _ = require('underscore');
 // in
 var sassDir   = 'assets/stylesheets';
 var sassIndex = path.join(sassDir, 'index.scss');
@@ -6,21 +7,23 @@ var fontsDir  = 'assets/stylesheets/assets/fonts';
 // out
 var imagesDir       = 'public/images';
 var javascriptsDir  = 'public';
-var cssDir          = javascriptsDir + '/.css';
+var cssDir          = 'public/styles';
 var rendrDir        = 'node_modules/rendr';
-var rendrModulesDir = rendrDir + '/node_modules';
-var compassCSS      = 'public/.css/index.css';
+var compassCSS      = 'public/styles/index.css';
 var mergedCSSPath   = 'public/styles/index.css';
+var minCSS = [
+  compassCSS
+];
 //stitch
 var aceScripts = [
   'assets/bower/ace-builds/src-min-noconflict/ace.js',
   'assets/bower/ace-builds/src-min-noconflict/theme-textmate.js',
-  'assets/vendor/aceWithFuckingSemicolons/*.js'
-  // 'assets/bower/ace-builds/src-min-noconflict/mode-stylus.js'
+  'assets/vendor/aceWithFuckingSemicolons/*.js',
 ];
 var frontendScripts = [
   'assets/vendor/*.js',
-  'assets/vendor/jquery-ui/js/*.js',
+  'assets/vendor/jquery-ui/js/jquery-1.9.1.js',
+  'assets/vendor/jquery-ui/js/jquery-ui-1.10.3.custom.js',
   'assets/bower/frontend-track/frontend-track.js'
 ]
 .concat(aceScripts);
@@ -33,11 +36,17 @@ module.exports = function(grunt) {
     bgShell: {
       runNode: {
         cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js index.js',
-        bg: true
+        bg: true,
+        execOpts: {
+          maxBuffer: 1000*1024
+        }
       },
       debugNode: {
         cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js --debug index.js & ./node_modules/nodemon/nodemon.js -d 1 -x node-inspector index.js',
-        bg: true
+        bg: true,
+        execOpts: {
+          maxBuffer: 1000*1024
+        }
       }
     },
 
@@ -69,9 +78,31 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
-      combine: {
+      build: {
         files: {
-          // mergedCSSPath : compassCSS // set below
+          // mergedCSSPath : minCSS // set below
+        }
+      }
+    },
+
+    concat: {
+      dev: {
+        files: {
+          // mergedCSSPath : minCSS // set below
+        }
+      }
+    },
+
+    uglify: {
+      build: {
+        options: {
+          preserveComments: false,
+          report: true/*,
+          sourceMap: 'public/source-map.js',
+          sourceMappingURL: '/source-map.js'*/
+        },
+        files: {
+          'public/mergedAssets.js' : ['public/mergedAssets.js']
         }
       }
     },
@@ -115,8 +146,8 @@ module.exports = function(grunt) {
         }
       },
       stylesheets: {
-        files: sassDir + '/**/*.{scss,sass}',
-        tasks: ['clean-merged-css', 'compass:server', 'move-css'],
+        files: _.without([sassDir + '/**/*.{scss,sass}'].concat(minCSS), compassCSS),
+        tasks: ['compass:server', 'concat:dev'],
         options: {
           interrupt: true
         }
@@ -140,6 +171,7 @@ module.exports = function(grunt) {
           dependencies: frontendScripts,
           npmDependencies: {
             underscore: '../rendr/node_modules/underscore/underscore.js',
+            'underscore.string': '../underscore.string/lib/underscore.string.js',
             backbone: '../rendr/node_modules/backbone/backbone.js',
             handlebars: '../rendr/node_modules/handlebars/dist/handlebars.runtime.js',
             async: '../rendr/node_modules/async/lib/async.js',
@@ -160,39 +192,52 @@ module.exports = function(grunt) {
           ]
         }]
       }
+    },
+
+    jshint: {
+      all: ['app/**/*.js']
     }
   };
-  gruntConfig.cssmin.combine.files[mergedCSSPath] = [compassCSS]; //minifies css
+  gruntConfig.cssmin.build.files[mergedCSSPath] = minCSS; //minifies css
+  gruntConfig.concat.dev.files[mergedCSSPath] = minCSS; //concats css
   grunt.initConfig(gruntConfig);
 
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-bg-shell');
   grunt.loadNpmTasks('grunt-rendr-stitch');
-
-  grunt.registerTask('clean-merged-css', 'Delete merged css file before merging new styles', function () {
-    grunt.log.writeln('Deleting file "' + mergedCSSPath + '"');
-    grunt.file['delete'](mergedCSSPath, { force:true });
+  // generate channelImages.js
+  grunt.registerTask('channel-images-hash', 'Create channel images hash to prevent 404s', function () {
+    var fs = require('fs');
+    var done = this.async();
+    var imageDir = path.join(__dirname, 'public/images/channels');
+    fs.readdir(imageDir, function (err, files) {
+      var imageHash = {};
+      files.forEach(function (file) {
+        var channelName = file.replace(/[.](png|gif|jpg)$/, '');
+        imageHash[channelName] = true;
+      });
+      var fileString = 'module.exports='+JSON.stringify(imageHash)+';';
+      var hashFile = path.join(__dirname,'app/channelImages.js');
+      fs.writeFile(hashFile, fileString, done);
+    });
   });
-
-  grunt.registerTask('move-css', 'Copy compass index.css to styles dir in public', function () {
-    grunt.log.writeln('Copying file "' + compassCSS + '" to "' + mergedCSSPath + '"');
-    grunt.file.copy(compassCSS, mergedCSSPath);
-  });
-
+  // jslint
+  grunt.registerTask('jshint', ['jshint:all']);
   // Compile - shared tasks for all
-  grunt.registerTask('compile', ['handlebars', 'rendr_stitch', 'clean-merged-css', 'compass']);
-
+  grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'rendr_stitch', 'compass']);
   // Shared tasks for server and debug
-  grunt.registerTask('dev-mode', ['compile', 'move-css', 'watch']);
+  grunt.registerTask('dev', ['compile', 'concat', 'watch']);
   // Run the server and watch for file changes
-  grunt.registerTask('server', ['bgShell:runNode', 'dev-mode']);
+  grunt.registerTask('server', ['bgShell:runNode', 'dev']);
   // Debug
-  grunt.registerTask('debug', ['bgShell:debugNode', 'dev-mode']);
+  grunt.registerTask('debug', ['bgShell:debugNode', 'dev']);
   // Build for production
-  grunt.registerTask('build', ['compile', 'cssmin']);
+  grunt.registerTask('build', ['compile', 'cssmin', 'uglify']);
   // Default task(s).
   grunt.registerTask('default', ['build']);
 };

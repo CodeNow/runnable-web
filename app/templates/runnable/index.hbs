@@ -1,0 +1,55 @@
+{{view "header_view" model=user context=.}}
+<section class="content">
+  <div class="container">
+    <section class="title">
+      {{view "vote_button" model=image}}
+      {{view "runnable_title" model=image}}
+    </section>
+    <article class="span9">
+      <section class="actions">
+        {{view "run_button" model=container collection=defaultFiles}}
+        {{#if permissions.edit}}
+        {{view "edit_button" model=container containerid=container.id}}
+        {{/if}}
+        {{#if permissions.fork}}
+        {{view "fork_button" collection=defaultFiles containerid=container.id}}
+        {{/if}}
+        {{!view "download_button" model=container}}
+      </section>
+      {{view "code_editor" context=. editmode=false model=image}}
+      {{view "terminal" model=container}}
+    </article>
+    <aside class="span3 last runnable-sidebar">
+      <!--<div class="module">
+        {{view "new_example_button"}}
+      </div>-->
+      <section class="module">
+        {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created}}
+        {{!view "project_stats" model=image}}
+      </section>
+
+      {{#if image.attributes.tags}}
+      {{#if image.attributes.tags.length}}
+      <section class="module tags">
+        <h3>Tags</h3>
+        {{view "runnable_tags" model=image editmode=editmode}}
+      </section>
+      {{/if}}
+      {{/if}}
+
+      {{#if related.length}}
+      <section class="module">
+        <h3>Related code</h3>
+        <nav class="related-nav">
+          <ul>
+            {{#each related.models}}
+            {{view "runnable_item_small" model=.}}
+            {{/each}}
+          </ul>
+        </nav>
+      </section>
+      {{/if}}
+    </aside>
+  </div>
+</section>
+{{view "footer_view" model=user context=.}}

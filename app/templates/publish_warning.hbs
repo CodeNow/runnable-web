@@ -1,2 +1,13 @@
-<p>Your code example is currently private. When you're ready to show it off to the world hit publish.</p>
-<p><button class="btn-primary">Publish my code example</button></p>
+<p>Your code is currently in draft mode. When you're ready to show it off to the world hit publish.</p>
+<p>
+  {{#if isModerator}}
+  	<button id="pubwarn-back-button" class="btn-primary">Publish back to existing example</button>
+    <button id="pubwarn-new-button" class="btn-primary">Publish as new code example</button>
+  {{else}}
+    {{#if permissions.edit}}
+    <button id="pubwarn-back-button" class="btn-primary">Publish back to existing example</button>
+    {{else}}
+    <button id="pubwarn-new-button" class="btn-primary">Publish as new code example</button>
+    {{/if}}
+  {{/if}}
+</p>
