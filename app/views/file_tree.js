@@ -108,7 +108,7 @@ module.exports = BaseView.extend({
       var contents = this.collection;
       var dir = this.model;
       var self = this;
-      async.forEach(files, eachFile, allDone);
+      // firefox does not hoist functions in blocks
       function eachFile (fileItem, cb) {
         self.app.dispatch.trigger('show:upload');
         var urlRoot = _.result(contents, 'url');
@@ -121,6 +121,7 @@ module.exports = BaseView.extend({
         self.showIfError(err);
         self.app.dispatch.trigger('hide:upload');
       }
+      async.forEach(files, eachFile, allDone);
     }
   },
   slideUpHeight: function () {
@@ -147,6 +148,11 @@ module.exports = BaseView.extend({
   sync: function () {
     if (this.model.get('open')) {
       var contents = this.collection;
+      // firefox does not hoist functions in blocks
+      function cb (err) {
+        this.hideLoader();
+        this.showIfError(err);
+      }
       var options = _.extend(utils.cbOpts(cb, this), {
         data: contents.params,   // VERY IMPORTANT! - ask TJ.
         silent: true,            // silent until all the models are for sure in store..
@@ -154,10 +160,6 @@ module.exports = BaseView.extend({
       });
       this.showLoader();
       contents.fetch(options);
-      function cb (err) {
-        this.hideLoader();
-        this.showIfError(err);
-      }
     }
   },
   open: function () {
