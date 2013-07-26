@@ -28,6 +28,9 @@ module.exports = Base.extend({
     else if (toCollection.findWhere({name:this.get('name')})) {
       cb(this.get('name')+' already exists in '+toCollection.params.path);
     }
+    else if (this.isDir() && this.fullPath() === toCollection.params.path) {
+      cb('cannot move folder to itself');
+    }
     else {
       var newPath = toCollection.params.path;
       var options = utils.cbOpts(saveCallback, this);
