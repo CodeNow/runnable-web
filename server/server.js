@@ -10,7 +10,10 @@ var express = require('express'),
     rendrMw = require('rendr/server/middleware'),
     viewEngine = require('rendr/server/viewEngine'),
     Handlebars = viewEngine.Handlebars,
+    rollbar = require("rollbar"),
     app;
+
+rollbar.handleUncaughtExceptions(env.current.rollbar);
 
 // Add Handlebars helpers
 addHandlebarsHelpers();
@@ -72,6 +75,8 @@ function initMiddleware() {
     // set the middleware stack
     if (process.env.NODE_ENV != 'development')
       app.use(express.compress());
+
+    app.use(rollbar.errorHandler());
     app.use(express.static(__dirname + '/../public'));
     app.use(express.cookieParser());
     app.use(express.session({

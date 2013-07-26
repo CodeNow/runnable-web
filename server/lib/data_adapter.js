@@ -3,8 +3,12 @@ var utils = require('rendr/server/utils'),
     cookie = require('cookie'),
     url = require('url'),
     request = require('request'),
+    env = require('./env'),
     debug = require('debug')('app:DataAdapter'),
+    rollbar = require("rollbar"),
     inspect = require('util').inspect;
+
+rollbar.init(env.current.rollbar);
 
 module.exports = DataAdapter;
 
@@ -33,6 +37,7 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
   });
 ;
   api = this.apiDefaults(api);
+  api.timeout = 30000;
 
   if (req.session && req.session.access_token) {
     api.headers['runnable-token'] = req.session.access_token;
@@ -41,7 +46,10 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
 
   start = new Date().getTime();
   request(api, function(err, response, body) {
-    if (err) return callback(err);
+    if (err) {
+      rollbar.reportMessage("API Error: " + err.code + " at " + api.url);
+      return callback(err);
+    }
 
     // Removing this causes misery
     try {
