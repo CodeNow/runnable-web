@@ -23,6 +23,11 @@ module.exports = BaseView.extend({
   postRender: function () {
     var navigationView = _.findWhere(this.childViews, {name:'web_navigation'});
     this.listenTo(navigationView, 'change:url', this.setIframeSrcPath.bind(this));
+    this.$iframe = this.$('iframe');
+    this.refresh(); // to prevent cache hit
+  },
+  refresh: function () {
+    this.$iframe.attr('src', this.$iframe.attr('src'));
   },
   setIframeSrcPath: function (url) {
     if (url[0] !== '/') url = '/' + url;
