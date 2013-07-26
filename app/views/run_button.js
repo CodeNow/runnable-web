@@ -20,7 +20,7 @@ module.exports = BaseView.extend({
       if (err) {
         this.showError(err);
         popup.close();
-        _rollbar.push("Error trying to run container");
+        _rollbar.push({level: 'error', msg: "Couldn't start container", errMsg: err});
       } else {
         popup.postMessage("Refresh", "*");
       }
