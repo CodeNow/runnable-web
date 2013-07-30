@@ -54,7 +54,7 @@ module.exports = {
         return _.extend(results, {
           page: {
             title: "Runnable Code Examples for "+results.channel,
-            description: 'Runnable Job Postings and Listings',
+            description: "Runnable Code Examples for "+results.channel,
             canonical: canonical.call(self)
           }
         });
