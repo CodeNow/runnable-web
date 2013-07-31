@@ -1,5 +1,5 @@
 {
-  "port": 3000,
+  "port": 3100,
   "ipaddress": "127.0.0.1",
   "redis": {
     "port": 6379,
@@ -20,7 +20,7 @@
 
   "api": {
     "default": {
-      "host": "api.runnable.com",
+      "host": "localhost:3030",
       "protocol": "http"
     }
   },
@@ -34,7 +34,7 @@
       "id": "UA-36631837-2"
     },
     "pageSize" : 25,
-     "domain": "runnable.com"
+     "domain": "runnableapp.dev"
   }
 
 }
