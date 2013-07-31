@@ -4,12 +4,13 @@ var utils = require('../utils');
 var fetch = helpers.fetch;
 
 var fetchOwnersFor = helpers.fetchOwnersFor;
+var fetchChannel = helpers.fetchChannel;
 var canonical = helpers.canonical;
 
 module.exports = {
   index: function(params, callback) {
     var spec = {
-      user    : {
+      user: {
         model  : 'User',
         params : {
           _id: 'me'
@@ -63,5 +64,40 @@ module.exports = {
   },
   runnable: function (params, callback) {
     this.redirectTo(params._id +'/'+ params.name);
+  },
+  category: function (params, callback) {
+    var self = this;
+    var spec = {
+      user: {
+        model: 'User',
+        params: {
+          _id: 'me'
+        }
+      },
+      channels: {
+        collection: 'Channels',
+        params: {
+          category: params.category
+        }
+      },
+      categories: {
+        collection: 'Categories'
+      }
+    };
+    fetch.call(this, spec, function (err, results) {
+      callback(err, !err && addSEO(results))
+    });
+    function addSEO (results) {
+      var channel = params.channel;
+      var category = params.category;
+      var channelAndOrCategory = channel? channel+' in '+category : category;
+      return _.extend(results, {
+        page: {
+          title: "Runnable Code Examples for "+channelAndOrCategory,
+          description: "Runnable Code Examples for "+channelAndOrCategory,
+          canonical: canonical.call(self)
+        }
+      });
+    }
   }
 };

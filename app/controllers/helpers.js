@@ -155,6 +155,18 @@ function fetchContainer (containerId, callback) {
   });
 }
 
+function fetchCategory (channelName, callback) {
+  var spec = {
+    channel: {
+      model: 'Channel',
+      params: {
+        name: channelName
+      }
+    }
+  };
+  fetch.call(self, spec, callback);
+}
+
 function fetchOwnersFor (runnables, callback) {
   var userIds = runnables.map(function (run) {
     return run.get('owner');
@@ -178,8 +190,8 @@ function fetchOwnersFor (runnables, callback) {
   });
 }
 
-function fetchOwnerOf (runnables, callback) {
-  fetchOwnersFor.call(this, [runnables], callback);
+function fetchOwnerOf (runnable, callback) {
+  fetchOwnersFor.call(this, [runnable], callback);
 }
 
 function fetchImage (imageId, callback) {
