@@ -1,31 +1,42 @@
 {{view "header_view" model=user context=.}}
 <div class="content">
   <div class="container">
-    <h1>Frameworks</h1>
+    <h1>Selected category</h1>
     <div class="span3">
-      <h3>Browse code by category</h3>
-      <ul>
+      <nav class="cat-nav">
         {{#each categories.models}}
         {{#with attributes}}
-        <li>
-          <a href="">{{name}}</a>
-        </li>
+        <a href="">{{name}}</a>
         {{/with}}
         {{/each}}
-        <li><a href="">Browse all code</a>
-      </ul>
+        <a href="" class="selected">Selected category</a>
+        <a href="">Browse all code</a>
+      </nav>
     </div>
     <div class="span9 last">
-      <ul>
+      <nav class="tag-box">
         {{#each channels.models}}
         {{#with attributes}}
-        <li>
-          <span>{{name}}</span>
-          <span>{{description}}</span>
-        </li>
+        <a href="">
+          <figure><img src="/images/channels/codeigniter.png" alt=""></figure>
+          <span class="tag-count">87</span>
+          <h4>{{name}}</h4>
+          <p class="tag-desc">{{description}}</p>
+        </a>
         {{/with}}
         {{/each}}
-        <li>Your code here</li>
+        <a href="">
+          <figure><img src="/images/channels/nodejs.png" alt=""></figure>
+          <span class="tag-count">1,236</span>
+          <h4>Imagine this is an extra long name</h4>
+          <p class="tag-desc">Then this would be an extra long description. Send money, make online payments, receive money. It's great.</p>
+        </a>
+        <a href="">
+          <figure></figure>
+          <span class="tag-count">3</span>
+          <h4>Short</h4>
+          <p class="tag-desc">With no icon.</p>
+        </a>
       </ul>
     </div>
   </div>

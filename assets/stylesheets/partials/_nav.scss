@@ -412,3 +412,69 @@ footer .social-icons{
 		@extend .btn;
 	}
 }
+
+// Categories
+.cat-nav{
+	a{
+		display:block;
+		padding:5px;
+		width:100%;
+		&.selected{
+			background:rgba(0,0,0,.02);
+		}
+	}
+}
+
+// Tag boxes
+.tag-box{
+	a{
+		@extend .span4;
+		margin-bottom:$padding;
+		padding:5px 5px 5px 42px;
+		border:1px solid #eee;
+		position:relative;
+		figure{
+			max-width:32px;
+			position:absolute;
+			top:5px;
+			left:5px;
+		}
+		h4{
+			color:$primary-color;
+			margin:-3px 0 0; // Minus the difference between font size and line height to get top flush
+		}
+		.tag-desc{
+			margin:0;
+			color:$gray;
+			font-size:13px;
+		}
+		.tag-count{
+			float:right;
+			background:$gray;
+			@include border-radius(25px);
+			color:#fff;
+			font-weight:bold;
+			padding:3px 8px;
+			font-size:12px;
+			line-height:1;
+		}
+		&:nth-child(3n){
+			@extend .last;
+		}
+		&:nth-child(3n+1){
+			clear:both;
+		}
+		&:hover{
+			background:rgba(0,0,0,.02);
+			text-decoration:none;
+			h4{
+				//text-decoration:underline;
+			}
+			.tag-count{
+				background:$primary-color;
+			}
+		}
+	}
+}
+
+
