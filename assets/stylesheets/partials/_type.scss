@@ -24,6 +24,11 @@ h1 {
     color:$font-color-primary;
     font-weight:normal;
     text-transform:capitalize;
+    img{
+        max-width:40px;
+        max-height:40px;
+        vertical-align:text-bottom;
+    }
 }
 
 h2 {

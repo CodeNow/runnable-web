@@ -2,7 +2,7 @@
 <div class="content">
   <div class="container">
     <h1>Selected category</h1>
-    <div class="span3">
+    <aside class="span3">
       <nav class="cat-nav">
         {{#each categories.models}}
         {{#with attributes}}
@@ -12,8 +12,8 @@
         <a href="" class="selected">Selected category</a>
         <a href="">Browse all code</a>
       </nav>
-    </div>
-    <div class="span9 last">
+    </aside>
+    <article class="span9 last">
       <nav class="tag-box">
         {{#each channels.models}}
         {{#with attributes}}
@@ -38,7 +38,7 @@
           <p class="tag-desc">With no icon.</p>
         </a>
       </ul>
-    </div>
+    </article>
   </div>
 </div>
 {{view "footer_view" model=user context=.}}
