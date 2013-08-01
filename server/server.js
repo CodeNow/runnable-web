@@ -10,8 +10,11 @@ var express = require('express'),
     rendrMw = require('rendr/server/middleware'),
     viewEngine = require('rendr/server/viewEngine'),
     Handlebars = viewEngine.Handlebars,
+    rollbar = require("rollbar"),
     sitemap = require('./lib/sitemap'),
     app;
+
+rollbar.handleUncaughtExceptions(env.current.rollbar);
 
 // Add Handlebars helpers
 require('../app/handlebarsHelpers').add(Handlebars);
@@ -60,6 +63,9 @@ exports.start = function start(options, cb) {
   console.log("server pid " + process.pid + " listening on port " + port + " in " + app.settings.env + " mode");
 };
 
+//
+// Initialize middleware stack
+//
 //
 // Initialize middleware stack
 //

@@ -5,26 +5,21 @@ module.exports = BaseView.extend({
   id: 'save-button-view',
   className: 'btn-save btn-tertiary',
   events: {
-    'click div' : 'saveAll'
+    'click' : 'saveAll'
   },
   postRender: function () {
     this.listenTo(this.collection, "unsaved", this.onChangeUnsaved.bind(this));
+    this.onChangeUnsaved(this.collection.unsaved());
   },
   saveAll :function () {
     this.disable(true);
     this.collection.saveAll(function (err) {
       this.disable(false);
-      if (err) {
-        this.showError(err);
-      }
+      this.showIfError(err);
     }, this);
   },
   onChangeUnsaved: function (bool) {
-    if (bool)
-      this.$el.removeAttr('disabled');      
-    else
-      this.$el.attr('disabled','disabled');      
-
+    this.disable(!bool);
   }
  });
 

@@ -7,6 +7,12 @@ module.exports = BaseView.extend({
   events: {
     'click' : 'click'
   },
+  postHydrate: function () {
+    var dispatch = this.app.dispatch;
+    if (dispatch) {
+      this.listenTo(dispatch, 'unsaved:files', this.onChangeUnsaved.bind(this));
+    }
+  },
   postRender: function () {
     console.log("CONTAINER ID: ", this.model.id);
   },
@@ -20,11 +26,18 @@ module.exports = BaseView.extend({
       if (err) {
         this.showError(err);
         popup.close();
+        _rollbar.push({level: 'error', msg: "Couldn't start container", errMsg: err});
       } else {
         popup.postMessage("Refresh", "*");
       }
     }, this);
     this.app.dispatch.trigger('run');
+  },
+  onChangeUnsaved: function (bool) {
+    if (bool)
+      this.$('span').html(' Save and Run');
+    else
+      this.$('span').html(' Run');
   }
 });
 

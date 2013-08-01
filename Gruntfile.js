@@ -93,16 +93,24 @@ module.exports = function(grunt) {
       }
     },
 
+    copy: {
+      dev: {
+        src: 'public/mergedAssets.js',
+        dest: 'public/mergedAssets.min.js'
+      }
+    },
+
     uglify: {
       build: {
         options: {
           preserveComments: false,
-          report: true/*,
-          sourceMap: 'public/source-map.js',
-          sourceMappingURL: '/source-map.js'*/
+          report: true,
+          sourceMapPrefix: 1, //instead of public
+          sourceMap: 'public/mergedAssets.min.map',
+          sourceMappingURL: '/mergedAssets.min.map'
         },
         files: {
-          'public/mergedAssets.js' : ['public/mergedAssets.js']
+          'public/mergedAssets.min.js' : ['public/mergedAssets.js']
         }
       }
     },
@@ -147,7 +155,7 @@ module.exports = function(grunt) {
       },
       stylesheets: {
         files: _.without([sassDir + '/**/*.{scss,sass}'].concat(minCSS), compassCSS),
-        tasks: ['compass:server', 'concat:dev'],
+        tasks: ['compass:server', 'concat:dev', 'copy:dev'],
         options: {
           interrupt: true
         }
@@ -198,8 +206,8 @@ module.exports = function(grunt) {
       all: ['app/**/*.js']
     }
   };
-  gruntConfig.cssmin.build.files[mergedCSSPath] = minCSS; //minifies css
-  gruntConfig.concat.dev.files[mergedCSSPath] = minCSS; //concats css
+  gruntConfig.cssmin.build.files[mergedCSSPath] = minCSS; //minifies css for prod
+  gruntConfig.concat.dev.files[mergedCSSPath] = minCSS; //concats css for dev
   grunt.initConfig(gruntConfig);
 
   grunt.loadNpmTasks('grunt-contrib-compass');
@@ -232,7 +240,7 @@ module.exports = function(grunt) {
   // Compile - shared tasks for all
   grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'rendr_stitch', 'compass']);
   // Shared tasks for server and debug
-  grunt.registerTask('dev', ['compile', 'concat', 'watch']);
+  grunt.registerTask('dev', ['compile', 'concat', 'copy', 'watch']);
   // Run the server and watch for file changes
   grunt.registerTask('server', ['bgShell:runNode', 'dev']);
   // Debug

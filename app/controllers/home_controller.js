@@ -111,7 +111,7 @@ module.exports = {
   },
 
   logout: function () {
-    if (utils.exists(global.window)) {
+    if (!isServer) {
       // force serverside hit for clientside (pushstate)
       // so that session can be destroyed
       window.location = '/logout';
