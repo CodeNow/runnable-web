@@ -4,4 +4,4 @@ module.exports = BaseView.extend({
 
 });
 
-module.exports.id = "home/category";
+module.exports.id = "channel/category";

@@ -1,0 +1,21 @@
+categories
+<ul>
+  {{#each categories.models}}
+  {{#with attributes}}
+  <li>
+    {{name}}
+  </li>
+  {{/with}}
+  {{/each}}
+</ul>
+channels in channels.models
+<ul>
+  {{#each channels.models}}
+  {{#with attributes}}
+  <li>
+    <span>{{name}}</span>
+    <span>{{description}}</span>
+  </li>
+  {{/with}}
+  {{/each}}
+</ul>
