@@ -6,38 +6,27 @@
       <nav class="cat-nav">
         {{#each categories.models}}
         {{#with attributes}}
-        <a href="">{{name}}</a>
+        {{view 'link' href=link text=name}}
         {{/with}}
         {{/each}}
-        <a href="" class="selected">Selected category</a>
-        <a href="">Browse all code</a>
+        <a href="/">Browse all code</a>
       </nav>
     </div>
     <div class="span9 last">
       <nav class="tag-box">
         {{#each channels.models}}
         {{#with attributes}}
-        <a href="">
-          <figure><img src="/images/channels/codeigniter.png" alt=""></figure>
-          <span class="tag-count">87</span>
+        <a href="/{{name}}">
+          {{#channelHasImage name}}
+          <figure>{{view "channel_image" name=name}}</figure>
+          {{/channelHasImage}}
+          <span class="tag-count">{{count}}</span>
           <h4>{{name}}</h4>
           <p class="tag-desc">{{description}}</p>
         </a>
         {{/with}}
         {{/each}}
-        <a href="">
-          <figure><img src="/images/channels/nodejs.png" alt=""></figure>
-          <span class="tag-count">1,236</span>
-          <h4>Imagine this is an extra long name</h4>
-          <p class="tag-desc">Then this would be an extra long description. Send money, make online payments, receive money. It's great.</p>
-        </a>
-        <a href="">
-          <figure></figure>
-          <span class="tag-count">3</span>
-          <h4>Short</h4>
-          <p class="tag-desc">With no icon.</p>
-        </a>
-      </ul>
+      </nav>
     </div>
   </div>
 </div>

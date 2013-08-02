@@ -232,5 +232,24 @@ var utils = module.exports = {
       tags += ' ' + prelastword + ' ' +last;
       return tags;
     }
-  }
+  },
+  isCurrentURL: function (app, url) {
+      var currentUrl;
+      if (isServer) {
+        currentUrl = app.req && app.req.url;
+      }
+      else {
+        currentUrl = Backbone.history.fragment;
+      }
+      return utils.urlsMatch(currentUrl, url);
+    },
+    urlsMatch: function (url1, url2) {
+      url1 = url1 && url1.toLowerCase && url1.toLowerCase();
+      url2 = url2 && url2.toLowerCase && url2.toLowerCase();
+      return url1 == url2 ||
+        url1+'/' == url2 ||
+        '/'+url1 == url2 ||
+        url1 == url2+'/' ||
+        url1 == '/'+url2;
+    }
 };
