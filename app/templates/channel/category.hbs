@@ -1,7 +1,7 @@
 {{view "header_view" model=user context=.}}
 <div class="content">
   <div class="container">
-    <h1>Selected category</h1>
+    <h1>{{selectedCategory.attributes.name}}</h1>
     <div class="span3">
       <nav class="cat-nav">
         {{#each categories.models}}

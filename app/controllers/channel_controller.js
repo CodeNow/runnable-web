@@ -66,6 +66,7 @@ module.exports = {
     this.redirectTo(params._id +'/'+ params.name);
   },
   category: function (params, callback) {
+    console.log('category')
     var self = this;
     var spec = {
       user: {
@@ -85,7 +86,14 @@ module.exports = {
       }
     };
     fetch.call(this, spec, function (err, results) {
-      callback(err, !err && addSEO(results))
+      if (err) { callback(err); } else {
+        results.selectedCategoryLower = params.category.toLowerCase();
+        results.selectedCategory = _.find(results.categories.models, function (category) {
+          return category.get('name').toLowerCase() == results.selectedCategoryLower;
+        });
+        console.log(results.selectedCategory.attributes);
+        callback(null, addSEO(results))
+      }
     });
     function addSEO (results) {
       var channel = params.channel;

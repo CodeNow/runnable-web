@@ -8,10 +8,12 @@ module.exports = BaseView.extend({
     if (!Boolean(channelImages[lower])) {
       this.className="display-none";
     }
-    this.attributes = {
-      src: "/images/channels/"+lower+".png",
-      img: lower
-    };
+    else {
+      this.attributes = {
+        src: "/images/channels/"+lower+".png",
+        img: lower
+      };
+    }
   }
 });
 
