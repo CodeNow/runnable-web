@@ -2,7 +2,7 @@
 <div class="content">
   <div class="container">
     <h1>{{selectedCategory.attributes.name}}</h1>
-    <div class="span3">
+    <aside class="span3">
       <nav class="cat-nav">
         {{#each categories.models}}
         {{#with attributes}}
@@ -26,18 +26,6 @@
         </a>
         {{/with}}
         {{/each}}
-        <a href="">
-          <figure><img src="/images/channels/nodejs.png" alt=""></figure>
-          <span class="tag-count">1,236</span>
-          <h4>Imagine this is an extra long name</h4>
-          <p class="tag-desc">Then this would be an extra long description. Send money, make online payments, receive money. It's great.</p>
-        </a>
-        <a href="">
-          <figure></figure>
-          <span class="tag-count">3</span>
-          <h4>Short</h4>
-          <p class="tag-desc">With no icon.</p>
-        </a>
       </nav>
     </article>
   </div>

@@ -434,10 +434,14 @@ footer .social-icons{
 		border:1px solid #eee;
 		position:relative;
 		figure{
-			max-width:32px;
 			position:absolute;
 			top:5px;
 			left:5px;
+			text-align:center;
+			width:32px;
+			img{
+				max-height:32px;
+			}
 		}
 		h4{
 			color:$primary-color;
