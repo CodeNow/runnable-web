@@ -11,8 +11,8 @@
         {{/each}}
         <a href="/">Browse all code</a>
       </nav>
-    </div>
-    <div class="span9 last">
+    </aside>
+    <article class="span9 last">
       <nav class="tag-box">
         {{#each channels.models}}
         {{#with attributes}}
@@ -26,8 +26,20 @@
         </a>
         {{/with}}
         {{/each}}
+        <a href="">
+          <figure><img src="/images/channels/nodejs.png" alt=""></figure>
+          <span class="tag-count">1,236</span>
+          <h4>Imagine this is an extra long name</h4>
+          <p class="tag-desc">Then this would be an extra long description. Send money, make online payments, receive money. It's great.</p>
+        </a>
+        <a href="">
+          <figure></figure>
+          <span class="tag-count">3</span>
+          <h4>Short</h4>
+          <p class="tag-desc">With no icon.</p>
+        </a>
       </nav>
-    </div>
+    </article>
   </div>
 </div>
 {{view "footer_view" model=user context=.}}
