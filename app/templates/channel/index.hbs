@@ -13,14 +13,20 @@
           <a href="">AnotherMadeUpTag (1)</a>
           <a href="" class="subtle">+ Show More</a>
         </nav>
-        <nav class="tags-nav">
+        <!--<nav class="tags-nav">
           {{#each channels.models}}
           {{view "tag_link" model=.}}
           {{/each}}
-        </nav>
+        </nav>-->
       </section>
     </aside>
-    {{view "runnable_list" collection=images className="span9 last"}}
+    <article class="span9 last">
+      <section class="tag-info">
+        <p>CodeIgniter is a powerful PHP framework with a very small footprint, built for PHP coders who need a simple and elegant toolkit to create full-featured web applications. If you're a developer who lives in the real world <a href="" class="subtle">read more...</a></p>
+        <p><a href="" target="_blank">ellislab.com/codeigniter</a></p>
+      </section>
+      {{view "runnable_list" collection=images className=""}}
+    </article>
   </div>
 </div>
 {{view "footer_view" model=user context=.}}
