@@ -27,7 +27,7 @@ module.exports.add = function (Handlebars) {
 
   Handlebars.registerHelper('channelHasImage', function (channelName, options) {
     var channelImages = require('./channelImages');
-    if (Boolean(channelImages[channelName]))
+    if (Boolean(channelImages[channelName.toLowerCase()]))
       return options.fn(this);
     return options.inverse(this);
   });
