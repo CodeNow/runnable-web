@@ -1,30 +1,35 @@
 {{view "header_view" model=user context=.}}
 <div class="content">
   <div class="container">
-    <h1><img src="/images/channels/codeigniter.png" alt=""> {{channel}} Runnable Code Examples</h1>
+    <h1>
+      {{#with channel.attributes}}
+      {{view 'channel_image' name=name}}
+      <span>{{name}} Runnable Code Examples</span>
+      {{/with}}
+    </h1>
+    {{#if channels.length}}
     <aside class="span3">
       <section class="module">
         <h3>Filter by tag</h3>
         <nav class="tags-filter">
-          <a href=""><img src="/images/channels/jquery.png" alt=""> jQuery (57)</a>
-          <a href=""><img src="/images/channels/facebook.png" alt=""> Facebook (47)</a>
-          <a href=""><img src="/images/channels/google.png" alt=""> Google (13)</a>
-          <a href="">Some made up tag (1)</a>
-          <a href="">AnotherMadeUpTag (1)</a>
-          <a href="" class="subtle">+ Show More</a>
-        </nav>
-        <!--<nav class="tags-nav">
           {{#each channels.models}}
-          {{view "tag_link" model=.}}
+          {{#with attributes}}
+          <a href="/{{name}}">
+            {{view "channel_image" name=name}}
+            <span>{{name}} ({{count}})</span>
+          </a>
+          {{/with}}
           {{/each}}
-        </nav>-->
+        </nav>
       </section>
     </aside>
-    <article class="span9 last">
+    {{/if}}
+    <article class="{{#if channels.length}}span9{{else}}span12{{/if}} last">
+      <!--{{#if channel.attributes.description}}
       <section class="tag-info">
-        <p>CodeIgniter is a powerful PHP framework with a very small footprint, built for PHP coders who need a simple and elegant toolkit to create full-featured web applications. If you're a developer who lives in the real world <a href="" class="subtle">read more...</a></p>
-        <p><a href="" target="_blank">ellislab.com/codeigniter</a></p>
+        <p>{{{channel.attributes.description}}}</p>
       </section>
+      {{/if}}-->
       {{view "runnable_list" collection=images className=""}}
     </article>
   </div>

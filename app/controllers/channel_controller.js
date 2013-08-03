@@ -26,7 +26,15 @@ module.exports = {
       },
       channels: {
         collection : 'Channels',
-        params     : {}
+        params     : {
+          channel: params.channel
+        }
+      },
+      channel: {
+        model : 'Channel',
+        params: {
+          name: params.channel
+        }
       }
     };
     var self = this;
@@ -40,7 +48,7 @@ module.exports = {
       } else {
         fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
           if (err) { callback(err); } else {
-            results = _.extend(results, ownerResults, { channel:params.channel });
+            results = _.extend(results, ownerResults);
             results = addSEO(results);
             callback(null, results);
           }
@@ -66,7 +74,7 @@ module.exports = {
     this.redirectTo(params._id +'/'+ params.name);
   },
   category: function (params, callback) {
-    console.log('category')
+    params.category = params.category || 'PHP';
     var self = this;
     var spec = {
       user: {
@@ -103,7 +111,7 @@ module.exports = {
         page: {
           title: "Runnable Code Examples for "+channelAndOrCategory,
           description: "Runnable Code Examples for "+channelAndOrCategory,
-          canonical: canonical.call(self)
+          canonical: 'http://runnable.com/c/'+params.category
         }
       });
     }

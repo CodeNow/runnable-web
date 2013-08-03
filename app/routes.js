@@ -1,6 +1,7 @@
 module.exports = function(match) {
-  match('',                     'home#index');
-  match('page/:page',           'home#index');
+  match('',                     'channel#category');
+  match('all',                  'home#index');
+  match('all/page/:page',       'home#index');
   match('providers',            'home#providers');
   match('about',                'home#about');
   match('jobs',                 'home#jobs');
