@@ -111,7 +111,7 @@ module.exports = {
   },
 
   logout: function () {
-    if (utils.exists(global.window)) {
+    if (!isServer) {
       // force serverside hit for clientside (pushstate)
       // so that session can be destroyed
       window.location = '/logout';
@@ -136,5 +136,14 @@ module.exports = {
         }
       }));
     });
+  },
+  newhome: function (params, callback) {
+    // var spec = {
+    //   collection: {collection: 'Collection', params: params}
+    // };
+    // this.app.fetch(spec, function(err, result) {
+    //   callback(err, '<% _.underscored(this.name) %>_index_view', result);
+    // });
+    callback();
   }
 };

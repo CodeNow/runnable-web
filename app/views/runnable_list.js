@@ -12,7 +12,7 @@ module.exports = BaseView.extend({
     var showPrev = page >= 2;
     var showNext = this.collection.length == this.app.get('pageSize'); // if collection has max limit of models (25)
     var channel = this.collection.params.channel;
-    var baseHref = (channel) ? '/'+channel+'/' : '/';
+    var baseHref = (channel) ? '/'+channel+'/' : '/all/';
     var prevLink;
     if (showPrev) prevLink = baseHref;
     if (page >= 3) prevLink = baseHref+'page/'+(page-1);

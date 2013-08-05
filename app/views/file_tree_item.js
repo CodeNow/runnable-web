@@ -23,6 +23,7 @@ module.exports = BaseView.extend({
     this.listenTo(this.model, 'change:name', this.render.bind(this));
     this.listenTo(this.model, 'change:selected', this.highlightIfSelected.bind(this));
     this.listenTo(this.model, 'rename', this.setEditMode.bind(this, true));
+    this.highlightIfSelected();
   },
   highlightIfSelected: function () {
     if (this.model.get('selected')) {

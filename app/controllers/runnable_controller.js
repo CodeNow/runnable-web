@@ -67,11 +67,11 @@ module.exports = {
           async.parallel([
             fetchFilesForContainer.bind(self, results.container.id),
             fetchOwnerOf.bind(self, results.image), //image owner
-            fetchRelated.bind(self, tags),
+            // fetchRelated.bind(self, tags)
           ],
           function (err, data) {
             if (err) { cb(err); } else {
-              cb(null,  _.extend(results, data[0], data[1], data[2]));
+              cb(null,  _.extend(results, data[0], data[1], {related:{models:[]}}));
             }
           });
         },

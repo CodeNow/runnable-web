@@ -16,6 +16,7 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     return _.extend(this.options, {
       user: this.app.user,
+      isModerator: this.app.user.isModerator(),
       permissions: {
         edit: this.app.user.canEdit(this.model)
       }

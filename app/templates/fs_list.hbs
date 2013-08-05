@@ -2,7 +2,7 @@
   {{#each collection.models}}
     {{#unless attributes.ignore}}
     {{#if attributes.dir}}
-      {{view "file_tree" model=. editmode=editmode}}
+      {{view "file_tree" model=. editmode=../../../editmode}}
     {{else}}
       <li>
         {{view "file_tree_item" model=.}}

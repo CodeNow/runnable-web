@@ -1,6 +1,7 @@
 module.exports = function(match) {
-  match('',                     'home#index');
-  match('page/:page',           'home#index');
+  match('',                     'channel#category');
+  match('all',                  'home#index');
+  match('all/page/:page',       'home#index');
   match('providers',            'home#providers');
   match('about',                'home#about');
   match('jobs',                 'home#jobs');
@@ -8,10 +9,12 @@ module.exports = function(match) {
   match('logout',               'home#logout');
   match('blob',                 'home#blob');
   match('new',                  'runnable#new');
+  match('newhome',              'home#newhome');
   match('new/:from',            'runnable#newFrom');
   match('me/published',         'user#published');
   match('me/drafts',            'user#drafts');
   match('me/:_id',              'runnable#container');
+  match('c/:category',          'channel#category');
   match(':_id',                 'runnable#index');
   match(':_id/output',          'runnable#output');
   match(':_id/:name',           'runnable#index');

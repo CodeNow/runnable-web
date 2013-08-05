@@ -1,0 +1,33 @@
+{{view "header_view" model=user context=.}}
+<div class="content">
+  <div class="container">
+    <h1>{{selectedCategory.attributes.name}}</h1>
+    <aside class="span3">
+      <nav class="cat-nav">
+        {{#each categories.models}}
+        {{#with attributes}}
+        {{view 'link' href=link text=name}}
+        {{/with}}
+        {{/each}}
+        <a href="/all">Browse all code</a>
+      </nav>
+    </aside>
+    <article class="span9 last">
+      <nav class="tag-box">
+        {{#each channels.models}}
+        {{#with attributes}}
+        <a href="/{{name}}">
+          {{#channelHasImage name}}
+          <figure>{{view "channel_image" name=name}}</figure>
+          {{/channelHasImage}}
+          <span class="tag-count">{{count}}</span>
+          <h4>{{name}}</h4>
+          <p class="tag-desc">{{{description}}}</p>
+        </a>
+        {{/with}}
+        {{/each}}
+      </nav>
+    </article>
+  </div>
+</div>
+{{view "footer_view" model=user context=.}}

@@ -10,14 +10,6 @@ header{
 	background:$header;
 }
 
-@-webkit-keyframes rotate {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-  }
-}
 .logo-link {
 	height:20px;
 	width:110px;
@@ -48,16 +40,9 @@ header{
 		position:relative;
 		margin-top: -20px;
 		z-index: 10;
-		display: none;
+		display:inline-block;
 		&:active{
 			background-position:0 -33.4px;
-		}
-		&.loading {
-			display:inline-block;
-		  -webkit-animation-name:             rotate;
-		  -webkit-animation-duration:         .5s;
-		  -webkit-animation-iteration-count:  infinite;
-		  -webkit-animation-timing-function:  linear;
 		}
 	}
 }

@@ -26,8 +26,8 @@
       var _rollbarParams = {"server.environment": CONFIG.env};
 
       // <!-- Rollbar Error Tracking -->
-      _rollbarParams["notifier.snippet_version"] = "2"; var _rollbar=["4438a220aaf74c7daecd53ebb98ac110", _rollbarParams]; var _ratchet=_rollbar;
-      (function(w,d){w.onerror=function(e,u,l){_rollbar.push({_t:'uncaught',e:e,u:u,l:l});};var i=function(){var s=d.createElement("script");var 
+      _rollbarParams["notifier.snippet_version"] = "2"; var _rollbar=["4e8efcdd52444688aa5b53255cc959cb", _rollbarParams]; var _ratchet=_rollbar;
+      (function(w,d){w.onerror=function(e,u,l){_rollbar.push({_t:'uncaught',e:e,u:u,l:l});};var i=function(){var s=d.createElement("script");var
       f=d.getElementsByTagName("script")[0];s.src="//d37gvrvc0wt4s1.cloudfront.net/js/1/rollbar.min.js";s.async=!0;
       f.parentNode.insertBefore(s,f);};if(w.addEventListener){w.addEventListener("load",i,!1);}else{w.attachEvent("onload",i);}})(window,document);
 
@@ -63,8 +63,7 @@
     _kiq.push(['identify', USER.email || USER._id]);
     </script>
     {{/if_eq}}
-
-    <script src="/mergedAssets.js"></script>
+    <script src="/mergedAssets.min.js"></script>
     <script>
     (function() {
       var App = window.App = new (require('app/app'))({{json appData}});

@@ -15,10 +15,12 @@ module.exports = BaseView.extend({
   loader: function (model, loading) {
     var $loader = this.$('.logo-only');
     if (loading) {
-      $loader.addClass('loading');
+      $loader.addClass('rotate');
+      $loader.removeClass('display-none');
     }
     else {
-      $loader.removeClass('loading');
+      $loader.removeClass('rotate');
+      $loader.addClass('display-none');
     }
   },
   getTemplateData: function () {

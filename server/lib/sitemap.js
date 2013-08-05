@@ -16,7 +16,7 @@ module.exports.init = function(app) {
     async.parallel([
       function channel (cb) {
         request({
-          url: 'http://api.runnable.com/channels',
+          url: 'http://api.runnable.com/channels?map=true',
           json: {}
         }, function (err, res, channels) {
           if (err) {

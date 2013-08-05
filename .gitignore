@@ -1,5 +1,7 @@
 node_modules
 public/mergedAssets.js
+public/mergedAssets.min.js
+public/mergedAssets.min.map
 app/templates/compiledTemplates.js
 app/channelImages.js
 public/styles/index.css

@@ -4,12 +4,13 @@ var utils = require('../utils');
 var fetch = helpers.fetch;
 
 var fetchOwnersFor = helpers.fetchOwnersFor;
+var fetchChannel = helpers.fetchChannel;
 var canonical = helpers.canonical;
 
 module.exports = {
   index: function(params, callback) {
     var spec = {
-      user    : {
+      user: {
         model  : 'User',
         params : {
           _id: 'me'
@@ -25,7 +26,15 @@ module.exports = {
       },
       channels: {
         collection : 'Channels',
-        params     : {}
+        params     : {
+          channel: params.channel
+        }
+      },
+      channel: {
+        model : 'Channel',
+        params: {
+          name: params.channel
+        }
       }
     };
     var self = this;
@@ -39,7 +48,7 @@ module.exports = {
       } else {
         fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
           if (err) { callback(err); } else {
-            results = _.extend(results, ownerResults, { channel:params.channel });
+            results = _.extend(results, ownerResults);
             results = addSEO(results);
             callback(null, results);
           }
@@ -54,7 +63,7 @@ module.exports = {
         return _.extend(results, {
           page: {
             title: "Runnable Code Examples for "+results.channel,
-            description: 'Runnable Job Postings and Listings',
+            description: "Runnable Code Examples for "+results.channel,
             canonical: canonical.call(self)
           }
         });
@@ -63,5 +72,48 @@ module.exports = {
   },
   runnable: function (params, callback) {
     this.redirectTo(params._id +'/'+ params.name);
+  },
+  category: function (params, callback) {
+    params.category = params.category || 'PHP';
+    var self = this;
+    var spec = {
+      user: {
+        model: 'User',
+        params: {
+          _id: 'me'
+        }
+      },
+      channels: {
+        collection: 'Channels',
+        params: {
+          category: params.category
+        }
+      },
+      categories: {
+        collection: 'Categories'
+      }
+    };
+    fetch.call(this, spec, function (err, results) {
+      if (err) { callback(err); } else {
+        results.selectedCategoryLower = params.category.toLowerCase();
+        results.selectedCategory = _.find(results.categories.models, function (category) {
+          return category.get('name').toLowerCase() == results.selectedCategoryLower;
+        });
+        console.log(results.selectedCategory.attributes);
+        callback(null, addSEO(results))
+      }
+    });
+    function addSEO (results) {
+      var channel = params.channel;
+      var category = params.category;
+      var channelAndOrCategory = channel? channel+' in '+category : category;
+      return _.extend(results, {
+        page: {
+          title: "Runnable Code Examples for "+channelAndOrCategory,
+          description: "Runnable Code Examples for "+channelAndOrCategory,
+          canonical: 'http://runnable.com/c/'+params.category
+        }
+      });
+    }
   }
 };

@@ -1,123 +1,37 @@
 {{view "header_view" model=user context=.}}
 <div class="content">
   <div class="container">
-    <h1>{{channel}} Runnable Code Examples</h1>
-    {{view "runnable_list" collection=images className="span9"}}
-    <aside class="span3 last runnable-sidebar">
+    <h1>
+      {{#with channel.attributes}}
+      {{view 'channel_image' name=name}}
+      <span>{{name}} Runnable Code Examples</span>
+      {{/with}}
+    </h1>
+    {{#if channels.length}}
+    <aside class="span3">
       <section class="module">
-        <h3>Featured Code</h3>
-        <ul class="channel-list">
-          {{!#each channels.models}}
-          {{!view "channel_item_view" model=.}}
-          {{!/each}}
-          <li>
-            <a href="/php">
-              <span class="tile">
-                <img src="/images/channels/php.png" alt="PHP">
-              </span>
-              <span class="name">PHP</span>
-            </a>
-          </li>
-          <li>
-            <a href="/nodejs">
-              <span class="tile">
-                <img src="/images/channels/nodejs.png" alt="Node.js">
-              </span>
-              <span class="name">Node.js</span>
-            </a>
-          </li>
-          <li>
-            <a href="/python">
-              <span class="tile">
-                <img src="/images/channels/python.png" alt="Python">
-              </span>
-              <span class="name">Python</span>
-            </a>
-          </li>
-          <li>
-            <a href="/express">
-              <span class="tile">
-                <img src="/images/channels/express.png" alt="Express">
-              </span>
-              <span class="name">Express</span>
-            </a>
-          </li>
-          <li>
-            <a href="/codeigniter">
-              <span class="tile">
-                <img src="/images/channels/codeigniter.png" alt="Codeigniter">
-              </span>
-              <span class="name">Codeigniter</span>
-            </a>
-          </li>
-          <li>
-            <a href="/jquery">
-              <span class="tile">
-                <img src="/images/channels/jquery.png" alt="jQuery">
-              </span>
-              <span class="name">jQuery</span>
-            </a>
-          </li>
-          <li>
-            <a href="/facebook">
-              <span class="tile">
-                <img src="/images/channels/facebook.png" alt="Facebook">
-              </span>
-              <span class="name">Facebook</span>
-            </a>
-          </li>
-          <li>
-            <a href="/twitter">
-              <span class="tile">
-                <img src="/images/channels/twitter.png" alt="Twitter">
-              </span>
-              <span class="name">Twitter</span>
-            </a>
-          </li>
-          <li>
-            <a href="/angularjs">
-              <span class="tile">
-                <img src="/images/channels/angularjs.png" alt="AngularJS">
-              </span>
-              <span class="name">AngularJS</span>
-            </a>
-          </li>
-          <li>
-            <a href="/google">
-              <span class="tile">
-                <img src="/images/channels/google.png" alt="Google">
-              </span>
-              <span class="name">Google</span>
-            </a>
-          </li>
-          <li>
-            <a href="/node-mongodb-native">
-              <span class="tile">
-                <img src="/images/channels/node-mongodb-native.png" alt="MongoDB">
-              </span>
-              <span class="name">MongoDB</span>
-            </a>
-          </li>
-          <li>
-            <a href="/paypal">
-              <span class="tile">
-                <img src="/images/channels/paypal.png" alt="PayPal">
-              </span>
-              <span class="name">PayPal</span>
-            </a>
-          </li>
-
-        </ul>
-      </section>
-      <section class="module">
-        <h3>All Tags</h3>
-        <nav class="tags-nav">
+        <h3>Filter by tag</h3>
+        <nav class="tags-filter">
           {{#each channels.models}}
-          {{view "tag_link" model=.}}
+          {{#with attributes}}
+          <a href="/{{name}}">
+            {{view "channel_image" name=name}}
+            <span>{{name}} ({{count}})</span>
+          </a>
+          {{/with}}
           {{/each}}
         </nav>
       </section>
     </aside>
+    {{/if}}
+    <article class="{{#if channels.length}}span9{{else}}span12{{/if}} last">
+      <!--{{#if channel.attributes.description}}
+      <section class="tag-info">
+        <p>{{{channel.attributes.description}}}</p>
+      </section>
+      {{/if}}-->
+      {{view "runnable_list" collection=images className=""}}
+    </article>
   </div>
 </div>
 {{view "footer_view" model=user context=.}}
