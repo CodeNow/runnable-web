@@ -116,9 +116,12 @@
 	right:0;
 	bottom:0;
 	width:25%;
+	padding-top:25px;
 	@include box-sizing(border-box);
+	@include box-shadow(-1px 0 2px rgba(0,0,0,.1));
+	border-left:1px solid rgba(0,0,0,.1);
 	&.drop-hover{
-		border:1px solid rgba(0,176,229,.3);
+		border:1px solid $primary-color;
 	}
 }
 
@@ -127,12 +130,19 @@
 	top:0;
 	right:0;
 	z-index:5;
+	width:100%;
+	@include background-image(linear-gradient(#eaeae9,#dddfdc));
+	border-bottom:1px solid #ccc;
+	@include box-shadow(inset 0 1px 0 rgba(255,255,255,.4),0 1px 2px rgba(0,0,0,.1));
 	button{
 		float:left;
 		color:rgba(0,0,0,.4);
-		padding:0 5px;
-		background:none;
-		border:none;
+		padding: 5px 7px;
+		background: none;
+		border: none;
+		border-right: 1px solid rgba(0,0,0,.1);
+		// border-left: 1px solid rgba(255,255,255,.6);
+		@include box-shadow(1px 0 0 rgba(255,255,255,.6));
 		&:hover{
 			color:rgba(0,0,0,.6);
 		}
@@ -148,15 +158,13 @@ $tree-padding:15px;
 	list-style:none;
 	margin:0;
 	padding:0;
-	padding-top:25px;
+	//padding-top:25px;
 	position:relative;
 	z-index:4;
 	overflow-x:hidden;
 	overflow-y:auto;
 	height:100%;
 	@include box-sizing(border-box);
-	@include box-shadow(-1px 0 2px rgba(0,0,0,.1));
-	border-left:1px solid rgba(0,0,0,.1);
 	ul,ol{
 		list-style:none;
 		margin:0;
@@ -247,7 +255,9 @@ $tree-padding:15px;
 			// @include border-radius(2px);
 			color:#fff;
 			background:rgba($primary-color,.8);
-
+			// @include border-radius(25px);
+			margin-left:-$tree-padding;
+			padding-left:$tree-padding;
 		}
 	}
 	li.selected{
@@ -306,6 +316,16 @@ nav.file-tree > ul > li > span{
 // Add padding below for right click menu
 nav.file-tree > ul > li:first-child{
 	padding-bottom: 100px;
+}
+
+// File upload
+.file-upload{
+	margin:10px 10px 0;
+	padding:5px;
+	background:#f9df8b;
+	border:1px dashed #ffab4b;
+	text-align:center;
+	color:#b48045;
 }
 
 // Context menu (right click)

@@ -21,9 +21,6 @@ module.exports = BaseView.extend({
   postHydrate: function () {
     this.listenTo(this.app.user, 'change:_id', this.render.bind(this));
     this.listenTo(this.model, 'change:votes', this.render.bind(this));
-    console.log(this.model.toJSON());
-    console.log(this.model.toJSON());
-    console.log(this.model.toJSON());
   },
   vote: function (evt) {
     var self = this;

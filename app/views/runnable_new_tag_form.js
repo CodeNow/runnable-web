@@ -34,7 +34,7 @@ module.exports = BaseView.extend({
     this.disableForm();
     var tag = new BaseModel(formData, {app:this.app});
     tag.urlRoot = _.result(collection, 'url');
-    var options = utils.successErrorToCB(saveCallback.bind(this));
+    var options = utils.cbOpts(saveCallback.bind(this));
     options.method = 'POST';
     tag.save({}, options);
     function saveCallback (err, tagSaved) {
