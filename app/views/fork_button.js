@@ -1,5 +1,6 @@
 var BaseView = require('./base_view');
 // var router = require('../router');
+var SignupModal = require('./signup_modal');
 
 module.exports = BaseView.extend({
   tagName: 'button',
@@ -8,16 +9,22 @@ module.exports = BaseView.extend({
     'click' : 'click'
   },
   click: function () {
-    this.disable(true);
-    this.collection.saveAll(function (err) {
-      this.disable(false);
-      if (err) {
-        this.showError(err);
-      }
-      else {
-        this.app.router.navigate('/me/'+this.options.containerid, true);
-      }
-    }, this);
+    if (this.app.user.isRegistered()) {
+      this.disable(true);
+      this.collection.saveAll(function (err) {
+        this.disable(false);
+        if (err) {
+          this.showError(err);
+        }
+        else {
+          this.app.router.navigate('/me/'+this.options.containerid, true);
+        }
+      }, this);
+    } else {
+      var signupModal = new SignupModal({ app:this.app });
+      signupModal.open();
+      return false; // stop link
+    }
   }
 });
 

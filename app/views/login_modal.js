@@ -8,10 +8,13 @@ module.exports = ModalView.extend({
   postInitialize: function (options) {
     this.header = this.options.header || this.defaultHeader;
   },
-  events: _.extend(Super.events, {
+  events: {
+    'click .modal'      : 'stopPropagation',
+    'click'             : 'close', // closes modal on bg click
+    'click .btn-close'  : 'close',
     'click .signup-link' : 'openSignup',
     'submit form'        : 'login'
-  }),
+  },
   postRender: function () {
     Super.postRender.apply(this, arguments);
   },
