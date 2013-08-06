@@ -8,7 +8,8 @@ module.exports = BaseView.extend({
   events: {
     'click' : 'click'
   },
-  click: function () {
+  click: function (evt) {
+    evt.preventDefault();
     if (this.app.user.isRegistered()) {
       this.disable(true);
       this.collection.saveAll(function (err) {
@@ -23,7 +24,6 @@ module.exports = BaseView.extend({
     } else {
       var signupModal = new SignupModal({ app:this.app });
       signupModal.open();
-      return false; // stop link
     }
   }
 });
