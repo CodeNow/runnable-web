@@ -6,7 +6,6 @@ module.exports = BaseView.extend({
     'change select': 'action'
   },
   getTemplateData: function () {
-    //debugger;
     return _.extend(this.options, {
       prevLink: '',
       nextLink: ''
