@@ -1,5 +1,33 @@
 {{view "header_view" model=user context=.}}
-<div class="content">
-{{view "dashboard" collection=images}}
+<div class="container">
+  <h1>Dashboard</h1>
+  <form>
+    <div class="tab-container">
+      <nav class="tab-nav">
+        <a href="/me/published" class="selected">Published</a>
+        <a href="/me/drafts">Drafts</a>
+      </nav>
+      <div class="tab-content">
+        <div class="tab-pane">
+          <table class="data">
+            <thead>
+              <tr>
+                <th><!--name--></th>
+                <th scope="col">Votes</th>
+                <th scope="col">Views</th>
+                <th scope="col">Runs</th>
+                <th scope="col">Copies</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each images.models}}
+                {{view "dashboard_item_view" model=.}}
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
 {{view "footer_view" model=user context=.}}

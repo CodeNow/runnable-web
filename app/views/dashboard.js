@@ -8,7 +8,7 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     return _.extend(this.options, {
       prevLink: '',
-      nextLink: '',
+      nextLink: ''
     });
   },
   action: function (evt) {

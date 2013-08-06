@@ -3,8 +3,9 @@ var _ = require('underscore');
 
 module.exports = BaseView.extend({
   getTemplateData: function () {
-    console.log(this.options);
-    return this.options;
+    return _.extend(this.options, {
+      verified: this.options.user.isVerified()
+    });
   }
 });
 
