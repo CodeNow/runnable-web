@@ -141,7 +141,7 @@ module.exports = function(grunt) {
       },
       scripts: {
         files: ['app/**/*.js', '!node_modules/rendr/node_modules/*', 'node_modules/rendr/**/*.js'],
-        tasks: ['rendr_stitch'],
+        tasks: ['rendr_stitch', 'copy:dev'],
         options: {
           interrupt: true
         }
@@ -155,7 +155,7 @@ module.exports = function(grunt) {
       },
       stylesheets: {
         files: _.without([sassDir + '/**/*.{scss,sass}'].concat(minCSS), compassCSS),
-        tasks: ['compass:server', 'concat:dev', 'copy:dev'],
+        tasks: ['compass:server', 'concat:dev'],
         options: {
           interrupt: true
         }
