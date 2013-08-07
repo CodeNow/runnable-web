@@ -19,7 +19,9 @@ module.exports = BaseView.extend({
     this.render();
   },
   postRender: function () {
-    this.attachWindowEvents();
+    // settimeout bc render is triggered by a click event which is still propagating dom
+    // settimeout ensures the window events are set after the evt propagation has completed
+    setTimeout(this.attachWindowEvents.bind(this), 0);
     this.$el.css(_.pick(this.options, 'top', 'left'));
   },
   getTemplateData: function () {
@@ -51,7 +53,7 @@ module.exports = BaseView.extend({
   download: function () {
     this.alert('TODO');
   },
-  remove: function () {
+  remove: function (evt) {
     this.detachWindowEvents();
     this.trigger('remove');
     Super.remove.apply(this, arguments);
@@ -60,9 +62,7 @@ module.exports = BaseView.extend({
     var $window = $(window);
     this.removeBindThis = this.remove.bind(this);
     $window.one('click blur', this.removeBindThis);
-    setTimeout(function () {
-      $window.one('contextmenu', this.removeBindThis);
-    }.bind(this), 0);
+    $window.one('contextmenu', this.removeBindThis);
     this.windowEvents = 'click blur contextmenu';
   },
   detachWindowEvents: function () {
