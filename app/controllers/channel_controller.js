@@ -99,7 +99,6 @@ module.exports = {
         results.selectedCategory = _.find(results.categories.models, function (category) {
           return category.get('name').toLowerCase() == results.selectedCategoryLower;
         });
-        console.log(results.selectedCategory.attributes);
         callback(null, addSEO(results))
       }
     });
