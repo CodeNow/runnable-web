@@ -23,14 +23,12 @@ var utils = module.exports = {
   },
   inside: function (arrOrStr) {
     return function (thing) {
-      console.log(thing);
       return ~arrOrStr.indexOf(thing)
     }
   },
   not: function (fn, ctx) {
     ctx = ctx || this;
     return function () {
-      console.log(arguments);
       return fn.apply(ctx, arguments)
     }
   },
