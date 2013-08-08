@@ -1,6 +1,6 @@
 var Base = require('./base');
 var utils = require('../utils');
-var contains = utils.contains;
+var inside = utils.inside;
 var not = utils.not;
 
 module.exports = Base.extend({
