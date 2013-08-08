@@ -7,7 +7,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --ui bdd --reporter spec",
     "start": "DEBUG=app:* node index.js",
-    "preinstall": "node preInstall.js"
+    "postinstall": "node postInstall.js"
   },
   "repository": {
     "type": "git",

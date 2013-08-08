@@ -10,6 +10,7 @@ public/styles/index.css
 npm-debug.log
 .sass-cache
 .css
+.rendr-commit
 assets/bower
 assets/vendor/bower
 configs/local.json
