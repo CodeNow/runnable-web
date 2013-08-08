@@ -29,7 +29,7 @@ var utils = module.exports = {
   not: function (fn, ctx) {
     ctx = ctx || this;
     return function () {
-      return fn.apply(ctx, arguments)
+      return !fn.apply(ctx, arguments)
     }
   },
   andAll: function() {
