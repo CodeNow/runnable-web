@@ -62,8 +62,8 @@ module.exports = {
       else {
         return _.extend(results, {
           page: {
-            title: "Runnable Code Examples for "+results.channel,
-            description: "Runnable Code Examples for "+results.channel,
+            title: "Runnable Code Examples for "+results.channel.get('name'),
+            description: "Runnable Code Examples for "+results.channel.get('name'),
             canonical: canonical.call(self)
           }
         });
