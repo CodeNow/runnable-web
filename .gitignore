@@ -4,6 +4,7 @@ public/mergedAssets.min.js
 public/mergedAssets.min.map
 app/templates/compiledTemplates.js
 app/channelImages.js
+configs/commitHash.js
 public/styles/index.css
 .DS_Store
 npm-debug.log

@@ -34,14 +34,14 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     bgShell: {
-      runNode: {
+      server: {
         cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js index.js',
         bg: true,
         execOpts: {
           maxBuffer: 1000*1024
         }
       },
-      debugNode: {
+      debug: {
         cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js --debug index.js & ./node_modules/nodemon/nodemon.js -d 1 -x node-inspector index.js',
         bg: true,
         execOpts: {
@@ -219,7 +219,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-bg-shell');
   grunt.loadNpmTasks('grunt-rendr-stitch');
-  // generate channelImages.js
+  // generate app/channelImages.js
   grunt.registerTask('channel-images-hash', 'Create channel images hash to prevent 404s', function () {
     var fs = require('fs');
     var done = this.async();
@@ -231,20 +231,33 @@ module.exports = function(grunt) {
         imageHash[channelName] = true;
       });
       var fileString = 'module.exports='+JSON.stringify(imageHash)+';';
-      var hashFile = path.join(__dirname,'app/channelImages.js');
-      fs.writeFile(hashFile, fileString, done);
+      var filePath = path.join(__dirname,'app/channelImages.js');
+      fs.writeFile(filePath, fileString, done);
+    });
+  });
+  // generate configs/commitHash.js
+  grunt.registerTask('commit-hash-file', 'Create json that contains github commit hash number', function () {
+    var fs = require('fs');
+    var done = this.async();
+    var exec = require('child_process').exec;
+    exec("git log -n 1 | grep commit | sed -e s/^commit\\ //", function (err, commitHash) {
+      if (err) { done(err); } else {
+        var versionFile = 'module.exports="'+commitHash.trim()+'";';
+        var filePath = path.join(__dirname, 'configs/commitHash.js');
+        fs.writeFile(filePath, versionFile, done);
+      }
     });
   });
   // jslint
   grunt.registerTask('jshint', ['jshint:all']);
   // Compile - shared tasks for all
-  grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'rendr_stitch', 'compass']);
+  grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'commit-hash-file', 'rendr_stitch', 'compass']);
   // Shared tasks for server and debug
-  grunt.registerTask('dev', ['compile', 'concat', 'copy', 'watch']);
+  grunt.registerTask('dev', ['compile', 'concat', 'copy']);
   // Run the server and watch for file changes
-  grunt.registerTask('server', ['bgShell:runNode', 'dev']);
+  grunt.registerTask('server', ['dev', 'bgShell:server', 'watch']);
   // Debug
-  grunt.registerTask('debug', ['bgShell:debugNode', 'dev']);
+  grunt.registerTask('debug', ['dev', 'bgShell:debug', 'watch']);
   // Build for production
   grunt.registerTask('build', ['compile', 'cssmin', 'uglify']);
   // Default task(s).

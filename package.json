@@ -21,8 +21,6 @@
     "rendr": "https://github.com/CodeNow/rendr/tarball/master",
     "debug": "*",
     "eson": "0.4.1",
-    "uuid": "~1.4.1",
-    "node-uuid": "~1.4.0",
     "redis": "~0.8.3",
     "connect-redis": "~1.4.5",
     "cookie": "~0.1.0",

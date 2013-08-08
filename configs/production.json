@@ -29,6 +29,7 @@
 
   "rendrApp": {
     "env" : "production",
+    "commitHash": "{COMMIT_HASH}",
     "mixpanel" : {
       "key": "8790acfcca0cab43adebbc796f1d4f96"
     },
