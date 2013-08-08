@@ -20,7 +20,8 @@ module.exports = BaseView.extend({
     if (showNext) nextLink = baseHref+'page/'+(page+1);
     return _.extend(this.options, {
       prevLink: prevLink,
-      nextLink: nextLink
+      nextLink: nextLink,
+      page: page
     });
   }
 });
