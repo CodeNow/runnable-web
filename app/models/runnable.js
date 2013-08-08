@@ -1,4 +1,7 @@
 var Base = require('./base');
+var utils = require('../utils');
+var contains = utils.contains;
+var not = utils.not;
 
 module.exports = Base.extend({
   isOwner: function (userId) {
@@ -9,6 +12,23 @@ module.exports = Base.extend({
   },
   isUserOwner: function (userId) {
     this.isOwner(this, arguments);
+  },
+  nameWithTags: function (surroundTagsWithParenthesis) {
+    var name = this.get('name');
+    var lower = name.toLowerCase();
+    var tagsNotInName = this.get('tags').filter(function (tag) {
+      var lowerTag = tag.name.toLowerCase();
+      var nameParts = lowerTag.split(/[- ]+/);
+      if (nameParts.length === 0) nameParts = [lowerTag];
+      return nameParts.every(not(inside(lower)));
+    });
+    var tagStr = '';
+    if (tagsNotInName.length) {
+      tagStr = ' for ' + utils.tagsToString(tagsNotInName);
+      if (surroundTagsWithParenthesis)
+        tagStr = ' (' + tagStr.slice(1) + ')';
+    }
+    return name + tagStr
   }
 });
 

@@ -7,7 +7,6 @@ var helpers = require('./helpers');
 var fetch = helpers.fetch;
 var fetchUser = helpers.fetchUser;
 var fetchImage = helpers.fetchImage;
-var fetchRelated = helpers.fetchRelated;
 var fetchOwnerOf = helpers.fetchOwnerOf;
 var fetchUserAndImage = helpers.fetchUserAndImage;
 var fetchUserAndContainer = helpers.fetchUserAndContainer;
@@ -34,6 +33,7 @@ module.exports = {
       }
     }
     else {
+      var nameWithTags;
       async.waterfall([
         fetchUserAndImage.bind(this, params._id),
         function check404 (results, cb) {
@@ -46,7 +46,8 @@ module.exports = {
         },
         function nameInUrl (results, cb) {
           var image = results.image;
-          var urlFriendlyName = utils.urlFriendly(results.image.get('name'));
+          nameWithTags = results.image.nameWithTags();
+          var urlFriendlyName = utils.urlFriendly(nameWithTags);
           if (encodeURIComponent(params.name) !== urlFriendlyName || params.channel) {
             var urlWithName = [image.id, urlFriendlyName].join('/');
             self.redirectTo(urlWithName);
@@ -94,13 +95,10 @@ module.exports = {
         }
       });
       function addSEO (results) {
-        var image = results.image;
-        var tags = utils.tagsToString(image.get('tags'), 'and');
-        tags = tags ? ' for '+tags : ''
         return _.extend(results, {
           page: {
-            title      : image.get('name') + tags,
-            description: ['Runnable Code Example: ', image.get('name'), tags].join(''),
+            title      : nameWithTags,
+            description: ['Runnable Code Example: ', nameWithTags].join(''),
             canonical: canonical.call(self)
           }
         });
@@ -124,7 +122,7 @@ module.exports = {
     fetch.call(this, spec, function (err, results) {
       if (err) { callback(err); } else {
         var tags = utils.tagsToString(results.channels, 'or');
-        tags = tags ? ' for '+tags : ''
+        tags = tags ? ' for '+tags : '';
         callback(null, _.extend(results, {
           page: {
             title: 'Create a new runnable for JQuery, Codeigniter, NodeJS, Express and more',

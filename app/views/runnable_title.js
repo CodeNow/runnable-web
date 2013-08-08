@@ -18,6 +18,7 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     var user = this.app.user;
     var noEdit = (this.model instanceof Image); // for now never show edit button for image
+    this.model.virtual.nameWithTags = this.model.nameWithTags(true);
     return _.extend(this.options, {
       isOwner: !noEdit && user.isOwnerOf(this.model)
     });

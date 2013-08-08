@@ -27,6 +27,7 @@ module.exports = RendrBase.extend({
     }
     return data;
   },
+  virtual: {}
   // get: function (key) {
   // //   var val = Super.get.apply(this, arguments);
   // //   return (utils.exists(val) && !this.ifVirtual(key))

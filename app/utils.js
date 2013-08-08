@@ -16,6 +16,24 @@ var utils = module.exports = {
   addAll: function() {
     return Array.prototype.slice.apply(arguments).reduce(utils.add);
   },
+  pluck: function (key) {
+    return function (obj) {
+      return obj[key];
+    };
+  },
+  inside: function (arrOrStr) {
+    return function (thing) {
+      console.log(thing);
+      return ~arrOrStr.indexOf(thing)
+    }
+  },
+  not: function (fn, ctx) {
+    ctx = ctx || this;
+    return function () {
+      console.log(arguments);
+      return fn.apply(ctx, arguments)
+    }
+  },
   andAll: function() {
     return Array.prototype.slice.apply(arguments).reduce(utils.and);
   },
@@ -148,7 +166,7 @@ var utils = module.exports = {
     var moreThanOneDash = /-{2,}/g;
     str = str
       .replace(urlUnfriendlyChars, '-')
-      .replace(/[.]/g, '') // replace periods
+      .replace(/[.,]/g, '-') // replace periods, commas
       .replace(moreThanOneDash, '-')
       .toLowerCase()
     ;
@@ -210,7 +228,7 @@ var utils = module.exports = {
     return Boolean(str && str.length === 16 && utils.isObjectId(utils.base64ToHex(str)));
   },
   tagsToString: function (tags, prelastword) {
-    prelastword = prelastword || ','
+    prelastword = prelastword || 'and'
     if (tags.length === 0) {
       return ''
     }
@@ -224,9 +242,7 @@ var utils = module.exports = {
         tags = tags.slice(0, maxLength);
         last = 'more';
       }
-      tags = tags.map(function (tag) {
-        return tag.name;
-      });
+      tags = tags.map(utils.pluck('name'));
       last = last || tags.pop();
       tags = tags.join(', ');
       tags += ' ' + prelastword + ' ' +last;
