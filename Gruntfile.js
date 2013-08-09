@@ -241,6 +241,7 @@ module.exports = function(grunt) {
     var done = this.async();
     var exec = require('child_process').exec;
     exec("git log -n 1 | grep commit | sed -e s/^commit\\ //", function (err, commitHash) {
+    exec("git log -n 1 | grep commit | sed -e s/^commit\\ // | sed -e s/\\ .*$//", function (err, commitHash) {
       if (err) { done(err); } else {
         var versionFile = 'module.exports="'+commitHash.trim()+'";';
         var filePath = path.join(__dirname, 'configs/commitHash.js');
