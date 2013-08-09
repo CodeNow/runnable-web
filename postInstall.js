@@ -29,7 +29,9 @@ d.run(function () {
     }
     else {
       log('new commit found '+commitHash);
-      squashRendr(installRendr(writeCommitFile));
+      squashRendr(function () {
+        installRendr(writeCommitFile);
+      });
     }
     function squashRendr (cb) {
       log('squashing rendr');
@@ -37,15 +39,20 @@ d.run(function () {
     }
     function installRendr (cb) {
       log('installing rendr');
-      var rendrPkg = { rendr:pkg['rendr'] };
+      var packages = ['rendr'].map(function(dep) {
+        var pkgDep = pkg.dependencies[dep];
+        return (~pkgDep.indexOf('://')) ?
+          pkgDep : // If it has a protocol, assume it's a link to a repo.
+          dep + '@' + pkgDep;
+      });
       npm.load({cwd:__dirname}, i(function () {
-        npm.commands.install(rendrPkg, i(cb));
+        npm.commands.install(packages, i(cb));
       }));
     }
     function writeCommitFile () {
       log('installed '+commitHash);
-      fs.writeFile('./.rendr-commit', commitHash, i(function() {
-        log("POSTINSTALL: %s", message);
+      fs.writeFile('./.rendr-commit', commitHash, i(function(message) {
+        log("POSTINSTALL: Rendr updated (%s)", commitHash);
       }));
     }
   }));
