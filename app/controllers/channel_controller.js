@@ -9,52 +9,60 @@ var canonical = helpers.canonical;
 
 module.exports = {
   index: function(params, callback) {
-    var spec = {
-      user: {
-        model  : 'User',
-        params : {
-          _id: 'me'
+    var lowerChannel = params.channel.toLowerCase();
+    if (params.channel != lowerChannel) {
+      var url = lowerChannel + ((params.page) ? '/page/'+params.page : '');
+      console.log(url);
+      this.redirectTo(url);
+    }
+    else {
+      var spec = {
+        user: {
+          model  : 'User',
+          params : {
+            _id: 'me'
+          }
+        },
+        images: {
+          collection : 'Images',
+          params     : {
+            sort: 'votes',
+            channel: lowerChannel,
+            page: (params.page && params.page-1) || 0
+          }
+        },
+        channels: {
+          collection : 'Channels',
+          params     : {
+            channel: lowerChannel
+          }
+        },
+        channel: {
+          model : 'Channel',
+          params: {
+            name: lowerChannel
+          }
         }
-      },
-      images: {
-        collection : 'Images',
-        params     : {
-          sort: 'votes',
-          channel: params.channel,
-          page: (params.page && params.page-1) || 0
-        }
-      },
-      channels: {
-        collection : 'Channels',
-        params     : {
-          channel: params.channel
-        }
-      },
-      channel: {
-        model : 'Channel',
-        params: {
-          name: params.channel
-        }
-      }
-    };
-    var self = this;
-    fetch.call(this, spec, function (err, results) {
-      if (err || results.images.length === 0) {
-        if (err) { callback(err); } else { // if err or no images found, go ahead and callback
-          results =  _.extend(results, { channel:params.channel });
-          results = addSEO(results);
-          callback(null, results);
-        }
-      } else {
-        fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
-          if (err) { callback(err); } else {
-            results = _.extend(results, ownerResults);
+      };
+      var self = this;
+      fetch.call(this, spec, function (err, results) {
+        if (err || results.images.length === 0) {
+          if (err) { callback(err); } else { // if err or no images found, go ahead and callback
+            results =  _.extend(results);
             results = addSEO(results);
             callback(null, results);
           }
-        });
-      }
-    });
+        } else {
+          fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
+            if (err) { callback(err); } else {
+              results = _.extend(results, ownerResults);
+              results = addSEO(results);
+              callback(null, results);
+            }
+          });
+        }
+      });
+    }
     function addSEO (results) {
       if (!results || !results.channel) {
         return results;
