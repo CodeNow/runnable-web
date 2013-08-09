@@ -11,6 +11,8 @@ module.exports = {
   'fetchUser':              fetchUser,
   'fetchImage':             fetchImage,
   'fetchContainer':         fetchContainer,
+  'fetchUserAndChannel':    fetchUserAndChannel,
+  'fetchChannelContents':   fetchChannelContents,
   'fetchOwnerOf':           fetchOwnerOf,
   'fetchOwnersFor':         fetchOwnersFor,
   'fetchRelated':           fetchRelated,
@@ -155,16 +157,43 @@ function fetchContainer (containerId, callback) {
   });
 }
 
-function fetchCategory (channelName, callback) {
+function fetchUserAndChannel (channelName, callback) {
   var spec = {
+    user: {
+      model:'User',
+      params:{
+        _id: 'me'
+      }
+    },
     channel: {
       model: 'Channel',
       params: {
-        name: channelName
+        name: channelName.toLowerCase()
       }
     }
   };
-  fetch.call(self, spec, callback);
+  fetch.call(this, spec, callback);
+}
+
+function fetchChannelContents (channelName, page, callback) {
+  var lowerChannel = channelName.toLowerCase();
+  var spec = {
+    images: {
+      collection : 'Images',
+      params     : {
+        sort: 'votes',
+        channel: lowerChannel,
+        page: (page && page-1) || 0
+      }
+    },
+    channels: {
+      collection : 'Channels',
+      params     : {
+        channel: lowerChannel
+      }
+    }
+  };
+  fetch.call(this, spec, callback);
 }
 
 function fetchOwnersFor (runnables, callback) {
