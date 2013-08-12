@@ -13,7 +13,7 @@ module.exports = Base.extend({
   isUserOwner: function (userId) {
     this.isOwner(this, arguments);
   },
-  nameWithTags: function (surroundTagsWithParenthesis) {
+  nameWithTags: function (surroundTagsWithBrackets) {
     var name = this.get('name');
     var lower = name.toLowerCase();
     var tagsNotInName = this.get('tags').filter(function (tag) {
@@ -24,9 +24,12 @@ module.exports = Base.extend({
     });
     var tagStr = '';
     if (tagsNotInName.length) {
-      tagStr = ' for ' + utils.tagsToString(tagsNotInName);
-      if (surroundTagsWithParenthesis)
-        tagStr = ' (' + tagStr.slice(1) + ')';
+      if (surroundTagsWithBrackets) {
+        tagStr = ' [' + utils.tagsToString(tagsNotInName) + ']';
+      }
+      else {
+        tagStr = ' for ' + utils.tagsToString(tagsNotInName);
+      }
     }
     return name + tagStr
   }
