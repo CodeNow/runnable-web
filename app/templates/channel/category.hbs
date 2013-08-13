@@ -6,7 +6,9 @@
       <nav class="cat-nav">
         {{#each categories.models}}
         {{#with attributes}}
-        {{view 'link' href=link text=name}}
+        <h3 style="font-size:16px; margin-bottom:0px;">
+          {{view 'link' href=link text=name}}
+        </h3>
         {{/with}}
         {{/each}}
         <a href="/all">Browse all code</a>
