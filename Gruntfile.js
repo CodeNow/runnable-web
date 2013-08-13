@@ -1,5 +1,6 @@
 var path = require('path');
 var _ = require('underscore');
+var livereloadPort = 35731;
 // in
 var sassDir   = 'assets/stylesheets';
 var sassIndex = path.join(sassDir, 'index.scss');
@@ -35,14 +36,14 @@ module.exports = function(grunt) {
 
     bgShell: {
       server: {
-        cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js index.js',
+        cmd: 'LIVERELOAD_PORT='+livereloadPort+' node ./node_modules/nodemon/nodemon.js index.js',
         bg: true,
         execOpts: {
           maxBuffer: 1000*1024
         }
       },
       debug: {
-        cmd: 'NODE_PATH=node_modules & node ./node_modules/nodemon/nodemon.js --debug index.js & ./node_modules/nodemon/nodemon.js -d 1 -x node-inspector index.js',
+        cmd: 'LIVERELOAD_PORT='+livereloadPort+' node ./node_modules/nodemon/nodemon.js --debug index.js & ./node_modules/nodemon/nodemon.js -d 1 -x node-inspector index.js',
         bg: true,
         execOpts: {
           maxBuffer: 1000*1024
@@ -136,9 +137,6 @@ module.exports = function(grunt) {
     },
 
     watch: {
-      options: {
-        livereload: 35731
-      },
       scripts: {
         files: ['app/**/*.js', '!node_modules/rendr/node_modules/*', 'node_modules/rendr/**/*.js'],
         tasks: ['rendr_stitch', 'copy:dev'],
@@ -160,17 +158,14 @@ module.exports = function(grunt) {
           interrupt: true
         }
       },
-      // livereload: {
-      //   files: [
-      //     'public/mergedAssets.js',
-      //     mergedCSSPath,
-      //     'public/images/*.*'
-      //   ],
-      //   options: {
-      //     livereload: 35731
-      //   },
-      //   tasks: []
-      // }
+      livereload: {
+        files: [mergedCSSPath, 'public/mergedAssets.min.js', 'public/images/*'],
+        tasks: ['noop'],
+        options: {
+          interrupt: true,
+          livereload: 35371
+        }
+      }
     },
 
     rendr_stitch: {
@@ -219,6 +214,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-bg-shell');
   grunt.loadNpmTasks('grunt-rendr-stitch');
+  grunt.registerTask('noop', 'noop', function () {});
   // generate app/channelImages.js
   grunt.registerTask('channel-images-hash', 'Create channel images hash to prevent 404s', function () {
     var fs = require('fs');
