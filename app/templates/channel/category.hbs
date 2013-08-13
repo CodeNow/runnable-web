@@ -6,7 +6,9 @@
       <nav class="cat-nav">
         {{#each categories.models}}
         {{#with attributes}}
-        {{view 'link' href=link text=name}}
+        <h3 style="font-size:16px; margin-bottom:0px;">
+          {{view 'link' href=link text=name}}
+        </h3>
         {{/with}}
         {{/each}}
         <a href="/all">Browse all code</a>
@@ -21,7 +23,7 @@
           <figure>{{view "channel_image" name=name}}</figure>
           {{/channelHasImage}}
           <span class="tag-count">{{count}}</span>
-          <h4>{{name}}</h4>
+          <h2 class="h2_hack">{{name}}</h2>
           <p class="tag-desc">{{{description}}}</p>
         </a>
         {{/with}}
