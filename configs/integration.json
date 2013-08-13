@@ -1,10 +1,10 @@
 {
 
   "port": 3000,
-  "ipaddress": "10.0.1.42",
+  "ipaddress": "10.0.1.150",
   "redis": {
     "port": 6379,
-    "host": "10.0.1.15"
+    "host": "10.0.1.14"
   },
 
   "cookieKey": "runnable.sid",
@@ -22,22 +22,22 @@
   "rollbar": "bbbd8090514a4b40a0ec53fbed32d882",
   "api": {
     "default": {
-      "host": "api.runnable.com",
+      "host": "api.cloudcosmos.com",
       "protocol": "http"
     }
   },
 
   "rendrApp": {
-    "env" : "production",
+    "env" : "integration",
     "commitHash": "{COMMIT_HASH}",
     "mixpanel" : {
-      "key": "8790acfcca0cab43adebbc796f1d4f96"
+      "key": "de848319a0091fb3a5876184d81a40ec"
     },
     "googleAnalytics" : {
-      "id": "UA-36631837-1"
+      "id": "UA-36631837-2"
     },
     "pageSize" : 25,
-    "domain": "runnable.com"
+    "domain": "cloudcosmos.com"
   }
 
 }

@@ -10,7 +10,6 @@
     {{#if locals.page.canonical}}
     <link rel="canonical" href="{{locals.page.canonical}}">
     {{/if}}
-    <meta name="fragment" content="!">
     <link href="/styles/index.css" media="screen" rel="stylesheet" type="text/css" />
   </head>
 
@@ -23,7 +22,11 @@
     <script>
       var CONFIG = window.CONFIG = {{json app}};
       var USER   = window.USER   = {{json locals.user}};
-      var _rollbarParams = {"server.environment": CONFIG.env, "client.javascript.source_map_enabled": true};
+      var _rollbarParams = {
+        "server.environment": CONFIG.env,
+        "client.javascript.source_map_enabled": true,
+        "client.javascript.code_version": CONFIG.commitHash
+      };
 
       // <!-- Rollbar Error Tracking -->
       _rollbarParams["notifier.snippet_version"] = "2"; var _rollbar=["4e8efcdd52444688aa5b53255cc959cb", _rollbarParams]; var _ratchet=_rollbar;

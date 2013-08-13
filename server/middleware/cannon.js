@@ -35,7 +35,7 @@ module.exports = function () {
         search: parsed.search,
         hash: parsed.hash
       });
-      res.redirect(newUrl);
+      res.redirect(301, newUrl);
     } else {
       next();
     }

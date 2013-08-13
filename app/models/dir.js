@@ -34,7 +34,7 @@ module.exports = Base.extend({
     // TODO add support for directories
     // }
     // else {
-    if (fileItem.size > 5000000) {
+    if (fileItem.size > 10000000) {
       callback('Sorry "'+fileItem.name+'" is too big (5MB max).');
     }
     else {
