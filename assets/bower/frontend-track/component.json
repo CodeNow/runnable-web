@@ -2,13 +2,6 @@
   "name": "frontend-track",
   "version": "0.1.1",
   "main": "frontend-track.js",
-  "dependencies": {},
-  "gitHead": "0885387aa1c3245396f6d7c6e4df5c090e40f76e",
-  "_id": "frontend-track@0.1.1",
-  "readme": "ERROR: No README.md file found!",
-  "description": "ERROR: No README.md file found!",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/CodeNow/frontend-track.git"
+  "dependencies": {
   }
 }

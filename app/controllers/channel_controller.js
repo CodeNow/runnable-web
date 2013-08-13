@@ -53,7 +53,7 @@ module.exports = {
     this.redirectTo(params._id +'/'+ params.name);
   },
   category: function (params, callback) {
-    params.category = params.category || 'PHP';
+    params.category = params.category || 'Featured';
     var self = this;
     var spec = {
       user: {

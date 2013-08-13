@@ -59,12 +59,17 @@
     </script>
 
     <!-- Qualaroo for runnable.com -->
-    <script type="text/javascript">var _kiq = _kiq || [];</script>
-    {{#if_eq env compare="production"}}
-    <script async type="text/javascript" src="//s3.amazonaws.com/ki.js/46198/9ai.js"></script>
-    <script type="text/javascript" charset="utf-8">
-    _kiq.push(['identify', USER.email || USER._id]);
+    <script type="text/javascript">window._kiq = window._kiq || [];</script>
+    {{#if_eq app.attributes.env compare="production"}}
+    <script type="text/javascript">
+      (function(){
+        setTimeout(function(){
+        var d = document, f = d.getElementsByTagName('script')[0], s = d.createElement('script'); s.type = 'text/javascript';
+        s.async = true; s.src = '//s3.amazonaws.com/ki.js/46198/9ai.js'; f.parentNode.insertBefore(s, f);
+        }, 1);
+      })();
     </script>
+    _kiq.push(['identify', USER.email || USER._id]);
     {{/if_eq}}
     <script src="/mergedAssets.min.js"></script>
     <script>
