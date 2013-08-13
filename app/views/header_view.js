@@ -7,6 +7,7 @@ module.exports = BaseView.extend({
   postHydrate: function () {
     this.listenTo(this.model, 'change:gravitar', this.render.bind(this));
     this.listenTo(this.app, 'change:loading', this.loader.bind(this));
+    this.loader(this.app, this.app.get('loading'));
   },
   events: {
     'click #header-login-link' : 'openLogin',
