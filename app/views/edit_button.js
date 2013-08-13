@@ -1,10 +1,17 @@
-var BaseView = require('./base_view');
+var EditorButtonView = require('./editor_button_view');
+var Super = EditorButtonView.prototype;
 
-module.exports = BaseView.extend({
+module.exports = EditorButtonView.extend({
   tagName: 'button',
   className: 'btn-tertiary',
   events: {
     'click': 'openContainerPage'
+  },
+  preRender: function () {
+    Super.preRender.call(this);
+  },
+  postHydrate: function () {
+    Super.postHydrate.call(this);
   },
   openContainerPage: function () {
     // in the future we may want to open a new container and not this one

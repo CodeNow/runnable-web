@@ -90,6 +90,14 @@ module.exports = RendrView.extend({
       this.$el.removeAttr('disabled');
     }
   },
+  loading: function (bool) {
+    if (bool) {
+      this.$el.addClass('loading');
+    }
+    else {
+      this.$el.removeClass('loading');
+    }
+  },
   viewName: function () {
     return _str.humanize(this.$el.attr('data-view'));
   },

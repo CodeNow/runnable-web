@@ -35,6 +35,20 @@
 	overflow:auto;
 }
 
+.terminal-view{
+	.loader{
+		display:none;
+		position:absolute;
+		left:10px;
+		top:25px;
+		color:white;
+	}
+}
+.terminal-view.loading{
+	.loader{
+		display:block;
+	}
+}
 
 // Tabs for controlling terminal/output
 // .console-tabs{

@@ -1,11 +1,18 @@
-var BaseView = require('./base_view');
+var EditorButtonView = require('./editor_button_view');
+var Super = EditorButtonView.prototype;
 
-module.exports = BaseView.extend({
+module.exports = EditorButtonView.extend({
   tagName: 'button',
   id: 'save-button-view',
   className: 'btn-save btn-tertiary',
   events: {
     'click' : 'saveAll'
+  },
+  preRender: function () {
+    Super.preRender.call(this);
+  },
+  postHydrate: function () {
+    Super.postHydrate.call(this);
   },
   postRender: function () {
     this.listenTo(this.collection, "unsaved", this.onChangeUnsaved.bind(this));

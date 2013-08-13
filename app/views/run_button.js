@@ -1,13 +1,18 @@
-var BaseView = require('./base_view');
+var EditorButtonView = require('./editor_button_view');
+var Super = EditorButtonView.prototype;
 var utils = require('../utils');
 
-module.exports = BaseView.extend({
+module.exports = EditorButtonView.extend({
   tagName: 'button',
   className: 'run-button btn-primary',
   events: {
     'click' : 'click'
   },
+  preRender: function () {
+    Super.preRender.call(this);
+  },
   postHydrate: function () {
+    Super.postHydrate.call(this);
     var dispatch = this.app.dispatch;
     if (dispatch) {
       this.listenTo(dispatch, 'unsaved:files', this.onChangeUnsaved.bind(this));
