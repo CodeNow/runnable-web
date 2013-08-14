@@ -7,6 +7,9 @@ form{
 			float:none;
 		}
 	}
+	.actions{
+		margin-bottom:$padding;
+	}
 	label{
 		display:block;
 		margin-bottom:5px;
@@ -43,7 +46,7 @@ form{
 			color:$bad-color;
 		}
 		input,textarea{
-			border-color:$bad-color;
+			border-color:$bad-color !important;
 		}
 	}
 }

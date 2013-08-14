@@ -5,10 +5,9 @@
 		</div>
 
 		<div class="notification bad">
-			<p>There was a problem publishing your code.</p>
+			<p>Sorry, we couldn't publish your code</p>
 			<ul>
-				<li>A descriptive title is required</li>
-				<li>At least one tag is required</li>
+				<li>Another code example with this title already exists. Please change your title and try again.</li>
 			</ul>
 		</div>
 
@@ -19,13 +18,18 @@
 				<h1>How To Find Out Who I Love With The Twitter Node.Js And Twitter API <a href="" class="edit-link">Edit</a></h1>
 			</section>
 
-	    	<section class="title">
-				<button class="btn-vote">833</button>
+	    	<section class="title no-vote">
 	    		<form>
-	    			<div class="item">
+	    			<div class="item error">
 	    				<input type="text" class="title-input" autofocus placeholder="Give your code example a title">
+	    				<p class="reason">Another code example with this title already exists. Please change your title and try again.</p>
 	    			</div>
-	    			<button class="btn-secondary">Save title</button>
+	    			<div class="item">
+	    				<input type="text" class="title-input" placeholder="Short description">
+	    			</div>
+	    			<div class="actions">
+	    				<button class="btn-secondary">Save title</button>
+	    			</div>
 	    		</form>
 	    	</section>
 
@@ -138,15 +142,12 @@
 				<nav class="related-nav">
 					<ul>
 						<li>
-							<button class="btn-vote">833</button>
 							<a href="">Login auth using sessions in express - Node.js</a>
 						</li>
 						<li>
-							<button class="btn-vote">833</button>
 							<a href="">Login auth using sessions in express - Node.js</a>
 						</li>
 						<li>
-							<button class="btn-vote">2</button>
 							<a href="">One liner</a>
 						</li>
 					</ul>
