@@ -1,10 +1,10 @@
 {{view "vote_button" model=model}}
 {{#with model.attributes}}
-<h3>
+<h2>
   <a href="/{{_id}}/{{urlFriendly name}}">
     {{name}}
   </a>
-</h3>
+</h2>
 {{#if tags}}
 {{#if tags.length}}
 <nav class="tags-nav">
