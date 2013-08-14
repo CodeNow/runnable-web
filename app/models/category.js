@@ -1,7 +1,6 @@
 var Base = require('./base');
 
 module.exports = Base.extend({
-  idAttribute: 'name',
-  urlRoot: '/channels/categories'
+  urlRoot: '/categories'
 });
 module.exports.id = 'Category';
