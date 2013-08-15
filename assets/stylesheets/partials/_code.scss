@@ -583,3 +583,16 @@ nav.file-tree > ul > li:first-child{
 		}
 	}
 }
+
+// Variables
+.variable-list{
+	padding:$padding;
+	background:rgba($primary-color,.05);
+	border:1px solid rgba($primary-color,.1);
+	@include border-radius($br);
+	margin-bottom:$padding;
+	table{
+		margin-bottom:$padding;
+		width:auto;
+	}
+}
