@@ -46,6 +46,10 @@
 				<a class="btn-tertiary" href=""><i class="icon-edit"></i> Edit Project</a>
 	    	</section>
 
+	    	<section class="variables">
+	    		<p>There are <strong>2</strong> variables required for this code. <a href="#" onclick="$('#required-variables-modal').show();return false;">Show</a>. <span class="hint--bottom" data-hint="Required variables are typically API keys or tokens required to run code examples"><i class="icon-question-sign"></i></span></p>
+	    	</section>
+
 	    	<section class="code-container">
 	    		<nav class="file-tabs">
 	    			<ul class="open-file-tabs">
@@ -393,6 +397,41 @@
 	    </section>
 	  </div>
 	</div>
+
+
+	<!-- Required variables -->
+	<div id="required-variables-modal" class="required-variables-modal lightbox display-none">
+	  <div class="modal">
+	    <section class="modal-header">
+	      <nav class="modal-tab-nav">
+	      	<a href="" class="selected">Variables</a>
+	      	<a href="">Instructions</a>
+	      </nav>
+	      <button type="button" class="btn-close"><i class="icon-remove"></i></button>
+	    </section>
+	    <section class="modal-body">
+	    	<div class="modal-content">
+	    	  <p>This code needs 2 variables to run.</p>
+		      <form>
+		        <div class="item">
+		          <label for="">FB API Key</label>
+		          <input type="text">
+		        </div>
+		        <div class="item">
+		          <label for="">Secret Token</label>
+		          <input type="text">
+		        </div>
+		        <div class="actions">
+		          <button class="btn-secondary">Save</button>
+		          <button class="btn-text">Cancel</button>
+		        </div>
+		      </form>
+		    </div>
+	    </section>
+	  </div>
+	</div>
+
+
 
 	<!-- Login -->
 	<div id="login" class="lightbox display-none login-modal">

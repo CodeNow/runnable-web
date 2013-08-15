@@ -2,7 +2,7 @@
 .lightbox{
 	background:rgba(0,0,0,.9);
 	position:fixed;
-	z-index:100;
+	z-index:999;
 	top:0;
 	left:0;
 	width:100%;
@@ -27,6 +27,22 @@
 			font-weight:normal;
 			line-height:50px;
 			text-transform: capitalize;
+		}
+		.modal-tab-nav{
+			position:absolute;
+			bottom:0;
+			a{
+				display:block;
+				float:left;
+				margin-right:5px;
+				padding:10px;
+				font-size:14px;
+				@include border-radius($br $br 0 0);
+				&.selected{
+					background:$toolbar;
+					color:#666;
+				}
+			}
 		}
 		.btn-close{
 			position:absolute;
