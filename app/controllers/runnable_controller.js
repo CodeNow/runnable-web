@@ -8,6 +8,7 @@ var fetch = helpers.fetch;
 var fetchUser = helpers.fetchUser;
 var fetchImage = helpers.fetchImage;
 var fetchOwnerOf = helpers.fetchOwnerOf;
+var fetchRelated = helpers.fetchRelated;
 var fetchUserAndImage = helpers.fetchUserAndImage;
 var fetchUserAndContainer = helpers.fetchUserAndContainer;
 var fetchFilesForContainer = helpers.fetchFilesForContainer;
@@ -33,7 +34,7 @@ module.exports = {
       }
     }
     else {
-      var nameWithTags;
+      var app = this.app;
       async.waterfall([
         fetchUserAndImage.bind(this, params._id),
         function check404 (results, cb) {
@@ -46,11 +47,9 @@ module.exports = {
         },
         function nameInUrl (results, cb) {
           var image = results.image;
-          nameWithTags = results.image.nameWithTags();
-          var urlFriendlyName = utils.urlFriendly(nameWithTags);
-          if (encodeURIComponent(params.name) !== urlFriendlyName || params.channel) {
-            var urlWithName = [image.id, urlFriendlyName].join('/');
-            self.redirectTo(urlWithName);
+          var imageURL = results.image.appURL();
+          if (!utils.isCurrentURL(app, imageURL)|| params.channel) {
+            self.redirectTo(imageURL);
           }
           else {
             cb(null, results);
@@ -64,16 +63,13 @@ module.exports = {
           });
         },
         function filesOwnerRelated (results, cb) {
-          var tags = results.container.attributes.tags;
           async.parallel([
             fetchFilesForContainer.bind(self, results.container.id),
             fetchOwnerOf.bind(self, results.image), //image owner
-            // fetchRelated.bind(self, tags)
+            fetchRelated.bind(self, results.image.id, results.container.attributes.tags)
           ],
           function (err, data) {
-            if (err) { cb(err); } else {
-              cb(null,  _.extend(results, data[0], data[1], {related:{models:[]}}));
-            }
+            cb(err, !err && _.extend(results, data[0], data[1], data[2]));
           });
         },
         function generatePermissions (results, cb) {
@@ -95,6 +91,7 @@ module.exports = {
         }
       });
       function addSEO (results) {
+        var nameWithTags = results.image.nameWithTags();
         return _.extend(results, {
           page: {
             title      : nameWithTags,

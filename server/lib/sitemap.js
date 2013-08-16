@@ -2,6 +2,8 @@ var sitemap = require('sitemap');
 var async = require('async');
 var request = require('request');
 var utils = require('../../app/utils');
+var imageModel =  require('../../app/models/image');
+var api = require('./env').current.api['default'];
 
 module.exports.init = function(app) {
 
@@ -16,7 +18,7 @@ module.exports.init = function(app) {
     async.parallel([
       function channel (cb) {
         request({
-          url: 'http://api.runnable.com/channels?map=true',
+          url: api.protocol+'://'+api.host+'/channels?map=true',
           json: {}
         }, function (err, res, channels) {
           if (err) {
@@ -34,18 +36,16 @@ module.exports.init = function(app) {
       },
       function project (cb) {
         request({
-          url: 'http://api.runnable.com/runnables?map=true',
+          url: api.protocol+'://'+api.host+'/runnables?map=true',
           json: {}
         }, function (err, res, projects) {
           if (err) {
             return cb(err);
           }
           projects.forEach(function (project) {
+            var model = new imageModel(project);
             urls.push({
-              url: 'http://runnable.com/' +
-                project._id +
-                '/' +
-                utils.urlFriendly(project.name),
+              url: 'http://runnable.com' + model.appURL(),
               changefreq: 'weekly',
               priority: 0.6
             });

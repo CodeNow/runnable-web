@@ -317,7 +317,7 @@ function fetchFilesForContainer (containerId, callback) {
   });
 }
 
-function fetchRelated (tags, cb) {
+function fetchRelated (imageId, tags, cb) {
   var tagNames = tags.map(function (tag) {
     return tag.name;
   });
@@ -331,5 +331,11 @@ function fetchRelated (tags, cb) {
       }
     }
   };
-  fetch.call(this, spec, cb);
+  fetch.call(this, spec, function (err, results) {
+    if (err) { cb(err); } else {
+      var selfInRelated = results.related.get(imageId);
+      if (selfInRelated) results.related.remove(selfInRelated);
+      cb(null, results);
+    }
+  });
 }
