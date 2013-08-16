@@ -18,7 +18,7 @@ module.exports = {
       function redirectCheck (channelResult, cb) {
         var channelName = channelResult.channel.get('name');
         if (channelName !== params.channel) {
-          var url = channelName + ((params.page) ? '/page/'+params.page : '');
+          var url = '/'+ channelName + ((params.page) ? '/page/'+params.page : '');
           self.redirectTo(url);
         }
         else {
