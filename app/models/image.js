@@ -41,6 +41,9 @@ module.exports = Runnable.extend({
         callback(null, image);
       }
     }
+  },
+  appURL: function () {
+    return '/'+this.id+'/'+utils.urlFriendly(this.nameWithTags());
   }
 });
 

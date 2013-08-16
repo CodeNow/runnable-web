@@ -34,7 +34,7 @@ module.exports = {
       }
     }
     else {
-      var nameWithTags;
+      var app = this.app;
       async.waterfall([
         fetchUserAndImage.bind(this, params._id),
         function check404 (results, cb) {
@@ -47,11 +47,9 @@ module.exports = {
         },
         function nameInUrl (results, cb) {
           var image = results.image;
-          nameWithTags = results.image.nameWithTags();
-          var urlFriendlyName = utils.urlFriendly(nameWithTags);
-          if (encodeURIComponent(params.name) !== urlFriendlyName || params.channel) {
-            var urlWithName = [image.id, urlFriendlyName].join('/');
-            self.redirectTo(urlWithName);
+          var imageURL = results.image.appURL();
+          if (!utils.isCurrentURL(app, imageURL)|| params.channel) {
+            self.redirectTo(imageURL);
           }
           else {
             cb(null, results);
@@ -93,6 +91,7 @@ module.exports = {
         }
       });
       function addSEO (results) {
+        var nameWithTags = results.image.nameWithTags();
         return _.extend(results, {
           page: {
             title      : nameWithTags,
