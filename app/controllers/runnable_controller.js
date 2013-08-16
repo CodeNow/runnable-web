@@ -8,6 +8,7 @@ var fetch = helpers.fetch;
 var fetchUser = helpers.fetchUser;
 var fetchImage = helpers.fetchImage;
 var fetchOwnerOf = helpers.fetchOwnerOf;
+var fetchRelated = helpers.fetchRelated;
 var fetchUserAndImage = helpers.fetchUserAndImage;
 var fetchUserAndContainer = helpers.fetchUserAndContainer;
 var fetchFilesForContainer = helpers.fetchFilesForContainer;
@@ -64,16 +65,13 @@ module.exports = {
           });
         },
         function filesOwnerRelated (results, cb) {
-          var tags = results.container.attributes.tags;
           async.parallel([
             fetchFilesForContainer.bind(self, results.container.id),
             fetchOwnerOf.bind(self, results.image), //image owner
-            // fetchRelated.bind(self, tags)
+            fetchRelated.bind(self, results.image.id, results.container.attributes.tags)
           ],
           function (err, data) {
-            if (err) { cb(err); } else {
-              cb(null,  _.extend(results, data[0], data[1], {related:{models:[]}}));
-            }
+            cb(err, !err && _.extend(results, data[0], data[1], data[2]));
           });
         },
         function generatePermissions (results, cb) {
