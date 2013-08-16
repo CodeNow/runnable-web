@@ -340,7 +340,7 @@ nav.file-tree > ul > li:first-child{
 	//padding:5px 0;
 	border:1px solid #eee;
 	min-width:150px;
-	z-index:999;
+	z-index:990;
 	.menu-options{
 		list-style:none;
 		padding:0;
@@ -581,5 +581,18 @@ nav.file-tree > ul > li:first-child{
 				font-weight:bold;
 			}
 		}
+	}
+}
+
+// Variables
+.variable-list{
+	padding:$padding;
+	background:rgba($primary-color,.05);
+	border:1px solid rgba($primary-color,.1);
+	@include border-radius($br);
+	margin-bottom:$padding;
+	table{
+		margin-bottom:$padding;
+		width:auto;
 	}
 }
