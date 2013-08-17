@@ -62,7 +62,7 @@ Router.prototype.postInitialize = function() {
 
 Router.prototype.handleError = function (err) {
   var viewPath;
-  if (err.status && err.status === 404 && err.status === 403) {
+  if (err.status && (err.status === 404 || err.status === 403)) {
     // 404 path
     viewPath = '404';
   }
@@ -70,7 +70,6 @@ Router.prototype.handleError = function (err) {
     viewPath = '500';
   }
   console.log(err.status, 'Error:', err);
-  this.appView.$content = $('html');
   var View = this.getView(viewPath);
   this.currentView = new View();
   this.renderView();
