@@ -19,6 +19,14 @@ module.exports = BaseView.extend({
         self.setIframeSrcPath('');
       }
     }, false);
+    var dispatch = this.app.dispatch;
+    if (dispatch) {
+      this.listenTo(dispatch, 'ready:box', this.onBoxReady.bind(this));
+    }
+  },
+  onBoxReady: function () {
+    this.refresh();
+    this.hideLoader();
   },
   postRender: function () {
     var navigationView = _.findWhere(this.childViews, {name:'web_navigation'});
@@ -38,6 +46,9 @@ module.exports = BaseView.extend({
     return {
       url: this.baseUrl
     };
+  },
+  hideLoader: function () {
+    this.$('.loading').hide();
   }
 });
 
