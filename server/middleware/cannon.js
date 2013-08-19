@@ -1,11 +1,20 @@
 var url = require('url');
 var utils = require('../../app/utils');
+var _ = require('underscore');
+var config = require('../lib/env').current;
 
 module.exports = function () {
-	return function (req, res, next) {
-    var parsed = url.parse(req.url);
+  return function (req, res, next) {
+    var port = (process.env.NODE_ENV == 'development') ? 3000 : null;
+    var split = req.url.split('?');
+    var parsed = {
+      protocol: req.protocol,
+      hostname: req.host,
+      port: port,
+      pathname: split[0],
+      search: split[1] && '?'+split[1]
+    };
     var dirty = false;
-
     if (/^www\./.test(parsed.hostname)) {
       dirty = true;
       parsed.hostname = parsed.hostname.replace(/^www\./, '');
@@ -21,20 +30,8 @@ module.exports = function () {
       parsed.pathname = parsed.pathname.replace(/\/$/, '');
     }
 
-    // if (checkForChannelProject(parsed.pathname)) {
-    //   dirty = true;
-    //   parsed.pathname = parsed.pathname.replace(/^\/[^\/]+\//, '/');
-    // }
-
     if (dirty) {
-      var newUrl = url.format({
-        protocol: parsed.protocol,
-        hostname: parsed.hostname,
-        port: parsed.port,
-        pathname: parsed.pathname,
-        search: parsed.search,
-        hash: parsed.hash
-      });
+      var newUrl = url.format(parsed);
       res.redirect(301, newUrl);
     } else {
       next();
