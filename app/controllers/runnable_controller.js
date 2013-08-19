@@ -84,6 +84,7 @@ module.exports = {
         // DEBUG!
         if(err && err.status) {
           console.log(err.status);
+          console.log((new Error()).message);
           console.log((new Error()).stack);
         }
         if (err) { callback(err); } else {
