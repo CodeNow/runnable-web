@@ -59,16 +59,16 @@ function initMiddleware() {
   app.set('views', __dirname + '/../app/views');
   app.set('view engine', 'js');
   app.engine('js', viewEngine);
-  app.use(require('./middleware/cannon')());
 
   // set the middleware stack
+  app.use(express.staticCache());
   app.configure('production', function() {
     app.use(express.compress());
   });
-  app.use(express.staticCache());
   app.use(express.static(__dirname + '/../public'));
+  app.use(require('./middleware/cannon')()); // no canon for static
   app.use(function (req, res, next) {
-    if (/\/(images|styles|scripts|external)\/.+/.test(req.url)) {
+    if (/^\/(images|styles|scripts|external)\/.+/.test(req.url)) {
       res.send(404); // prevent static 404s from hitting router
     } else {
       next();
