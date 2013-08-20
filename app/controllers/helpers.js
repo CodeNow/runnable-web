@@ -168,7 +168,7 @@ function fetchUserAndChannel (channelName, callback) {
     channel: {
       model: 'Channel',
       params: {
-        name: channelName.toLowerCase()
+        name: channelName
       }
     }
   };
@@ -176,20 +176,19 @@ function fetchUserAndChannel (channelName, callback) {
 }
 
 function fetchChannelContents (channelName, page, callback) {
-  var lowerChannel = channelName.toLowerCase();
   var spec = {
     images: {
       collection : 'Images',
       params     : {
         sort: 'votes',
-        channel: lowerChannel,
+        channel: channelName,
         page: (page && page-1) || 0
       }
     },
     channels: {
       collection : 'Channels',
       params     : {
-        channel: lowerChannel
+        channel: channelName
       }
     }
   };
