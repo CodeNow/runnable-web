@@ -24,12 +24,11 @@ module.exports.handle500 = function (req, res, next) {
 
     // Respond with HTML
     if (req.accepts('html')) {
+      res.set('Content-Type', 'text/html');
       res.sendfile(path.join(__dirname, '/../../app/templates/500.hbs'));
-
     // Respond with JSON
     } else if (req.accepts('json')) {
       res.json({error: 'Application error'});
-
     // Respond with plain-text.
     } else {
       res.type('txt').send('Application error');

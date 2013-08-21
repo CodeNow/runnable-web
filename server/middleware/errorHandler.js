@@ -10,11 +10,13 @@ module.exports = function() {
       res.redirect('/login');
     } else if (err.status === 404 || err.status === 403) { //permission denied as 404 for now
       handle404.handle404(req, res, next);
-    } else {
-      if (process.env.NODE_ENV == 'development')
+    } else { // 500
+      if (process.env.NODE_ENV == 'development') {
         express.errorHandler()(err, req, res, next);
-      else
+      }
+      else {
         handle404.handle500(req, res, next);
+      }
     }
   };
 };
