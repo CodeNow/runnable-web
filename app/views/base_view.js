@@ -2,6 +2,8 @@ var RendrView = require('rendr/shared/base/view');
 var Super = RendrView.prototype;
 var _ = require('underscore');
 var _str = require('underscore.string');
+var utils = require('../utils');
+
 
 // Create a base view, for adding common extensions to our
 // application's views.
@@ -91,11 +93,18 @@ module.exports = RendrView.extend({
     }
   },
   loading: function (bool) {
-    if (bool) {
-      this.$el.addClass('loading');
+    if (utils.exists(bool)) {
+      // SET
+      if (bool) {
+        this.$el.addClass('loading');
+      }
+      else {
+        this.$el.removeClass('loading');
+      }
     }
     else {
-      this.$el.removeClass('loading');
+      // GET
+      return this.$el.hasClass('loading');
     }
   },
   viewName: function () {

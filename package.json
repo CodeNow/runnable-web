@@ -32,7 +32,8 @@
     "rollbar": "*",
     "rimraf": "~2.2.1",
     "sitemap": "~0.6.0",
-    "underscore.string": "~2.3.3"
+    "underscore.string": "~2.3.3",
+    "nprogress": "git://github.com/tjmehta/nprogress#e03c00d1756f4bb6960ef12551aaf2557708cab0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
