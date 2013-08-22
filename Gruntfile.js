@@ -145,7 +145,7 @@ module.exports = function(grunt) {
         }
       },
       templates: {
-        files: ['!app/templates/compiledTemplates.js', 'app/templates/**/*.hbs'],
+        files: ['app/templates/**/*.hbs'],
         tasks: ['handlebars'],
         options: {
           interrupt: true
@@ -178,7 +178,8 @@ module.exports = function(grunt) {
             backbone: '../rendr/node_modules/backbone/backbone.js',
             handlebars: '../rendr/node_modules/handlebars/dist/handlebars.runtime.js',
             async: '../rendr/node_modules/async/lib/async.js',
-            moment: '../moment/moment.js'
+            moment: '../moment/moment.js',
+            marked: '../marked/lib/marked.js'
           },
           aliases: [
             {from: rendrDir + '/client', to: 'rendr/client'},

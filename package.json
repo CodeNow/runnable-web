@@ -32,7 +32,8 @@
     "rollbar": "*",
     "rimraf": "~2.2.1",
     "sitemap": "~0.6.0",
-    "underscore.string": "~2.3.3"
+    "underscore.string": "~2.3.3",
+    "marked": "~0.2.9"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

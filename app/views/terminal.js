@@ -25,11 +25,15 @@ module.exports = BaseView.extend({
       this.removeWindowMessageListener();
     }
     else {
+      var dispatch = this.app.dispatch;
+      var timeout = setTimeout(function () {
+        dispatch.trigger('ready:box');
+        this.app.set('loading', false);
+        this.loading(false);
+      }, 5000);
       this.onWindowMessage = function (evt) {
         var hostname = window.location.host.split(':')[0]; //no port
         var runnableSubdomain = new RegExp(hostname.replace('.', '\\.')); //esc periods
-        var dispatch = this.app.dispatch;
-        var timeout = setTimeout(dispatch.trigger.bind(dispatch, 'ready:box'), 5000);
         if (runnableSubdomain.test(evt.origin)) {
           clearTimeout(timeout);
           dispatch.trigger('ready:box');
