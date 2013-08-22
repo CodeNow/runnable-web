@@ -17,6 +17,8 @@ module.exports = BaseView.extend({
     $iframe.attr('src', url);
   },
   listenToWindowMessage: function () {
+    var dispatch = this.app.dispatch;
+    var timeout;
     if (this.onWindowMessage) {
       this.removeWindowMessageListener();
     }
@@ -24,8 +26,6 @@ module.exports = BaseView.extend({
       this.onWindowMessage = function (evt) {
         var hostname = window.location.host.split(':')[0]; //no port
         var runnableSubdomain = new RegExp(hostname.replace('.', '\\.')); //esc periods
-        var dispatch = this.app.dispatch;
-        var timeout = setTimeout(dispatch.trigger.bind(dispatch, 'ready:box'), 5000);
         if (runnableSubdomain.test(evt.origin)) {
           clearTimeout(timeout);
           dispatch.trigger('ready:box');
@@ -33,6 +33,7 @@ module.exports = BaseView.extend({
         }
       }.bind(this);
     }
+    timeout = setTimeout(this.showError.bind('Error'), 10000);
     window.addEventListener('message', this.onWindowMessage);
   },
   removeWindowMessageListener: function () {

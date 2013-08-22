@@ -18,7 +18,7 @@ module.exports = BaseView.extend({
     var dispatch = this.app.dispatch;
     if (dispatch) {
       this.loading(true);
-      this.listenTo(dispatch, 'ready:box', this.onBoxReady.bind(this));
+      this.listenToOnce(dispatch, 'ready:box', this.onBoxReady.bind(this));
     }
   },
   postRender: function () {
@@ -43,18 +43,22 @@ module.exports = BaseView.extend({
   loading: function (bool) {
     if (utils.exists(bool)) {
       if (bool) {
-        if (!this.nprogress){
-          this.nprogress = require('nprogress').create(); // donot require this serverside! it will crash
-          this.nprogress.configure({ el:this.el, showSpinner:false });
-          this.nprogress.start();
-        }
+        this.ifNotThenShowProgress();
       }
       else {
+        this.ifNotThenShowProgress();
         this.nprogress.done();
         this.nprogress = null;
       }
     }
     return Super.loading.apply(this, arguments);
+  },
+  ifNotThenShowProgress: function () {
+    if (!this.nprogress) {
+      this.nprogress = require('nprogress').create(); // donot require this serverside! it will crash
+      this.nprogress.configure({ el:this.el, showSpinner:false });
+      this.nprogress.start();
+    }
   }
 });
 
