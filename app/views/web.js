@@ -6,13 +6,13 @@ module.exports = BaseView.extend({
   postInitialize: function () {
     if (this.model) {
       //first render..
-      this.baseUrl = "http://" + this.model.get("docker_id") + "." + this.app.get('domain');
+      this.baseUrl = "http://" + this.model.get("webToken") + "." + this.app.get('domain');
     }
   },
   postHydrate: function () {
     //clientside
     var self = this;
-    this.baseUrl = "http://" + this.model.get("docker_id") + "." + this.app.get('domain');
+    this.baseUrl = "http://" + this.model.get("webToken") + "." + this.app.get('domain');
     this.setIframeSrcPath('');
     window.addEventListener("message", function (event) {
       if (event.data === 'Refresh') {

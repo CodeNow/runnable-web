@@ -7,7 +7,7 @@ module.exports = BaseView.extend({
     this.listenToWindowMessage();
   },
   preRender: function () {
-    var url = "http://logs." + this.app.get('domain') + "/log.html?termId=" + this.model.get("token");
+    var url = "http://" + this.model.get("servicesToken")+ "." + this.app.get('domain') + "/static/log.html";
     this.attributes = {
       src: url
     };

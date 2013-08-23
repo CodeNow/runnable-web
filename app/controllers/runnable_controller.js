@@ -6,6 +6,9 @@ var helpers = require('./helpers');
 
 var fetch = helpers.fetch;
 var fetchUser = helpers.fetchUser;
+var fetchImplementation = helpers.fetchImplementation;
+var fetchSpecification = helpers.fetchSpecification;
+var fetchSpecifications = helpers.fetchSpecifications;
 var fetchImage = helpers.fetchImage;
 var fetchOwnerOf = helpers.fetchOwnerOf;
 var fetchRelated = helpers.fetchRelated;
@@ -149,13 +152,29 @@ module.exports = {
     fetchUserAndContainer.call(this, params._id, function (err, results) {
       if (err) { callback(err); } else {
         var container = results.container;
-        callback(null, _.extend(results, {
-          page: {
-            title: 'Output: '+container.get('name'),
-            description: 'Web and console output for '+container.get('name'),
-            canonical: canonical.call(self)
-          }
-        }));
+        if (container.get('specification')) {
+          fetchImplementation(container.get('specification'), results.user._id, function (err, implementation) {
+            if (err) { callback(err); } else {
+              // IF NO IMPLEMENTATION DEAL WITH IT AS ERROR
+              container.webToken = implementation.subdomain;
+              callback(null, _.extend(results, {
+                page: {
+                  title: 'Output: ' + container.get('name'),
+                  description: 'Web and console output for ' + container.get('name'),
+                  canonical: canonical.call(self)
+                }
+              }));
+            }
+          });
+        } else {
+          callback(null, _.extend(results, {
+            page: {
+              title: 'Output: '+container.get('name'),
+              description: 'Web and console output for '+container.get('name'),
+              canonical: canonical.call(self)
+            }
+          }));
+        }
       }
     });
   },
@@ -169,6 +188,33 @@ module.exports = {
         }
         else {
           cb(null, results);
+        }
+      },
+      function getSpecifications (results, cb) {
+        fetchSpecifications.call(self, function (err, specifications) {
+          if (err) {
+            cb(err);
+          } else {
+            results.specifications = specifications;
+            cb(null, results);
+          }
+        });
+      },
+      function handleSpecification (results, cb) {
+        if (!results.container.get('specification')) {
+          console.log('NO SPEC');
+          cb(null, results);
+        } else {
+          console.log('SPEC');
+          fetchSpecification.call(self, results.container.get('specification'), function (err, specification) {
+            console.log('FETCHED SPEC', err, specification);
+            if (err) {
+              cb(err);
+            } else {
+              results.specification = specification;
+              cb(null, results);
+            }
+          });
         }
       },
       function parentAndFiles (results, cb) {

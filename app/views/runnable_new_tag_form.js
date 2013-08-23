@@ -6,7 +6,7 @@ var _ = require('underscore');
 
 
 module.exports = BaseView.extend({
-	tagName: 'form',
+  tagName: 'form',
   events: {
     'submit' : 'addNewTag'
   },

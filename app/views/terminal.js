@@ -7,11 +7,14 @@ module.exports = BaseView.extend({
     'click .icon-external-link' : 'popOpenTerminal'
   },
   popOpenTerminal: function () {
-    window.open("http://terminals." + this.app.get('domain') + "/term.html?termId=" + this.model.get("token"), "_blank");
+    window.open("http://" + this.model.get("servicesToken") + "." + this.app.get('domain') + "/static/term.html", "_blank");
   },
   postRender: function () {
+    var self = this;
     this.$iframe = $('.terminal-iframe');
-    this.$iframe.attr('src', "http://terminals." + this.app.get('domain') + "/term.html?termId=" + this.model.get("token"));
+    $.get("http://" + this.model.get("servicesToken") + "." + this.app.get('domain') + "/api/env").always(function() { 
+      self.$iframe.attr('src', "http://" + self.model.get("servicesToken") + "." + self.app.get('domain') + "/static/term.html");
+    });
   },
   postHydrate: function () {
     setTimeout(function () {
@@ -30,7 +33,7 @@ module.exports = BaseView.extend({
         dispatch.trigger('ready:box');
         this.app.set('loading', false);
         this.loading(false);
-      }, 5000);
+      }.bind(this), 5000);
       this.onWindowMessage = function (evt) {
         var hostname = window.location.host.split(':')[0]; //no port
         var runnableSubdomain = new RegExp(hostname.replace('.', '\\.')); //esc periods

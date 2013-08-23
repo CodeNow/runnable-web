@@ -24,6 +24,16 @@
       <section class="module display-none">
         {{view "runnable_owner" model=container}}
       </section>
+      <section class="module">
+        <h3>Service</h3>
+        {{#if specification}}
+        {{view "service" model=specification collection=specifications editmode=isVerified}}
+        {{else}}
+        {{#if isVerified}}
+        {{view "add_service" model=container collection=specifications}}
+        {{/if}}
+        {{/if}}
+      </section>
       <section class="module tags">
         <h3>Tags</h3>
         {{view "runnable_tags" model=container editmode=isVerified}}
