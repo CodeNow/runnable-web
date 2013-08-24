@@ -1,22 +1,17 @@
 var BaseView = require('./base_view');
-var utils = require('../utils');
 var Image = require('../models/image');
-var _ = require('underscore');
 var utils = require('../utils');
 
-var Super = BaseView.prototype;
 module.exports = BaseView.extend({
-  tagName: 'div',
   events: {
     'click .edit-link': 'clickEdit',
-    'submit form'      : 'submitName',
+    'submit form'     : 'submitDescription',
     'click .btn-cancel': 'escEditMode'
   },
   postRender: function () {
-    this.listenTo(this.model, 'change:name', this.render.bind(this));
+    this.listenTo(this.model, 'change:description', this.render.bind(this));
   },
   getTemplateData: function () {
-    this.model.virtual.nameWithTags = this.model.nameWithTags(true);
     this.options.canEdit = !(this.model instanceof Image) &&
       this.app.user.canEdit(this.model);
     return this.options;
@@ -32,12 +27,12 @@ module.exports = BaseView.extend({
     this.options.editMode = bool;
     this.render();
   },
-  submitName: function (evt) {
+  submitDescription: function (evt) {
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
     var options = utils.cbOpts(cb, this);
     this.options.editMode = false; // assume success, change will rerender
-    this.model.save(formData,  options);
+    this.model.save(formData, options);
     function cb (err) {
       if (err) {
         this.setEditMode(true);
@@ -47,4 +42,4 @@ module.exports = BaseView.extend({
   }
 });
 
-module.exports.id = 'RunnableTitle';
+module.exports.id = "RunnableDescription";
