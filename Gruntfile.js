@@ -13,6 +13,7 @@ var rendrDir        = 'node_modules/rendr';
 var compassCSS      = 'public/styles/index.css';
 var mergedCSSPath   = 'public/styles/index.css';
 var minCSS = [
+  'assets/bower/AutoCompleteJS/css/autocomplete.css',
   compassCSS
 ];
 //stitch
@@ -25,7 +26,8 @@ var frontendScripts = [
   'assets/vendor/*.js',
   'assets/vendor/jquery-ui/js/jquery-1.9.1.js',
   'assets/vendor/jquery-ui/js/jquery-ui-1.10.3.custom.js',
-  'assets/bower/frontend-track/frontend-track.js'
+  'assets/bower/frontend-track/frontend-track.js',
+  'assets/bower/AutoCompleteJS/js/autocomplete.js'
 ]
 .concat(aceScripts);
 

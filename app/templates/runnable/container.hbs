@@ -26,13 +26,7 @@
       </section>
       <section class="module">
         <h3>Service</h3>
-        {{#if specification}}
-        {{view "service" model=specification collection=specifications editmode=isVerified}}
-        {{else}}
-        {{#if isVerified}}
-        {{view "add_service" model=container collection=specifications}}
-        {{/if}}
-        {{/if}}
+        {{view "service" model=container collection=specifications editmode=isVerified}}
       </section>
       <section class="module tags">
         <h3>Tags</h3>

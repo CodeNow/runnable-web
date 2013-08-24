@@ -191,6 +191,7 @@ module.exports = {
         }
       },
       function getSpecifications (results, cb) {
+        //merge into parallel
         fetchSpecifications.call(self, function (err, specifications) {
           if (err) {
             cb(err);
@@ -199,23 +200,6 @@ module.exports = {
             cb(null, results);
           }
         });
-      },
-      function handleSpecification (results, cb) {
-        if (!results.container.get('specification')) {
-          console.log('NO SPEC');
-          cb(null, results);
-        } else {
-          console.log('SPEC');
-          fetchSpecification.call(self, results.container.get('specification'), function (err, specification) {
-            console.log('FETCHED SPEC', err, specification);
-            if (err) {
-              cb(err);
-            } else {
-              results.specification = specification;
-              cb(null, results);
-            }
-          });
-        }
       },
       function parentAndFiles (results, cb) {
         async.parallel([

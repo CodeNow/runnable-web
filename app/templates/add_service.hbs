@@ -1,1 +1,103 @@
-<button class="btn-secondary btn-small left"><i class="icon-plus"></i> Add service</button>
+<article class="modal">
+  <section class="modal-header">
+    <h3>
+      <span class="progress">{{#if phase1}}1{{else}}✓{{/if}}</span>
+      <hr class="spacer"></hr>
+      <span class="progress">{{#if phase1}}2{{else}}{{#if phase2}}2{{else}}✓{{/if}}{{/if}}</span>
+      <hr class="spacer"></hr>
+      <span class="progress">3</span>
+    </h3>
+    <button type="button" class="btn-close"><i class="icon-remove"></i></button>
+  </section>
+  <section class="modal-body">
+    <div class="modal-content">
+      {{#if phase1}}
+      <h4>Add a Service</h4>
+      <form>
+        <label>
+          <span>Service:</span>
+          <select>
+            <option value="null">
+            {{#each collection.models}}
+            <option value="{{attributes._id}}">{{attributes.name}}
+            {{/each}}
+            <option value="new"{{#if new}}selected="selected"{{/if}}>new service
+          </select>
+        </label>
+        {{#if new}}
+        <label>
+          <span>Name:</span>
+          <input name="name" value="{{specification.attributes.name}}" required>
+        </label>
+        <label>
+          <span>Description:</span>
+          <input name="description" value="{{specification.attributes.description}}" required>
+        </label>
+        {{/if}}
+        <div class="right">
+          <button name="next" class="btn-primary">Next</button>
+        </div>
+      </form>
+      {{/if}}
+      {{#if phase2}}
+      {{#if new}}
+      <h4>Add Required Keys</h4>
+      <p>List variables that user should fill in . . . </p>
+      {{#each specification.attributes.requirements}}
+      <div>
+        <form>
+          <input name="{{.}}" value="{{.}}">: 
+          <input disabled>
+        </form>
+      </div>
+      {{/each}}
+      <form name="newKey">
+        <span>New Key:</span>
+        <input name="new">
+        <button type="button" class="btn-secondary btn-small">
+          <i class="icon-plus"></i>
+        </button>
+      </form>
+      <div class="right">
+        <button name="prev" class="btn-primary">Prev</button>
+        <button name="next" class="btn-primary">Next</button>
+      </div>
+      {{else}}
+      <h4>View Keys</h4>
+      {{#each specification.attributes.requirements}}
+      <div>
+        <label>
+          <span>{{.}}:</span> 
+          <input disabled>
+        </label>
+      </div>
+      {{/each}}
+      <div class="right">
+        <button name="prev" class="btn-primary">Prev</button>
+        <button name="next" class="btn-primary">Next</button>
+      </div>
+      {{/if}}
+      {{/if}}
+      {{#if phase3}}
+      <div>phase3</div>
+      {{/if}}
+    </div>
+  </section>
+</article>
+<style>
+  .progress {
+    border: 2px solid;
+    font-size: 27px;
+    display: inline-block;
+    height: 36px;
+    line-height: 45px;
+    width: 36px;
+    text-align: center;
+    border-radius: 22px;
+  }
+  .spacer {
+    display: inline-block;
+    width: 191px;
+    border-bottom: 2px solid;
+  }
+</style>
