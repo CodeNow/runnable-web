@@ -47,7 +47,7 @@
     "mocha": "~1.9.0",
     "should": "~1.2.2",
     "console-trace": "numbcoder/console-trace",
-    "generator-rendr": "~0.0.5",
+    "generator-rendr": "~0.0.6",
     "subl": "tjmehta/node-subl",
     "grunt-contrib-uglify": "~0.2.2",
     "grunt-contrib-jshint": "~0.6.0",

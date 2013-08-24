@@ -1,8 +1,7 @@
 var BaseView = require('./base_view');
-var BaseModel = require('../models/base');
-var BaseCollection = require('../collections/base');
+var Tag = require('../models/runnable/tag');
+var Tags = require('../collections/runnable/tags');
 var utils = require('../utils');
-var _ = require('underscore');
 
 
 module.exports = BaseView.extend({
@@ -11,11 +10,7 @@ module.exports = BaseView.extend({
     'submit' : 'addNewTag'
   },
   postHydrate: function () {
-    BaseCollection = BaseCollection.extend({model:BaseModel});
-    this.collection = new BaseCollection(this.model.get('tags'), {
-      app: this.app,
-      url:'/users/me/runnables/'+this.model.id+'/tags'
-    });
+    this.collection = new Tags(this.model.get('tags'), { app: this.app, runnableId:this.model.id  });
     this.listenTo(this.collection, 'add remove change', this.collectionChange.bind(this));
     this.listenTo(this.model, 'change:tags', this.onChange.bind(this));
   },
@@ -32,10 +27,8 @@ module.exports = BaseView.extend({
     var formData = $(evt.currentTarget).serializeObject();
     var collection = this.collection;
     this.disableForm();
-    var tag = new BaseModel(formData, {app:this.app});
-    tag.urlRoot = _.result(collection, 'url');
+    var tag = new Tag(formData, { app:this.app, runnableId:this.model.id });
     var options = utils.cbOpts(saveCallback.bind(this));
-    options.method = 'POST';
     tag.save({}, options);
     function saveCallback (err, tagSaved) {
       this.enableForm();
