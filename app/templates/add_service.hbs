@@ -45,16 +45,19 @@
       <p>List variables that user should fill in . . . </p>
       {{#each specification.attributes.requirements}}
       <div>
-        <form>
-          <input name="{{.}}" value="{{.}}">: 
+        <form name="req:{{.}}">
+          <span>{{.}}:</span>
           <input disabled>
+          <button class="btn-secondary btn-small">
+            <i class="icon-minus"></i>
+          </button>
         </form>
       </div>
       {{/each}}
       <form name="newKey">
         <span>New Key:</span>
-        <input name="new">
-        <button type="button" class="btn-secondary btn-small">
+        <input name="new" required>
+        <button class="btn-secondary btn-small">
           <i class="icon-plus"></i>
         </button>
       </form>
@@ -79,7 +82,31 @@
       {{/if}}
       {{/if}}
       {{#if phase3}}
-      <div>phase3</div>
+      {{#if new}}
+      <h4>Instructions</h4>
+      <label>
+        <span>Preview:</span>
+        <input type="checkbox" {{#if preview}}checked{{/if}}>
+      </label>
+      {{#if preview}}
+      <p>{{{rendered}}}</p>
+      {{else}}
+      <p>
+        <textarea>{{specification.attributes.instructions}}</textarea>
+      </p>
+      {{/if}}
+      <div class="right">
+        <button name="prev" class="btn-primary">Prev</button>
+        <button name="finish" class="btn-primary">Finish</button>
+      </div>
+      {{else}}
+      <h4>View Instructions</h4>
+      <p>{{specification.attributes.instructions}}</p>
+      <div class="right">
+        <button name="prev" class="btn-primary">Prev</button>
+        <button name="finish" class="btn-primary">Finish</button>
+      </div>
+      {{/if}}
       {{/if}}
     </div>
   </section>

@@ -3,6 +3,11 @@ var Super = ModalView.prototype;
 var utils = require('../utils');
 var _ = require('underscore');
 var Specification = require('../models/specification');
+var marked = require('marked');
+
+marked.setOptions({
+  sanitize: true
+});
 
 module.exports = ModalView.extend({
   events: {
@@ -13,13 +18,16 @@ module.exports = ModalView.extend({
     'submit form'      : 'submit',
     'change select'    : 'submit',
     'click button[name=next]': 'submit',
-    'click button[name=prev]': 'prev'
+    'click button[name=prev]': 'prev',
+    'click button[name=finish]': 'finish',
+    'click [type=checkbox]': 'togglePreview'
   },
   postRender: function () {
     Super.postRender.apply(this, arguments);
   },
   postInitialize: function () {
     this.phase = 1;
+    this.preview = false;
   },
   getTemplateData: function () {
     return _.extend(this.options, {
@@ -27,18 +35,19 @@ module.exports = ModalView.extend({
       phase1: this.phase === 1,
       phase2: this.phase === 2,
       phase3: this.phase === 3,
-      new: this.new
+      new: this.new,
+      preview: this.preview,
+      rendered: this.preview && marked(this.specification.get('instructions'))
     });
   },
   submit: function (evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    debugger;
     if (this.phase === 1) {
       this.parseSelect();
     } else if (this.phase === 2) {
       if (this.new) {
-        debugger;
+        this.adjustKeys($(evt.target).attr("name"));
       } else {
         this.next();
       }
@@ -75,18 +84,61 @@ module.exports = ModalView.extend({
       this.next();
     }
   },
-  newKey: function () {
-    alert('new key')
+  adjustKeys: function (name) {
+    console.log('NAME', name);
+    if (name === 'newKey') {
+      var key = this.$('[name=new]').val();
+      if (key === '') {
+        alert('enter value');
+      } else {
+        var requirements = this.specification.get('requirements');
+        requirements.push(key);
+        this.specification.set('requirements', requirements);
+        this.render();
+      }
+    } else if (name === 'next') {
+      this.next();
+    } else {
+      var key = name.replace(/^req:/,'');
+      var requirements = this.specification.get('requirements');
+      requirements = requirements.filter(function (requirement) {
+        return requirement !== key;
+      });
+      this.specification.set('requirements', requirements);
+      this.render();
+    }
   },
-  attachService: function (evt) {
+  addService: function () {
+    if (!this.preview) {
+      this.specification.set('instructions', this.$('textarea').val());
+    }
+    this.specification.save({}, utils.cbOpts(function (err, saved) {
+      if (err) {
+        console.error(err);
+      } else {
+        this.specification = saved;
+        this.collection.add(this.specification);
+        this.attachService();
+      }
+    }.bind(this)));
+  },
+  attachService: function () {
     this.model.set('specification', this.specification.id);
     this.model.save({}, utils.cbOpts(function (err) {
       if (err) {
         console.error(err);
       } else {
-        debugger;
+        this.options.parent.render();
+        this.close();
       }
     }.bind(this)));
+  },
+  togglePreview: function () {
+    if (!this.preview) {
+      this.specification.set('instructions', this.$('textarea').val());
+    }
+    this.preview = !this.preview;
+    this.render();
   },
   prev: function () {
     this.phase--;
@@ -95,6 +147,13 @@ module.exports = ModalView.extend({
   next: function () {
     this.phase++;
     this.render();
+  },
+  finish: function () {
+    if (this.new) {
+      this.addService();
+    } else {
+      this.attachService();
+    }
   }
 });
 
