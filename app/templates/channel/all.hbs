@@ -1,7 +1,7 @@
 {{view "header_view" model=user context=.}}
 <div class="content">
   <div class="container">
-    <h1>Run, edit &amp; share code in your browser</h1>
+    <h1>{{page.title}}</h1>
     {{view "runnable_list" collection=images className="span9"}}
     <aside class="span3 last runnable-sidebar">
       <section class="module">

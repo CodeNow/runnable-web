@@ -8,11 +8,11 @@ var fetchOwnersFor = helpers.fetchOwnersFor;
 var fetchUserAndChannel = helpers.fetchUserAndChannel;
 var fetchChannelContents = helpers.fetchChannelContents;
 var canonical = helpers.canonical;
+var formatTitle = helpers.formatTitle;
 
 module.exports = {
   index: function(params, callback) {
     var self = this;
-    var lowerChannel = params.channel.toLowerCase();
     async.waterfall([
       fetchUserAndChannel.bind(this, params.channel),
       function redirectCheck (channelResult, cb) {
@@ -27,7 +27,7 @@ module.exports = {
       },
       function (channelResult, cb) {
         fetchChannelContents.call(self, params.channel, params.page, function (err, results) {
-          cb(err, !err && _.extend(results, channelResult));
+          cb(err, !err && _.extend(results, channelResult, {page:params.page}));
         });
       }.bind(this),
       function (results, cb) {
@@ -40,9 +40,9 @@ module.exports = {
         }
       },
       function addSEO (results, cb) {
+        var pageText = (params.page) ? " Page "+params.page : "";
         results.page = {
-          title: "Runnable Code Examples for "+results.channel.get('name'),
-          description: "Runnable Code Examples for "+results.channel.get('name'),
+          title: formatTitle(results.channel.get('name')+" Code Examples"+pageText),
           canonical: canonical.call(self)
         };
         cb(null, results);
@@ -54,7 +54,6 @@ module.exports = {
   },
   category: function (params, callback) {
     params.category = params.category || 'Featured';
-    var self = this;
     var spec = {
       user: {
         model: 'User',
@@ -87,11 +86,50 @@ module.exports = {
       var channelAndOrCategory = channel? channel+' in '+category : category;
       return _.extend(results, {
         page: {
-          title: "Runnable Code Examples for "+channelAndOrCategory,
-          description: "Runnable Code Examples for "+channelAndOrCategory,
+          title: formatTitle(channelAndOrCategory+" Related Tags"),
           canonical: 'http://runnable.com/c/'+params.category
         }
       });
     }
+  },
+  all: function(params, callback) {
+    var spec = {
+      user    : {
+        model  : 'User',
+        params : {
+          _id: 'me'
+        }
+      },
+      images: {
+        collection : 'Images',
+        params     : {
+          sort: 'votes',
+          page: (params.page && params.page-1) || 0
+        }
+      },
+      channels: {
+        collection : 'Channels',
+        params     : {}
+      }
+    };
+    var self = this;
+    fetch.call(this, spec, function (err, results) {
+      if (err || results.images.length === 0) {
+        // if err or no images found, go ahead and callback
+        callback(err, results);
+      } else {
+        var pageText = (params.page) ? " Page "+params.page : "";
+        _.extend(results, {page:params.page});
+        fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
+          callback(err, _.extend(results, ownerResults, {
+            page: {
+              title: formatTitle('Runnable code examples for JQuery, Codeigniter, NodeJS, PHP, Python and more'+pageText),
+              description: 'Runnable code examples for '+utils.tagsToString(results.channels.toJSON(), 'and'),
+              canonical: canonical.call(self)
+            }
+          }));
+        });
+      }
+    });
   }
 };

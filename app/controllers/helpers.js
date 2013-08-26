@@ -20,10 +20,16 @@ module.exports = {
   'fetchUserAndContainer':  fetchUserAndContainer,
   'fetchFilesForContainer': fetchFilesForContainer,
   'createContainerFrom':    createContainerFrom,
-  'canonical':              canonical
+  'canonical':              canonical,
+  'formatTitle':            formatTitle
 };
 
-// spec, [options], callback
+
+function formatTitle () {
+  var args = Array.prototype.slice.call(arguments);
+  args.push('Runnable');
+  return args.join(' - ');
+}
 // CONTEXT must be controller
 function canonical () {
   if (isServer) {
@@ -33,9 +39,10 @@ function canonical () {
     return 'http://runnable.com/' + Backbone.history.fragment;
   }
 }
+// spec, [options], callback
 function fetch (spec, options, callback) {
   var app = this.app;
-  if (typeof options == 'function') {
+  if (typeof options === 'function') {
     callback = options;
     options = {};
   }
@@ -56,14 +63,14 @@ function fetch (spec, options, callback) {
       createUser(function (err) {
         if (err) { callback(err); } else {
           app.fetch.call(app, spec, options, function (err, results) {
-            if (!err && results.user) app.user = results.user;// find some place better for this
+            if (!err && results.user) { app.user = results.user; } // find some place better for this
             callback(err, results);
           });
         }
       });
     }
     else {
-      if (!err && results.user) app.user = results.user;// find some place better for this
+      if (!err && results.user) { app.user = results.user; } // find some place better for this
       callback(err, results);
     }
   };
@@ -72,7 +79,7 @@ function fetch (spec, options, callback) {
 
 function fetchWithMe (spec, options, callback) {
   var app = this.app;
-  if (typeof options == 'function') {
+  if (typeof options === 'function') {
     callback = options;
     options = {};
   }
@@ -237,7 +244,6 @@ function fetchImage (imageId, callback) {
 }
 
 function createContainerFrom (imageIdOrChannelName, callback) {
-  var self = this;
   var app = this.app;
   var container = new Container({}, { app:app });
   var options = utils.successErrorToCB(callback);
@@ -333,7 +339,7 @@ function fetchRelated (imageId, tags, cb) {
   fetch.call(this, spec, function (err, results) {
     if (err) { cb(err); } else {
       var selfInRelated = results.related.get(imageId);
-      if (selfInRelated) results.related.remove(selfInRelated);
+      if (selfInRelated) { results.related.remove(selfInRelated); }
       cb(null, results);
     }
   });

@@ -23,14 +23,14 @@ var utils = module.exports = {
   },
   inside: function (arrOrStr) {
     return function (thing) {
-      return ~arrOrStr.indexOf(thing)
-    }
+      return ~arrOrStr.indexOf(thing);
+    };
   },
   not: function (fn, ctx) {
     ctx = ctx || this;
     return function () {
-      return !fn.apply(ctx, arguments)
-    }
+      return !fn.apply(ctx, arguments);
+    };
   },
   andAll: function() {
     return Array.prototype.slice.apply(arguments).reduce(utils.and);
@@ -63,13 +63,13 @@ var utils = module.exports = {
   },
   // thing, keys..
   keyPathExists : function(thing) {
-    if (!utils.exists(thing)) return false;
+    if (!utils.exists(thing)) { return false; }
     var keys = Array.prototype.slice.apply(arguments);
     keys.shift(); //pop off 'thing'
     var thingAtPath = thing;
     var nonExistingPathFound = keys.some(function (key) {
       thingAtPath = thingAtPath[key];
-      if (!utils.exists(thingAtPath)) return true;
+      if (!utils.exists(thingAtPath)) { return true; }
     });
 
     return !nonExistingPathFound;
@@ -125,12 +125,12 @@ var utils = module.exports = {
     }
   },
   successToCB : function (cb) {
-    return function (model, response, options) {
+    return function (model, response) {
       cb(null, model, response);
     };
   },
   errorToCB : function (cb) {
-    return function (model, xhr, options) {
+    return function (model, xhr) {
       if (xhr.message) {
         cb(xhr.message);
       }
@@ -145,21 +145,21 @@ var utils = module.exports = {
     };
   },
   successErrorToCB: function (cb, context) {
-    if (context) cb = cb.bind(context);
+    if (context) { cb = cb.bind(context); }
     return {
       success: utils.successToCB(cb),
       error  : utils.errorToCB(cb)
     };
   },
   cbOpts: function (cb, context) {
-    if (context) cb = cb.bind(context);
+    if (context) { cb = cb.bind(context); }
     return {
       success: utils.successToCB(cb),
       error  : utils.errorToCB(cb)
     };
   },
   urlFriendly: function (str) {
-    if (!str) return '';
+    if (!str) { return ''; }
     var urlUnfriendlyChars = /[ @:?!'\(\)<>#%&=;{}\^\`\|\/\\]/g;
     var moreThanOneDash = /-{2,}/g;
     str = str
@@ -171,20 +171,19 @@ var utils = module.exports = {
     return encodeURIComponent(str);
   },
   base64ToHex: function(base64) {
-    if (!utils.exists(base64)) return null;
+    if (!utils.exists(base64)) { return null; }
     return (isServer) ?
       utils._server_base64ToHex(base64) :
       utils._client_base64ToHex(base64);
   },
   _client_base64ToHex: function (base64) {
-    console.log('CLIENT!')
     var underscore = /_/g;
     var dash = /-/g;
     try {
       base64 = base64.replace(dash,'+').replace(underscore,'/').replace(/[ \r\n]+$/, "");
       for (var i = 0, bin = atob(base64), hex = []; i < bin.length; ++i) {
         var tmp = bin.charCodeAt(i).toString(16);
-        if (tmp.length === 1) tmp = "0" + tmp;
+        if (tmp.length === 1) { tmp = "0" + tmp; }
         hex[hex.length] = tmp;
       }
       return hex.join("");
@@ -194,13 +193,12 @@ var utils = module.exports = {
     }
   },
   _server_base64ToHex: function (base64) {
-    console.log('SERVER!')
     var underscore = /_/g;
     var dash = /-/g;
     return (new Buffer(base64.toString().replace(dash,'+').replace(underscore,'/'), 'base64')).toString('hex');
   },
   hexToBase64: function (hex) {
-    if (!utils.exists(hex)) return null;
+    if (!utils.exists(hex)) { return null; }
     return (isServer) ?
       utils._server_hexToBase64(hex) :
       utils._client_hexToBase64(hex);
@@ -226,12 +224,12 @@ var utils = module.exports = {
     return Boolean(str && str.length === 16 && utils.isObjectId(utils.base64ToHex(str)));
   },
   tagsToString: function (tags, prelastword) {
-    prelastword = prelastword || 'and'
+    prelastword = prelastword || 'and';
     if (tags.length === 0) {
-      return ''
+      return '';
     }
     else if (tags.length === 1) {
-      return tags[0].name
+      return tags[0].name;
     }
     else {
       var maxLength = 14;
@@ -248,22 +246,22 @@ var utils = module.exports = {
     }
   },
   isCurrentURL: function (app, url) {
-      var currentUrl;
-      if (isServer) {
-        currentUrl = app.req && app.req.url;
-      }
-      else {
-        currentUrl = Backbone.history.fragment;
-      }
-      return utils.urlsMatch(currentUrl, url);
-    },
-    urlsMatch: function (url1, url2) {
-      url1 = url1 && url1.toLowerCase && url1.toLowerCase();
-      url2 = url2 && url2.toLowerCase && url2.toLowerCase();
-      return url1 == url2 ||
-        url1+'/' == url2 ||
-        '/'+url1 == url2 ||
-        url1 == url2+'/' ||
-        url1 == '/'+url2;
+    var currentUrl;
+    if (isServer) {
+      currentUrl = app.req && app.req.url;
     }
+    else {
+      currentUrl = Backbone.history.fragment;
+    }
+    return utils.urlsMatch(currentUrl, url);
+  },
+  urlsMatch: function (url1, url2) {
+    url1 = url1 && url1.toLowerCase && url1.toLowerCase();
+    url2 = url2 && url2.toLowerCase && url2.toLowerCase();
+    return url1 === url2 ||
+      url1+'/' === url2 ||
+      '/'+url1 === url2 ||
+      url1 === url2+'/' ||
+      url1 === '/'+url2;
+  }
 };

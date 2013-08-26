@@ -150,6 +150,7 @@ function buildRendrRoutes(app) {
     fnChain.push(mw.errorHandler());
 
     // Attach the route to the Express server.
+    console.log(path)
     app.get(path, fnChain);
   });
 }

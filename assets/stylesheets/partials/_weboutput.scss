@@ -148,3 +148,10 @@ iframe.terminal-iframe{
 }
 
 
+.nprogress .peg{
+	-webkit-transform: rotate(1deg) translate(0px, -1px);
+	-moz-transform: rotate(1deg) translate(0px, -1px);
+	-ms-transform: rotate(1deg) translate(0px, -1px);
+	-o-transform: rotate(1deg) translate(0px, -1px);
+	transform: rotate(1deg) translate(0px, -1px);
+}
