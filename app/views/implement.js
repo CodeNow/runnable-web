@@ -66,7 +66,6 @@ module.exports = ModalView.extend({
       }
       this.collection.add(savedImplementation);
       this.close();
-      this.options.parent.click && this.options.parent.click();
     }.bind(this)));
   },
   domainify: function (string) {

@@ -179,7 +179,7 @@ module.exports = {
           fetchImplementation.call(self, container.get('specification'), function (err, implementation) {
             if (err) { callback(err); } else {
               // IF NO IMPLEMENTATION DEAL WITH IT AS ERROR
-              container.webToken = implementation.subdomain;
+              container.set('webToken', implementation.get('subdomain'));
               callback(null, _.extend(results, {
                 page: {
                   title: 'Output: ' + container.get('name'),

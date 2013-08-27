@@ -18,6 +18,7 @@ module.exports = EditorButtonView.extend({
     var dispatch = this.app.dispatch;
     if (dispatch) {
       this.listenTo(dispatch, 'unsaved:files', this.onChangeUnsaved.bind(this));
+      this.listenTo(dispatch, 'edit:implementation', this.openImplementModal.bind(this));
     }
   },
   postRender: function () {

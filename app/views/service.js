@@ -12,7 +12,8 @@ module.exports = BaseView.extend({
   events: {
     'click [name=edit]': 'edit',
     'click [name=remove]': 'remove',
-    'click [name=add]': 'add'
+    'click [name=add]': 'add',
+    'click [name=implement]': 'implement'
   },
   add: function () {
     var serviceModal = new ServiceModal({
@@ -45,6 +46,9 @@ module.exports = BaseView.extend({
         this.render();
       }
     }
+  },
+  implement: function () {
+     this.app.dispatch.trigger('edit:implementation', this.model.get('specification'));
   }
 });
 
