@@ -10,6 +10,7 @@ module.exports = {
   'fetchWithMe':            fetchWithMe,
   'fetchUser':              fetchUser,
   'fetchImplementation':    fetchImplementation,
+  'fetchImplementations':   fetchImplementations,
   'fetchSpecification':     fetchSpecification,
   'fetchSpecifications':    fetchSpecifications,
   'fetchImage':             fetchImage,
@@ -157,6 +158,18 @@ function fetchImplementation (specificationId, callback) {
   };
   fetch.call(this, spec, function (err, results) {
     callback(err, results && results.implementation);
+  });
+}
+
+function fetchImplementations (callback) {
+  var spec = {
+    implementations: {
+      collection: 'Implementations',
+      params: {}
+    }
+  };
+  fetch.call(this, spec, function (err, results) {
+    callback(err, results && results.implementations);
   });
 }
 

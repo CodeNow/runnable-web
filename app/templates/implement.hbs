@@ -1,0 +1,46 @@
+<article class="modal">
+  <section class="modal-header">
+    <h3>
+      <span class="headly{{#if instructions}}{{else}} selected{{/if}}">Keys</span>
+      <span class="headly{{#if instructions}} selected{{/if}}">Instructions</span>
+    </h3>
+    <button type="button" class="btn-close"><i class="icon-remove"></i></button>
+  </section>
+  <section class="modal-body">
+    <div class="modal-content">
+      {{#if instructions}}
+      <p>{{{rendered}}}</p>
+      {{else}}
+      <form>
+        <h4>{{model.attributes.name}}</h4>
+        {{#each implementation.attributes.requirements}}
+          <label>
+            <span>{{name}}:</span>
+            <input name="{{name}}" value="{{value}}" required>
+          </label>
+        {{/each}}
+        <label>
+          <span>Url(?):</span>
+          <input disabled value="{{url}}">
+        </label>
+        <button name="save" class="btn-primary right">
+          <i class="icon-save"></i>
+          Save
+        </button>
+      </form>
+      {{/if}}
+    </div>
+  </section>
+</article>
+<style>
+  .headly {
+    display: inline-block;
+    width: 47%;
+    text-align: center;
+    cursor: pointer;
+  }
+  .headly.selected {
+    background-color: black;
+    cursor: inherit;
+  }
+</style>

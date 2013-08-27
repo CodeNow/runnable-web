@@ -10,7 +10,7 @@
       {{view "publish_warning" model=image containerid=container.id}}
       {{/if}}
       <section class="actions">
-        {{view "run_button" model=container}}
+        {{view "run_button" model=container collection=implementations}}
         {{view "save_button" collection=defaultFiles}}
         {{!view "download_button" model=container}}
       </section>

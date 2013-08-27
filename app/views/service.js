@@ -26,7 +26,12 @@ module.exports = BaseView.extend({
   },
   edit: function () {
     var specification = this.collection.get(this.model.get('specification'));
-    var serviceModal = new ServiceModal({ app:this.app });
+    var serviceModal = new ServiceModal({
+      'app': this.app,
+      'model': this.model,
+      'collection': this.collection,
+      'parent': this
+    });
     serviceModal.open();
   },
   remove: function () {

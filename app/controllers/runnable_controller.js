@@ -7,6 +7,7 @@ var helpers = require('./helpers');
 var fetch = helpers.fetch;
 var fetchUser = helpers.fetchUser;
 var fetchImplementation = helpers.fetchImplementation;
+var fetchImplementations = helpers.fetchImplementations;
 var fetchSpecification = helpers.fetchSpecification;
 var fetchSpecifications = helpers.fetchSpecifications;
 var fetchImage = helpers.fetchImage;
@@ -153,7 +154,7 @@ module.exports = {
       if (err) { callback(err); } else {
         var container = results.container;
         if (container.get('specification')) {
-          fetchImplementation(container.get('specification'), results.user._id, function (err, implementation) {
+          fetchImplementation.call(self, container.get('specification'), function (err, implementation) {
             if (err) { callback(err); } else {
               // IF NO IMPLEMENTATION DEAL WITH IT AS ERROR
               container.webToken = implementation.subdomain;
@@ -197,6 +198,17 @@ module.exports = {
             cb(err);
           } else {
             results.specifications = specifications;
+            cb(null, results);
+          }
+        });
+      },
+      function getImplementations (results, cb) {
+        //merge into parallel
+        fetchImplementations.call(self, function (err, implementations) {
+          if (err) {
+            cb(err);
+          } else {
+            results.implementations = implementations;
             cb(null, results);
           }
         });

@@ -14,7 +14,6 @@ module.exports = ModalView.extend({
     'click .modal'      : 'stopPropagation',
     'click'             : 'close', // closes modal on bg click
     'click .btn-close'  : 'close',
-    'click .login-link': 'openLogin',
     'submit form'      : 'submit',
     'change select'    : 'submit',
     'click button[name=next]': 'submit',

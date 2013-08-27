@@ -181,7 +181,8 @@ module.exports = function(grunt) {
             handlebars: '../rendr/node_modules/handlebars/dist/handlebars.runtime.js',
             async: '../rendr/node_modules/async/lib/async.js',
             moment: '../moment/moment.js',
-            marked: '../marked/lib/marked.js'
+            marked: '../marked/lib/marked.js',
+            'node-uuid': '../node-uuid/uuid.js'
           },
           aliases: [
             {from: rendrDir + '/client', to: 'rendr/client'},
