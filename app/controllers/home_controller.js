@@ -1,51 +1,11 @@
 var _ = require('underscore');
-var utils = require('../utils');
 var helpers = require('./helpers');
 
 var fetch = helpers.fetch;
-var fetchOwnersFor = helpers.fetchOwnersFor;
 var canonical = helpers.canonical;
+var formatTitle = helpers.formatTitle;
 
 module.exports = {
-  index: function(params, callback) {
-    var spec = {
-      user    : {
-        model  : 'User',
-        params : {
-          _id: 'me'
-        }
-      },
-      images: {
-        collection : 'Images',
-        params     : {
-          sort: 'votes',
-          page: (params.page && params.page-1) || 0
-        }
-      },
-      channels: {
-        collection : 'Channels',
-        params     : {}
-      }
-    };
-    var self = this;
-    fetch.call(this, spec, function (err, results) {
-      if (err || results.images.length === 0) {
-        // if err or no images found, go ahead and callback
-        callback(err, results);
-      } else {
-        fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
-          callback(err, _.extend(results, ownerResults, {
-            page: {
-              title: 'Runnable code examples for JQuery, Codeigniter, NodeJS, Express, Python and more',
-              description: 'Runnable code examples for '+utils.tagsToString(results.channels.toJSON(), 'and'),
-              canonical: canonical.call(self)
-            }
-          }));
-        });
-      }
-    });
-  },
-
   jobs: function (params, callback) {
     var self = this;
     var spec = {
@@ -54,8 +14,8 @@ module.exports = {
     fetch.call(this, spec, function (err, results) {
       callback(err, _.extend(results, {
         page: {
-          title: 'Runnable Jobs',
-          description: 'Runnable Job Postings and Listings',
+          title: formatTitle('Jobs'),
+          description: formatTitle('Job Postings and Listings'),
           canonical: canonical.call(self)
         }
       }));
@@ -70,8 +30,7 @@ module.exports = {
     fetch.call(this, spec, function (err, results) {
       callback(err, _.extend(results, {
         page: {
-          title: 'Runnable Privacy Policy',
-          description: 'Runnable',
+          title: formatTitle('Privacy Policy'),
           canonical: canonical.call(self)
         }
       }));
@@ -86,11 +45,10 @@ module.exports = {
     fetch.call(this, spec, function (err, results) {
       callback(err, _.extend(results, {
         page: {
-          title: 'About Runnable',
-          description: 'About Runnable as a company and its team members',
+          title: formatTitle('About', 'Company Information and Team Members'),
           canonical: canonical.call(self)
         }
-      }))
+      }));
     });
   },
 
@@ -102,8 +60,7 @@ module.exports = {
     fetch.call(this, spec, function (err, results) {
       callback(err, _.extend(results, {
         page: {
-          title: 'Runnable API Providers Contact',
-          description: 'Runnable API providers contact page',
+          title: formatTitle('API Providers Contact'),
           canonical: canonical.call(self)
         }
       }));
@@ -120,30 +77,21 @@ module.exports = {
       this.app.req.session.destroy();
       this.redirectTo('/');
     }
-  },
-
-  blob: function (params, callback) {
-    var self = this;
-    var spec = {
-      user: { model:'User', params:{_id: 'me'} }
-    };
-    fetch.call(this, spec, function (err, results) {
-      callback(err, _.extend(results, {
-        page: {
-          title: 'Runnable',
-          description: 'Runnable',
-          canonical: canonical.call(self)
-        }
-      }));
-    });
-  },
-  newhome: function (params, callback) {
-    // var spec = {
-    //   collection: {collection: 'Collection', params: params}
-    // };
-    // this.app.fetch(spec, function(err, result) {
-    //   callback(err, '<% _.underscored(this.name) %>_index_view', result);
-    // });
-    callback();
   }
+
+  // blob: function (params, callback) {
+  //   var self = this;
+  //   var spec = {
+  //     user: { model:'User', params:{_id: 'me'} }
+  //   };
+  //   fetch.call(this, spec, function (err, results) {
+  //     callback(err, _.extend(results, {
+  //       page: {
+  //         title: formatTitle('Runnable'),
+  //         description: 'Runnable',
+  //         canonical: canonical.call(self)
+  //       }
+  //     }));
+  //   });
+  // }
 };

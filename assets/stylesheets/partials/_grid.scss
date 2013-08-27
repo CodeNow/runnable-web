@@ -3,6 +3,9 @@ Grid
 12-column grid that is fluid and responsive
 .container wraps the grid
 */
+html, body{
+	height: 100%;
+}
 
 .container {
 	max-width: 1000px;

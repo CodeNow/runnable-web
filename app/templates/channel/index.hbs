@@ -1,12 +1,7 @@
 {{view "header_view" model=user context=.}}
 <div class="content">
   <div class="container">
-    <h1>
-      {{#with channel.attributes}}
-      {{view 'channel_image' name=name}}
-      <span>{{name}} Runnable Code Examples</span>
-      {{/with}}
-    </h1>
+    <h1>{{channel.attributes.name}} Code Examples</h1>
     {{#if channels.length}}
     <aside class="span3">
       <section class="module">

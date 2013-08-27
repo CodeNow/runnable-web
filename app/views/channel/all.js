@@ -1,7 +1,7 @@
 var BaseView = require('../base_view');
+var _ = require('underscore');
 
 module.exports = BaseView.extend({
-  id: 'output-view'
 });
 
-module.exports.id = "runnable/output";
+module.exports.id = "channel/all";

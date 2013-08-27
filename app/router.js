@@ -81,7 +81,7 @@ Router.prototype.updateMetaInfo = function (meta) {
     $('title').html(meta.title);
   }
   if (meta.description) {
-    $('meta[name=description]').attr('content', meta.description);
+    $('meta[name=description]').attr('content', meta.description || meta.title);
   }
   if (meta.canonical) {
     $('link[rel=canonical]').attr('href', meta.canonical);

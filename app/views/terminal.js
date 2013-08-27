@@ -24,6 +24,8 @@ module.exports = BaseView.extend({
     this.listenToWindowMessage();
   },
   listenToWindowMessage: function () {
+    var dispatch = this.app.dispatch;
+    var timeout;
     if (this.onWindowMessage) {
       this.removeWindowMessageListener();
     }
@@ -45,6 +47,7 @@ module.exports = BaseView.extend({
         }
       }.bind(this);
     }
+    timeout = setTimeout(dispatch.trigger.bind(dispatch, 'ready:box'), 10000);
     window.addEventListener('message', this.onWindowMessage);
   },
   removeWindowMessageListener: function () {

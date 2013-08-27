@@ -1,13 +1,13 @@
 module.exports = function(match) {
   match('',                     'channel#category');
-  match('all',                  'home#index');
-  match('all/page/:page',       'home#index');
+  match('all',                  'channel#all');
+  match('all/page/:page',       'channel#all');
   match('providers',            'home#providers');
   match('about',                'home#about');
   match('jobs',                 'home#jobs');
   match('privacy',              'home#privacy');
   match('logout',               'home#logout');
-  match('blob',                 'home#blob');
+  // match('blob',                 'home#blob');
   match('new',                  'runnable#new');
   match('newhome',              'home#newhome');
   match('new/:from',            'runnable#newFrom');

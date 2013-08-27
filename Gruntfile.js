@@ -14,6 +14,7 @@ var compassCSS      = 'public/styles/index.css';
 var mergedCSSPath   = 'public/styles/index.css';
 var minCSS = [
   'assets/bower/AutoCompleteJS/css/autocomplete.css',
+  'node_modules/nprogress/nprogress.css',
   compassCSS
 ];
 //stitch
@@ -30,7 +31,6 @@ var frontendScripts = [
   'assets/bower/AutoCompleteJS/js/autocomplete.js'
 ]
 .concat(aceScripts);
-
 module.exports = function(grunt) {
   // Project configuration.
   var gruntConfig = {
@@ -38,14 +38,21 @@ module.exports = function(grunt) {
 
     bgShell: {
       server: {
-        cmd: 'LIVERELOAD_PORT='+livereloadPort+' node ./node_modules/nodemon/nodemon.js index.js',
+        cmd: 'NODE_ENV='+process.env.NODE_ENV+' LIVERELOAD_PORT='+livereloadPort+' node ./node_modules/nodemon/nodemon.js index.js',
         bg: true,
         execOpts: {
           maxBuffer: 1000*1024
         }
       },
       debug: {
-        cmd: 'LIVERELOAD_PORT='+livereloadPort+' node ./node_modules/nodemon/nodemon.js --debug index.js & ./node_modules/nodemon/nodemon.js -d 1 -x node-inspector index.js',
+        cmd: 'NODE_ENV='+process.env.NODE_ENV+' LIVERELOAD_PORT='+livereloadPort+' node ./node_modules/nodemon/nodemon.js --debug index.js & ./node_modules/nodemon/nodemon.js -d 1 -x node-inspector index.js',
+        bg: true,
+        execOpts: {
+          maxBuffer: 1000*1024
+        }
+      },
+      sdebug: {
+        cmd: 'sudo NODE_ENV='+process.env.NODE_ENV+' LIVERELOAD_PORT='+livereloadPort+' node ./node_modules/nodemon/nodemon.js --debug index.js & ./node_modules/nodemon/nodemon.js -d 1 -x node-inspector index.js',
         bg: true,
         execOpts: {
           maxBuffer: 1000*1024
@@ -182,7 +189,8 @@ module.exports = function(grunt) {
             async: '../rendr/node_modules/async/lib/async.js',
             moment: '../moment/moment.js',
             marked: '../marked/lib/marked.js',
-            'node-uuid': '../node-uuid/uuid.js'
+            'node-uuid': '../node-uuid/uuid.js',
+            nprogress: '../nprogress/nprogress.js'
           },
           aliases: [
             {from: rendrDir + '/client', to: 'rendr/client'},
@@ -258,6 +266,7 @@ module.exports = function(grunt) {
   grunt.registerTask('server', ['dev', 'bgShell:server', 'watch']);
   // Debug
   grunt.registerTask('debug', ['dev', 'bgShell:debug', 'watch']);
+  grunt.registerTask('sdebug', ['dev', 'bgShell:sdebug', 'watch']); // sudo debug for port 80
   // Build for production
   grunt.registerTask('build', ['compile', 'cssmin', 'uglify']);
   // Default task(s).

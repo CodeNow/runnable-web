@@ -5,6 +5,7 @@
     <article class="span9">
       <section class="title">
         {{view "runnable_title" model=container}}
+        {{view "runnable_description" model=container}}
       </section>
       {{#if isVerified}}
       {{view "publish_warning" model=image containerid=container.id}}

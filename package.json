@@ -34,7 +34,8 @@
     "sitemap": "~0.6.0",
     "underscore.string": "~2.3.3",
     "marked": "~0.2.9",
-    "node-uuid": "~1.4.1"
+    "node-uuid": "~1.4.1",
+    "nprogress": "git://github.com/tjmehta/nprogress#e03c00d1756f4bb6960ef12551aaf2557708cab0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -48,7 +49,7 @@
     "mocha": "~1.9.0",
     "should": "~1.2.2",
     "console-trace": "numbcoder/console-trace",
-    "generator-rendr": "tjmehta/generator-rendr",
+    "generator-rendr": "~0.0.6",
     "subl": "tjmehta/node-subl",
     "grunt-contrib-uglify": "~0.2.2",
     "grunt-contrib-jshint": "~0.6.0",

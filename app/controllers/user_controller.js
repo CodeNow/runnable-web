@@ -1,6 +1,5 @@
 var _ = require('underscore');
 var helpers = require('./helpers');
-var utils = require('../utils');
 var fetchWithMe = helpers.fetchWithMe;
 
 module.exports = {
@@ -22,8 +21,8 @@ module.exports = {
     };
     var self = this;
     fetchWithMe.call(this, spec, function (err, results) {
-      if (err) { 
-        callback(err); 
+      if (err) {
+        callback(err);
       } else {
         if (results.user.isVerified()) {
           callback(null, addSEO(results));
@@ -61,10 +60,9 @@ module.exports = {
         }
       }
     };
-    var self = this;
     fetchWithMe.call(this, spec, function (err, results) {
-      if (err) { 
-        callback(err); 
+      if (err) {
+        callback(err);
       } else {
         callback(null, addSEO(results));
       }

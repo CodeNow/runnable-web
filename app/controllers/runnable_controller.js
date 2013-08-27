@@ -18,6 +18,7 @@ var fetchUserAndContainer = helpers.fetchUserAndContainer;
 var fetchFilesForContainer = helpers.fetchFilesForContainer;
 var createContainerFrom = helpers.createContainerFrom;
 var canonical = helpers.canonical;
+var formatTitle = helpers.formatTitle;
 
 module.exports = {
   index: function(params, callback) {
@@ -50,7 +51,6 @@ module.exports = {
           }
         },
         function nameInUrl (results, cb) {
-          var image = results.image;
           var imageURL = results.image.appURL();
           if (!utils.isCurrentURL(app, imageURL)|| params.channel) {
             self.redirectTo(imageURL);
@@ -117,16 +117,14 @@ module.exports = {
           callback(null, addSEO(results, self.req));
         }
       });
-      function addSEO (results) {
-        var nameWithTags = results.image.nameWithTags();
-        return _.extend(results, {
-          page: {
-            title      : nameWithTags,
-            description: ['Runnable Code Example: ', nameWithTags].join(''),
-            canonical: canonical.call(self)
-          }
-        });
-      }
+    }
+    function addSEO (results) {
+      return _.extend(results, {
+        page: {
+          title      : formatTitle(results.image.nameWithTags()+" Code Example"),
+          canonical: canonical.call(self)
+        }
+      });
     }
   },
   'new': function (params, callback) {
@@ -149,8 +147,8 @@ module.exports = {
         tags = tags ? ' for '+tags : '';
         callback(null, _.extend(results, {
           page: {
-            title: 'Create a new runnable for JQuery, Codeigniter, NodeJS, Express and more',
-            description: 'Create a new Runnable Code Example' + tags,
+            title: formatTitle('Create a New Example for JQuery, Codeigniter, NodeJS, PHP, Python, Ruby and more'),
+            description: 'Create a New Code Example' + tags,
             canonical: canonical.call(self)
           }
         }));
@@ -182,7 +180,7 @@ module.exports = {
               container.set('webToken', implementation.get('subdomain'));
               callback(null, _.extend(results, {
                 page: {
-                  title: 'Output: ' + container.get('name'),
+                  title: 'Output: ' + results.container.nameWithTags(),
                   description: 'Web and console output for ' + container.get('name'),
                   canonical: canonical.call(self)
                 }
@@ -192,7 +190,7 @@ module.exports = {
         } else {
           callback(null, _.extend(results, {
             page: {
-              title: 'Output: '+container.get('name'),
+              title: 'Output: '+results.container.nameWithTags(),
               description: 'Web and console output for '+container.get('name'),
               canonical: canonical.call(self)
             }
@@ -244,7 +242,7 @@ module.exports = {
           var container = results.container;
           cb(err, _.extend(results, { image:data[0] }, data[1], {
             page: {
-              title: 'Unpublished: '+container.get('name'),
+              title: formatTitle('Unpublished: '+results.container.nameWithTags()),
               description: 'Unpublished Runnable Example:' + container.get('name'),
               canonical: canonical.call(self)
             }

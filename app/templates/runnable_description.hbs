@@ -1,0 +1,20 @@
+{{#unless editMode}}
+<h2>
+  {{model.attributes.description}}
+  {{#if canEdit}}
+    {{#if model.attributes.description}}
+    <a href="javascript:void(0)" class="edit-link">Edit</a>
+    {{else}}
+    <a href="javascript:void(0)" class="edit-link">Add description</a>
+    {{/if}}
+  {{/if}}
+</h2>
+{{else}}
+  <form action="javascript:void(0);">
+    <div class="item">
+      <input type="text" class="title-input" name="description" autofocus placeholder="Give your code example a description" value="{{model.attributes.description}}" />
+    </div>
+    <button class="btn-secondary" type="submit">Save title</button>
+    <button class="btn-text btn-cancel" type="button">Cancel</button>
+  </form>
+{{/unless}}
