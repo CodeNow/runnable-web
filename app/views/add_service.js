@@ -124,6 +124,7 @@ module.exports = ModalView.extend({
   attachService: function () {
     this.model.set('specification', this.specification.id);
     this.model.save({}, utils.cbOpts(function (err) {
+      debugger;
       if (err) {
         console.error(err);
       } else {

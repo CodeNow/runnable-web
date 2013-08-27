@@ -76,6 +76,28 @@ module.exports = {
             cb(err, !err && _.extend(results, data[0], data[1], data[2]));
           });
         },
+        function getSpecifications (results, cb) {
+          //merge into parallel
+          fetchSpecifications.call(self, function (err, specifications) {
+            if (err) {
+              cb(err);
+            } else {
+              results.specifications = specifications;
+              cb(null, results);
+            }
+          });
+        },
+        function getImplementations (results, cb) {
+          //merge into parallel
+          fetchImplementations.call(self, function (err, implementations) {
+            if (err) {
+              cb(err);
+            } else {
+              results.implementations = implementations;
+              cb(null, results);
+            }
+          });
+        },
         function generatePermissions (results, cb) {
           results.permissions = {
             edit: results.image.attributes.owner === results.user.id ||

@@ -24,6 +24,7 @@ module.exports = EditorButtonView.extend({
     console.log("CONTAINER ID: ", this.model.id);
   },
   click: function () {
+    debugger;
     var specificationId = this.model.get('specification');
     if (specificationId) {
       var implementation = this.implementation = this.collection.models.filter(function (model) { 
@@ -69,7 +70,7 @@ module.exports = EditorButtonView.extend({
         'model': fetchedSpecification,
         'collection': self.collection,
         'parent': self,
-        'containerId': self.model.id
+        'containerId': self.options.containerid || self.model.id
       });
       implement.open();
     }));
