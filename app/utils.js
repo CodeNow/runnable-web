@@ -53,12 +53,15 @@ var utils = module.exports = {
     return ret;
   },
   parseJSON: function (string, cb) {
+    var err, json;
     try {
-      var json = JSON.parse(string);
-      cb(null, json);
+      json = JSON.parse(string);
     }
-    catch(err) {
-      cb(err);
+    catch(parseErr) {
+      err = parseErr;
+    }
+    finally {
+      cb(err, json);
     }
   },
   // thing, keys..

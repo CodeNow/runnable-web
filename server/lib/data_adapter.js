@@ -8,6 +8,12 @@ var utils = require('rendr/server/utils'),
     rollbar = require("rollbar"),
     inspect = require('util').inspect;
 
+var httpProxy = require('http-proxy');
+var proxy = new httpProxy.RoutingProxy();
+var split = env.current.api['default'].host.split(':')
+var apiHost = split[0];
+var apiPort = split[1] ? parseInt(split[1], 10) : 80
+
 rollbar.init(env.current.rollbar);
 
 module.exports = DataAdapter;
@@ -23,7 +29,25 @@ function DataAdapter(options) {
 // `options`: (optional) Options.
 // `callback`: Callback.
 //
-DataAdapter.prototype.request = function(req, api, options, callback) {
+DataAdapter.prototype.request = function(req, api, options, callback, res) {
+  if (~(req.header('content-type') || '').indexOf('form-data')) {
+    // true proxy.. for form-data requests
+    req.url = api.path;
+    req.headers['runnable-token'] = req.session.access_token;
+    console.log("Access Token: " + req.session.access_token);
+    // dont worry about setting the access token here, we can assume a multipart request will never be the
+    // first request to the server
+    proxy.proxyRequest(req, res, {
+      host: apiHost,
+      port: apiPort
+    });
+  }
+  else {
+    this._request.apply(this, arguments);
+  }
+};
+
+DataAdapter.prototype._request = function (req, api, options, callback) {
   var _this = this, start, end;
   if (arguments.length === 3) {
     callback = options;
@@ -83,7 +107,7 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
     }
     callback(err, response, body);
   });
-};
+}
 
 DataAdapter.prototype.apiDefaults = function(api) {
   var urlOpts, basicAuth, authParts, apiHost;

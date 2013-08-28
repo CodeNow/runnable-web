@@ -95,13 +95,14 @@ module.exports = BaseView.extend({
     this.showMessage('Upload files by dragging them into the file browser.')
   },
   uploadFiles: function (evt) {
-    if (!evt.originalEvent.dataTransfer) return; // for move drag and drop
+    if (!evt.originalEvent.dataTransfer) { return; } // for move drag and drop
     evt.stopPropagation();
     evt.preventDefault();
     evt = evt.originalEvent;
     var files = evt.dataTransfer.files;
     if (!files) {
       // no browser support
+      this.showError('Sorry your browser does not support drag and drop uploads - we suggest using Google Chrome Browser');
     }
     else {
       this.dragClassOff(evt);
@@ -111,9 +112,8 @@ module.exports = BaseView.extend({
       // firefox does not hoist functions in blocks
       function eachFile (fileItem, cb) {
         self.app.dispatch.trigger('show:upload');
-        var urlRoot = _.result(contents, 'url');
-        dir.uploadFile(urlRoot, fileItem, function (err, fileModel) {
-          if (!err) contents.add(fileModel);
+        dir.uploadFile(fileItem, function (err, fileModel) {
+          if (!err) { contents.add(fileModel); }
           cb(err);
         });
       }

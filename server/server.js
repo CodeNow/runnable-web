@@ -87,7 +87,15 @@ function initMiddleware() {
     }
   }));
   app.use(express.logger());
-  app.use(express.bodyParser());
+  app.use(function (req, res, next) {
+    console.log(req.headers);
+    if (~(req.header('content-type') || '').indexOf('form-data')) {
+      next();
+    }
+    else {
+      express.bodyParser()(req, res, next);
+    }
+  });
 
   app.configure('development', function() {
     app.use(require('./middleware/liveReload')({port:process.env.LIVERELOAD_PORT}));
@@ -150,7 +158,6 @@ function buildRendrRoutes(app) {
     fnChain.push(mw.errorHandler());
 
     // Attach the route to the Express server.
-    console.log(path)
     app.get(path, fnChain);
   });
 }

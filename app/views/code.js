@@ -45,9 +45,9 @@ module.exports = BaseView.extend({
     // detach previous file events/session
     this.detachFile(this.file);
     // set current file
-    this.file = file;
     if (!file) {
       // all files closed
+      this.file = null;
       this.$el.hide();
     }
     else {
@@ -72,13 +72,19 @@ module.exports = BaseView.extend({
     else {
       // init file session
       var createSession = function () {
-        if (file.get('content').length > 10000 &&
+        if (!utils.exists(file.get('content'))) { //TODO:  content null.. right now content null does not mean unfetched it means unsupported
+          alert('This file format is not supported by our editor.')
+          this.file = null;
+          file.trigger('close:file', file);
+        }
+        else if (file.get('content').length > 10000 &&
           !confirm('This file is huge are you sure you want to open it (might crash or take a looong time)?')
         ) {
-          file.trigger('close:file', file);
           this.file = null;
+          file.trigger('close:file', file);
         }
         else {
+          this.file = file;
           session = file.editorSession = ace.createEditSession(file.get('content'));
           editor.setSession(session);
           session.setMode(this.getMode(file.get('name')));

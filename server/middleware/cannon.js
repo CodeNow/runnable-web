@@ -5,6 +5,9 @@ var config = require('../lib/env').current;
 
 module.exports = function () {
   return function (req, res, next) {
+    if (req.method !== 'GET') {
+      return next();
+    }
     var port = (process.env.NODE_ENV == 'development') ? 3000 : null;
     var split = req.url.split('?');
     var parsed = {
