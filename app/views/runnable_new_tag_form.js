@@ -5,7 +5,7 @@ var utils = require('../utils');
 
 
 module.exports = BaseView.extend({
-	tagName: 'form',
+  tagName: 'form',
   events: {
     'submit' : 'addNewTag'
   },

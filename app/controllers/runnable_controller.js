@@ -6,6 +6,10 @@ var helpers = require('./helpers');
 
 var fetch = helpers.fetch;
 var fetchUser = helpers.fetchUser;
+var fetchImplementation = helpers.fetchImplementation;
+var fetchImplementations = helpers.fetchImplementations;
+var fetchSpecification = helpers.fetchSpecification;
+var fetchSpecifications = helpers.fetchSpecifications;
 var fetchImage = helpers.fetchImage;
 var fetchOwnerOf = helpers.fetchOwnerOf;
 var fetchRelated = helpers.fetchRelated;
@@ -70,6 +74,28 @@ module.exports = {
           ],
           function (err, data) {
             cb(err, !err && _.extend(results, data[0], data[1], data[2]));
+          });
+        },
+        function getSpecifications (results, cb) {
+          //merge into parallel
+          fetchSpecifications.call(self, function (err, specifications) {
+            if (err) {
+              cb(err);
+            } else {
+              results.specifications = specifications;
+              cb(null, results);
+            }
+          });
+        },
+        function getImplementations (results, cb) {
+          //merge into parallel
+          fetchImplementations.call(self, function (err, implementations) {
+            if (err) {
+              cb(err);
+            } else {
+              results.implementations = implementations;
+              cb(null, results);
+            }
           });
         },
         function generatePermissions (results, cb) {
@@ -147,13 +173,29 @@ module.exports = {
     fetchUserAndContainer.call(this, params._id, function (err, results) {
       if (err) { callback(err); } else {
         var container = results.container;
-        callback(null, _.extend(results, {
-          page: {
-            title: formatTitle('Output: '+results.container.nameWithTags()),
-            description: 'Web and console output for '+container.get('name'),
-            canonical: canonical.call(self)
-          }
-        }));
+        if (container.get('specification')) {
+          fetchImplementation.call(self, container.get('specification'), function (err, implementation) {
+            if (err) { callback(err); } else {
+              // IF NO IMPLEMENTATION DEAL WITH IT AS ERROR
+              container.set('webToken', implementation.get('subdomain'));
+              callback(null, _.extend(results, {
+                page: {
+                  title: 'Output: ' + results.container.nameWithTags(),
+                  description: 'Web and console output for ' + container.get('name'),
+                  canonical: canonical.call(self)
+                }
+              }));
+            }
+          });
+        } else {
+          callback(null, _.extend(results, {
+            page: {
+              title: 'Output: '+results.container.nameWithTags(),
+              description: 'Web and console output for '+container.get('name'),
+              canonical: canonical.call(self)
+            }
+          }));
+        }
       }
     });
   },
@@ -168,6 +210,28 @@ module.exports = {
         else {
           cb(null, results);
         }
+      },
+      function getSpecifications (results, cb) {
+        //merge into parallel
+        fetchSpecifications.call(self, function (err, specifications) {
+          if (err) {
+            cb(err);
+          } else {
+            results.specifications = specifications;
+            cb(null, results);
+          }
+        });
+      },
+      function getImplementations (results, cb) {
+        //merge into parallel
+        fetchImplementations.call(self, function (err, implementations) {
+          if (err) {
+            cb(err);
+          } else {
+            results.implementations = implementations;
+            cb(null, results);
+          }
+        });
       },
       function parentAndFiles (results, cb) {
         async.parallel([

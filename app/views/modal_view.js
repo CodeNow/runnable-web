@@ -9,7 +9,9 @@ module.exports = BaseView.extend({
     'click .btn-close'  : 'close',
   },
   postRender: function () {
-    $('body').append(this.$el);
+    if ($('body').has(this.$el).length === 0) {
+      $('body').append(this.$el);
+    }
     this.$('input').eq(0).focus();
   },
   remove: function () {

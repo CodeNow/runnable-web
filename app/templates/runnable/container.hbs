@@ -11,7 +11,7 @@
       {{view "publish_warning" model=image containerid=container.id}}
       {{/if}}
       <section class="actions">
-        {{view "run_button" model=container}}
+        {{view "run_button" model=container collection=implementations}}
         {{view "save_button" collection=defaultFiles}}
         {{!view "download_button" model=container}}
       </section>
@@ -24,6 +24,10 @@
       {{! </div> }}
       <section class="module display-none">
         {{view "runnable_owner" model=container}}
+      </section>
+      <section class="module">
+        <h3>Service</h3>
+        {{view "service" model=container collection=specifications editmode=isVerified}}
       </section>
       <section class="module tags">
         <h3>Tags</h3>

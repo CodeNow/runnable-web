@@ -7,9 +7,9 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     return _.extend(this.options, {
-      isVerified: this.options.user.isVerified()
+      isVerified: this.app.user.isVerified()
     });
-  },
+  }
 });
 
 module.exports.id = "runnable/container";

@@ -1,10 +1,10 @@
 {
-  "name" : "runnable-web",
+  "name": "runnable-web",
   "private": true,
   "dependencies": {
-  	"ace-builds"     : "v1.1.01",
-  	"frontend-track" : "git://github.com/CodeNow/frontend-track.git#0.1.1"
+    "ace-builds": "v1.1.01",
+    "frontend-track": "git://github.com/CodeNow/frontend-track.git#0.1.1",
+    "AutoCompleteJS": "~0.2.1"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

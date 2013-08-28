@@ -27,3 +27,5 @@ module.exports = RendrBase.extend({
     return model;
   }
 });
+
+module.exports.id = 'Base';
