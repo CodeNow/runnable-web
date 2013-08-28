@@ -12,7 +12,7 @@ module.exports = BaseView.extend({
   postRender: function () {
     var self = this;
     this.$iframe = $('.terminal-iframe');
-    $.get("http://" + this.model.get("servicesToken") + "." + this.app.get('domain') + "/api/env").always(function() { 
+    $.get("http://" + this.model.get("servicesToken") + "." + this.app.get('domain') + "/api/running").always(function() { 
       self.$iframe.attr('src', "http://" + self.model.get("servicesToken") + "." + self.app.get('domain') + "/static/term.html");
     });
   },
@@ -20,42 +20,21 @@ module.exports = BaseView.extend({
     setTimeout(function () {
       this.app.set('loading', true); // setTimeout so it doesnt get overridden by the router start/end loader
       this.loading(true);
-    }.bind(this), 0)
-    this.listenToWindowMessage();
+    }.bind(this), 0);
+    this.loadingTimeout = setTimeout(this.loaded, 5000);
+    this.waitForLoad();
   },
-  listenToWindowMessage: function () {
-    var dispatch = this.app.dispatch;
-    var timeout;
-    if (this.onWindowMessage) {
-      this.removeWindowMessageListener();
-    }
-    else {
-      var dispatch = this.app.dispatch;
-      var timeout = setTimeout(function () {
-        dispatch.trigger('ready:box');
-        this.app.set('loading', false);
-        this.loading(false);
-      }.bind(this), 5000);
-      this.onWindowMessage = function (evt) {
-        var hostname = window.location.host.split(':')[0]; //no port
-        var runnableSubdomain = new RegExp(hostname.replace('.', '\\.')); //esc periods
-        if (runnableSubdomain.test(evt.origin)) {
-          clearTimeout(timeout);
-          dispatch.trigger('ready:box');
-          this.app.set('loading', false);
-          this.loading(false);
-        }
-      }.bind(this);
-    }
-    timeout = setTimeout(dispatch.trigger.bind(dispatch, 'ready:box'), 10000);
-    window.addEventListener('message', this.onWindowMessage);
+  waitForLoad: function () {
+    var url = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain') + "/api/running";
+    $.get(url)
+      .done(this.loaded)
+      .fail(this.waitForLoad);
   },
-  removeWindowMessageListener: function () {
-    window.removeEventListener('message', this.onWindowMessage);
-  },
-  remove: function () {
-    this.removeWindowMessageListener();
-    Super.remove.apply(this, arguments);
+  loaded: function () {
+    clearTimeout(this.loadingTimeout);
+    this.app.dispatch.trigger('ready:box');
+    this.app.set('loading', false);
+    this.loading(false);
   }
 });
 
