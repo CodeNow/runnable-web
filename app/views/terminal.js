@@ -21,14 +21,14 @@ module.exports = BaseView.extend({
       this.app.set('loading', true); // setTimeout so it doesnt get overridden by the router start/end loader
       this.loading(true);
     }.bind(this), 0);
-    this.loadingTimeout = setTimeout(this.loaded, 5000);
-    this.waitForLoad();
+    this.loadingTimeout = setTimeout(this.loaded.bind(this), 5000);
+    this.waitForLoad.call(this);
   },
   waitForLoad: function () {
     var url = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain') + "/api/running";
     $.get(url)
-      .done(this.loaded)
-      .fail(this.waitForLoad);
+      .done(this.loaded.bind(this))
+      .fail(this.waitForLoad.bind(this));
   },
   loaded: function () {
     clearTimeout(this.loadingTimeout);

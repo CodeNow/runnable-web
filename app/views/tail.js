@@ -7,8 +7,8 @@ module.exports = BaseView.extend({
     setTimeout(function () {
       this.loading(true); // setTimeout so it doesnt get overridden by the router start/end loader
     }.bind(this), 0)
-    this.loadingTimeout = setTimeout(this.showError.bind('Error'), 10000);
-    this.waitForLoad();
+    this.loadingTimeout = setTimeout(this.showError.bind(this, 'Error'), 10000);
+    this.waitForLoad.call(this);
   },
   postRender: function () {
     var $iframe = this.$iframe = this.$('iframe');
@@ -22,14 +22,14 @@ module.exports = BaseView.extend({
   waitForLoad: function () {
     var url = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain') + "/api/running";
     $.getJSON(url)
-      .done(this.loaded)
-      .fail(this.waitForLoad);
+      .done(this.loaded.bind(this))
+      .fail(this.waitForLoad.bind(this));
   },
   checkForRunning: function (data) {
     if (data.running) {
-      this.loaded();
+      this.loaded.call(this);
     } else {
-      this.waitForLoad();
+      this.waitForLoad.call(this);
     }
   },
   loaded: function () {
