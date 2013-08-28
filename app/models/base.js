@@ -70,3 +70,5 @@ module.exports = RendrBase.extend({
   //   this.attributes[key] = this.getVirtual(key);
   // }
 });
+
+module.exports.id = 'Base';

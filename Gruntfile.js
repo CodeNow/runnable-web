@@ -13,6 +13,7 @@ var rendrDir        = 'node_modules/rendr';
 var compassCSS      = 'public/styles/index.css';
 var mergedCSSPath   = 'public/styles/index.css';
 var minCSS = [
+  'assets/bower/AutoCompleteJS/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
   compassCSS
 ];
@@ -26,7 +27,8 @@ var frontendScripts = [
   'assets/vendor/*.js',
   'assets/vendor/jquery-ui/js/jquery-1.9.1.js',
   'assets/vendor/jquery-ui/js/jquery-ui-1.10.3.custom.js',
-  'assets/bower/frontend-track/frontend-track.js'
+  'assets/bower/frontend-track/frontend-track.js',
+  'assets/bower/AutoCompleteJS/js/autocomplete.js'
 ]
 .concat(aceScripts);
 module.exports = function(grunt) {
@@ -152,7 +154,7 @@ module.exports = function(grunt) {
         }
       },
       templates: {
-        files: ['!app/templates/compiledTemplates.js', 'app/templates/**/*.hbs'],
+        files: ['app/templates/**/*.hbs'],
         tasks: ['handlebars'],
         options: {
           interrupt: true
@@ -186,6 +188,8 @@ module.exports = function(grunt) {
             handlebars: '../rendr/node_modules/handlebars/dist/handlebars.runtime.js',
             async: '../rendr/node_modules/async/lib/async.js',
             moment: '../moment/moment.js',
+            marked: '../marked/lib/marked.js',
+            'node-uuid': '../node-uuid/uuid.js',
             nprogress: '../nprogress/nprogress.js'
           },
           aliases: [

@@ -7,46 +7,34 @@ module.exports = BaseView.extend({
     'click .icon-external-link' : 'popOpenTerminal'
   },
   popOpenTerminal: function () {
-    window.open("http://terminals." + this.app.get('domain') + "/term.html?termId=" + this.model.get("token"), "_blank");
+    window.open("http://" + this.model.get("servicesToken") + "." + this.app.get('domain') + "/static/term.html", "_blank");
   },
   postRender: function () {
+    var self = this;
     this.$iframe = $('.terminal-iframe');
-    this.$iframe.attr('src', "http://terminals." + this.app.get('domain') + "/term.html?termId=" + this.model.get("token"));
+    $.get("http://" + this.model.get("servicesToken") + "." + this.app.get('domain') + "/api/running").always(function() { 
+      self.$iframe.attr('src', "http://" + self.model.get("servicesToken") + "." + self.app.get('domain') + "/static/term.html");
+    });
   },
   postHydrate: function () {
     setTimeout(function () {
       this.app.set('loading', true); // setTimeout so it doesnt get overridden by the router start/end loader
       this.loading(true);
-    }.bind(this), 0)
-    this.listenToWindowMessage();
+    }.bind(this), 0);
+    this.loadingTimeout = setTimeout(this.loaded.bind(this), 5000);
+    this.waitForLoad.call(this);
   },
-  listenToWindowMessage: function () {
-    var dispatch = this.app.dispatch;
-    var timeout;
-    if (this.onWindowMessage) {
-      this.removeWindowMessageListener();
-    }
-    else {
-      this.onWindowMessage = function (evt) {
-        var hostname = window.location.host.split(':')[0]; //no port
-        var runnableSubdomain = new RegExp(hostname.replace('.', '\\.')); //esc periods
-        if (runnableSubdomain.test(evt.origin)) {
-          clearTimeout(timeout);
-          dispatch.trigger('ready:box');
-          this.app.set('loading', false);
-          this.loading(false);
-        }
-      }.bind(this);
-    }
-    timeout = setTimeout(dispatch.trigger.bind(dispatch, 'ready:box'), 10000);
-    window.addEventListener('message', this.onWindowMessage);
+  waitForLoad: function () {
+    var url = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain') + "/api/running";
+    $.get(url)
+      .done(this.loaded.bind(this))
+      .fail(this.waitForLoad.bind(this));
   },
-  removeWindowMessageListener: function () {
-    window.removeEventListener('message', this.onWindowMessage);
-  },
-  remove: function () {
-    this.removeWindowMessageListener();
-    Super.remove.apply(this, arguments);
+  loaded: function () {
+    clearTimeout(this.loadingTimeout);
+    this.app.dispatch.trigger('ready:box');
+    this.app.set('loading', false);
+    this.loading(false);
   }
 });
 

@@ -8,7 +8,7 @@
     </section>
     <article class="span9">
       <section class="actions">
-        {{view "run_button" model=container collection=defaultFiles}}
+        {{view "run_button" model=container collection=implementations containerid=container.id}}
         {{#if permissions.edit}}
         {{view "edit_button" model=container containerid=container.id}}
         {{/if}}
@@ -28,7 +28,10 @@
         {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created}}
         {{!view "project_stats" model=image}}
       </section>
-
+      <section class="module">
+        <h3>Service</h3>
+        {{view "service" model=container collection=specifications editmode=false}}
+      </section>
       {{#if image.attributes.tags}}
       {{#if image.attributes.tags.length}}
       <section class="module tags">

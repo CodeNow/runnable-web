@@ -9,6 +9,10 @@ module.exports = {
   'fetch':                  fetch,
   'fetchWithMe':            fetchWithMe,
   'fetchUser':              fetchUser,
+  'fetchImplementation':    fetchImplementation,
+  'fetchImplementations':   fetchImplementations,
+  'fetchSpecification':     fetchSpecification,
+  'fetchSpecifications':    fetchSpecifications,
   'fetchImage':             fetchImage,
   'fetchContainer':         fetchContainer,
   'fetchUserAndChannel':    fetchUserAndChannel,
@@ -148,6 +152,58 @@ function fetchUserAndContainer (containerId, callback) {
     }
   };
   fetch.call(this, spec, callback);
+}
+
+function fetchImplementation (specificationId, callback) {
+  var spec = {
+    implementation: {
+      model: 'Implementation',
+      params: {
+        implements: specificationId
+      }
+    }
+  };
+  fetch.call(this, spec, function (err, results) {
+    callback(err, results && results.implementation);
+  });
+}
+
+function fetchImplementations (callback) {
+  var spec = {
+    implementations: {
+      collection: 'Implementations',
+      params: {}
+    }
+  };
+  fetch.call(this, spec, function (err, results) {
+    callback(err, results && results.implementations);
+  });
+}
+
+function fetchSpecification (specificationId, callback) {
+  var spec = {
+    specification: {
+      model: 'Specification',
+      params: {
+        _id: specificationId
+      }
+    }
+  };
+  fetch.call(this, spec, function (err, results) {
+    callback(err, results && results.specification);
+  });
+}
+
+function fetchSpecifications (callback) {
+  var spec = {
+    specifications: {
+      collection : 'Specifications',
+      params     : {}
+    }
+  };
+  fetch.call(this, spec, function (err, results) {
+    callback(err, results && results.specifications);
+  });
 }
 
 function fetchContainer (containerId, callback) {

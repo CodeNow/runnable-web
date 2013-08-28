@@ -1,0 +1,30 @@
+{{#if specification}}
+{{#with specification.attributes}}
+<b>{{name}}</b>
+<p>{{description}}</p>
+{{/with}}
+<button name="implement" class="btn-secondary btn-small">
+  <i class="icon-edit"></i> 
+  Edit implementation
+</button>
+{{#if editmode}}
+<div>
+  <button name="edit" class="btn-secondary btn-small">
+    <i class="icon-edit"></i> 
+    Edit service
+  </button>
+</div>
+<div>
+  <button name="remove" class="btn-secondary btn-small">
+  <i class="icon-minus"></i> 
+  Remove service
+</button>
+{{/if}}
+{{else}}
+{{#if editmode}}
+<button name="add" class="btn-secondary btn-small">
+  <i class="icon-plus"></i> 
+  Add service
+</button>
+{{/if}}
+{{/if}}

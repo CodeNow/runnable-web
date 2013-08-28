@@ -14,8 +14,6 @@ var express = require('express'),
     sitemap = require('./lib/sitemap'),
     app;
 
-rollbar.handleUncaughtExceptions(env.current.rollbar);
-
 // Add Handlebars helpers
 require('../app/handlebarsHelpers').add(Handlebars);
 
@@ -61,9 +59,9 @@ function initMiddleware() {
   app.engine('js', viewEngine);
 
   // set the middleware stack
-  app.use(express.staticCache());
   app.configure('production', function() {
     app.use(express.compress());
+    app.use(express.staticCache());
   });
   app.use(express.static(__dirname + '/../public'));
   app.use(require('./middleware/cannon')()); // no canon for static
