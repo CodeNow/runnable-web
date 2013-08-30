@@ -35,7 +35,8 @@
     "underscore.string": "~2.3.3",
     "marked": "~0.2.9",
     "node-uuid": "~1.4.1",
-    "nprogress": "git://github.com/tjmehta/nprogress#e03c00d1756f4bb6960ef12551aaf2557708cab0"
+    "nprogress": "git://github.com/tjmehta/nprogress#e03c00d1756f4bb6960ef12551aaf2557708cab0",
+    "http-proxy": "~0.10.3"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
