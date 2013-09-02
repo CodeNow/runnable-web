@@ -1,35 +1,76 @@
 {{view "header_view" model=user context=.}}
-<div class="content">
+
+<section id="hero">
   <div class="container">
-    <h1>{{selectedCategory.attributes.name}}</h1>
-    <aside class="span3">
-      <nav class="cat-nav">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Discover <div>
+          <ul class="texts">
+            <li>Frameworks</li>
+            <li>APIs</li>
+            <li>New Worlds</li>
+            <li>Yourself</li>
+          </ul>
+        </div> through code</h1>
+        <p>Full-stack code examples anyone can run from their browser</p>
+        <form id="searchbox" method="post" action="">
+          <input type="text"   name="search" placeholder="Search" />
+          <button type="submit"><img src="/images/icon-search.png" height="16" width="16" /></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav id="framework-filters" class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand visible-xs" href="#">Select a Framework</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
         {{#each categories.models}}
         {{#with attributes}}
-        <h3 style="font-size:16px; margin-bottom:0px;">
-          {{view 'link' href=link text=name}}
-        </h3>
+        {{view 'item_link' href=link text=name activeClass="yoyoma"}}
         {{/with}}
         {{/each}}
-        <a href="/all">Browse all code</a>
-      </nav>
-    </aside>
-    <article class="span9 last">
-      <nav class="tag-box">
-        {{#each channels.models}}
-        {{#with attributes}}
-        <a href="/{{name}}">
-          {{#channelHasImage name}}
-          <figure>{{view "channel_image" name=name}}</figure>
-          {{/channelHasImage}}
-          <span class="tag-count">{{count}}</span>
-          <h2 class="h2_hack">{{name}}</h2>
-          <p class="tag-desc">{{{description}}}</p>
-        </a>
-        {{/with}}
-        {{/each}}
-      </nav>
-    </article>
+      </ul>
+    </div>
   </div>
-</div>
+</nav>
+
+<section id="cards" class="container">
+  <div class="row">
+    {{#each channels.models}}
+    {{#with attributes}}
+    <div class="col-sm-4">
+      <a href="/{{name}}" class="card">
+        {{view 'channel_image' name=name height="24" width="22"}}
+        <div class="count">{{count}}</div>
+        <div class="description">
+          <h2>{{name}}</h2>
+          {{#if description}}
+          <p>{{description}}</p>
+          {{/if}}
+        </div>
+      </a>
+    </div>
+    {{/with}}
+    {{/each}}
+  </div>
+  <div class="row">
+    <div class="col-sm-12 load-more">
+      <a href="#"><span>Load More</span></a>
+    </div>
+  </div>
+</section>
 {{view "footer_view" model=user context=.}}

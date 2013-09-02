@@ -77,21 +77,15 @@ module.exports = {
       this.app.req.session.destroy();
       this.redirectTo('/');
     }
+  },
+  index: function (params, callback) {
+    // var spec = {
+    //   collection: {collection: 'Collection', params: params}
+    // };
+    // this.app.fetch(spec, function(err, result) {
+    //   callback(err, '<% _.underscored(this.name) %>_index_view', result);
+    // });
+    callback();
   }
 
-  // blob: function (params, callback) {
-  //   var self = this;
-  //   var spec = {
-  //     user: { model:'User', params:{_id: 'me'} }
-  //   };
-  //   fetch.call(this, spec, function (err, results) {
-  //     callback(err, _.extend(results, {
-  //       page: {
-  //         title: formatTitle('Runnable'),
-  //         description: 'Runnable',
-  //         canonical: canonical.call(self)
-  //       }
-  //     }));
-  //   });
-  // }
 };

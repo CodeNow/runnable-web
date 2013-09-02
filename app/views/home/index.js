@@ -4,4 +4,4 @@ module.exports = BaseView.extend({
 
 });
 
-module.exports.id = 'home/index';
+module.exports.id = "home/index";

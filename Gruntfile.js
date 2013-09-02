@@ -2,9 +2,9 @@ var path = require('path');
 var _ = require('underscore');
 var livereloadPort = 35731;
 // in
-var sassDir   = 'assets/stylesheets';
+var sassDir   = 'assets/scss';
 var sassIndex = path.join(sassDir, 'index.scss');
-var fontsDir  = 'assets/stylesheets/assets/fonts';
+var fontsDir  = undefined;//'assets/stylesheets/assets/fonts';
 // out
 var imagesDir       = 'public/images';
 var javascriptsDir  = 'public';
@@ -13,9 +13,12 @@ var rendrDir        = 'node_modules/rendr';
 var compassCSS      = 'public/styles/index.css';
 var mergedCSSPath   = 'public/styles/index.css';
 var minCSS = [
-  'assets/bower/AutoCompleteJS/css/autocomplete.css',
+  'assets/vendor/bootstrap/bootstrap.min.css',
+  'assets/vendor/bootstrap/bootstrap-theme.min.css',
+  'assets/bower/textillate/assets/animate.css',
+  'assets/bower/autocompletejs/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
-  compassCSS
+  compassCSS // must be last
 ];
 //stitch
 var aceScripts = [
@@ -25,10 +28,12 @@ var aceScripts = [
 ];
 var frontendScripts = [
   'assets/vendor/*.js',
-  'assets/vendor/jquery-ui/js/jquery-1.9.1.js',
-  'assets/vendor/jquery-ui/js/jquery-ui-1.10.3.custom.js',
+  'assets/bower/jquery/jquery.min.js',
+  'assets/bower/bootstrap/dist/bootstrap.min.js',
+  'assets/bower/textillate/assets/jquery.lettering.js',
+  'assets/bower/textillate/jquery.textillate.js',
   'assets/bower/frontend-track/frontend-track.js',
-  'assets/bower/AutoCompleteJS/js/autocomplete.js'
+  'assets/bower/autocompletejs/js/autocomplete.js'
 ]
 .concat(aceScripts);
 module.exports = function(grunt) {
@@ -231,13 +236,20 @@ module.exports = function(grunt) {
   grunt.registerTask('channel-images-hash', 'Create channel images hash to prevent 404s', function () {
     var fs = require('fs');
     var done = this.async();
-    var imageDir = path.join(__dirname, 'public/images/channels');
+    var imageDir = path.join(__dirname, 'public/images');
     fs.readdir(imageDir, function (err, files) {
       var imageHash = {};
-      files.forEach(function (file) {
-        var channelName = file.replace(/[.](png|gif|jpg)$/, '');
-        imageHash[channelName] = true;
-      });
+      var iconDash = /^icon-/
+      files
+        .filter(function (filename) {
+          return iconDash.test(filename);
+        })
+        .forEach(function (filename) {
+          var channelName = filename
+            .replace(iconDash, '')
+            .replace(/[.](png|gif|jpg)$/, '');
+          imageHash[channelName] = true;
+        });
       var fileString = 'module.exports='+JSON.stringify(imageHash)+';';
       var filePath = path.join(__dirname,'app/channelImages.js');
       fs.writeFile(filePath, fileString, done);
