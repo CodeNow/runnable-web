@@ -1,22 +1,64 @@
 {{view "header_view" model=user context=.}}
 
 <section id="hero">
+  <div id="bubbles-container">
+    <div id="bubbles">
+      <img class="small"      src="/images/hero-logos/search.svg"         />
+      <img class="medium reverse" src="/images/hero-logos/thumbs-up.svg"      />
+      <img class="large"      src="/images/hero-logos/lightbulb.svg"      />
+      <img class="small reverse"  src="/images/hero-logos/cog.svg"          />
+      <img class="medium"     src="/images/hero-logos/chat-cutout.svg"      />
+      <img class="large reverse"  src="/images/hero-logos/globe.svg"        />
+      <img class="small"      src="/images/hero-logos/world.svg"        />
+      <img class="medium reverse" src="/images/hero-logos/jquery.svg"         />
+      <img class="large"      src="/images/hero-logos/cog.svg"          />
+      <img class="small reverse"  src="/images/hero-logos/codeigniter.svg"      />
+      <img class="medium"     src="/images/hero-logos/arrow.svg"        />
+      <img class="large reverse"  src="/images/hero-logos/chat-bubble.svg"      />
+      <img class="small"      src="/images/hero-logos/connection.svg"       />
+      <img class="medium reverse" src="/images/hero-logos/display.svg"        />
+      <img class="large"      src="/images/hero-logos/expression-engine.svg"  />
+      <img class="small reverse"  src="/images/hero-logos/heart.svg"        />
+      <img class="small"      src="/images/hero-logos/search.svg"         />
+      <img class="medium reverse" src="/images/hero-logos/thumbs-up.svg"      />
+      <img class="large"      src="/images/hero-logos/lightbulb.svg"      />
+      <img class="small reverse"  src="/images/hero-logos/cog.svg"          />
+      <img class="medium"     src="/images/hero-logos/chat-cutout.svg"      />
+      <img class="large reverse"  src="/images/hero-logos/globe.svg"        />
+      <img class="small"      src="/images/hero-logos/world.svg"        />
+      <img class="medium reverse" src="/images/hero-logos/jquery.svg"         />
+      <img class="large"      src="/images/hero-logos/cog.svg"          />
+      <img class="small reverse"  src="/images/hero-logos/codeigniter.svg"      />
+      <img class="medium"     src="/images/hero-logos/arrow.svg"        />
+      <img class="large reverse"  src="/images/hero-logos/chat-bubble.svg"      />
+      <img class="small"      src="/images/hero-logos/connection.svg"       />
+      <img class="medium reverse" src="/images/hero-logos/display.svg"        />
+      <img class="large"      src="/images/hero-logos/expression-engine.svg"  />
+      <img class="small reverse"  src="/images/hero-logos/heart.svg"        />
+    </div>
+  </div>
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h1>Discover <div>
-          <ul class="texts">
-            <li>Frameworks</li>
-            <li>APIs</li>
-            <li>New Worlds</li>
-            <li>Yourself</li>
-          </ul>
-        </div> through code</h1>
-        <p>Full-stack code examples anyone can run from their browser</p>
-        <form id="searchbox" method="post" action="">
-          <input type="text"   name="search" placeholder="Search" />
-          <button type="submit"><img src="/images/icon-search.png" height="16" width="16" /></button>
-        </form>
+        <div id="hero-content">
+          <h1>Discover <div>
+            <ul class="texts">
+              <li>Frameworks</li>
+              <li>APIs</li>
+              <li>New Worlds</li>
+              <li>Yourself</li>
+            </ul>
+          </div> through code</h1>
+          <p>Full-stack code examples anyone can run from their browser</p>
+          <form id="searchbox" method="post" action="">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"><img src="/images/icon-search.png" height="16" width="16" /></button>
+              </span>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

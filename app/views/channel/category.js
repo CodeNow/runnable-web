@@ -9,6 +9,10 @@ module.exports = BaseView.extend({
     return this.options;
   },
   postRender: function () {
+    this.textEffect();
+    this.imageTile();
+  },
+  textEffect: function () {
     this.$('#hero h1 div').textillate({
       // the default selector to use when detecting multiple texts to animate
       selector: '.texts',
@@ -61,6 +65,17 @@ module.exports = BaseView.extend({
         sync: false,
         shuffle: false,
       }
+    });
+  },
+  imageTile: function () {
+    this.$('#bubbles').isotope({
+      itemSelector : 'img',
+      layoutMode   : 'masonry',
+      itemPositionDataEnabled : true,
+      transformsEnabled       : false,
+      onLayout : function(){
+        this.$('#bubbles img').addClass('hero-animate');
+      }.bind(this)
     });
   }
 });

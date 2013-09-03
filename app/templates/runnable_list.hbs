@@ -1,11 +1,9 @@
-<nav class="project-nav">
-  <ul>
-    {{#each collection.models}}
-      {{view "runnable_item_view" model=.}}
-    {{/each}}
-  </ul>
-</nav>
-<nav class="pagination">
+<ul id="tags-content">
+  {{#each collection.models}}
+    {{view "runnable_item_view" model=.}}
+  {{/each}}
+</ul>
+<!--nav class="pagination">
   {{#if prevLink}}
     <a href="{{prevLink}}" class="previous"><i class="icon-chevron-left"></i> Previous page</a>
   {{/if}}
@@ -16,4 +14,4 @@
   {{#if nextLink}}
     <a href="{{nextLink}}" class="next">Next page <i class="icon-chevron-right"></i></a>
   {{/if}}
-</nav>
+</nav-->

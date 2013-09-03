@@ -4,20 +4,27 @@ var channelImages = require('../channelImages');
 module.exports = BaseView.extend({
   tagName: 'img',
   preRender: function () {
-    var name = this.options.name;
+    var opts = this.options;
+    var name = opts.name;
     var lower = name.toLowerCase();
+    var src;
     if (lower in channelImages) {
+      var pre = (opts.large) ? 'icon-lg-' : (opts.tag) ? 'tag-' : 'icon-';
+      var src = '/image/:pre:lower.png'
+        .replace(':pre', pre)
+        .replace(':lower', lower);
+
       this.attributes = {
-        src: "/images/icon-"+lower+".png",
+        src: src,
         alt: name,
-        height: this.options.height,
-        width: this.options.width
+        height: opts.height,
+        width: opts.width
       };
     }
     else {
-      this.className="display-none";
+      this.className='display-none';
     }
   }
 });
 
-module.exports.id = "ChannelImage";
+module.exports.id = 'ChannelImage';

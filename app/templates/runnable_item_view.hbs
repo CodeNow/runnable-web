@@ -1,18 +1,15 @@
-{{view "vote_button" model=model}}
 {{#with model.attributes}}
-<h2>
+<h3>
   <a href="/{{_id}}/{{urlFriendly name}}">
     {{name}}
   </a>
-</h2>
-{{#if tags}}
-{{#if tags.length}}
-<nav class="tags-nav">
-  {{#each tags}}
-  {{view "tag_link" data=.}}
-  {{/each}}
-</nav>
-{{/if}}
-{{/if}}
-{{view "runnable_item_owner" model=../model.owner model_id=owner model_name='user' created=created}}
+</h3>
+<p>
+  <span class="vote-up"><a href="#">{{votes}}</a></span>&bull;{{view "runnable_item_owner" model=../model.owner model_id=owner model_name='user' created=created}}
+  &bull;<span class="tags">
+    {{#each tags}}
+    {{view "tag_link" name=name}}
+    {{/each}}
+  </span>
+</p>
 {{/with}}

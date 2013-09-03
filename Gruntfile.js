@@ -13,8 +13,9 @@ var rendrDir        = 'node_modules/rendr';
 var compassCSS      = 'public/styles/index.css';
 var mergedCSSPath   = 'public/styles/index.css';
 var minCSS = [
-  'assets/vendor/bootstrap/bootstrap.min.css',
-  'assets/vendor/bootstrap/bootstrap-theme.min.css',
+  'assets/vendor/bootstrap/bootstrap.min.css', // custom
+  'assets/vendor/bootstrap/bootstrap-theme.min.css', // custom
+  'assets/vendor/bootstrap-select/bootstrap-select-theme.min.css',
   'assets/bower/textillate/assets/animate.css',
   'assets/bower/autocompletejs/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
@@ -30,8 +31,10 @@ var frontendScripts = [
   'assets/vendor/*.js',
   'assets/bower/jquery/jquery.min.js',
   'assets/bower/bootstrap/dist/bootstrap.min.js',
+  'assets/bower/bootstrap-select/bootstrap-select.min.js',
   'assets/bower/textillate/assets/jquery.lettering.js',
   'assets/bower/textillate/jquery.textillate.js',
+  'assets/bower/isotope/jquery.isotope.min.js',
   'assets/bower/frontend-track/frontend-track.js',
   'assets/bower/autocompletejs/js/autocomplete.js'
 ]

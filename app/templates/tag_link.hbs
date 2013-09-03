@@ -1,2 +1,2 @@
-{{view "channel_image" name=name}}
-<span>{{name}}</span>
+{{#channelHasImage name}}{{view "channel_image" name=name tag=true height="12" width="9"}}{{/channelHasImage}}
+{{name}}

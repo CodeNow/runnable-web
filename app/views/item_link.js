@@ -6,7 +6,6 @@ module.exports = BaseView.extend({
   preRender: function () {
     var app = this.app;
     var opts = this.options;
-    debugger;
     if (utils.isCurrentURL(app, opts.href)) {
       this.className = opts.activeclass || 'active';
     }

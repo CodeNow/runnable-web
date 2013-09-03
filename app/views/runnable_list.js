@@ -2,10 +2,6 @@ var BaseView = require('./base_view');
 var _ = require('underscore');
 
 module.exports = BaseView.extend({
-  preRender: function () {
-    this.attributes = {};
-    if (this.options.className) this.attributes.className = this.options.className;
-  },
   getTemplateData: function () {
     var paramPage = this.collection.options.page || this.collection.params.page;
     var page = (paramPage+1) || 1;
