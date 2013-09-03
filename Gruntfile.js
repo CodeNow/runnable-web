@@ -15,7 +15,7 @@ var mergedCSSPath   = 'public/styles/index.css';
 var minCSS = [
   'assets/vendor/bootstrap/bootstrap.min.css', // custom
   'assets/vendor/bootstrap/bootstrap-theme.min.css', // custom
-  'assets/vendor/bootstrap-select/bootstrap-select-theme.min.css',
+  'assets/bower/bootstrap-select/bootstrap-select.min.css',
   'assets/bower/textillate/assets/animate.css',
   'assets/bower/autocompletejs/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
