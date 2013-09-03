@@ -1,1 +1,3 @@
-<a href="/{{model.id}}/{{urlFriendly model.attributes.name}}">{{model.attributes.name}}</a>
+{{#with model}}
+<a href="/{{attributes._id}}/{{virtuals.appURL}}">{{attributes.name}}</a>
+{{/with}}

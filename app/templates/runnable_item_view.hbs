@@ -1,10 +1,12 @@
 {{view "vote_button" model=model}}
-{{#with model.attributes}}
+{{#with model}}
 <h2>
-  <a href="/{{_id}}/{{urlFriendly name}}">
-    {{name}}
+  <a href="/{{attributes._id}}/{{virtuals.appURL}}">
+    {{attributes.name}}
   </a>
 </h2>
+{{/with}}
+{{#with model.attributes}}
 {{#if tags}}
 {{#if tags.length}}
 <nav class="tags-nav">
@@ -14,5 +16,5 @@
 </nav>
 {{/if}}
 {{/if}}
-{{view "runnable_item_owner" model=../model.owner model_id=owner model_name='user' created=created}}
 {{/with}}
+{{view "runnable_item_owner" model=model.owner model_id=owner model_name='user' created=created}}
