@@ -10,7 +10,7 @@ module.exports = BaseView.extend({
     var src;
     if (lower in channelImages) {
       var pre = (opts.large) ? 'icon-lg-' : (opts.tag) ? 'tag-' : 'icon-';
-      var src = '/image/:pre:lower.png'
+      var src = '/images/:pre:lower.png'
         .replace(':pre', pre)
         .replace(':lower', lower);
 
