@@ -1,7 +1,7 @@
 <div class="container">
   <nav class="row">
     <div id="logo" class="navbar-header">
-      <a class="navbar-brand" href="#"><img src="/images/runnable-logo.png" height="24" width="129" /></a>
+      <a class="navbar-brand" href="/"><img src="/images/runnable-logo.png" height="24" width="129" /></a>
     </div>
     {{#if model.attributes.username}}
     {{#with model.attributes}}
@@ -24,7 +24,7 @@
     {{else}}
     <!-- Signed Out, class on nav "signed-out" -->
     <ul class="nav nav-pills navbar-right signed-out">
-      <li><a href="#">Browse All</a></li>
+      <li><a href="/all">Browse All</a></li>
       <li class="active"><a href="/new">Publish Code</a></li>
       <li><a id="header-login-link"href="#">Sign In</a></li>
     </ul>

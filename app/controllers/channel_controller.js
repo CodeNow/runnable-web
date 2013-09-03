@@ -3,6 +3,7 @@ var async = require('async');
 var helpers = require('./helpers');
 var utils = require('../utils');
 var fetch = helpers.fetch;
+var Channel = require('../models/channel');
 
 var fetchOwnersFor = helpers.fetchOwnersFor;
 var fetchUserAndChannel = helpers.fetchUserAndChannel;
@@ -121,12 +122,13 @@ module.exports = {
         var pageText = (params.page) ? " Page "+params.page : "";
         _.extend(results, {page:params.page});
         fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
-          callback(err, _.extend(results, ownerResults, {
+          callback(err, 'channel/index', _.extend(results, ownerResults, {
             page: {
               title: formatTitle('Runnable code examples for JQuery, Codeigniter, NodeJS, PHP, Python and more'+pageText),
               description: 'Runnable code examples for '+utils.tagsToString(results.channels.toJSON(), 'and'),
               canonical: canonical.call(self)
-            }
+            },
+            channel: new Channel({name:'All'}, {app:this.app})
           }));
         });
       }
