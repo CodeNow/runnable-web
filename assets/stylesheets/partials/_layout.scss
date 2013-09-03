@@ -10,6 +10,32 @@ header{
 	background:$header;
 }
 
+.container.home {
+	margin: 20px auto;
+	h1{
+		font-size:30px;
+	}
+	img{
+		width:79%;
+	}
+}
+.center {
+	text-align: center;
+	margin:0 auto;
+}
+.super-heavy{
+	font-weight: 900;
+}
+.square {
+	height: 460px;
+	width: 500px;
+	margin:0 auto;
+	padding: 150px 0;
+	@include box-sizing(border-box);
+	@include border-radius(25px);
+	background: lightgrey;
+}
+
 .logo-link {
 	height:20px;
 	width:110px;

@@ -94,4 +94,18 @@ module.exports = {
   //     }));
   //   });
   // }
-};
+,
+  index: function (params, callback) {
+    var self = this;
+    var spec = {
+      user: { model:'User', params:{_id: 'me'} }
+    };
+    fetch.call(this, spec, function (err, results) {
+      callback(err, _.extend(results, {
+        page: {
+          title: 'Runnable',
+          canonical: canonical.call(self)
+        }
+      }));
+    });
+  }};
