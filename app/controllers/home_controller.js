@@ -12,7 +12,7 @@ module.exports = {
       user: { model:'User', params:{_id: 'me'} }
     };
     fetch.call(this, spec, function (err, results) {
-      callback(err, _.extend(results, {
+      callback(err, !err && _.extend(results, {
         page: {
           title: formatTitle('Jobs'),
           description: formatTitle('Job Postings and Listings'),
@@ -23,18 +23,20 @@ module.exports = {
   },
 
   privacy: function (params, callback) {
-    var self = this;
-    var spec = {
-      user: { model:'User', params:{_id: 'me'} }
-    };
-    fetch.call(this, spec, function (err, results) {
-      callback(err, _.extend(results, {
+    // var self = this;
+    // var spec = {
+    //   user: { model:'User', params:{_id: 'me'} }
+    // };
+    // fetch.call(this, spec, function (err, results) {
+      var err = null;
+      var results = {};
+      callback(err, !err && _.extend(results, {
         page: {
           title: formatTitle('Privacy Policy'),
           canonical: canonical.call(self)
         }
       }));
-    });
+    // });
   },
 
   about: function (params, callback) {
@@ -43,7 +45,7 @@ module.exports = {
       user: { model:'User', params:{_id: 'me'} }
     };
     fetch.call(this, spec, function (err, results) {
-      callback(err, _.extend(results, {
+      callback(err, !err && _.extend(results, {
         page: {
           title: formatTitle('About', 'Company Information and Team Members'),
           canonical: canonical.call(self)
@@ -58,7 +60,7 @@ module.exports = {
       user: { model:'User', params:{_id: 'me'} }
     };
     fetch.call(this, spec, function (err, results) {
-      callback(err, _.extend(results, {
+      callback(err, !err && _.extend(results, {
         page: {
           title: formatTitle('API Providers Contact'),
           canonical: canonical.call(self)
@@ -85,7 +87,7 @@ module.exports = {
   //     user: { model:'User', params:{_id: 'me'} }
   //   };
   //   fetch.call(this, spec, function (err, results) {
-  //     callback(err, _.extend(results, {
+  //     callback(err, !err && _.extend(results, {
   //       page: {
   //         title: formatTitle('Runnable'),
   //         description: 'Runnable',
@@ -101,7 +103,7 @@ module.exports = {
       user: { model:'User', params:{_id: 'me'} }
     };
     fetch.call(this, spec, function (err, results) {
-      callback(err, _.extend(results, {
+      callback(err, !err && _.extend(results, {
         page: {
           title: 'Runnable',
           canonical: canonical.call(self)
