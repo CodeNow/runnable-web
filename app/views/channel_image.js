@@ -9,7 +9,8 @@ module.exports = BaseView.extend({
     var lower = name.toLowerCase();
     var src;
     if (lower in channelImages) {
-      var pre = (opts.large) ? 'icon-lg-' : (opts.tag) ? 'tag-' : 'icon-';
+      //no icon-lg for til all images are in
+      var pre = (opts.large) ? 'icon-' : (opts.tag) ? 'tag-' : 'icon-';
       var src = '/images/:pre:lower.png'
         .replace(':pre', pre)
         .replace(':lower', lower);
@@ -17,8 +18,8 @@ module.exports = BaseView.extend({
       this.attributes = {
         src: src,
         alt: name,
-        height: opts.height,
-        width: opts.width
+        height: opts.height
+        // width: opts.width
       };
     }
     else {

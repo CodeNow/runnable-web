@@ -86,6 +86,13 @@ module.exports = Base.extend({
       }
     };
     reader.readAsText(file);
+  },
+  actionClass: function () {
+    // class used for toggling open and close
+    return this.id;
+  },
+  open: function () {
+    return Boolean(this.get('open'));
   }
 });
 

@@ -1,8 +1,8 @@
 var BaseView = require('./base_view');
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
-  tagName: 'button',
-  className: 'btn-vote',
+  tagName: 'a',
+  className: 'vote-up',
   events: {
     'click': 'vote'
   },
@@ -23,6 +23,7 @@ module.exports = BaseView.extend({
     this.listenTo(this.model, 'change:votes', this.render.bind(this));
   },
   vote: function (evt) {
+    evt.preventDefault();
     var self = this;
     this.app.user.vote(this.model, function (errMessage) {
       if (errMessage) {

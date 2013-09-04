@@ -31,4 +31,15 @@ module.exports.add = function (Handlebars) {
       return options.fn(this);
     return options.inverse(this);
   });
-}
+
+  Handlebars.registerHelper('replace', function (str, options) {
+    var opts = options.hash;
+    if (opts.concat) str = str+opts.concat;
+    return str.replace(opts.pattern, opts.replacement);
+  });
+
+  Handlebars.registerHelper('invoke', function (obj, options) {
+    var opts = options.hash;
+    return obj[opts.method]();
+  });
+};

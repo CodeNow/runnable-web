@@ -3,17 +3,15 @@ var Super = BaseView.prototype;
 
 module.exports = BaseView.extend({
   className: 'terminal-view relative',
-  events: {
-    'click .icon-external-link' : 'popOpenTerminal'
-  },
-  popOpenTerminal: function () {
-    window.open("http://" + this.model.get("servicesToken") + "." + this.app.get('domain') + "/static/term.html", "_blank");
-  },
   postRender: function () {
     var self = this;
-    this.$iframe = $('.terminal-iframe');
-    $.get("http://" + this.model.get("servicesToken") + "." + this.app.get('domain') + "/api/running").always(function() { 
-      self.$iframe.attr('src', "http://" + self.model.get("servicesToken") + "." + self.app.get('domain') + "/static/term.html");
+    this.$iframe = this.$('.terminal-iframe');
+    this.$popoutLink = this.$('a');
+    $.get("http://" + this.model.get("servicesToken") + "." + this.app.get('domain') + "/api/running").always(function() {
+      self.src = "http://" + self.model.get("servicesToken") + "." + self.app.get('domain') + "/static/term.html";
+      self.$iframe.attr('src', self.src);
+      self.$popoutLink.attr('href', self.src);
+      self.$popoutLink.attr('target', '_blank');
     });
   },
   postHydrate: function () {

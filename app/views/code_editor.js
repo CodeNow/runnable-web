@@ -6,7 +6,6 @@ var _ = require('underscore');
 // Important for push state navigation from any "project list" page
 // to a "single project page"
 module.exports = BaseView.extend({
-  className:"code-container",
   events: {
     'click .btn-show-file-browser' : 'showFiles',
     'click .btn-hide-file-browser' : 'hideFiles',
@@ -16,6 +15,7 @@ module.exports = BaseView.extend({
     this.$showFilesButton = this.$('.btn-show-file-browser');
     this.$fileBrowser = this.$('.file-browser');
     this.codeView = _.findWhere(this.childViews, {name:'code'});
+    // this.$("[rel='tooltip']").tooltip();
   },
   postHydrate: function () {
     var model = this.model;

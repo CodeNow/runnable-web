@@ -6,7 +6,7 @@ var Specification = require('../models/specification');
 
 module.exports = EditorButtonView.extend({
   tagName: 'button',
-  className: 'run-button btn-primary',
+  className: 'green',
   events: {
     'click' : 'click'
   },
@@ -28,7 +28,7 @@ module.exports = EditorButtonView.extend({
     debugger;
     var specificationId = this.model.get('specification');
     if (specificationId) {
-      var implementation = this.implementation = this.collection.models.filter(function (model) { 
+      var implementation = this.implementation = this.collection.models.filter(function (model) {
         return model.get('implements') === specificationId;
       }).pop();
       if (implementation == null) {
@@ -53,9 +53,9 @@ module.exports = EditorButtonView.extend({
   },
   onChangeUnsaved: function (bool) {
     if (bool)
-      this.$('span').html(' Save and Run');
+      this.$('span').html('Save and Run');
     else
-      this.$('span').html(' Run');
+      this.$('span').html('Run');
   },
   openImplementModal: function (specificationId) {
     var self = this;

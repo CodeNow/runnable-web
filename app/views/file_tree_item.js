@@ -5,16 +5,53 @@ var NewFileModal = require('./new_file_modal');
 var utils = require('../utils');
 
 module.exports = BaseView.extend({
-  tagName: 'span',
   events: {
-    'submit form' : 'submitName',
-    'blur input'  : 'escEditMode',
-    'click a'     : 'click'
+    // 'submit form' : 'submitName',
+    'blur input'  : 'escEditMode'
+    // 'click'     : 'click'
+  },
+  preRender: function () {
+    var opts = this.options;
+    var model = opts.model;
+    var className;
+
+    if (model.isRootDir()) {
+      this.attributes = {};
+      this.attributes.style = 'display:none;';
+      return;
+    }
+
+    if (opts.editmode) {
+      this.tagName = 'form';
+      this.events.submit = 'submitName';
+      this.events.click = undefined;
+    }
+    else {
+      this.tagName = 'a';
+      this.events.submit = undefined;
+      this.events.click = 'click';
+    }
+    className = model.isDir()?
+      model.open()? 'open' : 'collapsed' :
+      '';
+    this.attributes = {
+      href      : 'javascript:void(0);',
+      class     : className,
+      'data-id' : opts.model.id
+    }
+    if (model.isDir()) this.attributes['data-target'] = '.'+model.id;
   },
   getTemplateData: function () {
-    return _.extend(this.options, this.options.model.toJSON());;
+    var opts = this.options;
+    var model = opts.model;
+    var className = '';
+    var isDir = model.isDir();
+    model.virtual.isDir = isDir;
+    if (isDir && !model.get('open')) className = 'collapsed';
+    return _.extend(opts, { className:className });;
   },
-  click: function () {
+  click: function (evt) {
+    evt.preventDefault();
     if (this.model.isFile()) {
       this.app.dispatch.trigger('open:file', this.model);
     }
@@ -27,10 +64,10 @@ module.exports = BaseView.extend({
   },
   highlightIfSelected: function () {
     if (this.model.get('selected')) {
-      this.$el.parent().addClass('selected');
+      this.$el.parent().addClass('active');
     }
     else {
-      this.$el.parent().removeClass('selected');
+      this.$el.parent().removeClass('active');
     }
   },
   postRender: function () {
@@ -39,6 +76,9 @@ module.exports = BaseView.extend({
       this.$('input').focus();
     }
     this.makeDraggable()
+    if (this.options.model.isRootDir()) {
+      this.remove();
+    }
   },
   makeDraggable: function () {
     if (!this.model.isRootDir()) {

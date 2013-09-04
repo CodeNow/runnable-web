@@ -7,7 +7,7 @@
         {{#with channel.attributes}}
         {{#channelHasImage name}}
         <span class="icon-container">
-          {{view "channel_image" large=true height="39" width="35"}}
+          {{view "channel_image" name=name large=true height="39" width="35"}}
         </span>
         {{/channelHasImage}}
         <span>{{name}} Code Examples</span>

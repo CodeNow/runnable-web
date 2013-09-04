@@ -24,12 +24,12 @@ var minCSS = [
 //stitch
 var aceScripts = [
   'assets/bower/ace-builds/src-min-noconflict/ace.js',
-  'assets/bower/ace-builds/src-min-noconflict/theme-textmate.js',
   'assets/vendor/aceWithFuckingSemicolons/*.js',
 ];
 var frontendScripts = [
   'assets/vendor/*.js',
   'assets/bower/jquery/jquery.min.js',
+  'assets/vendor/jquery-ui-custom/js/jquery-ui-1.10.3.custom.min.js',
   'assets/bower/bootstrap/dist/bootstrap.min.js',
   'assets/bower/bootstrap-select/bootstrap-select.min.js',
   'assets/bower/textillate/assets/jquery.lettering.js',

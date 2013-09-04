@@ -5,8 +5,13 @@
   </a>
 </h3>
 <p>
-  <span class="vote-up"><a href="#">{{votes}}</a></span>&bull;{{view "runnable_item_owner" model=../model.owner model_id=owner model_name='user' created=created}}
-  &bull;<span class="tags">
+  <span class="vote-up">
+    <span>{{votes}}</span>
+  </span>
+  &bull;
+  {{view "runnable_item_owner" model=../model.owner model_id=owner model_name='user' created=created}}
+  &bull;
+  <span class="tags">
     {{#each tags}}
     {{view "tag_link" name=name}}
     {{/each}}

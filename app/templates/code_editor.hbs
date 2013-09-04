@@ -1,6 +1,53 @@
 {{view "file_tabs" collection=defaultFiles}}
-<div class="file-content">
+<div id="project-editor-container">
+  <!--googleoff: anchor-->
   {{view "code" collection=defaultFiles}}
+  <!--googleon: anchor-->
+  <a class="open-file-explorer" href="#"><img src="/images/icon-expand.png" height="17" width="24" alt="Open File Explorer" /></a>
+  <aside id="file-explorer">
+    <ul class="controls clearfix">
+      <li class="left">
+        <a href="#"><img src="/images/control-refresh.png"  height="12" width="9"  alt="Refresh" /></a>
+      </li>
+      <li class="dark-theme active">
+        <a href="#" rel="tooltip" title="Dark Theme"></a>
+      </li>
+      <li class="light-theme">
+        <a href="#" rel="tooltip" title="Light Theme"></a>
+      </li>
+      <li class="close-file-explorer right">
+        <a href="#"><img src="/images/control-close.png" height="12" width="12" alt="Close" /></a>
+      </li>
+      <li class="right">
+        <a href="#"><img src="/images/control-settings.png" height="12" width="12" alt="Settings" /></a>
+      </li>
+    </ul>
+    <ul class="nav nav-pills nav-stacked">
+      {{! <li class="folder">
+        <a data-toggle="collapse" data-target=".nav-collapse" data-toggle="dropdown" class="collapsed">
+          views
+        </a>
+        <ul class="nav-collapse collapse">
+          <li><a href="#">My Profile</a></li>
+          <li><a href="#">Settings</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Docker File</a></li>
+      <li><a href="#">README.md</a></li>
+      <li><a href="#">package.json</a></li>
+      <li class="active"><a href="#">pass.js</a></li>
+      <li><a href="#">server.js</a></li> }}
+      {{view "file_tree" model=rootDir editmode=editmode}}
+    </ul>
+  </aside>
+</div>
+
+
+
+<!--
+{{view "file_tabs" collection=defaultFiles}}
+<div class="file-content">
   <button class="btn-tertiary btn-small btn-show-file-browser">
     <i class="icon-folder-open"></i> Show file browser</button>
   <div class="file-browser display-none">
@@ -17,3 +64,4 @@
     </nav>
   </div>
 </div>
+-->

@@ -1,0 +1,110 @@
+pre {
+  margin:0;
+}
+
+#project-editor-container{
+  height:auto;
+  min-height: 350px; /*same as pre.code*/
+}
+
+pre.code{
+  min-height: 350px;
+}
+
+ul.fs-list{
+  padding-left:0;
+}
+
+$tree-padding:15px;
+
+#project-editor-container #file-explorer > ul.nav{
+  li{
+    padding-left:0;
+    li{
+      padding-left:$tree-padding*1;
+      li{
+        padding-left:$tree-padding*2;
+        li{
+          padding-left:$tree-padding*3;
+          li{
+            padding-left:$tree-padding*4;
+            li{
+              padding-left:$tree-padding*5;
+              li{
+                padding-left:$tree-padding*6;
+                li{
+                  padding-left:$tree-padding*7;
+                  li{
+                    padding-left:$tree-padding*8;
+                    li{
+                      padding-left:$tree-padding*9;
+                      li{
+                        padding-left:$tree-padding*10;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.relative{
+  position:relative;
+}
+
+.terminal-view .loader{
+  position: absolute;
+  top: 20px;
+  left: 5px;
+  color: white;
+  display:none;
+}
+.terminal-view.loading .loader{
+  display:block;
+}
+
+#project-editor-container aside#file-explorer ul.fs-list li.active {
+  background: #fd7022;
+}
+
+
+//runnable index
+#project-author h4.author-title b {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+//runnable list
+#tags-main #tags-content li p b {
+  color: #222222;
+}
+#tags-main #tags-content li p span.vote-up span {
+  color: #bbb;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding-left: 15px;
+}
+#tags-main #tags-content li p span.vote-up span:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 32%;
+  left: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid #bbb;
+  -webkit-transition: -webkit-transform 0.25s linear;
+  -moz-transition: -moz-transform 0.25s linear;
+  -ms-transition: -o-transform 0.25s linear;
+  -o-transition: -o-transform 0.25s linear;
+  transition: transform 0.25s linear;
+}

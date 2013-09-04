@@ -1,8 +1,9 @@
 var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
-  tagName: 'nav',
-  className: 'file-tabs',
+  tagName: 'ul',
+  id: 'project-editor-tabs',
+  className: 'nav nav-tabs',
   postHydrate: function () {
     this.listenTo(this.collection, 'add remove change:selected', this.render.bind(this));
   },

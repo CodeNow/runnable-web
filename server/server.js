@@ -87,7 +87,6 @@ function initMiddleware() {
   }));
   app.use(express.logger());
   app.use(function (req, res, next) {
-    console.log(req.headers);
     if (~(req.header('content-type') || '').indexOf('form-data')) {
       next();
     }

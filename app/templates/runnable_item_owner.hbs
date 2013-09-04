@@ -1,9 +1,10 @@
 Published by
 {{#with model.attributes}}
 {{#if username}}
-<a href="#">{{username}}</a>
+<!--a href="#">{{username}}</a-->
+<b>{{username}}</b>
 {{else}}
-<a href="#">Anonymous</a>
+<b>Anonymous</b>
 {{/if}}
 {{/with}}
 <time datetime="{{created}}"> {{dateAgo created}}</time>

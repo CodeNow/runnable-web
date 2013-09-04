@@ -6,11 +6,22 @@ var utils = require('../utils');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
-  tagName: 'div',
   events: {
     'click .edit-link': 'clickEdit',
-    'submit form'      : 'submitName',
+    'submit'      : 'submitName',
     'click .btn-cancel': 'escEditMode'
+  },
+  preRender: function () {
+    if (this.options.editMode) {
+      this.tagName = 'form';
+      this.attributes = {
+        action: "javascript:void(0);"
+      };
+    }
+    else {
+      this.tagName = 'span';
+      this.attributes = {};
+    }
   },
   postRender: function () {
     this.listenTo(this.model, 'change:name', this.render.bind(this));
