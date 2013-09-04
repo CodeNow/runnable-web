@@ -18,15 +18,15 @@ module.exports = RendrBase.extend({
     }
     return Super.parse.apply(this, arguments);
   },
-  toJSON: function () {
-    var data = Super.toJSON.call(this);
-    var virtuals = _.result(this, 'virtuals');
-    for (var key in virtuals) {
-      var val = virtuals[key];
-      data[key] = this[val]();
-    }
-    return data;
-  },
+  // toJSON: function () {
+  //   var data = Super.toJSON.call(this);
+  //   var virtuals = _.result(this, 'virtuals');
+  //   for (var key in virtuals) {
+  //     var val = virtuals[key];
+  //     data[key] = this[val]();
+  //   }
+  //   return data;
+  // },
   virtual: {}
   // get: function (key) {
   // //   var val = Super.get.apply(this, arguments);
