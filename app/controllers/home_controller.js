@@ -23,7 +23,7 @@ module.exports = {
   },
 
   privacy: function (params, callback) {
-    // var self = this;
+    var self = this;
     // var spec = {
     //   user: { model:'User', params:{_id: 'me'} }
     // };
