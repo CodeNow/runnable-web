@@ -13,7 +13,7 @@ module.exports = BaseView.extend({
     this.imageTile();
   },
   textEffect: function () {
-    this.$('#hero h1 div').textillate({
+    this.$('#home-header h1 div').textillate({
       // the default selector to use when detecting multiple texts to animate
       selector: '.texts',
 
@@ -68,15 +68,26 @@ module.exports = BaseView.extend({
     });
   },
   imageTile: function () {
-    this.$('#bubbles').isotope({
-      itemSelector : 'img',
-      layoutMode   : 'masonry',
-      itemPositionDataEnabled : true,
-      transformsEnabled       : false,
-      onLayout : function(){
-        this.$('#bubbles img').addClass('hero-animate');
-      }.bind(this)
+    var $bubbleImages = this.$('.bubbles img');
+    var max = $bubbleImages.length;
+    var count = 0;
+    $bubbleImages.each(function () {
+      $(this).once('load', checkAllLoaded);
     });
+    function checkAllLoaded () {
+      if (++count >= max) done();
+    }
+    function done () {
+      this.$('.bubbles').isotope({
+        itemSelector : 'img',
+        layoutMode   : 'masonry',
+        itemPositionDataEnabled : true,
+        transformsEnabled       : false,
+        onLayout : function(){
+          $bubbleImages.addClass('hero-animate');
+        }
+      });
+    }
   }
 });
 
