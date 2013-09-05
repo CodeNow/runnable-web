@@ -90,7 +90,7 @@ module.exports = BaseView.extend({
           session.setMode(this.getMode(file.get('name')));
           session.setTabSize(2);
           session.setUseSoftTabs(true);
-          this.listenTo(session, 'change',           this.onEdit.bind(this));
+          this.listenTo(session, 'change',           this.onEdit.bind(this, this.file)); // change events are slow and sometimes occur after a file has been switched so bind it here.
           this.listenTo(session, 'changeScrollLeft', this.onScrollLeft.bind(this));
           this.listenTo(session, 'changeScrollTop',  this.onScrollTop.bind(this));
         }
@@ -132,10 +132,10 @@ module.exports = BaseView.extend({
 
     return (new mode.Mode());
   },
-  onEdit: function () {
+  onEdit: function (file) {
     this.adjustHeightToContents();
     var value = this.editor.getValue();
-    this.file.set('content', value);
+    file.set('content', value);
   },
   adjustHeightToContents: function () {
     var editor = this.editor;
