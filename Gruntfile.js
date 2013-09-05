@@ -36,6 +36,7 @@ var frontendScripts = [
   'assets/bower/textillate/assets/jquery.lettering.js',
   'assets/bower/textillate/jquery.textillate.js',
   'assets/bower/isotope/jquery.isotope.min.js',
+  'assets/bower/jquery.stellar/jquery.stellar.min.js',
   'assets/bower/frontend-track/frontend-track.js',
   'assets/bower/autocompletejs/js/autocomplete.js'
 ]
