@@ -3,15 +3,12 @@ var _ = require('underscore');
 var Super = ModalView.prototype;
 
 module.exports = ModalView.extend({
-  className: 'lightbox login-modal',
+  id:'login',
   defaultHeader: "Log in to Runnable",
   postInitialize: function (options) {
     this.header = this.options.header || this.defaultHeader;
   },
   events: {
-    'click .modal'      : 'stopPropagation',
-    'click'             : 'close', // closes modal on bg click
-    'click .btn-close'  : 'close',
     'click .signup-link' : 'openSignup',
     'submit form'        : 'login'
   },

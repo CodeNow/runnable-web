@@ -2,15 +2,15 @@ var BaseView = require('./base_view');
 var Super = BaseView.prototype;
 
 module.exports = BaseView.extend({
-  className: 'lightbox',
-  events: {
-    'click .modal'      : 'stopPropagation',
-    'click'             : 'close', // closes modal on bg click
-    'click .btn-close'  : 'close',
-  },
+  className: 'modal fade',
+  modalOptions: {},
   postRender: function () {
     if ($('body').has(this.$el).length === 0) {
+      // first render
       $('body').append(this.$el);
+      this.$el.modal(this.modalOptions);
+      this.$el.modal('show');
+      this.$el.once('hidden.bs.modal', this.remove.bind(this));
     }
     this.$('input').eq(0).focus();
   },
@@ -23,10 +23,6 @@ module.exports = BaseView.extend({
   },
   close: function () {
     this.remove();
-  },
-  stopPropagation: function (evt) {
-    evt.stopPropagation();
-    //prevents closing modal when clicking inside modal
   }
 });
 

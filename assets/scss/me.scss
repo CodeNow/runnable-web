@@ -1,3 +1,6 @@
+$br:2px;
+$primary-color: #198dd2;
+
 pre {
   margin:0;
 }
@@ -107,4 +110,82 @@ $tree-padding:15px;
   -ms-transition: -o-transform 0.25s linear;
   -o-transition: -o-transform 0.25s linear;
   transition: transform 0.25s linear;
+}
+
+//home page
+.container.home {
+  margin: 20px auto;
+  h1{
+    font-size:30px;
+  }
+  img{
+    width:79%;
+  }
+}
+.center {
+  text-align: center;
+  margin:0 auto;
+}
+.super-heavy{
+  font-weight: 900;
+}
+.square {
+  height: 460px;
+  width: 500px;
+  margin:0 auto;
+  padding: 150px 0;
+  @include box-sizing(border-box);
+  @include border-radius(25px);
+  background: lightgrey;
+}
+
+// Context menu (right click)
+.context-menu{
+  position:absolute;
+  background:#fff;
+  @include border-radius($br);
+  @include box-shadow(0 10px 20px rgba(0,0,0,.1));
+  //padding:5px 0;
+  border:1px solid #eee;
+  min-width:150px;
+  z-index:990;
+  .menu-options{
+    list-style:none;
+    padding:0;
+    margin:0;
+    a{
+      display:block;
+      color:rgba(0,0,0,.4);
+      padding:5px 10px;
+      &:hover{
+        background:$primary-color;
+        //@include background-image(linear-gradient(#0c5e91,darken(#0c5e91,5%)));
+        color:#fff;
+        text-decoration:none;
+      }
+      i{
+        font-size:12px !important;
+        top: 0px;
+        padding-right: 2px;
+      }
+    }
+    li:first-child a{
+      @include border-radius($br $br 0 0);
+    }
+    li:last-child a{
+      @include border-radius(0 0 $br $br);
+    }
+    hr{
+      border:none;
+      border-top:1px solid #eee;
+      margin:0;
+    }
+  }
+}
+
+//wth modal is shifting whole page bc of margin
+body.modal-open,
+.modal-open .navbar-fixed-top,
+.modal-open .navbar-fixed-bottom {
+  margin-right: 0;
 }

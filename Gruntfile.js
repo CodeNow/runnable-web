@@ -30,7 +30,8 @@ var frontendScripts = [
   'assets/vendor/*.js',
   'assets/bower/jquery/jquery.min.js',
   'assets/vendor/jquery-ui-custom/js/jquery-ui-1.10.3.custom.min.js',
-  'assets/bower/bootstrap/dist/bootstrap.min.js',
+  'assets/bower/bootstrap/js/tooltip.js',
+  'assets/bower/bootstrap/js/modal.js',
   'assets/bower/bootstrap-select/bootstrap-select.min.js',
   'assets/bower/textillate/assets/jquery.lettering.js',
   'assets/bower/textillate/jquery.textillate.js',
@@ -155,7 +156,7 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['app/**/*.js', '!node_modules/rendr/node_modules/*', 'node_modules/rendr/**/*.js'],
+        files: ['app/**/*.js', 'app/templates/compiledTemplates.js', '!node_modules/rendr/node_modules/*', 'node_modules/rendr/**/*.js'],
         tasks: ['rendr_stitch', 'copy:dev'],
         options: {
           interrupt: true

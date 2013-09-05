@@ -1,13 +1,13 @@
 <ul class="menu-options">
   {{#unless createOnly}}
-  <li><a href="javascript:void(0)" class="rename" href=""><i class="icon-pencil"></i> Rename</a></li>
-  <li><a href="javascript:void(0)" class="delete" href=""><i class="icon-trash"></i> Delete</a></li>
+  <li><a href="javascript:void(0)" class="rename" href=""><i class="glyphicon glyphicon-pencil"></i> Rename</a></li>
+  <li><a href="javascript:void(0)" class="delete" href=""><i class="glyphicon glyphicon-trash"></i> Delete</a></li>
   {{#if showDefault}}
   {{#if isFile}}
     {{#if model.attributes.default}}
-    <li><a href="javascript:void(0)" class="undefault" href=""><i class="icon-star"></i> Set: Closed by Default</a></li>
+    <li><a href="javascript:void(0)" class="undefault" href=""><i class="glyphicon glyphicon-star-empty"></i> Set: Closed by Default</a></li>
     {{else}}
-    <li><a href="javascript:void(0)" class="default" href=""><i class="icon-star"></i> Set: Opened by Default</a></li>
+    <li><a href="javascript:void(0)" class="default" href=""><i class="glyphicon glyphicon-star"></i> Set: Opened by Default</a></li>
     {{/if}}
   {{/if}}
   {{/if}}
@@ -15,15 +15,15 @@
   {{/unless}}
   <li>
     <a href="javascript:void(0)" class="create-file" href="">
-      <i class="icon-doc-add"></i> New file</a>
+      <i class="glyphicon glyphicon-file"></i> New file</a>
   </li>
   <li>
     <a href="javascript:void(0)" class="create-dir" href="">
-      <i class="icon-folder-add"></i> New folder</a>
+      <i class="glyphicon glyphicon-folder-close"></i> New folder</a>
   </li>
   <li>
     <a href="javascript:void(0)" class="upload" href="">
-      <i class="icon-upload-alt"></i> Upload</a>
+      <i class="glyphicon glyphicon-upload"></i> Upload</a>
   </li>
   <!--
   <li>

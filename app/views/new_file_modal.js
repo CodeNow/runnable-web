@@ -7,10 +7,10 @@ var Super = ModalView.prototype;
 
 module.exports = ModalView.extend({
   className: 'lightbox',
-  events: _.extend(Super.events, {
+  events: {
     'click .btn-cancel' : 'remove',
     'submit form'       : 'submit'
-  }),
+  },
   postInitialize: function () {
     $('body').append(this.$el);
     this.render();

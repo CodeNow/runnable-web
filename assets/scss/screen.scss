@@ -25,301 +25,343 @@ $grey-lighter:	#F6F6F6;
 // Ugly hack to get rid of the blue focus on inputs
 textarea:focus, input:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus { @include box-shadow(none) }
 
+a::-moz-focus-inner, button::-moz-focus-inner,  {
+  border: 0;
+}
+
+// Responsive Mixins
+@mixin breakpoint($point) {
+	@if $point == screen-lg {
+		@media (max-width: 1200px) { @content; }
+	}
+	@else if $point == screen-md {
+		@media (max-width: 992px) { @content; }
+	}
+	@else if $point == screen-sm {
+		@media (max-width: 768px)  { @content; }
+	}
+	@else if $point == screen-xs {
+		@media (max-width: 480px)  { @content; }
+	}
+}
+
+// Retina Mixin
+// http://37signals.com/svn/posts/3271-easy-retina-ready-images-using-scss
+@mixin background-image-retina($image) {
+	@media (min--moz-device-pixel-ratio: 1.3),
+		(-o-min-device-pixel-ratio: 2.6/2),
+		(-webkit-min-device-pixel-ratio: 1.3),
+		(min-device-pixel-ratio: 1.3),
+		(min-resolution: 1.3dppx) {
+	/* on retina, use image that's scaled by 2 */
+	background-image: url($image);
+	}
+}
+
 // Animations ------------------------- //
 
 @-webkit-keyframes bounceySmall {
 	0% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 	50% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(360deg));
 	}
 	100% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 }
 
 @-webkit-keyframes bounceyMedium {
 	0% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 	50% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(360deg));
 	}
 	100% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 }
 
 @-webkit-keyframes bounceyLarge {
 	0% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 	50% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(360deg));
 	}
 	100% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 }
 
 @-webkit-keyframes bounceySmallReverse {
 	0% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 	50% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(-360deg));
 	}
 	100% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 }
 
 @-webkit-keyframes bounceyMediumReverse {
 	0% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 	50% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(-360deg));
 	}
 	100% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 }
 
 @-webkit-keyframes bounceyLargeReverse {
 	0% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 	50% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(-360deg));
 	}
 	100% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 }
 
 @-moz-keyframes bounceySmall {
 	0% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 	50% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(360deg));
 	}
 	100% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 }
 
 @-moz-keyframes bounceyMedium {
 	0% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 	50% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(360deg));
 	}
 	100% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 }
 
 @-moz-keyframes bounceyLarge {
 	0% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 	50% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(360deg));
 	}
 	100% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 }
 
 @-moz-keyframes bounceySmallReverse {
 	0% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 	50% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(-360deg));
 	}
 	100% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 }
 
 @-moz-keyframes bounceyMediumReverse {
 	0% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 	50% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(-360deg));
 	}
 	100% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 }
 
 @-moz-keyframes bounceyLargeReverse {
 	0% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 	50% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(-360deg));
 	}
 	100% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 }
 
 @-ms-keyframes bounceySmall {
 	0% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 	50% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(360deg));
 	}
 	100% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 }
 
 @-ms-keyframes bounceyMedium {
 	0% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 	50% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(360deg));
 	}
 	100% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 }
 
 @-ms-keyframes bounceyLarge {
 	0% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 	50% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(360deg));
 	}
 	100% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 }
 
 @-ms-keyframes bounceySmallReverse {
 	0% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 	50% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(-360deg));
 	}
 	100% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 }
 
 @-ms-keyframes bounceyMediumReverse {
 	0% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 	50% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(-360deg));
 	}
 	100% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 }
 
 @-ms-keyframes bounceyLargeReverse {
 	0% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 	50% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(-360deg));
 	}
 	100% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 }
 
 @keyframes bounceySmall {
 	0% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 	50% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(360deg));
 	}
 	100% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 }
 
 @keyframes bounceyMedium {
 	0% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 	50% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(360deg));
 	}
 	100% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 }
 
 @keyframes bounceyLarge {
 	0% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 	50% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(360deg));
 	}
 	100% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(0));
 	}
 }
 
 @keyframes bounceySmallReverse {
 	0% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 	50% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(-360deg));
 	}
 	100% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 }
 
 @keyframes bounceyMediumReverse {
 	0% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 	50% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(-360deg));
 	}
 	100% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 }
 
 @keyframes bounceyLargeReverse {
 	0% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 	50% {
-		@include transform(scale(1.1));
+		@include transform(scale(1.1) rotate(-360deg));
 	}
 	100% {
-		@include transform(scale(0.7));
+		@include transform(scale(0.7) rotate(0));
 	}
 }
 
 // ----------------------------------- //
 
+// inputs
+.form-control {
+		min-height: 40px;
+		font-weight: bold;
+		@include box-shadow(none);
+		&:focus {
+			box-shadow: none;
+			border-color: $purple-light;
+		}
+	}
 
-
-// buttons 
+// buttons
 button {
 	@include border-radius(3px);
 	@include transition(all 0.2s ease-in-out);
@@ -328,7 +370,7 @@ button {
 		font-weight: bold;
 		@include box-shadow(inset 0 1px 0 #A7CC45, 0 1px 0 #C5C5C5);
 		background-color: #81B638;
-		@include background-image(linear-gradient(rgba(0,0,0,0), #589427));
+		@include background-image(linear-gradient(rgba(88,148,39,0), #589427));
 		@include box-shadow(inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 0 rgba(0,0,0,0.1));
 		color: #fff;
 		text-shadow: 0 -1px 0 #4F7C20;
@@ -343,12 +385,12 @@ button {
 		}
 		&:hover {
 			background-color: adjust-lightness(#81B638,5);
-			@include background-image(linear-gradient(rgba(0,0,0,0), #589427));
+			@include background-image(linear-gradient(rgba(88,148,39,0), #589427));
 			border-color: adjust-lightness(#538823, -5);
 		}
 		&:active {
 			background-color: #629C2B;
-			@include background-image(linear-gradient(rgba(0,0,0,0),adjust-lightness(#629C2B,-5)));
+			@include background-image(linear-gradient(rgba(90,143,40,0),adjust-lightness(#629C2B,-5)));
 			@include box-shadow(inset 0 0 2px rgba(0,0,0,0.5));
 			@include transition(all 0.05s ease-in-out);
 		}
@@ -357,7 +399,7 @@ button {
 		border: solid 1px #ccc;
 		background-color: #E4E4E4;
 		font-weight: bold;
-		@include background-image(linear-gradient(#F8F8F8,rgba(0,0,0,0)));
+		@include background-image(linear-gradient(#F8F8F8,rgba(248,248,248,0)));
 		@include box-shadow(inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 0 rgba(0,0,0,0.1));
 		color: #999;
 		text-shadow: 0 1px 0 #fff;
@@ -377,10 +419,76 @@ button {
 		}
 		&:active {
 			background-color: #DADADA;
-			@include background-image(linear-gradient(rgba(0,0,0,0),#E0E0E0));
+			@include background-image(linear-gradient(rgba(224,224,224,0),#E0E0E0));
 			@include box-shadow(inset 0 0 2px rgba(0,0,0,0.5));
 			@include transition(all 0.05s ease-in-out);
 		}
+	}
+	&.purple {
+		border: solid 1px #56349E;
+		background-color: #9A58BA;
+		font-weight: bold;
+		@include background-image(linear-gradient(rgba(107,64,155,0),#6B409B));
+		@include box-shadow(inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 0 rgba(0,0,0,0.1));
+		color: #fff;
+		text-shadow: 0 -1px 0 #633791;
+		font-size: 13px;
+		padding: 8px 18px 8px 16px;
+		img, span {
+			vertical-align: middle;
+			display: inline-block;
+		}
+		img {
+			margin-right: 8px;
+			margin-top: 1px;
+		}
+		&:hover {
+			background-color: #AC67C6;
+		}
+		&:active {
+			background-color: #7B49A5;
+			@include background-image(linear-gradient(rgba(141,83,177,0),#8D53B1));
+			@include box-shadow(inset 0 0 2px rgba(0,0,0,0.5));
+			@include transition(all 0.05s ease-in-out);
+		}
+	}
+	&.orange {
+		border: solid 1px #C3531E;
+		background-color: #FD8524;
+		font-weight: bold;
+		@include background-image(linear-gradient(rgba(252,91,32,0),#FC5B20));
+		@include box-shadow(inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 0 rgba(0,0,0,0.1));
+		color: #fff;
+		text-shadow: 0 -1px 0 #F06B20;
+		font-size: 13px;
+		padding: 8px 18px 8px 16px;
+		img, span {
+			vertical-align: middle;
+			display: inline-block;
+		}
+		img {
+			margin-right: 8px;
+			margin-top: 1px;
+		}
+		&:hover {
+			background-color: #FD9F28;
+		}
+		&:active {
+			background-color: #DA5A1B;
+			@include background-image(linear-gradient(rgba(224,106,30,0),#E06A1E));
+			@include box-shadow(inset 0 0 2px rgba(0,0,0,0.2));
+			@include transition(all 0.05s ease-in-out);
+		}
+	}
+}
+
+// Expandable
+.expandable {
+	display: none;
+	opacity: 0;
+	&.expanded {
+		opacity: 1;
+		display: inline;
 	}
 }
 
@@ -393,6 +501,10 @@ button {
 		margin: 8px 0;
 		> li {
 			margin-left: 35px;
+			@include breakpoint(screen-xs) {
+				margin-left: 6px;
+				padding: 0;
+			}
 		}
 		a {
 			color: #fff;
@@ -406,11 +518,19 @@ button {
 			}
 		}
 		> li.active a {
-			border: solid 1px $purple; 
+			border: solid 1px $purple;
 			@include box-shadow(inset 0 1px 0 rgba(255,255,255,0.1), 0 1px 0 rgba(0,0,0,0.3));
 			&:hover {
-				background: adjust-lightness(#6E3E8E,15);
+				background: #B48BD1;
 				text-decoration: none;
+				color: adjust-lightness($purple,-15);
+			}
+			&:active {
+				background: adjust-lightness($purple,-5);
+				@include box-shadow(inset 0 0 10px rgba(0,0,0,0.5));
+				@include transition(all 0.1s ease-in-out);
+				color: adjust-saturation($purple-light, -18);
+
 			}
 		}
 		&.signed-out {
@@ -418,25 +538,12 @@ button {
 			}
 		}
 		&.signed-in {
-			> li.active a {
-				border: solid 1px $purple;
-				background-color: #81B638;
-				@include background-image(linear-gradient(rgba(0,0,0,0), #589427));
-				@include box-shadow(inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 0 rgba(0,0,0,0.1));
-				@include transition(all 0.2s ease-in-out);
-				text-shadow: 0 -1px 0 rgba(60,105,14,0.75);
-				&:hover {
-					background-color: adjust-lightness(#81B638,5);
-					@include background-image(linear-gradient(rgba(0,0,0,0), #589427));
-						text-decoration: none;
-				}
-				&:active {
-					background-color: adjust-lightness(#81B638,-10);
-					@include transition(all 0.03s ease-in-out);
-				}
-			}
 			> li.dropdown a {
 				padding: 0;
+				@include breakpoint(screen-xs) {
+					margin-top: 4px;
+					margin-left: 8px;
+				}
 			}
 			img {
 				width: 32px;
@@ -444,6 +551,11 @@ button {
 				@include border-radius(3px);
 				overflow: hidden;
 				margin-right: 12px;
+				@include breakpoint(screen-xs) {
+					width: 24px;
+					height: 24px;
+					margin-right: 4px;
+				}
 			}
 			.caret {
 				border-top-color: #B48BD1;
@@ -452,6 +564,9 @@ button {
 				border-left-width: 5px;
 				border-right-width: 5px;
 				margin-left: 12px;
+				@include breakpoint(screen-xs) {
+					margin-left: 4px;
+				}
 			}
 			.dropdown-menu {
 				top: 170%;
@@ -463,7 +578,7 @@ button {
 				@include box-shadow(0 2px 3px rgba(0,0,0,0.3));
 				li {
 					overflow: hidden;
-					&:first-child { 
+					&:first-child {
 						@include border-radius(3px 3px 0 0);
 						a:before {
 							content: "";
@@ -476,6 +591,18 @@ button {
 							border-right: 5px solid transparent;
 							border-bottom: 6px solid #fff;
 							@include transition(all 0.2s ease-in-out);
+							z-index: 100;
+						}
+						a:after {
+							content: "";
+							position: absolute;
+							top: -7px;
+							right: 21px;
+							width: 0;
+							height: 0;
+							border-left: 6px solid transparent;
+							border-right: 6px solid transparent;
+							border-bottom: 7px solid #C6C6C6;
 						}
 						a:hover:before {
 							border-bottom: 6px solid $orange;
@@ -487,7 +614,7 @@ button {
 						font-size: 12px;
 						padding: 8px 12px;
 						display: block;
-						@include border-radius(0);						
+						@include border-radius(0);
 						&:hover {
 							background: $orange;
 							color: #fff;
@@ -503,7 +630,7 @@ button {
 			border: none;
 			@include border-radius(3px);
 			font-size: 12px;
-			height: 32px;
+			min-height: 32px;
 			margin-top: 3px;
 			width: 290px;
 			margin: 4px auto 0 auto;
@@ -511,9 +638,61 @@ button {
 	}
 }
 
-#hero {
+#login {
+	.modal-dialog {
+		width: 30%;
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 25%;
+		.modal-content {
+			background: #f6f6f6;
+			@include border-radius(3px);
+			border: none;
+			.modal-header {
+				@include border-radius(3px 3px 0 0);
+				@include box-shadow(inset 0 1px 0 rgba(255,255,255,0.25));
+				background: $purple-light;
+				color: #fff;
+				padding: 10px 20px;
+				h4 {
+					font-weight: bold;
+					font-size: 14px;
+				}
+			}
+			.modal-body {
+				input {
+					margin-bottom: 20px;
+				}
+				button {
+					width: 100%;
+					margin-bottom: 20px;
+				}
+				p {
+					text-align: center;
+					a {
+						color: #bcbcbc;
+						font-size: 12px;
+						text-shadow: 0 1px 0 #fff;
+					}
+				}
+			}
+		}
+	}
+}
+
+#home-header {
+	.hero-content {
+		bottom: 0;
+		width: 100%;
+		@include breakpoint(screen-sm) {
+			bottom: -55px;
+		}
+	}
+}
+
+.hero {
 	// background: $purple url(../images/hero-bg.png) no-repeat center -16px;
-	overflow: hidden;
 	background: $purple;
 	color: #fff;
 	text-align: center;
@@ -536,87 +715,86 @@ button {
 	form {
 		width: 40%;
 		margin: 0 auto 80px auto;
-		input {
+		.form-control {
 			background: #fff;
 			border: none;
 			outline: none;
 			font-size: 13px;
-			padding: 8px 10px;
-			min-height: 36px;
 			@include border-radius(3px 0 0 3px);
 		}
-		button {
+		.btn-default {
 			border: none;
 			background: $orange;
 			padding: 8px 20px;
 			@include border-radius(0 3px 3px 0);
-			min-height: 36px;
+			height: 40px;
 		}
 	}
-	#hero-content {
+	.hero-content {
 		position: absolute;
 		bottom: 0;
 		left: 0;
 	}
-	#bubbles-container {
-		overflow: hidden;
-		height: 300px;
-		#bubbles {
-			top: -50px;
-			img {
-				position: absolute;
-				padding: 3px;
-				&.small  { 
-					width: 5%; 
-					height: auto;
-					&.hero-animate {
-						-moz-animation: 	bounceySmall 16s infinite ease;
-						-webkit-animation: 	bounceySmall 16s infinite ease;
-						-ms-animation: 		bounceySmall 16s infinite ease;
-						animation: 			bounceySmall 16s infinite ease;
-						&.reverse {
-							-moz-animation: 	bounceySmallReverse 16s infinite ease;
-							-webkit-animation: 	bounceySmallReverse 16s infinite ease;
-							-ms-animation: 		bounceySmallReverse 16s infinite ease;
-							animation: 			bounceySmallReverse 16s infinite ease;
-						}
-					}
-				}
-				&.medium { 
-					width: 10%;
-					height: auto;
-					&.hero-animate {
-						-moz-animation: 	bounceyMedium 32s infinite ease;
-						-webkit-animation: 	bounceyMedium 32s infinite ease;
-						-ms-animation: 		bounceyMedium 32s infinite ease;
-						animation: 			bounceyMedium 32s infinite ease;
-						&.reverse {
-							-moz-animation: 	bounceyMediumReverse 32s infinite ease;
-							-webkit-animation: 	bounceyMediumReverse 32s infinite ease;
-							-ms-animation: 		bounceyMediumReverse 32s infinite ease;
-							animation: 			bounceyMediumReverse 32s infinite ease;
-						}
-					}
-				}
-				&.large  { 
-					width: 15%;
-					height: auto;
-					&.hero-animate {
-						-moz-animation: 	bounceyLarge 64s infinite ease;
-						-webkit-animation: 	bounceyLarge 64s infinite ease;
-						-ms-animation: 		bounceyLarge 64s infinite ease;
-						animation: 			bounceyLarge 64s infinite ease;
-						&.reverse {
-							-moz-animation: 	bounceyLargeReverse 64s infinite ease;
-							-webkit-animation: 	bounceyLargeReverse 64s infinite ease;
-							-ms-animation: 		bounceyLargeReverse 64s infinite ease;
-							animation: 			bounceyLargeReverse 64s infinite ease;
-						}
+}
+
+.bubbles-container {
+	overflow: hidden;
+	height: 300px;
+	.bubbles {
+		top: -50px;
+		img {
+			position: absolute;
+			padding: 3px;
+			&.small  {
+				width: 5%;
+				height: auto;
+				&.hero-animate {
+					-moz-animation: 	bounceySmall 16s infinite ease;
+					-webkit-animation: 	bounceySmall 16s infinite ease;
+					-ms-animation: 		bounceySmall 16s infinite ease;
+					animation: 			bounceySmall 16s infinite ease;
+					&.reverse {
+						-moz-animation: 	bounceySmallReverse 16s infinite ease;
+						-webkit-animation: 	bounceySmallReverse 16s infinite ease;
+						-ms-animation: 		bounceySmallReverse 16s infinite ease;
+						animation: 			bounceySmallReverse 16s infinite ease;
 					}
 				}
 			}
-			height: 400px;
+			&.medium {
+				width: 10%;
+				height: auto;
+				&.hero-animate {
+					-moz-animation: 	bounceyMedium 32s infinite ease;
+					-webkit-animation: 	bounceyMedium 32s infinite ease;
+					-ms-animation: 		bounceyMedium 32s infinite ease;
+					animation: 			bounceyMedium 32s infinite ease;
+					&.reverse {
+						-moz-animation: 	bounceyMediumReverse 32s infinite ease;
+						-webkit-animation: 	bounceyMediumReverse 32s infinite ease;
+						-ms-animation: 		bounceyMediumReverse 32s infinite ease;
+						animation: 			bounceyMediumReverse 32s infinite ease;
+					}
+				}
+			}
+			&.large  {
+				width: 15%;
+				height: auto;
+				&.hero-animate {
+					-moz-animation: 	bounceyLarge 64s infinite ease;
+					-webkit-animation: 	bounceyLarge 64s infinite ease;
+					-ms-animation: 		bounceyLarge 64s infinite ease;
+					animation: 			bounceyLarge 64s infinite ease;
+					&.reverse {
+						-moz-animation: 	bounceyLargeReverse 64s infinite ease;
+						-webkit-animation: 	bounceyLargeReverse 64s infinite ease;
+						-ms-animation: 		bounceyLargeReverse 64s infinite ease;
+						animation: 			bounceyLargeReverse 64s infinite ease;
+					}
+				}
+			}
 		}
+		height: 400px;
 	}
 }
 
@@ -653,7 +831,7 @@ button {
 		@include box-shadow(inset 0 1px 0 rgba(255,255,255,0.75), 0 2px 3px rgba(0,0,0,0.05));
 		@include border-radius(5px);
 		background-color: #f4f4f4;
-		@include background-image(linear-gradient(#fcfcfc, rgba(0,0,0,0)));
+		@include background-image(linear-gradient(#fcfcfc, rgba(252,252,252,0)));
 		@include transition(all 0.2s ease-in-out);
 		img {
 			float: left;
@@ -682,7 +860,7 @@ button {
 		&:hover {
 			text-decoration: none;
 			background-color:  #F7ECFE;
-			@include background-image(linear-gradient(#FDFAFF, rgba(0,0,0,0)));
+			@include background-image(linear-gradient(#FDFAFF, rgba(253,250,255,0)));
 			border-color: $purple-light;
 		}
 	}
@@ -956,7 +1134,7 @@ button {
 				&.folder a:before {
 					content: "";
 					position: absolute;
-					width: 0; 
+					width: 0;
 					height: 0;
 					top: 43%;
 					left: 6%;
@@ -1066,8 +1244,8 @@ div.terminal {
 						}
 						&:before {
 							content: "";
-							width: 0; 
-							height: 0; 
+							width: 0;
+							height: 0;
 							border-left: 6px solid transparent;
 							border-right: 6px solid transparent;
 							border-bottom: 8px solid #878787;
@@ -1137,6 +1315,7 @@ div.terminal {
 					}
 				}
 			}
+			.dropdown-menu > li > a { padding: 3px 14px }
 			.dropdown-menu li a:hover { background: $orange }
 		}
 	}
@@ -1189,7 +1368,7 @@ div.terminal {
 							&:before {
 								content: "";
 								position: absolute;
-								width: 0; 
+								width: 0;
 								height: 0;
 								top: 32%;
 								left: 0;
@@ -1262,6 +1441,502 @@ div.terminal {
 							@include border-radius(7px);
 							padding: 1px 6px;
 						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#about {
+
+	.jumbotron {
+		margin: 0;
+		background-repeat: no-repeat;
+		@include background-size(cover);
+		min-height: 480px;
+		h2 {
+			font-weight: bold;
+			font-size: 36px;
+			margin-bottom: 15px;
+		}
+		p {
+			font-size: 18px;
+			line-height: 1.2em;
+		}
+	}
+
+	#about-header {
+		background-image: url('../images/about-header-plx.jpg');
+		@include background-image-retina('../images/about-header-plx@2x.jpg');
+		color: #fff;
+		text-shadow: 0 3px 20px rgba(0,0,0,0.75);
+		h2 {
+			margin-top: 225px;
+		}
+		p {
+			margin-right: 30%;
+		}
+	}
+
+	#about-logos {
+		text-align: center;
+		padding: 75px 0;
+		.logo {
+			display: inline-block;
+			margin: 0 28px 60px 28px;
+			&.engadget {
+				background: url(../images/sprite-engadget.png);
+				@include background-image-retina('../images/sprite-engadget@2x.png');
+				@include background-size(100% auto);
+				width: 150px;
+				height: 51px;
+			}
+			&:hover {
+				background-position: 0 -100%;
+			}
+		}
+		blockquote {
+			border: none;
+			margin: 0;
+			padding: 0;
+			font-family: Georgia, serif;
+			font-style: italic;
+			color: $purple-light;
+			p {
+				position: relative;
+				font-size: 24px;
+				&:before {
+					content: "“";
+					position: absolute;
+					top: -40px;
+					left: -55px;
+					font-size: 120px;
+					color: #E1E3E5;
+				}
+				&:after {
+					content: "”";
+					position: absolute;
+					top: 40px;
+					right: -35px;
+					font-size: 120px;
+					color: #E1E3E5;
+				}
+			}
+		}
+		h3.read-the-article {
+			margin-top: 40px;
+			a {
+				font-size: 18px;
+				text-transform: uppercase;
+				color: #C8C9CB;
+				font-weight: bold;
+				&:hover {
+					text-decoration: underline;
+					color: $purple-light;
+				}
+			}
+		}
+	}
+
+	#about-stack {
+		background-image: url('../images/about-stack.jpg');
+		@include background-image-retina('../images/about-stack@2x.jpg');
+		@include background-size(cover);
+		color: #fff;
+		overflow: hidden;
+		.container {
+			position: relative;
+			img {
+				position: absolute;
+				height: auto;
+				&.amazon {
+					width: 15%;
+					top: -20px;
+					left: 0;
+				}
+				&.node {
+					width: 28%;
+					top: 130px;
+					left: 7%;
+				}
+				&.codeigniter {
+					width: 11%;
+					top: 100px;
+					right: -10%;
+				}
+				&.diamond {
+					width: 5%;
+					top: 0;
+					right: 0;
+				}
+			}
+		}
+		h2 {
+			margin-top: 160px;
+		}
+		p {
+			font-size: 18px;
+			margin-right: 15%;
+		}
+	}
+
+	#about-satellite {
+		background-image: url('../images/about-satellite.jpg');
+		@include background-image-retina('../images/about-satellite@2x.jpg');
+		@include background-size(cover);
+		color: #fff;
+		text-shadow: 0 3px 20px rgba(0,0,0,0.75);
+		h2 {
+			font-size: 36px;
+			font-weight: bold;
+			margin-top: 160px;
+			margin-bottom: 18px;
+		}
+		p {
+			font-size: 18px;
+		}
+	}
+
+	#about-team {
+		text-align: center;
+		padding: 40px 0;
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+		h2 {
+			font-weight: bold;
+			font-size: 36px;
+		}
+		p {
+			font-size: 18px;
+			font-weight: bold;
+		}
+		#team-list {
+			margin-top: 40px;
+			h3 {
+				font-size: 16px;
+				font-weight: bold;
+				margin-bottom: 0;
+				white-space: nowrap;
+			}
+			p {
+				font-weight: normal;
+				font-size: 14px;
+				margin: 0;
+			}
+		}
+	}
+}
+
+#jobs {
+
+	.jumbotron {
+		margin: 0;
+		background-repeat: no-repeat;
+		@include background-size(cover);
+		min-height: 700px;
+		h2 {
+			font-weight: bold;
+			font-size: 36px;
+			margin-bottom: 15px;
+		}
+		p {
+			font-size: 18px;
+			line-height: 1.2em;
+		}
+	}
+
+	#jobs-header {
+		background-image: url('../images/jobs-header.jpg');
+		@include background-image-retina('../images/jobs-header@2x.jpg');
+		@include background-size(cover);
+		color: #fff;
+		text-align: center;
+		height: 700px;
+		h2 {
+			margin-top: 215px;
+		}
+		p {
+			margin-bottom: 50px;
+		}
+		button {
+			height: 60px;
+			font-size: 17px;
+			padding: 0 40px;
+		}
+	}
+
+	#jobs-perks {
+		text-align: center;
+		padding: 75px 0 15px 0;
+		color: #aaa;
+		h2 {
+			font-weight: bold;
+			margin: 0 0 60px 0;
+		}
+		h3 {
+			font-size: 18px;
+			font-weight: bold;
+			margin-bottom: 60px;
+		}
+	}
+
+	#jobs-you {
+		background-image: url('../images/jobs-you.jpg');
+		@include background-image-retina('../images/jobs-you@2x.jpg');
+		@include background-size(cover);
+		color: #fff;
+		height: 700px;
+		h2 {
+			margin-top: 415px;
+		}
+	}
+
+	#jobs-open-positions {
+		h3 {
+			font-weight: bold;
+			font-size: 18px;
+			margin-top: 75px;
+		}
+		#jobs-open-positions-list {
+			@include box-shadow(0 2px 6px rgba(0,0,0,0.1));
+			background: #fff;
+			margin: 25px 0 75px 0;
+			padding: 0;
+			@include border-radius(3px);
+			li {
+				border-bottom: solid 1px #eee;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				h4, p, div {
+					margin: 0;
+					padding: 2.5%;
+					font-size: 14px;
+				}
+				h4 {
+					font-weight: bold;
+					margin-top: 12px;
+				}
+				p {
+					margin-top: 12px;
+				}
+				div {
+					text-align: right;
+				}
+			}
+		}
+		#jobs-about {
+			h3 {
+				margin-bottom: 21px;
+			}
+			p {
+				font-size: 17px;
+				color: #999;
+				margin: 0 0 25px 0;
+				padding: 0 0 25px 0;
+				line-height: 1.3em;
+				border-bottom: solid 1px #ccc;
+			}
+			#jobs-contact-list {
+				margin: 0;
+				padding: 0;
+				li {
+					list-style: none;
+					font-weight: bold;
+					text-align: left;
+					font-size: 14px;
+					margin-bottom: 25px;
+					a {
+						color: #333;
+					}
+				}
+			}
+		}
+	}
+}
+
+#contact-header {
+	text-align: center;
+	#contact-mid {
+		background-color: $purple;
+		color: #fff;
+		height: 200px;
+		h2 {
+			margin: 0;
+			font-size: 36px;
+			font-weight: bold;
+			padding: 40px 0 10px 0;
+		}
+		p {
+			color: #c49cdf;
+			font-size: 18px;
+		}
+	}
+	#contact-body {
+		margin-top: -45px;
+		background-color: #fff;
+		background-image: url('../images/contact-body.png');
+		@include background-image-retina('../images/contact-body@2x.png');
+		text-align: left;
+	}
+}
+
+#contact-body, #about-contact-body {
+	background-color: #fff;
+	background-image: url('../images/about-contact.jpg');
+	@include background-image-retina('../images/about-contact@2x.png');
+	@include background-size(100% auto);
+	background-repeat: no-repeat;
+	@include border-radius(3px);
+	margin-bottom: 40px;
+	@include box-shadow(inset 0 1px 0 rgba(255,255,255,0.3), 0 2px 7px rgba(0,0,0,0.1));
+	address {
+		height: 200px;
+		text-align: center;
+		p {
+			padding: 40px 0 0 0;
+			margin: 0;
+		}
+		h3 {
+			margin: 12px 0 0 0;
+			padding: 0;
+		}
+	}
+	h2 {
+		font-weight: bold;
+		font-size: 24px;
+		color: $purple-light;
+		margin: 10px 0 30px 0;
+	}
+	input.form-control {
+		margin-bottom: 20px;
+	}
+	textarea.form-control {
+		margin-top: 66px;
+		min-height: 100px;
+		margin-bottom: 20px;
+	}
+	button {
+		width: 100%;
+		height: 40px;
+	}
+	h4 {
+		font-weight: bold;
+		margin-top: 20px;
+	}
+	p {
+		margin-bottom: 30px;
+		font-size: 14px;
+	}
+}
+
+#providers {
+	.hero {
+		min-height: 430px;
+		.bubbles-container {
+			min-height: 430px;
+		}
+		overflow: visible;
+	}
+	.container {
+		position: relative;
+	}
+	.providers-section {
+		padding: 80px 0 60px 0;
+		border-bottom: solid 1px #ddd;
+		h2 {
+			margin-top: 40px;
+			font-weight: bold;
+		}
+		p {
+			font-size: 18px;
+		}
+	}
+	.providers-image {
+		text-align: center;
+	}
+	#providers-text {
+		position: absolute;
+		left: 0;
+		bottom: 90px;
+		text-align: left;
+		width: 33%;
+	}
+	#providers-hero {
+		position: absolute;
+		bottom: -15px;
+		right: 0;
+		width: 62%;
+		height: auto;
+	}
+
+	#providers-documentation {
+		h2 {
+			margin-top: 105px;
+		}
+	}
+
+	#providers-insights {
+		border-bottom: none;
+		h2 {
+			margin-top: 90px;
+		}
+	}
+
+	#providers-register {
+		height: 580px;
+		.bubbles-container {
+			height: 580px;
+			@include box-shadow(inset 0 10px 100px rgba(0,0,0,0.3));
+		}
+		#providers-register-form {
+			position: absolute;
+			bottom: 50px;
+			left: 17.5%;
+			width: 65%;
+			margin-bottom: 0;
+			.input-group {
+				padding: 20px 10px;
+				margin: 0 12%;
+				@include background-image(linear-gradient(#2E1340, #441E5B));
+				@include box-shadow(inset 0 0 4px rgba(0,0,0,0.2), 0 1px 0 rgba(255,255,255,0.15));
+				@include border-radius(5px);
+				text-align: center;
+				.input-group-addon {
+					font-size: 30px;
+					font-weight: bold;
+					background: none;
+					border: none;
+				}
+				.form-control {
+					@include border-radius(3px);
+					margin-right: 4%;
+					width: 96%;
+				}
+			}
+			.row {
+				text-align: left;
+				margin: 0 10%;
+				label {
+					color: #C39EDD;
+					font-weight: normal;
+					margin-top: 30px;
+				}
+				.form-control {
+					@include border-radius(3px);
+					border: solid 1px #fff;
+				}
+				textarea.form-control {
+					height: 135px;
+				}
+				.providers-register-submit {
+					text-align: right;
+					button {
+						padding: 10px 30px;
+						margin-top: 50px;
 					}
 				}
 			}

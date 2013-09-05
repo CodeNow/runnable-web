@@ -5,10 +5,7 @@ module.exports = BaseView.extend({
   id: 'project-editor-tabs',
   className: 'nav nav-tabs',
   postHydrate: function () {
-    this.listenTo(this.collection, 'add remove change:selected', this.render.bind(this));
-  },
-  getTemplateData: function () {
-    return this.options;
+    this.listenTo(this.collection, 'add remove', this.render.bind(this));
   }
 });
 

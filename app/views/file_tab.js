@@ -8,7 +8,7 @@ module.exports = BaseView.extend({
   },
   preRender: function () {
     var file = this.options.model;
-    if (file && file.get('selected')) {
+    if (file.get('selected')) {
       this.className = 'active';
     }
   },
@@ -16,8 +16,16 @@ module.exports = BaseView.extend({
     return this.model.toJSON();
   },
   postHydrate: function () {
-    // change:selected is listened to in file_tabs
     this.listenTo(this.model, 'change:name', this.render.bind(this));
+    this.listenTo(this.model, 'change:selected', this.onChangeSelected.bind(this));
+  },
+  onChangeSelected: function (model, selected) {
+    if (selected) {
+      this.$el.addClass('active');
+    }
+    else {
+      this.$el.removeClass('active');
+    }
   },
   select: function (evt) {
     evt.preventDefault();
