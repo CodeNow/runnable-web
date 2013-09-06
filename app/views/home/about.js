@@ -3,7 +3,9 @@ var BaseView = require('../base_view');
 module.exports = BaseView.extend({
   id:'about',
   postRender: function () {
-    $.stellar();
+    setTimeout(function () {
+      $.stellar();
+    }, 100); // timeout for clientside hit, else doesnt work..
   }
 });
 

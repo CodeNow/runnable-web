@@ -1,4 +1,5 @@
 var BaseView = require('../base_view');
+var utils = require('../../utils');
 
 module.exports = BaseView.extend({
   id:'providers',
@@ -6,26 +7,18 @@ module.exports = BaseView.extend({
     this.imageTile();
   },
   imageTile: function () {
-    var $bubbleImages = this.$('.bubbles img');
-    var max = $bubbleImages.length;
-    var count = 0;
-    $bubbleImages.each(function () {
-      $(this).once('load', checkAllLoaded);
-    });
-    function checkAllLoaded () {
-      if (++count >= max) done();
-    }
-    function done () {
-      this.$('.bubbles').isotope({
+    var $bubbles = this.$('.bubbles');
+    utils.allImagesLoaded($bubbles.find('img'), function () {
+      $bubbles.isotope({
         itemSelector : 'img',
         layoutMode   : 'masonry',
         itemPositionDataEnabled : true,
         transformsEnabled       : false,
         onLayout : function(){
-          $bubbleImages.addClass('hero-animate');
+          $bubbles.find('.bubble').addClass('hero-animate');
         }
       });
-    }
+    });
   }
 });
 

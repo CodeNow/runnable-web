@@ -635,6 +635,7 @@ button {
 			width: 290px;
 			margin: 4px auto 0 auto;
 		}
+		@include breakpoint(screen-sm) { margin: 0 }
 	}
 }
 
@@ -698,6 +699,9 @@ button {
 	text-align: center;
 	h1 {
 		margin-top: 60px;
+		@include breakpoint(screen-sm) {
+			margin-top: -35px;
+		}
 		div {
 			font-family: "Shadows Into Light Two", cursive;
 			display: inline-block;
@@ -712,8 +716,11 @@ button {
 		color: #AC87C6;
 		margin: 15px 0 30px;
 	}
-	form {
+	#searchbox {
 		width: 40%;
+		@include breakpoint(screen-sm) {
+			width: 90%;
+		}
 		margin: 0 auto 80px auto;
 		.form-control {
 			background: #fff;
@@ -731,17 +738,16 @@ button {
 		}
 	}
 	.hero-content {
-		position: absolute;
-		bottom: 0;
-		left: 0;
+		position: relative;
 	}
 }
 
 .bubbles-container {
-	overflow: hidden;
+	position: absolute;
+	width: 100%;
 	height: 300px;
+	overflow: hidden;
 	.bubbles {
-		top: -50px;
 		img {
 			position: absolute;
 			padding: 3px;
@@ -1131,27 +1137,31 @@ button {
 					color: #fff;
 					@include border-radius(0);
 				}
-				&.folder a:before {
-					content: "";
-					position: absolute;
-					width: 0;
-					height: 0;
-					top: 43%;
-					left: 6%;
-					border-left: 4px solid transparent;
-					border-right: 4px solid transparent;
-					border-top: 6px solid #bbb;
-					@include transition(transform 0.25s linear);
-				}
-				&.folder a.collapsed:before {
-					@include transform(rotate(-90deg));
+
+				&.folder {
+					cursor: pointer;
+					> a:before {
+						content: "";
+						position: absolute;
+						width: 0;
+						height: 0;
+						top: 43%;
+						left: 6%;
+						border-left: 4px solid transparent;
+						border-right: 4px solid transparent;
+						border-top: 6px solid #bbb;
+						@include transition(transform 0.25s linear);
+					}
+					a.collapsed:before {
+						@include transform(rotate(-90deg));
+					}
 				}
 				ul li {
 					list-style: none;
 					a {
 						display: block;
-						padding: 6px 0;
-						&:before { display: none }
+						padding: 6px 0 6px 25px;
+
 					}
 				}
 			}
@@ -1835,17 +1845,41 @@ div.terminal {
 
 #providers {
 	.hero {
-		min-height: 430px;
-		.bubbles-container {
-			min-height: 430px;
+		height: 430px;
+		@include breakpoint(screen-sm) {
+			height: auto;
 		}
-		overflow: visible;
-	}
-	.container {
-		position: relative;
+		.bubbles-container {
+			height: 430px;
+			@include breakpoint(screen-sm) {
+				height: auto;
+			}
+		}
+		#providers-hero-content {
+			position: relative;
+			#providers-text {
+				text-align: left;
+				padding-top: 80px;
+				@include breakpoint(screen-sm) {
+					text-align: center;
+					padding-top: 10px;
+				}
+			}
+			#providers-computer {
+				img {
+					position: static;
+					margin: 28px 0;
+					max-width: 100%;
+					height: auto;
+				}
+			}
+		}
 	}
 	.providers-section {
 		padding: 80px 0 60px 0;
+		@include breakpoint(screen-sm) {
+			padding: 40px 0;
+		}
 		border-bottom: solid 1px #ddd;
 		h2 {
 			margin-top: 40px;
@@ -1854,53 +1888,53 @@ div.terminal {
 		p {
 			font-size: 18px;
 		}
+		.providers-image {
+			text-align: center;
+			img {
+				max-width: 100%;
+				height: auto;
+			}
+		}
 	}
-	.providers-image {
-		text-align: center;
-	}
-	#providers-text {
-		position: absolute;
-		left: 0;
-		bottom: 90px;
-		text-align: left;
-		width: 33%;
-	}
-	#providers-hero {
-		position: absolute;
-		bottom: -15px;
-		right: 0;
-		width: 62%;
-		height: auto;
-	}
-
 	#providers-documentation {
 		h2 {
 			margin-top: 105px;
+			@include breakpoint(screen-sm) {
+				margin-top: 0;
+			}
 		}
 	}
-
 	#providers-insights {
 		border-bottom: none;
 		h2 {
 			margin-top: 90px;
+			@include breakpoint(screen-sm) {
+				margin-top: 40px;
+			}
 		}
 	}
-
 	#providers-register {
 		height: 580px;
+		@include breakpoint(screen-sm) {
+			height: auto;
+			padding-bottom: 40px;
+		}
 		.bubbles-container {
 			height: 580px;
+			@include breakpoint(screen-sm) { height: auto; }
 			@include box-shadow(inset 0 10px 100px rgba(0,0,0,0.3));
+			.bubbles {
+				@include breakpoint(screen-sm) { height: auto; }
+			}
 		}
 		#providers-register-form {
-			position: absolute;
-			bottom: 50px;
-			left: 17.5%;
-			width: 65%;
+			position: relative;
 			margin-bottom: 0;
+			padding-top: 40px;
 			.input-group {
 				padding: 20px 10px;
 				margin: 0 12%;
+				@include breakpoint(screen-sm) { width: 76% }
 				@include background-image(linear-gradient(#2E1340, #441E5B));
 				@include box-shadow(inset 0 0 4px rgba(0,0,0,0.2), 0 1px 0 rgba(255,255,255,0.15));
 				@include border-radius(5px);
@@ -1910,6 +1944,7 @@ div.terminal {
 					font-weight: bold;
 					background: none;
 					border: none;
+					@include breakpoint(screen-sm) { display: block }
 				}
 				.form-control {
 					@include border-radius(3px);
@@ -1917,7 +1952,7 @@ div.terminal {
 					width: 96%;
 				}
 			}
-			.row {
+			#form-columns {
 				text-align: left;
 				margin: 0 10%;
 				label {
@@ -1941,6 +1976,7 @@ div.terminal {
 				}
 			}
 		}
+
 	}
 }
 

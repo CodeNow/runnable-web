@@ -248,6 +248,21 @@ var utils = module.exports = {
       return tags;
     }
   },
+  allImagesLoaded: function ($imgs, cb) {
+    var max = $imgs.length;
+    var count = 0;
+    $imgs.each(function () {
+      var $img = $(this);
+      if ($img[0].complete) {
+        checkAllLoaded();
+      } else {
+        $img.once('load', checkAllLoaded);
+      }
+    });
+    function checkAllLoaded () {
+      if (++count >= max) cb();
+    }
+  },
   isCurrentURL: function (app, url) {
     var currentUrl;
     if (isServer) {
