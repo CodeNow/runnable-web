@@ -1,45 +1,39 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
-var FileMenu = require('./file_menu');
-var NewFileModal = require('./new_file_modal');
+// var FileMenu = require('./file_menu');
+// var NewFileModal = require('./new_file_modal');
 var utils = require('../utils');
+var closedClass = 'collapsed';
 
 module.exports = BaseView.extend({
   events: {
-    // 'submit form' : 'submitName',
-    'blur input'  : 'escEditMode'
-    // 'click'     : 'click'
+    'submit form' : 'submitName',
+    'blur input'  : 'escEditMode',
+    'click'       : 'click'
   },
   preRender: function () {
     var opts = this.options;
     var model = opts.model;
-    var className;
 
     if (model.isRootDir()) {
       this.attributes = {};
       this.attributes.style = 'display:none;';
-      return;
     }
-
-    if (opts.editmode) {
+    else if (opts.editmode) {
       this.tagName = 'form';
       this.events.submit = 'submitName';
       this.events.click = undefined;
     }
     else {
       this.tagName = 'a';
+      this.className = 'collapsed';
       this.events.submit = undefined;
       this.events.click = 'click';
+      this.attributes = {
+        href      : 'javascript:void(0);',
+        'data-id' : opts.model.id
+      };
     }
-    className = model.isDir()?
-      model.open()? 'open' : 'collapsed' :
-      '';
-    this.attributes = {
-      href      : 'javascript:void(0);',
-      class     : className,
-      'data-id' : opts.model.id
-    }
-    if (model.isDir()) this.attributes['data-target'] = '.'+model.id;
   },
   getTemplateData: function () {
     var opts = this.options;
@@ -48,12 +42,25 @@ module.exports = BaseView.extend({
     var isDir = model.isDir();
     model.virtual.isDir = isDir;
     if (isDir && !model.get('open')) className = 'collapsed';
-    return _.extend(opts, { className:className });;
+    return _.extend(opts, { className:className });
   },
   click: function (evt) {
-    evt.preventDefault();
     if (this.model.isFile()) {
+      evt.preventDefault();
       this.app.dispatch.trigger('open:file', this.model);
+    }
+    else { // isDir
+      var animating = this.$el.next().hasClass('animating');
+      if (animating) return;
+
+      if (this.model.get('open')) {
+        this.$el.addClass('collapsed');
+        this.model.set('open', false);
+      }
+      else {
+        this.$el.removeClass('collapsed');
+        this.model.set('open', true);
+      }
     }
   },
   postHydrate: function () {
@@ -75,7 +82,7 @@ module.exports = BaseView.extend({
     if (this.options.editmode) {
       this.$('input').focus();
     }
-    this.makeDraggable()
+    this.makeDraggable();
     if (this.options.model.isRootDir()) {
       this.remove();
     }
@@ -83,7 +90,7 @@ module.exports = BaseView.extend({
   makeDraggable: function () {
     if (!this.model.isRootDir()) {
       this.$el.draggable({
-        opacity: .8,
+        opacity: 0.8,
         helper: "clone",
         containment: "#file-tree"
       });

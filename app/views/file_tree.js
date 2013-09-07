@@ -5,12 +5,10 @@ var NewFileModal = require('./new_file_modal');
 var utils = require('../utils');
 var async = require('async');
 
-var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName: 'li',
   className: 'folder',
   events: {
-    'click span.dir:first' : 'toggle',
     'contextmenu'          : 'contextMenu',
     'drop'                 : 'uploadFiles',
     'dragover'             : 'over', //necessary else drop wont work
@@ -19,6 +17,7 @@ module.exports = BaseView.extend({
   dontTrackEvents: ['dragover', 'dragleave'],
   postHydrate: function () {
     this.listenTo(this.app.dispatch, 'sync:files', this.sync.bind(this));
+    this.listenTo(this.model, 'change:open', this.changeOpen.bind(this));
   },
   getTemplateData: function () {
     return this.options;
@@ -30,8 +29,8 @@ module.exports = BaseView.extend({
   },
   postRender: function () {
     this.$contentsUL = this.$('ul').first();
-    var fileList = _.findWhere(this.childViews, {name:'fs_list'});
-    this.collection = fileList.collection;
+    this.fileList = _.findWhere(this.childViews, {name:'fs_list'});
+    this.collection = this.fileList.collection;
     // droppable
     this.$el.droppable({
       greedy: true,
@@ -47,7 +46,7 @@ module.exports = BaseView.extend({
       this.menu.remove();
       this.menu = null;
     }
-    var collection = _.findWhere(this.childViews, {name:'fs_list'}).collection;
+    var collection = this.collection;
     var modelId = $(evt.target).data('id');
     var model = collection.get(modelId);
     var createOnly = !Boolean(modelId); // if grey area clicked don't show rename or delete..could be confusing to user
@@ -92,7 +91,7 @@ module.exports = BaseView.extend({
     });
   },
   upload: function () {
-    this.showMessage('Upload files by dragging them into the file browser.')
+    this.showMessage('Upload files by dragging them into the file browser.');
   },
   uploadFiles: function (evt) {
     if (!evt.originalEvent.dataTransfer) { return; } // for move drag and drop
@@ -124,26 +123,8 @@ module.exports = BaseView.extend({
       async.forEach(files, eachFile, allDone);
     }
   },
-  slideUpHeight: function () {
-    this.$el.removeClass('open');
-    this.$contentsUL.slideUp(200, function () {
-      this.animating = false;
-    }.bind(this));
-  },
-  slideDownHeight: function () {
-    this.$el.addClass('open');
-    this.$contentsUL.slideDown(200, function () {
-      this.animating = false;
-    }.bind(this));
-  },
-  toggle: function (evt) {
-    this.animating = true;
-    if (this.model.get('open')) {
-      this.close();
-    }
-    else {
-      this.open();
-    }
+  changeOpen: function (model, open) {
+    this.fileList.toggle(open);
   },
   sync: function () {
     if (this.model.get('open')) {
@@ -158,43 +139,8 @@ module.exports = BaseView.extend({
         silent: true,            // silent until all the models are for sure in store..
         merge: true             // so model 'selected' dont get reset
       });
-      this.showLoader();
       contents.fetch(options);
     }
-  },
-  open: function () {
-    this.model.set('open', true);
-    this.slideDownHeight();
-    // fetch the dir contents if not fetched.
-    var self = this;
-    var collection = this.collection;
-    // if (!collection.fetched) {
-    if (true) {
-      this.showLoader();
-      var options = _.extend(utils.cbOpts(cb, this), {
-        data: collection.params, // VERY IMPORTANT! - ask TJ.
-        silent: true,           // silent until all the models are for sure in store..
-        merge: true             // so model 'selected' dont get reset
-      });
-      collection.fetch(options);
-      function cb (err, collection) {
-        this.hideLoader();
-        if (err) {
-          this.showError(err);
-        }
-        else {
-          collection.forEach(function (model) {
-            model.store(); // VERY IMPORTANT! - ask TJ.
-            if (model.isDir()) model.contents.store();
-          });
-          collection.trigger('sync');
-        }
-      }
-    }
-  },
-  close: function () {
-    this.model.set('open', false);
-    this.slideUpHeight();
   },
   moveDrop: function (evt, ui) {
     evt.preventDefault();
@@ -218,12 +164,6 @@ module.exports = BaseView.extend({
         }
       }, this)
     }
-  },
-  showLoader: function () {
-    //TODO
-  },
-  hideLoader: function () {
-    //TODO
   },
   over: function (evt) {
     this.dragClass(evt);
