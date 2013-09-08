@@ -22,27 +22,54 @@ $tree-padding:15px;
 
 #project-editor-container #file-explorer > ul.nav{
   li{
-    padding-left:0;
+    div{
+      padding-left:$tree-padding*0;
+    }
     li{
-      padding-left:$tree-padding*1;
+      div{
+        padding-left:$tree-padding*0;
+      }
       li{
-        padding-left:$tree-padding*2;
+        div{
+          padding-left:$tree-padding*1;
+        }
         li{
-          padding-left:$tree-padding*3;
+          div{
+            padding-left:$tree-padding*2;
+          }
           li{
-            padding-left:$tree-padding*4;
+            div{
+              padding-left:$tree-padding*3;
+            }
             li{
-              padding-left:$tree-padding*5;
+              div{
+                padding-left:$tree-padding*4;
+              }
               li{
-                padding-left:$tree-padding*6;
+                div{
+                  padding-left:$tree-padding*5;
+                }
                 li{
-                  padding-left:$tree-padding*7;
+                  div{
+                    padding-left:$tree-padding*6;
+                  }
                   li{
-                    padding-left:$tree-padding*8;
+                    div{
+                      padding-left:$tree-padding*7;
+                    }
                     li{
-                      padding-left:$tree-padding*9;
+                      div{
+                        padding-left:$tree-padding*8;
+                      }
                       li{
-                        padding-left:$tree-padding*10;
+                        div{
+                          padding-left:$tree-padding*9;
+                        }
+                        li{
+                          div{
+                            padding-left:$tree-padding*10;
+                          }
+                        }
                       }
                     }
                   }
@@ -54,6 +81,10 @@ $tree-padding:15px;
       }
     }
   }
+}
+#project-editor-container aside#file-explorer .nav li ul li form {
+  display: block;
+  padding: 6px 0 6px 25px;
 }
 
 .relative{
@@ -222,4 +253,63 @@ body.modal-open,
 }
 address, #about-contact-body address {
   height: 140px;
+}
+
+// modal
+.modal-dialog {
+  width: 30%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 25%;
+  .modal-content {
+    background: #f6f6f6;
+    @include border-radius(3px);
+    border: none;
+    .modal-header {
+      @include border-radius(3px 3px 0 0);
+      @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.25));
+      background: $purple-light;
+      color: #fff;
+      padding: 10px 20px;
+      h4 {
+        font-weight: bold;
+        font-size: 14px;
+      }
+    }
+    .modal-body {
+      input {
+        margin-bottom: 20px;
+      }
+      button {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      p {
+        text-align: center;
+        a {
+          color: #bcbcbc;
+          font-size: 12px;
+          text-shadow: 0 1px 0 #fff;
+        }
+      }
+    }
+  }
+}
+
+//folder tweak..
+#project-editor-container aside#file-explorer .nav li.folder > div > a:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 43%;
+  left: 6%;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 6px solid #bbb;
+  -webkit-transition: -webkit-transform 0.25s linear;
+  -moz-transition: -moz-transform 0.25s linear;
+  -o-transition: -o-transform 0.25s linear;
+  transition: transform 0.25s linear;
 }

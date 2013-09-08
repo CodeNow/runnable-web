@@ -6,17 +6,12 @@ var utils = require('../utils');
 var Super = ModalView.prototype;
 
 module.exports = ModalView.extend({
-  className: 'lightbox',
+  className: 'fade',
   events: {
-    'click .btn-cancel' : 'remove',
     'submit form'       : 'submit'
   },
   postInitialize: function () {
-    $('body').append(this.$el);
     this.render();
-  },
-  getTemplateData: function () {
-    return this.options;
   },
   submit: function (evt) {
     evt.preventDefault();

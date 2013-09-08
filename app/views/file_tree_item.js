@@ -7,34 +7,12 @@ var closedClass = 'collapsed';
 
 module.exports = BaseView.extend({
   events: {
+    // editmode events
     'submit form' : 'submitName',
     'blur input'  : 'escEditMode',
-    'click'       : 'click'
+    'keyup input' : 'keyup',
   },
-  preRender: function () {
-    var opts = this.options;
-    var model = opts.model;
-
-    if (model.isRootDir()) {
-      this.attributes = {};
-      this.attributes.style = 'display:none;';
-    }
-    else if (opts.editmode) {
-      this.tagName = 'form';
-      this.events.submit = 'submitName';
-      this.events.click = undefined;
-    }
-    else {
-      this.tagName = 'a';
-      this.className = 'collapsed';
-      this.events.submit = undefined;
-      this.events.click = 'click';
-      this.attributes = {
-        href      : 'javascript:void(0);',
-        'data-id' : opts.model.id
-      };
-    }
-  },
+  dontTrackEvents: ['keyup input'],
   getTemplateData: function () {
     var opts = this.options;
     var model = opts.model;
@@ -44,61 +22,43 @@ module.exports = BaseView.extend({
     if (isDir && !model.get('open')) className = 'collapsed';
     return _.extend(opts, { className:className });
   },
-  click: function (evt) {
-    if (this.model.isFile()) {
-      evt.preventDefault();
-      this.app.dispatch.trigger('open:file', this.model);
-    }
-    else { // isDir
-      var animating = this.$el.next().hasClass('animating');
-      if (animating) return;
-
-      if (this.model.get('open')) {
-        this.$el.addClass('collapsed');
-        this.model.set('open', false);
-      }
-      else {
-        this.$el.removeClass('collapsed');
-        this.model.set('open', true);
-      }
+  preRender: function () {
+    var opts = this.options;
+    var model = opts.model;
+    if (model.isRootDir()) {
+      this.attributes = {};
+      this.attributes.style = 'display:none;';
     }
   },
   postHydrate: function () {
-    this.listenTo(this.model, 'change:name', this.render.bind(this));
     this.listenTo(this.model, 'change:selected', this.highlightIfSelected.bind(this));
     this.listenTo(this.model, 'rename', this.setEditMode.bind(this, true));
-    this.highlightIfSelected();
+  },
+  postRender: function () {
+    if (this.options.model.isRootDir()) {
+      this.remove();
+    }
+    if (this.options.editmode) {
+      this.$('input').focus();
+    }
+    else {
+      this.highlightIfSelected();
+    }
   },
   highlightIfSelected: function () {
-    if (this.model.get('selected')) {
+    if (this.model.isFile() && this.model.selected()) {
       this.$el.parent().addClass('active');
     }
     else {
       this.$el.parent().removeClass('active');
     }
   },
-  postRender: function () {
-    this.highlightIfSelected();
-    if (this.options.editmode) {
-      this.$('input').focus();
-    }
-    this.makeDraggable();
-    if (this.options.model.isRootDir()) {
-      this.remove();
-    }
-  },
-  makeDraggable: function () {
-    if (!this.model.isRootDir()) {
-      this.$el.draggable({
-        opacity: 0.8,
-        helper: "clone",
-        containment: "#file-tree"
-      });
-    }
-  },
   setEditMode: function (bool) {
     this.options.editmode = bool;
     this.render();
+  },
+  keyup: function (evt) {
+    if (evt.keyCode === 27) this.escEditMode();   // esc
   },
   escEditMode: function () {
     this.setEditMode(false);
@@ -106,21 +66,16 @@ module.exports = BaseView.extend({
   submitName: function (evt) {
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
-    var options = utils.successErrorToCB(function (err) {
+    var options = utils.cbOpts(function (err) {
       if (err) {
         this.showError(err);
       }
       else {
         this.escEditMode();
       }
-    }.bind(this));
+    }, this);
     options.patch = true;
     this.model.save(formData, options);
-  },
-  showError: function (err) {
-    if (err) {
-      alert(err);
-    }
   }
 });
 

@@ -30,7 +30,8 @@ module.exports = BaseView.extend({
   postRender: function () {
     this.$contentsUL = this.$('ul').first();
     this.fileList = _.findWhere(this.childViews, {name:'fs_list'});
-    this.collection = this.fileList.collection;
+    // IMPORTANT must be set to this.model.contents for rerendering.. else when parent dir rerenders child dirs will lose their collection
+    this.model.contents = this.collection = this.fileList.collection;
     // droppable
     this.$el.droppable({
       greedy: true,
@@ -39,6 +40,7 @@ module.exports = BaseView.extend({
     });
   },
   contextMenu: function (evt) {
+    debugger;
     this.$(document).click(); // closes other context menus
     evt.preventDefault(); // prevent browser context menu
     evt.stopPropagation();
@@ -147,7 +149,7 @@ module.exports = BaseView.extend({
     evt.stopPropagation();
     this.$el.removeClass('drop-hover');
     var self = this;
-    var $itemDropped = $(ui.draggable).find('[data-id]');
+    var $itemDropped = $(ui.draggable);
     var fsid = $itemDropped.data('id');
     if (fsid) {
       var collection = this.collection;
@@ -163,6 +165,9 @@ module.exports = BaseView.extend({
           }, this);
         }
       }, this)
+    }
+    else {
+      debugger;
     }
   },
   over: function (evt) {

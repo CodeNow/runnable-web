@@ -12,6 +12,7 @@ module.exports = BaseView.extend({
       'fs-list nav-collapse collapse';
   },
   postHydrate: function () {
+    debugger;
     this.listenTo(this.collection, 'add remove reset sync', this.render.bind(this));
   },
   getTemplateData: function () {
@@ -32,7 +33,7 @@ module.exports = BaseView.extend({
     // if (!collection.fetched) {
     if (true) {
       var options = _.extend(utils.cbOpts(cb, this), {
-        data: collection.params, // VERY IMPORTANT! - ask TJ.
+        data: _.clone(collection.params), // VERY IMPORTANT! - ask TJ.
         silent: true,           // silent until all the models are for sure in store..
         merge: true             // so model 'selected' dont get reset
       });

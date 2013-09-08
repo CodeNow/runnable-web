@@ -22,7 +22,7 @@ module.exports = BaseView.extend({
     this.render();
   },
   close: function () {
-    this.remove();
+    this.$el.modal('hide');
   }
 });
 

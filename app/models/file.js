@@ -78,6 +78,9 @@ module.exports = Base.extend({
     var formData = new FormData();
     formData.append(file.name, file);
     xhr.send(formData);
+  },
+  selected: function () {
+    return this.get('selected');
   }
 });
 

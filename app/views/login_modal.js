@@ -4,9 +4,10 @@ var Super = ModalView.prototype;
 
 module.exports = ModalView.extend({
   id:'login',
+  className: 'fade',
   defaultHeader: "Log in to Runnable",
   postInitialize: function (options) {
-    this.header = this.options.header || this.defaultHeader;
+    this.options.header = this.options.header || this.defaultHeader;
   },
   events: {
     'click .signup-link' : 'openSignup',
@@ -21,11 +22,6 @@ module.exports = ModalView.extend({
     var signupModal = new SignupModal({ app:this.app });
     signupModal.open();
     return false; // stop link
-  },
-  getTemplateData: function () {
-    return {
-      header: this.header
-    };
   },
   login: function (evt) {
     evt.preventDefault();
