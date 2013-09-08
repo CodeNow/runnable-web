@@ -3,6 +3,11 @@
     {{view "runnable_item_view" model=.}}
   {{/each}}
 </ul>
+<ul class="pagination">
+  <li><a href="{{prevLink}}">«</a></li>
+  <li><a href="#">{{page}}</a></li>
+  <li><a href="{{nextLink}}">»</a></li>
+</ul>
 <!--nav class="pagination">
   {{#if prevLink}}
     <a href="{{prevLink}}" class="previous"><i class="icon-chevron-left"></i> Previous page</a>

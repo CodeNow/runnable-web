@@ -128,7 +128,7 @@ module.exports = {
               description: 'Runnable code examples for '+utils.tagsToString(results.channels.toJSON(), 'and'),
               canonical: canonical.call(self)
             },
-            channel: new Channel({name:'All'}, {app:this.app})
+            channel: new Channel({name:'All'}, {app:self.app})
           }));
         });
       }
