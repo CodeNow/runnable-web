@@ -58,6 +58,7 @@ module.exports = BaseView.extend({
   detachFile: function (file) {
     if (file) {
       var session = file.editorSession;
+      this.stopListening(file);
       this.stopListening(session);
     }
   },
@@ -90,6 +91,7 @@ module.exports = BaseView.extend({
     this.listenTo(file, 'change:content', function () {
       // this.editor.getSession().setValue(file.get('content')); // use case: sync doesnt update open-file contents unless the session is updated
       // call _createSession with file
+      if (file.editorSession) this.stopListening(file.editorSession);
       self._createSession(file);
     });
   },
@@ -102,12 +104,15 @@ module.exports = BaseView.extend({
 
     var editor = this.editor;
     var options, session;
-    // if (file.editorSession) {
-    if (false) {
+    if (file.editorSession) {
+    // if (false) {
       this.hideLoader();
       // resume session if session exists
-      editor.setSession(file.editorSession);
-      editor.getSession().setValue(file.get('content')); // just in case
+      var session = file.editorSession;
+      editor.setSession(session);
+      if (session.getValue() !== file.get('content')) {
+        session.setValue(file.get('content')); // sync for previously opened files but not currently open
+      }
       this._fileEvents(file);
       this._sessionEvents(session);
     }
