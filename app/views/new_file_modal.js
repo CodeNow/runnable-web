@@ -45,7 +45,7 @@ module.exports = ModalView.extend({
       if (model.isFile()) {
         this.app.dispatch.trigger('open:file', model);
       }
-      this.remove();
+      this.close();
     }
   }
 });
