@@ -14,7 +14,7 @@ module.exports = BaseView.extend({
     this.listenTo(this.app.dispatch, 'toggle:files', this.toggleFiles.bind(this));
   },
   postRender: function () {
-    // this.$("[rel='tooltip']").tooltip();
+    this.$("[rel='tooltip']").tooltip();
   },
   toggleFiles: function (open) {
     if (open) { this.showFiles(); } else {

@@ -313,3 +313,31 @@ address, #about-contact-body address {
   -o-transition: -o-transform 0.25s linear;
   transition: transform 0.25s linear;
 }
+
+div.search-results{
+  position:relative;
+  ul{
+    z-index: 1;
+    position:absolute;
+    width: 290px;
+    background: white;
+    margin:0 16px;
+    padding: 0;
+    padding: 10px 15px;
+    top: 45px;
+    box-sizing:auto;
+    li{
+      border-bottom: solid 1px #eee;
+      box-sizing:auto;
+      list-style-type: none;
+    }
+    li:first-child,
+    li:last-child{
+      border-bottom: none;
+    }
+  }
+}
+
+.search-bar{
+  display:inline-block;
+}

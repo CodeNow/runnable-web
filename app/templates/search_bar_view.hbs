@@ -1,10 +1,6 @@
-<form class="search-form">
-  <label for="search-bar-input">Search for code example requests</label>
-  <div class="relative">
-	<input id="search-bar-input" type="search" autofocus placeholder="Search for runnable code examples"></input><i class="icon-search"></i>
-	<div id="search-bar-dropdown" class="search-auto-complete">
-		<ul id="search-bar-dropdown-suggestions">
-		</ul>
-	</div>
+<form class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Search">
   </div>
 </form>
+{{view "search_results"}}

@@ -3,6 +3,7 @@
     <div id="logo" class="navbar-header">
       <a class="navbar-brand" href="/"><img src="/images/runnable-logo.png" height="24" width="129" /></a>
     </div>
+    {{view "search_bar_view"}}
     {{#if model.attributes.username}}
     {{#with model.attributes}}
     <!-- Signed In, class on nav "signed-in" -->
