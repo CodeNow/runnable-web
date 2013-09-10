@@ -18,6 +18,7 @@ module.exports = BaseView.extend({
   },
   dontTrackEvents: ['dragover', 'dragleave'],
   postHydrate: function () {
+    debugger;
     this.listenTo(this.app.dispatch, 'sync:files', this.sync.bind(this));
   },
   getTemplateData: function () {
@@ -137,6 +138,7 @@ module.exports = BaseView.extend({
     }.bind(this));
   },
   toggle: function (evt) {
+    console.log("Toggle clicked on", this);
     this.animating = true;
     if (this.model.get('open')) {
       this.close();
@@ -146,7 +148,8 @@ module.exports = BaseView.extend({
     }
   },
   sync: function () {
-    if (this.model.get('open')) {
+    debugger;
+    // if (this.model.get('open')) {
       var contents = this.collection;
       // firefox does not hoist functions in blocks
       function cb (err) {
@@ -160,7 +163,8 @@ module.exports = BaseView.extend({
       });
       this.showLoader();
       contents.fetch(options);
-    }
+      // setTimeout(this.sync.bind(this), 5000);
+    // }
   },
   open: function () {
     this.model.set('open', true);

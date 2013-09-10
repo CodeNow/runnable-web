@@ -61,56 +61,74 @@ module.exports = BaseView.extend({
       this.stopListening(session);
     }
   },
+  _createSession: function (file) {
+
+    if (!utils.exists(file.get('content'))) { //TODO:  content null.. right now content null does not mean unfetched it means unsupported
+      alert('This file format is not supported by our editor.')
+      this.file = null;
+      file.trigger('close:file', file);
+    }
+    else if (file.get('content').length > 10000 &&
+      !confirm('This file is huge are you sure you want to open it (might crash or take a looong time)?')
+    ) {
+      this.file = null;
+      file.trigger('close:file', file);
+    }
+    else {
+      this.file = file;
+      session = file.editorSession = ace.createEditSession(file.get('content'));
+      this.editor.setSession(session);
+      session.setMode(this.getMode(file.get('name')));
+      session.setTabSize(2);
+      session.setUseSoftTabs(true);
+      this._fileEvents(file);
+      this._sessionEvents(session);
+    }
+  },
+  _fileEvents: function (file) {
+    var self = this;
+    this.listenTo(file, 'change:content', function () {
+      // this.editor.getSession().setValue(file.get('content')); // use case: sync doesnt update open-file contents unless the session is updated
+      // call _createSession with file
+      self._createSession(file);
+    });
+  },
+  _sessionEvents: function (session) {
+    this.listenTo(session, 'change',           this.onEdit.bind(this, this.file)); // change events are slow and sometimes occur after a file has been switched so bind it here.
+    this.listenTo(session, 'changeScrollLeft', this.onScrollLeft.bind(this));
+    this.listenTo(session, 'changeScrollTop',  this.onScrollTop.bind(this));
+  },
   attachFile: function (file) {
+
     var editor = this.editor;
     var options, session;
-    if (file.editorSession) {
+    // if (file.editorSession) {
+    if (false) {
       this.hideLoader();
       // resume session if session exists
       editor.setSession(file.editorSession);
+      editor.getSession().setValue(file.get('content')); // just in case
+      this._fileEvents(file);
+      this._sessionEvents(session);
     }
     else {
       // init file session
-      var createSession = function () {
-        if (!utils.exists(file.get('content'))) { //TODO:  content null.. right now content null does not mean unfetched it means unsupported
-          alert('This file format is not supported by our editor.')
-          this.file = null;
-          file.trigger('close:file', file);
-        }
-        else if (file.get('content').length > 10000 &&
-          !confirm('This file is huge are you sure you want to open it (might crash or take a looong time)?')
-        ) {
-          this.file = null;
-          file.trigger('close:file', file);
-        }
-        else {
-          this.file = file;
-          session = file.editorSession = ace.createEditSession(file.get('content'));
-          editor.setSession(session);
-          session.setMode(this.getMode(file.get('name')));
-          session.setTabSize(2);
-          session.setUseSoftTabs(true);
-          this.listenTo(session, 'change',           this.onEdit.bind(this, this.file)); // change events are slow and sometimes occur after a file has been switched so bind it here.
-          this.listenTo(session, 'changeScrollLeft', this.onScrollLeft.bind(this));
-          this.listenTo(session, 'changeScrollTop',  this.onScrollTop.bind(this));
-        }
-      }.bind(this);
       // fetch file if unfetched -- maybe change this to always?
       if (file.unFetched()) {
         this.showLoader();
-        options = utils.successErrorToCB(function (err) {
+        options = utils.cbOpts(function (err) {
           this.hideLoader();
           if (err) {
             this.showError(err);
           }
           else {
-            createSession();
+            this._createSession(file);
           }
-        }.bind(this));
+        }, this);
         file.fetch(options);
       }
       else {
-        createSession();
+        this._createSession(file);
       }
     }
     // always
