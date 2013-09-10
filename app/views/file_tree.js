@@ -40,7 +40,6 @@ module.exports = BaseView.extend({
     });
   },
   contextMenu: function (evt) {
-    debugger;
     this.$(document).click(); // closes other context menus
     evt.preventDefault(); // prevent browser context menu
     evt.stopPropagation();

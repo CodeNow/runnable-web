@@ -12,7 +12,6 @@ module.exports = BaseView.extend({
       'fs-list nav-collapse collapse';
   },
   postHydrate: function () {
-    debugger;
     this.listenTo(this.collection, 'add remove reset sync', this.render.bind(this));
   },
   getTemplateData: function () {
