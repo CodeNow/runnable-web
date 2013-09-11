@@ -82,9 +82,13 @@ $tree-padding:15px;
     }
   }
 }
-#project-editor-container aside#file-explorer .nav li ul li form {
+#project-editor-container aside#file-explorer .nav li ul li form,
+#project-editor-container aside#file-explorer .nav li ul li span{
   display: block;
   padding: 6px 0 6px 25px;
+}
+#project-editor-container aside#file-explorer .nav li ul li img{
+  margin-left: 25px;
 }
 
 .relative{

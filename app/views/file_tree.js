@@ -70,8 +70,14 @@ module.exports = BaseView.extend({
     this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
   },
   del: function (model) {
-    var options = utils.cbOpts(this.showIfError, this);
+    var options = utils.cbOpts(callback, this);
     model.destroy(options);
+    function callback (err, model) {
+      if (err) {
+        this.showError(err);
+        this.collection.add(model); //readd model..
+      }
+    }
   },
   def: function (model) {
     var options = utils.cbOpts(this.showIfError, this);
@@ -157,16 +163,9 @@ module.exports = BaseView.extend({
           this.showError(err);
         }
         else {
-          model.moveFromTo(fromCollection, collection, function (err) {
-            if (err) {
-              this.showError(err);
-            }
-          }, this);
+          model.moveFromTo(fromCollection, collection, this.showIfError, this);
         }
       }, this)
-    }
-    else {
-      debugger;
     }
   },
   over: function (evt) {

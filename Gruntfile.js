@@ -30,7 +30,7 @@ var aceScripts = [
 ];
 var frontendScripts = [
   'assets/vendor/*.js',
-  'assets/bower/jquery/jquery.min.js',
+  'assets/bower/jquery/jquery.js',
   'assets/vendor/jquery-ui-custom/js/jquery-ui-1.10.3.custom.min.js',
   'assets/bower/alertify.js/lib/alertify.js',
   'assets/bower/bootstrap/js/collapse.js',
