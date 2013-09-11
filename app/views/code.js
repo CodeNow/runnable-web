@@ -59,11 +59,10 @@ module.exports = BaseView.extend({
     if (file) {
       var session = file.editorSession;
       this.stopListening(file);
-      this.stopListening(session);
+      this._detachSessionEvents(session);
     }
   },
   _createSession: function (file) {
-
     if (!utils.exists(file.get('content'))) { //TODO:  content null.. right now content null does not mean unfetched it means unsupported
       alert('This file format is not supported by our editor.')
       this.file = null;
@@ -83,25 +82,31 @@ module.exports = BaseView.extend({
       session.setTabSize(2);
       session.setUseSoftTabs(true);
       this._fileEvents(file);
-      this._sessionEvents(session);
+      this._sessionEvents(session, file);
     }
   },
   _fileEvents: function (file) {
     var self = this;
     this.listenTo(file, 'change:content', function () {
-      // this.editor.getSession().setValue(file.get('content')); // use case: sync doesnt update open-file contents unless the session is updated
-      // call _createSession with file
-      if (file.editorSession) this.stopListening(file.editorSession);
-      self._createSession(file);
+      if (file.editorSession.getValue() !== file.get('content')) {
+        // use case: sync doesnt update open-file contents unless the session is updated
+        // if check blocks user edit change events
+        if (file.editorSession) this.stopListening(file.editorSession);
+        self._createSession(file);
+      }
     });
   },
-  _sessionEvents: function (session) {
-    this.listenTo(session, 'change',           this.onEdit.bind(this, this.file)); // change events are slow and sometimes occur after a file has been switched so bind it here.
-    this.listenTo(session, 'changeScrollLeft', this.onScrollLeft.bind(this));
-    this.listenTo(session, 'changeScrollTop',  this.onScrollTop.bind(this));
+  _sessionEvents: function (session, file) {
+    session.on('change',           this.onEdit.bind(this, file)); // change events are slow and sometimes occur after a file has been switched so bind it here.
+    session.on('changeScrollLeft', this.onScrollLeft.bind(this));
+    session.on('changeScrollTop',  this.onScrollTop.bind(this));
+  },
+  _detachSessionEvents: function (session) {
+    session.removeAllListeners('change');
+    session.removeAllListeners('changeScrollLeft');
+    session.removeAllListeners('changeScrollTop');
   },
   attachFile: function (file) {
-
     var editor = this.editor;
     var options, session;
     if (file.editorSession) {
@@ -114,7 +119,7 @@ module.exports = BaseView.extend({
         session.setValue(file.get('content')); // sync for previously opened files but not currently open
       }
       this._fileEvents(file);
-      this._sessionEvents(session);
+      this._sessionEvents(session, file);
     }
     else {
       // init file session
