@@ -137,7 +137,6 @@ module.exports = BaseView.extend({
     }.bind(this));
   },
   toggle: function (evt) {
-    console.log("Toggle clicked on", this);
     this.animating = true;
     if (this.model.get('open')) {
       this.close();
