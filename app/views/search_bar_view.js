@@ -1,23 +1,55 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
+var Images = require('../collections/images');
 
 module.exports = BaseView.extend({
-  events: {
-    'keyup input' : 'search',
-    'blur input'  : 'clear'
+  tagName: 'form',
+  className:"navbar-form navbar-left",
+  preRender: function () {
+    this.attributes = {
+      role:'search'
+    };
   },
-  dontTrackEvents: ['blur input'],
-  className: 'search-bar',
   postRender: function () {
-    this.resultsView = _.findWhere(this.childViews, {name:'search_results'});
+    var engine = {
+      compile: function (template) {
+        var compiled = _.template(template);
+        return {
+          render: function (data) {
+            return compiled(data);
+          }
+        };
+      }
+    };
+    var limit = 7;
+    this.$('input')
+      .typeahead([
+        {
+          name: 'images',
+          valueKey: 'name',
+          limit: limit,
+          remote: {
+            url:'/api/-/runnables?search=%QUERY&limit='+limit,
+            filter: function (results) {
+              debugger;
+              var images = new Images(results, {app:this.app});
+              return images.map(function (image) {
+                var json = _.pick(image.attributes, 'name', 'description');
+                json.url = image.appURL();
+                return json
+              });
+            }
+          },
+          template: [
+            '<p class="search-name" data-url="<%= url %>"><%= name %></p>',
+          ].join(''),
+          engine: engine
+        }
+      ])
+      .on('typeahead:selected', this.onSelect.bind(this));
   },
-  search: function (evt) {
-    var text = $(evt.currentTarget).val();
-    this.resultsView.search(text);
-  },
-  clear: function (evt) {
-    this.$(evt.currentTarget).val('');
-    this.resultsView.clear();
+  onSelect: function (evt, data) {
+    window.location.href = data.url;
   }
 });
 

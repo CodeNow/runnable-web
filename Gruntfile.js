@@ -16,6 +16,7 @@ var minCSS = [
   'assets/vendor/bootstrap/bootstrap.min.css', // custom
   'assets/vendor/bootstrap/bootstrap-theme.min.css', // custom
   'assets/bower/bootstrap-select/bootstrap-select.min.css',
+  'assets/vendor/typeahead.js-bootstrap.css',
   'assets/bower/textillate/assets/animate.css',
   'assets/bower/autocompletejs/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
@@ -37,6 +38,7 @@ var frontendScripts = [
   'assets/bower/bootstrap/js/tooltip.js',
   'assets/bower/bootstrap/js/modal.js',
   'assets/bower/bootstrap/js/transition.js',
+  'assets/bower/typeahead.js/dist/typeahead.min.js',
   'assets/bower/bootstrap-select/bootstrap-select.min.js',
   'assets/bower/textillate/assets/jquery.lettering.js',
   'assets/bower/textillate/jquery.textillate.js',
