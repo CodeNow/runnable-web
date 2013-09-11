@@ -72,17 +72,13 @@ module.exports = RendrView.extend({
     alert(str)
   },
   showError: function (err) {
+    debugger;
     if (err) {
-      alert(err);
+      alertify.alert(err);
     }
   },
   showIfError: function (err) {
     if (err) this.showError(err);
-  },
-  showIfError: function (err) {
-    if (err) {
-      this.showError(err);
-    }
   },
   disable: function (bool) {
     if (bool) {

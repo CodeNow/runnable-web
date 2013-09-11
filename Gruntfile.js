@@ -20,6 +20,7 @@ var minCSS = [
   'assets/bower/textillate/assets/animate.css',
   'assets/bower/autocompletejs/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
+  'assets/bower/alertify.js/themes/alertify.core.css',
   'assets/bower/alertify.js/themes/alertify.default.css',
   compassCSS // must be last
 ];
