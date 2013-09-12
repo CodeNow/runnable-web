@@ -23,6 +23,7 @@ module.exports = Base.extend({
     if (dispatch) {
       this.listenTo(dispatch, 'open:file', this.openFile.bind(this));
       this.listenTo(dispatch, 'saveAll', this.saveAll.bind(this));
+      this.listenTo(dispatch, 'sync:files', this.syncAllFiles.bind(this));
     }
   },
   _unsaved: false,
@@ -126,6 +127,13 @@ module.exports = Base.extend({
     else {
       cb();
     }
+  },
+  syncAllFiles: function () {
+    this.forEach(function (file) {
+      file.fetch();
+      // file.editorSession = undefined
+    });
+
   }
 });
 

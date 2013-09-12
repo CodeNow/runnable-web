@@ -134,12 +134,20 @@ module.exports = BaseView.extend({
     this.fileList.toggle(open);
   },
   sync: function () {
-    if (this.model.get('open')) {
       var contents = this.collection;
       // firefox does not hoist functions in blocks
       function cb (err) {
         this.hideLoader();
-        this.showIfError(err);
+        if (err) {
+          this.showError(err);
+        }
+        else {
+          contents.forEach(function (model) {
+            model.store(); // VERY IMPORTANT! - ask TJ.
+            if (model.isDir()) model.contents.store();
+          });
+          contents.trigger('sync');
+        }
       }
       var options = _.extend(utils.cbOpts(cb, this), {
         data: contents.params,   // VERY IMPORTANT! - ask TJ.
@@ -147,7 +155,6 @@ module.exports = BaseView.extend({
         merge: true             // so model 'selected' dont get reset
       });
       contents.fetch(options);
-    }
   },
   moveDrop: function (evt, ui) {
     evt.preventDefault();
