@@ -71,6 +71,7 @@ DataAdapter.prototype._request = function (req, api, options, callback) {
   start = new Date().getTime();
   request(api, function(err, response, body) {
     if (err) {
+      console.log("API Error: " + err.code + " while " + api.method + " to " + api.path, "error", body);
       rollbar.reportMessage("API Error: " + err.code + " while " + api.method + " to " + api.path, "error", req);
       return callback(err);
     }
