@@ -42,4 +42,12 @@ module.exports.add = function (Handlebars) {
     var opts = options.hash;
     return obj[opts.method]();
   });
+
+  Handlebars.registerHelper('if_result', function (obj, options) {
+    var opts = options.hash;
+    opts.equals = opts.equals || true;
+    if (obj[opts.method]() === opts.equals)
+      return options.fn(this);
+    return options.inverse(this);
+  });
 };

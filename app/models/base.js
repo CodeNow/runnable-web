@@ -4,7 +4,8 @@ var Super = RendrBase.prototype;
 
 module.exports = RendrBase.extend({
   idAttribute: '_id',
-  // virtuals: {},
+  virtual: {},
+  virtuals: {},
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
     if (options) {
@@ -20,14 +21,13 @@ module.exports = RendrBase.extend({
   },
   // toJSON: function () {
   //   var data = Super.toJSON.call(this);
-  //   var virtuals = _.result(this, 'virtuals');
-  //   for (var key in virtuals) {
-  //     var val = virtuals[key];
+  //   var virtualMap = _.result(this, 'virtualMap');
+  //   for (var key in virtualMap) {
+  //     var val = virtualMap[key];
   //     data[key] = this[val]();
   //   }
   //   return data;
   // },
-  virtual: {}
   // get: function (key) {
   // //   var val = Super.get.apply(this, arguments);
   // //   return (utils.exists(val) && !this.ifVirtual(key))

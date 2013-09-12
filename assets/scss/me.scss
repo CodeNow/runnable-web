@@ -358,3 +358,92 @@ div.search-results{
 .search-bar{
   display:inline-block;
 }
+
+//dropdown
+#primary .nav {
+  > li.dropdown a {
+    padding: 0;
+    @include breakpoint(screen-xs) {
+      margin-top: 4px;
+      margin-left: 8px;
+    }
+  }
+  img {
+    width: 32px;
+    height: 32px;
+    @include border-radius(3px);
+    overflow: hidden;
+    margin-right: 12px;
+    @include breakpoint(screen-xs) {
+      width: 24px;
+      height: 24px;
+      margin-right: 4px;
+    }
+  }
+  .caret {
+    border-top-color: #B48BD1;
+    border-bottom-color: #B48BD1;
+    border-top-width: 6px;
+    border-left-width: 5px;
+    border-right-width: 5px;
+    margin-left: 12px;
+    @include breakpoint(screen-xs) {
+      margin-left: 4px;
+    }
+  }
+  .dropdown-menu {
+    top: 170%;
+    padding: 0;
+    margin: 0;
+    left: auto;
+    width: 100%;
+    // overflow: hidden;
+    @include box-shadow(0 2px 3px rgba(0,0,0,0.3));
+    li {
+      overflow: hidden;
+      &:first-child {
+        @include border-radius(3px 3px 0 0);
+        a:before {
+          content: "";
+          position: absolute;
+          top: -6px;
+          right: 22px;
+          width: 0;
+          height: 0;
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-bottom: 6px solid #fff;
+          @include transition(all 0.2s ease-in-out);
+          z-index: 100;
+        }
+        a:after {
+          content: "";
+          position: absolute;
+          top: -7px;
+          right: 21px;
+          width: 0;
+          height: 0;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          border-bottom: 7px solid #C6C6C6;
+        }
+        a:hover:before {
+          border-bottom: 6px solid $orange;
+        }
+      }
+      &:last-child  { @include border-radius(0 0 3px 3px) }
+      a {
+        color: #333;
+        font-size: 12px;
+        padding: 8px 12px;
+        display: block;
+        @include border-radius(0);
+        &:hover {
+          background: $orange;
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

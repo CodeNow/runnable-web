@@ -5,11 +5,10 @@ var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName:'header',
   id:'primary',
-  postHydrate: function () {
-    this.listenTo(this.model, 'change:gravitar', this.render.bind(this));
-    this.listenTo(this.app, 'change:loading', this.loader.bind(this));
-    this.loader(this.app, this.app.get('loading'));
-  },
+  // postHydrate: function () {
+  //   this.listenTo(this.app, 'change:loading', this.loader.bind(this));
+  //   this.loader(this.app, this.app.get('loading'));
+  // },
   events: {
     'click #header-login-link' : 'openLogin'
   },

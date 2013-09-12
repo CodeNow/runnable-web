@@ -4,31 +4,6 @@
       <a class="navbar-brand" href="/"><img src="/images/runnable-logo.png" height="24" width="129" /></a>
     </div>
     {{view "search_bar_view"}}
-    {{#if model.attributes.username}}
-    {{#with model.attributes}}
-    <!-- Signed In, class on nav "signed-in" -->
-    <ul class="nav nav-pills navbar-right signed-in">
-      <li><a href="/all">Browse All</a></li>
-      <li class="active"><a href="/new">Publish Code</a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <img src="{{gravitar}}?s=64" alt="{{username}}" />{{username}}<span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="#">My Profile</a></li>
-          <li><a href="#">Settings</a></li>
-          <li><a href="/logout">Logout</a></li>
-        </ul>
-      </li>
-    </ul>
-    {{/with}}
-    {{else}}
-    <!-- Signed Out, class on nav "signed-out" -->
-    <ul class="nav nav-pills navbar-right signed-out">
-      <li><a href="/all">Browse All</a></li>
-      <li class="active"><a href="/new">Publish Code</a></li>
-      <li><a id="header-login-link"href="#">Sign In</a></li>
-    </ul>
-    {{/if}}
+    {{view "header_actions" model=model}}
   </nav>
 </div>
