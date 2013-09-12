@@ -88,6 +88,19 @@ $tree-padding:15px;
   margin-left: 25px;
 }
 
+// file tabs
+#project-editor-container aside#file-explorer .nav{
+  overflow:scroll;
+}
+#project-editor-tabs li a.tab-body {
+  padding: 7px 25px 5px 10px;
+}
+#project-editor-tabs li a.close-tab {
+  top: 5px;
+  right: 10px;
+}
+
+
 .relative{
   position:relative;
 }
