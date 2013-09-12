@@ -69,7 +69,7 @@ module.exports = RendrView.extend({
     Track.event(this.viewName(), actionName +' Error:'+ err);
   },
   showMessage: function (str) {
-    alert(str)
+    alertify.alert(str);
   },
   showError: function (err) {
     debugger;

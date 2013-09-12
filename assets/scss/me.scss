@@ -236,9 +236,12 @@ body.modal-open,
 }
 
 // about page uses 8-col css
-#about {
+#about, #jobs {
   .col-sm-1 {
     width: 12.5%;
+  }
+  .col-sm-2 {
+    width: 25%;
   }
   .col-sm-3 {
     width: 37.5%;
