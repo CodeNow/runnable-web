@@ -64,7 +64,8 @@ module.exports = BaseView.extend({
   },
   _createSession: function (file) {
     if (!utils.exists(file.get('content'))) { //TODO:  content null.. right now content null does not mean unfetched it means unsupported
-      alert('This file format is not supported by our editor.')
+      alert('This file format is not supported by our editor.');
+      _rollbar.push({level: 'error', msg: "Couldn't open client requested file", errMsg: file.get('name')});
       this.file = null;
       file.trigger('close:file', file);
     }
