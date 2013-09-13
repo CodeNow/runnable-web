@@ -4,9 +4,13 @@
   {{/each}}
 </ul>
 <ul class="pagination">
+  {{#if prevLink}}
   <li><a href="{{prevLink}}">«</a></li>
+  {{/if}}
   <li><a href="#">{{page}}</a></li>
+  {{#if nextLink}}
   <li><a href="{{nextLink}}">»</a></li>
+  {{/if}}
 </ul>
 <!--nav class="pagination">
   {{#if prevLink}}
