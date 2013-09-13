@@ -387,7 +387,7 @@ function fetchRelated (imageId, tags, cb) {
       collection:'Images',
       params: {
         channel: tagNames[0],
-        limit: 5,
+        limit: 10,
         sort: 'votes'
       }
     }
