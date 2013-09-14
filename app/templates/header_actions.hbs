@@ -1,19 +1,23 @@
 {{#if_result model method="isRegistered"}}
-{{#with model.attributes}}
 <!-- Signed In, class on nav "signed-in" -->
-  <li><a href="/all">Browse All</a></li>
-  <li class="active"><a href="/new">Publish Code</a></li>
-  <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      <img src="{{gravitar}}?s=64" alt="{{username}}" />{{username}}<span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-      <li><a href="#">My Profile</a></li>
-      <li><a href="#">Settings</a></li>
-      <li><a href="/logout">Logout</a></li>
-    </ul>
-  </li>
-{{/with}}
+<li><a href="/all">Browse All</a></li>
+<li class="active"><a href="/new">Publish Code</a></li>
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    {{#with model.attributes}}
+    <img src="{{gravitar}}?s=64" alt="{{username}}" />{{username}}<span class="caret"></span>
+    {{/with}}
+  </a>
+  <ul class="dropdown-menu">
+    {{#if_result model method="isVerified"}}
+    <li><a href="/me/published">Published Runnables</a></li>
+    <li><a href="/me/drafts">Draft Runnables</a></li>
+    {{else}}
+    <li><a href="/me/drafts">Saved Runnables</a></li>
+    {{/if_result}}
+    <li><a href="/logout">Logout</a></li>
+  </ul>
+</li>
 {{else}}
 <!-- Signed Out, class on nav "signed-out" -->
   <li><a href="/all">Browse All</a></li>

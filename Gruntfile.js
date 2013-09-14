@@ -36,6 +36,7 @@ var frontendScripts = [
   'assets/bower/alertify.js/lib/alertify.js',
   'assets/bower/bootstrap/js/collapse.js',
   'assets/bower/bootstrap/js/dropdown.js',
+  'assets/bower/bootstrap/js/tab.js',
   'assets/bower/bootstrap/js/tooltip.js',
   'assets/bower/bootstrap/js/modal.js',
   'assets/bower/bootstrap/js/transition.js',

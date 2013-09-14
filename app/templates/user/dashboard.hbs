@@ -1,0 +1,72 @@
+{{view "header_view" model=user context=.}}
+<div class="container">
+  <h1>Dashboard</h1>
+  <ul class="nav nav-tabs">
+    {{#if verifiedUser}}
+    <li{{#if publishedActive}} class="active"{{/if}}>
+      <a href="#published">Published</a>
+    </li>
+    {{/if}}
+    <li{{#if draftsActive}} class="active"{{/if}}>
+      <a href="#drafts" class="selected">Drafts</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    {{#if verifiedUser}}
+    <div class="tab-pane fade{{#if publishedActive}} active in{{/if}} in" id="published">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Votes</th>
+            <th>Views</th>
+            <th>Runs</th>
+            <th>Copies</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each published.models}}
+          <tr>
+            <td>{{add @index arg=1}}</td>
+            <td><a href="{{invoke . method="appURL"}}">{{attributes.name}}</a></td>
+            <td>{{attributes.votes}}</td>
+            <td>{{attributes.views}}</td>
+            <td>{{attributes.runs}}</td>
+            <td>{{attributes.copies}}</td>
+            <td>{{dateAgo attributes.created}}</td>
+          </tr>
+          {{else}}
+          <tr><td colspan="6">(No Published Runnables)</td></tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    {{/if}}
+    <div class="tab-pane fade{{#if draftsActive}} active in{{/if}}" id="drafts">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each drafts.models}}
+          <tr>
+            <td>{{add @index arg=1}}</td>
+            <td><a href="{{invoke . method="appURL"}}">{{attributes.name}}</a></td>
+            <td>{{dateAgo attributes.created}}</td>
+          </tr>
+          {{else}}
+            <tr><td colspan="3">(No Draft Runnables)</td></tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{{view "footer_view" model=user context=.}}
