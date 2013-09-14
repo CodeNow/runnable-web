@@ -459,6 +459,7 @@ div.search-results{
 #page-loader{
   position: absolute;
   top: 0;
+  z-index: 1000;
   height: 100%;
   width: 100%;
   background: black;
@@ -482,5 +483,25 @@ div.search-results{
     visibility: visible;
     display: block;
     opacity: 0.6;
+  }
+}
+
+.no-padding{
+  padding:0;
+}
+
+button.btn-sm, .btn-xs {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+#runnable-tags-edit{
+  .form-control{
+    display:inline-block;
+    max-height: 31px;
+    min-height: 25px;
+    width: 148px;
   }
 }

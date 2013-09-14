@@ -31,7 +31,6 @@ module.exports = BaseView.extend({
           remote: {
             url:'/api/-/runnables?search=%QUERY&limit='+limit,
             filter: function (results) {
-              debugger;
               var images = new Images(results, {app:this.app});
               return images.map(function (image) {
                 var json = _.pick(image.attributes, 'name', 'description');

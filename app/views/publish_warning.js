@@ -4,8 +4,7 @@ var Image = require('../models/image');
 var utils = require('../utils');
 
 module.exports = BaseView.extend({
-  tagName: 'section',
-  className: 'notification warning',
+  className: 'alert alert-warning',
   events: {
     'click #pubwarn-new-button' : 'publishNew',
     'click #pubwarn-back-button': 'publishBack'
