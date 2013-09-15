@@ -43,7 +43,7 @@ module.exports = {
       function addSEO (results, cb) {
         var pageText = (params.page) ? " Page "+params.page : "";
         results.page = {
-          title: formatTitle(results.channel.get('name')+" Code"+pageText),
+          title: formatTitle(results.channel.get('name')+" code"+pageText),
           canonical: canonical.call(self)
         };
         cb(null, results);
@@ -128,8 +128,8 @@ module.exports = {
         results.channel = new Channel({name:'All'}, {app:self.app});
         var pageText = (params.page) ? " Page "+params.page : "";
         results.page = {
-          title: formatTitle('Runnable code examples for JQuery, Codeigniter, NodeJS, PHP, Python and more'+pageText),
-          description: 'Runnable code examples for '+utils.tagsToString(results.channels.toJSON(), 'and'),
+          title: formatTitle('Runnable code for JQuery, Codeigniter, NodeJS, PHP, Python and more'+pageText),
+          description: 'Runnable code for '+utils.tagsToString(results.channels.toJSON(), 'and'),
           canonical: canonical.call(self)
         };
         cb(null, results);
