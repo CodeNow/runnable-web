@@ -43,7 +43,7 @@ module.exports = {
       function addSEO (results, cb) {
         var pageText = (params.page) ? " Page "+params.page : "";
         results.page = {
-          title: formatTitle(results.channel.get('name')+" Code Examples"+pageText),
+          title: formatTitle(results.channel.get('name')+" Code"+pageText),
           canonical: canonical.call(self)
         };
         cb(null, results);
