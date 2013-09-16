@@ -5,14 +5,12 @@ var Super = BaseView.prototype;
 
 module.exports = BaseView.extend({
   id: 'output-results-container',
-  postHydrate: function () {
-    //clientside
-    var self = this;
+  getTemplateData: function () {
     this.options.baseUrl = "http://" + this.model.get("webToken") + "." + this.app.get('domain');
+    return this.options;
   },
   postRender: function () {
-    this.navigationView = _.findWhere(this.childViews, {name:'web_navigation'});
-    this.listenTo(this.navigationView, 'change:url', this.setUrlPath.bind(this));
+    this.listenTo(this.app.dispatch, 'change:url', this.setUrl.bind(this));
     this.$iframe = this.$('iframe');
     // iframe loader
     this.loading(true);
@@ -25,6 +23,9 @@ module.exports = BaseView.extend({
     this.loading(true);
     if (path[0] !== '/') path = '/' + path;
     var url = this.options.baseUrl+path;
+    this.$iframe.attr('src', url);
+  },
+  setUrl: function (url) {
     this.$iframe.attr('src', url);
   },
   loading: function (bool) {

@@ -7,9 +7,12 @@ module.exports = BaseView.extend({
     'click #output-reload' : 'refresh',
     'submit form'          : 'enter'
   },
+  getTemplateData: function () {
+    this.options.currentUrl = this.options.currentUrl || "http://" + this.model.get("webToken") + "." + this.app.get('domain');
+    return this.options;
+  },
   postHydrate: function () {
     this.history = [];
-    this.options.currentUrl = '';
   },
   backButtonState: function () {
     if (this.history.length === 0) {
@@ -33,7 +36,7 @@ module.exports = BaseView.extend({
     var url = this.history.pop();
     if (url) {
       this.setAddress(url);
-      this.trigger('change:url', url);
+      this.app.dispatch.trigger('change:url', url);
     }
     this.backButtonState();
   },

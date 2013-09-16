@@ -72,7 +72,6 @@ module.exports = RendrView.extend({
     alertify.alert(str);
   },
   showError: function (err) {
-    debugger;
     if (err) {
       alertify.alert(err);
     }
