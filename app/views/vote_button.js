@@ -1,5 +1,6 @@
 var BaseView = require('./base_view');
 var Super = BaseView.prototype;
+var utils = require('../utils');
 module.exports = BaseView.extend({
   tagName: 'a',
   className: 'vote-up',
@@ -9,11 +10,14 @@ module.exports = BaseView.extend({
   preRender: function () {
     // preRender is called before .getAttributes so setting attributes here still works
     var user = this.app.user;
-    if (user.hasVoted(this.model) || user.isOwnerOf(this.model)) {
-      this.attributes = {
-        disabled: 'disabled'
-      };
-    }
+    this.attributes = this.attributes || {};
+    this.attributes.href = 'javascript:void(0);';
+    // if (user.isOwnerOf(this.model) || !utils.exists(user.get('votes'))) {
+    //   this.attributes = {
+    //     disabled: 'disabled'
+    //   };
+    //   delete this.attributes.href;
+    // }
   },
   getTemplateData: function () {
     return this.model.toJSON();

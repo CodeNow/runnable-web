@@ -112,13 +112,14 @@ var User = module.exports = Base.extend({
     var checkVote = function () {
       var match = self.votes.findWhere({ runnable: project.id });
       cb(null, match !== null && match !== undefined);
+      return match;
     };
     if (!this.votes) {
       this.createVotesCollection([]);
       this.votes.fetch();
       this.listenToOnce(this.votes, 'sync', checkVote);
     } else {
-      checkVote();
+      return checkVote();
     }
   },
   isOwnerOf: function (project) {

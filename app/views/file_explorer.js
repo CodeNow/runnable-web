@@ -4,6 +4,7 @@ var _ = require('underscore');
 module.exports = BaseView.extend({
   tagName: 'aside',
   id: 'file-explorer',
+  className: 'closed',
   events: {
     'click .dark-theme'  : 'setDarkTheme',
     'click .light-theme' : 'setLightTheme',
