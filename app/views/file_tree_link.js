@@ -14,8 +14,9 @@ module.exports = BaseView.extend({
   },
   preRender: function () {
     var model = this.model;
-    if (model.isDir() && !model.open()) {
-      this.className = 'collapsed';
+    if (model.isDir()) {
+      this.className = 'arrow'
+      if (!model.open()) this.className += ' collapsed';
     }
     this.attributes.title = model.get('name');
     this.attributes['data-id'] = model.id;

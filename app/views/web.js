@@ -4,41 +4,28 @@ var utils = require('../utils');
 var Super = BaseView.prototype;
 
 module.exports = BaseView.extend({
-  id: 'web',
-  postInitialize: function () {
-    if (this.model) {
-      //first render..
-      this.baseUrl = "http://" + this.model.get("webToken") + "." + this.app.get('domain');
-    }
-  },
+  id: 'output-results-container',
   postHydrate: function () {
     //clientside
     var self = this;
-    this.baseUrl = "http://" + this.model.get("webToken") + "." + this.app.get('domain');
-    var dispatch = this.app.dispatch;
-    if (dispatch) {
-      this.loading(true);
-      this.listenToOnce(dispatch, 'ready:box', this.onBoxReady.bind(this));
-    }
+    this.options.baseUrl = "http://" + this.model.get("webToken") + "." + this.app.get('domain');
   },
   postRender: function () {
-    var navigationView = _.findWhere(this.childViews, {name:'web_navigation'});
-    this.listenTo(navigationView, 'change:url', this.setIframeSrcPath.bind(this));
+    this.navigationView = _.findWhere(this.childViews, {name:'web_navigation'});
+    this.listenTo(this.navigationView, 'change:url', this.setUrlPath.bind(this));
     this.$iframe = this.$('iframe');
-  },
-  onBoxReady: function () {
-    //first url set
-    this.setIframeSrcPath('');
-    this.$iframe.load(this.loading.bind(this, false));
+    // iframe loader
+    this.loading(true);
+    this.$iframe.load(this.loading.bind(this, false)); // load event remains attached, for subsequent page loads
   },
   refresh: function () {
     this.$iframe.attr('src', this.$iframe.attr('src'));
   },
-  setIframeSrcPath: function (url) {
+  setUrlPath: function (path) {
     this.loading(true);
-    if (url[0] !== '/') url = '/' + url;
-    var fullUrl = this.baseUrl+url;
-    this.$('iframe').attr('src', fullUrl);
+    if (path[0] !== '/') path = '/' + path;
+    var url = this.options.baseUrl+path;
+    this.$iframe.attr('src', url);
   },
   loading: function (bool) {
     if (utils.exists(bool)) {
@@ -47,8 +34,7 @@ module.exports = BaseView.extend({
       }
       else {
         this.ifNotThenShowProgress();
-        this.nprogress.done();
-        this.nprogress = null;
+        this.progressDone();
       }
     }
     return Super.loading.apply(this, arguments);
@@ -59,6 +45,10 @@ module.exports = BaseView.extend({
       this.nprogress.configure({ el:this.el, showSpinner:false });
       this.nprogress.start();
     }
+  },
+  progressDone: function () {
+    this.nprogress.done();
+    this.nprogress = null;
   }
 });
 
