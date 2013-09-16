@@ -124,6 +124,16 @@ function buildRoutes(app) {
   sitemap.init(app);
   buildApiRoutes(app);
   buildRendrRoutes(app);
+  app.post('/pressauth', function (req, res, next) {
+    if (req.body.password.toLowerCase() == 'discovercode') {
+      res.cookie('pressauth', true, { expires: new Date(Date.now() + 1000*60*60*24), httpOnly: true });
+      res.json(201, {message:'successful login'});
+    }
+    else {
+      res.json(403, {message:'successful login'});
+    }
+    res.redirect('/press');
+  });
   app.get(/^(?!\/api\/)/, mw.handle404.handle404);
 }
 

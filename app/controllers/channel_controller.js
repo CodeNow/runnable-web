@@ -54,43 +54,60 @@ module.exports = {
     this.redirectTo(params._id +'/'+ params.name);
   },
   category: function (params, callback) {
-    params.category = params.category || 'Featured';
-    var spec = {
-      user: {
-        model: 'User',
-        params: {
-          _id: 'me'
+    if (isServer && !this.app.req.cookies.pressauth) {
+      this.redirectTo('/press');
+    }
+    else if (!isServer && !utils.clientGetCookie('pressauth')) {
+      this.redirectTo('/press');
+    }
+    else {
+      params.category = params.category || 'Featured';
+      var spec = {
+        user: {
+          model: 'User',
+          params: {
+            _id: 'me'
+          }
+        },
+        channels: {
+          collection: 'Channels',
+          params: {
+            category: params.category
+          }
+        },
+        categories: {
+          collection: 'Categories'
         }
-      },
-      channels: {
-        collection: 'Channels',
-        params: {
-          category: params.category
+      };
+      fetch.call(this, spec, function (err, results) {
+        if (err) {
+          callback(err);
         }
-      },
-      categories: {
-        collection: 'Categories'
-      }
-    };
-    fetch.call(this, spec, function (err, results) {
-      if (err) { callback(err); } else {
-        results.selectedCategoryLower = params.category.toLowerCase();
-        results.selectedCategory = _.find(results.categories.models, function (category) {
-          return category.get('name').toLowerCase() === results.selectedCategoryLower;
-        });
-        callback(null, addSEO(results));
-      }
-    });
-    function addSEO (results) {
-      var channel = params.channel;
-      var category = params.category;
-      var channelAndOrCategory = channel? channel+' in '+category : category;
-      return _.extend(results, {
-        page: {
-          title: formatTitle(channelAndOrCategory+" Related Tags"),
-          canonical: 'http://runnable.com/c/'+params.category
+        else {
+          results.selectedCategoryLower = params.category.toLowerCase();
+          results.selectedCategory = _.find(results.categories.models, function (category) {
+            return category.get('name').toLowerCase() === results.selectedCategoryLower;
+          });
+          var catName = results.selectedCategory.get('name');
+          if (catName !== params.category) {
+            self.redirectTo('/c/'+catName);
+          }
+          else {
+            callback(null, addSEO(results));
+          }
         }
       });
+      function addSEO (results) {
+        var channel = params.channel;
+        var category = params.category;
+        var channelAndOrCategory = channel? channel+' in '+category : category;
+        return _.extend(results, {
+          page: {
+            title: formatTitle(channelAndOrCategory+" Related Tags"),
+            canonical: 'http://runnable.com/c/'+params.category
+          }
+        });
+      }
     }
   },
   all: function(params, callback) {

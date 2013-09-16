@@ -6,6 +6,8 @@
     {{#unless nosearch}}
     {{view "searchbar" classname="navbar-form navbar-left" divclass="form-group" inputclass="form-control" placeholder="Search for code"}}
     {{/unless}}
+    {{#unless noactions}}
     {{view "header_actions" model=model}}
+    {{/unless}}
   </nav>
 </div>

@@ -1,0 +1,17 @@
+{{view 'header_view' nosearch=true noactions=true}}
+<div class="modal-page">
+  <form class="modal-dialog" action="/pressauth" method="post">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Press Login</h4>
+      </div>
+      <div class="modal-body">
+        <input type="password" class="form-control" name="password" placeholder="Press Password" required />
+        <button type="submit" class="orange">Log In</button>
+        <p>Want Press Access?? <a class="signup-link" href="mailto:support@runnable.com">Request Press Pass</a></p>
+      </div>
+    </div><!-- /.modal-content -->
+  </form><!-- /.modal-dialog -->
+</div>
+{{view 'footer_view'}}
