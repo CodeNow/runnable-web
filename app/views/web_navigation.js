@@ -40,7 +40,8 @@ module.exports = BaseView.extend({
     }
     this.backButtonState();
   },
-  refresh: function () {
+  refresh: function (evt) {
+    evt.preventDefault();
     this.trigger('change:url', this.options.currentUrl);
   },
   enter: function (evt) {
