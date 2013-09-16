@@ -25,7 +25,6 @@ module.exports = EditorButtonView.extend({
     console.log("CONTAINER ID: ", this.model.id);
   },
   click: function () {
-    debugger;
     var specificationId = this.model.get('specification');
     if (specificationId) {
       var implementation = this.implementation = this.collection.models.filter(function (model) {
