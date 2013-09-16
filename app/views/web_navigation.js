@@ -42,7 +42,7 @@ module.exports = BaseView.extend({
   },
   refresh: function (evt) {
     evt.preventDefault();
-    this.trigger('change:url', this.options.currentUrl);
+    this.app.dispatch.trigger('change:url', this.options.currentUrl);
   },
   enter: function (evt) {
     evt.preventDefault();
@@ -50,7 +50,7 @@ module.exports = BaseView.extend({
     var url = this.$address.val();
     this.history.push(opts.currentUrl);
     opts.currentUrl = url;
-    this.trigger('change:url', url);
+    this.app.dispatch.trigger('change:url', url);
   }
 });
 

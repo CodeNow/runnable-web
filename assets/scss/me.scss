@@ -456,3 +456,26 @@ aside#file-explorer {
     }
   }
 }
+
+#output-results-container .loader{
+  color: black;
+}
+.nprogress .bar{
+  position: absolute;
+  top: 50px;
+}
+.nprogress .peg{
+  -webkit-transform: rotate(1deg) translate(0px, -1px);
+  -moz-transform: rotate(1deg) translate(0px, -1px);
+  -ms-transform: rotate(1deg) translate(0px, -1px);
+  -o-transform: rotate(1deg) translate(0px, -1px);
+  transform: rotate(1deg) translate(0px, -1px);
+}
+#output #output-results-container .ui-resizable-handle{
+  position:absolute;
+}
+
+#output #output-results-container #output-results {
+  padding-top: 50px;
+  box-sizing: border-box;
+}

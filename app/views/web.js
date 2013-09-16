@@ -26,7 +26,8 @@ module.exports = BaseView.extend({
     this.$iframe.attr('src', url);
   },
   setUrl: function (url) {
-    this.$iframe.attr('src', url);
+    this.loading(true);
+    this.$('iframe').attr('src', url);
   },
   loading: function (bool) {
     if (utils.exists(bool)) {
