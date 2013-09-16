@@ -30,9 +30,9 @@ var aceScripts = [
   'assets/vendor/aceWithFuckingSemicolons/*.js',
 ];
 var frontendScripts = [
-  'assets/vendor/*.js',
   'assets/bower/jquery/jquery.js',
   'assets/vendor/jquery-ui-custom/js/jquery-ui-1.10.3.custom.min.js',
+  'assets/vendor/*.js', //include jquery plugins, must be after jquery
   'assets/bower/alertify.js/lib/alertify.js',
   'assets/bower/bootstrap/js/collapse.js',
   'assets/bower/bootstrap/js/dropdown.js',

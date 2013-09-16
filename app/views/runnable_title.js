@@ -6,6 +6,7 @@ var utils = require('../utils');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
+  tagName:'span',
   events: {
     'click .edit-link' : 'clickEdit',
     'submit'           : 'submitName',

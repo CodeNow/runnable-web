@@ -13,15 +13,6 @@ module.exports = BaseView.extend({
     'keyup input' : 'keyup',
   },
   dontTrackEvents: ['keyup input'],
-  getTemplateData: function () {
-    var opts = this.options;
-    var model = opts.model;
-    var className = '';
-    var isDir = model.isDir();
-    model.virtual.isDir = isDir;
-    if (isDir && !model.get('open')) className = 'collapsed';
-    return _.extend(opts, { className:className });
-  },
   preRender: function () {
     var opts = this.options;
     var model = opts.model;

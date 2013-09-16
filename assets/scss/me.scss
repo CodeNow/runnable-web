@@ -17,81 +17,14 @@ ul.fs-list{
 
 $tree-padding:15px;
 
-#project-editor-container #file-explorer > ul.nav{
-  li{
-    div{
-      padding-left:$tree-padding*0;
-    }
-    li{
-      div{
-        padding-left:$tree-padding*0;
-      }
-      li{
-        div{
-          padding-left:$tree-padding*1;
-        }
-        li{
-          div{
-            padding-left:$tree-padding*2;
-          }
-          li{
-            div{
-              padding-left:$tree-padding*3;
-            }
-            li{
-              div{
-                padding-left:$tree-padding*4;
-              }
-              li{
-                div{
-                  padding-left:$tree-padding*5;
-                }
-                li{
-                  div{
-                    padding-left:$tree-padding*6;
-                  }
-                  li{
-                    div{
-                      padding-left:$tree-padding*7;
-                    }
-                    li{
-                      div{
-                        padding-left:$tree-padding*8;
-                      }
-                      li{
-                        div{
-                          padding-left:$tree-padding*9;
-                        }
-                        li{
-                          div{
-                            padding-left:$tree-padding*10;
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+//page-title
+h2.page-title{
+  button, input, form{
+    line-height: normal;
   }
-}
-#project-editor-container aside#file-explorer .nav li ul li form,
-#project-editor-container aside#file-explorer .nav li ul li span{
-  display: block;
-  padding: 6px 0 6px 25px;
-}
-#project-editor-container aside#file-explorer .nav li ul li img{
-  margin-left: 25px;
 }
 
 // file tabs
-#project-editor-container aside#file-explorer .nav{
-  overflow:scroll;
-}
 #project-editor-tabs li a.tab-body {
   padding: 7px 25px 5px 10px;
 }
@@ -116,9 +49,6 @@ $tree-padding:15px;
   display:block;
 }
 
-#project-editor-container aside#file-explorer ul.fs-list li.active {
-  background: #fd7022;
-}
 
 
 //runnable index
@@ -314,23 +244,6 @@ address, #about-contact-body address {
   }
 }
 
-//folder tweak..
-#project-editor-container aside#file-explorer .nav li.folder > div > a:before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  top: 43%;
-  left: 6%;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 6px solid #bbb;
-  -webkit-transition: -webkit-transform 0.25s linear;
-  -moz-transition: -moz-transform 0.25s linear;
-  -o-transition: -o-transform 0.25s linear;
-  transition: transform 0.25s linear;
-}
-
 div.search-results{
   position:relative;
   ul{
@@ -487,7 +400,11 @@ div.search-results{
 }
 
 .no-padding{
-  padding:0;
+  padding:0 !important;
+  margin: 0 !important;
+}
+.normal-line-height{
+  line-height: normal !important;
 }
 
 button.btn-sm, .btn-xs {
