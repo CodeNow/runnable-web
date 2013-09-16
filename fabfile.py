@@ -62,6 +62,7 @@ def setup():
   clone_repo()
   checkout_latest()
   install_requirements()
+  bower()
   grunt()
   boot()
  
@@ -83,9 +84,13 @@ def install_requirements():
   """
   Install the required packages using npm.
   """
-  sudo('npm install pm2 grunt-cli -g')
+  sudo('npm install pm2 grunt-cli bower -g')
   with cd('runnable-web'):
     run('npm install')
+
+def bower():
+  with cd('runnable-web'):
+    run('bower install')
   
 def grunt():
   """
@@ -112,6 +117,7 @@ def deploy():
       
   checkout_latest()
   install_requirements()
+  bower()
   grunt()
   reboot()
  
