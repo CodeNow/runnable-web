@@ -62,6 +62,7 @@ def setup():
   clone_repo()
   checkout_latest()
   install_requirements()
+  bower()
   grunt()
   boot()
  
@@ -75,20 +76,28 @@ def checkout_latest():
   """
   Pull the latest code on the specified branch.
   """
-  run('cd runnable-web; git checkout %(branch)s; git pull origin %(branch)s' % env)
+  with cd('runnable-web'):
+    run('git checkout %(branch)s' % env)
+    run('git pull origin %(branch)s' % env)
  
 def install_requirements():
   """
   Install the required packages using npm.
   """
-  sudo('npm install pm2 grunt-cli -g')
-  run('npm install runnable-web')
+  sudo('npm install pm2 grunt-cli bower -g')
+  with cd('runnable-web'):
+    run('npm install')
+
+def bower():
+  with cd('runnable-web'):
+    run('bower install')
   
 def grunt():
   """
   Run grunt
   """
-  run('cd runnable-web; grunt')
+  with cd('runnable-web'):
+    run('grunt')
 
 def boot():
   """
@@ -108,6 +117,7 @@ def deploy():
       
   checkout_latest()
   install_requirements()
+  bower()
   grunt()
   reboot()
  
