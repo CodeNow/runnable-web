@@ -3,10 +3,13 @@ var _ = require('underscore');
 var Images = require('../collections/images');
 
 module.exports = BaseView.extend({
-  tagName: 'form',
-  className:"navbar-form navbar-left",
+  tagName:'input',
   preRender: function () {
+    var opts = this.options;
+    this.className = opts.classname;
     this.attributes = {
+      type:'text',
+      placeholder: opts.placeholder,
       role:'search'
     };
   },
@@ -22,7 +25,7 @@ module.exports = BaseView.extend({
       }
     };
     var limit = 7;
-    this.$('input')
+    this.$el
       .typeahead([
         {
           name: 'images',
@@ -31,12 +34,21 @@ module.exports = BaseView.extend({
           remote: {
             url:'/api/-/runnables?search=%QUERY&limit='+limit,
             filter: function (results) {
-              var images = new Images(results, {app:this.app});
-              return images.map(function (image) {
-                var json = _.pick(image.attributes, 'name', 'description');
-                json.url = image.appURL();
-                return json
+              results.forEach(function (result, index) {
+                result.sort = index;
               });
+              var images = new Images(results, {app:this.app});
+              var ret = images
+                .sort(function (a, b) {
+                  return (a.sort>b.sort) ? -1 : 1;
+                })
+                .map(function (image) {
+                  var json = _.pick(image.attributes, 'name', 'description');
+                  json.url = image.appURL();
+                  return json
+                });
+              debugger;
+              return ret;
             }
           },
           template: [
@@ -52,4 +64,4 @@ module.exports = BaseView.extend({
   }
 });
 
-module.exports.id = 'SearchBarView';
+module.exports.id = 'Searchbar';

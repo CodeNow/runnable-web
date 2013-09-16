@@ -42,7 +42,7 @@
       <div class="col-sm-12">
         <div class="hero-content">
           <h1>Discover <div>
-            <ul class="texts">
+            <ul class="texts" style="display: none;">
               <li>APIs</li>
               <li>Services</li>
               <li>Libraries</li>
@@ -54,7 +54,7 @@
           <p>Full-stack code anyone can run from their browser</p>
           <form id="searchbox" method="post" action="">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search" />
+              {{view "searchbar" classname="form-control" placeholder="Search for an Example"}}
               <span class="input-group-btn">
                 <button class="btn btn-default" type="submit"><img src="/images/icon-search.png" height="16" width="16" /></button>
               </span>

@@ -479,3 +479,28 @@ aside#file-explorer {
   padding-top: 50px;
   box-sizing: border-box;
 }
+
+#framework-filters{
+  z-index:1;
+}
+
+.hero .tt-suggestion{
+  text-align: left;
+}
+.hero .search-name {
+  padding: 3px;
+  margin:0;
+  text-align: left;
+}
+.hero #searchbox input {
+  background: #fff;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  -webkit-border-radius: 3px 0 0 3px !important;
+  -moz-border-radius: 3px 0 0 3px !important;
+  -ms-border-radius: 3px 0 0 3px !important;
+  -o-border-radius: 3px 0 0 3px !important;
+  border-radius: 3px 0 0 3px !important;
+  height: 40px;
+}

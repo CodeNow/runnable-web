@@ -3,7 +3,11 @@
     <div id="logo" class="navbar-header">
       <a class="navbar-brand" href="/"><img src="/images/logo.png" height="24"  /></a>
     </div>
-    {{view "search_bar_view"}}
+    <form class="navbar-form navbar-left">
+      <div class="form-group">
+        {{view "searchbar" classname="form-control" placeholder="Search for an Example"}}
+      </div>
+    </form>
     {{view "header_actions" model=model}}
   </nav>
 </div>
