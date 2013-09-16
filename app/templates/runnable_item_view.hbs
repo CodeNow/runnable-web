@@ -5,10 +5,12 @@
   </a>
 </h3>
 <p>
+  {{#unless ../novotes}}
   <span class="vote-up">
     <span>{{votes}}</span>
   </span>
   &bull;
+  {{/unless}}
   {{view "runnable_item_owner" model=../model.owner model_id=owner model_name='user' created=created}}
   {{#if tags.length}}
   &bull;

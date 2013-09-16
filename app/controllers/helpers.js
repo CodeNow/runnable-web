@@ -9,6 +9,7 @@ module.exports = {
   'fetch':                  fetch,
   'fetchWithMe':            fetchWithMe,
   'fetchUser':              fetchUser,
+  'fetchUserAndSearch':     fetchUserAndSearch,
   'fetchImplementation':    fetchImplementation,
   'fetchImplementations':   fetchImplementations,
   'fetchSpecification':     fetchSpecification,
@@ -399,4 +400,22 @@ function fetchRelated (imageId, tags, cb) {
       cb(null, results);
     }
   });
+}
+
+function fetchUserAndSearch (searchText, callback) {
+  var spec = {
+    user: {
+      model:'User',
+      params:{
+        _id: 'me'
+      }
+    },
+    images: {
+      collection : 'Images',
+      params: {
+        search: searchText
+      }
+    }
+  };
+  fetch.call(this, spec, callback);
 }

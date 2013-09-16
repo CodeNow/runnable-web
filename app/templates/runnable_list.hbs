@@ -1,8 +1,9 @@
 <ul id="tags-content">
   {{#each collection.models}}
-    {{view "runnable_item_view" model=.}}
+    {{view "runnable_item_view" model=. novotes=../novotes}}
   {{/each}}
 </ul>
+{{#unless nopaging}}
 <ul class="pagination">
   {{#if prevLink}}
   <li><a href="{{prevLink}}">«</a></li>
@@ -12,6 +13,7 @@
   <li><a href="{{nextLink}}">»</a></li>
   {{/if}}
 </ul>
+{{/unless}}
 <!--nav class="pagination">
   {{#if prevLink}}
     <a href="{{prevLink}}" class="previous"><i class="icon-chevron-left"></i> Previous page</a>

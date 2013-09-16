@@ -1,0 +1,22 @@
+{{view "header_view" model=user context=.}}
+
+<section id="tags-main" class="container">
+  <div class="row">
+    <div class="col-sm-9">
+      <h2 class="page-title">
+        <span>Search Results</span>
+      </h2>
+    </div>
+  </div>
+  <div class="row">
+    <div id="tags-details" class="col-sm-12">
+      {{#if images.length}}
+      {{view "runnable_list" collection=images nopaging=true novotes=true}}
+      {{else}}
+        <h4> No Results </h4>
+      {{/if}}
+    </div>
+  </div>
+</section>
+
+{{view "footer_view" model=user context=.}}

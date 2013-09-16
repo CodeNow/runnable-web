@@ -3,15 +3,12 @@ var _ = require('underscore');
 var Images = require('../collections/images');
 
 module.exports = BaseView.extend({
-  tagName:'input',
+  tagName:'form',
+  events: {
+    submit: 'search'
+  },
   preRender: function () {
-    var opts = this.options;
-    this.className = opts.classname;
-    this.attributes = {
-      type:'text',
-      placeholder: opts.placeholder,
-      role:'search'
-    };
+    this.className = this.options.classname;
   },
   postRender: function () {
     var engine = {
@@ -25,7 +22,7 @@ module.exports = BaseView.extend({
       }
     };
     var limit = 7;
-    this.$el
+    this.$('input')
       .typeahead([
         {
           name: 'images',
@@ -45,9 +42,8 @@ module.exports = BaseView.extend({
                 .map(function (image) {
                   var json = _.pick(image.attributes, 'name', 'description');
                   json.url = image.appURL();
-                  return json
+                  return json;
                 });
-              debugger;
               return ret;
             }
           },
@@ -60,7 +56,13 @@ module.exports = BaseView.extend({
       .on('typeahead:selected', this.onSelect.bind(this));
   },
   onSelect: function (evt, data) {
+    this.app.set('loading', true);
     window.location.href = data.url;
+  },
+  search: function (evt) {
+    evt.preventDefault();
+    var data = $(evt.currentTarget).serializeObject();
+    window.location.href = '/search?q='+data.q;
   }
 });
 

@@ -19,6 +19,8 @@ var fetchFilesForContainer = helpers.fetchFilesForContainer;
 var createContainerFrom = helpers.createContainerFrom;
 var canonical = helpers.canonical;
 var formatTitle = helpers.formatTitle;
+var fetchUserAndSearch = helpers.fetchUserAndSearch;
+var fetchOwnersFor = helpers.fetchOwnersFor;
 
 module.exports = {
   index: function(params, callback) {
@@ -248,6 +250,30 @@ module.exports = {
             }
           }));
         });
+      }
+    ], callback);
+  },
+  search: function(params, callback) {
+    var self = this;
+    var searchText = params.q || '';
+    async.waterfall([
+      fetchUserAndSearch.bind(this, searchText),
+      function (results, cb) {
+        if (results.images.length === 0) {
+          cb(null, results);
+        } else {
+          fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
+            cb(err, !err && _.extend(results, ownerResults));
+          });
+        }
+      },
+      function addSEO (results, cb) {
+        var pageText = searchText;
+        results.page = {
+          title: 'Search Results for ',
+          canonical: canonical.call(self)
+        };
+        cb(null, results);
       }
     ], callback);
   }

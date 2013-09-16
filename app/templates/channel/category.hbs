@@ -52,14 +52,8 @@
             </ul>
           </div> through code</h1>
           <p>Full-stack code anyone can run from their browser</p>
-          <form id="searchbox" method="post" action="">
-            <div class="input-group">
-              {{view "searchbar" classname="form-control" placeholder="Search for an Example"}}
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><img src="/images/icon-search.png" height="16" width="16" /></button>
-              </span>
-            </div>
-          </form>
+          {{view "searchbar" id="searchbox" divclass="input-group" inputclass="form-control" placeholder="Search for an Example" hasbutton=true}}
+
         </div>
       </div>
     </div>
