@@ -2,7 +2,7 @@ module.exports = function(match) {
   match('',                     'home#index');
   match('all',                  'channel#all');
   match('all/page/:page',       'channel#all');
-  match('providers',            'home#providers');
+  match('publish',            'home#providers');
   match('about',                'home#about');
   match('jobs',                 'home#jobs');
   match('privacy',              'home#privacy');
