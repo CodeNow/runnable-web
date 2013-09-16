@@ -1,8 +1,6 @@
 <div class="{{divclass}}">
   <input name="q" type="text" placeholder="{{placeholder}}" class="{{inputclass}}"/>
-  {{#if hasbutton}}
-  <span class="input-group-btn">
+  <span class="input-group-btn" {{#unless hasbutton}}style="display:none"{{/unless}}>
     <button class="btn btn-default" type="submit"><img src="/images/icon-search.png" height="16" width="16" /></button>
   </span>
-  {{/if}}
 </div>

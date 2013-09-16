@@ -9,6 +9,10 @@ module.exports = BaseView.extend({
   },
   preRender: function () {
     this.className = this.options.classname;
+    this.attributes = {
+      action: '/search',
+      method: 'get'
+    };
   },
   postRender: function () {
     var engine = {
@@ -58,11 +62,6 @@ module.exports = BaseView.extend({
   onSelect: function (evt, data) {
     this.app.set('loading', true);
     window.location.href = data.url;
-  },
-  search: function (evt) {
-    evt.preventDefault();
-    var data = $(evt.currentTarget).serializeObject();
-    window.location.href = '/search?q='+data.q;
   }
 });
 

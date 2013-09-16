@@ -255,7 +255,7 @@ module.exports = {
   },
   search: function(params, callback) {
     var self = this;
-    var searchText = params.q || '';
+    var searchText = params.q || ' ';
     async.waterfall([
       fetchUserAndSearch.bind(this, searchText),
       function (results, cb) {
