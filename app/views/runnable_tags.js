@@ -5,8 +5,8 @@ var utils = require('../utils');
 var global = this;
 
 module.exports = BaseView.extend({
-  tagName: 'nav',
-  className: 'tags-nav',
+  tagName: 'ul',
+  className: 'clearfix',
   events: {
     'click .remove-tag' : 'removeTag',
   },
@@ -18,17 +18,6 @@ module.exports = BaseView.extend({
     });
     this.listenTo(this.collection, 'add remove reset change', this.render.bind(this));
     this.listenTo(this.model, 'change:tags', this.onChange.bind(this));
-  },
-  handleBrokenImages: function (evt) {
-    this.$('img').each(function (i, img) {
-      var clone = new Image();
-      // clone.onerror = function () {};
-      clone.onload = function () {
-        var $img = $(img);
-        $img.show();
-      };
-      clone.src = img.src;
-    });
   },
   collectionChange: function () {
     this.model.set('tags', this.collection.toJSON());
@@ -54,15 +43,6 @@ module.exports = BaseView.extend({
         this.model.set('tags', collection.toJSON());
       }
     }
-  },
-  postRender: function () {
-    this.handleBrokenImages();
-  },
-  getTemplateData: function () {
-    return {
-      tags    : this.model.get('tags'),
-      editMode: this.options.editmode
-    };
   }
 });
 

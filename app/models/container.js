@@ -50,6 +50,9 @@ var Container = module.exports = Runnable.extend({
     var container = this.app.fetcher.modelStore.get('container', containerId, true);
     var options = utils.cbOpts(callback, ctx);
     container.destroy(options);
+  },
+  appURL: function () {
+    return '/me/'+this.id;
   }
 });
 

@@ -1,14 +1,7 @@
-{{!#if fsJSON.isRootDir}}
-  {{!<span class="name {{fsJSON.type}" href="" data-id="{{fsJSON.path}" title="{{projectJSON.name}">{{projectJSON.name}</span>}}
-{{!else}}
 {{#if editmode}}
-<form>
-  <input class="name-input" name='name' value="{{name}}" />
-</form>
+  <form>
+    <input class="name-input" name='name' value="{{model.attributes.name}}" autofocus required />
+  </form>
 {{else}}
-  {{#if dir}}
-  <span class="name {{type}}" data-id="{{_id}}" href="" title="{{fullPath}}">{{name}}</span>
-  {{else}}
-  <a class="name {{type}}" data-id="{{_id}}" href="javascript:void(0);" title="{{fullPath}}">{{name}}</a>
-  {{/if}}
+  {{view "file_tree_link" model=model}}
 {{/if}}

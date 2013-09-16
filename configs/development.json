@@ -26,16 +26,15 @@
   },
 
   "rendrApp": {
-    "env" : "production",
+    "env" : "development",
     "commitHash": "{COMMIT_HASH}",
     "mixpanel" : {
       "key": "8790acfcca0cab43adebbc796f1d4f96"
     },
     "googleAnalytics" : {
-      "id": "UA-36631837-1"
+      "id": "UA-36631837-2"
     },
     "pageSize" : 25,
     "domain": "runnable.com"
   }
 }
-

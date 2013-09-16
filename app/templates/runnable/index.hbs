@@ -1,13 +1,14 @@
 {{view "header_view" model=user context=.}}
-<section class="content">
-  <div class="container">
-    <section class="title">
-      {{view "vote_button" model=image}}
-      {{view "runnable_title" model=image}}
+
+<section id="main" class="container">
+  <div id="project-details" class="row">
+    <div class="col-sm-9">
+      <h2 class="page-title clearfix">
+        {{view "vote_button" model=image}}
+        {{view "runnable_title" model=image}}
+      </h2>
       {{view "runnable_description" model=image}}
-    </section>
-    <article class="span9">
-      <section class="actions">
+      <div class="main-controls">
         {{view "run_button" model=container collection=implementations containerid=container.id}}
         {{#if permissions.edit}}
         {{view "edit_button" model=container containerid=container.id}}
@@ -15,45 +16,46 @@
         {{#if permissions.fork}}
         {{view "fork_button" collection=defaultFiles containerid=container.id}}
         {{/if}}
-        {{!view "download_button" model=container}}
-      </section>
+      </div>
+    </div>
+    {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created}}
+  </div>
+  <div class="row">
+    <div class="col-sm-9">
       {{view "code_editor" context=. editmode=false model=image}}
       {{view "terminal" model=container}}
-    </article>
-    <aside class="span3 last runnable-sidebar">
-      <!--<div class="module">
-        {{view "new_example_button"}}
-      </div>-->
-      <section class="module">
-        {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created}}
-        {{!view "project_stats" model=image}}
-      </section>
-      <section class="module">
-        <h3>Service</h3>
+    </div>
+    <ul id="sidebar" class="col-sm-3">
+      {{#if container.attributes.specificationId}}
+      <li class="services">
+      <h3 class="widget-title">Services</h3>
         {{view "service" model=container collection=specifications editmode=false}}
-      </section>
-      {{#if image.attributes.tags}}
-      {{#if image.attributes.tags.length}}
-      <section class="module tags">
-        <h3>Tags</h3>
-        {{view "runnable_tags" model=image editmode=editmode}}
-      </section>
+      </li>
       {{/if}}
-      {{/if}}
-
+      {{#if image.attributes.tags}}{{#if image.attributes.tags.length}}
+      <li class="tags">
+        <h3 class="widget-title">Tags</h3>
+        <ul class="clearfix">
+          {{#each image.attributes.tags}}
+          <li>
+          {{view "tag_link" name=name}}
+          </li>
+          {{/each}}
+        </ul>
+      </li>
+      {{/if}}{{/if}}
       {{#if related.length}}
-      <section class="module">
-        <h3>Related code</h3>
-        <nav class="related-nav">
-          <ul>
-            {{#each related.models}}
-            {{view "runnable_item_small" model=.}}
-            {{/each}}
-          </ul>
-        </nav>
-      </section>
+      <li class="related-code">
+        <h3 class="widget-title">Related Code</h3>
+        <ul>
+          {{#each related.models}}
+          {{view "runnable_item_small" model=.}}
+          {{/each}}
+        </ul>
+      </li>
       {{/if}}
-    </aside>
+    </ul>
   </div>
 </section>
+
 {{view "footer_view" model=user context=.}}

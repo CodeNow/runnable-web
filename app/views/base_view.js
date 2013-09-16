@@ -69,20 +69,16 @@ module.exports = RendrView.extend({
     Track.event(this.viewName(), actionName +' Error:'+ err);
   },
   showMessage: function (str) {
-    alert(str)
+    alertify.alert(str);
   },
   showError: function (err) {
+    debugger;
     if (err) {
-      alert(err);
+      alertify.alert(err);
     }
   },
   showIfError: function (err) {
     if (err) this.showError(err);
-  },
-  showIfError: function (err) {
-    if (err) {
-      this.showError(err);
-    }
   },
   disable: function (bool) {
     if (bool) {

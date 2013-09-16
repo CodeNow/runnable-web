@@ -39,7 +39,8 @@ module.exports = Base.extend({
       // assume success
       fromCollection.remove(this);
       toCollection.add(this);
-      function saveCallback (err, model) {
+      var model = this; // not available in saveCallback..
+      function saveCallback (err) {
         if (err) {
           // rollback if error
           toCollection.remove(model);

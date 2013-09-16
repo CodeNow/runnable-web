@@ -1,11 +1,5 @@
-{{#each tags}}
-<a href="/{{name}}">
-  {{#channelHasImage name}}
-  <img class="display-none" src="/images/channels/{{name}}.png" alt="">
-  {{/channelHasImage}}
-  {{name}}
-  {{#if ../editMode}}
-  <i data-id="{{_id}}" class="icon-remove remove-tag"></i>
-  {{/if}}
-</a>
+{{#each model.attributes.tags}}
+<li>
+{{view "tag_link" name=name editmode=../editmode _id=_id}}
+</li>
 {{/each}}

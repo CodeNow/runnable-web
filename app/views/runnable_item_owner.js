@@ -1,10 +1,7 @@
 var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
-  className: "author",
-  getTemplateData: function () {
-    return this.options;
-  }
+  tagName: "span"
 });
 
 module.exports.id = "RunnableItemOwner";

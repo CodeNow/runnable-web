@@ -1,6 +1,8 @@
 var _ = require('underscore');
 var helpers = require('./helpers');
 var fetchWithMe = helpers.fetchWithMe;
+var formatTitle = helpers.formatTitle;
+var canonical = helpers.canonical;
 
 module.exports = {
   published: function(params, callback) {
@@ -11,10 +13,16 @@ module.exports = {
           _id: 'me'
         }
       },
-      images: {
+      published: {
         collection : 'Images',
         params     : {
           sort: 'votes',
+          owner: 'me'
+        }
+      },
+      drafts: {
+        collection : 'Containers',
+        params     : {
           owner: 'me'
         }
       }
@@ -23,26 +31,18 @@ module.exports = {
     fetchWithMe.call(this, spec, function (err, results) {
       if (err) {
         callback(err);
+      } else if (!results.user.isVerified()) {
+        self.redirectTo('/me/drafts');
       } else {
-        if (results.user.isVerified()) {
-          callback(null, addSEO(results));
-        } else {
-          self.redirectTo('/me/drafts');
-        }
+        callback(err, 'user/dashboard', addSEO(results));
       }
     });
     function addSEO (results) {
-      if (!results) {
-        return results;
-      } else {
-        return _.extend(results, {
-          page: {
-            title: "Runnable Dashboard",
-            description: 'Runnable user dashboard listing runnables and their stats',
-            canonical: "http://runnable.com/me/published"
-          }
-        });
+      results.page = {
+        title    : formatTitle('Published', 'Dashboard'),
+        canonical: canonical.call(self)
       }
+      return results;
     }
   },
   drafts: function(params, callback) {
@@ -53,32 +53,35 @@ module.exports = {
           _id: 'me'
         }
       },
-      containers: {
+      published: {
+        collection : 'Images',
+        params     : {
+          sort: 'votes',
+          owner: 'me'
+        }
+      },
+      drafts: {
         collection : 'Containers',
         params     : {
           owner: 'me'
         }
       }
     };
+    var self = this;
     fetchWithMe.call(this, spec, function (err, results) {
       if (err) {
         callback(err);
-      } else {
-        callback(null, addSEO(results));
+      }
+      else {
+        callback(err, 'user/dashboard', addSEO(results));
       }
     });
     function addSEO (results) {
-      if (!results) {
-        return results;
-      } else {
-        return _.extend(results, {
-          page: {
-            title: "Runnable Dashboard",
-            description: 'Runnable user dashboard listing runnables and their stats',
-            canonical: "http://runnable.com/me/drafts"
-          }
-        });
+      results.page = {
+        title    : formatTitle('Drafts', 'Dashboard'),
+        canonical: canonical.call(self)
       }
+      return results;
     }
   },
 };

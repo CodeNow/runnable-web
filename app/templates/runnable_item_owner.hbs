@@ -1,11 +1,10 @@
-  {{#if model.attributes.gravitar}}
-  <span class="avatar"><img src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}"></span> 
-  {{/if}}Published by 
-<span>
-  {{#if model.attributes.username}}
-  <strong>{{model.attributes.username}}</strong>
-  {{else}}
-  <strong>Anonymous</strong>
-  {{/if}} 
-  <time pubdate="pubdate" datetime="{{created}}">{{dateAgo created}}</time>
-</span>
+Published by
+{{#with model.attributes}}
+{{#if username}}
+<!--a href="#">{{username}}</a-->
+<b>{{username}}</b>
+{{else}}
+<b>Anonymous</b>
+{{/if}}
+{{/with}}
+<time datetime="{{created}}"> {{dateAgo created}}</time>

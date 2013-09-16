@@ -1,6 +1,17 @@
 {{view "file_tabs" collection=defaultFiles}}
-<div class="file-content">
+<div id="project-editor-container">
+  <!--googleoff: anchor-->
   {{view "code" collection=defaultFiles}}
+  <!--googleon: anchor-->
+  <a class="open-file-explorer" href="#"><img src="/images/icon-expand.png" height="17" width="24" alt="Open File Explorer" /></a>
+  {{view "file_explorer" container=container rootDir=rootDir editmode=editmode}}
+</div>
+
+
+
+<!--
+{{view "file_tabs" collection=defaultFiles}}
+<div class="file-content">
   <button class="btn-tertiary btn-small btn-show-file-browser">
     <i class="icon-folder-open"></i> Show file browser</button>
   <div class="file-browser display-none">
@@ -17,3 +28,4 @@
     </nav>
   </div>
 </div>
+-->

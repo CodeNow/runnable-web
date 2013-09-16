@@ -5,12 +5,12 @@ module.exports = BaseView.extend({
   tagName:'a',
   preRender: function () {
     var app = this.app;
-    var href = this.options.href;
-    if (utils.isCurrentURL(app, href)) {
-      this.className = 'selected';
+    var opts = this.options;
+    if (utils.isCurrentURL(app, opts.href)) {
+      this.className = opts.activeclass || 'active';
     }
     this.attributes = {
-      href: href
+      href: opts.href
     }
   }
 });

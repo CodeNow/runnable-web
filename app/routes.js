@@ -2,14 +2,14 @@ module.exports = function(match) {
   match('',                     'home#index');
   match('all',                  'channel#all');
   match('all/page/:page',       'channel#all');
-  match('providers',            'home#providers');
+  match('publish',            'home#providers');
   match('about',                'home#about');
   match('jobs',                 'home#jobs');
   match('privacy',              'home#privacy');
   match('logout',               'home#logout');
   // match('blob',                 'home#blob');
   match('new',                  'runnable#new');
-  match('newhome',              'home#newhome');
+  match('newhome',              'home#newhome');            //*new
   match('new/:from',            'runnable#newFrom');
   match('me/published',         'user#published');
   match('me/drafts',            'user#drafts');

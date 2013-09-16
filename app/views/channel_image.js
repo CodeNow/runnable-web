@@ -4,17 +4,28 @@ var channelImages = require('../channelImages');
 module.exports = BaseView.extend({
   tagName: 'img',
   preRender: function () {
-    var lower = this.options.name.toLowerCase();
-    if (!Boolean(channelImages[lower])) {
-      this.className="display-none";
+    var opts = this.options;
+    var name = opts.name;
+    var lower = name.toLowerCase();
+    var src;
+    if (lower in channelImages) {
+      //no icon-lg for til all images are in
+      var pre = (opts.large) ? 'icon-' : (opts.tag) ? 'tag-' : 'icon-';
+      var src = '/images/:pre:lower.png'
+        .replace(':pre', pre)
+        .replace(':lower', lower);
+
+      this.attributes = {
+        src: src,
+        alt: name,
+        height: opts.height
+        // width: opts.width
+      };
     }
     else {
-      this.attributes = {
-        src: "/images/channels/"+lower+".png",
-        img: lower
-      };
+      this.className='display-none';
     }
   }
 });
 
-module.exports.id = "ChannelImage";
+module.exports.id = 'ChannelImage';

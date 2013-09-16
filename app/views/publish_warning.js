@@ -4,8 +4,7 @@ var Image = require('../models/image');
 var utils = require('../utils');
 
 module.exports = BaseView.extend({
-  tagName: 'section',
-  className: 'notification warning',
+  className: 'alert alert-warning',
   events: {
     'click #pubwarn-new-button' : 'publishNew',
     'click #pubwarn-back-button': 'publishBack'
@@ -22,11 +21,17 @@ module.exports = BaseView.extend({
       }
     });
   },
+  postRender: function () {
+    this.$pubNew = $('#pubwarn-new-button');
+    this.$pubBack = $('#pubwarn-back-button');
+  },
   publishNew: function () {
+    this.$pubNew.attr('disabled', 'disabled');
     var image = new Image({}, {app:this.app});
     image.publishFromContainer(this.options.containerid, this.publishCallback.bind(this));
   },
   publishBack: function () {
+    this.$pubBack.attr('disabled', 'disabled');
     if (!this.app.user.canEdit(this.model)) { // this shouldn't ever happen..
       this.showError('You cannot publish back since you are not the owner of the original runnable');
       return;
@@ -36,6 +41,8 @@ module.exports = BaseView.extend({
   },
   publishCallback: function (err, image) {
     if (err) {
+      this.$pubNew.removeAttr('disabled');
+      this.$pubBack.removeAttr('disabled');
       this.showError(err);
     }
     else {

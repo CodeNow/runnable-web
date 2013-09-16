@@ -3,7 +3,8 @@ var utils = require('../utils');
 var _ = require('underscore');
 
 module.exports = BaseView.extend({
-  className: 'tab-pane',
+  tagName: 'pre',
+  className: 'code',
   // minHeight: 300,
   // maxHeight: 550,
   events: {
@@ -25,9 +26,11 @@ module.exports = BaseView.extend({
     // this.setHeight(this.minHeight);
     var self = this;
     this.editor = ace.edit(this.el);
-    this.editor.setTheme(ace.require('ace/theme-textmate'));
+    this.setTheme('dark');
     this.editor.setShowPrintMargin(false);
     // you can attach events here since render only occurs once for this view
+    var dispatch = this.app.dispatch;
+    dispatch.on('change:theme', this.setTheme.bind(this));
     var openFiles = this.collection;
     this.setFile(openFiles.selectedFile());
     this.listenTo(openFiles, 'change:selected', this.changeSelected.bind(this));
@@ -35,6 +38,16 @@ module.exports = BaseView.extend({
     this.adjustHeightToContents = _.debounce(this.adjustHeightToContents, 100, true);
     this.onScrollLeft = _.debounce(this.onScrollLeft, 200, true);
     this.onScrollTop = _.debounce(this.onScrollTop, 200, true);
+  },
+  setTheme: function (theme) {
+    var currentTheme = this.editor.getTheme() || {cssClass:''};
+    var currentClass = currentTheme.cssClass;
+    if (~theme.indexOf('dark') && !~currentClass.indexOf('runnable_dark')) {
+      this.editor.setTheme(ace.require('ace/theme/runnable_dark'));
+    }
+    else if (~theme.indexOf('light') && !~currentClass.indexOf('runnable_light')) {
+      this.editor.setTheme(ace.require('ace/theme/runnable_light'));
+    }
   },
   changeSelected: function (model, selected) {
     if (selected) {

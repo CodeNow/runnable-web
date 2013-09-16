@@ -3,24 +3,17 @@ var _ = require('underscore');
 var Super = ModalView.prototype;
 
 module.exports = ModalView.extend({
+  className: 'fade',
   defaultHeader: "Sign up for Runnable",
   postInitialize: function (options) {
-    this.header = this.options.header || this.defaultHeader;
+    this.options.header = this.options.header || this.defaultHeader;
   },
   events: {
-    'click .modal'      : 'stopPropagation',
-    'click'             : 'close', // closes modal on bg click
-    'click .btn-close'  : 'close',
     'click .login-link': 'openLogin',
     'submit form'      : 'register'
   },
   postRender: function () {
     Super.postRender.apply(this, arguments);
-  },
-  getTemplateData: function () {
-    return {
-      header: this.header
-    };
   },
   openLogin: function () {
     this.close();
@@ -29,7 +22,7 @@ module.exports = ModalView.extend({
     loginModal.open();
     return false; // stop link
   },
-  register: function (evt) { 
+  register: function (evt) {
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
     if (!formData.username) {

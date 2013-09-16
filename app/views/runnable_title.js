@@ -6,14 +6,19 @@ var utils = require('../utils');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
-  tagName: 'div',
+  tagName:'span',
   events: {
-    'click .edit-link': 'clickEdit',
-    'submit form'      : 'submitName',
+    'click .edit-link' : 'clickEdit',
+    'submit'           : 'submitName',
     'click .btn-cancel': 'escEditMode'
   },
+  preRender: function () {
+    if (!(this.model instanceof Image)) {
+      this.className = 'no-padding';// if no vote button
+    }
+  },
   postRender: function () {
-    this.listenTo(this.model, 'change:name', this.render.bind(this));
+    this.listenTo(this.model, 'change:name change:tags', this.render.bind(this));
   },
   getTemplateData: function () {
     this.model.virtual.nameWithTags = this.model.nameWithTags(true);

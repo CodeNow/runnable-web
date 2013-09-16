@@ -1,15 +1,15 @@
 var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
-  className:"navigation toolbar",
+  tagName: 'header',
+  id:"primary",
   events: {
-    'click .back-button'    : 'back',
-    'click .refresh-button' : 'refresh',
+    'click #output-reload' : 'refresh',
     'submit form'          : 'enter'
   },
   postHydrate: function () {
     this.history = [];
-    this.prevAddress = '';
+    this.options.currentUrl = '';
   },
   backButtonState: function () {
     if (this.history.length === 0) {
@@ -32,19 +32,20 @@ module.exports = BaseView.extend({
   back: function () {
     var url = this.history.pop();
     if (url) {
-      setAddress(url);
+      this.setAddress(url);
       this.trigger('change:url', url);
     }
     this.backButtonState();
   },
   refresh: function () {
-    this.trigger('change:url', this.prevAddress);
+    this.trigger('change:url', this.options.currentUrl);
   },
   enter: function (evt) {
     evt.preventDefault();
+    var opts = this.options;
     var url = this.$address.val();
-    this.history.push(this.prevAddress);
-    this.prevAddress = url;
+    this.history.push(opts.currentUrl);
+    opts.currentUrl = url;
     this.trigger('change:url', url);
   }
 });

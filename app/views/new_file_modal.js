@@ -6,17 +6,12 @@ var utils = require('../utils');
 var Super = ModalView.prototype;
 
 module.exports = ModalView.extend({
-  className: 'lightbox',
-  events: _.extend(Super.events, {
-    'click .btn-cancel' : 'remove',
+  className: 'fade',
+  events: {
     'submit form'       : 'submit'
-  }),
-  postInitialize: function () {
-    $('body').append(this.$el);
-    this.render();
   },
-  getTemplateData: function () {
-    return this.options;
+  postInitialize: function () {
+    this.render();
   },
   submit: function (evt) {
     evt.preventDefault();
@@ -50,7 +45,7 @@ module.exports = ModalView.extend({
       if (model.isFile()) {
         this.app.dispatch.trigger('open:file', model);
       }
-      this.remove();
+      this.close();
     }
   }
 });

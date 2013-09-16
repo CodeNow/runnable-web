@@ -1,20 +1,22 @@
-{{view "vote_button" model=model}}
-{{#with model}}
-<h2>
-  <a href="{{virtuals.appURL}}">
-    {{attributes.name}}
-  </a>
-</h2>
-{{/with}}
 {{#with model.attributes}}
-{{#if tags}}
-{{#if tags.length}}
-<nav class="tags-nav">
-  {{#each tags}}
-  {{view "tag_link" data=.}}
-  {{/each}}
-</nav>
-{{/if}}
-{{/if}}
+<h3>
+  <a href="/{{_id}}/{{urlFriendly name}}">
+    {{name}}
+  </a>
+</h3>
+<p>
+  <span class="vote-up">
+    <span>{{votes}}</span>
+  </span>
+  &bull;
+  {{view "runnable_item_owner" model=../model.owner model_id=owner model_name='user' created=created}}
+  {{#if tags.length}}
+  &bull;
+  <span class="tags">
+    {{#each tags}}
+    {{view "tag_link" name=name}}
+    {{/each}}
+  </span>
+  {{/if}}
+</p>
 {{/with}}
-{{view "runnable_item_owner" model=model.owner model_id=owner model_name='user' created=created}}

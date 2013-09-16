@@ -3,6 +3,7 @@ var async = require('async');
 var helpers = require('./helpers');
 var utils = require('../utils');
 var fetch = helpers.fetch;
+var Channel = require('../models/channel');
 
 var fetchOwnersFor = helpers.fetchOwnersFor;
 var fetchUserAndChannel = helpers.fetchUserAndChannel;
@@ -42,7 +43,7 @@ module.exports = {
       function addSEO (results, cb) {
         var pageText = (params.page) ? " Page "+params.page : "";
         results.page = {
-          title: formatTitle(results.channel.get('name')+" Code Examples"+pageText),
+          title: formatTitle(results.channel.get('name')+" code"+pageText),
           canonical: canonical.call(self)
         };
         cb(null, results);
@@ -93,6 +94,7 @@ module.exports = {
     }
   },
   all: function(params, callback) {
+    var self = this;
     var spec = {
       user    : {
         model  : 'User',
@@ -112,24 +114,29 @@ module.exports = {
         params     : {}
       }
     };
-    var self = this;
-    fetch.call(this, spec, function (err, results) {
-      if (err || results.images.length === 0) {
-        // if err or no images found, go ahead and callback
-        callback(err, results);
-      } else {
+    async.waterfall([
+      fetch.bind(this, spec),
+      function owners (results, cb) {
+        if (results.images.length) {
+          fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
+            cb(err, !err && _.extend(results, ownerResults));
+          });
+        }
+        else { cb(null, results); }
+      },
+      function extend (results, cb) {
+        results.channel = new Channel({name:'All'}, {app:self.app});
         var pageText = (params.page) ? " Page "+params.page : "";
-        _.extend(results, {page:params.page});
-        fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
-          callback(err, _.extend(results, ownerResults, {
-            page: {
-              title: formatTitle('Runnable code examples for JQuery, Codeigniter, NodeJS, PHP, Python and more'+pageText),
-              description: 'Runnable code examples for '+utils.tagsToString(results.channels.toJSON(), 'and'),
-              canonical: canonical.call(self)
-            }
-          }));
-        });
+        results.page = {
+          title: formatTitle('Runnable code for JQuery, Codeigniter, NodeJS, PHP, Python and more'+pageText),
+          description: 'Runnable code for '+utils.tagsToString(results.channels.toJSON(), 'and'),
+          canonical: canonical.call(self)
+        };
+        cb(null, results);
       }
+    ],
+    function (err, results) {
+      callback(err, 'channel/index', results);
     });
   }
 };

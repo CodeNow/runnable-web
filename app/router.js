@@ -14,8 +14,6 @@ var Router = module.exports = function Router(options) {
 Router.prototype.__proto__ = BaseClientRouter.prototype;
 
 Router.prototype.postInitialize = function() {
-  this.app.dispatch = _.clone(Backbone.Events);
-
   this.on('action:start', this.trackImpression, this);
   this.on('action:start', this.scrollTop, this);
   this.on('action:end', this.scrollTop, this);

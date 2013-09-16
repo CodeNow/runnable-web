@@ -23,7 +23,7 @@ module.exports = Base.extend({
     this.containerId = options.containerId;
 
     if (!this.length) {
-      this.listenToOnce(this, 'sync change add', this.setFetched.bind(this));
+      this.listenToOnce(this, 'sync change', this.setFetched.bind(this));
     }
     else {
       this.setFetched();
@@ -55,6 +55,15 @@ module.exports = Base.extend({
     if (fs) {
       cb(null, fs, this);
     }
+  },
+  store: function () {
+    Super.store.apply(this, arguments);
+  },
+  set: function () {
+    Super.set.apply(this, arguments);
+  },
+  reset: function () {
+    Super.reset.apply(this, arguments);
   }
 });
 

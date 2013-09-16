@@ -1,42 +1,44 @@
 {{view "app_user" model=user}}
 {{view "header_view" model=user context=.}}
-<section class="content">
-  <div class="container">
-    <article class="span9">
-      <section class="title">
+
+<section id="main" class="container">
+  <div id="project-details" class="row">
+    <div class="col-sm-9">
+      <h2 class="page-title clearfix">
         {{view "runnable_title" model=container}}
-        {{view "runnable_description" model=container}}
-      </section>
+      </h2>
+      {{view "runnable_description" model=container}}
       {{#if isVerified}}
       {{view "publish_warning" model=image containerid=container.id}}
       {{/if}}
-      <section class="actions">
+      <div class="main-controls">
         {{view "run_button" model=container collection=implementations}}
         {{view "save_button" collection=defaultFiles}}
-        {{!view "download_button" model=container}}
-      </section>
+      </div>
+    </div>
+    {{!view "runnable_owner" model=container.owner model_id=container.owner.id model_name='user' created=container.attributes.created}}
+  </div>
+  <div class="row">
+    <div class="col-sm-9">
       {{view "code_editor" context=. editmode=true model=container}}
       {{view "terminal" model=container}}
-    </article>
-    <aside class="span3 last runnable-sidebar">
-      {{! <div class="module"> }}
-        {{!view "new_example_button"}}
-      {{! </div> }}
-      <section class="module display-none">
-        {{view "runnable_owner" model=container}}
-      </section>
-      <section class="module">
-        <h3>Service</h3>
+    </div>
+    <ul id="sidebar" class="col-sm-3">
+      {{#if container.attributes.specificationId}}
+      <li class="services">
+      <h3 class="widget-title">Services</h3>
         {{view "service" model=container collection=specifications editmode=isVerified}}
-      </section>
-      <section class="module tags">
-        <h3>Tags</h3>
+      </li>
+      {{/if}}
+      <li class="tags">
+        <h3 class="widget-title">Tags</h3>
         {{view "runnable_tags" model=container editmode=isVerified}}
         {{#if isVerified}}
         {{view "runnable_new_tag_form" model=container}}
         {{/if}}
-      </section>
-    </aside>
+      </li>
+    </ul>
   </div>
 </section>
+
 {{view "footer_view" model=user context=.}}

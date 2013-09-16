@@ -1,0 +1,20 @@
+<ul class="controls clearfix">
+  <li class="left">
+    {{view "sync_button" model=container}}
+  </li>
+  <li class="dark-theme theme active">
+    <a href="javascript:void(0);" rel="tooltip" title="Dark Theme"></a>
+  </li>
+  <li class="light-theme theme">
+    <a href="javascript:void(0);" rel="tooltip" title="Light Theme"></a>
+  </li>
+  <li class="close-file-explorer right">
+    <a href="javascript:void(0);"><img src="/images/control-close.png" height="12" width="12" alt="Close" /></a>
+  </li>
+  <li class="open-context-menu right">
+    <a href="javascript:void(0);"><img src="/images/control-settings.png" height="12" width="12" alt="Settings" /></a>
+  </li>
+</ul>
+<ul class="nav nav-pills nav-stacked">
+  {{view "file_tree" model=rootDir editmode=editmode}}
+</ul>
