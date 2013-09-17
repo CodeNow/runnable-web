@@ -1,14 +1,14 @@
-{{#if editMode}}
+{{#if editmode}}
 <form action="javascript:void(0);">
   <div class="item">
     <input type="text" class="form-control" name="name" autofocus placeholder="Give your code example a title" value="{{model.attributes.name}}" />
   </div>
-  <button class="silver" type="submit">Save title</button>
+  <button class="silver" type="submit">Save</button>
   <button class="silver btn-cancel" type="button">Cancel</button>
 </form>
 {{else}}
   <span>{{model.virtual.nameWithTags}}
-    {{#if canEdit}}
+    {{#if canedit}}
     <a href="javascript:void(0);" class="edit-link">Edit</a>
     {{/if}}
   </span>
