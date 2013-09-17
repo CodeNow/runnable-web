@@ -350,6 +350,14 @@ a::-moz-focus-inner, button::-moz-focus-inner,  {
 
 // ----------------------------------- //
 
+#page-effect.blur {
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+}
+
 // inputs
 .form-control {
 		min-height: 40px;
@@ -504,6 +512,9 @@ button {
 			@include box-shadow(inset 0 0 2px rgba(0,0,0,0.2));
 			@include transition(all 0.05s ease-in-out);
 		}
+	}
+	span {
+		margin-top: -3px;
 	}
 }
 
@@ -752,6 +763,138 @@ progress {
 	&.expanded {
 		opacity: 1;
 		display: inline;
+	}
+}
+
+.overlay-loader {
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.6);
+    -webkit-filter: blur(0);
+    -moz-filter: blur(0);
+    -o-filter: blur(0);
+    -ms-filter: blur(0);
+    filter: blur(0);
+	z-index: 10000000000;
+	.loader {
+		position: absolute;
+		width: 80px;
+		height: 80px;
+		left: 50%;
+		top: 50%;
+		margin: -40px 0 0 -40px;
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			&.play {
+				top: 50%;
+				left: 50%;
+				margin: -17px 0 0 -8px;
+				// -webkit-animation: pulsate 1s ease 0 infinite;
+				opacity: 0.75;
+			}
+			&.spin {
+				// -webkit-animation: spin 2s linear infinite;
+			}
+		}
+		.dot {
+			position: absolute;
+			height: 8px;
+			width: 8px;
+			background-color: #999;
+			@include border-radius(50%);
+			opacity: 0;
+			&.dot-1 {
+				top: 0;
+				left: 50%;
+				margin: 0 0 0 -4px;
+				// opacity: 1;
+				-webkit-animation: spin 1s linear 0 infinite;
+			}
+			&.dot-2 {
+				top: 20%;
+				left: 20%;
+				margin: -4px 0 0 -4px;
+				// opacity: 0.875;
+				-webkit-animation: spin 1s linear 0.125s infinite;
+			}
+			&.dot-3 {
+				top: 50%;
+				left: 0;
+				margin: -4px 0 0 0;
+				// opacity: 0.75;
+				-webkit-animation: spin 1s linear 0.25s infinite;
+			}
+			&.dot-4 {
+				top: 82%;
+				left: 20%;
+				margin: -4px 0 0 -4px;
+				// opacity: 0.625;
+				-webkit-animation: spin 1s linear 0.375s infinite;
+			}
+			&.dot-5 {
+				top: 95%;
+				left: 50%;
+				margin: -4px 0 0 -4px;
+				// opacity: 0.5;
+				-webkit-animation: spin 1s linear 0.5s infinite;
+			}
+			&.dot-6 {
+				top: 82%;
+				left: 80%;
+				margin: -4px 0 0 -4px;
+				// opacity: 0.375;
+				-webkit-animation: spin 1s linear 0.625s infinite;
+			}
+			&.dot-7 {
+				top: 50%;
+				left: 95%;
+				margin: -4px 0 0 -4px;
+				// opacity: 0.25;
+				-webkit-animation: spin 1s linear 0.75s infinite;
+			}
+			&.dot-8 {
+				top: 20%;
+				left: 80%;
+				margin: -4px 0 0 -4px;
+				// opacity: 0.125;
+				-webkit-animation: spin 1s linear 0.875s infinite;
+			}
+		}
+	}
+}
+
+
+@-webkit-keyframes spin {
+	0% {
+		opacity: 0;
+		@include transform(scale(0));
+	}
+	50% {
+		opacity: 1;
+		@include transform(scale(1.05));
+	}
+	100% {
+		opacity: 0;
+		@include transform(scale(1.05));
+	}
+}
+
+@-webkit-keyframes pulsate {
+	0% {
+		opacity: 0.5;
+	}
+	50% {
+		opacity: 0.8;
+	}
+	100% {
+		opacity: 0.5;
 	}
 }
 
@@ -2130,14 +2273,14 @@ div.terminal {
 		@include box-shadow(inset 0 1px 0 rgba(255,255,255,0.3), 0 2px 7px rgba(0,0,0,0.1));
 	}
 	#contact-body {
-		background-image: url('../images/contact-body.png');
-		@include background-image-retina('../images/contact-body@2x.png');
+		background-image: url('../images/contact-body.jpg');
+		@include background-image-retina('../images/contact-body@2x.jpg');
 	}
 }
 
 #contact-body, #about-contact-body {
 	background-color: #fff;
-	background-image: url('../images/about-contact.jpg');
+	background-image: url('../images/about-contact.png');
 	@include background-image-retina('../images/about-contact@2x.png');
 	@include background-size(100% auto);
 	background-repeat: no-repeat;

@@ -92,9 +92,11 @@ module.exports = RendrView.extend({
       // SET
       if (bool) {
         this.$el.addClass('loading');
+        this.$el.addClass('overlay-loader');
       }
       else {
         this.$el.removeClass('loading');
+        this.$el.removeClass('overlay-loader');
       }
     }
     else {
