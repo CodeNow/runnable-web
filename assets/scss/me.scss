@@ -39,7 +39,12 @@ h2.page-title{
 .relative{
   position:relative;
 }
-
+#project-editor {
+  position: static !important;
+}
+#project-editor-tabs li a.close-tab {
+  bottom:auto;
+}
 .overlay-loader{
   display: none;
 }
