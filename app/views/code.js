@@ -70,7 +70,9 @@ module.exports = BaseView.extend({
     }
     else {
       this.attachFile(file);
-      this.adjustHeightToContents();
+      setTimeout(function () { // set timeout fixes text editor height for first page hit.
+        this.adjustHeightToContents();
+      }.bind(this), 0);
     }
   },
   detachFile: function (file) {
