@@ -137,7 +137,6 @@ module.exports = BaseView.extend({
       var contents = this.collection;
       // firefox does not hoist functions in blocks
       function cb (err) {
-        this.hideLoader();
         if (err) {
           this.showError(err);
         }
