@@ -432,12 +432,6 @@ div.search-results{
 
 //page loader
 #page-loader{
-  position: absolute;
-  top: 0;
-  z-index: 1000;
-  height: 100%;
-  width: 100%;
-  background: black;
   filter: alpha(opacity=0);
   opacity: 0;
   visibility: hidden;
@@ -446,18 +440,10 @@ div.search-results{
   -ms-transition: opacity 0.15s ease-in-out, visibility 0s linear;
   -o-transition: opacity 0.15s ease-in-out, visibility 0s linear;
   transition: opacity 0.15s ease-in-out, visibility 0s linear;
-  .text{
-    position: absolute;
-    top: 25%;
-    width: 100%;
-    text-align: center;
-    color: white;
-    opacity:2.0;
-  }
   &.loading{
     visibility: visible;
     display: block;
-    opacity: 0.6;
+    opacity: 1;
   }
 }
 
@@ -560,4 +546,8 @@ aside#file-explorer {
 }
 .modal-page{
   height: 700px;
+}
+
+#project-editor-container aside#file-explorer .controls li.light-theme {
+  margin-right:0;
 }
