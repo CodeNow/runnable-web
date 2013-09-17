@@ -15,6 +15,7 @@ module.exports = BaseView.extend({
     // iframe loader
     this.loading(true);
     this.$iframe.load(this.loading.bind(this, false)); // load event remains attached, for subsequent page loads
+    this.setUrl(this.options.baseUrl);
   },
   refresh: function () {
     this.$iframe.attr('src', this.$iframe.attr('src'));
