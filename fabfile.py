@@ -13,16 +13,16 @@ def production():
   Work on production environment
   """
   env.settings = 'production'
-  env.hosts = [ 
+  env.hosts = [
     'web'
   ]
- 
+
 def integration():
   """
   Work on staging environment
   """
   env.settings = 'integration'
-  env.hosts = [ 
+  env.hosts = [
     'web-int'
   ]
 
@@ -35,13 +35,13 @@ def stable():
   Work on stable branch.
   """
   env.branch = 'stable'
- 
+
 def master():
   """
   Work on development branch.
   """
   env.branch = 'master'
- 
+
 def branch(branch_name):
   """
   Work on any specified branch.
@@ -65,13 +65,13 @@ def setup():
   bower()
   grunt()
   boot()
- 
+
 def clone_repo():
   """
   Do initial clone of the git repository.
   """
   run('git clone https://github.com/CodeNow/runnable-web.git')
- 
+
 def checkout_latest():
   """
   Pull the latest code on the specified branch.
@@ -79,7 +79,7 @@ def checkout_latest():
   with cd('runnable-web'):
     run('git checkout %(branch)s' % env)
     run('git pull origin %(branch)s' % env)
- 
+
 def install_requirements():
   """
   Install the required packages using npm.
@@ -91,7 +91,7 @@ def install_requirements():
 def bower():
   with cd('runnable-web'):
     run('bower install')
-  
+
 def grunt():
   """
   Run grunt
@@ -103,7 +103,7 @@ def boot():
   """
   Start process with pm2
   """
-  run('NODE_ENV=%(settings)s pm2 start runnable-web/index.js' % env)
+  run('NODE_ENV=%(settings)s pm2 start runnable-web/index.js -i 8' % env)
 
 """
 Commands - deployment
@@ -114,14 +114,14 @@ def deploy():
   """
   require('settings', provided_by=[production, integration])
   require('branch', provided_by=[stable, master, branch])
-      
+
   checkout_latest()
   install_requirements()
   bower()
   grunt()
   reboot()
- 
-def reboot(): 
+
+def reboot():
   """
   Restart the server.
   """
@@ -134,7 +134,7 @@ Commands - rollback
 def rollback(commit_id):
   """
   Rolls back to specified git commit hash or tag.
-  
+
   There is NO guarantee we have committed a valid dataset for an arbitrary
   commit hash.
   """
@@ -146,7 +146,7 @@ def rollback(commit_id):
   install_requirements()
   make()
   reboot()
-    
+
 def git_reset(commit_id):
   """
   Reset the git repository to an arbitrary commit hash or tag.
