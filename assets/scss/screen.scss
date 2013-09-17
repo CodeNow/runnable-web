@@ -1562,6 +1562,10 @@ progress {
 			overflow: scroll;
 			font-size: 12px;
 			padding: 6px 0;
+			> li {
+				height: 100%;
+				@include box-sizing(border-box);
+			}
 			li {
 				padding: 0;
 				margin: 0;
