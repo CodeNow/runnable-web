@@ -132,7 +132,7 @@ function buildRoutes(app) {
     else {
       res.json(403, {message:'successful login'});
     }
-    res.redirect('/press');
+    res.redirect('/');
   });
   app.get(/^(?!\/api\/)/, mw.handle404.handle404);
 }

@@ -55,10 +55,10 @@ module.exports = {
   },
   category: function (params, callback) {
     if (isServer && !this.app.req.cookies.pressauth) {
-      this.redirectTo('/press');
+      this.redirectTo('/');
     }
     else if (!isServer && !utils.clientGetCookie('pressauth')) {
-      this.redirectTo('/press');
+      this.redirectTo('/');
     }
     else {
       params.category = params.category || 'Featured';
