@@ -1611,7 +1611,7 @@ progress {
 						@include transform(rotate(-90deg));
 					}
 				}
-				&.ui-draggable-dragging {
+				a.ui-draggable-dragging {
 					z-index: 100000;
 					position: absolute;
 					width: 100%;
