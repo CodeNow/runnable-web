@@ -1,5 +1,7 @@
 var EditorButtonView = require('./editor_button_view');
 var Super = EditorButtonView.prototype;
+var utils = require('../utils');
+var async = require('async');
 // var router = require('../router');
 var SignupModal = require('./signup_modal');
 
@@ -18,20 +20,31 @@ module.exports = EditorButtonView.extend({
   click: function (evt) {
     evt.preventDefault();
     if (this.app.user.isRegistered()) {
-      this.disable(true);
-      this.collection.saveAll(function (err) {
-        this.disable(false);
-        if (err) {
-          this.showError(err);
-        }
-        else {
-          this.app.router.navigate('/me/'+this.options.containerid, true);
-        }
-      }, this);
+      this.saveAndRedirect();
     } else {
       var signupModal = new SignupModal({ app:this.app });
       signupModal.open();
     }
+  },
+  saveAndRedirect: function () {
+    var self = this;
+    self.disable(true);
+    async.parallel([
+      self.collection.saveAll.bind(self.collection),
+      function (cb) {
+        var opts = utils.cbOpts(cb);
+        self.model.save({ saved:true }, opts);
+      }
+    ],
+    function done (err) {
+      self.disable(false);
+      if (err) {
+        self.showError(err)
+      }
+      else {
+        self.app.router.navigate('/me/'+self.options.model.id, true);
+      }
+    });
   }
 });
 
