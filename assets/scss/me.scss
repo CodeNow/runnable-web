@@ -555,3 +555,12 @@ aside#file-explorer {
 #project-editor-container {
   background: #ddd;
 }
+
+.container > .navbar-header, .container > .navbar-collapse {
+  text-align: center;
+  .navbar-nav {
+    float: none;
+    display: inline-block;
+    margin: 0;
+  }
+}
