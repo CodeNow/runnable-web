@@ -1,0 +1,20 @@
+<thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Created</th>
+    <th>Delete</th>
+  </tr>
+</thead>
+<tbody>
+  {{#each collection.models}}
+  <tr>
+    <td>{{add @index arg=1}}</td>
+    <td><a href="{{invoke . method="appURL"}}">{{attributes.name}}</a></td>
+    <td>{{dateAgo attributes.created}}</td>
+    <td><button class="delete-draft" data-id="{{id}}">x</button></td>
+  </tr>
+  {{else}}
+    <tr><td colspan="3">(No Draft Runnables)</td></tr>
+  {{/each}}
+</tbody>
