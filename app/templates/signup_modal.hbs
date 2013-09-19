@@ -1,3 +1,7 @@
+{{#if fullpage}}
+{{view 'header_view' nosearch=true noactions=true}}
+<div class="modal-page">
+{{/if}}
 <form class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
@@ -6,10 +10,14 @@
     </div>
     <div class="modal-body">
       <input type="text" class="form-control" name="username" placeholder="Username" required autofocus />
-      <input type="text" class="form-control" name="email" placeholder="Email" required />
+      <input type="email" class="form-control" name="email" placeholder="Email" required />
       <input type="password" class="form-control" name="password" placeholder="Password" required />
       <button type="submit" class="orange">Sign Up</button>
       <p>Already have an account? <a class="login-link" href="javascript:void(0);">Log in here</a></p>
     </div>
   </div><!-- /.modal-content -->
 </form><!-- /.modal-dialog -->
+{{#if fullpage}}
+</div>
+{{view 'footer_view'}}
+{{/if}}

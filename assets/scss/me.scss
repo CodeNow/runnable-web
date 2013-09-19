@@ -39,8 +39,26 @@ h2.page-title{
 .relative{
   position:relative;
 }
-
-.loader{
+#project-editor {
+  position: static !important;
+}
+#project-editor-tabs li a.close-tab {
+  bottom:auto;
+}
+.overlay-loader{
+  display: none;
+}
+.overlay-loader {
+  .loader {
+    top: 40%;
+  }
+}
+.loading.overlay-loader{
+  display: block;
+}
+#output-results-container .loader,
+#output-terminal-container .loader,
+.terminal-view .loader{
   position: absolute;
   top: 30%;
   width: 100%;
@@ -49,14 +67,49 @@ h2.page-title{
   display: none;
   text-align: center;
 }
-.loading .loader{
+.terminal-view .loading .loader{
   display: block;
 }
 
 .terminal-view .loader{
   top: 40%;
 }
-
+.loader{
+  .dot {
+    &.dot-1 {
+      // opacity: 1;
+      -webkit-animation: spin 1s linear 0 infinite;
+    }
+    &.dot-2 {
+      // opacity: 0.875;
+      -webkit-animation: spin 1s linear 0.0625s infinite;
+    }
+    &.dot-3 {
+      // opacity: 0.75;
+      -webkit-animation: spin 1s linear 0.125s infinite;
+    }
+    &.dot-4 {
+      // opacity: 0.625;
+      -webkit-animation: spin 1s linear 0.1875s infinite;
+    }
+    &.dot-5 {
+      // opacity: 0.5;
+      -webkit-animation: spin 1s linear 0.25s infinite;
+    }
+    &.dot-6 {
+      // opacity: 0.375;
+      -webkit-animation: spin 1s linear 0.3125s infinite;
+    }
+    &.dot-7 {
+      // opacity: 0.25;
+      -webkit-animation: spin 1s linear 0.375s infinite;
+    }
+    &.dot-8 {
+      // opacity: 0.125;
+      -webkit-animation: spin 1s linear 0.4375s infinite;
+    }
+  }
+}
 
 
 //runnable index
@@ -378,12 +431,6 @@ div.search-results{
 
 //page loader
 #page-loader{
-  position: absolute;
-  top: 0;
-  z-index: 1000;
-  height: 100%;
-  width: 100%;
-  background: black;
   filter: alpha(opacity=0);
   opacity: 0;
   visibility: hidden;
@@ -392,18 +439,10 @@ div.search-results{
   -ms-transition: opacity 0.15s ease-in-out, visibility 0s linear;
   -o-transition: opacity 0.15s ease-in-out, visibility 0s linear;
   transition: opacity 0.15s ease-in-out, visibility 0s linear;
-  .text{
-    position: absolute;
-    top: 25%;
-    width: 100%;
-    text-align: center;
-    color: white;
-    opacity:2.0;
-  }
   &.loading{
     visibility: visible;
     display: block;
-    opacity: 0.6;
+    opacity: 1.0;
   }
 }
 
@@ -503,4 +542,188 @@ aside#file-explorer {
   -o-border-radius: 3px 0 0 3px !important;
   border-radius: 3px 0 0 3px !important;
   height: 40px;
+}
+.modal-page{
+  height: 700px;
+}
+
+#project-editor-container aside#file-explorer .controls li.light-theme {
+  margin-right:0;
+}
+
+#project-editor-container {
+  background: #ddd;
+}
+
+.container > .navbar-header, .container > .navbar-collapse {
+  text-align: center;
+  height: 38px !important;
+  .navbar-nav {
+    float: none;
+    display: inline-block;
+    margin: 0;
+  }
+}
+
+
+/* RIGHT HERE */
+
+#project-editor-tabs {
+  border-bottom: solid 1px #bbb;
+  li {
+    position: relative;
+    margin-right: 0.1%;
+    font-weight: bold;
+    a.tab-body {
+      background: #F6F6F6;
+      @include border-radius(0);
+      border-color: #bbb;
+      padding: 7px 30px 5px 30px;
+      text-align: center;
+      font-size: 11px;
+      color: #bcbcbc;
+    }
+    a.close-tab {
+      padding: 0;
+      margin: 0;
+      float: none;
+      border: none;
+      display: inline-block;
+      position: absolute;
+      background: none;
+      top: 16.5%;
+      right: 14%;
+      bottom: 0;
+      z-index: 100;
+    }
+    &.active a {
+      background: #fff;
+      color: #8447ad;
+      &.tab-body:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: #fff;
+        bottom: -1px;
+        left: 0;
+        z-index: 100;
+      }
+    }
+  }
+}
+
+#project-editor-container {
+  aside#file-explorer {
+    .nav {
+      position: absolute;
+      top: 25px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow: scroll;
+      font-size: 12px;
+      padding: 6px 0;
+      > li {
+        height: 100%;
+        @include box-sizing(border-box);
+      }
+      li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        a,
+        img,
+        span {
+          padding: 6px 6.5%;
+          margin: 0;
+          color: #333;
+          position: relative;
+          white-space: nowrap;
+          display: block;
+          &:hover {
+            text-decoration: none;
+            color: $purple-light;
+          }
+          &:before {
+            content: "";
+            float: left;
+            margin: 6px 10px 0 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 6px solid transparent;
+          }
+        }
+        ul {
+          padding-left: 0;
+          li {
+            a,
+            img,
+            span {
+              // padding-left: 0;
+            }
+            li a,
+            li img,
+            li span {
+              padding-left: 15%;
+            }
+            li li a,
+            li li img,
+            li li span {
+              padding-left: 23%;
+            }
+            li li li a,
+            li li li img,
+            li li li span {
+              padding-left: 31%;
+            }
+            li li li li a,
+            li li li li img,
+            li li li li span {
+              padding-left: 39%;
+            }
+            li li li li li a,
+            li li li li li img,
+            li li li li li span {
+              padding-left: 47%;
+            }
+            li li li li li li a,
+            li li li li li li img,
+            li li li li li li span {
+              padding-left: 55%;
+            }
+            li li li li li li li a,
+            li li li li li li li img,
+            li li li li li li li span {
+              padding-left: 63%;
+            }
+            li li li li li li li li a,
+            li li li li li li li li img,
+            li li li li li li li li span {
+              padding-left: 71%;
+            }
+            li li li li li li li li li a,
+            li li li li li li li li li img,
+            li li li li li li li li li span {
+              padding-left: 79%;
+            }
+            li li li li li li li li li li a,
+            li li li li li li li li li li img,
+            li li li li li li li li li li span {
+              padding-left: 86%;
+            }
+            li li li li li li li li li li li a,
+            li li li li li li li li li li li img,
+            li li li li li li li li li li li span {
+              padding-left: 94%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#about #about-team #team-list h3 {
+  white-space: normal;
 }

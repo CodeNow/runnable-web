@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var helpers = require('./helpers');
+var utils = require('../utils');
 
 var fetch = helpers.fetch;
 var canonical = helpers.canonical;
@@ -110,4 +111,71 @@ module.exports = {
         }
       }));
     });
-  }};
+  },
+  press: function (params, callback) {
+    var self = this;
+    if (isServer && this.app.req.cookies.pressauth) {
+      this.redirectTo('/c/Featured');
+    }
+    else if (!isServer && utils.clientGetCookie('pressauth')) {
+      this.redirectTo('/c/Featured');
+    }
+    else {
+      var spec = {
+        user: { model:'User', params:{_id: 'me'} }
+      };
+      fetch.call(this, spec, function (err, results) {
+        callback(err, !err && _.extend(results, {
+          page: {
+            title: 'Runnable',
+            canonical: canonical.call(self)
+          }
+        }));
+      });
+    }
+  },
+  login: function (params, callback) {
+    var self = this;
+    if (isServer && this.app.req.cookies.pressauth) {
+      this.redirectTo('/c/Featured');
+    }
+    else if (!isServer && utils.clientGetCookie('pressauth')) {
+      this.redirectTo('/c/Featured');
+    }
+    else {
+      var spec = {
+        user: { model:'User', params:{_id: 'me'} }
+      };
+      fetch.call(this, spec, function (err, results) {
+        callback(err, !err && _.extend(results, {
+          page: {
+            title: 'Runnable',
+            canonical: canonical.call(self)
+          }
+        }));
+      });
+    }
+  },
+  signup: function (params, callback) {
+    var self = this;
+    if (isServer && this.app.req.cookies.pressauth) {
+      this.redirectTo('/c/Featured');
+    }
+    else if (!isServer && utils.clientGetCookie('pressauth')) {
+      this.redirectTo('/c/Featured');
+    }
+    else {
+      var spec = {
+        user: { model:'User', params:{_id: 'me'} }
+      };
+      fetch.call(this, spec, function (err, results) {
+        callback(err, !err && _.extend(results, {
+          page: {
+            title: 'Runnable',
+            canonical: canonical.call(self)
+          }
+        }));
+      });
+    }
+  }
+};

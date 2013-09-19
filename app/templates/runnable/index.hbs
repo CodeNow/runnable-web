@@ -14,7 +14,7 @@
         {{view "edit_button" model=container containerid=container.id}}
         {{/if}}
         {{#if permissions.fork}}
-        {{view "fork_button" collection=defaultFiles containerid=container.id}}
+        {{view "fork_button" collection=defaultFiles model=container}}
         {{/if}}
       </div>
     </div>

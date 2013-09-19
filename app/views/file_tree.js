@@ -36,11 +36,11 @@ module.exports = BaseView.extend({
     this.$el.droppable({
       greedy: true,
       drop: this.moveDrop.bind(this),
-      hoverClass: 'drop-hover'
+      hoverClass: 'ui-draggable-hover'
     });
   },
   contextMenu: function (evt) {
-    this.$(document).click(); // closes other context menus
+    $(document).click(); // closes other context menus
     evt.preventDefault(); // prevent browser context menu
     evt.stopPropagation();
     if (this.menu) {
@@ -105,13 +105,13 @@ module.exports = BaseView.extend({
     evt.stopPropagation();
     evt.preventDefault();
     evt = evt.originalEvent;
+    this.dragClassOff(evt);
     var files = evt.dataTransfer.files;
     if (!files) {
       // no browser support
       this.showError('Sorry your browser does not support drag and drop uploads - we suggest using Google Chrome Browser');
     }
     else {
-      this.dragClassOff(evt);
       var contents = this.collection;
       var dir = this.model;
       var self = this;
@@ -137,7 +137,6 @@ module.exports = BaseView.extend({
       var contents = this.collection;
       // firefox does not hoist functions in blocks
       function cb (err) {
-        this.hideLoader();
         if (err) {
           this.showError(err);
         }
@@ -159,7 +158,7 @@ module.exports = BaseView.extend({
   moveDrop: function (evt, ui) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.$el.removeClass('drop-hover');
+    this.$el.removeClass('ui-draggable-hover');
     var self = this;
     var $itemDropped = $(ui.draggable);
     var fsid = $itemDropped.data('id');
@@ -184,26 +183,12 @@ module.exports = BaseView.extend({
   dragClass: function (evt) {
     evt.stopPropagation();
     evt.preventDefault();
-    if (this.model.isRootDir()) {
-      $('div.file-browser').addClass('drop-hover');
-    }
-    else {
-      this.$el.addClass('drop-hover');
-    }
+    this.$el.addClass('ui-draggable-hover');
   },
   dragClassOff: function (evt) {
     evt.stopPropagation();
     evt.preventDefault();
-    if (this.model.isRootDir()) {
-      $('div.file-browser').removeClass('drop-hover');
-    }
-    else {
-      this.$el.removeClass('drop-hover');
-    }
-  },
-  noop: function (evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
+    this.$el.removeClass('ui-draggable-hover');
   }
 });
 

@@ -34,6 +34,22 @@ module.exports = Base.extend({
       this.listenTo(dispatch, 'get:fs', this.onGetFs.bind(this));
     }
   },
+  comparator: function (a, b) {
+    var sortName = function (a, b) {
+      var A = a.get('name');
+      var B = b.get('name');
+      if (A == B) return 0;
+      if (A.toLowerCase() < B.toLowerCase()) return -1;
+      if (A.toLowerCase() > B.toLowerCase()) return 1;
+    };
+    var sortType = function (a, b) {
+      if (a.get('type') == b.get('type')) return 0;
+      if (a.isDir()  && b.isFile()) return -1;
+      if (a.isFile() && b.isDir() ) return 1;
+    };
+
+    return (sortType(a, b) || sortName(a, b));
+  },
   url  : function () {
     return '/users/me/runnables/:containerId/files'
       .replace(':containerId', this.containerId);

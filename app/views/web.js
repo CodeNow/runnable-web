@@ -6,7 +6,7 @@ var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   id: 'output-results-container',
   getTemplateData: function () {
-    this.options.baseUrl = "http://" + this.model.get("webToken") + "." + this.app.get('domain');
+    this.options.baseurl = "http://" + this.model.get("webToken") + "." + this.app.get('domain');
     return this.options;
   },
   postRender: function () {
@@ -15,6 +15,7 @@ module.exports = BaseView.extend({
     // iframe loader
     this.loading(true);
     this.$iframe.load(this.loading.bind(this, false)); // load event remains attached, for subsequent page loads
+    this.setUrl(this.options.baseurl);
   },
   refresh: function () {
     this.$iframe.attr('src', this.$iframe.attr('src'));
@@ -22,7 +23,7 @@ module.exports = BaseView.extend({
   setUrlPath: function (path) {
     this.loading(true);
     if (path[0] !== '/') path = '/' + path;
-    var url = this.options.baseUrl+path;
+    var url = this.options.baseurl+path;
     this.$iframe.attr('src', url);
   },
   setUrl: function (url) {

@@ -4,6 +4,7 @@ var _ = require('underscore');
 
 module.exports = BaseView.extend({
   tagName: 'pre',
+  id: 'project-editor',
   className: 'code',
   // minHeight: 300,
   // maxHeight: 550,
@@ -28,6 +29,10 @@ module.exports = BaseView.extend({
     this.editor = ace.edit(this.el);
     this.setTheme('dark');
     this.editor.setShowPrintMargin(false);
+    this.editor.renderer.setShowPrintMargin(false);
+    // this.editor.renderer.setScrollMargin(8, 8, 0, 0);
+    document.getElementById('project-editor').style.fontSize   = '12px';
+    document.getElementById('project-editor').style.lineHeight = '20px';
     // you can attach events here since render only occurs once for this view
     var dispatch = this.app.dispatch;
     dispatch.on('change:theme', this.setTheme.bind(this));
@@ -65,7 +70,9 @@ module.exports = BaseView.extend({
     }
     else {
       this.attachFile(file);
-      this.adjustHeightToContents();
+      setTimeout(function () { // set timeout fixes text editor height for first page hit.
+        this.adjustHeightToContents();
+      }.bind(this), 0);
     }
   },
   detachFile: function (file) {

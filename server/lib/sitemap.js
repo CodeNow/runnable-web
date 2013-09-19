@@ -10,7 +10,8 @@ module.exports.init = function(app) {
   app.get('/sitemap.xml', function (req, res, next) {
     var urls = [
       { url: '/',  changefreq: 'weekly', priority: 0.7 },
-      { url: '/providers',  changefreq: 'monthly',  priority: 0.3 },
+      { url: '/login',  changefreq: 'monthly',  priority: 0.3 },
+      { url: '/signup',  changefreq: 'monthly',  priority: 0.3 },
       { url: '/about',  changefreq: 'monthly',  priority: 0.5 },
       { url: '/jobs',  changefreq: 'monthly',  priority: 0.5 },
       { url: '/privacy',  changefreq: 'monthly',  priority: 0.1 }

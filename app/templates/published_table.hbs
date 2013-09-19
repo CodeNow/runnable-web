@@ -1,0 +1,28 @@
+<thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Votes</th>
+    <th>Views</th>
+    <th>Runs</th>
+    <th>Copies</th>
+    <th>Created</th>
+    <th>Delete</th>
+  </tr>
+</thead>
+<tbody>
+  {{#each collection.models}}
+  <tr>
+    <td>{{add @index arg=1}}</td>
+    <td><a href="{{invoke . method="appURL"}}">{{attributes.name}}</a></td>
+    <td>{{attributes.votes}}</td>
+    <td>{{attributes.views}}</td>
+    <td>{{attributes.runs}}</td>
+    <td>{{attributes.copies}}</td>
+    <td>{{dateAgo attributes.created}}</td>
+    <td><button class="delete-published" data-id="{{id}}">x</button></td>
+  </tr>
+  {{else}}
+  <tr><td colspan="6">(No Published Runnables)</td></tr>
+  {{/each}}
+</tbody>

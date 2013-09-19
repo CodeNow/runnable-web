@@ -16,12 +16,12 @@ module.exports = ModalView.extend({
   postRender: function () {
     Super.postRender.apply(this, arguments);
   },
-  openSignup: function () {
+  openSignup: function (evt) {
+    evt.preventDefault();
     this.close();
     var SignupModal = require('./signup_modal');
     var signupModal = new SignupModal({ app:this.app });
     signupModal.open();
-    return false; // stop link
   },
   login: function (evt) {
     evt.preventDefault();

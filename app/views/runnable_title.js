@@ -8,8 +8,8 @@ var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName:'span',
   events: {
-    'click .edit-link' : 'clickEdit',
-    'submit'           : 'submitName',
+    'click .edit-title': 'clickEdit',
+    'submit form'      : 'submitName',
     'click .btn-cancel': 'escEditMode'
   },
   preRender: function () {
@@ -22,7 +22,7 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     this.model.virtual.nameWithTags = this.model.nameWithTags(true);
-    this.options.canEdit = !(this.model instanceof Image) &&
+    this.options.canedit = !(this.model instanceof Image) &&
       this.app.user.canEdit(this.model);
     return this.options;
   },
@@ -34,14 +34,14 @@ module.exports = BaseView.extend({
     this.setEditMode(false);
   },
   setEditMode: function (bool) {
-    this.options.editMode = bool;
+    this.options.editmode = bool;
     this.render();
   },
   submitName: function (evt) {
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
     var options = utils.cbOpts(cb, this);
-    this.options.editMode = false; // assume success, change will rerender
+    this.options.editmode = false; // assume success, change will rerender
     this.model.save(formData,  options);
     function cb (err) {
       if (err) {
