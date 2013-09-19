@@ -767,6 +767,7 @@ progress {
 }
 
 .overlay-loader {
+	// display: none;
 	height: 100%;
 	width: 100%;
 	position: fixed;
@@ -870,7 +871,6 @@ progress {
 	}
 }
 
-
 @-webkit-keyframes spin {
 	0% {
 		opacity: 0;
@@ -895,6 +895,27 @@ progress {
 	}
 	100% {
 		opacity: 0.5;
+	}
+}
+
+@-webkit-keyframes click {
+	16.6% {
+		@include transform(translateY(-20px) rotate(17deg));
+	}
+	33.3% {
+		@include transform(translateY(0));
+	}
+	50% {
+		@include transform(translateY(-10px) rotate(-17deg));
+	}
+	66.6% {
+		@include transform(translateY(0));
+	}
+	83.3% {
+		@include transform(translateY(-5px) rotate(17deg));
+	}
+	100% {
+		@include transform(translateY(0) rotate(0));
 	}
 }
 
@@ -1074,7 +1095,6 @@ progress {
 	.dropdown-menu > li > a { padding: 3px 14px }
 	.dropdown-menu li a:hover { background: $orange }
 }
-
 
 #login {
 	.modal-dialog {
@@ -1350,16 +1370,50 @@ progress {
 			color: #bcbcbc;
 			text-align: center;
 			line-height: 0.7em;
-			img {
+			width: 22px;
+			.vote-up-icon {
 				margin: 0 auto;
+				display: inline-block;
+				height: 14px;
+				width: 16px;
+				background-image: url(../images/sprite-upvote.png);
+				@include background-image-retina('../images/sprite-upvote@2x.png');
+				background-size: 16px auto;
 			}
 			span {
 				display: block;
 				font-size: 16px;
 			}
-			&:hover {
+			&:hover, &.active {
 				text-decoration: none;
+				color: $purple-light;
+				.vote-up-icon {
+					background-position: 0 -15px;
+				}
 			}
+			&.active {
+				-webkit-animation: click 1s ease-out normal;
+			}
+		}
+		a.edit-title {
+			display: inline-block;
+			width: 19px;
+			height: 18px;
+			background-size: 19px auto;
+			background-image: url(../images/sprite-edit-title.png);
+			margin-left: 12px;
+			@include background-image-retina('../images/sprite-edit-title@2x.png');
+			&:hover, &.active {
+				background-position: 0 -18px;
+			}
+			&.active {
+				margin-left: 14px;
+				margin-bottom: -3px;
+			}
+		}
+		input.form-control {
+			display: inline-block;
+			margin: 0 0 6px 12px;
 		}
 	}
 	p.description {
@@ -1384,6 +1438,8 @@ progress {
 		margin: 25px 0;
 		button {
 			margin-right: 10px;
+			padding-bottom: 10px;
+			max-height: 39px;
 		}
 	}
 }
@@ -1469,7 +1525,6 @@ progress {
 	border: solid 1px #bbb;
 	border-top: none;
 	background: #fff;
-	overflow: hidden;
 	position: relative;
 	#project-editor {
 		position: absolute;
@@ -1479,7 +1534,74 @@ progress {
 		width: 98.9%;
 		margin: 0;
 		border: none;
+		@include border-radius(0);
 		font-family: 'Source Code Pro', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+	}
+	&.edit-mode {
+		#project-editor {
+			top: 28px;
+			@include transition(top 0.2s ease-in-out);
+			&.focus {
+				top: 1%;
+			}
+		}
+		p.edit-mode-notification {
+			background: $purple-light;
+			position: absolute;
+			width: 98.8%;
+			top: 0;
+			left: 0.6%;
+			height: 28px;
+			color: #fff;
+			font-size: 11px;
+			padding: 7px 25px 5px 25px;
+			font-weight: bold;
+			@include transition(all 0.2s ease-in-out);
+			&.focus {
+				height: 0;
+				padding: 0 25px;
+				opacity: 0;
+				overflow: hidden;
+			}
+		}
+		aside#file-explorer {
+			ul.nav {
+				bottom: 140px;
+			}
+		}
+	}
+	#drop-to-add {
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+		left: 10px;
+		height: 120px;
+		border: dashed 2px #BDBDBD;
+		overflow: hidden;
+		display: block;
+		text-align: center;
+		font-size: 12px;
+		font-weight: bold;
+		color: #BDBDBD;
+		@include border-radius(5px);
+		.drop-to-add-icon {
+			margin-top: 35px;
+			height: 30px;
+			width: 25px;
+			background-image: url(../images/sprite-upload.png);
+			@include background-image-retina('../images/sprite-upload@2x.png');
+			background-size: 25px auto;
+			overflow: hidden;
+			display: inline-block;
+		}
+		&:hover {
+			border: solid 2px $purple-light;
+			text-decoration: none;
+			color: $purple-light;
+			.drop-to-add-icon {
+				background-position: 0 -30px;
+			}
+		}
 	}
 	a.open-file-explorer {
 		display: block;
@@ -1500,13 +1622,16 @@ progress {
 		background: #fff;
 		@include transition(all 0.2s ease-in-out);
 		&.closed {
-			right: -26%;
+			width: 0;
+			opacity: 0;
+			overflow: hidden;
 		}
 		.controls {
 			background: $purple-light;
 			text-align: center;
 			margin: 0;
 			padding: 4px 8px;
+			max-height: 28px;
 			li {
 				list-style: none;
 				margin: 0 5px;
@@ -1562,17 +1687,11 @@ progress {
 			overflow: scroll;
 			font-size: 12px;
 			padding: 6px 0;
-			> li {
-				height: 100%;
-				@include box-sizing(border-box);
-			}
 			li {
 				padding: 0;
 				margin: 0;
 				list-style: none;
-				a,
-				img,
-				span {
+				a {
 					padding: 6px 6.5%;
 					margin: 0;
 					color: #333;
@@ -1615,7 +1734,7 @@ progress {
 						@include transform(rotate(-90deg));
 					}
 				}
-				a.ui-draggable-dragging {
+				&.ui-draggable-dragging {
 					z-index: 100000;
 					position: absolute;
 					width: 100%;
@@ -1631,71 +1750,6 @@ progress {
 					color: #777;
 					@include box-shadow(0 0 0 2px #777);
 					@include transition(all 0.2s ease-in-out);
-				}
-				ul {
-					padding-left: 0;
-					li {
-						a,
-						img,
-						span {
-							// padding-left: 0;
-						}
-						li a,
-						li img,
-						li span {
-							padding-left: 15%;
-						}
-						li li a,
-						li li img,
-						li li span {
-							padding-left: 23%;
-						}
-						li li li a,
-						li li li img,
-						li li li span {
-							padding-left: 31%;
-						}
-						li li li li a,
-						li li li li img,
-						li li li li span {
-							padding-left: 39%;
-						}
-						li li li li li a,
-						li li li li li img,
-						li li li li li span {
-							padding-left: 47%;
-						}
-						li li li li li li a,
-						li li li li li li img,
-						li li li li li li span {
-							padding-left: 55%;
-						}
-						li li li li li li li a,
-						li li li li li li li img,
-						li li li li li li li span {
-							padding-left: 63%;
-						}
-						li li li li li li li li a,
-						li li li li li li li li img,
-						li li li li li li li li span {
-							padding-left: 71%;
-						}
-						li li li li li li li li li a,
-						li li li li li li li li li img,
-						li li li li li li li li li span {
-							padding-left: 79%;
-						}
-						li li li li li li li li li li a,
-						li li li li li li li li li li img,
-						li li li li li li li li li li span {
-							padding-left: 86%;
-						}
-						li li li li li li li li li li li a,
-						li li li li li li li li li li li img,
-						li li li li li li li li li li li span {
-							padding-left: 94%;
-						}
-					}
 				}
 			}
 			&.ui-draggable-hover {
@@ -1727,6 +1781,68 @@ div.terminal {
 	padding: 2%;
 	letter-spacing: 1px;
 	height: 200px;
+	position: relative;
+	.terminal-loader {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: #5D5B56;
+		white-space: normal;
+		.terminal-loader-icon {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -26px 0 0 -35px;
+			width: 70px;
+			height: 54px;
+			text-align: center;
+			img {
+				opacity: 0.85;
+				margin-right: 4px;
+			}
+			.dot {
+				position: absolute;
+				height: 8px;
+				width: 8px;
+				background-color: #fff;
+				@include border-radius(50%);
+				opacity: 0;
+				bottom: 0;
+				&.dot-1 {
+					left: 0;
+					margin: 0 0 0 -4px;
+					// opacity: 1;
+					-webkit-animation: spin 1s linear 0 infinite;
+				}
+				&.dot-2 {
+					left: 25%;
+					margin: 0 0 0 -4px;
+					// opacity: 0.875;
+					-webkit-animation: spin 1s linear 0.125s infinite;
+				}
+				&.dot-3 {
+					left: 50%;
+					margin: 0 0 0 -4px;
+					// opacity: 0.75;
+					-webkit-animation: spin 1s linear 0.25s infinite;
+				}
+				&.dot-4 {
+					left: 75%;
+					margin: 0 0 0 -4px;
+					// opacity: 0.625;
+					-webkit-animation: spin 1s linear 0.375s infinite;
+				}
+				&.dot-5 {
+					right: 0;
+					margin: 0 -4px 0 0;
+					// opacity: 0.5;
+					-webkit-animation: spin 1s linear 0.5s infinite;
+				}
+			}
+		}
+	}
 }
 
 #disqus_thread {
@@ -1772,7 +1888,7 @@ div.terminal {
 							border-bottom: 8px solid #878787;
 							position: absolute;
 							left: 0;
-							top: 2px;
+							top: 5px;
 						}
 						&:hover {
 							text-decoration: none;
@@ -2602,6 +2718,16 @@ div.terminal {
 			right: 0;
 			bottom: 0;
 		}
+	}
+}
+
+#edit-mode {
+	background: $orange;
+	color: #fff;
+	font-size: 12px;
+	p {
+		margin: 0;
+		padding: 7px 0;
 	}
 }
 
