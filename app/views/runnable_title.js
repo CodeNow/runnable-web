@@ -8,7 +8,7 @@ var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName:'span',
   events: {
-    'click .edit-link' : 'clickEdit',
+    'click .edit-title': 'clickEdit',
     'submit form'      : 'submitName',
     'click .btn-cancel': 'escEditMode'
   },

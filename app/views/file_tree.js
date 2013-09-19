@@ -183,26 +183,12 @@ module.exports = BaseView.extend({
   dragClass: function (evt) {
     evt.stopPropagation();
     evt.preventDefault();
-    // if (this.model.isRootDir()) {
-    //   $('div.file-browser').addClass('ui-draggable-hover');
-    // }
-    // else {
     this.$el.addClass('ui-draggable-hover');
-    // }
   },
   dragClassOff: function (evt) {
     evt.stopPropagation();
     evt.preventDefault();
-    // if (this.model.isRootDir()) {
-    //   $('div.file-browser').removeClass('ui-draggable-hover');
-    // }
-    // else {
     this.$el.removeClass('ui-draggable-hover');
-    // }
-  },
-  noop: function (evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
   }
 });
 
