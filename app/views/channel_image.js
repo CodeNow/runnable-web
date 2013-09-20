@@ -10,15 +10,15 @@ module.exports = BaseView.extend({
     var src;
     if (lower in channelImages) {
       //no icon-lg for til all images are in
-      var pre = (opts.large) ? 'icon-' : (opts.tag) ? 'tag-' : 'icon-';
-      var src = '/images/:pre:lower.png'
+      var pre = (opts.large) ? 'icon-' : (opts.tag) ? 'icon-tag-' : 'icon-';
+      var src = '/images/provider-icons/:pre:lower.png'
         .replace(':pre', pre)
         .replace(':lower', lower);
 
       this.attributes = {
         src: src,
-        alt: name,
-        height: opts.height
+        alt: name
+        // height: opts.height
         // width: opts.width
       };
     }

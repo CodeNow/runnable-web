@@ -654,6 +654,9 @@ aside#file-explorer {
             border-top: 6px solid transparent;
           }
         }
+        img {
+          @include box-sizing(content-box);
+        }
         ul {
           padding-left: 0;
           li {
@@ -727,3 +730,37 @@ aside#file-explorer {
 #about #about-team #team-list h3 {
   white-space: normal;
 }
+
+#drop-to-add {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    height: 120px;
+    border: dashed 2px #BDBDBD;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #BDBDBD;
+    @include border-radius(5px);
+    .drop-to-add-icon {
+      margin-top: 35px;
+      height: 30px;
+      width: 25px;
+      background-image: url(../images/sprite-upload.png);
+      @include background-image-retina('../images/sprite-upload@2x.png');
+      background-size: 25px auto;
+      overflow: hidden;
+      display: inline-block;
+    }
+    &:hover {
+      border: solid 2px $purple-light;
+      text-decoration: none;
+      color: $purple-light;
+      .drop-to-add-icon {
+        background-position: 0 -30px;
+      }
+    }
+  }
