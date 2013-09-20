@@ -20,7 +20,11 @@
   "rollbar": "bbbd8090514a4b40a0ec53fbed32d882",
   "api": {
     "default": {
+<<<<<<< HEAD
       "host": "localhost:3030",
+=======
+      "host": "api.runnable.com",
+>>>>>>> 3fe33cbc573c254e56e4a6233a6c1e352ee2a845
       "protocol": "http"
     }
   },
