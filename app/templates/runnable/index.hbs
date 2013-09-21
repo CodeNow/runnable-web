@@ -18,7 +18,7 @@
         {{/if}}
       </div>
     </div>
-    {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created}}
+    {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created image=image}}
   </div>
   <div class="row">
     <div class="col-sm-9">

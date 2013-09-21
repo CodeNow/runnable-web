@@ -17,8 +17,8 @@ module.exports = BaseView.extend({
 
       this.attributes = {
         src: src,
-        alt: name
-        // height: opts.height
+        alt: name,
+        height: (opts.large) && 39
         // width: opts.width
       };
     }
