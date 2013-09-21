@@ -1,7 +1,7 @@
 {{view "file_tree_item" model=model}}
 {{view "fs_list" directoryid=model.id collection=model.contents open=model.attributes.open editmode=editmode}}
 {{#if_result model method="isRootDir"}}
-<div id="drop-to-add" href="#">
+<div id="drop-to-add" style="display:none;" href="#">
   <div class="drop-to-add-icon"></div>
   <p>Drop to add</p>
 </div>
