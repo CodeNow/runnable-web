@@ -250,20 +250,18 @@ module.exports = function(grunt) {
   grunt.registerTask('channel-images-hash', 'Create channel images hash to prevent 404s', function () {
     var fs = require('fs');
     var done = this.async();
-    var imageDir = path.join(__dirname, 'public/images');
-    fs.readdir(imageDir, function (err, files) {
+    var providerIconsDir = path.join(__dirname, 'public/images/provider-icons/');
+    fs.readdir(providerIconsDir, function (err, files) {
       var imageHash = {};
       var iconDash = /^icon-/
-      files
-        .filter(function (filename) {
-          return iconDash.test(filename);
-        })
-        .forEach(function (filename) {
+      files.forEach(function (filename) {
+        if (iconDash.test(filename)) {
           var channelName = filename
             .replace(iconDash, '')
             .replace(/[.](png|gif|jpg)$/, '');
           imageHash[channelName] = true;
-        });
+        }
+      });
       var fileString = 'module.exports='+JSON.stringify(imageHash)+';';
       var filePath = path.join(__dirname,'app/channelImages.js');
       fs.writeFile(filePath, fileString, done);

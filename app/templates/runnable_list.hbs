@@ -4,15 +4,17 @@
   {{/each}}
 </ul>
 {{#unless nopaging}}
-<ul class="pagination">
-  {{#if prevLink}}
-  <li><a href="{{prevLink}}">«</a></li>
-  {{/if}}
-  <li><a class="active" href="javascript:void(0);">{{page}}</a></li>
-  {{#if nextLink}}
-  <li><a href="{{nextLink}}">»</a></li>
-  {{/if}}
-</ul>
+<center>
+  <ul class="pagination">
+    {{#if prevLink}}
+    <li><a href="{{prevLink}}">«</a></li>
+    {{/if}}
+    <li><a class="active" href="javascript:void(0);">{{page}}</a></li>
+    {{#if nextLink}}
+    <li><a href="{{nextLink}}">»</a></li>
+    {{/if}}
+  </ul>
+</center>
 {{/unless}}
 <!--nav class="pagination">
   {{#if prevLink}}

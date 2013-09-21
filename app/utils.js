@@ -264,14 +264,18 @@ var utils = module.exports = {
     }
   },
   isCurrentURL: function (app, url) {
-    var currentUrl;
-    if (isServer) {
-      currentUrl = app.req && app.req.url;
-    }
-    else {
-      currentUrl = Backbone.history.fragment;
-    }
+    var currentUrl = utils.getCurrentUrlPath(app);
     return utils.urlsMatch(currentUrl, url);
+  },
+  getCurrentUrlPath: function (app) {
+    return (isServer) ?
+      app.req && app.req.url :
+      Backbone.history.fragment;
+  },
+  getCurrentUrl: function (app) {
+    return (isServer) ?
+      app.req.protocol+'://'+app.req.host+utils.getCurrentUrlPath(app) :
+      window.location.href;
   },
   urlsMatch: function (url1, url2) {
     url1 = url1 && url1.toLowerCase && url1.toLowerCase();

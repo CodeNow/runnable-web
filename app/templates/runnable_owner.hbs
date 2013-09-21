@@ -1,16 +1,19 @@
-{{#if model.attributes.gravitar}}
-<span>
-  <img src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}">
-</span>
-{{/if}}
-<p class="publish-date">
-  Published {{dateAgo created}} by
-</p>
-<h4 class="author-title">
-  {{#if model.attributes.username}}
-  <!--a href="#">{{model.attributes.username}}</a-->
-  <b>{{model.attributes.username}}</b>
-  {{else}}
-  <b>Anonymous</b>
+<div class="clearfix">
+  {{#if model.attributes.gravitar}}
+  <a href="#">
+    <img class="project-author-icon" src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}">
+  </a>
   {{/if}}
-</h4>
+  <p class="publish-date">
+    Published {{dateAgo created}} by
+  </p>
+  <h4 class="author-title">
+    {{#if model.attributes.username}}
+    <!--a href="#">{{model.attributes.username}}</a-->
+    <b>{{model.attributes.username}}</b>
+    {{else}}
+    <b>Anonymous</b>
+    {{/if}}
+  </h4>
+</div>
+{{view "runnable_share" model=image}}
