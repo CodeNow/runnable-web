@@ -175,8 +175,14 @@ module.exports = BaseView.extend({
     Track.event('Code View', 'Editor Scroll Tops', {projectId: this.file.id});
   },
   getMode: function (filename) {
+    var fileExtension = filename.split('.').pop();
+
     this.modelist = this.modelist || ace.require('ace/ext/modelist');
     var modeInfo = this.modelist.getModeForPath(filename);
+
+    if (fileExtension == "aspx") {
+      modeInfo = {"name":"csharp","caption":"C#","mode":"ace/mode/csharp","extensions":"cs","extRe":{}};
+    }
     var mode = ace.require(modeInfo.mode) || ace.require('ace/mode/markdown'); //default
 
     return (new mode.Mode());
