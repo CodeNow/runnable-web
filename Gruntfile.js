@@ -6,9 +6,13 @@ var sassDir   = 'assets/scss';
 var sassIndex = path.join(sassDir, 'index.scss');
 var fontsDir  = undefined;//'assets/stylesheets/assets/fonts';
 // out
+var layoutPath = 'app/templates/__layout_editable.hbs';
+var verLayoutPath = 'app/templates/__layout.hbs';
 var imagesDir       = 'public/images';
 var javascriptsDir  = 'public';
 var cssDir          = 'public/styles';
+var mergedAssetsPath= "public/mergedAssets.js";
+var minAssetsPath   = "public/mergedAssets.min.js";
 var rendrDir        = 'node_modules/rendr';
 var compassCSS      = 'public/styles/index.css';
 var mergedCSSPath   = 'public/styles/index.css';
@@ -50,6 +54,8 @@ var frontendScripts = [
   'assets/bower/autocompletejs/js/autocomplete.js'
 ]
 .concat(aceScripts);
+
+
 module.exports = function(grunt) {
   // Project configuration.
   var gruntConfig = {
@@ -126,6 +132,10 @@ module.exports = function(grunt) {
       dev: {
         src: 'public/mergedAssets.js',
         dest: 'public/mergedAssets.min.js'
+      },
+      layout: {
+        src: layoutPath,
+        dest: verLayoutPath
       }
     },
 
@@ -268,17 +278,66 @@ module.exports = function(grunt) {
     });
   });
   // generate configs/commitHash.js
+  var commitHashPath = 'configs/commitHash.js';
   grunt.registerTask('commit-hash-file', 'Create json that contains github commit hash number', function () {
+    var donecount = 0;
     var fs = require('fs');
     var done = this.async();
     var exec = require('child_process').exec;
     exec("git log -n 1 | grep commit | sed -e s/^commit\\ // | sed -e s/\\ .*$//", function (err, commitHash) {
       if (err) { done(err); } else {
         var versionFile = 'module.exports="'+commitHash.trim()+'";';
-        var filePath = path.join(__dirname, 'configs/commitHash.js');
+        var filePath = path.join(__dirname, commitHashPath);
         fs.writeFile(filePath, versionFile, done);
       }
     });
+  });
+  // versioned assets - must be run after commitHash
+  grunt.registerTask('version', 'Versions assets and creates __layout_versioned that points to them', function () {
+    var fs = require('fs');
+    var p = require('path');
+    var commitHash = require('./'+commitHashPath);
+    function startsWith (startStr) {
+      return function (str) { return (str.indexOf(startStr) === 0); }
+    }
+    function toPath (path) {
+      return function (filename) { return p.join(path, filename); };
+    }
+    function log (preStr) {
+      return function (str) { grunt.log.ok(preStr + str); };
+    }
+    // delete old versioned files
+    var publicDir = p.join(__dirname, 'public');
+    var stylesDir = p.join(__dirname, 'public/styles');
+    fs.readdirSync(publicDir)
+      .filter(startsWith('mergedAssets-'))
+      .map(toPath(publicDir))
+      .forEach(function (filepath) {
+        log('Deleting:', filepath);
+        fs.unlinkSync(filepath);
+      });
+    fs.readdirSync(stylesDir)
+      .filter(startsWith('index-'))
+      .map(toPath(stylesDir))
+      .forEach(function (filepath) {
+        log('Deleting:', filepath);
+        fs.unlinkSync(filepath);
+      });
+    // create  versioned files
+    var stylesPath, assetsPath, verStylesPath, verAssetsPath;
+    stylesPath = p.join(__dirname, mergedCSSPath);
+    assetsPath = p.join(__dirname, minAssetsPath);
+    verStylesPath = stylesPath.replace(/[.]css$/, '.'+commitHash+'.css');
+    verAssetsPath = assetsPath.replace(/[.]js$/, '.'+commitHash+'.js');
+    fs.renameSync(stylesPath, verStylesPath);
+    fs.renameSync(assetsPath, verAssetsPath);
+    grunt.log.ok(stylesPath +'>'+ verStylesPath);
+    grunt.log.ok(assetsPath +'>'+ verAssetsPath);
+    // create versioned layout
+    var layoutString = fs.readFileSync(p.join(__dirname, layoutPath)).toString()
+      .replace(/mergedAssets[.]min[.]js/g, 'mergedAssets.min.'+commitHash+'.js')
+      .replace(/index[.]css/g, 'index.'+commitHash+'.css');
+    fs.writeFileSync(p.join(__dirname, verLayoutPath), layoutString);
   });
   // jslint
   grunt.registerTask('jshint', ['jshint:all']);
@@ -292,7 +351,7 @@ module.exports = function(grunt) {
   grunt.registerTask('debug', ['dev', 'bgShell:debug', 'watch']);
   grunt.registerTask('sdebug', ['dev', 'bgShell:sdebug', 'watch']); // sudo debug for port 80
   // Build for production
-  grunt.registerTask('build', ['compile', 'cssmin', 'uglify']);
+  grunt.registerTask('build', ['compile', 'cssmin', 'uglify', 'version']);
   // Default task(s).
   grunt.registerTask('default', ['build']);
 };
