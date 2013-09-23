@@ -25,6 +25,12 @@ module.exports = BaseView.extend({
     else {
       this.className='display-none';
     }
+  },
+  postRender: function () {
+    this.$el.error(this.loadError);
+  },
+  loadError: function (evt) {
+    $(evt.currentTarget).hide();
   }
 });
 

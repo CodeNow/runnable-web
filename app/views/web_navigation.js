@@ -8,7 +8,7 @@ module.exports = BaseView.extend({
     'submit form'          : 'enter'
   },
   getTemplateData: function () {
-    this.options.currentUrl = this.options.currentUrl || "http://" + this.model.get("webToken") + "." + this.app.get('domain');
+    this.options.currenturl = this.options.currenturl || "http://" + this.model.get("webToken") + "." + this.app.get('domain');
     return this.options;
   },
   postHydrate: function () {
@@ -42,14 +42,14 @@ module.exports = BaseView.extend({
   },
   refresh: function (evt) {
     evt.preventDefault();
-    this.app.dispatch.trigger('change:url', this.options.currentUrl);
+    this.app.dispatch.trigger('change:url', this.options.currenturl);
   },
   enter: function (evt) {
     evt.preventDefault();
     var opts = this.options;
     var url = this.$address.val();
-    this.history.push(opts.currentUrl);
-    opts.currentUrl = url;
+    this.history.push(opts.currenturl);
+    opts.currenturl = url;
     this.app.dispatch.trigger('change:url', url);
   }
 });

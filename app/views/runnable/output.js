@@ -3,7 +3,7 @@ var BaseView = require('../base_view');
 module.exports = BaseView.extend({
   id: 'output',
   postRender:  function () {
-    this.$( "#output-results-container" ).resizable({
+    $( "#output-results-container" ).resizable({
       alsoResizeReverse: "#output-terminal-container",
       handles: "s",
       start: function () {
@@ -24,7 +24,7 @@ module.exports = BaseView.extend({
         });
       }
     });
-    this.$( "#output-terminal-container" ).resizable();
+    $( "#output-terminal-container" ).resizable();
   }
 });
 

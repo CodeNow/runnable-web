@@ -156,7 +156,7 @@ module.exports = {
         var tags = utils.tagsToString(results.channels, 'or');
         tags = tags ? ' for '+tags : '';
         results.channels.add(results.channels2.toArray());
-        results.channels2 = undefined;
+        delete results.channels2;
         callback(null, _.extend(results, {
           page: {
             title: formatTitle('Create a New Example for JQuery, Codeigniter, NodeJS, PHP, Python, Ruby and more'),

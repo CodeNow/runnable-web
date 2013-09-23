@@ -3,6 +3,7 @@ var utils = require('../../utils');
 
 module.exports = BaseView.extend({
   getTemplateData: function () {
+    this.options.channels.sort();
     this.options.categories.models.forEach(function (category) {
       attribs = category.attributes;
       attribs.link = '/c/'+attribs.name;

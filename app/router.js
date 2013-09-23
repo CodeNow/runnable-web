@@ -146,6 +146,7 @@ Router.prototype.navigate = function (fragment) {
     });
   }
 
+  $('body').removeClass('modal-open');
   Super.navigate.apply(this, arguments);
 }
 
