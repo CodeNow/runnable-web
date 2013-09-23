@@ -1,0 +1,33 @@
+<div class="row">
+  {{#if_eq basehref compare="/new"}}
+  <div class="col-sm-4">
+    <a class="card">
+      <div class="description">
+        <h2>
+          <form>
+            <input name='id' placeholder="Runnable Id">
+          </form>
+        </h2>
+        <p>Find an existing code example, copy it, add your own code then publish it.</p>
+      </div>
+    </a>
+  </div>
+  {{/if_eq}}
+  {{#each collection.models}}
+  {{#with attributes}}
+  <div class="col-sm-4">
+    <a href="{{../../basehref}}/{{name}}" class="card">
+      {{view 'channel_image' name=name height="24" width="22"}}
+      <div class="count">{{count}}</div>
+      <div class="description">
+        <h2>{{name}}</h2>
+        {{#if description}}
+        <p>{{description}}</p>
+        {{/if}}
+      </div>
+    </a>
+  </div>
+  {{/with}}
+  {{/each}}
+</div>
+<br/>

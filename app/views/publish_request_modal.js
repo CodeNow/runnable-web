@@ -1,8 +1,10 @@
 var ModalView = require('./modal_view');
+var _ = require('underscore');
 
 module.exports = ModalView.extend({
   id: 'publish-request-modal',
   postRender: function () {
+    Super.postRender.apply(this, arguments);
     var formView = _.findWhere(this.childViews, {name:'publish_request_form'});
     this.listenTo(formView, 'submitted', function (err) {
       if (!err) {

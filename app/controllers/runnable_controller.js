@@ -140,13 +140,23 @@ module.exports = {
       },
       channels: {
         collection : 'Channels',
-        params: {}
+        params: {
+          category: 'frameworks'
+        }
+      },
+      channels2: {
+        collection : 'Channels',
+        params: {
+          category: 'languages'
+        }
       }
     };
     fetch.call(this, spec, function (err, results) {
       if (err) { callback(err); } else {
         var tags = utils.tagsToString(results.channels, 'or');
         tags = tags ? ' for '+tags : '';
+        results.channels.add(results.channels2.toArray());
+        results.channels2 = undefined;
         callback(null, _.extend(results, {
           page: {
             title: formatTitle('Create a New Example for JQuery, Codeigniter, NodeJS, PHP, Python, Ruby and more'),

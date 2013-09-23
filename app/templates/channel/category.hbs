@@ -85,30 +85,6 @@
   </div>
 </nav>
 
-<section id="cards" class="container">
-  <div class="row">
-    {{#each channels.models}}
-    {{#with attributes}}
-    <div class="col-sm-4">
-      <a href="/{{name}}" class="card">
-        {{view 'channel_image' name=name height="24" width="22"}}
-        <div class="count">{{count}}</div>
-        <div class="description">
-          <h2>{{name}}</h2>
-          {{#if description}}
-          <p>{{description}}</p>
-          {{/if}}
-        </div>
-      </a>
-    </div>
-    {{/with}}
-    {{/each}}
-  </div>
-  <br/>
-  {{! <div class="row">
-    <div class="col-sm-12 load-more">
-      <a href="#"><span>Load More</span></a>
-    </div>
-  </div> }}
-</section>
+{{view "channel_cards" collection=channels}}
+
 {{view "footer_view" model=user context=.}}
