@@ -3,6 +3,9 @@ var utils = require('../../utils');
 
 module.exports = BaseView.extend({
   id:'providers',
+  events: {
+    'click #providers-text button' : 'scrollToPublishRequest'
+  },
   postRender: function () {
     this.imageTile();
   },
@@ -19,6 +22,12 @@ module.exports = BaseView.extend({
         }
       });
     });
+  },
+  scrollToPublishRequest: function (evt) {
+    evt.preventDefault();
+    $('body').animate({
+        scrollTop: this.$("#providers-register-form").offset().top
+    }, 400);
   }
 });
 

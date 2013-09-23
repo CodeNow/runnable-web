@@ -106,22 +106,13 @@
 <div id="about-contact">
   <div class="container">
     <div class="row">
-      <form id="about-contact-body" method="post" action="" class="col-sm-6 col-sm-offset-1">
+      <div id="about-contact-body" method="post" action="" class="col-sm-6 col-sm-offset-1">
         <address>
           <p>459 Hamilton Ave, Suite 304<br />
              Palo Alto, CA 94301</p>
           <h3>(866) 216-4762</h3>
         </address>
-        <div class="col-sm-4">
-          <h2>Contact Us</h2>
-          <input type="text" class="form-control" name="name" placeholder="Full Name">
-          <input class="form-control" type="text" name="email" placeholder="Email Address">
-          <input class="form-control" type="text" name="phone" placeholder="Contact Number">
-        </div>
-        <div class="col-sm-4">
-          <textarea class="form-control" rows="3"></textarea>
-          <button type="submit" class="purple">Send Message</button>
-        </div>
+        {{view "contact_form"}}
         <div class="col-sm-5">
           <h4>Having trouble with something? Don’t forget FAQ.</h4>
           <p>If you’re having trouble figuring something out, remember to check out the FAQ Section to see if your question has already been answered. There are plenty of other developers that are sharing information on the FAQ boards. Other than that, feel free to give us a shout!</p>
@@ -133,9 +124,10 @@
           Palo Alto, CA 94301<br />
           (866) 216-4762</p>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>
+
 
 {{view "footer_view" model=user context=.}}

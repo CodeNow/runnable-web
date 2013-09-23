@@ -3,6 +3,8 @@ var Handlebars = require('handlebars');
 var Backbone   = require('backbone');
 var _ = require('underscore');
 var Super = BaseClientRouter.prototype;
+var utils = require('./utils');
+var checkingRetina = false;
 
 // Add Handlebars helpers
 require('./handlebarsHelpers').add(Handlebars);
@@ -129,6 +131,21 @@ Router.prototype.navigate = function (fragment) {
   if (this.isCurrentRoute(fragment)) {
     this.shake();
   }
+
+  // pushState retina.js logic
+  if (window.Retina.isRetina() && !checkingRetina) {
+    checkingRetina = true;
+    this.listenTo(this.app, 'change:loading', function (app, loading) {
+      if (!loading) {
+        var context = {};
+        window.Retina.init(context);
+        utils.allImagesLoaded($('img'), function () {
+          context.onload();
+        });
+      }
+    });
+  }
+
   Super.navigate.apply(this, arguments);
 }
 

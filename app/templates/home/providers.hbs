@@ -164,35 +164,7 @@
       <img class="bubble small reverse"  src="/images/hero-logos/heart.svg"         />
     </div>
   </div>
-  <form id="providers-register-form">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-          <h2>Register To Publish Code</h2>
-          <p>Claim your branded page and contact us to become a publisher.</p>
-          <div class="input-group">
-            <span class="input-group-addon">runnable.com/</span>
-            <input type="text" name="page_name" class="form-control" placeholder="Your Page" />
-          </div>
-          <div id="form-columns">
-            <div class="col-sm-6">
-              <label>Name</label>
-              <input class="form-control" type="text" name="name" />
-              <label>Email</label>
-              <input class="form-control" type="text" name="email" />
-            </div>
-            <div class="col-sm-6">
-              <label>Tell us about your code</label>
-              <textarea name="about_the_code" class="form-control"></textarea>
-              <div class="providers-register-submit">
-                <button type="submit" class="orange">Submit</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
+  {{view "publish_request_form" id="providers-register-form"}}
 </section>
 
 

@@ -259,9 +259,6 @@ body.modal-open,
     padding-right: 15px;
   }
 }
-address, #about-contact-body address {
-  height: 140px;
-}
 
 // modal
 .modal-dialog {
@@ -772,4 +769,19 @@ aside#file-explorer {
 }
 button.silver img {
   margin-right: 0;
+}
+.modal-dialog .modal-content .modal-body .input-group {
+  margin-bottom: 20px;
+  input{
+    margin-bottom: 0;
+  }
+}
+.modal-dialog .modal-content .modal-body .input-group input {
+}
+.modal-dialog .modal-content .modal-body textarea {
+  margin-bottom: 20px;
+}
+
+#site-credits {
+  margin-top: 60px;
 }

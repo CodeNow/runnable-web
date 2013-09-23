@@ -10,7 +10,7 @@
   "cookieExpires": "1 year",
 
   "assets": {
-    "minify": true,
+    "minify": false,
     "cdn": {
       "protocol": "http",
       "cnames": ["localhost"],
@@ -26,15 +26,15 @@
   },
 
   "rendrApp": {
-    "env" : "development",
+    "env": "development",
     "commitHash": "{COMMIT_HASH}",
     "mixpanel" : {
-      "key": "8790acfcca0cab43adebbc796f1d4f96"
+      "key": "de848319a0091fb3a5876184d81a40ec"
     },
     "googleAnalytics" : {
       "id": "UA-36631837-2"
     },
     "pageSize" : 25,
-    "domain": "runnable.com"
+     "domain": "runnableapp.dev"
   }
 }
