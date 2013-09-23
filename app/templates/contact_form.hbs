@@ -1,0 +1,18 @@
+{{#if modal}}
+  <input type="text" class="form-control" name="NAME" placeholder="Full Name" autofocus required />
+  <input type="email" class="form-control" name="EMAIL" placeholder="Email Address" required />
+  <input type="tel" class="form-control" name="PHONE" placeholder="Phone Number (optional)" />
+  <textarea name="DETAILS" class="form-control" placeholder="Message"></textarea>
+  <button type="submit" class="orange">Send Message</button>
+{{else}}
+<div class="col-sm-4">
+  <h2>Contact Us</h2>
+  <input type="text" class="form-control" name="NAME" placeholder="Full Name" required>
+  <input class="form-control" type="email" name="EMAIL" placeholder="Email Address" required>
+  <input class="form-control" type="tel" name="PHONE" placeholder="Phone Number (optional)">
+</div>
+<div class="col-sm-4">
+  <textarea class="form-control" rows="3" name="DETAILS" placeholder="Message"></textarea>
+  <button type="submit" class="purple">Send Message</button>
+</div>
+{{/if}}

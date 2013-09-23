@@ -1,0 +1,39 @@
+{{#if modal}}
+  <input type="text" class="form-control" name="NAME" placeholder="Full Name" autofocus required />
+  <input type="email" class="form-control" name="EMAIL" placeholder="Email Address" required />
+  <div class="input-group">
+    <span class="input-group-addon">runnable.com/</span>
+    <input type="text" name="PAGE" class="form-control" placeholder="Your Page (optional)">
+  </div>
+  <textarea name="DETAILS" class="form-control" placeholder="About your code"></textarea>
+  <button type="submit" class="orange">Send Message</button>
+  <p><a class="signup-link" href="/publish">Learn More about Runnable</a></p>
+{{else}}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <h2>Send us a Message</h2>
+      <p>Claim your branded page and contact us to become a publisher.</p>
+      <div class="input-group">
+        <span class="input-group-addon">runnable.com/</span>
+        <input type="text" name="PAGE" class="form-control" placeholder="Your Page (optional)" />
+      </div>
+      <div id="form-columns">
+        <div class="col-sm-6">
+          <label>Full Name</label>
+          <input class="form-control" type="text" name="NAME" required />
+          <label>Email Address</label>
+          <input class="form-control" type="email" name="EMAIL" required />
+        </div>
+        <div class="col-sm-6">
+          <label>Tell us about your code</label>
+          <textarea name="DETAILS" class="form-control"></textarea>
+          <div class="providers-register-submit">
+            <button type="submit" class="orange">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/if}}
