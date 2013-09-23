@@ -14,8 +14,8 @@ module.exports = function(match) {
   match('new',                  'runnable#new');
   match('newhome',              'home#newhome');            //*new
   match('new/:from',            'runnable#newFrom');
-  match('me/published',         'user#published');
   match('me/drafts',            'user#drafts');
+  match('me/published',         'user#published');
   match('me/:_id',              'runnable#container');
   match('c/:category',          'channel#category');
   match(':_id',                 'runnable#index');

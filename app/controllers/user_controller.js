@@ -31,8 +31,8 @@ module.exports = {
     fetchWithMe.call(this, spec, function (err, results) {
       if (err) {
         callback(err);
-      } else if (!results.user.isVerified()) {
-        self.redirectTo('/me/drafts');
+      } else if (!results.user.isRegistered()) {
+        self.redirectTo('/');
       } else {
         callback(err, 'user/dashboard', addSEO(results));
       }
@@ -71,14 +71,15 @@ module.exports = {
     fetchWithMe.call(this, spec, function (err, results) {
       if (err) {
         callback(err);
-      }
-      else {
+      } else if (!results.user.isRegistered()) {
+        self.redirectTo('/');
+      } else {
         callback(err, 'user/dashboard', addSEO(results));
       }
     });
     function addSEO (results) {
       results.page = {
-        title    : formatTitle('Drafts', 'Dashboard'),
+        title    : formatTitle('Published', 'Dashboard'),
         canonical: canonical.call(self)
       }
       return results;
