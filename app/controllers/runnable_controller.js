@@ -99,14 +99,6 @@ module.exports = {
               cb(null, results);
             }
           });
-        },
-        function generatePermissions (results, cb) {
-          results.permissions = {
-            edit: results.image.attributes.owner === results.user.id ||
-              results.user.attributes.permission_level >= 5,
-            fork: results.image.attributes.owner !== results.user.id
-          };
-          cb(null, results);
         }
       ], function (err, results) {
         // DEBUG!

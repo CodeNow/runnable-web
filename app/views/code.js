@@ -37,7 +37,7 @@ module.exports = BaseView.extend({
     var dispatch = this.app.dispatch;
     dispatch.on('change:theme', this.setTheme.bind(this));
     var openFiles = this.collection;
-    this.setFile(openFiles.selectedFile());
+    this.setFile(openFiles.selectedFile(), true);
     this.listenTo(openFiles, 'change:selected', this.changeSelected.bind(this));
     //debounce events
     this.adjustHeightToContents = _.debounce(this.adjustHeightToContents, 100, true);
@@ -59,7 +59,7 @@ module.exports = BaseView.extend({
       this.setFile(model);
     }
   },
-  setFile: function (file) {
+  setFile: function (file, first) {
     // detach previous file events/session
     this.detachFile(this.file);
     // set current file
@@ -70,9 +70,14 @@ module.exports = BaseView.extend({
     }
     else {
       this.attachFile(file);
-      setTimeout(function () { // set timeout fixes text editor height for first page hit.
+      if (first) {
+        // set timeout fixes text editor height for first page hit.
+        setTimeout(this.adjustHeightToContents.bind(this), 0);
+        setTimeout(this.adjustHeightToContents.bind(this), 100);
+      }
+      else {
         this.adjustHeightToContents();
-      }.bind(this), 0);
+      }
     }
   },
   detachFile: function (file) {

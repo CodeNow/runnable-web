@@ -1,13 +1,9 @@
 <p><b>Your code is currently in draft mode. When you're ready to show it off to the world hit publish.</b></p>
 <p>
-  {{#if isModerator}}
-  	<button id="pubwarn-back-button" class="orange">Publish back as Existing Example</button>
-    <button id="pubwarn-new-button" class="orange">Publish as New Example</button>
+  {{#if canedit}}
+  <button id="pubwarn-back-button" class="orange">Publish back as Existing Example</button>
+  <button id="pubwarn-new-button" class="orange">Publish as New Example</button>
   {{else}}
-    {{#if permissions.edit}}
-    <button id="pubwarn-back-button" class="orange">Publish back as Existing Example</button>
-    {{else}}
-    <button id="pubwarn-new-button" class="orange">Publish as New Example</button>
-    {{/if}}
+  <button id="pubwarn-new-button" class="orange">Publish as New Example</button>
   {{/if}}
 </p>

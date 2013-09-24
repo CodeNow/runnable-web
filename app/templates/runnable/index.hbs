@@ -13,9 +13,7 @@
         {{#if permissions.edit}}
         {{view "edit_button" model=container containerid=container.id}}
         {{/if}}
-        {{#if permissions.fork}}
         {{view "fork_button" collection=defaultFiles model=container}}
-        {{/if}}
       </div>
     </div>
     {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created image=image}}
