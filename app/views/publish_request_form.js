@@ -29,6 +29,7 @@ module.exports = BaseView.extend({
       }
       else {
         this.trigger('submitted');
+        this.$('input, textarea').val('');
         this.showMessage("Thanks we'll get back to you soon!")
       }
     }

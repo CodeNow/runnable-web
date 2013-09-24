@@ -264,7 +264,7 @@ module.exports = {
         if (results.images.length === 0) {
           cb(null, results);
         } else {
-          fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
+          fetchOwnersFor.call(self, results.user, results.images, function (err, ownerResults) {
             cb(err, !err && _.extend(results, ownerResults));
           });
         }

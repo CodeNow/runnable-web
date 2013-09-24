@@ -23,8 +23,6 @@
 
   <body id="content">
     <!-- leave me at top -->
-    {{view "app_user" model=locals.user}}
-
     {{{body}}}
 
     <script>
@@ -88,7 +86,5 @@
       App.start();
     })();
     </script>
-    <!-- leave me at bottom -->
-    {{view "app_user" model=locals.user}}
   </body>
 </html>

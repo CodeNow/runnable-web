@@ -7,5 +7,9 @@ module.exports = BaseAppView.extend({
     this.app.on('change:loading', function(app, loading) {
       $body.toggleClass('loading', loading);
     }, this);
+  },
+  setCurrentView: function(view) {
+    this.$content.find('*').eq(0).replaceWith(view.$el);
+    view.render();
   }
 });

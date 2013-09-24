@@ -8,7 +8,7 @@ module.exports = ModalView.extend({
     var formView = _.findWhere(this.childViews, {name:'contact_form'});
     this.listenTo(formView, 'submitted', function (err) {
       if (!err) {
-        this.stopListeningTo(formView)
+        this.stopListening(formView)
         this.close();
       }
     }.bind(this));
