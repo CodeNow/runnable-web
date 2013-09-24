@@ -5,6 +5,7 @@ var Super = BaseView.prototype;
 
 module.exports = BaseView.extend({
   id: 'output-results-container',
+  className: 'resizable-iframe',
   getTemplateData: function () {
     this.options.baseurl = "http://" + this.model.get("webToken") + "." + this.app.get('domain');
     return this.options;
