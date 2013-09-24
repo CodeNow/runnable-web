@@ -35,7 +35,7 @@ module.exports = {
         if (results.images.length === 0) {
           cb(null, results);
         } else {
-          fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
+          fetchOwnersFor.call(self, results.user, results.images, function (err, ownerResults) {
             cb(err, !err && _.extend(results, ownerResults));
           });
         }
@@ -135,7 +135,7 @@ module.exports = {
       fetch.bind(this, spec),
       function owners (results, cb) {
         if (results.images.length) {
-          fetchOwnersFor.call(self, results.images, function (err, ownerResults) {
+          fetchOwnersFor.call(self, results.user, results.images, function (err, ownerResults) {
             cb(err, !err && _.extend(results, ownerResults));
           });
         }

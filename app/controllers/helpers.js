@@ -259,7 +259,7 @@ function fetchChannelContents (channelName, page, callback) {
   fetch.call(this, spec, callback);
 }
 
-function fetchOwnersFor (runnables, callback) {
+function fetchOwnersFor (user, runnables, callback) {
   var userIds = runnables.map(function (run) {
     return run.get('owner');
   });
@@ -274,16 +274,23 @@ function fetchOwnersFor (runnables, callback) {
   fetch.call(this, spec, function (err, userResults) {
     if (err) { callback(err); } else {
       runnables.forEach(function (run) {
-        run.owner = userResults.owners.get(run.get('owner'));
-        return run;
+        var ownerId = run.get('owner');
+        var owners = userResults.owners;
+        if (ownerId === user.id) {
+          run.owner = user;
+          owners.remove(owners.get(ownerId));
+        }
+        else {
+          run.owner = owners.get(ownerId);
+        }
       });
       callback(null, userResults);
     }
   });
 }
 
-function fetchOwnerOf (runnable, callback) {
-  fetchOwnersFor.call(this, [runnable], callback);
+function fetchOwnerOf (user, runnable, callback) {
+  fetchOwnersFor.call(this, user, [runnable], callback);
 }
 
 function fetchImage (imageId, callback) {

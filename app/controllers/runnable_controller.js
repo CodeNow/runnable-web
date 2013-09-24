@@ -71,7 +71,7 @@ module.exports = {
         function filesOwnerRelated (results, cb) {
           async.parallel([
             fetchFilesForContainer.bind(self, results.container.id),
-            fetchOwnerOf.bind(self, results.image), //image owner
+            fetchOwnerOf.bind(self, results.user, results.image), //image owner
             fetchRelated.bind(self, results.image.id, results.container.attributes.tags)
           ],
           function (err, data) {
