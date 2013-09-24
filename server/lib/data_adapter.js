@@ -135,7 +135,8 @@ DataAdapter.prototype.apiDefaults = function(api) {
   api = _.defaults(api, {
     method: 'GET',
     url: url.format(urlOpts),
-    headers: {}
+    headers: {},
+    pool: false
   });
 
   if (api.body != null) {
