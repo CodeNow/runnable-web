@@ -1872,24 +1872,16 @@ a.terminal-popout {
     }
 }
 
+div#output-terminal-container,
 div.terminal-view {
-    // background: #5D5B56;
-    // font-family: "Anonymous Pro", monospace;
-    // color: #fff;
-    // font-size: 11px;
-    // white-space: pre;
-    // border: solid 1px #000;
-    // padding: 2%;
-    // letter-spacing: 1px;
-    // height: 200px;
-    // position: relative;
     .terminal-loader {
+        z-index:3;
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        margin-top: 26px;
+        margin-top: 51px;
         white-space: normal;
         display:none;
         @include box-sizing(content-box);
@@ -1946,10 +1938,13 @@ div.terminal-view {
             }
         }
     }
-    &.loading {
-        .terminal-loader{
-            display:block
-        }
+    &.loading .terminal-loader{
+        display:block;
+    }
+}
+div#output-terminal-container{
+    .terminal-loader{
+        margin-top: 0;
     }
 }
 
