@@ -22,19 +22,36 @@ module.exports = BaseView.extend({
     $(evt.currentTarget).select();
   },
   twitterShare: function () {
-    var url = 'https://twitter.com/share?text=:text&url=:url' +
+    var url = 'https://twitter.com/share?text=' +
       (this.model.get('name') +' - '+ this.options.shorturl);
-    window.open(url, '__blank');
+    this.popup(url, 'twitter_share');
   },
   facebookShare: function () {
     var url = 'https://www.facebook.com/sharer/sharer.php?s=100&p[title]=:title&p[url]=:url'
       .replace(':title', this.model.get('name'))
-      .replace(':url', this.options.shorturl);
-    window.open(url, '__blank');
+      .replace(':url',   this.options.shorturl);
+    this.popup(url, 'facebook_share');
   },
   googlePlusShare: function () {
     var url = "https://plus.google.com/share?url="+this.options.shorturl;
-    window.open(url, '__blank');
+    this.popup(url, 'google+_share');
+  },
+  popups: {},
+  popup: function (url, windowName, height, width) {
+    height = height || 500;
+    width  = width  || 700;
+    var left = (screen.width/2)-(width/2);
+    var top  = (screen.height/2)-(height/2);
+    var popup = this.popups[windowName];
+    if (!popup || popup.closed) {
+      this.popups[windowName] = window.open(url, windowName,
+        'toolbar=no, location=no, directories=no, status=no, '+
+        'menubar=no, scrollbars=no, resizable=no, copyhistory=no, '+
+        'width='+width+', height='+height+', top='+top+', left='+left);
+    }
+    else {
+      this.popups[windowName].focus();
+    }
   }
   // emailShare: function () {
   //   var url = 'mailto:?';
