@@ -15,7 +15,7 @@ module.exports = EditorButtonView.extend({
   },
   openContainerPage: function () {
     // in the future we may want to open a new container and not this one
-    window.location.href = '/me/'+this.model.id;
+    window.location.href = '/me/'+this.options.containerid;
   }
 });
 
