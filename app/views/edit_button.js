@@ -3,7 +3,7 @@ var Super = EditorButtonView.prototype;
 
 module.exports = EditorButtonView.extend({
   tagName: 'button',
-  className: 'silver',
+  className: 'purple',
   events: {
     'click': 'openContainerPage'
   },
@@ -15,7 +15,7 @@ module.exports = EditorButtonView.extend({
   },
   openContainerPage: function () {
     // in the future we may want to open a new container and not this one
-    window.location.href = '/me/'+this.options.containerid;
+    window.location.href = '/me/'+this.model.id;
   }
 });
 

@@ -1,0 +1,13 @@
+{{#if show}}
+  <div class="status-bar">
+    <div class="container">
+      <div class="status-message col-sm-8">
+        <p>You are the owner of this project, you can Edit{{!or Delete}} it.</p>
+      </div>
+      <div class="status-buttons col-sm-4">
+        {{view "edit_button" model=model}}
+        {{! <button class="purple light">Delete Project</button> }}
+      </div>
+    </div>
+  </div>
+{{/if}}

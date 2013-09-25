@@ -41,13 +41,15 @@ module.exports.add = function (Handlebars) {
 
   Handlebars.registerHelper('invoke', function (obj, options) {
     var opts = options.hash;
-    return obj[opts.method]();
+    var args = _.chain(options).omit('method').values().value();
+    return obj[opts.method].apply(obj, args);
   });
 
   Handlebars.registerHelper('if_result', function (obj, options) {
     var opts = options.hash;
     opts.equals = opts.equals || true;
-    if (obj[opts.method]() === opts.equals)
+    var args = _.chain(options).omit('method', 'equals').values().value();
+    if (obj[opts.method].apply(obj, args) === opts.equals)
       return options.fn(this);
     return options.inverse(this);
   });

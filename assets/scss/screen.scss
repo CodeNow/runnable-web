@@ -15,12 +15,13 @@
 $cursive-font: 'Shadows Into Light Two', cursive;
 
 // Colors
-$purple:        #5B3777;
-$purple-light:  #834DAB;
-$orange:        #FD7022;
-$grey:          #E8E8E8;
-$grey-light:    #EEEEEE;
-$grey-lighter:  #F6F6F6;
+$purple:         #5B3777;
+$purple-light:   #834DAB;
+$purple-lighter: #F2DFFF;
+$orange:         #FD7022;
+$grey:           #E8E8E8;
+$grey-light:     #EEEEEE;
+$grey-lighter:   #F6F6F6;
 
 // Ugly hack to get rid of the blue focus on inputs
 textarea:focus, input:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus { @include box-shadow(none) }
@@ -360,13 +361,13 @@ button {
             @include transition(all 0.05s ease-in-out);
         }
         &[disabled] {
-        	background: adjust-lightness(adjust-saturation(#81B638, -35),25);
-        	color: adjust-lightness(adjust-saturation(#81B638, -35),47);
-        	@include box-shadow(none !important);
-        	border-color: transparent;
-        	text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
-        	img { opacity: 0.75 }
-        	cursor: not-allowed;
+            background: adjust-lightness(adjust-saturation(#81B638, -35),25);
+            color: adjust-lightness(adjust-saturation(#81B638, -35),47);
+            @include box-shadow(none !important);
+            border-color: transparent;
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+            img { opacity: 0.75 }
+            cursor: not-allowed;
         }
     }
     &.silver {
@@ -398,13 +399,13 @@ button {
             @include transition(all 0.05s ease-in-out);
         }
         &[disabled] {
-        	background: adjust-lightness(adjust-saturation(#999, -35),25);
-        	color: adjust-lightness(adjust-saturation(#999, -35),6);
-        	@include box-shadow(none !important);
-        	border-color: transparent;
-        	text-shadow: 0 1px 0 rgba(255,255,255,0.5);
-        	img { opacity: 0.75 }
-        	cursor: not-allowed;
+            background: adjust-lightness(adjust-saturation(#999, -35),25);
+            color: adjust-lightness(adjust-saturation(#999, -35),6);
+            @include box-shadow(none !important);
+            border-color: transparent;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+            img { opacity: 0.75 }
+            cursor: not-allowed;
         }
     }
     &.purple {
@@ -435,13 +436,13 @@ button {
             @include transition(all 0.05s ease-in-out);
         }
         &[disabled] {
-        	background: adjust-lightness(adjust-saturation(#AC67C6, -35),25);
-        	color: adjust-lightness(adjust-saturation(#AC67C6, -35),47);
-        	@include box-shadow(none !important);
-        	border-color: transparent;
-        	text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
-        	img { opacity: 0.75 }
-        	cursor: not-allowed;
+            background: adjust-lightness(adjust-saturation(#AC67C6, -35),25);
+            color: adjust-lightness(adjust-saturation(#AC67C6, -35),47);
+            @include box-shadow(none !important);
+            border-color: transparent;
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+            img { opacity: 0.75 }
+            cursor: not-allowed;
         }
     }
     &.orange {
@@ -472,13 +473,13 @@ button {
             @include transition(all 0.05s ease-in-out);
         }
         &[disabled] {
-        	background: adjust-lightness(adjust-saturation(#FD8524, -35),25);
-        	color: adjust-lightness(adjust-saturation(#FD8524, -35),47);
-        	@include box-shadow(none !important);
-        	border-color: transparent;
-        	text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
-        	img { opacity: 0.75 }
-        	cursor: not-allowed;
+            background: adjust-lightness(adjust-saturation(#FD8524, -35),25);
+            color: adjust-lightness(adjust-saturation(#FD8524, -35),47);
+            @include box-shadow(none !important);
+            border-color: transparent;
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+            img { opacity: 0.75 }
+            cursor: not-allowed;
         }
     }
     span {
@@ -487,9 +488,9 @@ button {
     // Alternate Disabled Styling
     //
     // &[disabled] {
-    // 	opacity: 0.5;
-    // 	@include box-shadow(none !important);
-    // 	cursor: not-allowed;
+    //  opacity: 0.5;
+    //  @include box-shadow(none !important);
+    //  cursor: not-allowed;
     // }
 }
 
@@ -865,17 +866,17 @@ progress {
     #logo {
         margin-right: 45px;
         .navbar-brand {
-        	margin: 13px 0 0 14px;
-			padding: 0;
-        	display: inline-block;
-        	height: 24px;
-        	width: 129px;
-        	background-image: url(../images/sprite-runnable-logo.png);
-        	@include background-image-retina('../images/sprite-runnable-logo@2x.png');
-        	background-size: 129px auto;
-			&:hover {
-				background-position: 0 -24px;
-			}
+            margin: 13px 0 0 15px;
+            padding: 0;
+            display: inline-block;
+            height: 24px;
+            width: 129px;
+            background-image: url(../images/sprite-runnable-logo.png);
+            @include background-image-retina('../images/sprite-runnable-logo@2x.png');
+            background-size: 129px auto;
+            &:hover {
+                background-position: 0 -24px;
+            }
         }
     }
     .nav {
@@ -899,8 +900,8 @@ progress {
             }
         }
         > li.active a {
-        	width: 107px;
-        	text-align: center;
+            width: 107px;
+            text-align: center;
             border: solid 1px $purple;
             @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.1), 0 1px 0 rgba(0,0,0,0.3));
             &:hover {
@@ -1007,7 +1008,7 @@ progress {
         }
     }
     .navbar-form {
-    	margin-top: 4px;
+        margin-top: 4px;
         input {
             border: none;
             @include border-radius(3px);
@@ -1017,10 +1018,15 @@ progress {
             width: 290px;
             margin: 4px auto 0 auto;
         }
+        .autocomplete-open {
+            input {
+                @include border-radius(3px 3px 0 0);
+            }
+        }
         @include breakpoint(screen-sm) { margin: 0 }
     }
     .navbar-right {
-    	margin-right: 15px;
+        margin-right: 15px;
     }
 }
 
@@ -1137,6 +1143,10 @@ progress {
             width: 90%;
         }
         margin: 0 auto 80px auto;
+        .autocomplete-open {
+            .form-control { @include border-radius(3px 0 0 0); }
+            .btn-default  { @include border-radius(0 3px 0 0); }
+        }
         .form-control {
             background: #fff;
             border: none;
@@ -1158,33 +1168,32 @@ progress {
 }
 
 .ui-helper-hidden-accessible {
-	display: none;
+    display: none;
 }
 .ui-autocomplete {
-	top: 5px;
-	background: #fff;
-	z-index: 100000;
-	border: solid 1px #C4C4C4;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	@include border-radius(3px);
-	@include box-shadow(0 2px 3px rgba(0,0,0,0.2));
-	li {
-		list-style: none;
-		margin: 0;
-		a {
-			color: #333;
-			display: block;
-			padding: 8px 10px !important;
-			text-decoration: none;
-			font-size: 13px;
-			&.ui-state-focus {
-				background: $orange;
-				color: #fff;
-			}
-		}
-	}
+    top: 5px;
+    background: #fff;
+    z-index: 100000;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    @include border-radius(0 0 3px 3px);
+    @include box-shadow(0 1px 3px rgba(0,0,0,0.1));
+    li {
+        list-style: none;
+        margin: 0;
+        a {
+            color: #333;
+            display: block;
+            padding: 8px 10px !important;
+            text-decoration: none;
+            font-size: 13px;
+            &.ui-state-focus {
+                background: $orange;
+                color: #fff;
+            }
+        }
+    }
 }
 
 
@@ -1349,7 +1358,7 @@ progress {
     h2.page-title {
         color: #333;
         font-size: 29px;
-        margin-bottom: 5px;
+        margin-bottom: 0;
         > span {
             margin: 7px 0 0 14px;
             line-height: 1.6em;
@@ -1408,6 +1417,7 @@ progress {
     p.description {
         color: #ababab;
         font-size: 15px;
+        padding-top: 5px;
         a.more {
             display: inline-block;
             color: #fff;
@@ -1424,7 +1434,7 @@ progress {
         }
     }
     .main-controls {
-        margin: 25px 0;
+        margin: 35px 0;
         button {
             margin-right: 10px;
             padding-bottom: 10px;
@@ -1507,9 +1517,9 @@ progress {
             text-align: center;
             font-size: 11px;
             color: #bcbcbc;
-			&:hover {
-				color: #777;
-			}
+            &:hover {
+                color: #777;
+            }
         }
         a.close-tab {
             padding: 0;
@@ -1521,7 +1531,7 @@ progress {
             background: none;
             top: 50%;
             right: 12px;
-			margin-top: -5px;
+            margin-top: -5px;
             bottom: 0;
             z-index: 100;
             height: 10px;
@@ -1530,8 +1540,8 @@ progress {
             @include background-image-retina('../images/sprite-tab-close@2x.png');
             background-size: 10px auto;
             &:hover {
-            	background-position: 0 -10px;
-            	cursor: pointer;
+                background-position: 0 -10px;
+                cursor: pointer;
             }
         }
         &.active a {
@@ -1548,7 +1558,7 @@ progress {
                 z-index: 100;
             }
             &:hover {
-            	color: #8447ad;
+                color: #8447ad;
             }
         }
     }
@@ -1601,14 +1611,14 @@ progress {
         }
         aside#file-explorer {
             ul.nav {
-                bottom: 140px;
+                bottom: 29%;
             }
             #drop-to-add {
                 position: absolute;
                 bottom: 10px;
                 right: 10px;
                 left: 10px;
-                height: 120px;
+                height: 24%;
                 border: dashed 2px #BDBDBD;
                 overflow: hidden;
                 display: block;
@@ -1617,15 +1627,20 @@ progress {
                 font-weight: bold;
                 color: #BDBDBD;
                 @include border-radius(5px);
-                .drop-to-add-icon {
-                    margin-top: 35px;
-                    height: 30px;
-                    width: 25px;
-                    background-image: url(../images/sprite-upload.png);
-                    @include background-image-retina('../images/sprite-upload@2x.png');
-                    background-size: 25px auto;
-                    overflow: hidden;
-                    display: inline-block;
+                .drop-to-add-icon-container {
+                    position: absolute;
+                    top: 50%;
+                    width: 100%;
+                    margin-top: -23px;
+                    .drop-to-add-icon {
+                        height: 30px;
+                        width: 25px;
+                        background-image: url(../images/sprite-upload.png);
+                        @include background-image-retina('../images/sprite-upload@2x.png');
+                        background-size: 25px auto;
+                        overflow: hidden;
+                        display: inline-block;
+                    }
                 }
                 &:hover {
                     border: solid 2px $purple-light;
@@ -1786,6 +1801,44 @@ progress {
                     @include box-shadow(0 0 0 2px #777);
                     @include transition(all 0.2s ease-in-out);
                 }
+                ul {
+                    padding-left: 0;
+                    li {
+                        a {
+                            padding-left: 15%;
+                        }
+                        li a {
+                            padding-left: 23%;
+                        }
+                        li li a {
+                            padding-left: 31%;
+                        }
+                        li li li a {
+                            padding-left: 39%;
+                        }
+                        li li li li a {
+                            padding-left: 47%;
+                        }
+                        li li li li li a {
+                            padding-left: 55%;
+                        }
+                        li li li li li li a {
+                            padding-left: 63%;
+                        }
+                        li li li li li li li a {
+                            padding-left: 71%;
+                        }
+                        li li li li li li li li a {
+                            padding-left: 79%;
+                        }
+                        li li li li li li li li li a {
+                            padding-left: 86%;
+                        }
+                        li li li li li li li li li li a {
+                            padding-left: 94%;
+                        }
+                    }
+                }
             }
             &.ui-draggable-hover {
                 background: #ddd;
@@ -1807,16 +1860,16 @@ h3.terminal-title {
 }
 
 a.terminal-popout {
-	margin-bottom: -2px;
-	display: inline-block;
-	height: 11px;
-	width: 11px;
-	background-image: url(../images/sprite-popout.png);
-	@include background-image-retina('../images/sprite-popout@2x.png');
-	background-size: 11px auto;
-	&:hover {
-		background-position: 0 -11px;
-	}
+    margin-bottom: -2px;
+    display: inline-block;
+    height: 11px;
+    width: 11px;
+    background-image: url(../images/sprite-popout.png);
+    @include background-image-retina('../images/sprite-popout@2x.png');
+    background-size: 11px auto;
+    &:hover {
+        background-position: 0 -11px;
+    }
 }
 
 div.terminal {
@@ -1898,9 +1951,9 @@ div.terminal {
 }
 
 #sidebar {
-    padding-top: 10px;
+    padding: 35px 0 0 0;
     > li {
-        margin-bottom: 50px;
+        margin-bottom: 35px;
         list-style: none;
         h3.widget-title {
             font-size: 13px;
@@ -2779,29 +2832,29 @@ div.terminal {
     }
 }
 
-#draft-mode {
-    background: #693C89;
-    color: #fff;
+.status-bar {
+    background: $purple-lighter;
+    color: $purple-light;
     font-size: 14px;
     p {
         margin: 0;
         padding: 12px 0;
     }
-    .draft-message {
-    	padding-left: 0;
+    .status-message {
+        padding-left: 0;
     }
-    .draft-buttons {
-    	padding-right: 0;
-    	padding-top: 6px;
-    	text-align: right;
-    	button.purple {
-    		border-color: #432658;
-    		background: #693C89;
-    		@include box-shadow(inset 0 1px 0 rgba(255,255,255,0.1));
-    		font-size: 12px;
-    		height: 32px;
-    		padding-top: 6px;
-    		margin-left: 10px;
+    .status-buttons {
+        padding-right: 0;
+        padding-top: 6px;
+        text-align: right;
+        button.purple {
+            border-color: #432658;
+            background: #693C89;
+            @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.1));
+            font-size: 12px;
+            height: 32px;
+            padding-top: 6px;
+            margin-left: 10px;
             &:hover {
                 background: adjust-lightness(#693C89,8);
                 text-decoration: none;
@@ -2812,7 +2865,24 @@ div.terminal {
                 @include transition(all 0.1s ease-in-out);
                 color: adjust-lightness(#693C89, 30);
             }
-    	}
+            &.light {
+                background: $purple-lighter;
+                color: $purple-light;
+                text-shadow: none;
+                border-color: $purple-light;
+                @include box-shadow(inset 0 1px rgba(255,255,255,0.7));
+                &:hover {
+                    background: adjust-lightness($purple-lighter,3);
+                    text-decoration: none;
+                }
+                &:active {
+                    background: adjust-lightness($purple-lighter,-5);
+                    @include box-shadow(inset 0 0 4px rgba(0,0,0,0.3));
+                    @include transition(all 0.1s ease-in-out);
+                    color: adjust-lightness($purple-light, 3);
+                }
+            }
+        }
     }
 }
 

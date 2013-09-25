@@ -4,19 +4,21 @@ var Image = require('../models/image');
 var utils = require('../utils');
 
 module.exports = BaseView.extend({
-  className: 'alert alert-warning',
   events: {
     'click #pubwarn-new-button' : 'publishNew',
     'click #pubwarn-back-button': 'publishBack'
   },
   postHydrate: function () {
-    this.listenTo(this.app.user, 'change:_id', this.render.bind(this));
+    // rerender on login/logout
+    this.listenTo(this.app.user, 'change:permission_level', this.render.bind(this));
+  },
+  preRender: function () {
+    var show = this.options.show = this.app.user.isVerified();
+    this.className = show ? 'status-bar' : 'display-none';
   },
   getTemplateData: function () {
-    return _.extend(this.options, {
-      user    : this.app.user,
-      canedit : this.app.user.canEdit(this.model)
-    });
+    this.options.user = this.app.user;
+    return this.options;
   },
   postRender: function () {
     this.$pubNew = $('#pubwarn-new-button');
