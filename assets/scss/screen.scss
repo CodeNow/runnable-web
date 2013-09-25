@@ -1872,25 +1872,27 @@ a.terminal-popout {
     }
 }
 
-div.terminal {
-    background: #5D5B56;
-    font-family: "Anonymous Pro", monospace;
-    color: #fff;
-    font-size: 11px;
-    white-space: pre;
-    border: solid 1px #000;
-    padding: 2%;
-    letter-spacing: 1px;
-    height: 200px;
-    position: relative;
+div.terminal-view {
+    // background: #5D5B56;
+    // font-family: "Anonymous Pro", monospace;
+    // color: #fff;
+    // font-size: 11px;
+    // white-space: pre;
+    // border: solid 1px #000;
+    // padding: 2%;
+    // letter-spacing: 1px;
+    // height: 200px;
+    // position: relative;
     .terminal-loader {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: #5D5B56;
+        margin-top: 26px;
         white-space: normal;
+        display:none;
+        @include box-sizing(content-box);
         .terminal-loader-icon {
             position: absolute;
             top: 50%;
@@ -1942,6 +1944,11 @@ div.terminal {
                     -webkit-animation: spin 1s linear 0.5s infinite;
                 }
             }
+        }
+    }
+    &.loading {
+        .terminal-loader{
+            display:block
         }
     }
 }

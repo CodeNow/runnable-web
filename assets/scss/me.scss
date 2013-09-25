@@ -57,8 +57,7 @@ h2.page-title{
   display: block;
 }
 #output-results-container .loader,
-#output-terminal-container .loader,
-.terminal-view .loader{
+#output-terminal-container .loader{
   position: absolute;
   top: 30%;
   width: 100%;
@@ -67,50 +66,48 @@ h2.page-title{
   display: none;
   text-align: center;
 }
-.terminal-view .loading .loader{
+.terminal-view.loading .loader{
   display: block;
 }
 
-.terminal-view .loader{
-  top: 40%;
-}
-.loader{
-  .dot {
-    &.dot-1 {
-      // opacity: 1;
-      -webkit-animation: spin 1s linear 0 infinite;
-    }
-    &.dot-2 {
-      // opacity: 0.875;
-      -webkit-animation: spin 1s linear 0.0625s infinite;
-    }
-    &.dot-3 {
-      // opacity: 0.75;
-      -webkit-animation: spin 1s linear 0.125s infinite;
-    }
-    &.dot-4 {
-      // opacity: 0.625;
-      -webkit-animation: spin 1s linear 0.1875s infinite;
-    }
-    &.dot-5 {
-      // opacity: 0.5;
-      -webkit-animation: spin 1s linear 0.25s infinite;
-    }
-    &.dot-6 {
-      // opacity: 0.375;
-      -webkit-animation: spin 1s linear 0.3125s infinite;
-    }
-    &.dot-7 {
-      // opacity: 0.25;
-      -webkit-animation: spin 1s linear 0.375s infinite;
-    }
-    &.dot-8 {
-      // opacity: 0.125;
-      -webkit-animation: spin 1s linear 0.4375s infinite;
+.overlay-loader {
+  .loader{
+    .dot {
+      &.dot-1 {
+        // opacity: 1;
+        -webkit-animation: spin 1s linear 0 infinite;
+      }
+      &.dot-2 {
+        // opacity: 0.875;
+        -webkit-animation: spin 1s linear 0.0625s infinite;
+      }
+      &.dot-3 {
+        // opacity: 0.75;
+        -webkit-animation: spin 1s linear 0.125s infinite;
+      }
+      &.dot-4 {
+        // opacity: 0.625;
+        -webkit-animation: spin 1s linear 0.1875s infinite;
+      }
+      &.dot-5 {
+        // opacity: 0.5;
+        -webkit-animation: spin 1s linear 0.25s infinite;
+      }
+      &.dot-6 {
+        // opacity: 0.375;
+        -webkit-animation: spin 1s linear 0.3125s infinite;
+      }
+      &.dot-7 {
+        // opacity: 0.25;
+        -webkit-animation: spin 1s linear 0.375s infinite;
+      }
+      &.dot-8 {
+        // opacity: 0.125;
+        -webkit-animation: spin 1s linear 0.4375s infinite;
+      }
     }
   }
 }
-
 
 //runnable index
 #project-author h4.author-title b {
