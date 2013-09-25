@@ -37,6 +37,7 @@ var frontendScripts = [
   'assets/bower/jquery/jquery.js',
   'assets/vendor/jquery-ui-custom/js/jquery-ui-1.10.3.custom.min.js',
   'assets/vendor/*.js', //include jquery plugins, must be after jquery
+  'assets/bower/sockjs/sockjs.js',
   'assets/bower/alertify.js/lib/alertify.js',
   'assets/bower/bootstrap/js/collapse.js',
   'assets/bower/bootstrap/js/dropdown.js',

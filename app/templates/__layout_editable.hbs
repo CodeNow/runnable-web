@@ -34,7 +34,8 @@
       var _rollbarParams = {
         "server.environment": CONFIG.env,
         "client.javascript.source_map_enabled": true,
-        "client.javascript.code_version": CONFIG.commitHash
+        "client.javascript.code_version": CONFIG.commitHash,
+        "client.javascript.guess_uncaught_frames": true
       };
 
       // <!-- Rollbar Error Tracking -->
