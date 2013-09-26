@@ -13,6 +13,8 @@ var express = require('express'),
     rollbar = require("rollbar"),
     sitemap = require('./lib/sitemap'),
     app;
+var path = require('path');
+var config = require('./lib/env').current;
 
 // Add Handlebars helpers
 require('../app/handlebarsHelpers').add(Handlebars);
@@ -73,6 +75,22 @@ function initMiddleware() {
       next();
     }
   });
+  if (config.downTime) {
+    app.use(function (req, res, next) {
+      res.set('Status', '503 Service Temporarily Unavailable');
+      res.set('Retry-After', config.downTime);
+      if (req.accepts('html')) {
+        res.set('Content-Type', 'text/html');
+        res.status(503);
+        var view = path.join(__dirname,'../app/templates/503.hbs');
+        console.log(view);
+        res.sendfile(view);
+      }
+      else if (req.accepts('json')) {
+        res.json(503, {message: '503 Service Temporarily Unavailable'});
+      }
+    });
+  }
   app.use(express.cookieParser());
   app.use(express.session({
     key: env.current.cookieKey,
