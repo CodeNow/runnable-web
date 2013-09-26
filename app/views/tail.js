@@ -25,6 +25,11 @@ module.exports = BaseView.extend({
       self.checkBoxUp();
     }
   },
+  remove: function () {
+    this.sock.onclose = function () {};
+    this.sock.close();
+    Super.remove.apply(this, arguments);
+  },
   loading: function (loading) {
     console.log(loading);
     this.stopWarningTimeout();
