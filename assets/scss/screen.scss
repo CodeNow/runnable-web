@@ -1513,7 +1513,7 @@ progress {
             background: #F6F6F6;
             @include border-radius(0);
             border-color: #bbb;
-            padding: 7px 30px 5px 30px;
+            padding: 7px 30px 5px 15px;
             text-align: center;
             font-size: 11px;
             color: #bcbcbc;
@@ -1529,8 +1529,8 @@ progress {
             display: inline-block;
             position: absolute;
             background: none;
-            top: 50%;
-            right: 12px;
+            top: 6px;
+            right: 14px;
             margin-top: -5px;
             bottom: 0;
             z-index: 100;
