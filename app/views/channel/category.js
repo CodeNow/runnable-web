@@ -2,15 +2,37 @@ var BaseView = require('../base_view');
 var utils = require('../../utils');
 
 module.exports = BaseView.extend({
+  sortChannels: function () {
+    var opts = this.options;
+    var category = opts.channels.params.category.toLowerCase();
+    var sortOrder = [ "nodejs","python","ruby-on-rails","php",".net","jquery",
+      "codeigniter","django","cakephp","paypal","mysql","node-mongodb-native"];
+    function getOrder (channel) {
+      var sortIndex;
+      channel.get('aliases').some(function (alias) {
+        sortIndex = sortOrder.indexOf(alias);
+        return ~sortIndex;
+      });
+      return (sortIndex !== -1) ? sortIndex : 1000; //1000 = last
+    }
+
+    if (category == 'featured') {
+      opts.channels.models = opts.channels.models.sort(function (a, b) {
+        return getOrder(a) < getOrder(b) ? -1 : 1;
+      });
+    }
+  },
   getTemplateData: function () {
-    this.options.channels.sort();
-    this.options.categories.models.forEach(function (category) {
+    var opts = this.options;
+    this.sortChannels();
+    opts.categories.models.forEach(function (category) {
       attribs = category.attributes;
       attribs.link = '/c/'+attribs.name;
     });
-    return this.options;
+    return opts;
   },
   postRender: function () {
+    if (typeof window !== 'undefined') window.tj = this;
     this.textEffect();
     this.imageTile();
   },
