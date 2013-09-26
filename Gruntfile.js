@@ -275,7 +275,8 @@ module.exports = function(grunt) {
       });
       var fileString = 'module.exports='+JSON.stringify(imageHash)+';';
       var filePath = path.join(__dirname,'app/channelImages.js');
-      fs.writeFile(filePath, fileString, done);
+      grunt.file.write(filePath, fileString);
+      done();
     });
   });
   // generate configs/commitHash.js
@@ -289,7 +290,8 @@ module.exports = function(grunt) {
       if (err) { done(err); } else {
         var versionFile = 'module.exports="'+commitHash.trim()+'";';
         var filePath = path.join(__dirname, commitHashPath);
-        fs.writeFile(filePath, versionFile, done);
+        grunt.file.write(filePath, versionFile);
+        done();
       }
     });
   });
@@ -298,47 +300,41 @@ module.exports = function(grunt) {
     var fs = require('fs');
     var p = require('path');
     var commitHash = require('./'+commitHashPath);
-    function startsWith (startStr) {
-      return function (str) { return (str.indexOf(startStr) === 0); }
-    }
-    function toPath (path) {
-      return function (filename) { return p.join(path, filename); };
-    }
-    function log (preStr) {
-      return function (str) { grunt.log.ok(preStr + str); };
+    function matches (re) { return function (str) { return re.test(str); } }
+    function toPath (path) { return function (filename) { return p.join(path, filename); }; }
+    function deletePath (filepath) {
+      grunt.file.delete(filepath)
+      grunt.log.writeln('deleted', p.relative(__dirname, filepath));
     }
     // delete old versioned files
     var publicDir = p.join(__dirname, 'public');
     var stylesDir = p.join(__dirname, 'public/styles');
     fs.readdirSync(publicDir)
-      .filter(startsWith('mergedAssets-'))
+      .filter(matches(/^mergedAssets\.min\..*\.js$/))
       .map(toPath(publicDir))
-      .forEach(function (filepath) {
-        log('Deleting:', filepath);
-        fs.unlinkSync(filepath);
-      });
+      .forEach(deletePath);
     fs.readdirSync(stylesDir)
-      .filter(startsWith('index-'))
+      .filter(matches(/^index\..*\.css/))
       .map(toPath(stylesDir))
-      .forEach(function (filepath) {
-        log('Deleting:', filepath);
-        fs.unlinkSync(filepath);
-      });
+      .forEach(deletePath);
     // create  versioned files
     var stylesPath, assetsPath, verStylesPath, verAssetsPath;
     stylesPath = p.join(__dirname, mergedCSSPath);
     assetsPath = p.join(__dirname, minAssetsPath);
     verStylesPath = stylesPath.replace(/[.]css$/, '.'+commitHash+'.css');
     verAssetsPath = assetsPath.replace(/[.]js$/, '.'+commitHash+'.js');
-    fs.renameSync(stylesPath, verStylesPath);
-    fs.renameSync(assetsPath, verAssetsPath);
-    grunt.log.ok(stylesPath +'>'+ verStylesPath);
-    grunt.log.ok(assetsPath +'>'+ verAssetsPath);
+    grunt.file.copy(stylesPath, verStylesPath);
+    grunt.file.delete(stylesPath);
+    grunt.log.writeln('moved', p.relative(__dirname, stylesPath)+' > '+p.relative(__dirname, verStylesPath))
+    grunt.file.copy(assetsPath, verAssetsPath);
+    grunt.file.delete(assetsPath);
+    grunt.log.writeln('moved', p.relative(__dirname, stylesPath)+' > '+p.relative(__dirname, verStylesPath))
     // create versioned layout
     var layoutString = fs.readFileSync(p.join(__dirname, layoutPath)).toString()
       .replace(/mergedAssets[.]min[.]js/g, 'mergedAssets.min.'+commitHash+'.js')
       .replace(/index[.]css/g, 'index.'+commitHash+'.css');
-    fs.writeFileSync(p.join(__dirname, verLayoutPath), layoutString);
+    grunt.file.write(p.join(__dirname, verLayoutPath), layoutString);
+    grunt.log.writeln('overwrote', verLayoutPath)
   });
   // jslint
   grunt.registerTask('jshint', ['jshint:all']);
