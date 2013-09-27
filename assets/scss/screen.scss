@@ -1801,44 +1801,6 @@ progress {
                     @include box-shadow(0 0 0 2px #777);
                     @include transition(all 0.2s ease-in-out);
                 }
-                ul {
-                    padding-left: 0;
-                    li {
-                        a {
-                            padding-left: 15%;
-                        }
-                        li a {
-                            padding-left: 23%;
-                        }
-                        li li a {
-                            padding-left: 31%;
-                        }
-                        li li li a {
-                            padding-left: 39%;
-                        }
-                        li li li li a {
-                            padding-left: 47%;
-                        }
-                        li li li li li a {
-                            padding-left: 55%;
-                        }
-                        li li li li li li a {
-                            padding-left: 63%;
-                        }
-                        li li li li li li li a {
-                            padding-left: 71%;
-                        }
-                        li li li li li li li li a {
-                            padding-left: 79%;
-                        }
-                        li li li li li li li li li a {
-                            padding-left: 86%;
-                        }
-                        li li li li li li li li li li a {
-                            padding-left: 94%;
-                        }
-                    }
-                }
             }
             &.ui-draggable-hover {
                 background: #ddd;
