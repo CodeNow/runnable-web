@@ -7,14 +7,18 @@
   <button class="silver btn-cancel" type="button">Cancel</button>
 </form>
 {{else}}
+  {{#if canEdit}}
   <p class="description">
     {{model.attributes.description}}<!--a class="more" href="#">&bull; &bull; &bull;</a-->
-    {{#if canEdit}}
       {{#if model.attributes.description}}
       <a href="javascript:void(0)" class="edit-link">Edit</a>
       {{else}}
       <a href="javascript:void(0)" class="edit-link">Add description</a>
-      {{/if}}
     {{/if}}
   </p>
+  {{else}}{{#if model.attributes.description}}
+  <p class="description">
+    {{model.attributes.description}}<!--a class="more" href="#">&bull; &bull; &bull;</a-->
+  </p>
+  {{/if}}{{/if}}
 {{/if}}

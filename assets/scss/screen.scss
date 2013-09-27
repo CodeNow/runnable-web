@@ -1434,7 +1434,7 @@ progress {
         }
     }
     .main-controls {
-        margin: 35px 0;
+        margin: 30px 0 35px 0;
         button {
             margin-right: 10px;
             padding-bottom: 10px;
@@ -1444,7 +1444,7 @@ progress {
 }
 
 #project-author {
-    margin: 30px 0;
+    margin: 30px 0 0 0;
     img.project-author-icon {
         width: 52px;
         @include border-radius(3px);
