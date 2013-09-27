@@ -39,7 +39,7 @@ module.exports = BaseView.extend({
   startWarningTimeout: function () {
     var self = this;
     var warningMessage = "Uh oh, looks like your box is having some problems.<br> Try refreshing to the window - you may lose your changes.";
-    this.warningTimeout = setTimeout(this.showError.bind(this, warningMessage), 10000);
+    this.warningTimeout = setTimeout(this.showError.bind(this, warningMessage), 20000);
   },
   stopWarningTimeout: function () {
     clearTimeout(this.warningTimeout);
