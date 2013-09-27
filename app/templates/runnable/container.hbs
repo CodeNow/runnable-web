@@ -14,13 +14,20 @@
         {{view "save_button" collection=defaultFiles}}
       </div>
     </div>
-    {{!view "runnable_owner" model=container.owner model_id=container.owner.id model_name='user' created=container.attributes.created}}
+    {{#unless isVerified}}
+    <ul id="sidebar" class="col-sm-3">
+      <li class="tags">
+        {{view "runnable_tags" model=container editmode=isVerified classname="clearfix right"}}
+      </li>
+    </ul>
+    {{/unless}}
   </div>
   <div class="row">
-    <div class="col-sm-9">
+    <div {{#if isVerified}}class="col-sm-9"{{else}}class="col-sm-12"{{/if}}>
       {{view "code_editor" context=. editmode=true model=container}}
       {{view "terminal" model=container}}
     </div>
+    {{#if isVerified}}
     <ul id="sidebar" class="col-sm-3">
       {{#if container.attributes.specificationId}}
       <li class="services">
@@ -36,6 +43,7 @@
         {{/if}}
       </li>
     </ul>
+    {{/if}}
   </div>
 </section>
 

@@ -10,6 +10,9 @@ module.exports = BaseView.extend({
   events: {
     'click .remove-tag' : 'removeTag',
   },
+  preRender: function () {
+    if (this.options.classname) this.className = this.options.classname;
+  },
   postHydrate: function () {
     BaseCollection = BaseCollection.extend({model:BaseModel});
     this.collection = new BaseCollection(this.model.get('tags'), {
