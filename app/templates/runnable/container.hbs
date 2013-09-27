@@ -14,27 +14,15 @@
         {{view "save_button" collection=defaultFiles}}
       </div>
     </div>
-    {{#unless isVerified}}
+
     <ul id="sidebar" class="col-sm-3">
-      <li class="tags">
-        {{view "runnable_tags" model=container editmode=isVerified classname="clearfix right"}}
-      </li>
-    </ul>
-    {{/unless}}
-  </div>
-  <div class="row">
-    <div {{#if isVerified}}class="col-sm-9"{{else}}class="col-sm-12"{{/if}}>
-      {{view "code_editor" context=. editmode=true model=container}}
-      {{view "terminal" model=container}}
-    </div>
     {{#if isVerified}}
-    <ul id="sidebar" class="col-sm-3">
-      {{#if container.attributes.specificationId}}
+      <!--{{#if container.attributes.specificationId}}
       <li class="services">
       <h3 class="widget-title">Services</h3>
         {{view "service" model=container collection=specifications editmode=isVerified}}
       </li>
-      {{/if}}
+      {{/if}}-->
       <li class="tags">
         <h3 class="widget-title">Tags</h3>
         {{view "runnable_tags" model=container editmode=isVerified}}
@@ -42,8 +30,19 @@
         {{view "runnable_new_tag_form" model=container}}
         {{/if}}
       </li>
-    </ul>
+    {{else}}
+      <li class="tags">
+        {{view "runnable_tags" model=container editmode=isVerified classname="clearfix right"}}
+      </li>
     {{/if}}
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      {{view "code_editor" context=. editmode=true model=container}}
+      {{view "terminal" model=container}}
+    </div>
+
   </div>
 </section>
 
