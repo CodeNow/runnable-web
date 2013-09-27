@@ -33,7 +33,7 @@ module.exports = EditorButtonView.extend({
   saveAndRedirect: function () {
     var self = this;
     self.disable(true);
-    self.app.loading = true;
+    self.app.set('loading', true);
     async.parallel([
       self.collection.saveAll.bind(self.collection),
       function (cb) {
@@ -44,7 +44,7 @@ module.exports = EditorButtonView.extend({
     function done (err) {
       if (err) {
         self.disable(false);
-        self.app.loading = false;
+        self.app.set('loading', false);
         self.showError(err)
       }
       else {
