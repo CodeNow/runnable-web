@@ -19,16 +19,21 @@ module.exports = EditorButtonView.extend({
   },
   click: function (evt) {
     evt.preventDefault();
-    if (this.app.user.isRegistered()) {
+    var user = this.app.user;
+    if (user.isRegistered()) {
       this.saveAndRedirect();
-    } else {
+    }
+    else {
       var signupModal = new SignupModal({ app:this.app });
+      this.listenToOnce(user, 'auth', this.saveAndRedirect.bind(this));
+      this.listenToOnce(signupModal, 'remove', this.stopListening.bind(this, signupModal));
       signupModal.open();
     }
   },
   saveAndRedirect: function () {
     var self = this;
     self.disable(true);
+    self.app.loading = true;
     async.parallel([
       self.collection.saveAll.bind(self.collection),
       function (cb) {
@@ -37,8 +42,9 @@ module.exports = EditorButtonView.extend({
       }
     ],
     function done (err) {
-      self.disable(false);
       if (err) {
+        self.disable(false);
+        self.app.loading = false;
         self.showError(err)
       }
       else {

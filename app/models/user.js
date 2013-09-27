@@ -38,7 +38,8 @@ var User = module.exports = Base.extend({
   },
   register: function(email, username, password, cb) {
     cb = cb || function () {};
-    var cbOptions = utils.successErrorToCB(cb);
+    var self = this;
+    var cbOpts = utils.cbOpts(cb);
     this.save({
       email: email,
       username: username,
@@ -47,29 +48,43 @@ var User = module.exports = Base.extend({
       wait: true,
       method: 'PUT',
       url   : '/users/me',
-      success: cbOptions.success,
-      error  : cbOptions.error
+      success: success,
+      error  : cbOpts.error
     });
+    function success () {
+      cbOpts.success.apply(this, arguments);
+      self.trigger('auth');
+    }
   },
   login: function (emailUsername, password, cb) {
     cb = cb || function () {};
-    var self = this;
-    var cbToOpts = utils.successErrorToCB;
-    var auth = new Base({
-      email: emailUsername,
+    var self=this, app=this.app, auth, data, opts;
+
+    auth = new Base({}, { url: '/token', app:app });
+    data = {
+      email   : emailUsername,
       password: password
-    }, {
-      url: '/token',
-      app: this.app
-    });
-    auth.save({}, cbToOpts(function (err) {
-      if (err) { cb(err); } else {
-        var options = cbToOpts(cb);
-        self.fetch(_.extend(options, {
-          url: '/users/me'
-        }));
+    };
+    opts = utils.cbOpts(saveCallback);
+
+    auth.save(data, opts);
+    function saveCallback (err) {
+      var meOpts = utils.cbOpts(cb);
+      if (err) {
+        cb(err);
       }
-    }));
+      else {
+        self.fetch({
+          url: '/users/me',
+          success: success,
+          error: meOpts.error
+        });
+      }
+      function success () {
+        meOpts.success.apply(this, arguments);
+        self.trigger('auth');
+      }
+    }
   },
   vote: function (project, cb) {
     var self = this;
