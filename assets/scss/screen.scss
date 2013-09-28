@@ -1513,7 +1513,7 @@ progress {
             background: #F6F6F6;
             @include border-radius(0);
             border-color: #bbb;
-            padding: 7px 30px 5px 15px;
+            padding: 7px 25px 5px 14px;
             text-align: center;
             font-size: 11px;
             color: #bcbcbc;
@@ -1529,9 +1529,8 @@ progress {
             display: inline-block;
             position: absolute;
             background: none;
-            top: 6px;
-            right: 14px;
-            margin-top: -5px;
+            top: 10px;
+            right: 11px;
             bottom: 0;
             z-index: 100;
             height: 10px;
@@ -1581,77 +1580,6 @@ progress {
         border: none;
         @include border-radius(0);
         font-family: 'Source Code Pro', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
-    }
-    &.edit-mode {
-        #project-editor {
-            top: 28px;
-            @include transition(top 0.2s ease-in-out);
-            &.focus {
-                top: 1%;
-            }
-        }
-        p.edit-mode-notification {
-            background: $purple-light;
-            position: absolute;
-            width: 98.8%;
-            top: 0;
-            left: 0.6%;
-            height: 28px;
-            color: #fff;
-            font-size: 11px;
-            padding: 7px 25px 5px 25px;
-            font-weight: bold;
-            @include transition(all 0.2s ease-in-out);
-            &.focus {
-                height: 0;
-                padding: 0 25px;
-                opacity: 0;
-                overflow: hidden;
-            }
-        }
-        aside#file-explorer {
-            ul.nav {
-                bottom: 29%;
-            }
-            #drop-to-add {
-                position: absolute;
-                bottom: 10px;
-                right: 10px;
-                left: 10px;
-                height: 24%;
-                border: dashed 2px #BDBDBD;
-                overflow: hidden;
-                display: block;
-                text-align: center;
-                font-size: 12px;
-                font-weight: bold;
-                color: #BDBDBD;
-                @include border-radius(5px);
-                .drop-to-add-icon-container {
-                    position: absolute;
-                    top: 50%;
-                    width: 100%;
-                    margin-top: -23px;
-                    .drop-to-add-icon {
-                        height: 30px;
-                        width: 25px;
-                        background-image: url(../images/sprite-upload.png);
-                        @include background-image-retina('../images/sprite-upload@2x.png');
-                        background-size: 25px auto;
-                        overflow: hidden;
-                        display: inline-block;
-                    }
-                }
-                &:hover {
-                    border: solid 2px $purple-light;
-                    text-decoration: none;
-                    color: $purple-light;
-                    .drop-to-add-icon {
-                        background-position: 0 -30px;
-                    }
-                }
-            }
-        }
     }
     a.open-file-explorer {
         display: block;
@@ -1729,38 +1657,7 @@ progress {
             }
         }
         .nav {
-            position: absolute;
-            top: 25px;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            overflow: scroll;
-            font-size: 12px;
-            padding: 6px 0;
             li {
-                padding: 0;
-                margin: 0;
-                list-style: none;
-                a {
-                    padding: 6px 6.5%;
-                    margin: 0;
-                    color: #333;
-                    position: relative;
-                    white-space: nowrap;
-                    display: block;
-                    &:hover {
-                        text-decoration: none;
-                        color: $purple-light;
-                    }
-                    &:before {
-                        content: "";
-                        float: left;
-                        margin: 6px 10px 0 0;
-                        border-left: 4px solid transparent;
-                        border-right: 4px solid transparent;
-                        border-top: 6px solid transparent;
-                    }
-                }
                 &.active > a {
                     background: $orange;
                     color: #fff;

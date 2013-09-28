@@ -8,14 +8,20 @@ module.exports = BaseView.extend({
   events: {
     'click .dark-theme'  : 'setDarkTheme',
     'click .light-theme' : 'setLightTheme',
-    'click .open-context-menu': 'showFileMenu',
-    'click .close-file-explorer' : 'hideFiles'
+    'click .open-context-menu'   : 'showFileMenu',
+    'click .close-file-explorer' : 'hideFiles',
+    'click #drop-to-add' : 'showUploadMessage',
+    'drop #drop-to-add' : 'uploadToRoot',
+    'dragover #drop-to-add'  : 'stopPropagation',
+    'dragleave #drop-to-add' : 'stopPropagation',
+    'contextmenu #drop-to-add' : 'stopPropagation',
   },
   postHydrate: function () {
     this.listenTo(this.app.dispatch, 'toggle:files', this.toggleFiles.bind(this));
   },
   postRender: function () {
     this.$("[rel='tooltip']").tooltip();
+    this.fileRoot = _.findWhere(this.childViews, {name:'file_tree'});
   },
   toggleFiles: function (open) {
     if (open) { this.showFiles(); } else {
@@ -33,8 +39,7 @@ module.exports = BaseView.extend({
   showFileMenu: function (evt) {
     evt.preventDefault();
     // fragile, but I dont want to duplicate the file menu.. and it needs the rootDir
-    var fileRoot = _.findWhere(this.childViews, {name:'file_tree'});
-    fileRoot.contextMenu(evt);
+    this.fileRoot.contextMenu(evt);
   },
   setDarkTheme: function (evt) {
     if (evt) evt.preventDefault();
@@ -47,6 +52,19 @@ module.exports = BaseView.extend({
     this.$('.dark-theme').removeClass('active');
     this.$('.light-theme').addClass('active');
     this.app.dispatch.trigger('change:theme', 'light');
+  },
+  showUploadMessage: function (evt) {
+    evt.stopPropagation();
+    this.showMessage('To upload files drop them in the file browser');
+  },
+  uploadToRoot: function (evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    this.fileRoot.uploadFiles(evt);
+  },
+  stopPropagation: function (evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
   }
 });
 

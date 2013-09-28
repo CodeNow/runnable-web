@@ -1,4 +1,5 @@
 $terminal-color:#383734;
+$dropzone-height:75px;
 
 pre {
   margin:0;
@@ -25,25 +26,11 @@ h2.page-title{
     line-height: normal;
   }
 }
-
-// file tabs
-#project-editor-tabs li a.tab-body {
-  padding: 7px 25px 5px 10px;
-}
-#project-editor-tabs li a.close-tab {
-  top: 5px;
-  right: 10px;
-}
-
-
 .relative{
   position:relative;
 }
 #project-editor {
   position: static !important;
-}
-#project-editor-tabs li a.close-tab {
-  bottom:auto;
 }
 .overlay-loader{
   display: none;
@@ -561,51 +548,6 @@ aside#file-explorer {
 
 /* RIGHT HERE */
 
-#project-editor-tabs {
-  border-bottom: solid 1px #bbb;
-  li {
-    position: relative;
-    margin-right: 0.1%;
-    font-weight: bold;
-    a.tab-body {
-      background: #F6F6F6;
-      @include border-radius(0);
-      border-color: #bbb;
-      padding: 7px 30px 5px 30px;
-      text-align: center;
-      font-size: 11px;
-      color: #bcbcbc;
-    }
-    a.close-tab {
-      padding: 0;
-      margin: 0;
-      float: none;
-      border: none;
-      display: inline-block;
-      position: absolute;
-      background: none;
-      top: 16.5%;
-      right: 14%;
-      bottom: 0;
-      z-index: 100;
-    }
-    &.active a {
-      background: #fff;
-      color: #8447ad;
-      &.tab-body:after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        background: #fff;
-        bottom: -1px;
-        left: 0;
-        z-index: 100;
-      }
-    }
-  }
-}
-
 #project-editor-container {
   aside#file-explorer {
     .nav {
@@ -619,8 +561,10 @@ aside#file-explorer {
       padding: 6px 0;
       > li {
         height: 100%;
-        padding-bottom: 75px; // match dropzone height
         @include box-sizing(border-box);
+        > ul {
+          padding-bottom: $dropzone-height+10px;
+        }
       }
       li {
         padding: 0;
@@ -738,12 +682,12 @@ aside#file-explorer {
   white-space: normal;
 }
 
-#project-editor-container aside#file-explorer .nav > li > #drop-to-add {
+#project-editor-container aside#file-explorer > #drop-to-add {
     position: absolute;
-    bottom: 10px;
+    bottom: 5px;
     right: 10px;
     left: 10px;
-    height: 75px;
+    height: $dropzone-height;
     border: dashed 2px #BDBDBD;
     overflow: hidden;
     display: block;
@@ -751,10 +695,11 @@ aside#file-explorer {
     font-size: 12px;
     font-weight: bold;
     color: #BDBDBD;
+    opacity: 0.95;
+    background: white;
     @include border-radius(5px);
     .drop-to-add-icon {
-      margin-top: 7px;
-      margin-left: -11px;
+      margin-top: 10px;
       height: 30px;
       width: 25px;
       background-image: url(../images/sprite-upload.png);
@@ -824,4 +769,10 @@ a.card .description input {
 
 ul.clearfix.right li{
   float:right;
+}
+.alertify{
+  top: 25%;
+}
+.red{
+  color:red;
 }

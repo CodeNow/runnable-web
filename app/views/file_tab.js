@@ -12,9 +12,6 @@ module.exports = BaseView.extend({
       this.className = 'active';
     }
   },
-  getTemplateData: function () {
-    return this.model.toJSON();
-  },
   postHydrate: function () {
     this.listenTo(this.model, 'change:name', this.render.bind(this));
     this.listenTo(this.model, 'change:selected', this.onChangeSelected.bind(this));
