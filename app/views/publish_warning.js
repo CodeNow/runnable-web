@@ -25,11 +25,13 @@ module.exports = BaseView.extend({
   },
   publishNew: function () {
     this.$pubNew.attr('disabled', 'disabled');
+    this.app.set('loading', true);
     var image = new Image({}, {app:this.app});
     image.publishFromContainer(this.options.containerid, this.publishCallback.bind(this));
   },
   publishBack: function () {
     this.$pubBack.attr('disabled', 'disabled');
+    this.app.set('loading', true);
     if (!this.app.user.canEdit(this.model)) { // this shouldn't ever happen..
       this.showError('You cannot publish back since you are not the owner of the original runnable');
       return;
@@ -44,6 +46,7 @@ module.exports = BaseView.extend({
   },
   publishCallback: function (err, image) {
     if (err) {
+      this.app.set('loading', false);
       this.$pubNew.removeAttr('disabled');
       this.$pubBack.removeAttr('disabled');
       this.showError(err);
