@@ -4,6 +4,9 @@ var Super = ModalView.prototype;
 
 module.exports = ModalView.extend({
   id: 'publish-request-modal',
+  events: {
+    'click .request-link' : 'close'
+  },
   postRender: function () {
     Super.postRender.apply(this, arguments);
     var formView = _.findWhere(this.childViews, {name:'publish_request_form'});

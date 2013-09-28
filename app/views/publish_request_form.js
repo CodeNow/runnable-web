@@ -24,7 +24,6 @@ module.exports = BaseView.extend({
     publishRequest.save(data, opts);
     function callback (err) {
       if (err && !~err.indexOf('already subscribed')) {
-        this.trigger('submitted', err);
         this.showError(err);
       }
       else {

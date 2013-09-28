@@ -2,19 +2,18 @@ var _ = require('underscore');
 var BaseView = require('./base_view');
 var Image = require('../models/image');
 var utils = require('../utils');
+var PublishRequestModal = require('./publish_request_modal');
 
 module.exports = BaseView.extend({
   events: {
     'click #pubwarn-new-button' : 'publishNew',
-    'click #pubwarn-back-button': 'publishBack'
+    'click #pubwarn-back-button': 'publishBack',
+    'click #pubwarn-request-button' : 'openPublishRequest'
   },
+  className: 'status-bar',
   postHydrate: function () {
     // rerender on login/logout
     this.listenTo(this.app.user, 'change:permission_level', this.render.bind(this));
-  },
-  preRender: function () {
-    var show = this.options.show = this.app.user.isVerified();
-    this.className = show ? 'status-bar' : 'display-none';
   },
   getTemplateData: function () {
     this.options.user = this.app.user;
@@ -37,6 +36,11 @@ module.exports = BaseView.extend({
     }
     // this.model is container's parent image;
     this.model.publishFromContainer(this.options.containerid, this.publishCallback.bind(this));
+  },
+  openPublishRequest: function (evt) {
+    evt.preventDefault();
+    var publishRequestModal = new PublishRequestModal({app:this.app});
+    publishRequestModal.open();
   },
   publishCallback: function (err, image) {
     if (err) {
