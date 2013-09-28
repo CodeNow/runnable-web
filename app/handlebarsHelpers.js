@@ -48,7 +48,8 @@ module.exports.add = function (Handlebars) {
   Handlebars.registerHelper('if_result', function (obj, options) {
     var opts = options.hash;
     opts.equals = opts.equals || true;
-    var args = _.chain(options).omit('method', 'equals').values().value();
+    var args = _.chain(opts).omit('method', 'equals').values().value();
+    debugger;
     if (obj[opts.method].apply(obj, args) === opts.equals)
       return options.fn(this);
     return options.inverse(this);
