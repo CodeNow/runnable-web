@@ -73,6 +73,7 @@ module.exports = RendrView.extend({
   },
   showError: function (err) {
     if (err) {
+      err = '<div class="red">'+err+'</div>';
       alertify.alert(err);
     }
   },
