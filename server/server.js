@@ -66,7 +66,7 @@ function initMiddleware() {
     app.use(express.staticCache());
   });
   app.use(require('./middleware/disallowRobotsIfNotProduction'));
-  app.use(express.static(__dirname + '/../public'));
+  app.use(express.static(__dirname + '/../public', { maxAge:1000*60*60*24 }));
   app.use(require('./middleware/cannon')()); // no canon for static
   app.use(function (req, res, next) {
     if (/^\/(images|styles|scripts|external)\/.+/.test(req.url)) {
@@ -75,22 +75,7 @@ function initMiddleware() {
       next();
     }
   });
-  if (config.downTime) {
-    app.use(function (req, res, next) {
-      res.set('Status', '503 Service Temporarily Unavailable');
-      res.set('Retry-After', config.downTime);
-      if (req.accepts('html')) {
-        res.set('Content-Type', 'text/html');
-        res.status(503);
-        var view = path.join(__dirname,'../app/templates/503.hbs');
-        console.log(view);
-        res.sendfile(view);
-      }
-      else if (req.accepts('json')) {
-        res.json(503, {message: '503 Service Temporarily Unavailable'});
-      }
-    });
-  }
+  app.use(mw.downTime());
   app.use(express.cookieParser());
   app.use(express.session({
     key: env.current.cookieKey,
