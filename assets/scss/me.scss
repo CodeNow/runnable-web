@@ -503,6 +503,27 @@ aside#file-explorer {
   z-index:1;
 }
 
+.tt-dropdown-menu {
+  width: 100%;
+  border-top-left-radius : 0;
+  border-top-right-radius: 0;
+  top: 95% !important;
+  border-top: 0;
+
+  .tt-suggestion{
+    p{
+      color: black;
+    }
+
+    &.tt-is-under-cursor{
+      background: #fd7022;
+      p{
+        color: white;
+      }
+    }
+  }
+}
+
 .hero .tt-suggestion{
   text-align: left;
 }

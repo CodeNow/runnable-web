@@ -37,17 +37,18 @@ module.exports = BaseView.extend({
         merge: true             // so model 'selected' dont get reset
       });
       collection.fetch(options);
-      function cb (err, collection) {
-        if (err) {
-          this.showError(err);
-        }
-        else {
-          collection.forEach(function (model) {
-            model.store(); // VERY IMPORTANT! - ask TJ.
-            if (model.isDir()) model.contents.store();
-          });
-          collection.trigger('sync');
-        }
+    }
+    // Firefox does not hoist functions in blocks!
+    function cb (err, collection) {
+      if (err) {
+        this.showError(err);
+      }
+      else {
+        collection.forEach(function (model) {
+          model.store(); // VERY IMPORTANT! - ask TJ.
+          if (model.isDir()) model.contents.store();
+        });
+        collection.trigger('sync');
       }
     }
   },

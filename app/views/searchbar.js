@@ -5,7 +5,7 @@ var Images = require('../collections/images');
 module.exports = BaseView.extend({
   tagName:'form',
   preRender: function () {
-    this.className = 'searchbar '+this.options.classname;
+    this.className = 'searchbar'+ ( this.options.classname ? ' '+this.options.classname : '' );
     this.attributes = {
       action: '/search',
       method: 'get'
