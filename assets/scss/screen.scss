@@ -807,6 +807,10 @@ progress {
                 margin: 0 0 0 -4px;
                 // opacity: 1;
                 -webkit-animation: spin 1s linear 0 infinite;
+                -moz-animation: spin 1s linear 0 infinite;
+                -ms-animation: spin 1s linear 0 infinite;
+                -o-animation: spin 1s linear 0 infinite;
+                animation: spin 1s linear 0 infinite;
             }
             &.dot-2 {
                 top: 20%;
@@ -814,6 +818,10 @@ progress {
                 margin: -4px 0 0 -4px;
                 // opacity: 0.875;
                 -webkit-animation: spin 1s linear 0.125s infinite;
+                -moz-animation: spin 1s linear 0.125s infinite;
+                -ms-animation: spin 1s linear 0.125s infinite;
+                -o-animation: spin 1s linear 0.125s infinite;
+                animation: spin 1s linear 0.125s infinite;
             }
             &.dot-3 {
                 top: 50%;
@@ -821,6 +829,10 @@ progress {
                 margin: -4px 0 0 0;
                 // opacity: 0.75;
                 -webkit-animation: spin 1s linear 0.25s infinite;
+                -moz-animation: spin 1s linear 0.25s infinite;
+                -ms-animation: spin 1s linear 0.25s infinite;
+                -o-animation: spin 1s linear 0.25s infinite;
+                animation: spin 1s linear 0.25s infinite;
             }
             &.dot-4 {
                 top: 82%;
@@ -828,6 +840,10 @@ progress {
                 margin: -4px 0 0 -4px;
                 // opacity: 0.625;
                 -webkit-animation: spin 1s linear 0.375s infinite;
+                -moz-animation: spin 1s linear 0.375s infinite;
+                -ms-animation: spin 1s linear 0.375s infinite;
+                -o-animation: spin 1s linear 0.375s infinite;
+                animation: spin 1s linear 0.375s infinite;
             }
             &.dot-5 {
                 top: 95%;
@@ -835,6 +851,10 @@ progress {
                 margin: -4px 0 0 -4px;
                 // opacity: 0.5;
                 -webkit-animation: spin 1s linear 0.5s infinite;
+                -moz-animation: spin 1s linear 0.5s infinite;
+                -ms-animation: spin 1s linear 0.5s infinite;
+                -o-animation: spin 1s linear 0.5s infinite;
+                animation: spin 1s linear 0.5s infinite;
             }
             &.dot-6 {
                 top: 82%;
@@ -842,6 +862,10 @@ progress {
                 margin: -4px 0 0 -4px;
                 // opacity: 0.375;
                 -webkit-animation: spin 1s linear 0.625s infinite;
+                -moz-animation: spin 1s linear 0.625s infinite;
+                -ms-animation: spin 1s linear 0.625s infinite;
+                -o-animation: spin 1s linear 0.625s infinite;
+                animation: spin 1s linear 0.625s infinite;
             }
             &.dot-7 {
                 top: 50%;
@@ -849,6 +873,10 @@ progress {
                 margin: -4px 0 0 -4px;
                 // opacity: 0.25;
                 -webkit-animation: spin 1s linear 0.75s infinite;
+                -moz-animation: spin 1s linear 0.75s infinite;
+                -ms-animation: spin 1s linear 0.75s infinite;
+                -o-animation: spin 1s linear 0.75s infinite;
+                animation: spin 1s linear 0.75s infinite;
             }
             &.dot-8 {
                 top: 20%;
@@ -856,6 +884,10 @@ progress {
                 margin: -4px 0 0 -4px;
                 // opacity: 0.125;
                 -webkit-animation: spin 1s linear 0.875s infinite;
+                -moz-animation: spin 1s linear 0.875s infinite;
+                -ms-animation: spin 1s linear 0.875s infinite;
+                -o-animation: spin 1s linear 0.875s infinite;
+                animation: spin 1s linear 0.875s infinite;
             }
         }
     }
@@ -1149,7 +1181,7 @@ progress {
         }
         .form-control {
             background: #fff;
-            border: none;
+            // border: none;
             outline: none;
             font-size: 13px;
             @include border-radius(3px 0 0 3px);
@@ -1769,30 +1801,50 @@ div.terminal-view {
                     margin: 0 0 0 -4px;
                     // opacity: 1;
                     -webkit-animation: spin 1s linear 0 infinite;
+                    -moz-animation: spin 1s linear 0 infinite;
+                    -ms-animation: spin 1s linear 0 infinite;
+                    -o-animation: spin 1s linear 0 infinite;
+                    animation: spin 1s linear 0 infinite;
                 }
                 &.dot-2 {
                     left: 25%;
                     margin: 0 0 0 -4px;
                     // opacity: 0.875;
                     -webkit-animation: spin 1s linear 0.125s infinite;
+                    -moz-animation: spin 1s linear 0.125s infinite;
+                    -ms-animation: spin 1s linear 0.125s infinite;
+                    -o-animation: spin 1s linear 0.125s infinite;
+                    animation: spin 1s linear 0.125s infinite;
                 }
                 &.dot-3 {
                     left: 50%;
                     margin: 0 0 0 -4px;
                     // opacity: 0.75;
                     -webkit-animation: spin 1s linear 0.25s infinite;
+                    -moz-animation: spin 1s linear 0.25s infinite;
+                    -ms-animation: spin 1s linear 0.25s infinite;
+                    -o-animation: spin 1s linear 0.25s infinite;
+                    animation: spin 1s linear 0.25s infinite;
                 }
                 &.dot-4 {
                     left: 75%;
                     margin: 0 0 0 -4px;
                     // opacity: 0.625;
                     -webkit-animation: spin 1s linear 0.375s infinite;
+                    -moz-animation: spin 1s linear 0.375s infinite;
+                    -ms-animation: spin 1s linear 0.375s infinite;
+                    -o-animation: spin 1s linear 0.375s infinite;
+                    animation: spin 1s linear 0.375s infinite;
                 }
                 &.dot-5 {
                     right: 0;
                     margin: 0 -4px 0 0;
                     // opacity: 0.5;
                     -webkit-animation: spin 1s linear 0.5s infinite;
+                    -moz-animation: spin 1s linear 0.5s infinite;
+                    -ms-animation: spin 1s linear 0.5s infinite;
+                    -o-animation: spin 1s linear 0.5s infinite;
+                    animation: spin 1s linear 0.5s infinite;
                 }
             }
         }

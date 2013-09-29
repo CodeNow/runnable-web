@@ -21,6 +21,9 @@ var utils = module.exports = {
       return obj[key];
     };
   },
+  lowercase: function (str) {
+    return str.toLowerCase();
+  },
   inside: function (arrOrStr) {
     return function (thing) {
       return ~arrOrStr.indexOf(thing);

@@ -44,12 +44,7 @@
         <div class="hero-content">
           <h1>Discover <div>
             <ul class="texts" style="display: none;">
-              <li>APIs</li>
-              <li>Services</li>
-              <li>Libraries</li>
-              <li>Modules</li>
-              <li>Frameworks</li>
-              <li>Platforms</li>
+              {{#each keywords}}<li>{{.}}</li>{{/each}}
             </ul>
           </div> through code</h1>
           <p>Full-stack code anyone can run from their browser</p>
@@ -78,7 +73,7 @@
       <ul class="nav navbar-nav">
         {{#each categories.models}}
         {{#with attributes}}
-        {{view 'item_link' href=link text=name activeClass="yoyoma"}}
+        {{view 'item_link' href=link text=name}}
         {{/with}}
         {{/each}}
       </ul>

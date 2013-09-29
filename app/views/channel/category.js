@@ -1,7 +1,42 @@
 var BaseView = require('../base_view');
 var utils = require('../../utils');
+var _ = require('underscore');
+var Super = BaseView.prototype;
+var delay = 50;
+var cycleTime = 2000;
+
+var keywordsAndExamples = {
+  'Libraries' : {
+    name: 'How to upload a file using jQuery (PHP)?',
+    id: 'UZKDAYo3XEw2AACX'
+  },
+  'APIs'      : {
+    name: 'Get latest Ted Talks videos from YouTube (PHP)',
+    id: 'Uj4SkdqCFq4tAACR',
+  },
+  'Services'  : {
+    name: 'Make a Payment with Paypal API (Node.js)',
+    id: 'UXgzNO_v2oZyAADG'
+  },
+  'Frameworks': {
+    name: 'How to implement captcha with CakePHP (PHP)?', //How to perform authentication with Django (Python)
+    id: 'Uhe0zoDwlW4tAAIC'
+  },
+  'Modules'   : {
+    name: 'Sending and receiving events with socket.io (Node.js)',
+    id: 'UTlPMV-f2W1TAAAu'
+  }
+};
+
+var keywords = _.keys(keywordsAndExamples);
+var examples = _(keywordsAndExamples).values().map(utils.pluck('name'));
+var ids      = _(keywordsAndExamples).values().map(utils.pluck('id'));
 
 module.exports = BaseView.extend({
+  events: {
+    'focus input'         : 'selectInput',
+    'submit form'         : 'submitSearch'
+  },
   sortChannels: function () {
     var opts = this.options;
     var category = opts.channels.params.category.toLowerCase();
@@ -29,11 +64,13 @@ module.exports = BaseView.extend({
       attribs = category.attributes;
       attribs.link = '/c/'+attribs.name;
     });
+    opts.keywords = keywords;
     return opts;
   },
   postRender: function () {
     if (typeof window !== 'undefined') window.tj = this;
     this.textEffect();
+    this.searchSuggestions();
     this.imageTile();
   },
   textEffect: function () {
@@ -45,7 +82,7 @@ module.exports = BaseView.extend({
       loop: true,
 
       // sets the minimum display time for each text before it is replaced
-      minDisplayTime: 2000,
+      minDisplayTime: cycleTime,
 
       // sets the initial delay before starting the animation
       // (note that depending on the in effect you may need to manually apply
@@ -60,36 +97,45 @@ module.exports = BaseView.extend({
       inEffects: [],
 
       // custom set of 'out' effects
-      outEffects: [ 'hinge' ],
+      outEffects: [],
 
       // in animation settings
       in: {
-      // set the effect name
-      effect: 'fadeInDown',
-
-      // set the delay factor applied to each consecutive character
-      delayScale: 0,
-
-      // set the delay between each character
-      delay: 50,
-
-      // set to true to animate all the characters at the same time
-      sync: false,
-
-      // randomize the character sequence
-      // (note that shuffle doesn't make sense with sync = true)
-      shuffle: false
+        // set the effect name
+        effect: 'fadeInDown',
+        // set the delay factor applied to each consecutive character
+        delayScale: 0,
+        // set the delay between each character
+        delay: delay,
+        // set to true to animate all the characters at the same time
+        sync: false,
+        // randomize the character sequence
+        // (note that shuffle doesn't make sense with sync = true)
+        shuffle: false
       },
 
       // out animation settings.
       out: {
         effect: 'fadeOutDown',
         delayScale: 0,
-        delay: 50,
+        delay: delay,
         sync: false,
         shuffle: false,
       }
     });
+  },
+  searchSuggestions: function () {
+    var queries = examples;
+    var index = 0;
+    function nextQuery () {
+      setTimeout(function () {
+        this.$('.hero input.tt-query').val(queries[index]);
+        index++;
+        if (index === queries.length) index = 0;
+      }, 1500+delay);
+    }
+    nextQuery();
+    this.suggestionInterval = setInterval(nextQuery, cycleTime*2);
   },
   imageTile: function () {
     var $bubbles = this.$('.bubbles');
@@ -104,6 +150,31 @@ module.exports = BaseView.extend({
         }
       });
     });
+  },
+  stopSlides: function () {
+    this.stopped = true;
+    clearInterval(this.suggestionInterval);
+  },
+  selectInput: function (evt) {
+    if (this.stopped) return;
+    this.stopSlides();
+    var self = this;
+    setTimeout(function () {
+      self.$('input.tt-query').select();
+    }, 10); //settimeout bc typeahead js is interfering
+  },
+  submitSearch: function (evt) {
+    var query = this.$('input.tt-query').val().trim();
+    var index = examples.map(utils.lowercase).indexOf(query.toLowerCase());
+    if ( ~index ) {
+      evt.preventDefault();
+      this.app.set('loading', true);
+      window.location.href = '/'+ids[index];
+    }
+  },
+  remove: function () {
+    clearInterval(this.suggestionInterval);
+    Super.remove.apply(this, arguments);
   }
 });
 
