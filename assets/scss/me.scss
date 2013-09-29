@@ -847,3 +847,17 @@ $searchbox-height:50px;
 #primary .nav .dropdown-menu li:first-child a:before {
   border-bottom: 8px solid #fff;
 }
+
+#project-details h2.page-title form{
+  margin-bottom: 5px;
+}
+
+#project-details h2.page-title input.form-control{
+  margin: 0 0 5px 0px;
+}
+
+.runnable-description{
+  input{
+    margin: 15px 0;
+  }
+}

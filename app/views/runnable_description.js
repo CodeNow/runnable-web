@@ -3,6 +3,7 @@ var Image = require('../models/image');
 var utils = require('../utils');
 
 module.exports = BaseView.extend({
+  className: 'runnable-description',
   events: {
     'click .edit-link': 'clickEdit',
     'submit form'     : 'submitDescription',
