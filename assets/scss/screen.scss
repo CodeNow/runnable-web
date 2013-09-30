@@ -1570,6 +1570,7 @@ progress {
             background-image: url(../images/sprite-tab-close.png);
             @include background-image-retina('../images/sprite-tab-close@2x.png');
             background-size: 10px auto;
+            background-position: 0 0;
             &:hover {
                 background-position: 0 -10px;
                 cursor: pointer;

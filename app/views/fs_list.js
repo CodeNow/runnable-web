@@ -1,6 +1,7 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
 var utils = require('../utils');
+var Super = BaseView.prototype;
 
 module.exports = BaseView.extend({
   tagName: 'ul',
@@ -51,6 +52,9 @@ module.exports = BaseView.extend({
         collection.trigger('sync');
       }
     }
+  },
+  render: function () {
+    Super.render.apply(this, arguments);
   },
   slideUpHeight: function () {
     var $el = this.$el;
