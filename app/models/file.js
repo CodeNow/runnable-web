@@ -61,7 +61,8 @@ module.exports = Base.extend({
           utils.parseJSON(xhr.responseText, function (err, json) {
             if (err) { cb('Server error, please try again later.') } else {
               json = json[0]; //json is array
-              self.set(json);
+              self.set(json, {silent:true});
+              self.updateSaved();
               cb(null, self);
             }
           })

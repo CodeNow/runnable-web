@@ -45,6 +45,7 @@ module.exports = BaseView.extend({
         this.showError(err);
       }
       else {
+        // collection.store();
         collection.forEach(function (model) {
           model.store(); // VERY IMPORTANT! - ask TJ.
           if (model.isDir()) model.contents.store();
