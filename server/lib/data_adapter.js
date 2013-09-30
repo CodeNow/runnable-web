@@ -33,6 +33,7 @@ DataAdapter.prototype.request = function(req, api, options, callback, res) {
   if (~(req.header('content-type') || '').indexOf('form-data')) {
     // true proxy.. for form-data requests
     req.url = api.path;
+    req.headers['host'] = apiHost;
     req.headers['runnable-token'] = req.session.access_token;
     console.log("Access Token: " + req.session.access_token);
     // dont worry about setting the access token here, we can assume a multipart request will never be the
