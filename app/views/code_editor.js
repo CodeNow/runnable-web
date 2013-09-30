@@ -1,10 +1,7 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
+var Image = require('../models/image')
 
-// ATTN the purpose of this view is to ensure that the rootDir for the
-// currently loading project has been fetched for its sub views.
-// Important for push state navigation from any "project list" page
-// to a "single project page"
 module.exports = BaseView.extend({
   events: {
     'click .open-file-explorer' : 'showFiles'
@@ -16,66 +13,54 @@ module.exports = BaseView.extend({
   postHydrate: function () {
     var model = this.model;
     var canEdit = this.app.user.canEdit(model);
-    if (!canEdit) {
-      var views = model.get('views') + 1;
-      model.set('views', views);
-      model.save({}, {
-        url: '/runnables/' +
-          model.id +
-          '/stats/views',
-        method: 'post'
-      });
+
+    // if not canEdit(owner or admin) and Image page
+    var dispatch = this.app.dispatch;
+    if (!canEdit && model instanceof Image) {
+      this.incAndTrack('views', 'View')();
+      dispatch.on('copy',  this.incAndTrack('copies', 'Copy'));
+      dispatch.on('paste', this.incAndTrack('pastes', 'Paste'));
+      dispatch.on('cut',   this.incAndTrack('cuts',   'Cut'));
+      dispatch.on('run',   this.incAndTrack('runs',   'Run'));
     }
-    this.app.dispatch.on('copy', function () {
-      if (!canEdit) {
-        var copies = model.get('copies') + 1;
-        model.set('copies', copies);
-        model.save({}, {
-          url: '/runnables/' +
-            model.id +
-            '/stats/copies',
-          method: 'post'
-        });
-      }
-    });
-    this.app.dispatch.on('paste', function () {
-      if (!canEdit) {
-        var pastes = model.get('pastes') + 1;
-        model.set('pastes', pastes);
-        model.save({}, {
-          url: '/runnables/' +
-            model.id +
-            '/stats/pastes',
-          method: 'post'
-        });
-      }
-    });
-    this.app.dispatch.on('cut', function () {
-      if (!canEdit) {
-        var cuts = model.get('cuts') + 1;
-        model.set('cuts', cuts);
-        model.save({}, {
-          url: '/runnables/' +
-            model.id +
-            '/stats/cuts',
-          method: 'post'
-        });
-      }
-    });
-    this.app.dispatch.on('run', function () {
-      if (!canEdit) {
-        var runs = model.get('runs') + 1;
-        model.set('runs', runs);
-        model.save({}, {
-          url: '/runnables/' +
-            model.id +
-            '/stats/runs',
-          method: 'post'
-        });
-      }
+    else {
+      this.track('View');
+      dispatch.on('copy',  this.track.bind(this, 'Copy'));
+      dispatch.on('paste', this.track.bind(this, 'Paste'));
+      dispatch.on('cut',   this.track.bind(this, 'Cut'));
+      dispatch.on('run',   this.track.bind(this, 'Run'));
+    }
+  },
+  incAndTrack: function (stat, eventName) {
+    var model = this.model;
+    var self = this;
+
+    return function (trackingData) {
+      self.increment(stat);
+      self.track(eventName, trackingData);
+    };
+  },
+  increment: function (stat) {
+    var model = this.model;
+    var plusone = model.get(stat) + 1;
+
+    model.set(stat, plusone);
+    model.save({}, {
+      url: '/runnables/' + model.id + '/stats/' + stat,
+      method: 'post'
     });
   },
+  track: function (name, data) {
+    var model = this.model;
+
+    data = data || {};
+    data.projectId = model.id;
+    data.isImage = model instanceof Image;
+    Track.event('Code', name, data);
+    Track.increment(name.toLowerCase());
+  },
   showFiles: function (evt) {
+    // show file browser
     this.app.dispatch.trigger('toggle:files', true);
   },
   getTemplateData: function () {

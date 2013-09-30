@@ -9,10 +9,11 @@ module.exports = BaseView.extend({
   // minHeight: 300,
   // maxHeight: 550,
   events: {
-    'copy': 'onCopy',
-    'paste': 'onPaste',
-    'cut': 'onCut'
+    'copy' : 'copy',
+    'paste': 'paste',
+    'cut'  : 'cut'
   },
+  dontTrackEvents: ['copy', 'paste', 'cut'],
   getTemplateData: function () {
     //for serverside render
     var selectedFile = this.collection.selectedFile();
@@ -192,7 +193,22 @@ module.exports = BaseView.extend({
 
     return (new mode.Mode());
   },
-  onEdit: function (file) {
+  onEdit: function (file, evt) {
+    var self = this;
+
+    debugger;
+    if (evt.data.action === 'insertText' && evt.data.text && evt.data.text.length >= 4) {
+      self.justPasted = evt.data.text;
+      self.evtStartLine = evt.data.range.start.row;
+      self.evtStartColumn = evt.data.range.start.column;
+    }
+    else if ((evt.data.action === 'removeText' || evt.data.action === 'removeLines') && evt.data.text && evt.data.text.length >= 4) { // to filter just cut events, ignore delete
+      debugger;
+      self.justCut = evt.data.text;
+      self.evtStartLine = evt.data.range.start.row;
+      self.evtStartColumn = evt.data.range.start.column;
+    }
+
     this.adjustHeightToContents();
     var value = this.editor.getValue();
     file.set('content', value);
@@ -221,17 +237,45 @@ module.exports = BaseView.extend({
   showLoader: function () {
     console.log('show loader');
   },
-  showError: function (err) {
-    alert(err);
+  copy: function (evt) {
+    this.app.dispatch.trigger('copy', {
+      content  : this.editor.getCopyText()
+    });
   },
-  onCopy: function (evt) {
-    this.app.dispatch.trigger('copy');
+  paste: function (evt) {
+    var self = this;
+    if (!utils.exists(this.justPasted)) {
+      setTimeout(dispatch, 10);
+    }
+    else {
+      dispatch();
+    }
+    function dispatch () {
+      self.app.dispatch.trigger('paste', {
+        content  : self.justPasted,
+        line     : self.evtStartLine,
+        column   : self.evtStartColumn
+      });
+      self.justPasted = null;
+    }
   },
-  onPaste: function (evt) {
-    this.app.dispatch.trigger('paste');
-  },
-  onCut: function (evt) {
-    this.app.dispatch.trigger('cut');
+  cut: function (evt) {
+    var self = this;
+    if (!utils.exists(this.justCut)) {
+      setTimeout(dispatch, 10);
+    }
+    else {
+      dispatch();
+    }
+    function dispatch () {
+      self.app.dispatch.trigger('cut', {
+        content  : self.justCut,
+        line     : self.evtStartLine,
+        column   : self.evtStartColumn
+      });
+      Track.increment('copy');
+      self.justCut = null;
+    }
   }
 });
 

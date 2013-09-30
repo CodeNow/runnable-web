@@ -461,21 +461,6 @@ button.btn-sm, .btn-xs {
   width: 600px;
 }
 
-aside#file-explorer {
-  .nav {
-    li {
-      &.active > div > a {
-        background: $orange;
-        color: #fff;
-        @include border-radius(0);
-        &.arrow:before {
-          border-top: 6px solid #fff !important;
-        }
-      }
-    }
-  }
-}
-
 #output-results-container .loader{
   color: black;
 }
@@ -704,42 +689,50 @@ aside#file-explorer {
 }
 
 #project-editor-container aside#file-explorer > #drop-to-add {
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
-    left: 10px;
-    height: $dropzone-height;
-    border: dashed 2px #BDBDBD;
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  left: 10px;
+  height: $dropzone-height;
+  border: dashed 2px #BDBDBD;
+  overflow: hidden;
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #BDBDBD;
+  opacity: 0.95;
+  background: white;
+  @include border-radius(5px);
+  .drop-to-add-icon {
+    margin-top: 10px;
+    height: 30px;
+    width: 25px;
+    background-image: url(../images/sprite-upload.png);
+    background-repeat: no-repeat;
+    @include background-image-retina('../images/sprite-upload@2x.png');
+    background-size: 25px auto;
     overflow: hidden;
-    display: block;
-    text-align: center;
-    font-size: 12px;
-    font-weight: bold;
-    color: #BDBDBD;
-    opacity: 0.95;
-    background: white;
-    @include border-radius(5px);
+    display: inline-block;
+  }
+  &:hover {
+    border: solid 2px $purple-light;
+    text-decoration: none;
+    color: $purple-light;
     .drop-to-add-icon {
-      margin-top: 10px;
-      height: 30px;
-      width: 25px;
-      background-image: url(../images/sprite-upload.png);
-      background-repeat: no-repeat;
-      @include background-image-retina('../images/sprite-upload@2x.png');
-      background-size: 25px auto;
-      overflow: hidden;
-      display: inline-block;
-    }
-    &:hover {
-      border: solid 2px $purple-light;
-      text-decoration: none;
-      color: $purple-light;
-      .drop-to-add-icon {
-        background-position: 0 -30px;
-      }
+      background-position: 0 -30px;
     }
   }
-  element.style {
+}
+
+#project-editor-container aside#file-explorer .nav li.active a,
+aside#file-explorer .nav li.active > div > a {
+  background: $orange;
+  color: #fff;
+  @include border-radius(0);
+  &.arrow:before {
+    border-top: 6px solid #fff !important;
+  }
 }
 
 #tags-main #tags-content {
@@ -846,6 +839,29 @@ $searchbox-height:50px;
 
 #primary .nav .dropdown-menu li:first-child a:before {
   border-bottom: 8px solid #fff;
+}
+
+#project-details{
+  .runnable-description{
+    .edit-image{
+      display: inline-block;
+      width: 16px;
+      height: 17px;
+      background-size: 16px auto;
+      background-image: url(../images/sprite-edit-title.png);
+      margin-left: 8px;
+      background-repeat: no-repeat;
+      vertical-align: middle;
+      @include background-image-retina('../images/sprite-edit-title@2x.png');
+      &:hover, &.active {
+          background-position: 0 -18px;
+      }
+      &.active {
+          margin-left: 14px;
+          margin-bottom: -3px;
+      }
+    }
+  }
 }
 
 #project-details h2.page-title form{
