@@ -58,12 +58,16 @@
       // <!-- start Metrics Aliasing -->
       var userId = USER.email || USER._id;
       if (userId) {
+        var userData = {};
+        for (var key in USER) {
+          userData[key] = USER[key];
+        }
+        userData.name = userId;
+        userData.referrer = document.referrer;
+        // track
         mixpanel.alias(userId);
         mixpanel.name_tag(userId);
-        mixpanel.people.set({
-          "name": userId,
-          "referrer": document.referrer
-        });
+        mixpanel.people.set(userData);
         mixpanel.identify(userId);
       }
     </script>
