@@ -127,12 +127,38 @@ module.exports = BaseView.extend({
   searchSuggestions: function () {
     var queries = examples;
     var index = 0;
+    var self = this;
+    var $button = this.$('.hero button');
+    var $search = this.$('.hero input.tt-query');
+    self.typeIntervals = [];
+    var int1, int2, int3;
+
     function nextQuery () {
-      setTimeout(function () {
-        this.$('.hero input.tt-query').val(queries[index]);
+
+      int1 = setTimeout(function () {
+        console.log('outer')
+        var str = queries[index];
+
+        for (var i =0; i<str.length+1; i++) {
+          (function (i) {
+            int2 = setTimeout(function () {
+              $search.val(str.slice(0, i));
+              if (i==str.length) {
+                $button.addClass('shine');
+                int3 = setTimeout(function () {
+                  $button.removeClass('shine');
+                }, 3000);
+                self.typeIntervals.push(int3);
+              }
+            }, 35*i);
+            self.typeIntervals.push(int2);
+          })(i);
+        }
+
         index++;
         if (index === queries.length) index = 0;
-      }, 1500+delay);
+      }, 1000+delay);
+      self.typeIntervals.push(int1);
     }
     nextQuery();
     this.suggestionInterval = setInterval(nextQuery, cycleTime*2);
@@ -146,7 +172,7 @@ module.exports = BaseView.extend({
         itemPositionDataEnabled : true,
         transformsEnabled       : false,
         onLayout : function(){
-          $bubbles.find('.bubble').addClass('hero-animate');
+          // $bubbles.find('.bubble').addClass('hero-animate');
         }
       });
     });
@@ -154,6 +180,7 @@ module.exports = BaseView.extend({
   stopSlides: function () {
     this.stopped = true;
     clearInterval(this.suggestionInterval);
+    this.typeIntervals.forEach(clearInterval);
   },
   selectInput: function (evt) {
     if (this.stopped) return;
