@@ -20,13 +20,16 @@ module.exports = EditorButtonView.extend({
   click: function (evt) {
     evt.preventDefault();
     var user = this.app.user;
+    var dispatch = this.app.dispatch;
     if (user.isRegistered()) {
       this.saveAndRedirect();
     }
     else {
-      var signupModal = new SignupModal({ app:this.app });
+      var signupModal = new SignupModal({
+        app    : this.app,
+        onClose: this.stopListening.bind(this, user)
+      });
       this.listenToOnce(user, 'auth', this.saveAndRedirect.bind(this));
-      this.listenToOnce(signupModal, 'remove', this.stopListening.bind(this, signupModal));
       signupModal.open();
     }
   },

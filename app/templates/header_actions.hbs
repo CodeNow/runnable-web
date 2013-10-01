@@ -1,11 +1,8 @@
-{{#if_result model method="isRegistered"}}
-<!-- Signed In, class on nav "signed-in" -->
 <li><a href="/all">Browse All</a></li>
-{{#if_result model method="isVerified"}}
-<li class="active"><a href="/new">Create New</a></li>
-{{else}}
-<li class="active publish"><a href="javascript:void(0);">Publish Code</a></li>
-{{/if_result}}
+<li class="active">
+  {{view "create_new_button" model=model}}
+</li>
+{{#if_result model method="isRegistered"}}
 <li class="dropdown">
   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
     {{#with model.attributes}}
@@ -23,8 +20,5 @@
   </ul>
 </li>
 {{else}}
-<!-- Signed Out, class on nav "signed-out" -->
-  <li><a href="/all">Browse All</a></li>
-  <li class="active publish"><a href="javascript:void(0);">Publish Code</a></li>
   <li><a id="header-login-link"href="#">Sign In</a></li>
 {{/if_result}}

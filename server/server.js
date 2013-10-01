@@ -16,6 +16,13 @@ var express = require('express'),
 var path = require('path');
 var config = require('./lib/env').current;
 
+function envIs (envs) {
+  if (!Array.isArray(envs)) envs = [envs];
+  return envs.some(function (env) {
+    return process.env.NODE_ENV == env;
+  });
+}
+
 // Add Handlebars helpers
 require('../app/handlebarsHelpers').add(Handlebars);
 
@@ -61,12 +68,14 @@ function initMiddleware() {
   app.engine('js', viewEngine);
 
   // set the middleware stack
-  app.configure('production', function() {
+  var maxAge = 0;
+  if (envIs(['production', 'staging'])) {
     app.use(express.compress());
     app.use(express.staticCache());
-  });
+    maxAge = 1000*60*60*24;
+  }
   app.use(require('./middleware/disallowRobotsIfNotProduction'));
-  app.use(express.static(__dirname + '/../public', { maxAge:1000*60*60*24 }));
+  app.use(express.static(__dirname + '/../public', { maxAge:maxAge }));
   app.use(require('./middleware/cannon')()); // no canon for static
   app.use(function (req, res, next) {
     if (/^\/(images|styles|scripts|external)\/.+/.test(req.url)) {

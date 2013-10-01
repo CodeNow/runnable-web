@@ -6,8 +6,9 @@ module.exports = ModalView.extend({
   id:'login',
   className: 'fade',
   defaultHeader: "Log in to Runnable",
-  postInitialize: function (options) {
+  postInitialize: function () {
     this.options.header = this.options.header || this.defaultHeader;
+    this.onClose = this.options.onClose;
   },
   events: {
     'click .signup-link' : 'openSignup',
@@ -18,9 +19,10 @@ module.exports = ModalView.extend({
   },
   openSignup: function (evt) {
     evt.preventDefault();
+    this.openedSignup = true;
     this.close();
     var SignupModal = require('./signup_modal');
-    var signupModal = new SignupModal({ app:this.app });
+    var signupModal = new SignupModal({ app:this.app, onClose:this.onClose });
     signupModal.open();
   },
   login: function (evt) {
@@ -37,6 +39,11 @@ module.exports = ModalView.extend({
   },
   showError: function (err) {
     alert(err);
+  },
+  remove: function () {
+    debugger;
+    if (!this.openedSignup) this.onClose && this.onClose();
+    Super.remove.apply(this, arguments);
   }
 });
 
