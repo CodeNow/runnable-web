@@ -34,6 +34,7 @@ var ids      = _(keywordsAndExamples).values().map(utils.pluck('id'));
 
 module.exports = BaseView.extend({
   events: {
+    'keydown input'       : 'onType',
     'focus input'         : 'selectInput',
     'submit form'         : 'submitSearch'
   },
@@ -125,43 +126,57 @@ module.exports = BaseView.extend({
     });
   },
   searchSuggestions: function () {
-    var queries = examples;
-    var index = 0;
     var self = this;
+    var queries = examples;
     var $button = this.$('.hero button');
     var $search = this.$('.hero input.tt-query');
-    self.typeIntervals = [];
+
+    this.index = 0;
+    self.animIntervals = [];
+    self.animTimeouts = [];
     var int1, int2, int3;
+    var tim1, tim2, tim3;
+
+    tim1 = setTimeout(start, 500);
+    self.animTimeouts.push(tim1);
+
+    function start () {
+      nextQuery();
+      int1 = setInterval(nextQuery, cycleTime*2);
+      self.animIntervals.push(int1);
+    }
 
     function nextQuery () {
+      self.animIntervals = [];
+      self.animTimeouts = [];
+      var str = queries[self.index];
 
-      int1 = setTimeout(function () {
-        console.log('outer')
-        var str = queries[index];
-
-        for (var i =0; i<str.length+1; i++) {
-          (function (i) {
-            int2 = setTimeout(function () {
-              $search.val(str.slice(0, i));
-              if (i==str.length) {
-                $button.addClass('shine');
-                int3 = setTimeout(function () {
-                  $button.removeClass('shine');
-                }, 3000);
-                self.typeIntervals.push(int3);
-              }
-            }, 35*i);
-            self.typeIntervals.push(int2);
-          })(i);
-        }
-
-        index++;
-        if (index === queries.length) index = 0;
-      }, 1000+delay);
-      self.typeIntervals.push(int1);
+      for (var i = 1; i < str.length+1; i++) {
+        searchbarAnimate(i);
+      }
     }
-    nextQuery();
-    this.suggestionInterval = setInterval(nextQuery, cycleTime*2);
+
+    function searchbarAnimate (i) {
+      tim2 = setTimeout(typeEffect.bind(null, i), 35*i);
+      self.animTimeouts.push(tim2);
+    }
+
+    function typeEffect (i) {
+      var str = queries[self.index];
+      var slice = str.slice(0, i);
+      // add letter
+      $search.val(slice);
+      // shine button if done
+      if (i === str.length) {
+        // shine button
+        $button.addClass('shine');
+        tim3 = setTimeout($button.removeClass.bind($button, 'shine'), 3000);
+        self.animTimeouts.push(tim3);
+        // setup next query
+        self.index++;
+        if (self.index === queries.length) self.index = 0;
+      }
+    }
   },
   imageTile: function () {
     var $bubbles = this.$('.bubbles');
@@ -170,37 +185,40 @@ module.exports = BaseView.extend({
         itemSelector : 'img',
         layoutMode   : 'masonry',
         itemPositionDataEnabled : true,
-        transformsEnabled       : false,
-        onLayout : function(){
-          // $bubbles.find('.bubble').addClass('hero-animate');
-        }
+        transformsEnabled       : false
+        // onLayout : function(){
+        //   // $bubbles.find('.bubble').addClass('hero-animate'); // commented out = no pattern spinning..
+        // }
       });
     });
   },
-  stopSlides: function () {
+  stopSearchAnimation: function () {
     this.stopped = true;
-    clearInterval(this.suggestionInterval);
-    this.typeIntervals.forEach(clearInterval);
+    this.animIntervals.forEach(clearInterval);
+    this.animTimeouts.forEach(clearTimeout);
   },
   selectInput: function (evt) {
     if (this.stopped) return;
-    this.stopSlides();
+    this.stopSearchAnimation();
     var self = this;
     setTimeout(function () {
       self.$('input.tt-query').select();
     }, 10); //settimeout bc typeahead js is interfering
   },
   submitSearch: function (evt) {
-    var query = this.$('input.tt-query').val().trim();
-    var index = examples.map(utils.lowercase).indexOf(query.toLowerCase());
-    if ( ~index ) {
+    if (!this.typed) {
+      this.stopSearchAnimation();
       evt.preventDefault();
       this.app.set('loading', true);
-      window.location.href = '/'+ids[index];
+      this.app.router.navigate('/'+ids[this.index], {trigger:true});
     }
   },
+  onType: function () {
+    if (this.typed) return;
+    this.typed = true;
+  },
   remove: function () {
-    clearInterval(this.suggestionInterval);
+    this.stopSearchAnimation();
     Super.remove.apply(this, arguments);
   }
 });
