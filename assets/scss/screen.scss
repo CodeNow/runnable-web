@@ -902,10 +902,11 @@ progress {
             padding: 0;
             display: inline-block;
             height: 24px;
-            width: 129px;
+            width: 151px;
             background-image: url(../images/sprite-runnable-logo.png);
             @include background-image-retina('../images/sprite-runnable-logo@2x.png');
-            background-size: 129px auto;
+            background-size: 150px auto;
+            background-repeat: no-repeat;
             &:hover {
                 background-position: 0 -24px;
             }
