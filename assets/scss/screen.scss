@@ -901,14 +901,14 @@ progress {
             margin: 13px 0 0 15px;
             padding: 0;
             display: inline-block;
-            height: 24px;
+            height: 29px;
             width: 151px;
             background-image: url(../images/sprite-runnable-logo.png);
             @include background-image-retina('../images/sprite-runnable-logo@2x.png');
             background-size: 150px auto;
             background-repeat: no-repeat;
             &:hover {
-                background-position: 0 -24px;
+                background-position: 0 -28px;
             }
         }
     }
