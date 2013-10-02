@@ -279,5 +279,115 @@ module.exports = {
         cb(null, results);
       }
     ], callback);
+  },
+  lock: function(params, callback) {
+    var self = this;
+    if (!utils.isObjectId64(params._id)) {
+      var channelParams;
+      if (utils.isObjectId64(params.name)) {
+        // channel runnable page
+        channelParams = { channel:params._id, _id:params.name };
+        channelController.runnable.call(this, channelParams, callback);
+      }
+      else{
+        // channel page
+        channelParams = { channel:params._id };
+        channelController.index.call(this, channelParams, function (err, results) {
+          callback(err, 'channel/index', results);
+        });
+      }
+    }
+    else {
+      var app = this.app;
+      async.waterfall([
+        fetchUserAndImage.bind(this, params._id),
+        function check404 (results, cb) {
+          if (!results || !results.image) {
+            cb({ status:404 });
+          }
+          else {
+            cb(null, results);
+          }
+        },
+        function nameInUrl (results, cb) {
+          var imageURL = results.image.appURL();
+          if (!utils.isCurrentURL(app, imageURL)|| params.channel) {
+            self.redirectTo(imageURL);
+          }
+          else {
+            cb(null, results);
+          }
+        },
+        function container (results, cb) {
+          createContainerFrom.call(self, results.image.id, function (err, container) {
+            cb(err, _.extend(results, {
+              container: container
+            }));
+          });
+        },
+        function filesOwnerRelated (results, cb) {
+          async.parallel([
+            fetchFilesForContainer.bind(self, results.container.id),
+            fetchOwnerOf.bind(self, results.user, results.image), //image owner
+            fetchRelated.bind(self, results.image.id, results.container.attributes.tags)
+          ],
+          function (err, data) {
+            cb(err, !err && _.extend(results, data[0], data[1], data[2]));
+          });
+        },
+        function getSpecifications (results, cb) {
+          //merge into parallel
+          fetchSpecifications.call(self, function (err, specifications) {
+            if (err) {
+              cb(err);
+            } else {
+              results.specifications = specifications;
+              cb(null, results);
+            }
+          });
+        },
+        function getImplementations (results, cb) {
+          //merge into parallel
+          fetchImplementations.call(self, function (err, implementations) {
+            if (err) {
+              cb(err);
+            } else {
+              results.implementations = implementations;
+              cb(null, results);
+            }
+          });
+        }
+      ], function (err, results) {
+        // DEBUG!
+        if(err && err.status) {
+          console.log(err.status);
+          console.log((new Error()).message);
+          console.log((new Error()).stack);
+        }
+        if (err) { callback(err); } else {
+          callback(null, addSEO(results, self.req));
+        }
+      });
+    }
+    function addSEO (results) {
+      return _.extend(results, {
+        page: {
+          title      : formatTitle(results.image.nameWithTags()+" Code Example"),
+          canonical: canonical.call(self)
+        }
+      });
+    }
+  },
+  lockterminal: function (params, callback) {
+    fetchUser.call(this, function (err, results) {
+      if (err) {callback(err);} else {
+        results.page={
+          title: 'Terminal: too much load!',
+          canonical: canonical.call(this)
+        };
+        callback(null, results);
+      }
+    });
   }
+,
 };

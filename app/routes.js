@@ -1,5 +1,8 @@
+var lock = require('./lock');
+
 module.exports = function(match) {
-  match('',                     'home#press');
+  match('',                     'channel#category');
+  // match('',                     'home#press');
   match('login',                'home#login');
   match('signup',               'home#signup');
   match('search',               'runnable#search');
@@ -18,9 +21,16 @@ module.exports = function(match) {
   match('me/published',         'user#published');
   match('me/:_id',              'runnable#container');
   match('c/:category',          'channel#category');
-  match(':_id',                 'runnable#index');
-  match(':_id/output',          'runnable#output');
-  match(':_id/:name',           'runnable#index');
+  if (lock) {
+    match('terminal/load/locked', 'runnable#lockterminal');
+    match(':_id',                 'runnable#lock');
+    match(':_id/:name',           'runnable#lock');
+  }
+  else {
+    match(':_id',                 'runnable#index');
+    match(':_id/output',          'runnable#output');
+    match(':_id/:name',           'runnable#index');
+  }
   match(':channel',             'channel#index');
   match(':channel/page/:page',  'channel#index');
   match(':channel/:_id',        'channel#runnable'); // note! - hits ':id/:name'

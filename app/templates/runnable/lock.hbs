@@ -1,0 +1,64 @@
+{{view "app_user" model=user}}
+{{view "header_view" model=user context=.}}
+
+<section id="main" class="container">
+  <div id="project-details" class="row">
+    <div class="col-sm-9">
+      <h2 class="page-title clearfix">
+        <a class="vote-up">
+          <img src="/images/arrow-up.png" height="13" width="15" alt="Vote Up">
+          <span>{{image.attributes.votes}}</span>
+        </a>
+        {{view "runnable_title" model=image}}
+      </h2>
+      {{view "runnable_description" model=image}}
+      <div class="main-controls">
+        <button class="green">
+          <img src="/images/button-run.png" height="13" width="10">
+          <span>Run</span>
+        </button>
+        <button class="silver">
+          <img src="/images/button-save.png" height="16" width="19">
+          <span>Save a Copy</span>
+        </button>
+      </div>
+    </div>
+    {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created image=image}}
+  </div>
+  <div class="row">
+    <div class="col-sm-9">
+      {{view "code_editor" context=. editmode=false model=image lock=true}}
+      <h3 class="terminal-title">
+        <span>Terminal</span>
+      </h3>
+      <iframe class="terminal-iframe" src="/terminal/load/locked" frameborder="0" height='100%' width='100%'>
+      </iframe>
+    </div>
+    <ul id="sidebar" class="col-sm-3">
+      {{#if image.attributes.tags}}{{#if image.attributes.tags.length}}
+      <li class="tags">
+        <h3 class="widget-title">Tags</h3>
+        <ul class="clearfix">
+          {{#each image.attributes.tags}}
+          <li>
+          {{view "tag_link" name=name}}
+          </li>
+          {{/each}}
+        </ul>
+      </li>
+      {{/if}}{{/if}}
+      {{#if related.length}}
+      <li class="related-code">
+        <h3 class="widget-title">Related Code</h3>
+        <ul>
+          {{#each related.models}}
+          {{view "runnable_item_small" model=.}}
+          {{/each}}
+        </ul>
+      </li>
+      {{/if}}
+    </ul>
+  </div>
+</section>
+
+{{view "footer_view" model=user context=.}}

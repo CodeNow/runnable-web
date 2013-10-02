@@ -1,11 +1,18 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
+var lock = require('../lock');
 
-module.exports = BaseView.extend({
-  tagName: 'aside',
-  id: 'file-explorer',
-  className: 'closed',
-  events: {
+var events;
+if (lock) {
+  events = {
+    'click .dark-theme'  : 'setDarkTheme',
+    'click .light-theme' : 'setLightTheme',
+    'click .open-context-menu'   : 'showFileMenu',
+    'click .close-file-explorer' : 'hideFiles',
+  };
+}
+else {
+  events = {
     'click .dark-theme'  : 'setDarkTheme',
     'click .light-theme' : 'setLightTheme',
     'click .open-context-menu'   : 'showFileMenu',
@@ -15,7 +22,14 @@ module.exports = BaseView.extend({
     'dragover #drop-to-add'  : 'stopPropagation',
     'dragleave #drop-to-add' : 'stopPropagation',
     'contextmenu #drop-to-add' : 'stopPropagation',
-  },
+  };
+}
+
+module.exports = BaseView.extend({
+  tagName: 'aside',
+  id: 'file-explorer',
+  className: 'closed',
+  events: events,
   postHydrate: function () {
     this.listenTo(this.app.dispatch, 'toggle:files', this.toggleFiles.bind(this));
   },
@@ -65,6 +79,10 @@ module.exports = BaseView.extend({
   stopPropagation: function (evt) {
     evt.stopPropagation();
     evt.preventDefault();
+  },
+  getTemplateData: function () {
+    this.options.lock = lock;
+    return this.options;
   }
 });
 

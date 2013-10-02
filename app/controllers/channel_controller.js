@@ -54,13 +54,13 @@ module.exports = {
     this.redirectTo(params._id +'/'+ params.name);
   },
   category: function (params, callback) {
-    if (isServer && !this.app.req.cookies.pressauth) {
-      this.redirectTo('/');
-    }
-    else if (!isServer && !utils.clientGetCookie('pressauth')) {
-      this.redirectTo('/');
-    }
-    else {
+    // if (isServer && !this.app.req.cookies.pressauth) {
+    //   this.redirectTo('/');
+    // }
+    // else if (!isServer && !utils.clientGetCookie('pressauth')) {
+    //   this.redirectTo('/');
+    // }
+    // else {
       params.category = params.category || 'Featured';
       var spec = {
         user: {
@@ -111,7 +111,7 @@ module.exports = {
           }
         });
       }
-    }
+    // }
   },
   all: function(params, callback) {
     var self = this;

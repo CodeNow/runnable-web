@@ -6,17 +6,7 @@ module.exports = ModalView.extend({
   id: 'publish-request-modal',
   events: {
     'click .request-link' : 'close'
-  },
-  postRender: function () {
-    Super.postRender.apply(this, arguments);
-    var formView = _.findWhere(this.childViews, {name:'publish_request_form'});
-    this.listenTo(formView, 'submitted', function (err) {
-      if (!err) {
-        this.stopListening(formView)
-        this.close();
-      }
-    }.bind(this));
   }
 });
 
-module.exports.id = "PublishRequestModal";
+module.exports.id = "NewSignUpModal";

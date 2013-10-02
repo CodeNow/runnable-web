@@ -926,3 +926,17 @@ $searchbox-height:50px;
     90%{ box-shadow:0 0 6px #FDAE22,0 0 4px #FDAE22, 0 0 6px #FDAE22, 0 0 2px #FDAE22; }
     100%{ box-shadow:0 0 1px #FDAE22,0 0 4px #FDAE22, 0 0 6px #FDAE22, 0 0 2px #FDAE22; }
 }
+
+#hundo{
+  height: 100%;
+}
+
+.terminalload {
+  height: 100%;
+}
+
+.terminal-view.lock{
+  .terminal-loader{
+    height:30%;
+  }
+}

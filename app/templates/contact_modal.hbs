@@ -2,10 +2,13 @@
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title">Send us a Message</h4>
+      <h4 class="modal-title">
+      {{#if header}}{{header}}{{else}}Send us a Message{{/if}}
+      </h4>
     </div>
     <div class="modal-body">
-      {{view "contact_form" modal=true}}
+      {{{message}}}
+      {{view "contact_form" modal=true simple=simple}}
     </div>
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

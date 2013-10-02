@@ -4,16 +4,27 @@ var FileMenu = require('./file_menu');
 var NewFileModal = require('./new_file_modal');
 var utils = require('../utils');
 var async = require('async');
+var lock = require('../lock');
 
-module.exports = BaseView.extend({
-  tagName: 'li',
-  className: 'folder',
-  events: {
+var events;
+if (lock) {
+  events = {
+    'contextmenu'          : 'contextMenu'
+  };
+}
+else {
+  events = {
     'contextmenu'          : 'contextMenu',
     'drop'                 : 'uploadFiles',
     'dragover'             : 'over', //necessary else drop wont work
     'dragleave'            : 'leave'
-  },
+  };
+}
+
+module.exports = BaseView.extend({
+  tagName: 'li',
+  className: 'folder',
+  events: events,
   dontTrackEvents: ['dragover', 'dragleave'],
   postHydrate: function () {
     this.listenTo(this.app.dispatch, 'sync:files', this.sync.bind(this));
@@ -33,13 +44,16 @@ module.exports = BaseView.extend({
     // IMPORTANT must be set to this.model.contents for rerendering.. else when parent dir rerenders child dirs will lose their collection
     this.model.contents = this.collection = this.fileList.collection;
     // droppable
-    this.$el.droppable({
-      greedy: true,
-      drop: this.moveDrop.bind(this),
-      hoverClass: 'ui-draggable-hover'
-    });
+    if (!lock) {
+      this.$el.droppable({
+        greedy: true,
+        drop: this.moveDrop.bind(this),
+        hoverClass: 'ui-draggable-hover'
+      });
+    }
   },
   contextMenu: function (evt) {
+    if (lock) return;
     $(document).click(); // closes other context menus
     evt.preventDefault(); // prevent browser context menu
     evt.stopPropagation();
