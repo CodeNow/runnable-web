@@ -75,7 +75,7 @@ module.exports = BaseView.extend({
     function callback (err, model) {
       if (err) {
         this.showError(err);
-        this.collection.add(model); //readd model..
+        this.collection.add(model); //re-add model..
       }
     }
   },

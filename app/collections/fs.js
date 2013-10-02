@@ -23,7 +23,7 @@ module.exports = Base.extend({
     this.containerId = options.containerId;
 
     if (!this.length) {
-      this.listenToOnce(this, 'sync add', this.setFetched.bind(this));
+      this.listenToOnce(this, 'sync add remove', this.setFetched.bind(this));
     }
     else {
       this.setFetched();
