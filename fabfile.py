@@ -14,7 +14,9 @@ def production():
   """
   env.settings = 'production'
   env.hosts = [
-    'web'
+    'web',
+    'web1',
+    'web2'
   ]
 
 def integration():
@@ -59,24 +61,38 @@ def setup():
   require('settings', provided_by=[production, integration])
   require('branch', provided_by=[stable, master, branch])
 
+  install_node()
   clone_repo()
-  checkout_latest()
+  # checkout_latest()
   install_requirements()
   bower()
   grunt()
   boot()
 
+def install_node():
+  """
+  Install Node.js stable
+  """
+  sudo('apt-get update')
+  sudo('apt-get install -y python-software-properties python g++ make')
+  sudo('FORCE_ADD_APT_REPOSITORY=1 add-apt-repository ppa:chris-lea/node.js')
+  sudo('apt-get update')
+  sudo('apt-get install -y nodejs git')
+
 def clone_repo():
   """
   Do initial clone of the git repository.
   """
-  run('git clone https://github.com/CodeNow/runnable-web.git')
+  if run('[ -d runnable-web ] && echo true || echo false') == 'false':
+    run('git clone https://github.com/CodeNow/runnable-web.git')
 
 def checkout_latest():
   """
   Pull the latest code on the specified branch.
   """
   with cd('runnable-web'):
+    run('git fetch')
+    run('git reset --hard')
     run('git checkout %(branch)s' % env)
     run('git pull origin %(branch)s' % env)
 
@@ -85,6 +101,9 @@ def install_requirements():
   Install the required packages using npm.
   """
   sudo('npm install pm2 grunt-cli bower -g')
+  sudo('apt-get install -y rubygems')
+  sudo('gem install compass')
+  sudo('rm -rf ~/tmp')
   with cd('runnable-web'):
     run('npm install')
 
