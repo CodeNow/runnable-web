@@ -18,7 +18,7 @@
     "underscore": "~1.4.4",
     "async": "~0.1.22",
     "request": "~2.16",
-    "rendr": "git://github.com/CodeNow/rendr#4772aa691cb052151279d758485eb1b5e3da948c",
+    "rendr": "git://github.com/CodeNow/rendr#fde2e377f47b076aeaa6d6c94c8ca3e0106bb9e4",
     "debug": "*",
     "eson": "0.4.1",
     "redis": "~0.8.3",
