@@ -10,7 +10,6 @@ module.exports = BaseView.extend({
     click: 'click'
   },
   click: function (evt) {
-    debugger;
     if (this.app.user.isRegistered()) {
       // let the link work...
     }

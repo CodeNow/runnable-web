@@ -41,8 +41,8 @@ module.exports = BaseView.extend({
   sortChannels: function () {
     var opts = this.options;
     var category = opts.channels.params.category.toLowerCase();
-    var sortOrder = [ "nodejs","python","ruby-on-rails","php",".net","jquery",
-      "codeigniter","django","cakephp","paypal","mysql","node-mongodb-native"];
+    var sortOrder = [ "nodejs", "python", "add your own", "ruby-on-rails", "php", ".net", "jquery",
+      "codeigniter", "django", "cakephp", "paypal", "mysql", "node-mongodb-native"];
     function getOrder (channel) {
       var sortIndex;
       channel.get('aliases').some(function (alias) {
@@ -130,6 +130,7 @@ module.exports = BaseView.extend({
     var queries = examples;
     var $button = this.$('.hero button');
     var $search = this.$('.hero input.tt-query');
+    var removeShine = $button.removeClass.bind($button, 'shine');
 
     this.index = 0;
     self.animIntervals = [];
@@ -142,7 +143,7 @@ module.exports = BaseView.extend({
 
     function start () {
       nextQuery();
-      int1 = setInterval(nextQuery, cycleTime*2);
+      int1 = setInterval(nextQuery, cycleTime*2 + delay*2);
       self.animIntervals.push(int1);
     }
 
@@ -170,7 +171,7 @@ module.exports = BaseView.extend({
       if (i === str.length) {
         // shine button
         $button.addClass('shine');
-        tim3 = setTimeout($button.removeClass.bind($button, 'shine'), 3000);
+        tim3 = setTimeout(removeShine, 3000);
         self.animTimeouts.push(tim3);
         // setup next query
         self.index++;

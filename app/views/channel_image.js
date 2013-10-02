@@ -8,6 +8,7 @@ module.exports = BaseView.extend({
     var name = opts.name;
     var lower = name.toLowerCase();
     var src;
+    lower = (lower in channelImages) ? lower : lower.replace(/ /g, '-');
     if ((lower in channelImages) && !opts.tag) {
       //no icon-lg for til all images are in
       var pre = (opts.large) ? 'icon-' : (opts.tag) ? 'icon-tag-' : 'icon-';

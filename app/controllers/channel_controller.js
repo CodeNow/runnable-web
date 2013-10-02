@@ -93,6 +93,9 @@ module.exports = {
             self.redirectTo('/c/'+catName);
           }
           else {
+            if (params.category.toLowerCase() == 'featured') {
+              results.channels.insert(2, utils.customChannel(this.app));
+            }
             callback(null, addSEO(results));
           }
         }

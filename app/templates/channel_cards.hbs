@@ -14,9 +14,9 @@
   </div>
   {{/if_eq}}
   {{#each collection.models}}
-  {{#with attributes}}
   <div class="col-sm-4">
-    <a href="{{../../basehref}}/{{name}}" class="card">
+    <a href="{{invoke . method='appUrl'}}" class="card" data-name="{{attributes.name}}">
+      {{#with attributes}}
       {{view 'channel_image' name=name height="24" width="22"}}
       <div class="count">{{count}}</div>
       <div class="description">
@@ -25,9 +25,9 @@
         <p>{{description}}</p>
         {{/if}}
       </div>
+      {{/with}}
     </a>
   </div>
-  {{/with}}
   {{/each}}
 </div>
 <br/>

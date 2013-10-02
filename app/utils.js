@@ -1,3 +1,4 @@
+var Channel = require('./models/channel');
 
 var utils = module.exports = {
   capitalize: function (str) {
@@ -317,5 +318,16 @@ var utils = module.exports = {
     c_value = unescape(c_value.substring(c_start,c_end));
     }
     return c_value;
+  },
+  customChannel: function (app) {
+    // put it here so that it's just in one place
+    return new Channel({
+      _id        : "111122223333444455556666",
+      name       : "Add your own",
+      description: "Want to get Featured? Click here to find out how.",
+      aliases    : ['add your own'],
+      count      : 1337,
+      url        : '/publish'
+    }, { app:app });
   }
 };

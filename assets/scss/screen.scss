@@ -1048,8 +1048,13 @@ progress {
             font-size: 12px;
             min-height: 32px;
             margin-top: 3px;
-            width: 290px;
+            width: 100%;
             margin: 4px auto 0 auto;
+        }
+        @media screen and (min-width: 768px) {
+            input {
+                width: 290px;
+            }
         }
         .autocomplete-open {
             input {
@@ -1140,9 +1145,6 @@ progress {
     .hero-content {
         bottom: 0;
         width: 100%;
-        @include breakpoint(screen-sm) {
-            bottom: -55px;
-        }
     }
 }
 
@@ -1171,8 +1173,8 @@ progress {
         margin: 15px 0 30px;
     }
     #searchbox {
-        width: 40%;
-        @include breakpoint(screen-sm) {
+        width: 55%;
+        @include breakpoint(screen-md) {
             width: 90%;
         }
         margin: 0 auto 80px auto;
@@ -2757,11 +2759,16 @@ div#output-terminal-container{
     }
     .status-message {
         padding-left: 0;
+        display: inline-block;
+        float: left;
     }
     .status-buttons {
         padding-right: 0;
         padding-top: 6px;
         text-align: right;
+        display: inline-block;
+        float:left;
+        white-space: nowrap;
         button.purple {
             border-color: #432658;
             background: #693C89;
@@ -2769,7 +2776,8 @@ div#output-terminal-container{
             font-size: 12px;
             height: 32px;
             padding-top: 6px;
-            margin-left: 10px;
+            margin-left: 0;
+            margin-bottom: 10px;
             &:hover {
                 background: adjust-lightness(#693C89,8);
                 text-decoration: none;
@@ -2796,6 +2804,15 @@ div#output-terminal-container{
                     @include transition(all 0.1s ease-in-out);
                     color: adjust-lightness($purple-light, 3);
                 }
+            }
+        }
+    }
+    @media screen and (min-width: 768px) {
+        .status-buttons {
+            float: right;
+            margin-bottom: 0;
+            button.purple {
+                margin-left: 10px;
             }
         }
     }

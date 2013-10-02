@@ -15,6 +15,9 @@ module.exports = RendrBase.extend({
     }
     return Super.parse.apply(this, arguments);
   },
+  insert: function (index, model) {
+    this.add(model, { at:index });
+  },
   _prepareModel: function(attrs, options) {
     // BACKBONE BUG WORKAROUND
     // collection.fetch options -> collection.set -> _prepareModel -> model.set
