@@ -4,7 +4,14 @@ var LockModal = require('../new_sign_up_modal');
 
 module.exports = BaseView.extend({
   events: {
-    'click .main-controls button' : 'triggerModal'
+    'click .main-controls .run'      : 'run',
+    'click .main-controls .savecopy' : 'saveCopy',
+  },
+  run: function () {
+    this.triggerModal();
+  },
+  saveCopy: function () {
+    this.triggerModal();
   },
   triggerModal: function () {
     var user = this.app.user;
