@@ -544,6 +544,9 @@ button.btn-sm, .btn-xs {
 .container > .navbar-header, .container > .navbar-collapse {
   text-align: center;
   height: 38px !important;
+  @media (max-width: 1000px) {
+    height: auto !important;
+  }
   .navbar-nav {
     float: none;
     display: inline-block;
