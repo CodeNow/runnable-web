@@ -149,7 +149,7 @@ module.exports = {
         tags = tags ? ' for '+tags : '';
         results.channels.add(results.channels2.toArray());
         delete results.channels2;
-        results.channels.insert(2, utils.customChannel(this.app));
+        results.channels.insert(1, utils.customChannel(this.app));
         callback(null, _.extend(results, {
           page: {
             title: formatTitle('Create a New Example for JQuery, Codeigniter, NodeJS, PHP, Python, Ruby and more'),

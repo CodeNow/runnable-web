@@ -326,7 +326,7 @@ var utils = module.exports = {
       name       : "Add your own",
       description: "Want to get Featured? Click here to find out how.",
       aliases    : ['add your own'],
-      count      : 1337,
+      count      : '',
       url        : '/publish'
     }, { app:app });
   }

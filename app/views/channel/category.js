@@ -132,7 +132,7 @@ module.exports = BaseView.extend({
     var $search = this.$('.hero input.tt-query');
     var removeShine = $button.removeClass.bind($button, 'shine');
 
-    this.index = 0;
+    this.index = -1;
     self.animIntervals = [];
     self.animTimeouts = [];
     var int1, int2, int3;
@@ -150,6 +150,8 @@ module.exports = BaseView.extend({
     function nextQuery () {
       self.animIntervals = [];
       self.animTimeouts = [];
+      self.index++;
+      if (self.index === queries.length) self.index = 0;
       var str = queries[self.index];
 
       for (var i = 1; i < str.length+1; i++) {
@@ -173,9 +175,6 @@ module.exports = BaseView.extend({
         $button.addClass('shine');
         tim3 = setTimeout(removeShine, 3000);
         self.animTimeouts.push(tim3);
-        // setup next query
-        self.index++;
-        if (self.index === queries.length) self.index = 0;
       }
     }
   },
@@ -187,7 +186,7 @@ module.exports = BaseView.extend({
         layoutMode   : 'masonry',
         itemPositionDataEnabled : true,
         transformsEnabled       : false
-        // onLayout : function(){
+        // onLayout : function(){f
         //   // $bubbles.find('.bubble').addClass('hero-animate'); // commented out = no pattern spinning..
         // }
       });

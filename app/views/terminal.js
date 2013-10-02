@@ -31,7 +31,6 @@ module.exports = BaseView.extend({
     Super.remove.apply(this, arguments);
   },
   loading: function (loading) {
-    console.log(loading);
     this.stopWarningTimeout();
     if (loading) this.startWarningTimeout();
     Super.loading.apply(this, arguments);
