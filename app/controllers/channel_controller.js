@@ -61,7 +61,7 @@ module.exports = {
     //   this.redirectTo('/');
     // }
     // else {
-      params.category = params.category || 'Featured';
+      params.category = params.category || 'featured';
       var spec = {
         user: {
           model: 'User',
