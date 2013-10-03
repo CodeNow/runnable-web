@@ -945,3 +945,27 @@ $searchbox-height:50px;
     width: 100%;
   }
 }
+
+.modal-body{
+  ::-webkit-input-placeholder { /* WebKit browsers */
+      color:    #666;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+      color:    #666;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+      color:    #666;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10+ */
+      color:    #666;
+  }
+  p{
+
+    a{
+      color: #834dab !important;
+      font-weight: bold;
+      font-size: 14px;
+      margin-left: 2px;
+    }
+  }
+}

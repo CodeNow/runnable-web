@@ -12,7 +12,7 @@ module.exports = BaseView.extend({
       this.$el.modal('show');
       this.$el.once('hidden.bs.modal', this.remove.bind(this));
     }
-    this.$('input').eq(0).focus();
+    // this.$('input').eq(0).focus();
   },
   remove: function () {
     this.trigger('remove');
