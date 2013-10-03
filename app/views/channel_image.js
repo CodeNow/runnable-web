@@ -19,9 +19,9 @@ module.exports = BaseView.extend({
       this.attributes = {
         src: src,
         alt: name,
-        height: (opts.large) && 39
         // width: opts.width
       };
+      if (opts.large) this.attributes.height = 39;
     }
     else {
       this.className='display-none';
