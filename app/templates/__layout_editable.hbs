@@ -19,6 +19,24 @@
       <script src="assets/js/html5shiv.js"  ></script>
       <script src="assets/js/respond.min.js"></script>
     <![endif]-->
+    <!-- console.log shim -->
+    <script type='text/javascript'>
+      // usage: log('inside coolFunc',this,arguments);
+      // http://paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
+      window.log = function(){
+        log.history = log.history || [];   // store logs to an array for reference
+        log.history.push(arguments);
+        if(this.console){
+        var args = Array.prototype.slice.call(arguments);
+        var len  = args.length;
+        for (var i=0; i<len; i++) {
+          console.log(args[i]);
+        }
+        }
+      };
+      if (!this.console) this.console = {};
+      if (!this.console.log) this.console.log = window.log;
+    </script>
   </head>
 
   <body>
