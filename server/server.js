@@ -107,9 +107,9 @@ function initMiddleware() {
     }
   });
 
-  app.configure('development', function() {
-    app.use(require('./middleware/liveReload')({port:process.env.LIVERELOAD_PORT}));
-  });
+  // app.configure('development', function() {
+  //   app.use(require('./middleware/liveReload')({port:process.env.LIVERELOAD_PORT}));
+  // });
 
   app.use(app.router);
   app.use(mw.errorHandler());
