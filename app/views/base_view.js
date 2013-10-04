@@ -3,7 +3,8 @@ var Super = RendrView.prototype;
 var _ = require('underscore');
 var _str = require('underscore.string');
 var utils = require('../utils');
-
+var Image = require('../models/image');
+var Container = require('../models/container');
 
 // Create a base view, for adding common extensions to our
 // application's views.
@@ -50,6 +51,15 @@ module.exports = RendrView.extend({
         dataName: model.get('name'),
         dataId  : model.id
       });
+      if (this.model instanceof Image) {
+        properties.projectId = this.model.id;
+        properties.imageId = this.model.id;
+      }
+      else if (this.model instanceof Container) {
+        properties.projectId = this.model.id;
+        properties.containerId = this.model.id;
+      }
+      if (this.app && this.app.user) properties.userId = this.app.user.id;
     }
     else if (this.collection) {
       var collection = this.collection;
@@ -59,6 +69,7 @@ module.exports = RendrView.extend({
         dataName: JSON.stringify(collection.params)
       });
     }
+
     Track.event(this.viewName(), actionName, properties);
   },
   trackError: function (actionName, err) {
