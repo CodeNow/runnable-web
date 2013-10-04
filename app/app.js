@@ -1,6 +1,6 @@
 var BaseApp = require('rendr/shared/app');
 var utils = require('./utils');
-
+var Super = BaseApp.prototype;
 
 
 module.exports = BaseApp.extend({
@@ -12,6 +12,11 @@ module.exports = BaseApp.extend({
 
     // Call 'super'.
     BaseApp.prototype.start.call(this);
+  },
+
+  _interceptClick: function(e) {
+    Track.event('App', 'Click Link')
+    Super._interceptClick.apply(this, arguments);
   },
 
   utils: utils
