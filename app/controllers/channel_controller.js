@@ -54,6 +54,7 @@ module.exports = {
     this.redirectTo(params._id +'/'+ params.name);
   },
   category: function (params, callback) {
+    var self = this;
     // if (isServer && !this.app.req.cookies.pressauth) {
     //   this.redirectTo('/');
     // }
@@ -104,12 +105,14 @@ module.exports = {
         var channel = params.channel;
         var category = params.category;
         var channelAndOrCategory = channel? channel+' in '+category : category;
-        return _.extend(results, {
-          page: {
-            title: formatTitle(channelAndOrCategory+" Related Tags"),
-            canonical: 'http://runnable.com/c/'+params.category
-          }
-        });
+        results.page = {
+          title : (utils.isCurrentURL(self.app, '')) ?
+            'Discover Everything through Code' : // if homepage set homepage title
+            formatTitle(channelAndOrCategory+" Related Tags"),
+          canonical : canonical.call(self)
+        }
+
+        return results;
       }
     // }
   },
