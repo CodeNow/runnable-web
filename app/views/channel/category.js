@@ -63,7 +63,8 @@ module.exports = BaseView.extend({
     this.sortChannels();
     opts.categories.models.forEach(function (category) {
       attribs = category.attributes;
-      attribs.link = '/c/'+attribs.name;
+      console.log(attribs);
+      attribs.link = utils.exists(attribs.url) ? attribs.url : '/c/'+attribs.name;
     });
     opts.keywords = keywords;
     return opts;

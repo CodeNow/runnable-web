@@ -55,6 +55,10 @@ module.exports = {
   },
   category: function (params, callback) {
     var self = this;
+    var app = this.app;
+    var isHomepage = utils.isCurrentURL(app, '');
+    params.category = params.category || 'Featured';
+    var isFeaturedCategory = (params.category.toLowerCase() == 'featured');
     // if (isServer && !this.app.req.cookies.pressauth) {
     //   this.redirectTo('/');
     // }
@@ -62,7 +66,6 @@ module.exports = {
     //   this.redirectTo('/');
     // }
     // else {
-      params.category = params.category || 'Featured';
       var spec = {
         user: {
           model: 'User',
@@ -90,13 +93,20 @@ module.exports = {
             return category.get('name').toLowerCase() === results.selectedCategoryLower;
           });
           var catName = results.selectedCategory.get('name');
-          if (catName !== params.category) {
+          if (isFeaturedCategory && !isHomepage) {
+            self.redirectTo('');
+          }
+          else if (catName !== params.category) {
             self.redirectTo('/c/'+catName);
           }
           else {
-            if (params.category.toLowerCase() == 'featured') {
-              results.channels.insert(2, utils.customChannel(this.app));
+            if (isFeaturedCategory) {
+              results.channels.insert(2, utils.customChannel(app));
             }
+            var featured = results.categories.findWhere({
+              name: 'Featured'
+            });
+            featured.set('url', '/');
             callback(null, addSEO(results));
           }
         }
@@ -105,11 +115,18 @@ module.exports = {
         var channel = params.channel;
         var category = params.category;
         var channelAndOrCategory = channel? channel+' in '+category : category;
-        results.page = {
-          title : (utils.isCurrentURL(self.app, '')) ?
-            'Discover Everything through Code' : // if homepage set homepage title
-            formatTitle(channelAndOrCategory+" Related Tags"),
-          canonical : canonical.call(self)
+
+        if (params.category.toLowerCase() == 'featured') {
+          results.page = {
+            title : 'Discover Everything through Code',
+            canonical : 'http://runnable.com'
+          };
+        }
+        else {
+          results.page = {
+            title : formatTitle(channelAndOrCategory+" Related Tags"),
+            canonical : canonical.call(self)
+          };
         }
 
         return results;
