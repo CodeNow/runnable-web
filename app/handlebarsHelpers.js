@@ -54,6 +54,24 @@ module.exports.add = function (Handlebars) {
     return options.inverse(this);
   });
 
+  Handlebars.registerHelper('if_modulo', function (number, mod, offset, options) {
+    debugger;
+    if (typeof offset == 'object') {
+      options = offset;
+      offset = 0;
+    }
+    number += offset;
+    number = parseInt(number);
+    mod = parseInt(mod);
+    offset = parseInt(offset);
+    debugger;
+    if (options.notzero && number===0)
+      return options.inverse(this);
+    if (number % mod === 0)
+      return options.fn(this);
+    return options.inverse(this);
+  });
+
   function add (thing, options) {
     var opts = options.hash;
     var args = _.values(options.hash);

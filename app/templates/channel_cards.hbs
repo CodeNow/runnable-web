@@ -1,5 +1,10 @@
+{{#each collection.models}}
+
+{{#if_modulo @index 3}}
 <div class="row">
-  {{#if_eq basehref compare="/new"}}
+{{/if_modulo}}
+
+{{#if_eq attributes.name compare="runnableid"}}
   <div class="col-sm-4">
     <a class="card">
       <div class="description">
@@ -12,8 +17,7 @@
       </div>
     </a>
   </div>
-  {{/if_eq}}
-  {{#each collection.models}}
+{{else}}
   <div class="col-sm-4">
     {{#if attributes.url}}
     <a href="{{attributes.url}}" class="card" data-name="{{attributes.name}}">
@@ -32,6 +36,10 @@
       {{/with}}
     </a>
   </div>
-  {{/each}}
+{{/if_eq}}
+
+{{#if_modulo @index 3 1 notzero=true}}
 </div>
-<br/>
+{{/if_modulo}}
+
+{{/each}}
