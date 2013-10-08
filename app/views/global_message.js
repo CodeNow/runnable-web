@@ -15,7 +15,9 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     var message = this.app.get('message');
-    this.options.message = message.text;
+    if (message) {
+      this.options.message = message.text;
+    }
     return this.options;
   }
 });
