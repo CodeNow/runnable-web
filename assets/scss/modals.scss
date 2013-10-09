@@ -1,0 +1,149 @@
+#login {
+    .modal-dialog {
+        width: 30%;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 25%;
+        .modal-content {
+            background: #f6f6f6;
+            @include border-radius(3px);
+            border: none;
+            .modal-header {
+                @include border-radius(3px 3px 0 0);
+                @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.25));
+                background: $purple-light;
+                color: #fff;
+                padding: 10px 20px;
+                h4 {
+                    font-weight: bold;
+                    font-size: 14px;
+                }
+            }
+            .modal-body {
+                input {
+                    margin-bottom: 20px;
+                }
+                button {
+                    width: 100%;
+                    margin-bottom: 20px;
+                }
+                p {
+                    text-align: center;
+                    a {
+                        color: #bcbcbc;
+                        font-size: 12px;
+                        text-shadow: 0 1px 0 #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// modal
+.modal-dialog {
+  width: 365px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 25%;
+  .modal-content {
+    .tab-content {
+      margin-top: 20px;
+      min-height: 300px;
+    }
+    background: #f6f6f6;
+    @include border-radius(3px);
+    border: none;
+    .modal-header {
+      @include border-radius(3px 3px 0 0);
+      @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.25));
+      background: $purple-light;
+      color: #fff;
+      padding: 10px 20px;
+      h4 {
+        font-weight: bold;
+        font-size: 14px;
+      }
+    }
+    .modal-body {
+      input {
+        margin-bottom: 20px;
+      }
+      button {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      p {
+        text-align: center;
+        a {
+          color: #bcbcbc;
+          font-size: 12px;
+          text-shadow: 0 1px 0 #fff;
+        }
+      }
+      textarea {
+        margin-bottom: 20px;
+      }
+      .input-group {
+        margin-bottom: 20px;
+        input{
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+#implement_modal {
+  .modal-dialog {
+    width: 700px;
+  }
+}
+
+
+.modal-dialog .modal-content .modal-body .input-group {
+  margin-bottom: 20px;
+  input{
+    margin-bottom: 0;
+  }
+}
+
+
+#publish-request-modal {
+  p a{
+    color: #6e3e8e;
+  }
+}
+
+.modal-body{
+  ::-webkit-input-placeholder { /* WebKit browsers */
+      color:    #666;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+      color:    #666;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+      color:    #666;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10+ */
+      color:    #666;
+  }
+  p{
+
+    a{
+      color: #834dab !important;
+      font-weight: bold;
+      font-size: 14px !important;
+      margin-left: 2px;
+    }
+  }
+}
+
+//wth modal is shifting whole page bc of margin
+body.modal-open,
+.modal-open .navbar-fixed-top,
+.modal-open .navbar-fixed-bottom {
+  margin-right: 0;
+}

@@ -22,6 +22,11 @@ var utils = module.exports = {
       return obj[key];
     };
   },
+  put: function (obj, key) {
+    return function (val) {
+      obj[key] = val;
+    };
+  },
   lowercase: function (str) {
     return str.toLowerCase();
   },
@@ -318,6 +323,9 @@ var utils = module.exports = {
     c_value = unescape(c_value.substring(c_start,c_end));
     }
     return c_value;
+  },
+  domainify: function (string) {
+    return string.toLowerCase().replace(/[^0-9a-z-]/g, '-');
   },
   customChannel: function (app) {
     // put it here so that it's just in one place

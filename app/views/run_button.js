@@ -1,7 +1,7 @@
 var EditorButtonView = require('./editor_button_view');
 var Super = EditorButtonView.prototype;
 var utils = require('../utils');
-var Implement = require('./implement');
+var Implement = require('./implement_modal');
 var Specification = require('../models/specification');
 
 module.exports = EditorButtonView.extend({
@@ -25,15 +25,26 @@ module.exports = EditorButtonView.extend({
     console.log("CONTAINER ID: ", this.model.id);
   },
   click: function () {
-    var specificationId = this.model.get('specification');
-    if (specificationId) {
-      var implementation = this.implementation = this.collection.models.filter(function (model) {
-        return model.get('implements') === specificationId;
-      }).pop();
-      if (implementation == null) {
-        return this.openImplementModal(specificationId);
-      }
+    if (!this.implementsSpec()) {
+      this.openImplementModal();
     }
+    else {
+      this.run();
+    }
+  },
+  implementsSpec: function () {
+    var specificationId = this.model.get('specification');
+    if (!specificationId) {
+      return true;
+    }
+    else {
+      this.implementation = this.collection.findWhere({
+        'implements' : specificationId
+      });
+      return (this.implementation != null);
+    }
+  },
+  run: function () {
     var url = '/'+this.model.id+'/output';
     var windowName = this.model.id+'output';
     var popup = window.open(url, windowName);
@@ -44,7 +55,8 @@ module.exports = EditorButtonView.extend({
         this.showError(err);
         popup.close();
         _rollbar.push({level: 'error', msg: "Couldn't start container", errMsg: err});
-      } else {
+      }
+      else {
         popup.postMessage("Refresh", "*");
       }
     }, this);
@@ -61,16 +73,16 @@ module.exports = EditorButtonView.extend({
     var specification = new Specification({
       _id: specificationId
     });
-    specification.fetch(utils.cbOpts(function (err, fetchedSpecification) {
+    specification.fetch(utils.cbOpts(function (err) {
       if (err) {
         return self.showError(err);
       }
       var implement = new Implement({
-        'app': self.app,
-        'model': fetchedSpecification,
-        'collection': self.collection,
-        'parent': self,
-        'containerId': self.options.containerid || self.model.id
+        app        : self.app,
+        model      : specification,
+        collection : self.collection,
+        parent     : self,
+        containerId: self.model.id
       });
       implement.open();
     }));

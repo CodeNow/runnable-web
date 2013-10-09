@@ -1,16 +1,16 @@
-<article class="modal">
-  <section class="modal-header">
-    <h3>
+<div class="modal-dialog">
+  <div class="modal-content">
+  <div class="modal-header">
+    <h4>
       <span class="progress">{{#if phase1}}1{{else}}✓{{/if}}</span>
       <hr class="spacer"></hr>
       <span class="progress">{{#if phase1}}2{{else}}{{#if phase2}}2{{else}}✓{{/if}}{{/if}}</span>
       <hr class="spacer"></hr>
       <span class="progress">3</span>
-    </h3>
-    <button type="button" class="btn-close"><i class="icon-remove"></i></button>
-  </section>
-  <section class="modal-body">
-    <div class="modal-content">
+    </h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  </div>
+  <div class="modal-body">
       {{#if phase1}}
       <h4>Add a Service</h4>
       <form>
@@ -70,7 +70,7 @@
       {{#each specification.attributes.requirements}}
       <div>
         <label>
-          <span>{{.}}:</span> 
+          <span>{{.}}:</span>
           <input disabled>
         </label>
       </div>
@@ -108,9 +108,9 @@
       </div>
       {{/if}}
       {{/if}}
-    </div>
-  </section>
-</article>
+  </div>
+  </div>
+</div>
 <style>
   .progress {
     border: 2px solid;

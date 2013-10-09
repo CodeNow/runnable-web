@@ -1,19 +1,18 @@
 var BaseView = require('./base_view');
 var utils = require('../utils');
 var _ = require('underscore');
-var ServiceModal = require('./add_service');
+var ServiceModal = require('./service_modal');
 
 module.exports = BaseView.extend({
   getTemplateData: function () {
-    return _.extend(this.options, {
-      specification: this.collection.get(this.model.get('specification'))
-    });
+    this.options.specification = this.collection.get(this.model.get('specification'));
+    return this.options;
   },
   events: {
-    'click [name=edit]': 'edit',
+    'click [name=edit]'  : 'edit',
     'click [name=remove]': 'remove',
-    'click [name=add]': 'add',
-    'click [name=implement]': 'implement'
+    'click [name=add]'   : 'add',
+    'click .implement'   : 'implement'
   },
   add: function () {
     var serviceModal = new ServiceModal({

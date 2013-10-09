@@ -10,10 +10,8 @@ marked.setOptions({
 });
 
 module.exports = ModalView.extend({
+  className: 'fade',
   events: {
-    'click .modal'      : 'stopPropagation',
-    'click'             : 'close', // closes modal on bg click
-    'click .btn-close'  : 'close',
     'submit form'      : 'submit',
     'change select'    : 'submit',
     'click button[name=next]': 'submit',
@@ -157,4 +155,4 @@ module.exports = ModalView.extend({
   }
 });
 
-module.exports.id = "AddService";
+module.exports.id = "ServiceModal";

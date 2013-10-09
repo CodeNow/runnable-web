@@ -21,7 +21,11 @@
       {{view "terminal" model=container}}
     </div>
     <ul id="sidebar" class="col-sm-3">
+<<<<<<< Updated upstream
       {{#if isVerified}}
+=======
+      {{#if container.attributes.specification}}
+>>>>>>> Stashed changes
       <li class="services">
       <h3 class="widget-title">Services</h3>
         {{view "service" model=container collection=specifications editmode=isVerified}}

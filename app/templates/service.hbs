@@ -1,29 +1,31 @@
 {{#if specification}}
 {{#with specification.attributes}}
-<b>{{name}}</b>
-<p>{{description}}</p>
+<div class="left">
+  <b>{{name}}</b>
+  <p>{{description}}</p>
+</div>
 {{/with}}
-<button name="implement" class="btn-secondary btn-small">
-  <i class="icon-edit"></i> 
-  Edit implementation
-</button>
+<a class="implement right" href="javascript:void(0);">
+  <span class="glyphicon glyphicon-cog"></span>
+</a>
+<div class="clear"></div>
 {{#if editmode}}
 <div>
   <button name="edit" class="btn-secondary btn-small">
-    <i class="icon-edit"></i> 
+    <i class="icon-edit"></i>
     Edit service
   </button>
 </div>
 <div>
   <button name="remove" class="btn-secondary btn-small">
-  <i class="icon-minus"></i> 
+  <i class="icon-minus"></i>
   Remove service
 </button>
 {{/if}}
 {{else}}
 {{#if editmode}}
 <button name="add" class="btn-secondary btn-small">
-  <i class="icon-plus"></i> 
+  <i class="icon-plus"></i>
   Add service
 </button>
 {{/if}}

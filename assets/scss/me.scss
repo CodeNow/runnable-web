@@ -202,12 +202,7 @@ h2.page-title{
   }
 }
 
-//wth modal is shifting whole page bc of margin
-body.modal-open,
-.modal-open .navbar-fixed-top,
-.modal-open .navbar-fixed-bottom {
-  margin-right: 0;
-}
+
 
 // about page uses 8-col css
 #about, #jobs {
@@ -243,47 +238,6 @@ body.modal-open,
   }
 }
 
-// modal
-.modal-dialog {
-  width: 30%;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 25%;
-  .modal-content {
-    background: #f6f6f6;
-    @include border-radius(3px);
-    border: none;
-    .modal-header {
-      @include border-radius(3px 3px 0 0);
-      @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.25));
-      background: $purple-light;
-      color: #fff;
-      padding: 10px 20px;
-      h4 {
-        font-weight: bold;
-        font-size: 14px;
-      }
-    }
-    .modal-body {
-      input {
-        margin-bottom: 20px;
-      }
-      button {
-        width: 100%;
-        margin-bottom: 20px;
-      }
-      p {
-        text-align: center;
-        a {
-          color: #bcbcbc;
-          font-size: 12px;
-          text-shadow: 0 1px 0 #fff;
-        }
-      }
-    }
-  }
-}
 
 div.search-results{
   position:relative;
@@ -744,17 +698,6 @@ aside#file-explorer .nav li.active > div > a {
 button.silver img {
   margin-right: 0;
 }
-.modal-dialog .modal-content .modal-body .input-group {
-  margin-bottom: 20px;
-  input{
-    margin-bottom: 0;
-  }
-}
-.modal-dialog .modal-content .modal-body .input-group input {
-}
-.modal-dialog .modal-content .modal-body textarea {
-  margin-bottom: 20px;
-}
 
 #site-credits {
   margin-top: 60px;
@@ -762,15 +705,7 @@ button.silver img {
 a.card .description input {
   font-size: 16px;
 }
-.modal-dialog {
-  width: 365px;
-}
 
-#publish-request-modal {
-  p a{
-    color: #6e3e8e;
-  }
-}
 
 .terminal-view.relative{
   height: 250px;
@@ -946,26 +881,3 @@ $searchbox-height:50px;
   }
 }
 
-.modal-body{
-  ::-webkit-input-placeholder { /* WebKit browsers */
-      color:    #666;
-  }
-  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-      color:    #666;
-  }
-  ::-moz-placeholder { /* Mozilla Firefox 19+ */
-      color:    #666;
-  }
-  :-ms-input-placeholder { /* Internet Explorer 10+ */
-      color:    #666;
-  }
-  p{
-
-    a{
-      color: #834dab !important;
-      font-weight: bold;
-      font-size: 14px !important;
-      margin-left: 2px;
-    }
-  }
-}
