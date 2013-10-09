@@ -31,8 +31,9 @@ module.exports = BaseView.extend({
   submitDescription: function (evt) {
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
-    var options = utils.cbOpts(cb, this);
     this.options.editMode = false; // assume success, change will rerender
+    if (formData.description === this.model.get('description')) this.render();
+    var options = utils.cbOpts(cb, this);
     this.model.save(formData, options);
     function cb (err) {
       if (err) {

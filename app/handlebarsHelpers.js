@@ -55,7 +55,6 @@ module.exports.add = function (Handlebars) {
   });
 
   Handlebars.registerHelper('if_modulo', function (number, mod, offset, options) {
-    debugger;
     if (typeof offset == 'object') {
       options = offset;
       offset = 0;
@@ -64,7 +63,6 @@ module.exports.add = function (Handlebars) {
     number = parseInt(number);
     mod = parseInt(mod);
     offset = parseInt(offset);
-    debugger;
     if (options.notzero && number===0)
       return options.inverse(this);
     if (number % mod === 0)
