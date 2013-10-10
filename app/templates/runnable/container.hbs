@@ -25,7 +25,10 @@
       {{#if isVerified}}
       <li class="services">
       <h3 class="widget-title">Services</h3>
-        {{view "service" model=container collection=specifications editmode=isVerified}}
+        {{view "runnable_service" model=container collection=specifications editmode=isVerified}}
+        {{#if isVerified}}
+        {{view "runnable_add_service" collection=specifications}}
+        {{/if}}
       </li>
       {{/if}}
       <li class="tags">

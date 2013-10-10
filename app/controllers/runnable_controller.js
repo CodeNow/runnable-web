@@ -43,14 +43,28 @@ module.exports = {
     else {
       var app = this.app;
       async.waterfall([
-        fetchUserAndImage.bind(this, params._id),
-        function check404 (results, cb) {
-          if (!results || !results.image) {
-            cb({ status:404 });
-          }
-          else {
-            cb(null, results);
-          }
+        function data (cb) {
+          var spec = {
+            user: {
+              model:'User',
+              params:{
+                _id: 'me'
+              }
+            },
+            image: {
+              model : 'Image',
+              params: {_id:params._id}
+            },
+            specifications: {
+              collection: 'Specifications',
+              params: {}
+            },
+            implementations: {
+              collection: 'Implementations',
+              params: {}
+            }
+          };
+          fetch.call(self, spec, cb);
         },
         function nameInUrl (results, cb) {
           var imageURL = results.image.appURL();
@@ -75,30 +89,15 @@ module.exports = {
             fetchRelated.bind(self, results.image.id, results.container.attributes.tags)
           ],
           function (err, data) {
-            cb(err, !err && _.extend(results, data[0], data[1], data[2]));
+            cb(err, !err && _.extend(results, data[0], data[1], data[2], data[3]));
           });
         },
-        function getSpecifications (results, cb) {
-          //merge into parallel
-          fetchSpecifications.call(self, function (err, specifications) {
-            if (err) {
-              cb(err);
-            } else {
-              results.specifications = specifications;
-              cb(null, results);
-            }
-          });
-        },
-        function getImplementations (results, cb) {
-          //merge into parallel
-          fetchImplementations.call(self, function (err, implementations) {
-            if (err) {
-              cb(err);
-            } else {
-              results.implementations = implementations;
-              cb(null, results);
-            }
-          });
+        function anonCheck (results, cb) {
+          // remove implementations for anon users
+          if (!results.user.isRegistered()) {
+            delete results.implementations;
+          }
+          cb(null, results);
         }
       ], function (err, results) {
         // DEBUG!
@@ -115,7 +114,7 @@ module.exports = {
     function addSEO (results) {
       return _.extend(results, {
         page: {
-          title      : formatTitle(results.image.nameWithTags()+" Code Example"),
+          title : formatTitle(results.image.nameWithTags()+" Code Example"),
           canonical: canonical.call(self)
         }
       });

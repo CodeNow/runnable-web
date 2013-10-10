@@ -1,8 +1,6 @@
 var EditorButtonView = require('./editor_button_view');
 var Super = EditorButtonView.prototype;
 var utils = require('../utils');
-var Implement = require('./implement_modal');
-var Specification = require('../models/specification');
 
 module.exports = EditorButtonView.extend({
   tagName: 'button',
@@ -18,10 +16,10 @@ module.exports = EditorButtonView.extend({
     var dispatch = this.app.dispatch;
     if (dispatch) {
       this.listenTo(dispatch, 'unsaved:files', this.onChangeUnsaved.bind(this));
-      this.listenTo(dispatch, 'edit:implementation', this.openImplementModal.bind(this));
     }
   },
   postRender: function () {
+    // Leave this here for debugging!
     console.log("CONTAINER ID: ", this.model.id);
   },
   click: function () {
@@ -31,6 +29,11 @@ module.exports = EditorButtonView.extend({
     else {
       this.run();
     }
+  },
+  getTemplateData: function () {
+    this.options.specification = this.collection.get(this.model.get('specification'));
+    console.log()
+    return this.options;
   },
   implementsSpec: function () {
     var specificationId = this.model.get('specification');
@@ -67,25 +70,6 @@ module.exports = EditorButtonView.extend({
       this.$('span').html('Save and Run');
     else
       this.$('span').html('Run');
-  },
-  openImplementModal: function (specificationId) {
-    var self = this;
-    var specification = new Specification({
-      _id: specificationId
-    });
-    specification.fetch(utils.cbOpts(function (err) {
-      if (err) {
-        return self.showError(err);
-      }
-      var implement = new Implement({
-        app        : self.app,
-        model      : specification,
-        collection : self.collection,
-        parent     : self,
-        containerId: self.model.id
-      });
-      implement.open();
-    }));
   }
 });
 
