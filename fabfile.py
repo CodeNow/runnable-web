@@ -15,8 +15,8 @@ def production():
   env.settings = 'production'
   env.hosts = [
     'web',
-    'web1',
-    'web2'
+    # 'web1',
+    # 'web2'
   ]
 
 def integration():
