@@ -17,6 +17,7 @@ module.exports = BaseView.extend({
   userImplementedSpec: function () {
     var implementations = this.collection;
     var specification = this.model;
+    if (!specification) return true;
     var i = implementations.findWhere({
       'implements' : specification.id
     });
