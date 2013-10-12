@@ -22,14 +22,19 @@ module.exports = BaseView.extend({
     });
     return Boolean(i);
   },
-  openImplementModal: function (evt) {
-    if (evt && evt.preventDefault)
+  openImplementModal: function (evtOrOpts) {
+    var evt, opts;
+    if (evtOrOpts.preventDefault) {
+      evt = evtOrOpts;
       evt.preventDefault();
-    else
-      var opts = evt;
+    }
+    else {
+      opts = evtOrOpts;
+    }
     var implementModal = new ImplementModal(this.options);
-    if (opts.onClose)
+    if (opts && opts.onClose) {
       this.listenToOnce(implementModal, 'close', opts.onClose);
+    }
     implementModal.open();
   }
 });
