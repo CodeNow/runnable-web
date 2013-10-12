@@ -12,11 +12,11 @@ module.exports = BaseView.extend({
   postRender: function () {
     if (!this.modalIsInBody()) {
       // first render
-      $('body').append(this.$el);
+      // $('body').append(this.$el);
       this.$el.modal(this.modalOptions);
-      this.$el.modal('show');
-      this.$el.once('hidden.bs.modal', this.remove.bind(this));
-    }
+      if (this.auto) this.$el.once('hidden.bs.modal', this.remove.bind(this));
+    // }
+    if (this.auto) this.$el.modal('show');
     // this.$('input').eq(0).focus();
   },
   remove: function () {
