@@ -25,6 +25,7 @@ var utils = module.exports = {
   put: function (obj, key) {
     return function (val) {
       obj[key] = val;
+      return obj;
     };
   },
   lowercase: function (str) {

@@ -51,7 +51,6 @@
   .modal-content {
     .tab-content {
       margin-top: 20px;
-      min-height: 300px;
     }
     background: #f6f6f6;
     @include border-radius(3px);
@@ -68,11 +67,10 @@
       }
     }
     .modal-body {
-      input {
+      input, select, textarea {
         margin-bottom: 20px;
       }
       button {
-        width: 100%;
         margin-bottom: 20px;
       }
       p {
@@ -83,12 +81,9 @@
           text-shadow: 0 1px 0 #fff;
         }
       }
-      textarea {
-        margin-bottom: 20px;
-      }
       .input-group {
         margin-bottom: 20px;
-        input{
+        input, select, textarea {
           margin-bottom: 0;
         }
       }
@@ -96,9 +91,43 @@
   }
 }
 
-#implement_modal {
+#implement-modal {
+  .tab-content {
+    margin-top: 20px;
+    min-height: 315px;
+  }
+}
+#implement-modal, #service-modal {
   .modal-dialog {
     width: 700px;
+  }
+}
+
+#service-modal .modal-body {
+  h4 {
+    font-size: 20px;
+    padding-bottom: 10px;
+  }
+  .popover {
+    max-width: 445px;
+  }
+  .key-input {
+    width: 83.33%;
+    display: inline-block;
+    float: left;
+  }
+  .remove-key {
+    padding-top: 2px;
+    font-size: 22px;
+  }
+  .add-key {
+    min-height: 40px;
+  }
+  .instr-preview {
+    margin: 10px 0 40px 0;
+  }
+  div.step3 {
+
   }
 }
 

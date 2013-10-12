@@ -51,7 +51,6 @@ module.exports = ModalView.extend({
     alert(err);
   },
   remove: function () {
-    debugger;
     if (!this.openedLogin) this.onClose && this.onClose();
     Super.remove.apply(this, arguments);
   }

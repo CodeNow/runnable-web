@@ -1,0 +1,36 @@
+{{#if specification}}
+{{#with specification.attributes}}
+<div class="left">
+  <b>{{name}}</b>
+  <p>{{description}}</p>
+</div>
+{{/with}}
+<ul class="nav spec-nav right">
+  <li>
+    {{view "implement_link"
+      model=specification
+      collection=context.implementations
+      containerid=model.id}}
+  </li>
+  {{#if editmode}}
+  <li>
+    <a class="edit-service" href="javascript:void(0);">
+      <span class="glyphicon glyphicon-edit"></span>
+    </a>
+  </li>
+  <li>
+    <a class="remove-service" href="javascript:void(0);">
+      <span class="glyphicon glyphicon-remove"></span>
+    </a>
+  </li>
+  {{/if}}
+</ul>
+<div class="clear"></div>
+{{else}}
+{{#if editmode}}
+<button name="add" class="silver">
+  <i class="icon-plus"></i>
+  Add service
+</button>
+{{/if}}
+{{/if}}

@@ -3,7 +3,7 @@ var Implementation = require('../models/implementation'),
 
 module.exports = Base.extend({
   model: Implementation,
-  url: '/implementations'
+  url: '/users/me/implementations'
 });
 
 module.exports.id = 'Implementations';

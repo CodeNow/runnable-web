@@ -12,7 +12,7 @@
       </h2>
       {{view "runnable_description" model=image}}
       <div class="main-controls">
-        {{view "run_button" model=container collection=implementations}}
+        {{view "run_button" model=container collection=specifications context=.}}
         {{view "fork_button" collection=defaultFiles model=container}}
       </div>
     </div>
@@ -24,10 +24,10 @@
       {{view "terminal" model=container}}
     </div>
     <ul id="sidebar" class="col-sm-3">
-      {{#if container.attributes.specification}}
+      {{#if image.attributes.specification}}
       <li class="services">
       <h3 class="widget-title">Services</h3>
-        {{view "service" model=container collection=specifications editmode=false}}
+        {{view "runnable_services" model=container collection=specifications context=. editmode=false}}
       </li>
       {{/if}}
       {{#if image.attributes.tags}}{{#if image.attributes.tags.length}}

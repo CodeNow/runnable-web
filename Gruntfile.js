@@ -45,6 +45,7 @@ var frontendScripts = [
   'assets/bower/bootstrap/js/dropdown.js',
   'assets/bower/bootstrap/js/tab.js',
   'assets/bower/bootstrap/js/tooltip.js',
+  'assets/bower/bootstrap/js/popover.js',
   'assets/bower/bootstrap/js/modal.js',
   'assets/bower/bootstrap/js/transition.js',
   'assets/bower/typeahead.js/dist/typeahead.min.js',

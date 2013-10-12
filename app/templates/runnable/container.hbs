@@ -11,7 +11,7 @@
       </h2>
       {{view "runnable_description" model=container}}
       <div class="main-controls">
-        {{view "run_button" model=container collection=implementations}}
+        {{view "run_button" model=container collection=specifications context=.}}
         {{view "save_button" collection=defaultFiles}}
       </div>
     </div>
@@ -25,7 +25,7 @@
       {{#if isVerified}}
       <li class="services">
       <h3 class="widget-title">Services</h3>
-        {{view "service" model=container collection=specifications editmode=isVerified}}
+        {{view "runnable_services" model=container collection=specifications context=. editmode=isVerified}}
       </li>
       {{/if}}
       <li class="tags">

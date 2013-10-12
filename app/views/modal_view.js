@@ -4,8 +4,13 @@ var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   className: 'modal fade in',
   modalOptions: {},
+  preRender: function () {
+    if (this.modalIsInBody()) {
+      this.className = this.el.className;
+    }
+  },
   postRender: function () {
-    if ($('body').has(this.$el).length === 0) {
+    if (!this.modalIsInBody()) {
       // first render
       $('body').append(this.$el);
       this.$el.modal(this.modalOptions);
@@ -23,6 +28,9 @@ module.exports = BaseView.extend({
   },
   close: function () {
     this.$el.modal('hide');
+  },
+  modalIsInBody: function () {
+    return $('body').has(this.$el).length !== 0;
   }
 });
 

@@ -11,16 +11,19 @@ marked.setOptions({
 });
 
 module.exports = ModalView.extend({
-  id: 'implement_modal',
+  id: 'implement-modal',
   events: {
     'submit form'     : 'submit',
-    'click .nav li a' : 'switchTab'
+    'click .nav li a' : 'switchTab',
+    'mouseover .url-popover' : 'showUrlHint',
+    'mouseout .url-popover'  : 'hideUrlHint'
   },
   postRender: function () {
     Super.postRender.apply(this, arguments);
-  },
-  postInitialize: function () {
-    this.findOrCreateImplementation();
+    this.$('.url-popover').popover({
+      content: 'Use this as the base for a callback URL or redirect URL. This can be used as the permanent url of this application.',
+      show: false
+    });
   },
   findOrCreateImplementation: function () {
     var specificationId = this.model.id;
@@ -30,10 +33,11 @@ module.exports = ModalView.extend({
         'implements': this.model.id,
         subdomain   : utils.domainify(this.model.get('name')) + '-' + uuid.v4(),
         requirements: this.model.get('requirements')
-      });
+      }, {app:this.app});
   },
   getTemplateData: function () {
     var opts = this.options;
+    this.findOrCreateImplementation();
     opts.renderedInstructions = marked(this.model.get('instructions'));
     opts.header = (opts.prepend || '') + this.model.get('name') + ' Settings';
     return opts;
@@ -41,14 +45,19 @@ module.exports = ModalView.extend({
   submit: function (evt) {
     evt.preventDefault();
     evt.stopPropagation();
+    this.disableButtons(true);
     var requirements = $(evt.currentTarget).serializeArray();
     var attrs = {
       requirements: requirements,
       containerId : this.options.containerId
     };
-    this.options.implementation.save(attrs, utils.cbOpts(callback, this));
+    var implementation = this.options.implementation;
+    implementation.save(attrs, utils.cbOpts(callback, this));
     function callback (err) {
-      if (err) return this.showError(err);
+      if (err) {
+        this.disableButtons(false);
+        return this.showError(err);
+      }
       this.collection.add(implementation);
       this.close();
     }
@@ -56,6 +65,12 @@ module.exports = ModalView.extend({
   switchTab: function (evt) {
     evt.stopPropagation();
     $(evt.currentTarget).tab('show');
+  },
+  showUrlHint: function (evt) {
+    $(evt.currentTarget).popover('show');
+  },
+  hideUrlHint: function (evt) {
+    $(evt.currentTarget).popover('hide');
   }
 });
 

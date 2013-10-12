@@ -1,0 +1,12 @@
+@import "compass/css3/opacity";
+
+.spec-nav > li {
+  display: inline-block;
+  > a {
+    padding: 10px 2px;
+    @include opacity(0.8);
+  }
+  > a:hover {
+    @include opacity(1.0);
+  }
+}

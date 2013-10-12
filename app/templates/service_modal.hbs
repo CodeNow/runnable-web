@@ -1,130 +1,114 @@
 <div class="modal-dialog">
   <div class="modal-content">
-  <div class="modal-header">
-    <h4>
-      <span class="progress">{{#if phase1}}1{{else}}✓{{/if}}</span>
-      <hr class="spacer"></hr>
-      <span class="progress">{{#if phase1}}2{{else}}{{#if phase2}}2{{else}}✓{{/if}}{{/if}}</span>
-      <hr class="spacer"></hr>
-      <span class="progress">3</span>
-    </h4>
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  </div>
-  <div class="modal-body">
-      {{#if phase1}}
-      <h4>Add a Service</h4>
-      <form>
-        <label>
-          <span>Service:</span>
-          <select>
-            <option value="null">
-            {{#each collection.models}}
-            <option value="{{attributes._id}}">{{attributes.name}}
-            {{/each}}
-            <option value="new"{{#if new}}selected="selected"{{/if}}>new service
-          </select>
-        </label>
-        {{#if new}}
-        <label>
-          <span>Name:</span>
-          <input name="name" value="{{specification.attributes.name}}" required>
-        </label>
-        <label>
-          <span>Description:</span>
-          <input name="description" value="{{specification.attributes.description}}" required>
-        </label>
-        {{/if}}
-        <div class="right">
-          <button name="next" class="btn-primary">Next</button>
-        </div>
-      </form>
-      {{/if}}
-      {{#if phase2}}
-      {{#if new}}
-      <h4>Add Required Keys</h4>
-      <p>List variables that user should fill in . . . </p>
-      {{#each specification.attributes.requirements}}
-      <div>
-        <form name="req:{{.}}">
-          <span>{{.}}:</span>
-          <input disabled>
-          <button class="btn-secondary btn-small">
-            <i class="icon-minus"></i>
-          </button>
-        </form>
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4>{{header}}</h4>
+    </div>
+    <div class="modal-body">
+      <ul class="step-progress-bar clearfix steps-3">
+        <li data-step="1"{{#if_gte step compare=1}} class="active"{{/if_gte}}></li>
+        <li data-step="2"{{#if_gte step compare=2}} class="active"{{/if_gte}}></li>
+        <li data-step="3"{{#if_gte step compare=3}} class="active"{{/if_gte}}></li>
+      </ul>
+      <div class="step step{{step}}">
+        {{#if_eq step compare=1}}{{!   --STEP1--   }}
+          <h4>Select a Service</h4>
+          <form class="step1 form-horizontal" role="form">
+            <div class="form-group">
+              <div class="col-sm-12">
+                <select class="specification form-control" required>
+                  <option value="">Select a Service</option>
+                  {{#each collection.models}}
+                  <option value="{{attributes._id}}"{{#if_eq ../specification.id compare=attributes._id}} selected="selected"{{/if_eq}}>{{attributes.name}}</option>
+                  {{/each}}
+                  <option value="new"{{#if_result specification method="isNew"}} selected="selected"{{/if_result}}>Create a New Service</option>
+                </select>
+              </div>
+            </div>
+            {{#if specification.attributes}}
+            <div class="form-group">
+              <label for="name" class="col-sm-2 control-label">Name</label>
+              <div class="col-sm-10">
+                <input class="form-control" name="name" value="{{specification.attributes.name}}" {{#if_result specification method="isNew"}}required{{else}}disabled="disabled"{{/if_result}}>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="description" class="col-sm-2 control-label">Description</label>
+              <div class="col-sm-10">
+                <input class="form-control" name="description" value="{{specification.attributes.description}}" {{#if_result specification method="isNew"}}required{{else}}disabled="disabled"{{/if_result}}>
+              </div>
+            </div>
+            {{#if_result specification method="isNew"}}
+            <button class="orange col-sm-12">Next</button>
+            {{else}}
+            <button class="orange col-sm-12 next">Next</button>
+            {{/if_result}}
+            {{/if}}
+          </form>
+        {{else}}{{#if_eq step compare=2}}{{!   --STEP2--   }}
+          {{#if_result specification method="isNew"}}
+            <h4>Add Service Keys <a href="javascript:void(0);" class="keys-popover">(?)</a></h4>
+            <form class="add-key-form" role="form">
+              <div class="added-keys">
+                {{#each specification.attributes.requirements}}
+                <div class="form-group">
+                  <input class="form-control key-input inline-block" value="{{.}}" disabled="disabled">
+                  <a href="javascript:void(0)" class="col-sm-2 remove-key glyphicon glyphicon-remove"></a>
+                </div>
+                {{/each}}
+              </div>
+              <div class="form-group">
+                <input class="form-control key-input" name="new-key" placeholder="New Key Name">
+                <button class="silver col-sm-2 inline-block add-key">Add</button>
+                <div class="clear"></div>
+              </div>
+            </form>
+            <form class="step2">
+              <button type="button" class="purple col-sm-3 prev">Previous</button>
+              <button class="orange col-sm-9">Next</button>
+              <div class="clear"></div>
+            </form>
+          {{else}}{{! Existing }}
+            <h4>Keys <a href="javascript:void(0);" class="keys-popover">(?)</a></h4>
+            <form role="form">
+              {{#each specification.attributes.requirements}}
+              <div class="form-group">
+                <input class="form-control col-sm-12" value="{{.}}" disabled="disabled">
+              </div>
+              {{/each}}
+              <button type="button" class="purple col-sm-3 prev">Previous</button>
+              <button type="button" class="orange col-sm-9 next">Next</button>
+              <div class="clear"></div>
+            </form>
+          {{/if_result}}
+        {{else}}{{#if_eq step compare=3}}{{!   --STEP3--    }}
+          {{#if_result specification method="isNew"}}
+            <ul class="nav nav-pills">
+              <li{{#unless previewInstructions}} class="active"{{/unless}}><a href="javascript:void(0);">Edit Service Instructions (markdown)</a></li>
+              <li{{#if previewInstructions}} class="active"{{/if}}><a href="javascript:void(0);">Preview</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane{{#unless previewInstructions}} active in{{/unless}}">
+                <form class="step3">
+                  <textarea class="instructions form-control" rows="5">{{specification.attributes.instructions}}</textarea>
+                  <button type="button" class="purple col-sm-3 prev">Previous</button>
+                  <button class="orange col-sm-9">Create and Add</button>
+                  <div class="clear"></div>
+                </form>
+              </div>
+              <div class="tab-pane{{#if previewInstructions}} active in{{/if}}">
+                <div class="instr-preview">{{{rendered}}}</div>
+              </div>
+            </div>
+          {{else}}{{! Existing }}
+            <h4>Service Instructions</h4>
+            <div class="instr-preview">{{{rendered}}}</div>
+            <button type="button" class="purple col-sm-3 prev">Previous</button>
+            <button type="button" class="orange col-sm-9 add-service">Add</button>
+            <div class="clear"></div>
+          {{/if_result}}
+        {{/if_eq}}{{/if_eq}}{{/if_eq}}
       </div>
-      {{/each}}
-      <form name="newKey">
-        <span>New Key:</span>
-        <input name="new" required>
-        <button class="btn-secondary btn-small">
-          <i class="icon-plus"></i>
-        </button>
-      </form>
-      <div class="right">
-        <button name="prev" class="btn-primary">Prev</button>
-        <button name="next" class="btn-primary">Next</button>
-      </div>
-      {{else}}
-      <h4>View Keys</h4>
-      {{#each specification.attributes.requirements}}
-      <div>
-        <label>
-          <span>{{.}}:</span>
-          <input disabled>
-        </label>
-      </div>
-      {{/each}}
-      <div class="right">
-        <button name="prev" class="btn-primary">Prev</button>
-        <button name="next" class="btn-primary">Next</button>
-      </div>
-      {{/if}}
-      {{/if}}
-      {{#if phase3}}
-      {{#if new}}
-      <h4>Instructions</h4>
-      <label>
-        <span>Preview:</span>
-        <input type="checkbox" {{#if preview}}checked{{/if}}>
-      </label>
-      {{#if preview}}
-      <p>{{{rendered}}}</p>
-      {{else}}
-      <p>
-        <textarea>{{specification.attributes.instructions}}</textarea>
-      </p>
-      {{/if}}
-      <div class="right">
-        <button name="prev" class="btn-primary">Prev</button>
-        <button name="finish" class="btn-primary">Finish</button>
-      </div>
-      {{else}}
-      <h4>View Instructions</h4>
-      <p>{{{rendered}}}</p>
-      <div class="right">
-        <button name="prev" class="btn-primary">Prev</button>
-        <button name="finish" class="btn-primary">Finish</button>
-      </div>
-      {{/if}}
-      {{/if}}
-  </div>
+    </div>
   </div>
 </div>
-<style>
-  .progress {
-    border: 2px solid;
-    font-size: 27px;
-    display: inline-block;
-    height: 36px;
-    line-height: 45px;
-    width: 36px;
-    text-align: center;
-    border-radius: 22px;
-  }
-  .spacer {
-    display: inline-block;
-    width: 191px;
-    border-bottom: 2px solid;
-  }
-</style>

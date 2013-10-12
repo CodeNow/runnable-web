@@ -1,8 +1,7 @@
+var _ = require('underscore');
 var EditorButtonView = require('./editor_button_view');
 var Super = EditorButtonView.prototype;
 var utils = require('../utils');
-var Implement = require('./implement_modal');
-var Specification = require('../models/specification');
 
 module.exports = EditorButtonView.extend({
   tagName: 'button',
@@ -18,31 +17,35 @@ module.exports = EditorButtonView.extend({
     var dispatch = this.app.dispatch;
     if (dispatch) {
       this.listenTo(dispatch, 'unsaved:files', this.onChangeUnsaved.bind(this));
-      this.listenTo(dispatch, 'edit:implementation', this.openImplementModal.bind(this));
     }
   },
   postRender: function () {
+    // Leave this here for debugging!
     console.log("CONTAINER ID: ", this.model.id);
+    // implementation interactions through implement_link
+    this.implementLink = _.findWhere(this.childViews, {name:'implement_link'});
   },
   click: function () {
-    if (!this.implementsSpec()) {
-      this.openImplementModal();
+    if (!this.userImplementedSpec()) {
+      this.openImplementModal({
+        onClose: function () {
+          if (this.userImplementedSpec()) this.run();
+        }.bind(this)
+      });
     }
     else {
       this.run();
     }
   },
-  implementsSpec: function () {
-    var specificationId = this.model.get('specification');
-    if (!specificationId) {
-      return true;
-    }
-    else {
-      this.implementation = this.collection.findWhere({
-        'implements' : specificationId
-      });
-      return (this.implementation != null);
-    }
+  getTemplateData: function () {
+    this.options.specification = this.collection.get(this.model.get('specification'));
+    return this.options;
+  },
+  userImplementedSpec: function () {
+    return this.implementLink.userImplementedSpec();
+  },
+  openImplementModal: function (opts) {
+    return this.implementLink.openImplementModal(opts);
   },
   run: function () {
     var url = '/'+this.model.id+'/output';
@@ -67,25 +70,6 @@ module.exports = EditorButtonView.extend({
       this.$('span').html('Save and Run');
     else
       this.$('span').html('Run');
-  },
-  openImplementModal: function (specificationId) {
-    var self = this;
-    var specification = new Specification({
-      _id: specificationId
-    });
-    specification.fetch(utils.cbOpts(function (err) {
-      if (err) {
-        return self.showError(err);
-      }
-      var implement = new Implement({
-        app        : self.app,
-        model      : specification,
-        collection : self.collection,
-        parent     : self,
-        containerId: self.model.id
-      });
-      implement.open();
-    }));
   }
 });
 

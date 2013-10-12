@@ -8,6 +8,12 @@ module.exports.add = function (Handlebars) {
     return options.inverse(this);
   });
 
+  Handlebars.registerHelper('if_gte', function(context, options) {
+    if (context >= options.hash.compare)
+      return options.fn(this);
+    return options.inverse(this);
+  });
+
   Handlebars.registerHelper('exists', function(context, options) {
     if (context !== null && context !== undefined)
       return options.fn(this);
@@ -42,14 +48,14 @@ module.exports.add = function (Handlebars) {
   Handlebars.registerHelper('invoke', function (obj, options) {
     var opts = options.hash;
     var args = _.chain(options).omit('method').values().value();
-    return obj[opts.method].apply(obj, args);
+    return obj && obj[opts.method] && obj[opts.method].apply(obj, args);
   });
 
   Handlebars.registerHelper('if_result', function (obj, options) {
     var opts = options.hash;
     opts.equals = opts.equals || true;
     var args = _.chain(opts).omit('method', 'equals').values().value();
-    if (obj[opts.method].apply(obj, args) === opts.equals)
+    if (obj && obj[opts.method] && obj[opts.method].apply(obj, args) === opts.equals)
       return options.fn(this);
     return options.inverse(this);
   });

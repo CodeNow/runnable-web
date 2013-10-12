@@ -10,148 +10,208 @@ marked.setOptions({
 });
 
 module.exports = ModalView.extend({
+  id: 'service-modal',
   className: 'fade',
   events: {
-    'submit form'      : 'submit',
-    'change select'    : 'submit',
-    'click button[name=next]': 'submit',
-    'click button[name=prev]': 'prev',
-    'click button[name=finish]': 'finish',
-    'click [type=checkbox]': 'togglePreview'
+    'click button.prev' : 'prev',
+    'click button.next' : 'next',
+    'click .step-progress-bar > li.active' : 'gotoStep'
+    // all events in events1, events2, events3
+  },
+  postInitialize: function () {
+    this.options.step = 1;
+    this.options.previewInstructions = false;
+    _.extend(this.events, this.events1, this.events2, this.events3);
+  },
+  getTemplateData: function () {
+    var opts = this.options;
+    var spec = opts.specification = opts.specification ||
+      this.collection.get(this.model.get('specification')) || {};
+    if (spec.attributes) opts.rendered = marked(opts.specification.get('instructions') || '');
+    opts.header = this['header'+opts.step];
+    return opts;
   },
   postRender: function () {
     Super.postRender.apply(this, arguments);
+    var stepPostRender = this['postRender'+this.options.step];
+    if (stepPostRender) stepPostRender.call(this);
   },
-  postInitialize: function () {
-    this.phase = 1;
-    this.preview = false;
+  gotoStep: function (evt) {
+    var step = (typeof evt == 'number') ? evt : parseInt($(evt.currentTarget).data('step'));
+    this.options.step = step;
+    this.render();
   },
-  getTemplateData: function () {
-    return _.extend(this.options, {
-      specification: this.specification,
-      phase1: this.phase === 1,
-      phase2: this.phase === 2,
-      phase3: this.phase === 3,
-      new: this.new,
-      preview: this.preview,
-      rendered: this.preview && marked(this.specification.get('instructions'))
-    });
+  prev: function (evt) {
+    if (evt) evt.preventDefault();
+    this.options.step--;
+    this.render();
   },
-  submit: function (evt) {
+  next: function (evt) {
+    if (evt) evt.preventDefault();
+    this.options.step++;
+    this.render();
+  },
+
+  /*
+    STEP 1
+   */
+  header1: 'Step 1: Service',
+  events1: {
+    'change .specification' : 'changeService',
+    'submit form.step1'     : 'submitStep1ForNew'
+  },
+  changeService: function (evt) {
+    var app = this.app;
+    var opts = this.options;
+    var specId = $(evt.currentTarget).val();
+    console.log(specId);
+    if (specId === '') {
+      opts.specification = {};
+    }
+    else if (specId === 'new') {
+      opts.specification = new Specification({}, {app:app});
+    }
+    else {
+      opts.specification = this.collection.get(specId);
+    }
+    this.render();
+  },
+  submitStep1ForNew: function (evt) {
     evt.preventDefault();
-    evt.stopPropagation();
-    if (this.phase === 1) {
-      this.parseSelect();
-    } else if (this.phase === 2) {
-      if (this.new) {
-        this.adjustKeys($(evt.target).attr("name"));
-      } else {
-        this.next();
-      }
-    }
+    var formData = $(evt.currentTarget).serializeObject();
+    var specification = this.options.specification;
+    console.log(formData);
+    specification.set(formData);
+    this.next();
   },
-  parseSelect: function () {
-    var selection = this.$('select').val();
-    if (selection === 'null') {
-      alert('select a service');
-    } else if (selection === 'new') {
-      if (this.new) {
-        var name = this.$('[name=name]').val();
-        var description = this.$('[name=description]').val();
-        if (name === '' || description === '') {
-          alert('enter values');
-        } else {
-          this.specification.set('name', name);
-          this.specification.set('description', description);
-          this.next();
-        }
-      } else {
-        this.new = true;
-        this.specification = new Specification({
-          name: '',
-          description: '',
-          instructions: '',
-          requirements: []
-        });
-        this.render();
-      }
-    } else {
-      this.new = false;
-      this.specification = this.collection.get(selection);
-      this.next();
-    }
+
+  /*
+    STEP 2
+   */
+  header2: 'Step 2: Service Keys',
+  events2: {
+    'submit .add-key-form': 'addKey',
+    'click .remove-key'   : 'removeKey',
+    'submit form.step2'   : 'submitStep2ForNew',
+    'mouseover .keys-popover': 'showKeysHint',
+    'mouseout .keys-popover' : 'hideKeysHint'
   },
-  adjustKeys: function (name) {
-    console.log('NAME', name);
-    if (name === 'newKey') {
-      var key = this.$('[name=new]').val();
-      if (key === '') {
-        alert('enter value');
-      } else {
-        var requirements = this.specification.get('requirements');
-        requirements.push(key);
-        this.specification.set('requirements', requirements);
-        this.render();
+  postRender2: function () {
+    this.$('.keys-popover').popover({
+      content: 'Required variables the user must set to run your example. Use these keys as environment variables in your example. Eg. APP_SECRET, AUTH_TOKEN.',
+      show: false
+    });
+    this.$('input[name=new-key]').keydown(function (evt) {
+      evt.stopPropagation();
+      if (evt.keycode === 13) {
+        this.addKey();
       }
-    } else if (name === 'next') {
-      this.next();
-    } else {
-      var key = name.replace(/^req:/,'');
-      var requirements = this.specification.get('requirements');
-      requirements = requirements.filter(function (requirement) {
-        return requirement !== key;
-      });
-      this.specification.set('requirements', requirements);
-      this.render();
+    }.bind(this));
+  },
+  showKeysHint: function (evt) {
+    $(evt.currentTarget).popover('show');
+  },
+  hideKeysHint: function (evt) {
+    $(evt.currentTarget).popover('hide');
+  },
+  addKey: function (evt) {
+    evt.preventDefault();
+    var $input = this.$('input[name=new-key]');
+    var key = $input.val();
+    if (key.trim().length === 0) return;
+    if (~key.indexOf(' ')) {
+      this.showError('Key cannot contain spaces (Ex: API_KEY)');
+      return;
+    }
+    var specAttrs = this.options.specification.attributes;
+    var reqs = specAttrs.requirements = specAttrs.requirements || [];
+    $input.val('');
+    if (~reqs.indexOf(key)) return;
+    reqs.push(key);
+    this.render();
+    this.$('input[name=new-key]').focus();
+  },
+  removeKey: function (evt) {
+    var key = $(evt.currentTarget).parent('.form-group').find('input').val();
+    var reqs = this.options.specification.attributes.requirements;
+    reqs.splice(reqs.indexOf(key), 1);
+    this.render();
+  },
+  submitStep2ForNew: function (evt) {
+    evt.preventDefault();
+    var $keyInputs = this.$('input:disabled');
+    var keys = [].slice.call($keyInputs).map(utils.pluck('value'));
+    if (keys.length === 0) {
+      return this.showError('Atleast one key is required');
+    }
+    this.options.specification.set({
+      requirements: keys
+    });
+    this.next();
+  },
+
+  /*
+    STEP 3
+   */
+  header3: 'Step 3: Service Instructions for Users',
+  events3: {
+    'submit form.step3'            : 'submitStep3ForNew',
+    'click .add-service'           : 'addService',
+    'keydown .instructions'        : 'saveInstructions',
+    'change .instructions'         : 'saveInstructions',
+    'click .nav > li:not(.active)' : 'togglePreviewInstructions'
+  },
+  saveInstructions: function (evt) {
+    var instructions = $(evt.currentTarget).val();
+    this.options.specification.set('instructions', instructions);
+  },
+  submitStep3ForNew: function (evt) {
+    debugger;
+    evt.preventDefault();
+    this.disableButtons(true);
+    var spec = this.options.specification;
+    var instructions = spec.get('instructions');
+    if (instructions.trim().length === 0) {
+      return this.showError('Service Instructions are Required');
+    }
+    var doneCount = 0;
+    var opts = utils.cbOpts(callback, this);
+    spec.save({}, opts);
+    function callback (err) {
+      if (err) {
+        this.disableButtons(false);
+        this.showError(err);
+      }
+      else {
+        this.addService();
+      }
     }
   },
   addService: function () {
-    if (!this.preview) {
-      this.specification.set('instructions', this.$('textarea').val());
-    }
-    this.specification.save({}, utils.cbOpts(function (err, saved) {
+    debugger;
+    this.disableButtons(true);
+    var container = this.model;
+    var spec = this.options.specification;
+    var opts = utils.cbOpts(callback, this);
+    opts.put = true;
+    // assume success
+    this.collection.add(spec);
+    container.save({ specification:spec.id }, opts);
+    function callback (err) {
       if (err) {
-        console.error(err);
-      } else {
-        this.specification = saved;
-        this.collection.add(this.specification);
-        this.attachService();
+        this.collection.remove(spec); // revert on fail
+        this.disableButtons(false);
+        this.showError(err);
       }
-    }.bind(this)));
-  },
-  attachService: function () {
-    this.model.set('specification', this.specification.id);
-    this.model.save({}, utils.cbOpts(function (err) {
-      debugger;
-      if (err) {
-        console.error(err);
-      } else {
-        this.options.parent.render();
+      else {
         this.close();
       }
-    }.bind(this)));
-  },
-  togglePreview: function () {
-    if (!this.preview) {
-      this.specification.set('instructions', this.$('textarea').val());
     }
-    this.preview = !this.preview;
-    this.render();
   },
-  prev: function () {
-    this.phase--;
+  togglePreviewInstructions: function (evt) {
+    evt.preventDefault();
+    this.options.previewInstructions = !this.options.previewInstructions;
     this.render();
-  },
-  next: function () {
-    this.phase++;
-    this.render();
-  },
-  finish: function () {
-    if (this.new) {
-      this.addService();
-    } else {
-      this.attachService();
-    }
   }
 });
 

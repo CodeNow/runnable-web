@@ -121,5 +121,14 @@ module.exports = RendrView.extend({
   },
   getTemplateData: function () {
     return this.options;
+  },
+  disableButtons: function (bool) {
+    bool = utils.exists(bool) ? bool : this.$('button').attr('disabled');
+    if (bool) {
+      this.$('button').attr('disabled', 'disabled');
+    }
+    else {
+      this.$('button').removeAttr('disabled');
+    }
   }
 });
