@@ -1,4 +1,5 @@
 var Channel = require('./models/channel');
+var _ = require('underscore');
 
 var utils = module.exports = {
   capitalize: function (str) {
@@ -23,7 +24,12 @@ var utils = module.exports = {
     };
   },
   put: function (obj, key) {
+    if (arguments.length === 1 && typeof key === 'string') {
+      key = obj;
+      obj = {};
+    }
     return function (val) {
+      obj = _.clone(obj);
       obj[key] = val;
       return obj;
     };

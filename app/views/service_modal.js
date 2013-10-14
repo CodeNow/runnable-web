@@ -166,7 +166,6 @@ module.exports = ModalView.extend({
     this.options.specification.set('instructions', instructions);
   },
   submitStep3ForNew: function (evt) {
-    debugger;
     evt.preventDefault();
     this.disableButtons(true);
     var spec = this.options.specification;
@@ -188,7 +187,6 @@ module.exports = ModalView.extend({
     }
   },
   addService: function () {
-    debugger;
     this.disableButtons(true);
     var container = this.model;
     var spec = this.options.specification;
