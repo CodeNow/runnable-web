@@ -5,36 +5,33 @@
       <h4 class="modal-title">{{header}}</h4>
     </div>
     <div class="modal-body">
-      <ul class="nav nav-pills">
-        <li class="active"><a href="#implement-env-tab">Settings</a></li>
-        <li><a href="#implement-instructions-tab">Instructions</a></li>
-      </ul>
-      <div class="tab-content">
-        <div id="implement-env-tab" class="tab-pane fade active in">
-          <form class="form-horizontal" role="form">
-            <h4>Keys</h4>
-            {{#each implementation.attributes.requirements}}
-            <div class="form-group">
-              <label for="{{name}}" class="col-md-3 control-label">{{name}}</label>
-              <div class="col-md-9">
-                <input name="{{name}}" value="{{value}}" class="form-control">
-              </div>
+      <div id="implement-env-tab">
+        <h4>Keys (<a href="javascript:">Need Help?</a>)</h4>
+        <form class="form-horizontal" role="form">
+          {{#each model.attributes.requirements}}
+          <div class="form-group">
+            <label for="{{.}}" class="col-md-3 control-label">{{.}}</label>
+            <div class="col-md-9">
+              <input name="{{.}}" value="{{findWhere ../implementation.attributes.requirements name=.}}" class="form-control" required>
             </div>
-            {{/each}}
-            <div class="form-group">
-              <div class="col-md-12">
-                <h4>Base URL <a href="javascript:void(0);" class="url-popover">(?)</a></h4>
-                <input disabled value="{{invoke implementation method='appUrl'}}" class="form-control">
-              </div>
+          </div>
+          {{/each}}
+          <button name="save" class="orange col-sm-12">
+            <i class="icon-save"></i> {{savetext}}
+          </button>
+        </form>
+      </div>
+      <div id="implement-instructions-tab">
+        <h4>Base URL <a href="javascript:void(0);" class="url-popover">(?)</a></h4>
+        <form>
+          <div class="form-group">
+            <div class="col-md-12">
+              <input disabled value="{{invoke implementation method='appUrl'}}" class="form-control">
             </div>
-            <button name="save" class="orange col-sm-12">
-              <i class="icon-save"></i> Save
-            </button>
-          </form>
-        </div>
-        <div id="implement-instructions-tab" class="tab-pane fade">
-          <p>{{{renderedInstructions}}}</p>
-        </div>
+          </div>
+        </form>
+        <h4>Instructions for Keys</h4>
+        <p>{{{renderedInstructions}}}</p>
       </div>
     </div>
   </div>

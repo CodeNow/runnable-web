@@ -1,6 +1,5 @@
 var BaseView = require('./base_view');
 var ImplementModal = require('./implement_modal');
-var utils = require('../utils');
 
 module.exports = BaseView.extend({
   tagName: 'a',
@@ -15,28 +14,16 @@ module.exports = BaseView.extend({
     }
   },
   userImplementedSpec: function () {
-    var implementations = this.collection;
     var specification = this.model;
-    if (!specification) return true;
-    var i = implementations.findWhere({
-      'implements' : specification.id
-    });
-    return Boolean(i);
+    return this.collection.hasCompleteImplementationFor(specification);
   },
-  openImplementModal: function (evtOrOpts) {
-    var evt, opts;
-    if (evtOrOpts.preventDefault) {
-      evt = evtOrOpts;
-      evt.preventDefault();
-    }
-    else {
-      opts = evtOrOpts;
-    }
+  openImplementModal: function (evt) {
+    if (evt) evt.preventDefault();
+
     var implementModal = new ImplementModal(this.options);
-    if (opts && opts.onClose) {
-      this.listenToOnce(implementModal, 'close', opts.onClose);
-    }
     implementModal.open();
+
+    return implementModal;
   }
 });
 

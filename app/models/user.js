@@ -137,9 +137,9 @@ var User = module.exports = Base.extend({
       return checkVote();
     }
   },
-  isOwnerOf: function (project) {
-    owner = (project.toJSON) ? project.get('owner') : project.owner;
-    return this.id == owner;
+  isOwnerOf: function (model) {
+    owner = (model.toJSON) ? model.get('owner') : model.owner;
+    return this.id === owner;
   }
 });
 module.exports.id = 'User';

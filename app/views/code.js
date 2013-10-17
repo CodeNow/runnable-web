@@ -196,14 +196,12 @@ module.exports = BaseView.extend({
   onEdit: function (file, evt) {
     var self = this;
 
-    debugger;
     if (evt.data.action === 'insertText' && evt.data.text && evt.data.text.length >= 4) {
       self.justPasted = evt.data.text;
       self.evtStartLine = evt.data.range.start.row;
       self.evtStartColumn = evt.data.range.start.column;
     }
     else if ((evt.data.action === 'removeText' || evt.data.action === 'removeLines') && evt.data.text && evt.data.text.length >= 4) { // to filter just cut events, ignore delete
-      debugger;
       self.justCut = evt.data.text;
       self.evtStartLine = evt.data.range.start.row;
       self.evtStartColumn = evt.data.range.start.column;

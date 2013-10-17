@@ -6,8 +6,10 @@ module.exports = BaseView.extend({
     this.listenTo(this.app.user, 'change:_id', this.render.bind(this));
   },
   getTemplateData: function () {
-    return _.extend(this.options, {
-      isVerified: this.app.user.isVerified()
+    var opts = this.options;
+    return _.extend(opts, {
+      isVerified   : this.app.user.isVerified(),
+      specification: opts.specifications.get(opts.container.get('specification'))
     });
   }
 });

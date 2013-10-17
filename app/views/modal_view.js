@@ -27,6 +27,7 @@ module.exports = BaseView.extend({
     this.render();
   },
   close: function () {
+    this.trigger('close');
     this.$el.modal('hide');
   },
   modalIsInBody: function () {

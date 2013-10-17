@@ -32,6 +32,12 @@ module.exports.add = function (Handlebars) {
     return new Handlebars.SafeString(str);
   });
 
+  Handlebars.registerHelper('findWhere', function (arr, options) {
+    var found = _.findWhere(arr, options.hash);
+    var value = (found && found.value) || '';
+    return new Handlebars.SafeString(value);
+  });
+
   Handlebars.registerHelper('channelHasImage', function (channelName, options) {
     var channelImages = require('./channelImages');
     if (Boolean(channelImages[channelName.toLowerCase()]))
@@ -87,3 +93,4 @@ module.exports.add = function (Handlebars) {
   Handlebars.registerHelper('add', add);
   Handlebars.registerHelper('concat', add);
 };
+

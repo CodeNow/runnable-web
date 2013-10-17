@@ -16,6 +16,28 @@ module.exports = Base.extend({
   },
   appUrl: function () {
     return ["http://", this.get("subdomain"), ".", this.app.get('domain')].join('');
+  },
+  isComplete: function (specification) {
+    return specification?
+      this.isCompleteForSpecification(specification) :
+      this.requirementsAreComplete();
+  },
+  isCompleteForSpecification: function (specification) {
+    var reqHash = {};
+    this.get('requirements').forEach(function (req) {
+      reqHash[req.name] = req.value;
+    });
+
+    var specReqNames = specification.get('requirements');
+    return specReqNames.every(function (name) {
+      var value = reqHash[name];
+      return utils.exists(value) && value !== '';
+    });
+  },
+  requirementsAreComplete: function () {
+    return this.get('requirements').every(function (req) {
+      return utils.exists(req.value) && req.value !== '';
+    });
   }
 });
 module.exports.id = 'Implementation';

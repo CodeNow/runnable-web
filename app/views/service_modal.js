@@ -64,15 +64,19 @@ module.exports = ModalView.extend({
     var app = this.app;
     var opts = this.options;
     var specId = $(evt.currentTarget).val();
-    console.log(specId);
+    var currentSpec = opts.specification;
+
     if (specId === '') {
       opts.specification = {};
+    }
+    else if (specId === currentSpec.id) {
+      return; // do nothing
     }
     else if (specId === 'new') {
       opts.specification = new Specification({}, {app:app});
     }
     else {
-      opts.specification = this.collection.get(specId);
+      opts.specification = new Specification(this.collection.get(specId).toJSON(), {app:app});
     }
     this.render();
   },
@@ -80,7 +84,6 @@ module.exports = ModalView.extend({
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
     var specification = this.options.specification;
-    console.log(formData);
     specification.set(formData);
     this.next();
   },
@@ -175,7 +178,13 @@ module.exports = ModalView.extend({
     }
     var doneCount = 0;
     var opts = utils.cbOpts(callback, this);
-    spec.save({}, opts);
+    debugger;
+    if (spec.isNew()) {
+      spec.save({}, opts);
+    }
+    else {
+      this.collection.get(spec.id).save(spec.toJSON(), opts); // save back to model that is in the collection
+    }
     function callback (err) {
       if (err) {
         this.disableButtons(false);

@@ -18,6 +18,7 @@ module.exports = EditorButtonView.extend({
     if (dispatch) {
       this.listenTo(dispatch, 'unsaved:files', this.onChangeUnsaved.bind(this));
     }
+    this.listenTo(this.model, 'change:specification', this.setImplementLinkModel.bind(this));
   },
   postRender: function () {
     // Leave this here for debugging!
@@ -27,11 +28,10 @@ module.exports = EditorButtonView.extend({
   },
   click: function () {
     if (!this.userImplementedSpec()) {
-      this.openImplementModal({
-        onClose: function () {
-          if (this.userImplementedSpec()) this.run();
-        }.bind(this)
-      });
+      var modal = this.openImplementModal();
+      this.listenToOnce(modal, 'close', function () {
+        if (this.userImplementedSpec()) this.run();
+      }.bind(this))
     }
     else {
       this.run();
@@ -44,8 +44,8 @@ module.exports = EditorButtonView.extend({
   userImplementedSpec: function () {
     return this.implementLink.userImplementedSpec();
   },
-  openImplementModal: function (opts) {
-    return this.implementLink.openImplementModal(opts);
+  openImplementModal: function () {
+    return this.implementLink.openImplementModal();
   },
   run: function () {
     var url = '/'+this.model.id+'/output';
@@ -70,6 +70,12 @@ module.exports = EditorButtonView.extend({
       this.$('span').html('Save and Run');
     else
       this.$('span').html('Run');
+  },
+  setImplementLinkModel: function () {
+    //hack
+    var spec = this.collection.get(this.model.get('specification'));
+    this.implementLink.options.model = spec;
+    this.implementLink.model = spec;
   }
 });
 

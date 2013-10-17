@@ -37,9 +37,12 @@ module.exports = ModalView.extend({
   },
   getTemplateData: function () {
     var opts = this.options;
+    opts.savetext = opts.savetext || "Save";
     this.findOrCreateImplementation();
     opts.renderedInstructions = marked(this.model.get('instructions'));
-    opts.header = (opts.prepend || '') + this.model.get('name') + ' Settings';
+    opts.header = opts.header ?
+      opts.header.replace(/\{\{name\}\}/g, this.model.get('name')) :
+      this.model.get('name') + ' Keys';
     return opts;
   },
   submit: function (evt) {
@@ -49,7 +52,7 @@ module.exports = ModalView.extend({
     var requirements = $(evt.currentTarget).serializeArray();
     var attrs = {
       requirements: requirements,
-      containerId : this.options.containerId
+      containerId : this.options.containerid
     };
     var implementation = this.options.implementation;
     implementation.save(attrs, utils.cbOpts(callback, this));

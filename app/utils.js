@@ -126,7 +126,6 @@ var utils = module.exports = {
     var lastIndex = 0;
 
     str.replace(regex, function(match, index) {
-      console.log(match);
       newStr += (str.substring(lastIndex, index));
       lastIndex = index+1;
       if (index !== 0) {

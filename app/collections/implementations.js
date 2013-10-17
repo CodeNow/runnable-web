@@ -3,7 +3,20 @@ var Implementation = require('../models/implementation'),
 
 module.exports = Base.extend({
   model: Implementation,
-  url: '/users/me/implementations'
+  url: '/users/me/implementations',
+  hasCompleteImplementationFor: function (specification) {
+    var imp = this.findWhereImplements(specification);
+    return imp && imp.isComplete(specification);
+  },
+  hasImplementationFor: function (specOrId) {
+    return Boolean(this.findWhereImplements(specOrId));
+  },
+  findWhereImplements: function (specOrId) {
+    var specId = (specOrId.id) ? specOrId.id : specOrId;
+    return this.findWhere({
+      'implements' : specId
+    })
+  }
 });
 
 module.exports.id = 'Implementations';

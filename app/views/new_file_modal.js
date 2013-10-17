@@ -6,6 +6,7 @@ var utils = require('../utils');
 var Super = ModalView.prototype;
 
 module.exports = ModalView.extend({
+  id: 'new-file-modal',
   className: 'fade',
   events: {
     'submit form'       : 'submit'

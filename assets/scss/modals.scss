@@ -1,4 +1,6 @@
-#login {
+#contact-modal,
+#new-file-modal,
+#login, #signup {
     .modal-dialog {
         width: 30%;
         position: fixed;
@@ -40,6 +42,11 @@
         }
     }
 }
+#service-modal {
+  input, textarea {
+    margin-bottom: 20px;
+  }
+}
 
 // modal
 .modal-dialog {
@@ -66,28 +73,7 @@
         font-size: 14px;
       }
     }
-    .modal-body {
-      input, select, textarea {
-        margin-bottom: 20px;
-      }
-      button {
-        margin-bottom: 20px;
-      }
-      p {
-        text-align: center;
-        a {
-          color: #bcbcbc;
-          font-size: 12px;
-          text-shadow: 0 1px 0 #fff;
-        }
-      }
-      .input-group {
-        margin-bottom: 20px;
-        input, select, textarea {
-          margin-bottom: 0;
-        }
-      }
-    }
+
   }
 }
 
@@ -100,6 +86,10 @@
 #implement-modal, #service-modal {
   .modal-dialog {
     width: 700px;
+    .modal-body {
+      max-height: 500px;
+      overflow-y: scroll;
+    }
   }
 }
 
@@ -126,8 +116,18 @@
   .instr-preview {
     margin: 10px 0 40px 0;
   }
-  div.step3 {
+}
 
+.services-body {
+  label {
+    color: grey;
+  }
+  input {
+    height: 34px;
+    min-height: 34px;
+  }
+  button {
+    padding: 5px 10px;
   }
 }
 

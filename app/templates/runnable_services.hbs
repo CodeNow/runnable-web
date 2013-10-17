@@ -1,21 +1,12 @@
 {{#if specification}}
 {{#with specification.attributes}}
-<div class="left">
-  <b>{{name}}</b>
-  <p>{{description}}</p>
-</div>
+<div class="left name"><b>{{name}}</b></div>
 {{/with}}
-<ul class="nav spec-nav right">
-  <li>
-    {{view "implement_link"
-      model=specification
-      collection=context.implementations
-      containerid=model.id}}
-  </li>
+<ul class="nav right">
   {{#if editmode}}
   <li>
     <a class="edit-service" href="javascript:void(0);">
-      <span class="glyphicon glyphicon-edit"></span>
+      <span class="glyphicon glyphicon-cog"></span>
     </a>
   </li>
   <li>
@@ -26,6 +17,7 @@
   {{/if}}
 </ul>
 <div class="clear"></div>
+{{view "implement_form" model=specification collection=context.implementations containerid=model.id}}
 {{else}}
 {{#if editmode}}
 <button name="add" class="silver">
