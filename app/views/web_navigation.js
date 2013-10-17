@@ -22,12 +22,6 @@ module.exports = BaseView.extend({
       this.$('.back-button').removeAttr('disabled');
     }
   },
-  postRender: function () {
-    // cache jq elements
-    this.$back = this.$('.back-button');
-    this.$refresh = this.$('.refresh-button');
-    this.$address = this.$('.address-bar');
-  },
   setAddress: function (address) {
     if (address[0] == '/') address = address.slice(1);
     this.$address.val(address);
@@ -47,7 +41,7 @@ module.exports = BaseView.extend({
   enter: function (evt) {
     evt.preventDefault();
     var opts = this.options;
-    var url = this.$address.val();
+    var url = $(evt.currentTarget).serializeObject().url;
     this.history.push(opts.currenturl);
     opts.currenturl = url;
     this.app.dispatch.trigger('change:url', url);
