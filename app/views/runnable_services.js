@@ -30,7 +30,9 @@ module.exports = BaseView.extend({
       this.stopListening(opts.specification);
     }
     opts.specification = this.collection.get(this.model.get('specification'));
-    this.listenTo(opts.specification, 'change', this.render.bind());
+    if (opts.specification) {
+      this.listenTo(opts.specification, 'change', this.render.bind());
+    }
   },
   events: {
     'click .edit-service'   : 'edit',
@@ -48,7 +50,6 @@ module.exports = BaseView.extend({
     serviceModal.open();
   },
   remove: function () {
-    debugger;
     this.model.set('specification', null);
     var options = utils.cbOpts(this.showIfError.bind(this));
     this.model.save({}, options);

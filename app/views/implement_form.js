@@ -31,7 +31,6 @@ module.exports = BaseView.extend({
       this.collection.findWhere({ 'implements': specificationId });
   },
   getTemplateData: function () {
-    debugger;
     this.findImplementation();
     return this.options;
   },
@@ -60,6 +59,8 @@ module.exports = BaseView.extend({
         containerId : this.options.containerid
       };
       var opts = utils.cbOpts(callback, this);
+      opts.wait = true;
+      this.blockChangeRender = true;
       this.options.implementation.save(attrs, opts);
     }
     function callback (err) {
@@ -76,7 +77,14 @@ module.exports = BaseView.extend({
     //listen to implementation for changes
     if (this.listeningToImplementation || !this.options.implementation) return;
     this.listeningToImplementation = true;
-    this.listenTo(this.options.implementation, 'change:requirements', this.render.bind(this))
+    this.listenTo(this.options.implementation, 'change:requirements', this.handleChangeRequirements.bind(this));
+  },
+  handleChangeRequirements: function () {
+    if (this.blockChangeRender) {
+      this.blockChangeRender = false;
+      return;
+    }
+    this.render();
   }
 });
 

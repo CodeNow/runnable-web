@@ -5,6 +5,7 @@ module.exports = Base.extend({
   model: Implementation,
   url: '/users/me/implementations',
   hasCompleteImplementationFor: function (specification) {
+    if (!specification) return true;
     var imp = this.findWhereImplements(specification);
     return imp && imp.isComplete(specification);
   },

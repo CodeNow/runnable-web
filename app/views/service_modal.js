@@ -178,12 +178,17 @@ module.exports = ModalView.extend({
     }
     var doneCount = 0;
     var opts = utils.cbOpts(callback, this);
-    debugger;
     if (spec.isNew()) {
       spec.save({}, opts);
     }
     else {
-      this.collection.get(spec.id).save(spec.toJSON(), opts); // save back to model that is in the collection
+      var specEditing = this.collection.get(spec.id);
+      if (specEditing) {
+        specEditing.save(spec.toJSON(), opts); // save back to model that is in the collection
+      }
+      else {
+        callback();
+      }
     }
     function callback (err) {
       if (err) {
