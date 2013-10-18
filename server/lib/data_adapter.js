@@ -62,7 +62,7 @@ DataAdapter.prototype._request = function (req, api, options, callback) {
   });
 ;
   api = this.apiDefaults(api);
-  api.timeout = 30000;
+  api.timeout = 900000;
 
   if (req.session && req.session.access_token) {
     api.headers['runnable-token'] = req.session.access_token;
