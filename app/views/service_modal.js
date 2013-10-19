@@ -187,7 +187,7 @@ module.exports = ModalView.extend({
         specEditing.save(spec.toJSON(), opts); // save back to model that is in the collection
       }
       else {
-        callback();
+        callback.call(this);
       }
     }
     function callback (err) {
@@ -205,7 +205,7 @@ module.exports = ModalView.extend({
     var container = this.model;
     var spec = this.options.specification;
     var opts = utils.cbOpts(callback, this);
-    opts.put = true;
+    opts.patch = true;
     // assume success
     this.collection.add(spec);
     container.save({ specification:spec.id }, opts);
