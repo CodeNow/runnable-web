@@ -45,7 +45,11 @@ module.exports = EditorButtonView.extend({
     return this.implementLink.userImplementedSpec();
   },
   openImplementModal: function () {
-    return this.implementLink.openImplementModal();
+    var opts = {
+      header: 'Before you Run  Please Enter Required Keys for {{name}}',
+      savetext: 'Save and Run'
+    };
+    return this.implementLink.openImplementModal(null, opts);
   },
   run: function () {
     var url = '/'+this.model.id+'/output';

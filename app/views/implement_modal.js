@@ -36,13 +36,13 @@ module.exports = ModalView.extend({
       }, {app:this.app});
   },
   getTemplateData: function () {
+    this.findOrCreateImplementation();
     var opts = this.options;
     opts.savetext = opts.savetext || "Save";
-    this.findOrCreateImplementation();
-    opts.renderedInstructions = marked(this.model.get('instructions'));
     opts.header = opts.header ?
       opts.header.replace(/\{\{name\}\}/g, this.model.get('name')) :
       this.model.get('name') + ' Keys';
+    opts.renderedInstructions = marked(this.model.get('instructions'));
     return opts;
   },
   submit: function (evt) {

@@ -1,5 +1,6 @@
 var BaseView = require('./base_view');
 var ImplementModal = require('./implement_modal');
+var _ = require('underscore');
 
 module.exports = BaseView.extend({
   tagName: 'a',
@@ -17,10 +18,11 @@ module.exports = BaseView.extend({
     var specification = this.model;
     return this.collection.hasCompleteImplementationFor(specification);
   },
-  openImplementModal: function (evt) {
+  openImplementModal: function (evt, options) {
     if (evt) evt.preventDefault();
 
-    var implementModal = new ImplementModal(this.options);
+    var opts = _.extend(this.options, options || {});
+    var implementModal = new ImplementModal(opts);
     implementModal.open();
 
     return implementModal;
