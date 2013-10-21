@@ -137,7 +137,10 @@ var utils = module.exports = {
     };
   },
   errorToCB : function (cb) {
-    return function (model, xhr) {
+    return function (model, xhr, options) {
+      if (!isServer) {
+        Track.backboneRequestError(model, xhr, options);
+      }
       if (xhr.message) {
         cb(xhr.message);
       }
