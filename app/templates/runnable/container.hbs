@@ -6,9 +6,9 @@
 <section id="main" class="container">
   <div id="project-details" class="row">
     <div class="col-sm-9">
-      <h2 class="page-title clearfix">
+      <div class="page-title clearfix">
         {{view "runnable_title" model=container}}
-      </h2>
+      </div>
       {{view "runnable_description" model=container}}
       <div class="main-controls">
         {{view "run_button" model=container collection=specifications context=.}}
