@@ -149,7 +149,8 @@ module.exports = function(grunt) {
           report: true,
           sourceMapPrefix: 1, //instead of public
           sourceMap: 'public/mergedAssets.min.map',
-          sourceMappingURL: '/mergedAssets.min.map'
+          sourceMappingURL: '/mergedAssets.min.map',
+          semicolons: false
         },
         files: {
           'public/mergedAssets.min.js' : ['public/mergedAssets.js']
