@@ -92,7 +92,6 @@ module.exports = function(grunt) {
     compass: {
       compile: {
         options: {
-          sourcemap: true,
           sassDir: sassDir,
           specify: [sassIndex],
           cssDir: cssDir,
