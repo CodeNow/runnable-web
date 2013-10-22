@@ -1,7 +1,7 @@
-var BaseView = require('./base_view');
+var ModalView = require('./modal_view');
 
-module.exports = BaseView.extend({
+module.exports = ModalView.extend({
 
 });
 
-module.exports.id = "CreateApiModal";
+module.exports.id = "CreateSpecModal";

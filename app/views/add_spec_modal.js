@@ -4,13 +4,16 @@ var CreateSpecModal = require('./create_spec_modal');
 
 module.exports = ModalView.extend({
   events: {
-    'click .existing' : 'reviewSpec'
+    'click .existing' : 'openReviewSpecModal',
+    'click .new'      : 'openCreateSpecModal'
   },
   openReviewSpecModal: function () {
     (new ReviewSpecModal(this.options)).open();
+    this.close();
   },
   openCreateSpecModal: function () {
     (new CreateSpecModal(this.options)).open();
+    this.close();
   }
 });
 

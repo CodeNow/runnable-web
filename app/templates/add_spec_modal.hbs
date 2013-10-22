@@ -2,7 +2,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title">Select a Services</h4>
+      <h4 class="modal-title">Select an API</h4>
     </div>
     <div class="modal-body">
       <form class="step1 form-horizontal" role="form">
@@ -11,19 +11,14 @@
             <ul>
               {{#each collection.models}}
               <li>
-                <a href="javascript:" data-id="{{id}}">
+                <a class="existing" href="javascript:" data-id="{{id}}">
                   <img src="/images/provider-icons/icon-codeigniter.png" height="24" width="22">
                   <span>{{attributes.name}}</span>
                 </a>
               </li>
               {{/each}}
             </ul>
-            <a>Create New Service</a>
-          </div>
-          <div class="col-sm-12">
-            <a>Select Existing Service</a>
-            <input class="form-control" placeholder="Service Name" autofocus>
-            <button type="button" class="orange">Next</button>
+            <a class="new" href="javascript:">New API</a>
           </div>
         </div>
       </form>
