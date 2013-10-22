@@ -5,7 +5,14 @@
       <h4 class="modal-title">Review API</h4>
     </div>
     <div class="modal-body">
-    review
+      {{#with specification.attributes}}
+        <div>{{name}}</div>
+        {{#each requirements}}
+          <div>{{.}}</div>
+        {{/each}}
+        <div>{{instructions}}</div>
+        <div>{{markdown instructions}}</div>
+      {{/with}}
     </div>
   </div>
 </div>

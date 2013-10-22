@@ -7,8 +7,11 @@ module.exports = ModalView.extend({
     'click .existing' : 'openReviewSpecModal',
     'click .new'      : 'openCreateSpecModal'
   },
-  openReviewSpecModal: function () {
-    (new ReviewSpecModal(this.options)).open();
+  openReviewSpecModal: function (evt) {
+    var specId = $(evt.currentTarget).data('id');
+    var opts = this.options;
+    opts.specification = opts.collection.get(specId);
+    (new ReviewSpecModal(opts)).open();
     this.close();
   },
   openCreateSpecModal: function () {
