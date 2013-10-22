@@ -1,37 +1,47 @@
 #contact-modal,
 #new-file-modal,
-#login, #signup {
+#login, 
+#signup {
+
     .modal-dialog {
-        width: 30%;
         position: fixed;
-        left: 0;
-        right: 0;
-        top: 25%;
+          top: 25%;
+          right: 0;
+          left: 0;
+        width: 30%;
+
         .modal-content {
             background: #f6f6f6;
             @include border-radius(3px);
             border: none;
+
             .modal-header {
+                background: $purple-light;
                 @include border-radius(3px 3px 0 0);
                 @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.25));
-                background: $purple-light;
                 color: #fff;
                 padding: 10px 20px;
+
                 h4 {
-                    font-weight: bold;
                     font-size: 14px;
+                    font-weight: bold;
                 }
             }
+
             .modal-body {
+
                 input {
                     margin-bottom: 20px;
                 }
+
                 button {
-                    width: 100%;
                     margin-bottom: 20px;
+                    width: 100%;
                 }
+
                 p {
                     text-align: center;
+
                     a {
                         color: #bcbcbc;
                         font-size: 12px;
@@ -42,38 +52,43 @@
         }
     }
 }
+
 #service-modal {
-  input, textarea {
+  input, 
+  textarea {
     margin-bottom: 20px;
   }
 }
 
 // modal
 .modal-dialog {
-  width: 365px;
   position: fixed;
-  left: 0;
-  right: 0;
-  top: 25%;
+    top: 25%;
+    right: 0;
+    left: 0;
+  width: 365px;
+
   .modal-content {
+    background: #f6f6f6;
+    border: none;
+    @include border-radius(3px);
+
     .tab-content {
       margin-top: 20px;
     }
-    background: #f6f6f6;
-    @include border-radius(3px);
-    border: none;
+
     .modal-header {
+      background: $purple-light;
       @include border-radius(3px 3px 0 0);
       @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.25));
-      background: $purple-light;
       color: #fff;
       padding: 10px 20px;
+
       h4 {
-        font-weight: bold;
         font-size: 14px;
+        font-weight: bold;
       }
     }
-
   }
 }
 
@@ -207,8 +222,8 @@ form.step1 {
     > a {
       color: #333;
       cursor: pointer;
-      font-weight: 700;
       display: block;
+      font-weight: 700;
       height: 100%;
       padding: 0 15px;
       width: 100%;
@@ -230,7 +245,7 @@ form.step1 {
   .step1 > div > div {
     > a {
       cursor: pointer;
-      display: block;
+      display: inline;
       float: left;
       @include transition(all .2s ease-in-out);
     }
@@ -258,7 +273,7 @@ form.step1 {
 //create new service
 #service-modal.new {
   .modal-body {
-    height: 280px;
+    height: 260px;
   }
 
   .col-sm-12 {
@@ -280,8 +295,6 @@ form.step1 {
   .step1 > div > div {
     > a {
       cursor: pointer;
-      display: block;
-      margin-bottom: 10px;
       @include transition(all .2s ease-in-out);
     }
   }
