@@ -1,5 +1,6 @@
 #contact-modal,
 #new-file-modal,
+#publish-request-modal,
 #login, #signup {
     .modal-dialog {
         width: 30%;
@@ -23,7 +24,7 @@
                 }
             }
             .modal-body {
-                input {
+                input, textarea {
                     margin-bottom: 20px;
                 }
                 button {
