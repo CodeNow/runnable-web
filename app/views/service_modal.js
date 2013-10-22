@@ -28,7 +28,6 @@ module.exports = ModalView.extend({
     var spec = opts.specification = opts.specification ||
       this.collection.get(this.model.get('specification')) || {};
     if (spec.attributes) opts.rendered = marked(opts.specification.get('instructions') || '');
-    opts.header = this['header'+opts.step];
     return opts;
   },
   postRender: function () {
@@ -55,10 +54,23 @@ module.exports = ModalView.extend({
   /*
     STEP 1
    */
-  header1: 'Step 1: Service',
+  header1: 'Step 1: API',
   events1: {
-    'change .specification' : 'changeService',
-    'submit form.step1'     : 'submitStep1ForNew'
+    'click .existing-service': 'selectService',
+    'click #api-create-new'  : 'createNew',
+    'submit form.step1'      : 'submitStep1ForNew'
+  },
+  selectService: function (evt) {
+    var opts = this.options;
+    var specId = $(evt.currentTarget).data('id');
+    opts.specification = new Specification(this.collection.get(specId).toJSON(), {app:this.app});
+    this.next();
+  },
+  createNew: function () {
+    var opts = this.options;
+    opts.specification = new Specification({}, {app:this.app});
+    opts.editmode = true;
+    this.render();
   },
   changeService: function (evt) {
     var app = this.app;
@@ -91,7 +103,7 @@ module.exports = ModalView.extend({
   /*
     STEP 2
    */
-  header2: 'Step 2: Service Keys',
+  header2: 'Step 2: API Keys',
   events2: {
     'submit .add-key-form': 'addKey',
     'click .remove-key'   : 'removeKey',
@@ -156,7 +168,7 @@ module.exports = ModalView.extend({
   /*
     STEP 3
    */
-  header3: 'Step 3: Service Instructions for Users',
+  header3: 'Step 3: API Instructions for Users',
   events3: {
     'submit form.step3'            : 'submitStep3ForNew',
     'click .add-service'           : 'addService',
@@ -174,7 +186,7 @@ module.exports = ModalView.extend({
     var spec = this.options.specification;
     var instructions = spec.get('instructions');
     if (instructions.trim().length === 0) {
-      return this.showError('Service Instructions are Required');
+      return this.showError('API Instructions are Required');
     }
     var doneCount = 0;
     var opts = utils.cbOpts(callback, this);

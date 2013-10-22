@@ -1,8 +1,7 @@
 #contact-modal,
 #new-file-modal,
-#login, 
-#signup {
-
+#publish-request-modal,
+#login, #signup {
     .modal-dialog {
         position: fixed;
           top: 25%;
@@ -29,8 +28,7 @@
             }
 
             .modal-body {
-
-                input {
+                input, textarea {
                     margin-bottom: 20px;
                 }
 
@@ -195,7 +193,6 @@ body.modal-open,
 //testing alt layout for services
 //select a service
 form.step1 {
-  max-height: 200px;
 
   ul {
     background: #fff;
