@@ -32,6 +32,12 @@ module.exports.add = function (Handlebars) {
     return new Handlebars.SafeString(str);
   });
 
+  Handlebars.registerHelper('markdown', function (str) {
+    var marked = require('marked');
+    str = str || '';
+    return new Handlebars.SafeString(marked(str));
+  });
+
   Handlebars.registerHelper('findWhere', function (arr, options) {
     var found = _.findWhere(arr, options.hash);
     var value = (found && found.value) || '';
