@@ -12,6 +12,7 @@
       </ul>
       <div class="step step{{step}}">
         {{#if_eq step compare=1}}{{!   --STEP1--   }}
+          <!--
           <h4>Select a Service</h4>
           <form class="step1 form-horizontal" role="form">
             <div class="form-group">
@@ -39,6 +40,26 @@
             {{/if_result}}
             {{/if}}
           </form>
+          -->
+          <h4>Select a Service</h4>
+            <form class="step1 form-horizontal" role="form">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <ul>
+                    <li><a><img src="/images/provider-icons/icon-codeigniter.png" height="24" width="22">Facebook</a>
+                    <li><a><img src="/images/provider-icons/icon-paypal.png" height="24" width="22">Google Maps</a>
+                    <li><a><img src="/images/provider-icons/icon-php.png" height="24" width="22">Instagram</a>
+                    <li><a><img src="/images/provider-icons/icon-node.js.png" height="24" width="22">Twitter</a>
+                  </ul>
+                  <a>Create New Service</a>
+                </div>
+                <div class="col-sm-12">
+                  <a>Select Existing Service</a>
+                  <input class="form-control" placeholder="Service Name" autofocus>
+                  <button type="button" class="orange">Next</button>
+                </div>
+              </div>
+            </form>
         {{else}}{{#if_eq step compare=2}}{{!   --STEP2--   }}
           {{#if_result specification method="allowEdit"}}
             <h4>Add Service Keys <a href="javascript:void(0);" class="keys-popover">(?)</a></h4>

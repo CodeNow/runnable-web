@@ -19,6 +19,7 @@ module.exports = BaseView.extend({
     this.listenTo(this.model, 'change:specification', this.onChangeSpecification.bind(this));
     //frontend
     this.setSpecification();
+    this.add();
   },
   onChangeSpecification: function () {
     this.setSpecification();
