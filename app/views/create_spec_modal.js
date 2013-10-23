@@ -65,12 +65,19 @@ module.exports = ModalView.extend({
       this.showError('Atleast one API Key is Required');
       return;
     }
+    if (data.requirements.some(hasSpace)) {
+      this.showError('API Key Names Cannot have Spaces<br>(bc they are set as environment variables on the VM)');
+      return;
+    }
     if (_.unique(data.requirements).length !== data.requirements.length) {
       this.showError('API Keys must be Unique (No Duplicates)');
       return;
     }
     spec.set(data);
     this.step2();
+    function hasSpace (str) {
+      return ~str.indexOf(' ');
+    }
   },
   step2: function () {
     this.options.step = 2;
