@@ -152,7 +152,7 @@ body.modal-open,
 .spec-modal {
 
   .modal-body {
-    max-height: 500px;
+    max-height: 450px;
     overflow: auto;
     padding: 20px 20px 0;
 
@@ -180,15 +180,26 @@ body.modal-open,
         margin-bottom: 20px;
       }
   }
-  //secondary action
-  .back,
-  .prev {
-    color: $purple-light;
-    display: block;
-    float: left;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 36px; //match height of button
+
+  .modal-footer {
+      margin-top: 0;
+      padding: 10px 20px;
+
+    //primary action
+    > button {
+      float: right;
+    }
+
+    //secondary action
+    .back,
+    .prev {
+      color: $purple-light;
+      display: block;
+      float: left;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 36px; //match height of button
+    }
   }
 }
 
@@ -272,12 +283,6 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
           color: #bbb;
           cursor: text;
         }
-
-        //primary action
-        > button {
-          float: right;
-          margin-bottom: 20px;
-        }
       }
     }
 
@@ -311,12 +316,6 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
         font-weight: 700;
       }
     }
-
-    //primary action
-    > button {
-      float: right;
-      margin-bottom: 20px;
-    }
   }
 }
 
@@ -326,19 +325,17 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
 
   .modal-body {
 
-    form {
+    > p {
+      font-weight: 700;
+    }
 
-      > p {
-        font-weight: 700;
-      }
-
-      //primary action
-      > .orange {
-        float: right;
-        margin-bottom: 20px;
-      }
+    //primary action
+    > .orange {
+      float: right;
+      margin-bottom: 20px;
     }
   }
+
   .step1 {
 
     //api key inputs
@@ -366,12 +363,12 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
   .step2 {
 
     //markdown link
-    > a:first-child {
+    .help-link {
       color: $link-off;
       display: block;
       font-size: 12px;
       font-weight: 700;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
 
       &.hover {
         color: $link-on;
@@ -394,7 +391,7 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
     #create-spec-preview {
       height: 100%;
       margin-bottom: 20px;
-      min-height: 100px;
+      min-height: 200px;
       padding: 20px;
       width: 100%;
     }

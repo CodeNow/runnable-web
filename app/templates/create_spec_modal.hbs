@@ -16,15 +16,18 @@
             <p>API Keys <a href="javascript:" class="keys-popover">(?)</a></p>
             {{view "spec_requirements" model=../specification}}
         </div><!--/.modal-body-->
+
         <div class="modal-footer">
           <a href="javascript:" class="back">Go Back</a>
           <button class="orange">Next</button>
-        </div>
+        </div><!--/.modal-footer-->
+
       </form>
+      
       {{else}}
+      
       <form class="step2">
         <div class="modal-body">
-            <a href="http://daringfireball.net/projects/markdown/" target="_blank">Markdown help</a>
             <ul class="nav nav-tabs">
               <li class="active in">
                 <a href="#create-spec-instructions">API Instructions</a>
@@ -41,12 +44,15 @@
                 {{markdown specification.attributes.instructions}}
               </div>
             </div>
+            <a href="http://daringfireball.net/projects/markdown/" class="help-link" target="_blank">Markdown Help</a>
           </form>
         </div><!--/.modal-body-->
+
         <div class="modal-footer">
           <a class="prev" href="javascript:">Go Back</a>
           <button class="orange">{{saveButtonText}}</button>
-        </div>
+        </div><!--/.modal-footer-->
+
       </form>
       {{/if_eq}}
 

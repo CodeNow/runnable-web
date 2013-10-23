@@ -16,7 +16,8 @@ module.exports = ModalView.extend({
     'submit form'     : 'submit',
     'click .nav li a' : 'switchTab',
     'mouseover .url-popover' : 'showUrlHint',
-    'mouseout .url-popover'  : 'hideUrlHint'
+    'mouseout .url-popover'  : 'hideUrlHint',
+    'click input[readonly]' : 'baseUrl'
   },
   postRender: function () {
     Super.postRender.apply(this, arguments);
@@ -74,6 +75,9 @@ module.exports = ModalView.extend({
   },
   hideUrlHint: function (evt) {
     $(evt.currentTarget).popover('hide');
+  },
+  baseUrl: function (evt) {
+    $(evt.currentTarget).select();
   }
 });
 
