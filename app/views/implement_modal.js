@@ -28,7 +28,7 @@ module.exports = ModalView.extend({
       show: false
     });
     this.$('.keys-popover').popover({
-      content: 'Required variables that must be populated in order to run this example. These keys will be referenced as environment variables in the code.',
+      content: 'Required variables that must be populated in order to run this example. These keys can be used as environment variables in the code.',
       show: false
     });
   },
