@@ -15,13 +15,19 @@ module.exports = ModalView.extend({
   events: {
     'submit form'     : 'submit',
     'click .nav li a' : 'switchTab',
-    'mouseover .url-popover' : 'showUrlHint',
-    'mouseout .url-popover'  : 'hideUrlHint'
+    'mouseover .url-popover' : 'showHint',
+    'mouseout .url-popover'  : 'hideHint',
+    'mouseover .keys-popover': 'showHint',
+    'mouseout .keys-popover' : 'hideHint'
   },
   postRender: function () {
     Super.postRender.apply(this, arguments);
     this.$('.url-popover').popover({
       content: 'Use this as the base for a callback URL or redirect URL. This can be used as the permanent url of this application.',
+      show: false
+    });
+    this.$('.keys-popover').popover({
+      content: 'Use these keys as environment variables in your example. Eg. APP_SECRET, AUTH_TOKEN.',
       show: false
     });
   },
@@ -69,10 +75,10 @@ module.exports = ModalView.extend({
     evt.stopPropagation();
     $(evt.currentTarget).tab('show');
   },
-  showUrlHint: function (evt) {
+  showHint: function (evt) {
     $(evt.currentTarget).popover('show');
   },
-  hideUrlHint: function (evt) {
+  hideHint: function (evt) {
     $(evt.currentTarget).popover('hide');
   }
 });
