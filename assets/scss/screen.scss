@@ -1409,7 +1409,10 @@ progress {
         }
         input.form-control {
             display: inline-block;
-            margin: 0 0 6px 12px;
+            margin: 0;
+        }
+        button.silver {
+            line-height: normal;
         }
     }
     p.description {

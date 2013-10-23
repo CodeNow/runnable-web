@@ -41,8 +41,6 @@ module.exports = BaseView.extend({
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
     this.options.editmode = false; // assume success, change will rerender
-    debugger;
-    debugger;
     if (formData.name === this.model.get('name')) this.render();
     var options = utils.cbOpts(cb, this);
     this.model.save(formData,  options);

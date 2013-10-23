@@ -7,8 +7,8 @@
   <button class="silver btn-cancel" type="button">Cancel</button>
 </form>
 {{else}}
-  {{model.virtual.nameWithTags}}
-  {{#if canedit}}
-  <a href="javascript:void(0);" class="edit-title"></a>
-  {{/if}}
+{{model.virtual.nameWithTags}}
+{{#if canedit}}
+<a href="javascript:void(0);" class="edit-title"></a>
+{{/if}}
 {{/if}}
