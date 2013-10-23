@@ -10,6 +10,7 @@ module.exports = ModalView.extend({
     'submit .step2'      : 'saveSpec',
     'click  button.prev' : 'step1',
     'click .nav-tabs a'  : 'clickTab',
+    'click .back'        : 'openAddSpecModal'
   },
   dontTrackEvents: ['submit .name-form'],
   postInitialize: function () {
@@ -73,7 +74,6 @@ module.exports = ModalView.extend({
     $a.tab('show');
   },
   saveSpec: function (evt) {
-    debugger;
     evt.preventDefault();
     evt.stopPropagation();
     var data = $(evt.currentTarget).serializeObject();
@@ -81,11 +81,17 @@ module.exports = ModalView.extend({
     spec.unset('_id')
     var data = this.options.specification.toJSON();
     var opts = utils.cbOpts(this.saveSpecCallback, this);
+    // assume success
+    this.disableButtons(true);
+    this.collection.add(spec);
     spec.save(data, opts);
   },
-  saveSpecCallback: function (err, spec) {
+  saveSpecCallback: function (err) {
+    var spec = this.options.specification;
     if (err) {
       this.showError(err);
+      this.disableButtons(false);
+      this.collection.remove(spec);
     }
     else {
       this.saveContainer();
@@ -101,6 +107,7 @@ module.exports = ModalView.extend({
   saveContainerCallback: function (err, container) {
     if (err) {
       this.showError(err);
+      this.disableButtons(false);
     }
     else {
       this.close();
@@ -113,6 +120,12 @@ module.exports = ModalView.extend({
     }
     this.options.step = 1;
     this.render();
+  },
+  openAddSpecModal: function () {
+    var AddSpecModal = require('./add_spec_modal');
+    var opts = _.pick(this.options, 'app', 'model', 'collection');
+    (new AddSpecModal(opts)).open();
+    this.close();
   }
 });
 

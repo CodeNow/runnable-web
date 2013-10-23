@@ -1,10 +1,11 @@
 var ModalView = require('./modal_view');
 var utils = require('../utils');
+var _ = require('underscore');
 
 module.exports = ModalView.extend({
   events: {
       'click .edit' : 'openEditSpecModal',
-      'click .back' : 'openSelectSpecModal',
+      'click .back' : 'openAddSpecModal',
       'click .done' : 'saveSpecificationToContainer'
   },
   openEditSpecModal: function () {
@@ -25,6 +26,12 @@ module.exports = ModalView.extend({
     else {
       this.close();
     }
+  },
+  openAddSpecModal: function () {
+    var AddSpecModal = require('./add_spec_modal');
+    var opts = _.pick(this.options, 'app', 'model', 'collection');
+    (new AddSpecModal(opts)).open();
+    this.close();
   }
 });
 
