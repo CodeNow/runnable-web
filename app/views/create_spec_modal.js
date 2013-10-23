@@ -14,10 +14,19 @@ module.exports = ModalView.extend({
   },
   dontTrackEvents: ['submit .name-form'],
   postInitialize: function () {
-    this.options.step = 1;
+    var opts = this.options;
+    opts.step = 1;
     this.uuid = utils.uuid();
-    this.options.specification = new Specification({_id:this.uuid}, {app:this.app});
-    this.options.specification.store(); // id and store, so subview can use it as a model
+    var existingData = opts.editSpecification && opts.editSpecification.toJSON();
+    if (existingData) {
+      opts.header = "Edit API";
+      opts.specification = new Specification(existingData, {app:this.app});
+    }
+    else {
+      opts.header = "Create API";
+      opts.specification = new Specification({_id:this.uuid}, {app:this.app});
+    }
+    opts.specification.store(); // id and store, so subview can use it as a model
   },
   preRender: function () {
     Super.preRender.apply(this, arguments);
@@ -83,8 +92,13 @@ module.exports = ModalView.extend({
     var opts = utils.cbOpts(this.saveSpecCallback, this);
     // assume success
     this.disableButtons(true);
-    this.collection.add(spec);
-    spec.save(data, opts);
+    if (opts.editSpecification) {
+      opts.editSpecification.save(data, opts);
+    }
+    else {
+      this.collection.add(spec);
+      spec.save(data, opts);
+    }
   },
   saveSpecCallback: function (err) {
     var spec = this.options.specification;
@@ -101,7 +115,9 @@ module.exports = ModalView.extend({
     var container = this.model;
     var opts = utils.cbOpts(this.saveContainerCallback, this);
     opts.patch = true;
-    var specId = this.options.specification.id;
+    var specId = (opts.editSpecification) ?
+      opts.editSpecification.id :
+      this.options.specification.id;
     container.save({specification:specId}, opts);
   },
   saveContainerCallback: function (err, container) {

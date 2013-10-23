@@ -35,7 +35,7 @@ module.exports = BaseView.extend({
     }
   },
   events: {
-    'click .edit-service'   : 'edit',
+    'click .edit-service'   : 'openEditSpecModal',
     'click .remove-service' : 'remove',
     'click [name=add]'      : 'add'
   },
@@ -44,11 +44,17 @@ module.exports = BaseView.extend({
     var opts = _.pick(this.options, 'model', 'collection', 'app');
     (new AddSpecModal(opts)).open(); //model:container, collection:specifications
   },
-  edit: function (evt) {
-    evt&&evt.preventDefault();
-    var opts = _.pick(this.options, 'model', 'collection', 'specification', 'app');
-    opts.editmode = true;
-    (new AddSpecModal(opts)).open(); //model:container, collection:specifications
+  openEditSpecModal: function () {
+    if (this.options.specification.get('inUseByNonOwner')) {
+      this.showError("Sorry you cannot edit this specification, since it is in use by other user's runnables.")
+    }
+    else {
+      this.close();
+      var CreateSpecModal = require('./create_spec_modal');
+      var opts = _.pick(this.options, 'app', 'model', 'collection');
+      opts.editSpecification = this.options.specification;
+      (new CreateSpecModal(opts)).open();
+    }
   },
   remove: function () {
     this.model.set('specification', null);

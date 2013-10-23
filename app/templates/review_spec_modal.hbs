@@ -1,20 +1,22 @@
 <div class="modal-dialog spec-modal" id="review-spec-modal">
 
   <div class="modal-content">
-    {{#with specification.attributes}}
 
+    {{#if_result app.user method='canEdit' arg0=specification}}
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title">Review {{name}} API</h4>
+      <h4 class="modal-title">Review {{specification.attributes.name}} API</h4>
     </div><!--/.modal-header-->
+    {{/if_result}}
 
+    {{#with specification.attributes}}
     <div class="status-bar">
       <div class="container">
         <div class="status-message col-sm-8">
           <p>Wanna make changes?</p>
         </div>
         <div class="status-buttons">
-          <button class="purple">Edit</button>
+          <button class="purple edit">Edit</button>
         </div>
       </div>
     </div><!--/.status-bar-->

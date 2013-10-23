@@ -4,7 +4,7 @@
 
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title">Create API</h4>
+      <h4 class="modal-title">{{header}}</h4>
     </div><!--/.modal-header-->
 
     <div class="modal-body">
@@ -29,10 +29,10 @@
         </ul>
         <div class="tab-content">
           <div id="create-spec-instructions" class="tab-pane active in">
-            <textarea name="instructions" class="form-control" placeholder="Instruction">{{instructions}}</textarea>
+            <textarea name="instructions" class="form-control" placeholder="Instruction">{{specification.attributes.instructions}}</textarea>
           </div>
           <div id="create-spec-preview" class="tab-pane">
-            {{markdown instructions}}
+            {{markdown specification.attributes.instructions}}
           </div>
         </div>
         <button type="button" class="prev">Previous</button>
