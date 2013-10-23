@@ -29,13 +29,13 @@
         </ul>
         <div class="tab-content">
           <div id="create-spec-instructions" class="tab-pane active in">
-            <textarea name="instructions" class="form-control" placeholder="Instruction">{{specification.attributes.instructions}}</textarea>
+            <textarea name="instructions" class="form-control" placeholder="Instructions">{{instructions}}</textarea>
           </div>
           <div id="create-spec-preview" class="tab-pane">
             {{markdown specification.attributes.instructions}}
           </div>
         </div>
-        <button type="button" class="prev">Previous</button>
+        <a class="prev" href="javascript:">Go Back</a>
         <button class="orange">Create and Add</button>
       </form>
       {{/if_eq}}

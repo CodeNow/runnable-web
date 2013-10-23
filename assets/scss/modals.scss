@@ -51,15 +51,6 @@
     }
 }
 
-/*
-#service-modal {
-  input, 
-  textarea {
-    margin-bottom: 20px;
-  }
-}
-*/
-
 // modal
 .modal-dialog {
   position: fixed;
@@ -107,50 +98,6 @@
     }
   }
 }
-
-/*
-I don't think these do anything anymore...
--tony
-
-#service-modal .modal-body {
-  h4 {
-    font-size: 20px;
-    padding-bottom: 10px;
-  }
-  .popover {
-    max-width: 445px;
-  }
-  .key-input {
-    width: 83.33%;
-    display: inline-block;
-    float: left;
-  }
-  .remove-key {
-    padding-top: 2px;
-    font-size: 22px;
-  }
-  .add-key {
-    min-height: 40px;
-  }
-  .instr-preview {
-    margin: 10px 0 40px 0;
-  }
-}
-
-.services-body {
-  label {
-    color: grey;
-  }
-  input {
-    height: 34px;
-    min-height: 34px;
-  }
-  button {
-    padding: 5px 10px;
-  }
-}
-*/
-
 
 .modal-dialog .modal-content .modal-body .input-group {
   margin-bottom: 20px;
@@ -277,9 +224,12 @@ body.modal-open,
   }
 }
 
+//review and create modals should be the same size
+$spec-modal-width: 365px*1.5; //default modal size is 365px
+
 //#review-spec-modal
 #review-spec-modal {
-  width: 365px*1.5;
+  width: $spec-modal-width;
   
   .modal-body {
 
@@ -315,6 +265,7 @@ body.modal-open,
 
 //#create-spec-modal
 #create-spec-modal {
+  width: $spec-modal-width;
 
   .modal-body {
 
@@ -359,9 +310,22 @@ body.modal-open,
 
     .step2 {
 
+      textarea,
+      #create-spec-preview {
+        height: 100%;
+        margin-bottom: 20px;
+        min-height: 100px;
+        padding: 20px;
+        width: 100%;
+      }
+
       textarea {
         resize: vertical;
-        width: 100%;
+      }
+
+      #create-spec-preview {
+        background: lightyellow;
+        border: 1px solid rgba(0,0,0,0.1);
       }
     }
   }
