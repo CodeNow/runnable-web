@@ -10,7 +10,8 @@ module.exports = ModalView.extend({
     'submit .step2'      : 'saveSpec',
     'click  button.prev' : 'step1',
     'click .nav-tabs a'  : 'clickTab',
-    'click .back'        : 'openAddSpecModal'
+    'click .back'        : 'openAddSpecModal',
+    'click .prev'        : 'step1'
   },
   dontTrackEvents: ['submit .name-form'],
   postInitialize: function () {
@@ -18,12 +19,17 @@ module.exports = ModalView.extend({
     opts.step = 1;
     this.uuid = utils.uuid();
     var existingData = opts.editSpecification && opts.editSpecification.toJSON();
-    if (existingData) {
+    if (existingData) { // editing existing
       opts.header = "Edit API";
+      opts.saveButtonText = "Save";
+      if (this.model.get('specification') != existingData._id) {
+        opts.saveButtonText = "Save and Add";
+      }
       opts.specification = new Specification(existingData, {app:this.app});
     }
-    else {
+    else { // creating new
       opts.header = "Create API";
+      opts.saveButtonText = "Create and Add";
       opts.specification = new Specification({_id:this.uuid}, {app:this.app});
     }
     opts.specification.store(); // id and store, so subview can use it as a model
@@ -85,19 +91,19 @@ module.exports = ModalView.extend({
   saveSpec: function (evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    var data = $(evt.currentTarget).serializeObject();
     var spec = this.options.specification;
-    spec.unset('_id')
+    var formData = $(evt.currentTarget).serializeObject();
+    spec.set(formData);
     var data = this.options.specification.toJSON();
-    var opts = utils.cbOpts(this.saveSpecCallback, this);
-    // assume success
+    var saveOpts = utils.cbOpts(this.saveSpecCallback, this);
     this.disableButtons(true);
-    if (opts.editSpecification) {
-      opts.editSpecification.save(data, opts);
+    if (this.options.editSpecification) { //editing
+      this.options.editSpecification.save(data, saveOpts);
     }
-    else {
-      this.collection.add(spec);
-      spec.save(data, opts);
+    else { //creating
+      this.collection.add(spec); // assume success
+      spec.unset('_id')
+      spec.save(data, saveOpts);
     }
   },
   saveSpecCallback: function (err) {
@@ -105,7 +111,9 @@ module.exports = ModalView.extend({
     if (err) {
       this.showError(err);
       this.disableButtons(false);
-      this.collection.remove(spec);
+      if (!this.options.editSpecification) { //create, not edit
+        this.collection.remove(spec);
+      }
     }
     else {
       this.saveContainer();
@@ -113,12 +121,12 @@ module.exports = ModalView.extend({
   },
   saveContainer: function () {
     var container = this.model;
-    var opts = utils.cbOpts(this.saveContainerCallback, this);
-    opts.patch = true;
-    var specId = (opts.editSpecification) ?
-      opts.editSpecification.id :
-      this.options.specification.id;
-    container.save({specification:specId}, opts);
+    var saveOpts = utils.cbOpts(this.saveContainerCallback, this);
+    saveOpts.patch = true;
+    var specId = (this.options.editSpecification) ?
+      this.options.editSpecification.id : //editing
+      this.options.specification.id; //creating
+    container.save({specification:specId}, saveOpts);
   },
   saveContainerCallback: function (err, container) {
     if (err) {

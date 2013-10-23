@@ -5,7 +5,7 @@
 </div>
 {{else}}
 <div class="form-group">
-  <input class="form-control" name="newrequirement" placeholder="New Key Name">
+  <input class="form-control" name="requirement" placeholder="New Key Name" value="{{.}}">
   <button type="button" class="silver">x</button>
 </div>
 {{/if_eq}}
@@ -17,6 +17,6 @@
 <button type="button" class="silver col-sm-12 add-key">Add Key</button>
 
 <div class="form-group template hide">
-  <input class="form-control" name="newrequirement" placeholder="New Key Name">
+  <input class="form-control" name="requirement" placeholder="New Key Name">
   <button type="button" class="silver remove-key">x</button>
 </div>

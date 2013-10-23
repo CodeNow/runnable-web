@@ -49,7 +49,6 @@ module.exports = BaseView.extend({
       this.showError("Sorry you cannot edit this specification, since it is in use by other user's runnables.")
     }
     else {
-      this.close();
       var CreateSpecModal = require('./create_spec_modal');
       var opts = _.pick(this.options, 'app', 'model', 'collection');
       opts.editSpecification = this.options.specification;
