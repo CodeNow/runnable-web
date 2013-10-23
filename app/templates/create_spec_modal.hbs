@@ -9,12 +9,13 @@
 
     <div class="modal-body">
       {{#if_eq step compare=1}}
-      <form class="form-horizontal step1">
-        <input class="form-control" name="name"
+      <form class="name-form step1">
+        <input class="form-control" type="text" name="name" 
           placeholder="API Name" value="{{specification.attributes.name}}" required>
         <hr>
-       {{view "spec_requirements" model=../specification}}
-       <button class="orange col-sm-12">Next</button>
+        {{view "spec_requirements" model=../specification}}
+        <a>Go Back</a>
+        <button class="orange">Next</button>
       </form>
       {{else}}
       <form class="step2">
@@ -28,15 +29,14 @@
         </ul>
         <div class="tab-content">
           <div id="create-spec-instructions" class="tab-pane active in">
-            <textarea name="instructions" class="form-control">{{instructions}}</textarea>
+            <textarea name="instructions" class="form-control" placeholder="Instruction">{{instructions}}</textarea>
           </div>
           <div id="create-spec-preview" class="tab-pane">
             {{markdown instructions}}
           </div>
         </div>
-        <button type="button" class="prev purple col-sm-4">Previous</button>
-        <button class="prev purple col-sm-8 orange">Done</button>
-        <div class="clear"></div>
+        <button type="button" class="prev">Previous</button>
+        <button class="orange">Done</button>
       </form>
       {{/if_eq}}
     </div><!--/.modal-body-->
