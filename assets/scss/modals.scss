@@ -203,6 +203,7 @@ body.modal-open,
   .modal-body {
     max-height: 500px;
     overflow: scroll;
+    padding: 20px 20px 0;
 
       a {
         color: $purple-light;
@@ -270,6 +271,7 @@ body.modal-open,
       display: block;
       font-size: 14px;
       font-weight: 700;
+      margin-bottom: 20px;
       text-align: center;
     }
   }
@@ -286,8 +288,13 @@ body.modal-open,
       background: lightyellow;
       border: 1px solid rgba(0,0,0,0.1);
       height: 100%;
+      margin-bottom: 20px;
       padding: 20px;
       width: 100%;
+
+      a {
+        font-weight: 700;
+      }
     }
 
     //secondary action
@@ -296,33 +303,66 @@ body.modal-open,
       float: left;
       font-weight: 700;
       line-height: 36px; //match height of button
-      margin-top: 20px;
     }
 
     //primary action
-    button {
+    > button {
       float: right;
-      margin-top: 20px;
+      margin-bottom: 20px;
     }
   }
 }
 
 //#create-spec-modal
 #create-spec-modal {
-  
+
   .modal-body {
 
-    .form-deletable {
+    form {
 
+      //secondary action
+      > a {
+        display: block;
+        float: left;
+        font-weight: 700;
+        line-height: 36px; //match height of button
+      }
+
+      //primary action
+      > .orange {
+        float: right;
+        margin-bottom: 20px;
+      }
     }
 
-    .form-deletable:after {
-      color: black;
-      content: 'x';
-      display: block;
-      position: absolute;
-        top: 0;
-        right: 0;
+    .step1 {
+
+      //api key inputs
+      .form-group {
+        position: relative;
+
+        button {
+          @include border-radius(0 2px 2px 0);
+          @include box-shadow(none);
+          height: 100%;
+          position: absolute;
+            top: 0;
+            right: 0;
+        }
+      }
+
+      //.add-key
+      .add-key {
+        margin-bottom: 20px;
+      }
+    }
+
+    .step2 {
+
+      textarea {
+        resize: vertical;
+        width: 100%;
+      }
     }
   }
 }

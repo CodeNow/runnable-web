@@ -8,31 +8,22 @@
     </div><!--/.modal-header-->
 
     <div class="modal-body">
-      <form class="form-horizontal">
-        <input class="form-control" placeholder="API Name">
-        <hr>
-        <input class="form-control" placeholder="API Key">
-        <input class="form-control" placeholder="API Key">
-        <a>Add Another Key</a>
-      </form>
       {{#if_eq step compare=1}}
-        {{#with specification.attributes}}
-        <form class="name-form" role="form">
-          <div class="form-group">
-            <label class="control-label">Name</label>
-            <input class="form-control" type="text" name="name" value="{{name}}" required>
-          </div>
-          {{view "spec_requirements" model=../specification}}
-        {{/with}}
-        <button class="col-sm-12 orange">Next</button>
-        </form>
+      {{#with specification.attributes}}
+      <form class="name-form step1" role="form">
+        <input class="form-control" type="text" name="name" placeholder="API Name" value="{{name}}" required>
+        <hr>
+        {{view "spec_requirements" model=../specification}}
+      {{/with}}
+        <a>Go Back</a>
+        <button class="orange">Next</button>
+      </form>
       {{else}}
       <form class="step2">
-        <textarea>{{instructions}}</textarea>
+        <textarea class="form-control" placeholder="Instructions">{{instructions}}</textarea>
         <div class="preview">{{markdown instructions}}</div>
-        <button type="button" class="prev purple col-sm-2">Previous</button>
-        <button class="prev purple col-sm-10 orange">Done</button>
-        <div class="clear"></div>
+        <button type="button" class="prev">Previous</button>
+        <button class="orange">Done</button>
       </form>
       {{/if_eq}}
     </div><!--/.modal-body-->
