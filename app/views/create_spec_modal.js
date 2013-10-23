@@ -39,6 +39,8 @@ module.exports = ModalView.extend({
   preRender: function () {
     Super.preRender.apply(this, arguments);
     var name = this.$('[name=name]').val();
+    var spec = this.options.specification;
+    if (!spec.id) spec.set('_id', this.uuid);
     if (name) {
       this.options.specification.set({name: name.trim()});
     }
@@ -118,7 +120,8 @@ module.exports = ModalView.extend({
     }
     else { //creating
       this.collection.add(spec); // assume success
-      spec.unset('_id')
+      spec.unset('_id');
+      delete data._id;
       spec.save(data, saveOpts);
     }
   },
