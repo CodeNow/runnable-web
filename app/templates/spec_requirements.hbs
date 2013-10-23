@@ -1,14 +1,18 @@
-<div class="form-group">
-  <label class="control-label">API Keys</label>
-  {{#each model.attributes.requirements}}
-  <div class="added-key">
-    <input class="form-control inline-block" name="requirement" value="{{.}}" disabled="disabled">
-    <a href="javascript:" class="col-sm-2 remove-key glyphicon glyphicon-remove"></a>
-  </div>
-  {{/each}}
-  <div class="form-group">
-    <input class="form-control" name="newrequirement" placeholder="New Key Name">
-    <button type="button" class="silver col-sm-2 inline-block add-key">Add</button>
-    <div class="clear"></div>
-  </div>
+{{#each model.attributes.requirements}}
+<div class="added-key">
+  {{#if_eq @index compare=1}}
+  <input class="form-control" placeholder="API Key"name="requirement" value="{{.}}" required>
+  {{else}}
+  <input class="form-control" placeholder="API Key"name="requirement" value="{{.}}">
+  <a href="javascript:" class="col-sm-2 remove-key glyphicon glyphicon-remove"></a>
+  {{/if_eq}}
+</div>
+{{else}}
+<input class="form-control" placeholder="API Key" name="requirement" required>
+{{/each}}
+<a href="javascript:" class="add-key">Add Another Key</a>
+
+<div class="template hide added-key">
+  <input class="form-control" placeholder="API Key"name="requirement">
+  <a href="javascript:" class="col-sm-2 remove-key glyphicon glyphicon-remove"></a>
 </div>

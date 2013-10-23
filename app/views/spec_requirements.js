@@ -15,30 +15,13 @@ module.exports = BaseView.extend({
     }
   },
   addKey: function (evt) {
-    evt.stopPropagation();
-    evt.preventDefault();
-    var newReq = this.$('[name=newrequirement]').val().trim();
-    var spec = this.options.model;
-    var requirements = spec.get('requirements') || [];
-    if (newReq && !~requirements.indexOf(newReq)) {
-      requirements.push(newReq);
-      spec.set('requirements', requirements);
-      this.render();
-      this.$('[name=newrequirement]').focus();
-    }
+    var $newRow = this.$('.template').clone();
+    $newRow.removeClass('template');
+    $newRow.removeClass('hide')
+    this.$('.add-key').before($newRow);
   },
   removeKey: function (evt) {
-    debugger;
-    var $addedKeyGroup = $(evt.currentTarget).parents('.added-key');
-    var reqToRemove = $addedKeyGroup.find('input').val();
-    var spec = this.options.model;
-    var reqs = spec.get('requirements');
-    var index = reqs.indexOf(reqToRemove)
-    if (~index) {
-      reqs.splice(index, 1);
-      spec.set('requirements', reqs);
-      this.render();
-    }
+    $(evt.currentTarget).parents('.added-key').find('input').remove();
   },
 });
 

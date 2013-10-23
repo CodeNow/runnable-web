@@ -6,7 +6,6 @@ module.exports = BaseView.extend({
   modalOptions: {},
   preRender: function () {
     if (this.modalIsInBody()) {
-      debugger;
       this.className = this.el.className;
     }
   },

@@ -8,30 +8,34 @@
     </div><!--/.modal-header-->
 
     <div class="modal-body">
-      <form class="form-horizontal">
-        <input class="form-control" placeholder="API Name">
-        <hr>
-        <input class="form-control" placeholder="API Key">
-        <input class="form-control" placeholder="API Key">
-        <a>Add Another Key</a>
-      </form>
       {{#if_eq step compare=1}}
-        {{#with specification.attributes}}
-        <form class="name-form" role="form">
-          <div class="form-group">
-            <label class="control-label">Name</label>
-            <input class="form-control" type="text" name="name" value="{{name}}" required>
-          </div>
-          {{view "spec_requirements" model=../specification}}
-        {{/with}}
-        <button class="col-sm-12 orange">Next</button>
-        </form>
+      <form class="form-horizontal step1">
+        <input class="form-control" name="name"
+          placeholder="API Name" value="{{specification.attributes.name}}" required>
+        <hr>
+       {{view "spec_requirements" model=../specification}}
+       <button class="orange col-sm-12">Next</button>
+      </form>
       {{else}}
       <form class="step2">
-        <textarea>{{instructions}}</textarea>
-        <div class="preview">{{markdown instructions}}</div>
-        <button type="button" class="prev purple col-sm-2">Previous</button>
-        <button class="prev purple col-sm-10 orange">Done</button>
+        <ul class="nav nav-tabs">
+          <li class="active in">
+            <a href="#create-spec-instructions">API Instructions</a>
+          </li>
+          <li>
+            <a href="#create-spec-preview">Preview Instructions</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div id="create-spec-instructions" class="tab-pane active in">
+            <textarea name="instructions" class="form-control">{{instructions}}</textarea>
+          </div>
+          <div id="create-spec-preview" class="tab-pane">
+            {{markdown instructions}}
+          </div>
+        </div>
+        <button type="button" class="prev purple col-sm-4">Previous</button>
+        <button class="prev purple col-sm-8 orange">Done</button>
         <div class="clear"></div>
       </form>
       {{/if_eq}}
