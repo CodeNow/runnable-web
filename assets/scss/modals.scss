@@ -310,6 +310,18 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
 
     .step2 {
 
+      .nav-tabs {
+        border-bottom: none;
+
+        > li > a {
+          border-bottom: 1px solid #ddd;
+        }
+      }
+
+      .tab-content {
+        margin-top: 0;
+      }
+
       textarea,
       #create-spec-preview {
         height: 100%;
@@ -320,6 +332,9 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
       }
 
       textarea {
+        @include border-radius(0 2px 2px 2px);
+        position: relative;
+          z-index: 1;
         resize: vertical;
       }
 
