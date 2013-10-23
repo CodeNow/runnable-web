@@ -21,7 +21,7 @@ module.exports = BaseView.extend({
     this.$('.add-key').before($newRow);
   },
   removeKey: function (evt) {
-    $(evt.currentTarget).parents('.added-key').find('input').remove();
+    $(evt.currentTarget).parent().remove();
   },
 });
 

@@ -10,11 +10,11 @@
     <div class="modal-body">
       {{#if_eq step compare=1}}
       <form class="name-form step1">
-        <input class="form-control" type="text" name="name" 
+        <input class="form-control" type="text" name="name"
           placeholder="API Name" value="{{specification.attributes.name}}" required>
         <hr>
         {{view "spec_requirements" model=../specification}}
-        <a>Go Back</a>
+        <a href="javascript:" class="back">Go Back</a>
         <button class="orange">Next</button>
       </form>
       {{else}}
@@ -35,8 +35,8 @@
             {{markdown instructions}}
           </div>
         </div>
-        <a class="prev">Go Back</a>
-        <button class="orange">Done</button>
+        <a class="prev" href="javascript:">Go Back</a>
+        <button class="orange">Create and Add</button>
       </form>
       {{/if_eq}}
     </div><!--/.modal-body-->
