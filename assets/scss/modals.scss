@@ -51,12 +51,14 @@
     }
 }
 
+/*
 #service-modal {
   input, 
   textarea {
     margin-bottom: 20px;
   }
 }
+*/
 
 // modal
 .modal-dialog {
@@ -106,6 +108,10 @@
   }
 }
 
+/*
+I don't think these do anything anymore...
+-tony
+
 #service-modal .modal-body {
   h4 {
     font-size: 20px;
@@ -143,6 +149,7 @@
     padding: 5px 10px;
   }
 }
+*/
 
 
 .modal-dialog .modal-content .modal-body .input-group {
@@ -190,109 +197,132 @@ body.modal-open,
   margin-right: 0;
 }
 
-//testing alt layout for services
-//select a service
-form.step1 {
+//.spec-modals
+.spec-modal {
 
-  ul {
-    background: #fff;
-    overflow: hidden;
-    padding: 0;
-    margin: 0 0 20px;
-    @include border-radius(5px);
-    @include box-shadow(0 2px 5px rgba(0,0,0,.1));
+  .modal-body {
+    max-height: 500px;
+    overflow: scroll;
+
+      a {
+        color: $purple-light;
+        cursor: pointer;
+      }
+
+      hr {
+        border-top: 1px solid rgba(0,0,0,0.1);
+        margin-right: -20px;
+        margin-left: -20px;
+      }
+
+      input {
+        margin-bottom: 20px;
+      }
   }
+}
 
-  li {
-    border-bottom: solid 1px #eee;
-    height: 40px;
-    line-height: 40px;
-    list-style: none;
-    margin: 0;
-    @include transition(background .2s ease-in-out);
-    width: 100%;
+//#add-spec-modal
+#add-spec-modal {
 
-    &:hover {
-      background: #FCF7FF;
+  .modal-body {
+
+    ul {
+      background: #fff;
+      @include border-radius(5px);
+      @include box-shadow(0 2px 5px rgba(0,0,0,.1));
+      margin: 0 0 20px;
+      overflow: hidden;
+      padding: 0;
     }
 
-    > a {
-      color: #333;
-      cursor: pointer;
+    li {
+      border-bottom: solid 1px #eee;
+      height: 40px;
+      line-height: 40px;
+      list-style: none;
+      margin: 0;
+      @include transition(background .2s ease-in-out);
+      width: 100%;
+
+      &:hover {
+        background: #FCF7FF;
+      }
+
+      > a {
+        color: #333;
+        display: block;
+        font-weight: 700;
+        height: 100%;
+        padding: 0 15px;
+        width: 100%;
+      }
+    }
+
+    //icons
+    img {
+      height: auto;
+      margin-right: 10px;
+      width: 22px;
+    }
+
+  //add new api link
+  > a {
       display: block;
+      font-size: 14px;
       font-weight: 700;
+      text-align: center;
+    }
+  }
+}
+
+//#review-spec-modal
+#review-spec-modal {
+  width: 365px*1.5;
+  
+  .modal-body {
+
+    //wrapping div
+    > div {
+      background: lightyellow;
+      border: 1px solid rgba(0,0,0,0.1);
       height: 100%;
-      padding: 0 15px;
+      padding: 20px;
       width: 100%;
     }
-  }
 
-  //icons
-  img {
-    background: rgba(0,0,0,.1);
-    @include border-radius(40px);
-    display: inline-block;
-    height: 20px;
-    margin-right: 10px;
-    position: relative;
-    width: 20px;
-  }
-
-  //link
-  .step1 > div > div {
+    //secondary action
     > a {
-      cursor: pointer;
-      display: inline;
+      display: block;
       float: left;
-      @include transition(all .2s ease-in-out);
+      font-weight: 700;
+      line-height: 36px; //match height of button
+      margin-top: 20px;
     }
-  }
 
-  .col-sm-12 {
-    @include transition(transform .4s ease-in-out, opacity .2s ease-in-out);
-    @include translate3d(0,0,0);
-  }
-
-  .col-sm-12 + .col-sm-12 {
-    opacity: 0;
-    pointer-events: none;
-    @include translate3d(0,160px,0);
-  }
-}
-
-#service-modal {
-  .modal-body {
-    height: 360px;
-    @include transition(height .4s ease-in-out);
-  }
-}
-
-//create new service
-#service-modal.new {
-  .modal-body {
-    height: 260px;
-  }
-
-  .col-sm-12 {
-    opacity: 0;
-    pointer-events: none;
-    @include translate3d(0,-160px,0);
-  }
-
-  .col-sm-12 + .col-sm-12 {
-    opacity: 1;
-    @include translate3d(0,-200px,0);
-
+    //primary action
     button {
       float: right;
+      margin-top: 20px;
     }
   }
+}
 
-  //link
-  .step1 > div > div {
-    > a {
-      cursor: pointer;
-      @include transition(all .2s ease-in-out);
+//#create-spec-modal
+#create-spec-modal {
+  
+  .modal-body {
+
+    .form-deletable {
+
+    }
+
+    .form-deletable:after {
+      color: black;
+      content: 'x';
+      display: block;
+      position: absolute;
+        top: 0;
+        right: 0;
     }
   }
 }
