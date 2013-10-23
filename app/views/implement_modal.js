@@ -28,7 +28,7 @@ module.exports = ModalView.extend({
       show: false
     });
     this.$('.keys-popover').popover({
-      content: 'Use these keys as environment variables in your example. Eg. APP_SECRET, AUTH_TOKEN.',
+      content: 'Required variables that must be populated in order to run this example. These keys will be referenced as environment variables in the code.',
       show: false
     });
   },
