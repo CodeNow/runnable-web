@@ -15,6 +15,26 @@
         <input class="form-control" placeholder="API Key">
         <a>Add Another Key</a>
       </form>
+      {{#if_eq step compare=1}}
+        {{#with specification.attributes}}
+        <form class="name-form" role="form">
+          <div class="form-group">
+            <label class="control-label">Name</label>
+            <input class="form-control" type="text" name="name" value="{{name}}" required>
+          </div>
+          {{view "spec_requirements" model=../specification}}
+        {{/with}}
+        <button class="col-sm-12 orange">Next</button>
+        </form>
+      {{else}}
+      <form class="step2">
+        <textarea>{{instructions}}</textarea>
+        <div class="preview">{{markdown instructions}}</div>
+        <button type="button" class="prev purple col-sm-2">Previous</button>
+        <button class="prev purple col-sm-10 orange">Done</button>
+        <div class="clear"></div>
+      </form>
+      {{/if_eq}}
     </div><!--/.modal-body-->
 
   </div><!--/.modal-content-->

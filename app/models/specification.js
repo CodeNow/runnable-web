@@ -9,6 +9,10 @@ module.exports = Base.extend({
     var user = this.app.user;
     return this.isNew() ||
       (!this.get('inUseByNonOwner') && user.canEdit(this));
+  },
+  renderedInstructions: function () {
+    var marked = require('marked');
+    return marked(this.get('instructions') || '');
   }
 });
 module.exports.id = 'Specification';
