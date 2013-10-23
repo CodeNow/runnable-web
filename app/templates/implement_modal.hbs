@@ -1,38 +1,39 @@
-<div class="modal-dialog">
+<div class="modal-dialog spec-modal">
+
   <div class="modal-content">
+
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h4 class="modal-title">{{header}}</h4>
-    </div>
+    </div><!--/.modal-header-->
+
     <div class="modal-body">
-      <div id="implement-env-tab">
-        <h4>Keys (<a href="javascript:">Need Help?</a>)</h4>
-        <form class="form-horizontal" role="form">
+
+      <div id="implement-env-tab" class="clearfix">
+        <form>
+          <p>Keys <a href="javascript:">(?)</a></p>
           {{#each model.attributes.requirements}}
           <div class="form-group">
-            <label for="{{.}}" class="col-md-3 control-label">{{.}}</label>
-            <div class="col-md-9">
-              <input name="{{.}}" value="{{findWhere ../implementation.attributes.requirements name=.}}" class="form-control" required>
-            </div>
+            <label for="{{.}}" class="control-label">{{.}}</label>
+            <input id="{{.}}" name="{{.}}" value="{{findWhere ../implementation.attributes.requirements name=.}}" class="form-control" required>
           </div>
           {{/each}}
-          <button name="save" class="orange col-sm-12">
-            <i class="icon-save"></i> {{savetext}}
-          </button>
+
+          <hr>
+
+          <p>Base URL <a href="javascript:void(0);" class="url-popover">(?)</a></p>
+          <input readonly value="{{invoke implementation method='appUrl'}}" class="form-control">
+          <button name="save" class="orange">{{savetext}}</button>
         </form>
-      </div>
+      </div><!--/.implement-env-tab-->
+
       <div id="implement-instructions-tab">
-        <h4>Base URL <a href="javascript:void(0);" class="url-popover">(?)</a></h4>
-        <form>
-          <div class="form-group">
-            <div class="col-md-12">
-              <input disabled value="{{invoke implementation method='appUrl'}}" class="form-control">
-            </div>
-          </div>
-        </form>
-        <h4>Instructions for Keys</h4>
-        <p>{{{renderedInstructions}}}</p>
-      </div>
-    </div>
-  </div>
-</div>
+        <p>Instructions for Keys</p>
+        <div>{{{renderedInstructions}}}</div>
+      </div><!--/.implement-instructions-tab-->
+
+    </div><!--/.modal-body-->
+
+  </div><!--/.modal-content-->
+
+</div><!--/.modal-dialog-->

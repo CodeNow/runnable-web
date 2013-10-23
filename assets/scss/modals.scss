@@ -83,6 +83,8 @@
   }
 }
 
+/*
+
 #implement-modal {
   .tab-content {
     margin-top: 20px;
@@ -98,6 +100,8 @@
     }
   }
 }
+
+*/
 
 .modal-dialog .modal-content .modal-body .input-group {
   margin-bottom: 20px;
@@ -149,11 +153,16 @@ body.modal-open,
 
   .modal-body {
     max-height: 500px;
-    overflow: scroll;
+    overflow: auto;
     padding: 20px 20px 0;
 
+      label {
+        color: $link-off;
+        font-size: 14px;
+        font-weight: normal;
+      }
+
       a {
-        color: $purple-light;
         cursor: pointer;
       }
 
@@ -165,6 +174,17 @@ body.modal-open,
 
       input {
         margin-bottom: 20px;
+      }
+
+      //secondary action
+      .back,
+      .prev {
+        color: $purple-light;
+        display: block;
+        float: left;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 36px; //match height of button
       }
   }
 }
@@ -196,7 +216,7 @@ body.modal-open,
         background: #FCF7FF;
       }
 
-      > a {
+      > .existing {
         color: #333;
         display: block;
         font-weight: 700;
@@ -214,7 +234,7 @@ body.modal-open,
     }
 
   //add new api link
-  > a {
+  > .new {
       display: block;
       font-size: 14px;
       font-weight: 700;
@@ -224,8 +244,46 @@ body.modal-open,
   }
 }
 
-//review and create modals should be the same size
+//implement, review, & create modals should be the same size
 $spec-modal-width: 365px*1.5; //default modal size is 365px
+
+//#implement-modal
+#implement-modal > .modal-dialog {
+  width: $spec-modal-width;
+
+  .modal-body {
+      padding: 0;
+
+    #implement-env-tab {
+      padding: 20px 20px 0;
+
+      form {
+
+        > p {
+          font-weight: 700;
+        }
+
+        input[readonly] {
+          cursor: text;
+        }
+
+        //primary action
+        > button {
+          float: right;
+          margin-bottom: 20px;
+        }
+      }
+    }
+
+    #implement-instructions-tab {
+      background: lightyellow;
+      border: 1px solid rgba(0,0,0,0.1);
+      height: 100%;
+      padding: 20px;
+      width: 100%;
+    }
+  }
+}
 
 //#review-spec-modal
 #review-spec-modal {
@@ -247,14 +305,6 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
       }
     }
 
-    //secondary action
-    > a {
-      display: block;
-      float: left;
-      font-weight: 700;
-      line-height: 36px; //match height of button
-    }
-
     //primary action
     > button {
       float: right;
@@ -271,12 +321,8 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
 
     form {
 
-      //secondary action
-      > a {
-        display: block;
-        float: left;
+      > p {
         font-weight: 700;
-        line-height: 36px; //match height of button
       }
 
       //primary action
@@ -293,12 +339,14 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
         position: relative;
 
         button {
+          border: none;
+          border-left: 1px solid #ccc;
           @include border-radius(0 2px 2px 0);
           @include box-shadow(none);
-          height: 100%;
+          height: 38px;
           position: absolute;
-            top: 0;
-            right: 0;
+            top: 1px;
+            right: 1px;
         }
       }
 
@@ -309,6 +357,19 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
     }
 
     .step2 {
+
+      //markdown link
+      > a:first-child {
+        color: $link-off;
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      
+        &.hover {
+          color: $link-on;
+        }
+      }
 
       .nav-tabs {
         border-bottom: none;

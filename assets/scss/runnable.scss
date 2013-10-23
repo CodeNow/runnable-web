@@ -1,18 +1,22 @@
 @import "compass/css3/opacity";
 
 .services-body {
+
   .name {
-    margin: 10px 0;
     font-size: 16px;
+    margin: 10px 0;
   }
+
   .nav > li {
     display: inline-block;
+
     > a {
       padding: 10px 2px;
-      @include opacity(0.8);
-    }
-    > a:hover {
-      @include opacity(1.0);
+      @include opacity(.8);
+
+      &.hover {
+        @include opacity(1)
+      }
     }
   }
 }

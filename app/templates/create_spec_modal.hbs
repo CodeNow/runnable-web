@@ -13,12 +13,14 @@
         <input class="form-control" type="text" name="name"
           placeholder="API Name" value="{{specification.attributes.name}}" required>
         <hr>
+        <p>API Keys <a href="javascript:" class="keys-popover">(?)</a></p>
         {{view "spec_requirements" model=../specification}}
         <a href="javascript:" class="back">Go Back</a>
         <button class="orange">Next</button>
       </form>
       {{else}}
       <form class="step2">
+        <a href="http://daringfireball.net/projects/markdown/" target="_blank">Markdown help</a>
         <ul class="nav nav-tabs">
           <li class="active in">
             <a href="#create-spec-instructions">API Instructions</a>
