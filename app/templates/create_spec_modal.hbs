@@ -9,19 +9,32 @@
 
     <div class="modal-body">
       {{#if_eq step compare=1}}
-      {{#with specification.attributes}}
-      <form class="name-form step1" role="form">
-        <input class="form-control" type="text" name="name" placeholder="API Name" value="{{name}}" required>
+      <form class="name-form step1">
+        <input class="form-control" type="text" name="name" 
+          placeholder="API Name" value="{{specification.attributes.name}}" required>
         <hr>
         {{view "spec_requirements" model=../specification}}
-      {{/with}}
         <a>Go Back</a>
         <button class="orange">Next</button>
       </form>
       {{else}}
       <form class="step2">
-        <textarea class="form-control" placeholder="Instructions">{{instructions}}</textarea>
-        <div class="preview">{{markdown instructions}}</div>
+        <ul class="nav nav-tabs">
+          <li class="active in">
+            <a href="#create-spec-instructions">API Instructions</a>
+          </li>
+          <li>
+            <a href="#create-spec-preview">Preview Instructions</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div id="create-spec-instructions" class="tab-pane active in">
+            <textarea name="instructions" class="form-control" placeholder="Instruction">{{instructions}}</textarea>
+          </div>
+          <div id="create-spec-preview" class="tab-pane">
+            {{markdown instructions}}
+          </div>
+        </div>
         <button type="button" class="prev">Previous</button>
         <button class="orange">Done</button>
       </form>
