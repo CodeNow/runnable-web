@@ -14,7 +14,8 @@ module.exports = ModalView.extend({
   dontTrackEvents: ['submit .name-form'],
   postInitialize: function () {
     this.options.step = 1;
-    this.options.specification = new Specification({_id:utils.uuid()}, {app:this.app});
+    this.uuid = utils.uuid();
+    this.options.specification = new Specification({_id:this.uuid}, {app:this.app});
     this.options.specification.store(); // id and store, so subview can use it as a model
   },
   preRender: function () {
@@ -71,16 +72,13 @@ module.exports = ModalView.extend({
     var $a = this.$(evt.currentTarget);
     $a.tab('show');
   },
-  onEditInstructions: function () {
+  saveSpec: function (evt) {
     debugger;
-    var spec = this.options.specification;
-    this.$('.preview').html(
-      spec.renderedInstructions()
-    );
-  },
-  saveSpec: function () {
+    evt.preventDefault();
+    evt.stopPropagation();
     var data = $(evt.currentTarget).serializeObject();
     var spec = this.options.specification;
+    spec.unset('_id')
     var data = this.options.specification.toJSON();
     var opts = utils.cbOpts(this.saveSpecCallback, this);
     spec.save(data, opts);
@@ -90,13 +88,15 @@ module.exports = ModalView.extend({
       this.showError(err);
     }
     else {
-      this.saveSpecToContainer();
+      this.saveContainer();
     }
   },
   saveContainer: function () {
     var container = this.model;
     var opts = utils.cbOpts(this.saveContainerCallback, this);
-    container.save(opts)
+    opts.patch = true;
+    var specId = this.options.specification.id;
+    container.save({specification:specId}, opts);
   },
   saveContainerCallback: function (err, container) {
     if (err) {
@@ -107,6 +107,10 @@ module.exports = ModalView.extend({
     }
   },
   step1: function () {
+    var spec = this.options.specification;
+    if (!this.options.specification.id) {
+      spec.set('_id', this.uuid); // allows subviews to use spec as a model, stupid rendr
+    }
     this.options.step = 1;
     this.render();
   }
