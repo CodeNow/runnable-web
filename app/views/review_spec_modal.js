@@ -9,15 +9,13 @@ module.exports = ModalView.extend({
       'click .done' : 'saveSpecificationToContainer'
   },
   openEditSpecModal: function () {
-    if (this.options.specification.get('inUseByNonOwner')) {
-      this.showError("Sorry you cannot edit this specification, since it is in use by other user's runnables.")
-    }
-    else {
+    var CreateSpecModal = require('./create_spec_modal');
+    var opts = _.pick(this.options, 'app', 'model', 'collection');
+    opts.editSpecification = this.options.specification;
+    var modal = new CreateSpecModal(opts);
+    if (modal.canEdit()) {
       this.close();
-      var CreateSpecModal = require('./create_spec_modal');
-      var opts = _.pick(this.options, 'app', 'model', 'collection');
-      opts.editSpecification = this.options.specification;
-      (new CreateSpecModal(opts)).open();
+      modal.open()
     }
   },
   saveSpecificationToContainer: function () {

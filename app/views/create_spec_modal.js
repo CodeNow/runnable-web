@@ -157,6 +157,16 @@ module.exports = ModalView.extend({
     var opts = _.pick(this.options, 'app', 'model', 'collection');
     (new AddSpecModal(opts)).open();
     this.close();
+  },
+  canEdit: function () {
+    var spec = this.options.editSpecification;
+    if (spec.get('inUseByNonOwner')) {
+      this.showError("Sorry you cannot edit this specification, because<br> it is in use by other user's runnables.")
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 });
 

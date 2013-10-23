@@ -45,14 +45,13 @@ module.exports = BaseView.extend({
     (new AddSpecModal(opts)).open(); //model:container, collection:specifications
   },
   openEditSpecModal: function () {
-    if (this.options.specification.get('inUseByNonOwner')) {
-      this.showError("Sorry you cannot edit this specification, since it is in use by other user's runnables.")
-    }
-    else {
-      var CreateSpecModal = require('./create_spec_modal');
-      var opts = _.pick(this.options, 'app', 'model', 'collection');
-      opts.editSpecification = this.options.specification;
-      (new CreateSpecModal(opts)).open();
+    var CreateSpecModal = require('./create_spec_modal');
+    var opts = _.pick(this.options, 'app', 'model', 'collection');
+    opts.editSpecification = this.options.specification;
+    var modal = new CreateSpecModal(opts);
+    if (modal.canEdit()) {
+      this.close();
+      modal.open()
     }
   },
   remove: function () {
