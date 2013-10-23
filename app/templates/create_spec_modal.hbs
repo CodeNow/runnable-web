@@ -7,41 +7,48 @@
       <h4 class="modal-title">{{header}}</h4>
     </div><!--/.modal-header-->
 
-    <div class="modal-body">
       {{#if_eq step compare=1}}
       <form class="name-form step1">
-        <input class="form-control" type="text" name="name"
-          placeholder="API Name" value="{{specification.attributes.name}}" required>
-        <hr>
-        <p>API Keys <a href="javascript:" class="keys-popover">(?)</a></p>
-        {{view "spec_requirements" model=../specification}}
-        <a href="javascript:" class="back">Go Back</a>
-        <button class="orange">Next</button>
+        <div class="modal-body">
+            <input class="form-control" type="text" name="name"
+              placeholder="API Name" value="{{specification.attributes.name}}" required>
+            <hr>
+            <p>API Keys <a href="javascript:" class="keys-popover">(?)</a></p>
+            {{view "spec_requirements" model=../specification}}
+        </div><!--/.modal-body-->
+        <div class="modal-footer">
+          <a href="javascript:" class="back">Go Back</a>
+          <button class="orange">Next</button>
+        </div>
       </form>
       {{else}}
       <form class="step2">
-        <a href="http://daringfireball.net/projects/markdown/" target="_blank">Markdown help</a>
-        <ul class="nav nav-tabs">
-          <li class="active in">
-            <a href="#create-spec-instructions">API Instructions</a>
-          </li>
-          <li>
-            <a href="#create-spec-preview">Preview Instructions</a>
-          </li>
-        </ul>
-        <div class="tab-content">
-          <div id="create-spec-instructions" class="tab-pane active in">
-            <textarea name="instructions" class="form-control" placeholder="Instructions">{{specification.attributes.instructions}}</textarea>
-          </div>
-          <div id="create-spec-preview" class="tab-pane">
-            {{markdown specification.attributes.instructions}}
-          </div>
+        <div class="modal-body">
+            <a href="http://daringfireball.net/projects/markdown/" target="_blank">Markdown help</a>
+            <ul class="nav nav-tabs">
+              <li class="active in">
+                <a href="#create-spec-instructions">API Instructions</a>
+              </li>
+              <li>
+                <a href="#create-spec-preview">Preview Instructions</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div id="create-spec-instructions" class="tab-pane active in">
+                <textarea name="instructions" class="form-control" placeholder="Instructions">{{specification.attributes.instructions}}</textarea>
+              </div>
+              <div id="create-spec-preview" class="tab-pane">
+                {{markdown specification.attributes.instructions}}
+              </div>
+            </div>
+          </form>
+        </div><!--/.modal-body-->
+        <div class="modal-footer">
+          <a class="prev" href="javascript:">Go Back</a>
+          <button class="orange">{{saveButtonText}}</button>
         </div>
-        <a class="prev" href="javascript:">Go Back</a>
-        <button class="orange">{{saveButtonText}}</button>
       </form>
       {{/if_eq}}
-    </div><!--/.modal-body-->
 
   </div><!--/.modal-content-->
 

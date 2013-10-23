@@ -175,17 +175,16 @@ body.modal-open,
       input {
         margin-bottom: 20px;
       }
-
-      //secondary action
-      .back,
-      .prev {
-        color: $purple-light;
-        display: block;
-        float: left;
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 36px; //match height of button
-      }
+  }
+  //secondary action
+  .back,
+  .prev {
+    color: $purple-light;
+    display: block;
+    float: left;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 36px; //match height of button
   }
 }
 
@@ -288,7 +287,7 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
 //#review-spec-modal
 #review-spec-modal {
   width: $spec-modal-width;
-  
+
   .modal-body {
 
     //wrapping div
@@ -331,78 +330,77 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
         margin-bottom: 20px;
       }
     }
+  }
+  .step1 {
 
-    .step1 {
+    //api key inputs
+    .form-group {
+      position: relative;
 
-      //api key inputs
-      .form-group {
-        position: relative;
-
-        button {
-          border: none;
-          border-left: 1px solid #ccc;
-          @include border-radius(0 2px 2px 0);
-          @include box-shadow(none);
-          height: 38px;
-          position: absolute;
-            top: 1px;
-            right: 1px;
-        }
-      }
-
-      //.add-key
-      .add-key {
-        margin-bottom: 20px;
+      button {
+        border: none;
+        border-left: 1px solid #ccc;
+        @include border-radius(0 2px 2px 0);
+        @include box-shadow(none);
+        height: 38px;
+        position: absolute;
+          top: 1px;
+          right: 1px;
       }
     }
 
-    .step2 {
+    //.add-key
+    .add-key {
+      margin-bottom: 20px;
+    }
+  }
 
-      //markdown link
-      > a:first-child {
-        color: $link-off;
-        display: block;
-        font-size: 12px;
-        font-weight: 700;
-        margin-bottom: 10px;
-      
-        &.hover {
-          color: $link-on;
-        }
+  .step2 {
+
+    //markdown link
+    > a:first-child {
+      color: $link-off;
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+
+      &.hover {
+        color: $link-on;
       }
+    }
 
-      .nav-tabs {
-        border-bottom: none;
+    .nav-tabs {
+      border-bottom: none;
 
-        > li > a {
-          border-bottom: 1px solid #ddd;
-        }
+      > li > a {
+        border-bottom: 1px solid #ddd;
       }
+    }
 
-      .tab-content {
-        margin-top: 0;
-      }
+    .tab-content {
+      margin-top: 0;
+    }
 
-      textarea,
-      #create-spec-preview {
-        height: 100%;
-        margin-bottom: 20px;
-        min-height: 100px;
-        padding: 20px;
-        width: 100%;
-      }
+    textarea,
+    #create-spec-preview {
+      height: 100%;
+      margin-bottom: 20px;
+      min-height: 100px;
+      padding: 20px;
+      width: 100%;
+    }
 
-      textarea {
-        @include border-radius(0 2px 2px 2px);
-        position: relative;
-          z-index: 1;
-        resize: vertical;
-      }
+    textarea {
+      @include border-radius(0 2px 2px 2px);
+      position: relative;
+        z-index: 1;
+      resize: vertical;
+    }
 
-      #create-spec-preview {
-        background: lightyellow;
-        border: 1px solid rgba(0,0,0,0.1);
-      }
+    #create-spec-preview {
+      background: lightyellow;
+      border: 1px solid rgba(0,0,0,0.1);
     }
   }
 }
