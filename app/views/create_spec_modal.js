@@ -11,7 +11,9 @@ module.exports = ModalView.extend({
     'click  button.prev' : 'step1',
     'click .nav-tabs a'  : 'clickTab',
     'click .back'        : 'openAddSpecModal',
-    'click .prev'        : 'step1'
+    'click .prev'        : 'step1',
+    'mouseover .keys-popover': 'showHint',
+    'mouseout .keys-popover' : 'hideHint'
   },
   dontTrackEvents: ['submit .name-form'],
   postInitialize: function () {
@@ -40,6 +42,13 @@ module.exports = ModalView.extend({
     if (name) {
       this.options.specification.set({name: name.trim()});
     }
+  },
+  postRender: function () {
+    Super.postRender.apply(this, arguments);
+    this.$('.keys-popover').popover({
+      content: 'Required variables the user must set to run your example. Use these keys as environment variables in your example. Eg. APP_SECRET, AUTH_TOKEN.',
+      show: false
+    });
   },
   // STEP1
   saveStep1: function (evt) {
@@ -167,7 +176,13 @@ module.exports = ModalView.extend({
     else {
       return true;
     }
-  }
+  },
+  showHint: function (evt) {
+    $(evt.currentTarget).popover('show');
+  },
+  hideHint: function (evt) {
+    $(evt.currentTarget).popover('hide');
+  },
 });
 
 module.exports.id = "CreateSpecModal";
