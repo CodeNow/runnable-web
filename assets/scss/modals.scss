@@ -172,6 +172,10 @@ body.modal-open,
         margin-left: -20px;
       }
 
+      .popover {
+        font-weight: normal;
+      }
+
       input {
         margin-bottom: 20px;
       }
@@ -251,7 +255,7 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
   width: $spec-modal-width;
 
   .modal-body {
-      padding: 0;
+    padding: 0;
 
     #implement-env-tab {
       padding: 20px 20px 0;
@@ -263,6 +267,9 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
         }
 
         input[readonly] {
+          background-color: #efefef;
+          border: 1px solid #bbb;
+          color: #bbb;
           cursor: text;
         }
 
@@ -281,6 +288,7 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
       padding: 20px;
       width: 100%;
     }
+
   }
 }
 
