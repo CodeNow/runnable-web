@@ -4,7 +4,8 @@ var _ = require('underscore');
 module.exports = BaseView.extend({
   className: 'main-controls',
   events: {
-    'click .run-options' : 'runOptions'
+    'click .run-options' : 'runOptions',
+    'click .close' : 'closeRunOptions'
   },
   postRender: function () {
     this.$runOptions = this.$('.run-options');
@@ -17,6 +18,11 @@ module.exports = BaseView.extend({
   },
   runOptions: function (evt) {
     this.$runOptions.toggleClass('active');
+  },
+  closeRunOptions: function (evt) {
+    this.$runOptions
+      .popover('hide')
+      .removeClass('active');
   }
 });
 

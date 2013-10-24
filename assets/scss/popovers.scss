@@ -7,7 +7,8 @@
         max-width: none;
 
     > .arrow {
-        top: -6px;
+        border-width: 6px;
+        margin-left: -6px;
     }
 
     > .arrow:after {
