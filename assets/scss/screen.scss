@@ -1436,10 +1436,28 @@ progress {
     }
     .main-controls {
         margin: 30px 0 35px 0;
-        button {
+
+        .btn-group {
             margin-right: 10px;
-            padding-bottom: 10px;
-            max-height: 39px;
+
+            > button {
+                height: 39px;
+                line-height: 39px;
+                padding: 0 18px 0 16px;
+
+                &:hover,
+                &:focus {
+                    color: #fff;
+                }
+            }
+
+            .run-options, {
+                padding: 0 9px 0 8px;
+
+                .caret {
+                    border-top-color: #fff;
+                }
+            }
         }
     }
 }

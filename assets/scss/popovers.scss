@@ -1,0 +1,70 @@
+.main-controls .btn-group .popover {
+    background: #f6f6f6;
+    border: none;
+    display: block;
+    padding: 0;
+    width: 365px;
+        max-width: none;
+
+    > .arrow {
+        top: -6px;
+    }
+
+    > .arrow:after {
+        border-bottom-color: $purple-light;
+    }
+
+    > .popover-title {
+        $popover-header-height: 40px;
+
+        background: $purple-light;
+        border-bottom: 1px solid #e5e5e5;
+        @include border-radius(6px 6px 0 0);
+        @include box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.25));
+        height: $popover-header-height;
+        padding: 0 20px;
+        width: 100%;
+
+        > h4 {
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: $popover-header-height;
+            margin: 0;
+        }
+
+        > button {
+            line-height: $popover-header-height;
+            padding: 0;
+        }
+    }
+
+    > .popover-content {
+        padding: 15px;
+
+        .form-group {
+            margin: 0;
+            position: relative;
+
+            input {
+                padding-right: 112px;
+                width: 100%;
+            }
+
+            button {
+                @include border-radius(0 2px 2px 0);
+                @include box-shadow(none);
+                height: 38px;
+                position: absolute;
+                    top: 1px;
+                    right: 1px;
+                width: 99px;
+                white-space: nowrap;
+            }
+        }
+
+        hr {
+            margin: 15px -15px;
+        }
+    }
+}

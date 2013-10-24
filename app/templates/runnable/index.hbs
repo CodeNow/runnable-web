@@ -12,7 +12,23 @@
       </div>
       {{view "runnable_description" model=image}}
       <div class="main-controls">
-        {{view "run_button" model=container collection=specifications context=.}}
+        {{!   --view "run_button" model=container collection=specifications context=.--   }}
+
+        <div class="btn-group">
+          <button class="btn green">
+            <img src="/images/button-run.png" height="13" width="10">
+            <span>Run</span>
+            {{view "implement_link"
+              model=specification
+              collection=context.implementations
+              containerid=model.id
+              classname="hide"}}
+          </button>
+          <button class="btn green run-options">
+            <i class="caret"></i>
+          </button>
+        </div>
+
         {{view "fork_button" collection=defaultFiles model=container}}
       </div>
     </div>
