@@ -5,24 +5,35 @@ module.exports = BaseView.extend({
   className: 'main-controls',
   events: {
     'click .run-options' : 'runOptions',
-    'click .close' : 'closeRunOptions'
+    'click .close' : 'runOptionsClose',
+    'blur input' : 'runOptionsSave',
   },
   postRender: function () {
     this.$runOptions = this.$('.run-options');
     this.$runOptions.popover({
       title: '<button type="button" class="close">×</button><h4>Run Options</h4>',
-      content: '<form class="form-group"><input class="form-control" required><button class="green">Run</button></form><hr><form class="form-group"><input class="form-control" required><button class="green">Run &amp; Build</button></form></div></div>',
+      content: '<form class="form-group form-horizontal clearfix"><label for="save-run">Run cmd</label><input class="form-control" id="save-run" required><div class="saved">Saved</div></form><hr><form class="form-group form-horizontal clearfix"><label for="save-build">Build cmd</label><input class="form-control" id="save-build" required><div class="saved">Saved</div></form></div></div>',
       html: true,
       placement: 'bottom'
     });
   },
-  runOptions: function (evt) {
+  runOptions: function () {
     this.$runOptions.toggleClass('active');
   },
-  closeRunOptions: function (evt) {
+  runOptionsClose: function () {
     this.$runOptions
       .popover('hide')
       .removeClass('active');
+  },
+  runOptionsSave: function (evt) {
+    this.$thisInput = this.$(evt.target);
+
+    if (this.$thisInput[0].value) {
+      this.$thisInput.siblings('.saved').fadeIn();
+    }
+    setTimeout(function(){
+      this.$('.saved').stop().fadeOut();
+    },1000);
   }
 });
 

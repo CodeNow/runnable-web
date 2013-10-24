@@ -5,7 +5,7 @@ var utils = require('../utils');
 
 module.exports = EditorButtonView.extend({
   tagName: 'button',
-  className: 'green',
+  className: 'btn green',
   events: {
     'click' : 'click'
   },

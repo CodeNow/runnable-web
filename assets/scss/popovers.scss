@@ -44,24 +44,20 @@
         padding: 15px;
 
         .form-group {
+            height: 40px;
             margin: 0;
-            position: relative;
+        }
 
-            input {
-                padding-right: 112px;
-                width: 100%;
-            }
+        label {
+            float: left;
+            line-height: 40px;
+            margin-right: 10px;
+            text-align: right;
+            width: 70px;
+        }
 
-            button {
-                @include border-radius(0 2px 2px 0);
-                @include box-shadow(none);
-                height: 38px;
-                position: absolute;
-                    top: 1px;
-                    right: 1px;
-                width: 99px;
-                white-space: nowrap;
-            }
+        input {
+            width: 255px;
         }
 
         hr {

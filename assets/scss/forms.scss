@@ -1,0 +1,19 @@
+.form-group {
+    position: relative;
+}
+
+.saved {
+    background: lightyellow;
+    border: 1px solid darken(lightyellow, 50%);
+    @include border-radius(3px);
+    color: darken(lightyellow, 70%);
+    display: none;
+    font-size: 11px;
+    font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 4px;
+    position: absolute;
+        right: 10px;
+        bottom: 10px;
+}

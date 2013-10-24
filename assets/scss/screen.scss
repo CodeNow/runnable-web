@@ -1437,12 +1437,15 @@ progress {
     .main-controls {
         margin: 30px 0 35px 0;
 
+        .silver {
+            margin-left: 10px;
+        }
+
         .btn-group {
-            margin-right: 10px;
 
             > button {
-                height: 39px;
-                line-height: 39px;
+                height: 36px;
+                line-height: 36px;
                 padding: 0 18px 0 16px;
 
                 &:hover,
@@ -1452,6 +1455,7 @@ progress {
             }
 
             .run-options, {
+                @include border-radius(0 3px 3px 0);
                 padding: 0 9px 0 8px;
 
                 .caret {
@@ -1941,6 +1945,7 @@ div#output-terminal-container{
             background: none;
             vertical-align: middle;
             margin-top: 14px;
+
             .btn {
                 background: none;
                 box-shadow: none;

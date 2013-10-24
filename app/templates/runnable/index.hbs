@@ -12,18 +12,9 @@
       </div>
       {{view "runnable_description" model=image}}
       <div class="main-controls">
-        {{!   --view "run_button" model=container collection=specifications context=.--   }}
-
+        
         <div class="btn-group">
-          <button class="btn green">
-            <img src="/images/button-run.png" height="13" width="10">
-            <span>Run</span>
-            {{view "implement_link"
-              model=specification
-              collection=context.implementations
-              containerid=model.id
-              classname="hide"}}
-          </button>
+          {{view "run_button" model=container collection=specifications context=.}}
           <button class="btn green run-options">
             <i class="caret"></i>
           </button>
