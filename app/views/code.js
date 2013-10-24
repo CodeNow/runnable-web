@@ -189,6 +189,7 @@ module.exports = BaseView.extend({
     if (fileExtension == "aspx") {
       modeInfo = {"name":"csharp","caption":"C#","mode":"ace/mode/csharp","extensions":"cs","extRe":{}};
     }
+    console.log(modeInfo.mode, ace.require(modeInfo.mode));
     var mode = ace.require(modeInfo.mode) || ace.require('ace/mode/markdown'); //default
 
     return (new mode.Mode());

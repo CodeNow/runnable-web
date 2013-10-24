@@ -22,7 +22,7 @@ Router.prototype.postInitialize = function() {
   this.on('action:end', this.scrollTop, this);
 
   // set up ace worker urls
-  var config = ace.require("ace/config"); // or simply ace.config
+  var aceConfig = ace.require("ace/config"); // or simply ace.config
   [
     'javascript',
     'coffee',
@@ -33,11 +33,26 @@ Router.prototype.postInitialize = function() {
     'css'
   ]
   .forEach(function (worker) {
-    config.setModuleUrl(
-        "ace/mode/"+worker+"_worker",
-        "/scripts/ace/worker-"+worker+".js"
+    aceConfig.setModuleUrl(
+        'ace/mode/'+worker+'_worker',
+        '/vendor/bower/ace-builds/src-min-noconflict/worker-'+worker+'.js'
     );
   });
+  // [
+  //   'abap','actionscript','ada','asciidoc','assembly_x86','autohotkey','batchfile','c9search','c_cpp','clojure','cobol','coffee',
+  //   'coldfusion','csharp','css','curly','d','dart','diff','django','dot','ejs','erlang','forth','ftl','glsl','golang','groovy',
+  //   'haml','haskell','haxe','html','html_ruby','ini','java','javascript','json','jsoniq','jsp','jsx','julia','latex','less','liquid',
+  //   'lisp','livescript','logiql','lsl','lua','luapage','lucene','makefile','markdown','matlab','mushcode','mushcode_high_rules','mysql',
+  //   'objectivec','ocaml','pascal','perl','pgsql','php','powershell','prolog','properties','python','r','rdoc','rhtml','ruby','rust',
+  //   'sass','scad','scala','scheme','scss','sh','snippets','sql','stylus','svg','tcl','tex','text','textile','tmsnippet','toml','twig',
+  //   'typescript','vbscript','velocity','verilog','xml','xquery','yaml',
+  // ]
+  // .forEach(function (mode) {
+  //   aceConfig.setModuleUrl(
+  //     'ace/mode/'+mode,
+  //     '/vendor/bower/ace-builds/src-min-noconflict/mode-'+mode+'.js'
+  //   );
+  // });
 
   $.fn.once = $.fn.one; // for backbone
 
