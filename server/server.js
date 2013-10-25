@@ -78,7 +78,7 @@ function initMiddleware() {
   app.use(express.static(__dirname + '/../public', { maxAge:maxAge }));
   app.use(require('./middleware/cannon')()); // no canon for static
   app.use(function (req, res, next) {
-    if (/^\/(images|styles|scripts|external)\/.+/.test(req.url)) {
+    if (/^\/(images|styles|scripts|external|vendor)\/.+/.test(req.url)) {
       res.send(404); // prevent static 404s from hitting router
     } else {
       next();

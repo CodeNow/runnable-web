@@ -4,7 +4,6 @@ var Super = ModalView.prototype;
 
 module.exports = ModalView.extend({
   id:'login',
-  className: 'fade',
   defaultHeader: "Log in to Runnable",
   postInitialize: function () {
     this.options.header = this.options.header || this.defaultHeader;

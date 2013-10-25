@@ -17,45 +17,45 @@ var rendrDir        = 'node_modules/rendr';
 var compassCSS      = 'public/styles/index.css';
 var mergedCSSPath   = 'public/styles/index.css';
 var minCSS = [
-  'assets/vendor/bootstrap/bootstrap.min.css', // custom
-  'assets/vendor/bootstrap/bootstrap-theme.min.css', // custom
-  'assets/bower/bootstrap-select/bootstrap-select.min.css',
-  'assets/vendor/typeahead.js-bootstrap.css',
-  'assets/bower/textillate/assets/animate.css',
-  'assets/bower/autocompletejs/css/autocomplete.css',
+  'public/vendor/bootstrap/bootstrap.min.css', // custom
+  'public/vendor/bootstrap/bootstrap-theme.min.css', // custom
+  'public/vendor/bower/bootstrap-select/bootstrap-select.min.css',
+  'public/vendor/typeahead.js-bootstrap.css',
+  'public/vendor/bower/textillate/assets/animate.css',
+  'public/vendor/bower/autocompletejs/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
-  'assets/bower/alertify.js/themes/alertify.core.css',
-  'assets/bower/alertify.js/themes/alertify.default.css',
+  'public/vendor/bower/alertify.js/themes/alertify.core.css',
+  'public/vendor/bower/alertify.js/themes/alertify.default.css',
   compassCSS // must be last
 ];
 //stitch
 var aceScripts = [
-  'assets/bower/ace-builds/src-min-noconflict/ace.js',
-  'assets/vendor/aceWithFuckingSemicolons/*.js',
+  'public/vendor/bower/ace-builds/src-min-noconflict/ace.js',
+  'public/vendor/ace-bundle/*.js'
 ];
 var frontendScripts = [
-  'assets/bower/jquery/jquery.js',
-  'assets/vendor/jquery-ui-custom/js/jquery-ui-1.10.3.custom.min.js',
-  'assets/vendor/*.js', //include jquery plugins, must be after jquery
-  'assets/bower/sockjs/sockjs.js',
-  'assets/bower/es5-shim/es5-shim.js',
-  'assets/bower/es5-shim/es5-sham.js',
-  'assets/bower/alertify.js/lib/alertify.js',
-  'assets/bower/bootstrap/js/collapse.js',
-  'assets/bower/bootstrap/js/dropdown.js',
-  'assets/bower/bootstrap/js/tab.js',
-  'assets/bower/bootstrap/js/tooltip.js',
-  'assets/bower/bootstrap/js/popover.js',
-  'assets/bower/bootstrap/js/modal.js',
-  'assets/bower/bootstrap/js/transition.js',
-  'assets/bower/typeahead.js/dist/typeahead.min.js',
-  'assets/bower/bootstrap-select/bootstrap-select.min.js',
-  'assets/bower/textillate/assets/jquery.lettering.js',
-  'assets/bower/textillate/jquery.textillate.js',
-  'assets/bower/isotope/jquery.isotope.min.js',
-  'assets/bower/jquery.stellar/jquery.stellar.min.js',
-  'assets/bower/frontend-track/frontend-track.js',
-  'assets/bower/autocompletejs/js/autocomplete.js'
+  'public/vendor/bower/jquery/jquery.js',
+  'public/vendor/jquery-ui-custom/js/jquery-ui-1.10.3.custom.min.js',
+  'public/vendor/*.js', //include jquery plugins, must be after jquery
+  'public/vendor/bower/sockjs/sockjs.js',
+  'public/vendor/bower/es5-shim/es5-shim.js',
+  'public/vendor/bower/es5-shim/es5-sham.js',
+  'public/vendor/bower/alertify.js/lib/alertify.js',
+  'public/vendor/bower/bootstrap/js/collapse.js',
+  'public/vendor/bower/bootstrap/js/dropdown.js',
+  'public/vendor/bower/bootstrap/js/tab.js',
+  'public/vendor/bower/bootstrap/js/tooltip.js',
+  'public/vendor/bower/bootstrap/js/popover.js',
+  'public/vendor/bower/bootstrap/js/modal.js',
+  'public/vendor/bower/bootstrap/js/transition.js',
+  'public/vendor/bower/typeahead.js/dist/typeahead.min.js',
+  'public/vendor/bower/bootstrap-select/bootstrap-select.min.js',
+  'public/vendor/bower/textillate/assets/jquery.lettering.js',
+  'public/vendor/bower/textillate/jquery.textillate.js',
+  'public/vendor/bower/isotope/jquery.isotope.min.js',
+  'public/vendor/bower/jquery.stellar/jquery.stellar.min.js',
+  'public/vendor/bower/frontend-track/frontend-track.js',
+  'public/vendor/bower/autocompletejs/js/autocomplete.js'
 ]
 .concat(aceScripts);
 
@@ -261,6 +261,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bg-shell');
   grunt.loadNpmTasks('grunt-rendr-stitch');
   grunt.registerTask('noop', 'noop', function () {});
+  // copy ace files top public
+  grunt.registerTask('copy-ace-files', 'Copy ace editor files to public')
   // generate app/channelImages.js
   grunt.registerTask('channel-images-hash', 'Create channel images hash to prevent 404s', function () {
     var fs = require('fs');

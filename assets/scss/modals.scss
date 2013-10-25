@@ -3,10 +3,6 @@
 #publish-request-modal,
 #login, #signup {
     .modal-dialog {
-        position: fixed;
-          top: 25%;
-          right: 0;
-          left: 0;
         width: 30%;
 
         .modal-content {
@@ -53,10 +49,6 @@
 
 // modal
 .modal-dialog {
-  position: fixed;
-    top: 25%;
-    right: 0;
-    left: 0;
   width: 365px;
 
   .modal-content {
