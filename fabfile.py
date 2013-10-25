@@ -122,7 +122,7 @@ def boot():
   """
   Start process with pm2
   """
-  run('NODE_ENV=%(settings)s pm2 start runnable-web/index.js -i 40' % env)
+  run('NODE_ENV=%(settings)s pm2 start runnable-web/index.js -i 40 -x' % env)
 
 """
 Commands - deployment
@@ -144,7 +144,7 @@ def reboot():
   """
   Restart the server.
   """
-  run('pm2 stop index.js')
+  run('pm2 kill')
   boot()
 
 """
