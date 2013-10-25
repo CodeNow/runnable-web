@@ -122,7 +122,7 @@ def boot():
   """
   Start process with pm2
   """
-  run('NODE_ENV=%(settings)s pm2 start runnable-web/index.js -i 40 -x' % env)
+  run('NODE_ENV=%(settings)s pm2 start runnable-web/index.js -i 40' % env)
 
 """
 Commands - deployment
