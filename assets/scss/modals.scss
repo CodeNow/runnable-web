@@ -286,6 +286,18 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
       width: 100%;
     }
 
+    #implement-saved {
+      padding: 20px;
+
+      > p {
+        font-weight: bold;
+      }
+
+      > button {
+        float: right;
+      }
+    }
+
   }
 }
 
