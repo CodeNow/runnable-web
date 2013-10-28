@@ -161,6 +161,7 @@ module.exports = ModalView.extend({
     if (!this.options.specification.id) {
       spec.set('_id', this.uuid); // allows subviews to use spec as a model, stupid rendr
     }
+    spec.set('instructions', this.$('textarea').val()); // save instructions
     this.options.step = 1;
     this.render();
   },
