@@ -22,3 +22,4 @@ app/templates/__layout.hbs
 assets/scss/forms.scss
 
 assets/scss/popovers.scss
+assets/bower
