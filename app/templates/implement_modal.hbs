@@ -40,7 +40,9 @@
       </div><!--/.modal-body-->
 
       <div class="modal-footer">
+        {{#unless runbutton}}
         <a class="prev" href="javascript:">Go Back</a>
+        {{/unless}}
         <button name="save" class="orange">{{savetext}}</button>
       </div><!--/.modal-footer-->
     </form>
