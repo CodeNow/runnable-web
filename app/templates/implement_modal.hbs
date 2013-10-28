@@ -4,12 +4,20 @@
 
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      {{#if showrun}}
+      <h4 class="modal-title">Keys Saved. Continue and Run.</h4>
+      {{else}}
       <h4 class="modal-title">{{header}}</h4>
+      {{/if}}
     </div><!--/.modal-header-->
 
+    {{#if showrun}}
+      <div class="modal-body">
+        {{view "run_button" htmlonly=true}}
+      </div>
+    {{else}}
     <form>
       <div class="modal-body">
-
         <div id="implement-env-tab" class="clearfix">
             <p>Keys <a href="javascript:" class="keys-popover">(?)</a></p>
             {{#each model.attributes.requirements}}
@@ -37,6 +45,7 @@
         <button name="save" class="orange">{{savetext}}</button>
       </div><!--/.modal-footer-->
     </form>
+    {{/if}}
 
   </div><!--/.modal-content-->
 
