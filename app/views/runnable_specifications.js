@@ -36,10 +36,10 @@ module.exports = BaseView.extend({
   },
   events: {
     'click .edit-service'   : 'openEditSpecModal',
-    'click .remove-service' : 'remove',
-    'click [name=add]'      : 'add'
+    'click .remove-service' : 'removeSpec',
+    'click [name=add]'      : 'addSpec'
   },
-  add: function (evt) {
+  addSpec: function (evt) {
     evt&&evt.preventDefault();
     var opts = _.pick(this.options, 'model', 'collection', 'app');
     (new AddSpecModal(opts)).open(); //model:container, collection:specifications
@@ -54,7 +54,7 @@ module.exports = BaseView.extend({
       modal.open()
     }
   },
-  remove: function () {
+  removeSpec: function () {
     this.model.set('specification', null);
     var options = utils.cbOpts(this.showIfError.bind(this));
     this.model.save({}, options);

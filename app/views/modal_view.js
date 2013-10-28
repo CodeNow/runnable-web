@@ -10,6 +10,7 @@ module.exports = BaseView.extend({
     }
   },
   postRender: function () {
+    var $body = $('body');
     if (!this.modalIsInBody()) {
       // first render
       $('body').append(this.$el);
@@ -17,7 +18,7 @@ module.exports = BaseView.extend({
       this.$el.modal('show');
       this.$el.once('hidden.bs.modal', this.remove.bind(this));
     }
-    // this.$('input').eq(0).focus();
+    $body.addClass('model-open');
   },
   remove: function () {
     this.trigger('remove');
