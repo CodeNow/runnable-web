@@ -70,7 +70,6 @@ module.exports = ModalView.extend({
         return this.showError(err);
       }
       this.collection.add(implementation);
-      debugger;
       if (this.hasRunButton()) {
         this.options.showrun = true;
         this.render();

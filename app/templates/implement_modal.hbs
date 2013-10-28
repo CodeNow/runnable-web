@@ -19,25 +19,24 @@
     <form>
       <div class="modal-body">
         <div id="implement-env-tab" class="clearfix">
-            <p>Keys <a href="javascript:" class="keys-popover">(?)</a></p>
-            {{#each model.attributes.requirements}}
-            <div class="form-group">
-              <label for="{{.}}" class="control-label">{{.}}</label>
-              <input id="{{.}}" name="{{.}}" value="{{findWhere ../implementation.attributes.requirements name=.}}" class="form-control" required>
-            </div>
-            {{/each}}
+          <p>Keys <a href="javascript:" class="keys-popover">(?)</a></p>
+          {{#each model.attributes.requirements}}
+          <div class="form-group">
+            <label for="{{.}}" class="control-label">{{.}}</label>
+            <input id="{{.}}" name="{{.}}" value="{{findWhere ../implementation.attributes.requirements name=.}}" class="form-control" required>
+          </div>
+          {{/each}}
 
-            <hr>
+          <hr>
 
-            <p>Base URL <a href="javascript:void(0);" class="url-popover">(?)</a></p>
-            <input readonly value="{{invoke implementation method='appUrl'}}" class="form-control">
+          <p>Base URL <a href="javascript:void(0);" class="url-popover">(?)</a></p>
+          <input readonly value="{{invoke implementation method='appUrl'}}" class="form-control">
         </div><!--/.implement-env-tab-->
 
         <div id="implement-instructions-tab">
           <p>Instructions for Keys</p>
           <div>{{{renderedInstructions}}}</div>
         </div><!--/.implement-instructions-tab-->
-
       </div><!--/.modal-body-->
 
       <div class="modal-footer">
