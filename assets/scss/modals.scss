@@ -260,6 +260,10 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
   .modal-body {
     padding: 0;
 
+    .run-button {
+      margin: 50px 220px;
+    }
+
     #implement-env-tab {
       padding: 20px 20px 0;
 

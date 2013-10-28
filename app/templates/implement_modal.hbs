@@ -5,7 +5,7 @@
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       {{#if showrun}}
-      <h4 class="modal-title">Keys Saved. Continue and Run.</h4>
+      <h4 class="modal-title">Saved</h4>
       {{else}}
       <h4 class="modal-title">{{header}}</h4>
       {{/if}}
@@ -13,21 +13,8 @@
 
     {{#if showrun}}
       <div class="modal-body">
-        <div id="implement-saved">
-          <p>Keys Saved</a></p>
-          {{#each model.attributes.requirements}}
-          <div class="form-group">
-            <label for="{{.}}" class="control-label">{{.}}</label>
-            <input id="{{.}}" name="{{.}}" value="{{findWhere ../implementation.attributes.requirements name=.}}" class="form-control" readonly>
-          </div>
-          {{/each}}
-        </div><!--/#implement-saved-->
-      </div><!--/.modal-body-->
-
-      <div class="modal-footer">
-        <a class="prev" href="javascript:">Go Back</a>
         {{view "run_button" htmlonly=true}}
-      </div><!--/.modal-footer-->
+      </div>
     {{else}}
     <form>
       <div class="modal-body">
@@ -49,8 +36,7 @@
         <div id="implement-instructions-tab">
           <p>Instructions for Keys</p>
           <div>{{{renderedInstructions}}}</div>
-        </div><!--/#implement-instructions-tab-->
-
+        </div><!--/.implement-instructions-tab-->
       </div><!--/.modal-body-->
 
       <div class="modal-footer">
