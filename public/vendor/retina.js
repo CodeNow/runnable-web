@@ -29,7 +29,6 @@
     context.onload = function() {
       var images = document.getElementsByTagName("img"), retinaImages = [], i, image;
       images = Array.prototype.filter.call(images, notSvg);
-      debugger;
       for (i = 0; i < images.length; i++) {
         image = images[i];
         retinaImages.push(new RetinaImage(image));

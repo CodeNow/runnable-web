@@ -47,6 +47,14 @@
     }
 }
 
+//popovers within modals
+.modal {
+  .popover {
+    font-weight: normal;
+    z-index: 1050;
+  }
+}
+
 // modal
 .modal-dialog {
   width: 365px;
@@ -74,26 +82,6 @@
     }
   }
 }
-
-/*
-
-#implement-modal {
-  .tab-content {
-    margin-top: 20px;
-    min-height: 315px;
-  }
-}
-#implement-modal, #service-modal {
-  .modal-dialog {
-    width: 700px;
-    .modal-body {
-      max-height: 500px;
-      overflow-y: scroll;
-    }
-  }
-}
-
-*/
 
 .modal-dialog .modal-content .modal-body .input-group {
   margin-bottom: 20px;
@@ -162,10 +150,6 @@ body.modal-open,
         border-top: 1px solid rgba(0,0,0,0.1);
         margin-right: -20px;
         margin-left: -20px;
-      }
-
-      .popover {
-        font-weight: normal;
       }
 
       input {
@@ -260,6 +244,10 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
   .modal-body {
     padding: 0;
 
+    .run-button {
+      margin: 50px 220px;
+    }
+
     #implement-env-tab {
       padding: 20px 20px 0;
 
@@ -284,6 +272,18 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
       height: 100%;
       padding: 20px;
       width: 100%;
+    }
+
+    #implement-saved {
+      padding: 20px;
+
+      > p {
+        font-weight: bold;
+      }
+
+      > button {
+        float: right;
+      }
     }
 
   }

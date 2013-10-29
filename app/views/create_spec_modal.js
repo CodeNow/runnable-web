@@ -12,8 +12,8 @@ module.exports = ModalView.extend({
     'click .nav-tabs a'  : 'clickTab',
     'click .back'        : 'openAddSpecModal',
     'click .prev'        : 'step1',
-    'mouseover .keys-popover': 'showHint',
-    'mouseout .keys-popover' : 'hideHint'
+    'mouseover .keys-popover': 'showKeysHint',
+    'mouseout .keys-popover' : 'hideKeysHint'
   },
   dontTrackEvents: ['submit .name-form'],
   postInitialize: function () {
@@ -48,8 +48,10 @@ module.exports = ModalView.extend({
   postRender: function () {
     Super.postRender.apply(this, arguments);
     this.$('.keys-popover').popover({
+      container: '.modal.in',
       content: 'Required variables the user must set to run your example. Use these keys as environment variables in your example. Eg. APP_SECRET, AUTH_TOKEN.',
-      show: false
+      show: false,
+      trigger: 'hover'
     });
   },
   // STEP1
@@ -161,6 +163,7 @@ module.exports = ModalView.extend({
     if (!this.options.specification.id) {
       spec.set('_id', this.uuid); // allows subviews to use spec as a model, stupid rendr
     }
+    spec.set('instructions', this.$('textarea').val()); // save instructions
     this.options.step = 1;
     this.render();
   },
@@ -180,12 +183,12 @@ module.exports = ModalView.extend({
       return true;
     }
   },
-  showHint: function (evt) {
-    $(evt.currentTarget).popover('show');
+  showKeysHint: function (evt) {
+    // for mixpanel tracking
   },
-  hideHint: function (evt) {
-    $(evt.currentTarget).popover('hide');
-  },
+  hideKeysHint: function (evt) {
+    // for mixpanel tracking
+  }
 });
 
 module.exports.id = "CreateSpecModal";
