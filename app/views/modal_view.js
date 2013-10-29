@@ -13,12 +13,14 @@ module.exports = BaseView.extend({
     var $body = $('body');
     if (!this.modalIsInBody()) {
       // first render
-      $('body').append(this.$el);
+      $body.append(this.$el);
       this.$el.modal(this.modalOptions);
       this.$el.modal('show');
       this.$el.once('hidden.bs.modal', this.remove.bind(this));
+      this.$el.on('shown.bs.modal',function(){
+        $body.prop('class','modal-open');
+      });
     }
-    $body.addClass('model-open');
   },
   remove: function () {
     this.trigger('remove');
