@@ -84,7 +84,7 @@ module.exports = EditorButtonView.extend({
         _rollbar.push({level: 'error', msg: "Couldn't start container", errMsg: err});
       }
       else {
-        this.refreshOutput();
+        // this.refreshOutput();
       }
     }, this);
     this.app.dispatch.trigger('run');
