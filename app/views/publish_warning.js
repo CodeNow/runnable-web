@@ -3,6 +3,7 @@ var BaseView = require('./base_view');
 var Image = require('../models/image');
 var utils = require('../utils');
 var PublishRequestModal = require('./publish_request_modal');
+var PublishLoader = require('./publish_loader');
 
 module.exports = BaseView.extend({
   events: {
@@ -26,6 +27,7 @@ module.exports = BaseView.extend({
   publishNew: function () {
     this.$pubNew.attr('disabled', 'disabled');
     this.app.set('loading', true);
+    var publishLoader = new PublishLoader({app:this.app});
     var image = new Image({}, {app:this.app});
     image.publishFromContainer(this.options.containerid, this.publishCallback.bind(this));
   },
