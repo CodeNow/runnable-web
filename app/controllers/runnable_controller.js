@@ -92,13 +92,13 @@ module.exports = {
             cb(err, !err && _.extend(results, data[0], data[1], data[2], data[3]));
           });
         },
-        function anonCheck (results, cb) {
-          // remove implementations for anon users
-          if (!results.user.isRegistered()) {
-            results.implementations.reset([]);
-          }
-          cb(null, results);
-        }
+        // function anonCheck (results, cb) {
+        //   // remove implementations for anon users
+        //   if (!results.user.isRegistered()) {
+        //     results.implementations.reset([]);
+        //   }
+        //   cb(null, results);
+        // }
       ], function (err, results) {
         // DEBUG!
         if(err && err.status) {
@@ -237,13 +237,13 @@ module.exports = {
           cb(null, results);
         }
       },
-      function anonCheck (results, cb) {
-        // remove implementations for anon users
-        if (!results.user.isRegistered()) {
-          results.implementations.reset([]);
-        }
-        cb(null, results);
-      },
+      // function anonCheck (results, cb) {
+      //   // remove implementations for anon users
+      //   if (!results.user.isRegistered()) {
+      //     results.implementations.reset([]);
+      //   }
+      //   cb(null, results);
+      // },
       function parentAndFiles (results, cb) {
         async.parallel([
           fetchImage.bind(self, results.container.get('parent')),
