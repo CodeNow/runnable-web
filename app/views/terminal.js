@@ -26,10 +26,10 @@ module.exports = BaseView.extend({
   //   }
   // },
   onPostMessage: function (message) {
-    if (message === 'show:loader') {
+    if (message.data === 'show:loader') {
       this.loading(true);
     }
-    else if (message === 'show:loader') {
+    else if (message.data === 'show:loader') {
       this.loading(false);
     }
   },
