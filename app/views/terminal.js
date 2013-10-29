@@ -5,29 +5,46 @@ module.exports = BaseView.extend({
   className: 'terminal-view relative loading',
   postRender: function () {
     // this.$('iframe').load(this.loading.bind(this, false));
-    this.checkBoxUp();
+    // this.checkBoxUp();
+    this.loading(true);
+    this.listenToPostMessages();
   },
   getTemplateData: function () {
     this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
     this.options.termurl = this.options.boxurl + "/static/term.html";
     return this.options;
   },
-  checkBoxUp: function () {
-    var self = this;
-    this.loading(true);
-    this.sock = new SockJS(this.options.boxurl+'/streams/log');
-    this.sock.onopen = this.loading.bind(this, false);
-    this.sock.onclose = function () {
-      self.loading(true);
-      self.sock.close();
-      self.checkBoxUp();
+  // checkBoxUp: function () {
+  //   var self = this;
+  //   this.loading(true);
+  //   this.sock = new SockJS(this.options.boxurl+'/streams/log');
+  //   this.sock.onopen = this.loading.bind(this, false);
+  //   this.sock.onclose = function () {
+  //     self.loading(true);
+  //     self.sock.close();
+  //     self.checkBoxUp();
+  //   }
+  // },
+  onPostMessage: function (message) {
+    if (message === 'show:loader') {
+      this.loading(true);
     }
+    else if (message === 'show:loader') {
+      this.loading(false);
+    }
+  },
+  listenToPostMessages: function () {
+    window.addEventListener("message", this.onPostMessage);
+  },
+  stopListeningToPostMessages: function () {
+    window.removeEventListener("message", this.onPostMessage);
   },
   remove: function () {
     this.blockWarning = true;
     this.stopWarningTimeout();
-    this.sock.onclose = function () {};
-    this.sock.close();
+    this.stopListeningToPostMessages();
+    // this.sock.onclose = function () {};
+    // this.sock.close();
     Super.remove.apply(this, arguments);
   },
   loading: function (loading) {
