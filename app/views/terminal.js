@@ -3,6 +3,9 @@ var Super = BaseView.prototype;
 
 module.exports = BaseView.extend({
   className: 'terminal-view relative loading',
+  postHydrate: function () {
+    this.onPostMessage = this.onPostMessage.bind(this);
+  },
   postRender: function () {
     this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
     this.options.termurl = this.options.boxurl + "/static/term.html";
