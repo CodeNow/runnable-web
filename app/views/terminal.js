@@ -4,10 +4,13 @@ var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   className: 'terminal-view relative loading',
   postRender: function () {
+    this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
+    this.options.termurl = this.options.boxurl + "/static/term.html";
     // this.$('iframe').load(this.loading.bind(this, false));
     // this.checkBoxUp();
     this.loading(true);
     this.listenToPostMessages();
+    this.$('iframe').attr('src', this.options.termurl);
   },
   getTemplateData: function () {
     this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
