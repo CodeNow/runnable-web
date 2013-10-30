@@ -19,7 +19,8 @@ module.exports = ModalView.extend({
     'mouseover .url-popover' : 'showHint',
     'mouseout .url-popover'  : 'hideHint',
     'mouseover .keys-popover': 'showHint',
-    'mouseout .keys-popover' : 'hideHint'
+    'mouseout .keys-popover' : 'hideHint',
+    'click .run-button'      : 'run'
   },
   postRender: function () {
     Super.postRender.apply(this, arguments);
@@ -69,7 +70,13 @@ module.exports = ModalView.extend({
         return this.showError(err);
       }
       this.collection.add(implementation);
-      this.close();
+      if (this.hasRunButton()) {
+        this.options.showrun = true;
+        this.render();
+      }
+      else {
+        this.close();
+      }
     }
   },
   switchTab: function (evt) {
@@ -84,6 +91,18 @@ module.exports = ModalView.extend({
   },
   baseUrl: function (evt) {
     $(evt.currentTarget).select();
+  },
+  run: function () {
+    if (this.hasRunButton()) {
+      this.options.runbutton.run();
+      this.close();
+    }
+    else {
+      throw new Error('parent must be run button to run..');
+    }
+  },
+  hasRunButton: function () {
+    return Boolean(this.options.runbutton);
   }
 });
 

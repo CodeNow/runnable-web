@@ -144,7 +144,7 @@ def reboot():
   """
   Restart the server.
   """
-  run('pm2 stop index.js')
+  run('pm2 kill')
   boot()
 
 """
