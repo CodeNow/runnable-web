@@ -63,6 +63,8 @@ module.exports = BaseView.extend({
     }
   },
   submitRunOption: function (evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
     var $form = $(evt.currentTarget);
     var data = $form.serializeObject();
     var opts = utils.cbOpts(callback, this);
@@ -80,7 +82,7 @@ module.exports = BaseView.extend({
   saveEffect: function ($inputs) {
     $inputs.each(function () {
       var $save = $(this).next();
-      var showTime = 800;
+      var showTime = 1000;
       $save.fadeIn(function () {
         setTimeout($save.fadeOut.bind($save), showTime);
       });
