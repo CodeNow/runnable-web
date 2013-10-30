@@ -26,6 +26,11 @@ module.exports = BaseView.extend({
   },
   publishNew: function () {
     this.$pubNew.attr('disabled', 'disabled');
+
+    //test
+    this.testLoader();
+    return;
+
     this.app.set('loading', true);
     var publishLoader = new PublishLoader({app:this.app});
     var image = new Image({}, {app:this.app});
@@ -33,6 +38,11 @@ module.exports = BaseView.extend({
   },
   publishBack: function () {
     this.$pubBack.attr('disabled', 'disabled');
+
+    //test
+    this.testLoader();
+    return;
+    
     this.app.set('loading', true);
     if (!this.app.user.canEdit(this.model)) { // this shouldn't ever happen..
       this.showError('You cannot publish back since you are not the owner of the original runnable');
@@ -57,6 +67,10 @@ module.exports = BaseView.extend({
       // could do backbone pushstate too... just dont know how from a rendr view..
       this.app.router.navigate('/'+image.id, true);
     }
+  },
+  testLoader: function(){
+    $('#page-loader').hide();
+    $('#publish-loader').show();
   }
 });
 

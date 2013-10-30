@@ -8,8 +8,8 @@ module.exports = BaseView.extend({
     this.initLoading();
     // on event 1 call event1
 
-    this.$('h1:first-child').addClass('in');
     var i = 2;
+    this.$('h1:first-child').addClass('in');
     function testLoop(){
       setTimeout(function(){
         this.$('h1.in').prop('class','out');
@@ -17,14 +17,20 @@ module.exports = BaseView.extend({
         i++;
         if (i < 5) {
           testLoop();
+        } else if (i === 5) {
+          //sim error on last step
+          setTimeout(function(){
+            this.$('#progress-error').addClass('in');
+          },4000);
         }
       },4000);
     };
     testLoop();
-
-    //#progress-error
-    $('#progress-steps > a').on('click',function(){
-      $('#progress-error').toggleClass('in');
+    //restart on cancel
+    this.$('#progress-steps > a').on('click',function(){
+      $('#publish-loader').hide();
+      $('h1, #progress-error').removeClass('out in')
+      i = 1;
     });
 
   },
