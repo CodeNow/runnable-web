@@ -137,8 +137,8 @@
         top: -20px;
       text-align: center;
       text-shadow: 0 1px 1px rgba(0,0,0,0.75);
-      @include transition(all 0.75s);
-      width: 100px;
+      @include transition-3d(transform 0.75s);
+      width: 60px;
     }
   }
 
@@ -170,7 +170,7 @@
   }
 
   a {
-    color: #bbb;
+    color: $link-off;
     cursor: pointer;
     text-shadow: 0 1px 1px rgba(0,0,0,0.75);
 
@@ -184,7 +184,7 @@
     margin: 0 auto;
     position: relative;
       top: 80px;
-      z-index: 0;
+      z-index: -1;
     opacity: 0;
     @include transform-3d(0,-100%,0);
     @include transition(all 0.75s);
@@ -199,12 +199,13 @@
 
     button {
       display: block;
-      margin: 10px auto 0;
+      margin: 20px auto 0;
     }
 
     &.in {
       opacity: 1;
       @include transform-3d(0,0%,0);
+      z-index: 1;
     }
 
     &.in ~ a {

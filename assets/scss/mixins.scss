@@ -27,8 +27,8 @@
   }
 }
 
-@mixin transition-3d($transitionA, $transitionB) {
-  -o-transition: $transitionA, transform $transitionB;
-  -webkit-transition: $transitionA, -webkit-transform $transitionB;
-  transition: $transitionA, transform $transitionB;
+@mixin transition-3d($transition) {
+  -o-transition: $transition;
+  -webkit-transition: -webkit-+$transition;
+  transition: $transition;
 }
