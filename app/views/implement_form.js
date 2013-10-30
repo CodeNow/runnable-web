@@ -68,13 +68,18 @@ module.exports = BaseView.extend({
         this.showError('Error saving changes to keys, try again');
       }
       else {
-        $input.siblings('.saved').fadeIn();
-        setTimeout(function(){
-          this.$('.saved').stop().fadeOut();
-          $input.removeClass.bind($input, 'success');
-        }, 1000);
+        this.saveEffect($input);
       }
     }
+  },
+  saveEffect: function ($inputs) {
+    $inputs.each(function () {
+      var $save = $(this).next();
+      var showTime = 1000;
+      $save.fadeIn(function () {
+        setTimeout($save.fadeOut.bind($save), showTime);
+      });
+    });
   },
   listenToImplementation: function () {
     //listen to implementation for changes
