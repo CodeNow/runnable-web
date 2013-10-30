@@ -1,18 +1,17 @@
 <div class="arrow" style="left: 44.794520547945204%;"></div>
 <h3 class="popover-title">
-  <button type="button" class="close">×</button>
-  <h4>Run Options</h4>
-  <div class="popover-content">
-    <form class="form-group form-horizontal clearfix">
-      <label for="run_cmd">Run cmd</label>
-      <input class="form-control" name="run_cmd" value="npm start" required="">
-      <div class="saved">Saved</div>
-    </form>
-    <hr>
-    <form class="form-group form-horizontal clearfix">
-      <label for="build_cmd">Build cmd</label>
-      <input class="form-control" name="build_cmd" value="" required="">
-      <div class="saved">Saved</div>
-    </form>
-  </div>
+<button type="button" class="close">×</button>
+<h4>Run Options</h4>
+<div class="popover-content">
+  <form class="form-group form-horizontal clearfix">
+    <label for="start_cmd">Run cmd</label>
+    <input class="form-control" name="start_cmd" value="{{model.attributes.start_cmd}}" required="">
+    <div class="saved">Saved</div>
+  </form>
+  <hr>
+  <form class="form-group form-horizontal clearfix">
+    <label for="build_cmd">Build cmd</label>
+    <input class="form-control" name="build_cmd" value="{{model.attributes.build_cmd}}" required="">
+    <div class="saved">Saved</div>
+  </form>
 </div>
