@@ -12,14 +12,10 @@
       </div>
       {{view "runnable_description" model=image}}
       <div class="main-controls">
-        
         <div class="btn-group">
           {{view "run_button" model=container collection=specifications context=.}}
-          <button class="btn green run-options">
-            <i class="caret"></i>
-          </button>
+          {{view "run_options" model=container}}
         </div>
-
         {{view "fork_button" collection=defaultFiles model=container}}
       </div>
     </div>

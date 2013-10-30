@@ -1,0 +1,16 @@
+<i class="caret"></i>
+<div class="content-template hide">
+  {{#with model.attributes}}
+  <form class="form-group form-horizontal clearfix">
+    <label for="run_cmd">Run cmd</label>
+    <input class="form-control" name="run_cmd" value="{{start_cmd}}" required>
+    <div class="saved">Saved</div>
+  </form>
+    <hr>
+  <form class="form-group form-horizontal clearfix">
+    <label for="build_cmd">Build cmd</label>
+    <input class="form-control" name="build_cmd" value="{{build_cmd}}" required>
+    <div class="saved">Saved</div>
+  </form>
+  {{/with}}
+</div>
