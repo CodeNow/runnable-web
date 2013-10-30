@@ -25,7 +25,9 @@ module.exports = BaseView.extend({
         }
       },4000);
     };
-    testLoop();
+    $('#pubwarn-back-button, #pubwarn-new-button').on('click',function(){
+      testLoop();
+    });
     //restart on cancel
     this.$('#progress-steps > a').on('click',function(){
       $('#publish-loader').hide();
