@@ -75,6 +75,7 @@ module.exports = BaseView.extend({
         // set timeout fixes text editor height for first page hit.
         setTimeout(this.adjustHeightToContents.bind(this), 0);
         setTimeout(this.adjustHeightToContents.bind(this), 100);
+        setTimeout(this.adjustHeightToContents.bind(this), 200);
       }
       else {
         this.adjustHeightToContents();
@@ -95,12 +96,6 @@ module.exports = BaseView.extend({
       this.file = null;
       file.trigger('close:file', file);
     }
-    else if (file.get('content').length > 10000 &&
-      !confirm('This file is huge are you sure you want to open it (might crash or take a looong time)?')
-    ) {
-      this.file = null;
-      file.trigger('close:file', file);
-    }
     else {
       this.file = file;
       session = file.editorSession = ace.createEditSession(file.get('content'));
@@ -111,6 +106,12 @@ module.exports = BaseView.extend({
       this._fileEvents(file);
       this._sessionEvents(session, file);
     }
+    // else if (file.get('content').length > 10000 &&
+    //   !confirm('This file is huge are you sure you want to open it (might crash or take a looong time)?')
+    // ) {
+    //   this.file = null;
+    //   file.trigger('close:file', file);
+    // }
   },
   _fileEvents: function (file) {
     var self = this;
