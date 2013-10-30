@@ -1,6 +1,7 @@
 .main-controls .btn-group .popover {
     background: #f6f6f6;
     border: none;
+    @include border-radius(3px);
     display: block;
     padding: 0;
     width: 365px;
@@ -20,7 +21,7 @@
 
         background: $purple-light;
         border-bottom: 1px solid #e5e5e5;
-        @include border-radius(6px 6px 0 0);
+        @include border-radius(3px 3px 0 0);
         @include box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.25));
         height: $popover-header-height;
         padding: 0 20px;

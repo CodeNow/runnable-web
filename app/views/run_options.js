@@ -108,10 +108,10 @@ module.exports = BaseView.extend({
   saveEffect: function ($inputs) {
     $inputs.each(function () {
       var $save = $(this).next();
-      var showTime = 1000;
-      $save.fadeIn(function () {
-        setTimeout($save.fadeOut.bind($save), showTime);
-      });
+      $save.addClass('in');
+    }).on('focus',function(){
+      var $save = $(this).next();
+      $(this).next().removeClass('in');
     });
   },
   stopPropagation: function (evt) {
