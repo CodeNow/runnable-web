@@ -36,6 +36,10 @@
       };
       if (!this.console) this.console = {};
       if (!this.console.log) this.console.log = window.log;
+      // HTTPS REDIRECT
+      if (window.location.href.match(/^https/)) {
+        window.location = window.location.href.replace(/^https/, 'http');
+      }
     </script>
   </head>
 
