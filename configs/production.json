@@ -40,7 +40,7 @@
     "domain": "runnable.com",
     "message": {
       "status" : "danger",
-      "text"   : "<strong>There are issues with running code..</strong> We're working to resolve the issue."
+      "text"   : "<strong>There are issues with running code..</strong> We're working to resolve the issues."
     }
   }
 
