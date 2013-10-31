@@ -58,11 +58,9 @@ module.exports = BaseView.extend({
   },
   saveEffect: function ($inputs) {
     var self = this;
-    debugger;
     $inputs.each(function () {
       var $input = $(this);
       self.showSave($input);
-      debugger;
       $input.on('focus', self.focusInput.bind(self));
     });
   },
