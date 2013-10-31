@@ -35,6 +35,10 @@
       "id": "UA-36631837-2"
     },
     "pageSize" : 25,
-    "domain": "runnable.com"
+    "domain": "runnable.com",
+    "message": {
+      "status" : "danger",
+      "text"   : "<strong>There are issues with running code..</strong> We're working to resolve the issue."
+    }
   }
 }
