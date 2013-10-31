@@ -1,0 +1,95 @@
+.main-controls .popover {
+    background: #f6f6f6;
+    border: none;
+    @include border-radius(3px);
+    display: block;
+    padding: 0;
+    top: 40px;
+    width: 365px;
+        max-width: none;
+
+    > .arrow {
+        border-width: 6px;
+        margin-left: -6px;
+        left: 94px;
+    }
+
+    > .arrow:after {
+        border-bottom-color: $purple-light;
+    }
+
+    > .popover-title {
+        $popover-header-height: 40px;
+
+        background: $purple-light;
+        border-bottom: 1px solid #e5e5e5;
+        @include border-radius(3px 3px 0 0);
+        @include box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.25));
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        height: $popover-header-height;
+        line-height: $popover-header-height;
+        padding: 0 20px;
+        width: 100%;
+
+        > button {
+            line-height: $popover-header-height;
+            padding: 0;
+        }
+    }
+
+    > .popover-content {
+        padding: 15px;
+
+        form {
+
+            label {
+                font-weight: normal;
+                line-height: 40px;
+            }
+        }
+
+        //run and build and run
+        .form-horizontal {
+            height: 40px;
+            margin: 0;
+
+            label {
+                float: left;
+                margin-right: 10px;
+                width: 70px;
+            }
+
+            input {
+                width: 255px;
+            }
+        }
+
+        hr {
+            margin: 15px -15px;
+        }
+
+        /*
+        //set default view
+        form:last-child {
+            margin: 0;
+
+            .saved {
+                top: 0;
+            }
+
+            label {
+                cursor: pointer;
+                display: block;
+                margin: 0;
+            }
+
+            input {
+                float: right;
+                margin-top: 16px;
+            }
+        }
+        */
+    }
+}
