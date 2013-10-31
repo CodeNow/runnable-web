@@ -28,6 +28,7 @@ module.exports = BaseView.extend({
     data[$input.attr('name')] = $input.val();
     console.log(data);
     var opts = utils.cbOpts(callback, this);
+    this.hideSave($input);
     this.model.save(data, opts);
     function callback (err) {
       if (this.hidden()) return;
@@ -43,9 +44,11 @@ module.exports = BaseView.extend({
     evt.stopPropagation();
     evt.preventDefault();
     var $form = $(evt.currentTarget);
+    var $inputs = $form.find('input');
     var data = $form.serializeObject();
     console.log(data);
     var opts = utils.cbOpts(callback, this);
+    this.hideSave($inputs);
     this.model.save(data, opts);
     function callback (err) {
       if (this.hidden()) return;
@@ -53,7 +56,7 @@ module.exports = BaseView.extend({
         this.showError(err);
       }
       else {
-        this.saveEffect($form.find('input'));
+        this.saveEffect($inputs);
       }
     }
   },
@@ -68,11 +71,17 @@ module.exports = BaseView.extend({
   focusInput: function (evt) {
     this.hideSave($(evt.currentTarget));
   },
-  showSave: function ($input) {
-    $input.siblings('.saved').addClass('in');
+  showSave: function ($inputs) {
+    $inputs.each(function () {
+      var $input = $(this);
+      $input.siblings('.saved').addClass('in');
+    });
   },
-  hideSave: function ($input) {
-    $input.siblings('.saved').removeClass('in');
+  hideSave: function ($inputs) {
+    $inputs.each(function () {
+      var $input = $(this);
+      $input.siblings('.saved').removeClass('in');
+    });
   },
   stopPropagation: function (evt) {
     evt.stopPropagation();
