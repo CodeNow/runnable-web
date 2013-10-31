@@ -11,19 +11,27 @@
     <input class="form-control" name="start_cmd" value="{{model.attributes.start_cmd}}" required="">
     <div class="saved">Saved</div>
   </form>
-  <!--
   <hr>
   <form class="form-group form-horizontal clearfix">
     <label for="build_cmd">Build cmd</label>
     <input class="form-control" name="build_cmd" value="{{model.attributes.build_cmd}}" required="">
     <div class="saved">Saved</div>
-  </form>-->
-  <!--
-  <hr>
-  <form class="form-group clearfix">
-    <div class="saved">Saved</div>
-    <label for="web-view">Web View <input type="checkbox" id="web-view"></label>
-    <label for="terminal-view">Terminal Output <input type="checkbox" id="terminal-view"></label>
   </form>
-  -->
+  <hr>
+  <form class="form-group toggle-group clearfix">
+    <div class="toggle-group">
+      <label>Web Output</label>
+      <div>
+        <button class="toggle" type="button">Hide</button>
+        <button class="toggle active" type="button">Show</button>
+      </div>
+    </div>
+    <div class="toggle-group">
+      <label>Terminal Output</label>
+      <div>
+        <button class="toggle" type="button">Hide</button>
+        <button class="toggle active" type="button">Show</button>
+      </div>
+    </div>
+  </form>
 </div>

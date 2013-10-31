@@ -3,10 +3,19 @@
     border: none;
     @include border-radius(3px);
     display: block;
+    opacity: 0;
     padding: 0;
+    pointer-events: none;
     top: 40px;
     width: 365px;
         max-width: none;
+    z-index: -1;
+
+    &.in {
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 1010;
+    }
 
     > .arrow {
         border-width: 6px;
@@ -70,26 +79,67 @@
             margin: 15px -15px;
         }
 
-        /*
         //set default view
         form:last-child {
+            background: #EEE;
+            border: 1px solid rgba(0,0,0,0.1);
+            @include border-radius(3px);
             margin: 0;
 
-            .saved {
-                top: 0;
-            }
-
-            label {
-                cursor: pointer;
+            .toggle-group {
                 display: block;
+                height: 50px;
+                line-height: 50px;
                 margin: 0;
+                padding: 0 10px;
+                width: 100%;
+
+                > div {
+                    float: right;
+                }
+
+                &:last-child {
+                    border-top: 1px solid rgba(0,0,0,0.1);
+                }
             }
 
-            input {
-                float: right;
-                margin-top: 16px;
+            .toggle {
+                background: none;
+                border: 1px solid transparent;
+                color: #bbb;
+                font-size: 12px;
+                font-weight: bold;
+                height: 31px;
+                line-height: 31px;
+                padding: 0;
+                text-shadow: 0 1px 0 #fff;
+                @include transition(0.1s all);
+                width: 60px;
+
+                &:hover {
+                    border: 1px solid #bbb;
+                }
+
+                &.active {
+                    background: $purple-lighter;
+                    border: 1px solid $purple-light;
+                    color: $purple-light;
+                }
+
+                &:focus {
+                    outline: none;
+                }
+
+                &:first-child {
+                    margin-right: 10px;
+
+                    &.active {
+                        background: transparent;
+                        border-color: #bbb;
+                        color: #bbb;
+                    }
+                }
             }
         }
-        */
     }
 }

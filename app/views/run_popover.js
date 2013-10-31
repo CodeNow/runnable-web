@@ -5,10 +5,11 @@ module.exports = BaseView.extend({
   tagName: 'div',
   className: 'popover fade bottom',
   events: {
-    'click' : 'stopPropagation',
-    'submit form'  : 'submitRunOption',
-    'change input' : 'updateRunOption',
-    'click .close' : 'hide'
+    'click'         : 'stopPropagation',
+    'submit form'   : 'submitRunOption',
+    'change input'  : 'updateRunOption',
+    'click .close'  : 'hide',
+    'click .toggle' : 'toggle'
   },
   hidden: function () {
     return !this.$el.hasClass('in');
@@ -75,6 +76,12 @@ module.exports = BaseView.extend({
   },
   stopPropagation: function (evt) {
     evt.stopPropagation();
+  },
+  toggle: function (evt) {
+    $(evt.currentTarget)
+      .addClass('active')
+      .siblings()
+      .removeClass('active');
   }
 });
 
