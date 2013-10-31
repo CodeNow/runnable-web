@@ -3,10 +3,19 @@
     border: none;
     @include border-radius(3px);
     display: block;
+    opacity: 0;
     padding: 0;
+    pointer-events: none;
     top: 40px;
     width: 365px;
         max-width: none;
+    z-index: -1;
+
+    &.in {
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 1010;
+    }
 
     > .arrow {
         border-width: 6px;
