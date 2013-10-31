@@ -5,8 +5,10 @@ module.exports = BaseView.extend({
   tagName: 'div',
   className: 'popover fade bottom',
   events: {
+    'click' : 'stopPropagation',
     'submit form'  : 'submitRunOption',
-    'change input' : 'updateRunOption'
+    'change input' : 'updateRunOption',
+    'click .close' : 'hide'
   },
   hidden: function () {
     return !this.$el.hasClass('in');
@@ -30,7 +32,7 @@ module.exports = BaseView.extend({
         this.showError(err);
       }
       else {
-        this.showSave($input);
+        this.saveEffect($input);
       }
     }
   },
@@ -54,10 +56,12 @@ module.exports = BaseView.extend({
   },
   saveEffect: function ($inputs) {
     var self = this;
+    debugger;
     $inputs.each(function () {
       var $input = $(this);
       self.showSave($input);
-      $input.on('focus', self.focusInput);
+      debugger;
+      $input.on('focus', self.focusInput.bind(self));
     });
   },
   focusInput: function (evt) {
@@ -68,6 +72,9 @@ module.exports = BaseView.extend({
   },
   hideSave: function ($input) {
     $input.siblings('.saved').removeClass('in');
+  },
+  stopPropagation: function (evt) {
+    evt.stopPropagation();
   }
 });
 
