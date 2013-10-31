@@ -1,5 +1,6 @@
 var BaseView = require('./base_view');
 var utils = require('../utils');
+var _ = require('underscore');
 
 module.exports = BaseView.extend({
   tagName: 'div',
@@ -8,8 +9,19 @@ module.exports = BaseView.extend({
     'click' : 'stopPropagation',
     'submit form'  : 'submitRunOption',
     'change input' : 'updateRunOption',
-    'keyup input' : 'updateRunOption',
+    'keyup input'  : 'keyupUpdateRunOption',
     'click .close' : 'hide'
+  },
+  postInitialize: function () {
+    this.keyupUpdateRunOption = _.debounce(this.keyupUpdateRunOption.bind(this), 150);
+  },
+  keyupUpdateRunOption: function (evt) {
+    if (this.valueChanged($(evt.currentTarget))) {
+      this.updateRunOption.apply(this, arguments);
+    }
+  },
+  valueChanged: function ($input) {
+    var modelValue = this.model.get($input.attr('name'));
   },
   hidden: function () {
     return !this.$el.hasClass('in');
