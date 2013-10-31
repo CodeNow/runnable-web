@@ -8,6 +8,7 @@ module.exports = BaseView.extend({
     'click' : 'stopPropagation',
     'submit form'  : 'submitRunOption',
     'change input' : 'updateRunOption',
+    'keyup input' : 'updateRunOption',
     'click .close' : 'hide'
   },
   hidden: function () {
