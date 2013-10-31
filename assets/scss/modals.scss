@@ -132,7 +132,7 @@ body.modal-open,
 .spec-modal {
 
   .modal-body {
-    max-height: 450px;
+    max-height: 400px;
     overflow: auto;
     padding: 20px 20px 0;
 
@@ -150,6 +150,11 @@ body.modal-open,
         border-top: 1px solid rgba(0,0,0,0.1);
         margin-right: -20px;
         margin-left: -20px;
+      }
+
+      .popover {
+        font-weight: normal;
+        max-width: 350px;
       }
 
       input {

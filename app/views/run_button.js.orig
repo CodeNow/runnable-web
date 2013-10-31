@@ -6,7 +6,11 @@ var noop = function () {};
 
 module.exports = EditorButtonView.extend({
   tagName: 'button',
+<<<<<<< HEAD
+  className: 'btn green',
+=======
   className: 'green run-button',
+>>>>>>> master
   events: {
     'click' : 'click'
   },
@@ -84,11 +88,7 @@ module.exports = EditorButtonView.extend({
         _rollbar.push({level: 'error', msg: "Couldn't start container", errMsg: err});
       }
       else {
-<<<<<<< Updated upstream
-        this.refreshOutput();
-=======
-        // popup.postMessage("Refresh", "*");
->>>>>>> Stashed changes
+        // this.refreshOutput();
       }
     }, this);
     this.app.dispatch.trigger('run');
