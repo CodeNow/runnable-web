@@ -25,7 +25,6 @@ module.exports = BaseView.extend({
     var opts = utils.cbOpts(callback, this);
     this.model.save(data, opts);
     function callback (err) {
-      debugger;
       if (this.hidden()) return;
       if (err) {
         this.showError(err);
@@ -44,7 +43,6 @@ module.exports = BaseView.extend({
     var opts = utils.cbOpts(callback, this);
     this.model.save(data, opts);
     function callback (err) {
-      debugger;
       if (this.hidden()) return;
       if (err) {
         this.showError(err);

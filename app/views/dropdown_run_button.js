@@ -6,7 +6,8 @@ module.exports = BaseView.extend({
     'click .run-options' : 'togglePopover'
   },
   togglePopover: function () {
-    $('.popover').toggleClass('in');
+    this.$('.run-options').toggleClass('active');
+    this.$('.popover').toggleClass('in');
   }
 });
 
