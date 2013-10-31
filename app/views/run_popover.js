@@ -15,9 +15,11 @@ module.exports = BaseView.extend({
   },
   show: function () {
     this.$el.addClass('in');
+    this.trigger('show');
   },
   hide: function () {
-    this.$el.removeClass('');
+    this.$el.removeClass('in');
+    this.trigger('hide');
   },
   updateRunOption: function (evt) {
     var $input = $(evt.currentTarget);
