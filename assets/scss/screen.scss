@@ -1464,6 +1464,10 @@ progress {
                 line-height: 36px;
                 padding: 0 18px 0 16px;
 
+                > img {
+                    vertical-align: baseline;
+                }
+
                 &:hover,
                 &:focus {
                     color: #fff;
