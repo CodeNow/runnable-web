@@ -14,12 +14,12 @@ module.exports = BaseView.extend({
     'click .toggle-group label' : 'toggleOutputViews'
   },
   postInitialize: function () {
-    this.keyupUpdateRunOption = _.debounce(this.keyupUpdateRunOption.bind(this), 150);
+    // this.keyupUpdateRunOption = _.debounce(this.keyupUpdateRunOption.bind(this), 150);
   },
   keyupUpdateRunOption: function (evt) {
-    if (this.valueChanged($(evt.currentTarget))) {
-      this.updateRunOption.apply(this, arguments);
-    }
+    // if (this.valueChanged($(evt.currentTarget))) {
+    this.updateRunOption.apply(this, arguments);
+    // }
   },
   valueChanged: function ($input) {
     var modelValue = this.model.get($input.attr('name'));
@@ -41,6 +41,7 @@ module.exports = BaseView.extend({
     data[$input.attr('name')] = $input.val();
     console.log(data);
     var opts = utils.cbOpts(callback, this);
+    opts.patch = true;
     this.hideSave($input);
     this.model.save(data, opts);
     function callback (err) {
@@ -59,8 +60,8 @@ module.exports = BaseView.extend({
     var $form = $(evt.currentTarget);
     var $inputs = $form.find('input');
     var data = $form.serializeObject();
-    console.log(data);
     var opts = utils.cbOpts(callback, this);
+    opts.patch = true;
     this.hideSave($inputs);
     this.model.save(data, opts);
     function callback (err) {
