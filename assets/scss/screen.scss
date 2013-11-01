@@ -156,6 +156,13 @@ $prefix-for-spec:      true !default; // required for keyframe mixin
     $prefix-for-spec:      $original-prefix-for-spec;
 }
 
+// Mixin for animations
+@mixin animation($animation) {
+    -moz-animation: $animation;
+    -o-animation: $animation;
+    -webkit-animation: $animation;
+    animation: $animation;
+}
 
 
 
@@ -930,12 +937,13 @@ progress {
             }
         }
         a {
+            @include border-radius(3px);
             color: #fff;
             font-size: 12px;
-            padding: 10px;
-            line-height: 1em;
-            @include border-radius(3px);
+            line-height: 34px;
+            padding: 0;
             @include transition(all 0.2s ease-in-out);
+
             &:hover {
                 text-decoration: underline;
             }
@@ -1455,6 +1463,10 @@ progress {
                 height: 36px;
                 line-height: 36px;
                 padding: 0 18px 0 16px;
+
+                > img {
+                    vertical-align: baseline;
+                }
 
                 &:hover,
                 &:focus {

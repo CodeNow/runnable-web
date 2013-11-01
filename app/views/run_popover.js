@@ -9,8 +9,9 @@ module.exports = BaseView.extend({
     'click' : 'stopPropagation',
     'submit form'  : 'submitRunOption',
     'change input' : 'updateRunOption',
-    'keyup input'  : 'keyupUpdateRunOption',
-    'click .close' : 'hide'
+    'keyup input' : 'updateRunOption',
+    'click .close' : 'hide',
+    'click .toggle-group label' : 'toggleOutputViews'
   },
   postInitialize: function () {
     this.keyupUpdateRunOption = _.debounce(this.keyupUpdateRunOption.bind(this), 150);
@@ -97,6 +98,12 @@ module.exports = BaseView.extend({
   },
   stopPropagation: function (evt) {
     evt.stopPropagation();
+  },
+  toggleOutputViews: function (evt) {
+    $(evt.currentTarget)
+      .addClass('active')
+      .siblings()
+      .removeClass('active');
   }
 });
 

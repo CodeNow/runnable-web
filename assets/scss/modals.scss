@@ -274,6 +274,7 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
     #implement-instructions-tab {
       background: lightyellow;
       border: 1px solid rgba(0,0,0,0.1);
+      border-bottom: none;
       height: 100%;
       padding: 20px;
       width: 100%;
@@ -359,13 +360,15 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
 
   .step2 {
 
+    > .modal-body {
+      padding: 20px;
+    }
+
     //markdown link
     .help-link {
       color: $link-off;
-      display: block;
       font-size: 12px;
       font-weight: 700;
-      margin-bottom: 20px;
 
       &.hover {
         color: $link-on;
