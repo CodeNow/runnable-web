@@ -9,7 +9,7 @@ module.exports = BaseView.extend({
     'submit form'   : 'submitRunOption',
     'change input'  : 'updateRunOption',
     'click .close'  : 'hide',
-    'click .toggle' : 'toggle'
+    'click .toggle-group label' : 'toggleOutputViews'
   },
   hidden: function () {
     return !this.$el.hasClass('in');
@@ -77,7 +77,7 @@ module.exports = BaseView.extend({
   stopPropagation: function (evt) {
     evt.stopPropagation();
   },
-  toggle: function (evt) {
+  toggleOutputViews: function (evt) {
     $(evt.currentTarget)
       .addClass('active')
       .siblings()

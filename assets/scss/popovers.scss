@@ -51,12 +51,9 @@
     > .popover-content {
         padding: 15px;
 
-        form {
-
-            label {
-                font-weight: normal;
-                line-height: 40px;
-            }
+        label {
+            font-weight: normal;
+            line-height: 40px;
         }
 
         //run and build and run
@@ -78,68 +75,98 @@
         hr {
             margin: 15px -15px;
         }
+    }
 
-        //set default view
-        form:last-child {
-            background: #EEE;
-            border: 1px solid rgba(0,0,0,0.1);
-            @include border-radius(3px);
+    //set default view
+    .toggle-group {
+        background: #EEE;
+        border: 1px solid rgba(0,0,0,0.1);
+        @include border-radius(3px);
+        margin: 0;
+
+        > label {
+            cursor: pointer;
+            display: block;
+            height: 50px;
+            line-height: 50px;
             margin: 0;
+            padding: 0 10px;
+            width: 100%;
 
-            .toggle-group {
-                display: block;
-                height: 50px;
-                line-height: 50px;
-                margin: 0;
-                padding: 0 10px;
-                width: 100%;
-
-                > div {
-                    float: right;
-                }
-
-                &:last-child {
-                    border-top: 1px solid rgba(0,0,0,0.1);
-                }
+            &:nth-child(n+2) {
+                border-top: 1px solid rgba(0,0,0,0.1);
             }
 
-            .toggle {
-                background: none;
-                border: 1px solid transparent;
-                color: #bbb;
-                font-size: 12px;
-                font-weight: bold;
-                height: 31px;
-                line-height: 31px;
-                padding: 0;
-                text-shadow: 0 1px 0 #fff;
-                @include transition(0.1s all);
-                width: 60px;
+            &:first-child  {
+                .sprite-icons-output {
+                    background-position: -61px 0px;
 
-                &:hover {
-                    border: 1px solid #bbb;
-                }
-
-                &.active {
-                    background: $purple-lighter;
-                    border: 1px solid $purple-light;
-                    color: $purple-light;
-                }
-
-                &:focus {
-                    outline: none;
-                }
-
-                &:first-child {
-                    margin-right: 10px;
-
-                    &.active {
-                        background: transparent;
-                        border-color: #bbb;
-                        color: #bbb;
+                    &::after {
+                        height: 12px;
                     }
                 }
             }
+
+            &:nth-child(2) {
+                .sprite-icons-output {
+                    background-position: 0px 0px;
+                }
+            }
+
+            &:nth-child(3) {
+                .sprite-icons-output {
+                    background-position: -31px 0px;
+
+                    &::after {
+                        height: 22px;
+                    }
+                }
+            }
+
+            &.active {
+                background: #f2dfff;
+
+                .sprite-icons-output::after {
+                    @include animation(blinker 1s infinite);
+                }
+            }
+        }
+
+        input[type="radio"] {
+            float: right;
+            height: 50px;
+            margin: 0 10px 0 0;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .sprite-icons-output {
+            background: url(/images/sprite-icons-output.svg) no-repeat;
+            border: 1px solid;
+            border-color: rgba(0,0,0,0.15) rgba(0,0,0,0.15) rgba(0,0,0,0.2);
+            float: left;
+            height: 30px;
+            margin: 10px 10px 0 0;
+            overflow: hidden;
+            position: relative;
+            width: 30px;
+
+            &::after {
+                background: #383734;
+                content: '';
+                display: block;
+                opacity: 0;
+                position: absolute;
+                    bottom: 0;
+                width: 100%;
+            }
         }
     }
+}
+
+@include keyframes(blinker) {
+    from {opacity: 1;}
+    to {opacity: 0;}
 }

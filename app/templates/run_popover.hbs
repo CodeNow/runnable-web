@@ -19,19 +19,20 @@
   </form>
   <hr>
   <form class="form-group toggle-group clearfix">
-    <div class="toggle-group">
-      <label>Web Output</label>
-      <div>
-        <button class="toggle" type="button">Hide</button>
-        <button class="toggle active" type="button">Show</button>
-      </div>
-    </div>
-    <div class="toggle-group">
-      <label>Terminal Output</label>
-      <div>
-        <button class="toggle" type="button">Hide</button>
-        <button class="toggle active" type="button">Show</button>
-      </div>
-    </div>
+    <label class="active">
+      <div class="sprite-icons-output"></div>
+      Web & Terminal
+      <input type="radio" name="output-views" checked>
+    </label>
+    <label>
+      <div class="sprite-icons-output"></div>
+      Only Web
+      <input type="radio" name="output-views">
+    </label>
+    <label>
+      <div class="sprite-icons-output"></div>
+      Only Terminal
+      <input type="radio" name="output-views">
+    </label>
   </form>
 </div>
