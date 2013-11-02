@@ -4,34 +4,47 @@ var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   id: 'output-terminal-container',
   className: 'resizable-iframe loading',
-  getTemplateData: function () {
-    this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
-    this.options.tailurl = this.options.boxurl + "/static/log.html";
-    return this.options;
+  postHydrate: function () {
+    this.onPostMessage = this.onPostMessage.bind(this);
   },
   postRender: function () {
-    // this.$iframe = this.$('iframe');
-    // this.$iframe.load(this.loading.bind(this, false));
-    this.checkBoxUp();
-  },
-  checkBoxUp: function () {
-    var self = this;
+    this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
+    this.options.tailurl = this.options.boxurl + "/static/log.html";
     this.loading(true);
-    this.sock = new SockJS(this.options.boxurl+'/streams/log');
-    this.sock.onopen = this.loading.bind(this, false);
-    this.sock.onclose = function () {
-      self.loading(true);
-      self.sock.close();
-      self.checkBoxUp();
+    this.listenToPostMessages();
+    this.$('iframe').attr('src', this.options.tailurl);
+  },
+  onPostMessage: function (message) {
+    if (message.data === 'show:loader') {
+      this.loading(true);
+    }
+    else if (message.data === 'hide:loader') {
+      this.loading(false);
     }
   },
+  onPostMessage: function (message) {
+    if (message.data === 'show:loader') {
+      this.loading(true);
+    }
+    else if (message.data === 'hide:loader') {
+      this.loading(false);
+    }
+  },
+  listenToPostMessages: function () {
+    window.addEventListener("message", this.onPostMessage);
+  },
+  stopListeningToPostMessages: function () {
+    window.removeEventListener("message", this.onPostMessage);
+  },
   remove: function () {
-    this.sock.onclose = function () {};
-    this.sock.close();
+    this.blockWarning = true;
+    this.stopWarningTimeout();
+    this.stopListeningToPostMessages();
+    // this.sock.onclose = function () {};
+    // this.sock.close();
     Super.remove.apply(this, arguments);
   },
   loading: function (loading) {
-    console.log(loading);
     this.stopWarningTimeout();
     if (loading) this.startWarningTimeout();
     Super.loading.apply(this, arguments);
