@@ -13,6 +13,15 @@ module.exports = BaseView.extend({
   },
   postHydrate: function () {
     this.history = [];
+    this.listenTo(this.app.dispatch, 'toggle:buildMessage', this.toggleBuildMessage);
+  },
+  toggleBuildMessage: function (bool) {
+    if (bool) { // show
+      this.$el.addClass('hide');
+    }
+    else { // hide
+      this.$el.removeClass('hide');
+    }
   },
   backButtonState: function () {
     if (this.history.length === 0) {

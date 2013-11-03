@@ -1,3 +1,7 @@
 <div class="loader"><b>Loading..</b></div>
+{{#if buildmessage}}
+<div class="build-message center-text">Building...</div>
+{{else}}
 <iframe id="output-results" frameborder="0" height='100%' width='100%'>
 </iframe>
+{{/if}}

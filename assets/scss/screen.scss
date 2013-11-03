@@ -912,7 +912,7 @@ progress {
             width: 140px;
             background-image: url(../images/sprite-runnable-logo.png);
             @include background-image-retina('../images/sprite-runnable-logo@2x.png');
-            
+
             @media (min--moz-device-pixel-ratio: 1.3),
                    (-o-min-device-pixel-ratio: 2.6/2),
                    (-webkit-min-device-pixel-ratio: 1.3),
@@ -2713,6 +2713,9 @@ div#output-terminal-container{
         left: 0;
         right: 0;
         height: 70%;
+        .build-message {
+            padding-top: 100px
+        }
         #output-results {
             border: none;
             width: 100%;

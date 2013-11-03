@@ -9,26 +9,44 @@ module.exports = BaseView.extend({
   },
   postRender: function () {
     this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
-    this.options.tailurl = this.options.boxurl + "/static/log.html";
+    this.options.tailurl = this.options.boxurl + "/dynamic/tail";
     this.loading(true);
     this.listenToPostMessages();
     this.$('iframe').attr('src', this.options.tailurl);
   },
   onPostMessage: function (message) {
+    var dispatch = this.app.dispatch;
     if (message.data === 'show:loader') {
       this.loading(true);
     }
     else if (message.data === 'hide:loader') {
       this.loading(false);
+    }
+    else if (message.data.indexOf('stream:') === 0) {
+      this.stream = message.data.replace('stream:', '');
+      if (this.stream === 'build') {
+        dispatch.trigger('toggle:buildMessage', true);
+      }
+      else {
+        dispatch.trigger('toggle:buildMessage', false);
+      }
+    }
+    else if (message.data.indexOf('{') === 0) {
+      var json = JSON.parse(message.data);
+      if (json.type === 'code') {
+        this.handleCodePostMessage(json);
+      }
     }
   },
-  onPostMessage: function (message) {
-    if (message.data === 'show:loader') {
-      this.loading(true);
+  handleCodePostMessage: function (json) {
+    if (json.code+'' === '0' && this.stream === 'build') {
+      // process completed successfully and was build process
+      this.refreshIframe();
     }
-    else if (message.data === 'hide:loader') {
-      this.loading(false);
-    }
+  },
+  refreshIframe: function () {
+    var src = this.$('iframe').attr('src');
+    this.$('iframe').attr('src', src);
   },
   listenToPostMessages: function () {
     window.addEventListener("message", this.onPostMessage);
