@@ -9,20 +9,22 @@ module.exports = BaseView.extend({
     'click' : 'stopPropagation',
     'submit form'  : 'submitRunOption',
     'change input' : 'updateRunOption',
-    'keyup input' : 'updateRunOption',
+    'keyup input'  : 'keyupUpdateRunOption',
     'click .close' : 'hide',
     'click .toggle-group label' : 'toggleOutputViews'
   },
   postInitialize: function () {
-    // this.keyupUpdateRunOption = _.debounce(this.keyupUpdateRunOption.bind(this), 150);
+    this.keyupUpdateRunOption = _.debounce(this.keyupUpdateRunOption.bind(this), 150);
   },
   keyupUpdateRunOption: function (evt) {
-    // if (this.valueChanged($(evt.currentTarget))) {
-    this.updateRunOption.apply(this, arguments);
-    // }
+    if (this.valueChanged($(evt.currentTarget))) {
+      this.updateRunOption.apply(this, arguments);
+    }
   },
   valueChanged: function ($input) {
     var modelValue = this.model.get($input.attr('name'));
+    var inputValue = $input.val();
+    return modelValue !== inputValue;
   },
   hidden: function () {
     return !this.$el.hasClass('in');
