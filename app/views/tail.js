@@ -20,12 +20,18 @@ module.exports = BaseView.extend({
     this.listenToPostMessages();
     this.$('iframe').attr('src', this.options.tailurl);
     // in case build message gets stuck
+    this.setBuildMessageTimeout();
+  },
+  setBuildMessageTimeout: function () {
     this.buildMessageTimeout = setTimeout(
       this.checkIfBuildMessageStuck.bind(this),
     800);
   },
   checkIfBuildMessageStuck: function () {
-    if (this.parentView.childViews.stream != 'build') {
+    if (this.stream == null) {
+      this.setBuildMessageTimeout();
+    }
+    else if (this.stream != 'build') {
       dispatch.trigger('toggle:buildMessage', false);
     }
   },
