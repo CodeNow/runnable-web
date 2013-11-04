@@ -19,17 +19,8 @@ module.exports = BaseView.extend({
   postHydrate: function () {
     this.options.buildmessage = this.options.buildmessage || false; //init
     this.listenTo(this.app.dispatch, 'toggle:buildMessage', this.toggleBuildMessage);
-    this.buildMessageTimeout = setTimeout(function () {
-      this.checkIfBuildMessageStuck();
-    }.bind(this), 800);
-  },
-  checkIfBuildMessageStuck: function () {
-    if (this.parentView.childViews.stream != 'build') {
-      this.toggleBuildMessage(false);
-    }
   },
   toggleBuildMessage: function (bool) {
-    clearTimeout(this.buildMessageTimeout);
     if (this.options.buildmessage !== bool) {
       this.options.buildmessage = bool;
       this.render();

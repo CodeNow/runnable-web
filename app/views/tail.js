@@ -19,6 +19,15 @@ module.exports = BaseView.extend({
     this.loading(true);
     this.listenToPostMessages();
     this.$('iframe').attr('src', this.options.tailurl);
+    // in case build message gets stuck
+    this.buildMessageTimeout = setTimeout(
+      this.checkIfBuildMessageStuck.bind(this),
+    800);
+  },
+  checkIfBuildMessageStuck: function () {
+    if (this.parentView.childViews.stream != 'build') {
+      dispatch.trigger('toggle:buildMessage', false);
+    }
   },
   onPostMessage: function (message) {
     var dispatch = this.app.dispatch;
@@ -29,12 +38,12 @@ module.exports = BaseView.extend({
       this.loading(false);
     }
     else if (message.data.indexOf('stream:') === 0) {
-      // web.js relies on this logic, if changed - update it also
       this.stream = message.data.replace('stream:', '');
       if (this.stream === 'build') {
         dispatch.trigger('toggle:buildMessage', true);
       }
       else {
+        clearTimeout(this.buildMessageTimeout);
         dispatch.trigger('toggle:buildMessage', false);
       }
     }

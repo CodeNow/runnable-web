@@ -6,6 +6,7 @@
 </h3>
 
 <div class="popover-content">
+  {{#if editmode}}
   <form class="form-group form-horizontal clearfix">
     <label for="start_cmd">Run cmd</label>
     <input class="form-control" name="start_cmd" value="{{model.attributes.start_cmd}}" required="">
@@ -35,4 +36,17 @@
       <input type="radio" name="output_format" value="terminal" {{#if_eq model.attributes.output_format compare="terminal"}}checked{{/if_eq}}>
     </label>
   </form>
+  {{else}}
+  <form class="form-group form-horizontal clearfix">
+    <label for="start_cmd">Run cmd</label>
+    <input class="form-control" name="start_cmd" value="{{model.attributes.start_cmd}}" disabled>
+    <div class="saved">Saved</div>
+  </form>
+  <hr>
+  <form class="form-group form-horizontal clearfix">
+    <label for="build_cmd">Build cmd</label>
+    <input class="form-control" name="build_cmd" value="{{model.attributes.build_cmd}}" disabled>
+    <div class="saved">Saved</div>
+  </form>
+  {{/if}}
 </div>
