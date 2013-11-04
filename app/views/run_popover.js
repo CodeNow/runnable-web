@@ -10,7 +10,7 @@ module.exports = BaseView.extend({
     'click .close' : 'hide',
     'submit form'  : 'submitRunOption',
     'change input[type=text]' : 'updateRunOption',
-    'keyup input[type=text]'  : 'keyupUpdateRunOption',
+    'keyup input'             : 'keyupUpdateRunOption',
     'click .toggle-group label' : 'toggleOutputViews',
     'change input[type=radio]' : 'updateOutputFormat'
   },

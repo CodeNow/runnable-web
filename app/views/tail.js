@@ -29,6 +29,7 @@ module.exports = BaseView.extend({
       this.loading(false);
     }
     else if (message.data.indexOf('stream:') === 0) {
+      // web.js relies on this logic, if changed - update it also
       this.stream = message.data.replace('stream:', '');
       if (this.stream === 'build') {
         dispatch.trigger('toggle:buildMessage', true);
