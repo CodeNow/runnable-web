@@ -7,6 +7,12 @@ module.exports = BaseView.extend({
   postHydrate: function () {
     this.onPostMessage = this.onPostMessage.bind(this);
   },
+  preRender: function () {
+    var optClassName = this.options.classname;
+    if (optClassName && !~this.className.indexOf(optClassName)) {
+      this.className += ' ' + optClassName;
+    }
+  },
   postRender: function () {
     this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
     this.options.tailurl = this.options.boxurl + "/dynamic/tail";

@@ -2738,6 +2738,9 @@ div#output-terminal-container{
             z-index: 1000000;
             cursor: ns-resize;
         }
+        &.full-height {
+            height: 100%;
+        }
     }
     #output-terminal-container {
         position: absolute;
@@ -2755,6 +2758,11 @@ div#output-terminal-container{
             left: 0;
             right: 0;
             bottom: 0;
+        }
+        &.full-height {
+            height: 100%;
+            top: 0;
+            bottom: auto;
         }
     }
 }

@@ -7,11 +7,12 @@ module.exports = BaseView.extend({
   className: 'popover fade bottom',
   events: {
     'click' : 'stopPropagation',
-    'submit form'  : 'submitRunOption',
-    'change input' : 'updateRunOption',
-    'keyup input'  : 'keyupUpdateRunOption',
     'click .close' : 'hide',
-    'click .toggle-group label' : 'toggleOutputViews'
+    'submit form'  : 'submitRunOption',
+    'change input[type=text]' : 'updateRunOption',
+    'keyup input[type=text]'  : 'keyupUpdateRunOption',
+    'click .toggle-group label' : 'toggleOutputViews',
+    'change input[type=radio]' : 'updateOutputFormat'
   },
   postInitialize: function () {
     this.keyupUpdateRunOption = _.debounce(this.keyupUpdateRunOption.bind(this), 150);
@@ -107,6 +108,13 @@ module.exports = BaseView.extend({
       .addClass('active')
       .siblings()
       .removeClass('active');
+  },
+  updateOutputFormat: function (evt) {
+    var $input = $(evt.currentTarget);
+    var output_format = $input.val() || null;
+    var opts = utils.cbOpts(this.showIfError, this);
+    opts.patch = true;
+    this.model.save({output_format:output_format}, opts);
   }
 });
 

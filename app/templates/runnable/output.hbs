@@ -1,4 +1,14 @@
 {{view "app_user" model=user}}
+{{#unless container.attributes.output_format}}
 {{view "web_navigation" model=container}}
 {{view "web" model=container}}
 {{view "tail" model=container}}
+{{else}}
+{{#if_eq container.attributes.output_format compare='web'}}
+{{view "web_navigation" model=container}}
+{{view "web" model=container classname="full-height"}}
+{{/if_eq}}
+{{#if_eq container.attributes.output_format compare='terminal'}}
+{{view "tail" model=container classname="full-height"}}
+{{/if_eq}}
+{{/unless}}

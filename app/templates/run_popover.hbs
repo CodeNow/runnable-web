@@ -22,17 +22,17 @@
     <label class="active">
       <div class="sprite-icons-output"></div>
       Web & Terminal
-      <input type="radio" name="output-views" checked>
+      <input type="radio" name="output_format" value="" {{#unless model.attributes.output_format}}checked{{/unless}}>
     </label>
     <label>
       <div class="sprite-icons-output"></div>
       Only Web
-      <input type="radio" name="output-views">
+      <input type="radio" name="output_format" value="web" {{#if_eq model.attributes.output_format compare="web"}}checked{{/if_eq}}>
     </label>
     <label>
       <div class="sprite-icons-output"></div>
       Only Terminal
-      <input type="radio" name="output-views">
+      <input type="radio" name="output_format" value="terminal" {{#if_eq model.attributes.output_format compare="terminal"}}checked{{/if_eq}}>
     </label>
   </form>
 </div>
