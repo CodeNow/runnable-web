@@ -210,7 +210,7 @@
 
 #output-results-container {
   h1 {
-    @include animation(loaderText 1.5s forwards);
+    @include animation(loaderText 0.2s forwards);
     color: #999;
     margin: 0;
     text-shadow: none;
