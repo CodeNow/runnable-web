@@ -12,35 +12,35 @@
       <span class="description">My actual name</span>
     </h1>
   </div>
-  <ul id="tags-content" class="rows">
-  {{view "dashboard_item_view"}}
+
+  <div class="row" id="profile-content-filters">
+    <div class="btn-group">
+      <button class="btn silver active">Published</button>
+      <button class="btn silver">Drafts</button>
+    </div>
+    <button type="button" class="dropdown">
+      <div class="filter-option pull-left">Recent</div>&nbsp;
+      <div class="caret"></div>
+      <select>
+        <option value="Copies">Copies</option>
+        <option value="Recent">Recent</option>
+        <option value="Runs">Runs</option>
+        <option value="Views">Views</option>
+      </select>
+    </button>
+  </div>
+
+  <ul id="profile-content" class="row">
+{{!--     <li>
+      <div class="btn-group">
+        <button class="btn silver active">Published</button>
+        <button class="btn silver">Drafts</button>
+      </div>
+    </li> --}}
+    {{view "dashboard_item_view"}}
+    {{view "dashboard_item_view"}}
+    {{view "dashboard_item_view"}}
   </ul>
 </section>
-
-<!--
-<div class="container">
-  <h1>Dashboard</h1>
-  <ul class="nav nav-tabs">
-    {{#if verifiedUser}}
-    <li{{#if publishedActive}} class="active"{{/if}}>
-      <a href="#published">Published</a>
-    </li>
-    {{/if}}
-    <li{{#if draftsActive}} class="active"{{/if}}>
-      <a href="#drafts" class="selected">Drafts</a>
-    </li>
-  </ul>
-  <div class="tab-content">
-    {{#if verifiedUser}}
-    <div class="tab-pane fade{{#if publishedActive}} active in{{/if}}" id="published">
-      {{view "published_table" collection=published}}
-    </div>
-    {{/if}}
-    <div class="tab-pane fade{{#if draftsActive}} active in{{/if}}" id="drafts">
-      {{view "drafts_table" collection=drafts}}
-    </div>
-  </div>
-</div>
--->
 
 {{view "footer_view" model=user context=.}}

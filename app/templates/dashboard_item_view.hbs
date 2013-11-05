@@ -1,22 +1,22 @@
 <h3>
-  <a href="/{{_id}}/{{urlFriendly name}}">
-    {{name}}
+  <a href="#">
+    Using Hypercubed/frontman
   </a>
 </h3>
 <p>
-  {{#unless ../novotes}}
   <span class="vote-up">
-    <span>{{votes}}</span>
+    <span>123</span>
   </span>
   &bull;
-  {{/unless}}
-  {{view "runnable_item_owner" model=../model.owner model_id=owner model_name='user' created=created}}
-  {{#if tags.length}}
+  <span>Published 3 months ago</span>
   &bull;
   <span class="tags">
-    {{#each tags}}
-    {{view "tag_link" name=name}}
-    {{/each}}
+    <a href="/Node.js" data-view="tag_link" data-name="Node.js">
+      <img class="display-none" data-view="channel_image" data-name="Node.js" data-tag="true" data-height="12" data-width="12">
+Node.js
+    </a>
+    <a href="/front matter" data-view="tag_link" data-name="front matter">
+    front matter
+    </a>
   </span>
-  {{/if}}
 </p>

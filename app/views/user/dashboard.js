@@ -4,9 +4,10 @@ var utils = require('../../utils');
 
 module.exports = BaseView.extend({
   events: {
-    'click .nav-tabs a' : 'clickTab',
+    'click .nav-tabs a'       : 'clickTab',
     'click .delete-published' : 'deletePublished',
-    'click .delete-drafts'    : 'deleteDrafts'
+    'click .delete-drafts'    : 'deleteDrafts',
+    'change select'           : 'reSort'
   },
   clickTab: function (evt) {
     evt.preventDefault();
@@ -21,6 +22,9 @@ module.exports = BaseView.extend({
     opts.draftsActive = !opts.verifiedUser || utils.isCurrentURL(this.app, '/me/drafts');
     opts.publishedActive = !opts.draftsActive;
     return this.options;
+  },
+  reSort: function () {
+    this.$('.filter-option').text($('select')[0].value);
   }
 });
 
