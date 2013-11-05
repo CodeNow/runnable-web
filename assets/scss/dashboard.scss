@@ -46,14 +46,17 @@
     }
 
     .dropdown {
-        background: none;
-        @include box-shadow(none);
-        border: 1px solid #bbb;
-        color: #bbb;
-        font-size: 12px;
-        font-weight: bold;
-        margin-left: 10px;
-        width: 82px;
+        
+        button {
+            background: none;
+            @include box-shadow(none);
+            border: 1px solid #bbb;
+            color: #bbb;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+            width: 82px;
+        }
 
         .caret {
             border-top-color: #bbb;
