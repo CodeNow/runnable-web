@@ -20,20 +20,20 @@
   </form>
   <hr>
   <form class="form-group toggle-group clearfix">
-    <label class="active">
+    <label{{#unless model.attributes.output_format}} class="active"{{/unless}}>
       <div class="sprite-icons-output"></div>
       Web & Terminal
-      <input type="radio" name="output_format" value="" {{#unless model.attributes.output_format}}checked{{/unless}}>
+      <input type="radio" name="output_format" value=""{{#unless model.attributes.output_format}} checked{{/unless}}>
     </label>
-    <label>
+    <label{{#if_eq model.attributes.output_format compare="web"}} class="active"{{/if_eq}}>
       <div class="sprite-icons-output"></div>
       Only Web
-      <input type="radio" name="output_format" value="web" {{#if_eq model.attributes.output_format compare="web"}}checked{{/if_eq}}>
+      <input type="radio" name="output_format" value="web"{{#if_eq model.attributes.output_format compare="web"}} checked{{/if_eq}}>
     </label>
-    <label>
+    <label{{#if_eq model.attributes.output_format compare="terminal"}} class="active"{{/if_eq}}>
       <div class="sprite-icons-output"></div>
       Only Terminal
-      <input type="radio" name="output_format" value="terminal" {{#if_eq model.attributes.output_format compare="terminal"}}checked{{/if_eq}}>
+      <input type="radio" name="output_format" value="terminal"{{#if_eq model.attributes.output_format compare="terminal"}} checked{{/if_eq}}>
     </label>
   </form>
   {{else}}
