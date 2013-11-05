@@ -1,0 +1,30 @@
+#dashboard {
+
+      .icon-container {
+            background: #fff;
+            @include box-shadow(0 2px 3px rgba(0,0,0,0.3));
+            @include border-radius(50%);
+            display: inline-block;
+            float: left;
+            height: 60px;
+            margin-right: 5px;
+            overflow: hidden;
+            text-align: center;
+            width: 62px;
+
+            img {
+                @include border-radius(50%);
+                height: 40px;
+                margin: 10px 0;
+                width: 40px;
+            }
+      }
+
+      span:last-child {
+            color: #ababab;
+            display: block;
+            font-size: 15px;
+            margin-top: 6px;
+            text-indent: 2px;
+      }
+}

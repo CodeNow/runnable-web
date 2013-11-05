@@ -1,6 +1,23 @@
 {{view "app_user" model=user}}
 {{view "header_view" model=user context=.}}
 {{view "global_message"}}
+
+<section class="container" id="dashboard">
+  <div class="row">
+    <h1 class="page-title">
+      <div class="icon-container">
+        <img src="http://www.gravatar.com/avatar/5776cf8b02fedc16e69a131557be32cf?s=64" alt="erp" class="hoverZoomLink">
+      </div>
+      <span>Username</span>
+      <span class="description">My actual name</span>
+    </h1>
+  </div>
+  <ul id="tags-content" class="rows">
+  {{view "dashboard_item_view"}}
+  </ul>
+</section>
+
+<!--
 <div class="container">
   <h1>Dashboard</h1>
   <ul class="nav nav-tabs">
@@ -24,5 +41,6 @@
     </div>
   </div>
 </div>
+-->
 
 {{view "footer_view" model=user context=.}}
