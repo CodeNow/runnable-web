@@ -32,17 +32,7 @@ h2.page-title{
 #project-editor {
   position: static !important;
 }
-.overlay-loader{
-  display: none;
-}
-.overlay-loader {
-  .loader {
-    top: 40%;
-  }
-}
-.loading.overlay-loader{
-  display: block;
-}
+
 #output-results-container .loader{
   height: 80px;
   margin: -40px 0 0 -40px;
