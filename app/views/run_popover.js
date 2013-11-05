@@ -12,7 +12,7 @@ module.exports = BaseView.extend({
     'change input[type=text]' : 'updateRunOption',
     'keyup input'             : 'keyupUpdateRunOption',
     'click .toggle-group label' : 'toggleOutputViews',
-    'change input[type=radio]' : 'updateOutputFormat'
+    'change input[type=radio]'  : 'updateOutputFormat'
   },
   postInitialize: function () {
     this.keyupUpdateRunOption = _.debounce(this.keyupUpdateRunOption.bind(this), 150);
@@ -24,7 +24,7 @@ module.exports = BaseView.extend({
   },
   valueChanged: function ($input) {
     var modelValue = this.model.get($input.attr('name'));
-    var inputValue = $input.val();
+    var inputValue = $input.val().trim();
     return modelValue !== inputValue;
   },
   hidden: function () {
@@ -41,7 +41,7 @@ module.exports = BaseView.extend({
   updateRunOption: function (evt) {
     var $input = $(evt.currentTarget);
     var data = {};
-    data[$input.attr('name')] = $input.val();
+    data[$input.attr('name')] = $input.val().trim();
     console.log(data);
     var opts = utils.cbOpts(callback, this);
     opts.patch = true;

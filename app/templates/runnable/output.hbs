@@ -7,6 +7,7 @@
 {{#if_eq container.attributes.output_format compare='web'}}
 {{view "web_navigation" model=container}}
 {{view "web" model=container classname="full-height"}}
+{{view "tail" model=container classname="display-none"}} {{!necessary or build message will always show}}
 {{/if_eq}}
 {{#if_eq container.attributes.output_format compare='terminal'}}
 {{view "tail" model=container classname="full-height"}}
