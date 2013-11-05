@@ -1,4 +1,5 @@
 var BaseView = require('./base_view');
+var Super = BaseView.prototype;
 var utils = require('../utils');
 var _ = require('underscore');
 
@@ -17,6 +18,9 @@ module.exports = BaseView.extend({
   postInitialize: function () {
     this.keyupUpdateRunOption = _.debounce(this.keyupUpdateRunOption.bind(this), 150);
   },
+  postHydrate: function () {
+    this.boundHide = this.hide.bind(this);
+  },
   keyupUpdateRunOption: function (evt) {
     if (this.valueChanged($(evt.currentTarget))) {
       this.updateRunOption.apply(this, arguments);
@@ -33,10 +37,14 @@ module.exports = BaseView.extend({
   show: function () {
     this.$el.addClass('in');
     this.trigger('show');
+    setTimeout(function () {
+      $(document).once('click', this.boundHide);
+    }.bind(this), 0);
   },
   hide: function () {
     this.$el.removeClass('in');
     this.trigger('hide');
+    $(document).off('click', this.boundHide);
   },
   updateRunOption: function (evt) {
     var $input = $(evt.currentTarget);
@@ -115,6 +123,10 @@ module.exports = BaseView.extend({
     var opts = utils.cbOpts(this.showIfError, this);
     opts.patch = true;
     this.model.save({output_format:output_format}, opts);
+  },
+  remove: function () {
+    $(document).off('click', this.boundHide);
+    Super.remove.call(this);
   }
 });
 
