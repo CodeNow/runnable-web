@@ -11,7 +11,7 @@
       </div>
       {{view "runnable_description" model=container}}
       <div class="main-controls">
-        {{view "run_button" model=container collection=specifications context=.}}
+        {{view "dropdown_run_button" context=. editmode=true}}
         {{view "save_button" collection=defaultFiles}}
       </div>
     </div>

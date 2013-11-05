@@ -6,7 +6,7 @@ var noop = function () {};
 
 module.exports = EditorButtonView.extend({
   tagName: 'button',
-  className: 'green run-button',
+  className: 'btn green run-button',
   events: {
     'click' : 'click'
   },

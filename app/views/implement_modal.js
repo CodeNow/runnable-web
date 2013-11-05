@@ -13,9 +13,9 @@ marked.setOptions({
 module.exports = ModalView.extend({
   id: 'implement-modal',
   events: {
-    'submit form'     : 'submit',
-    'click .nav li a' : 'switchTab',
-    'click input[readonly]' : 'baseUrl',
+    'submit form'            : 'submit',
+    'click .nav li a'        : 'switchTab',
+    'click input[readonly]'  : 'baseUrl',
     'mouseover .url-popover' : 'showHint',
     'mouseout .url-popover'  : 'hideHint',
     'mouseover .keys-popover': 'showHint',

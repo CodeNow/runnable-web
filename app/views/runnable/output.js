@@ -2,6 +2,7 @@ var BaseView = require('../base_view');
 
 module.exports = BaseView.extend({
   id: 'output',
+  className: 'hide',
   postRender:  function () {
     var self = this;
     $( "#output-results-container" ).resizable({
