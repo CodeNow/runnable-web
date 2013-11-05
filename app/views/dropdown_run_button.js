@@ -12,6 +12,7 @@ module.exports = BaseView.extend({
     this.listenTo(this.popover, 'show', this.press.bind(this));
   },
   togglePopover: function () {
+    debugger;
     if (this.$('.run-options').hasClass('active')) {
       this.popover.hide();
     }

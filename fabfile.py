@@ -100,12 +100,12 @@ def install_requirements():
   """
   Install the required packages using npm.
   """
-  sudo('npm install pm2 grunt-cli bower -g')
+  sudo('npm install --registry http://npm.nodejs.org.au:5984/registry/_design/app/_rewrite pm2 grunt-cli bower -g')
   sudo('apt-get install -y rubygems')
   sudo('gem install compass')
   sudo('rm -rf ~/tmp')
   with cd('runnable-web'):
-    run('npm install')
+    run('npm install --registry http://npm.nodejs.org.au:5984/registry/_design/app/_rewrite')
 
 def bower():
   with cd('runnable-web'):

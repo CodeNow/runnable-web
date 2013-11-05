@@ -10,11 +10,11 @@ var Container = module.exports = Runnable.extend({
   },
   run: function (cb, ctx) {
     // if we aren't running, start
-    if (!this.get('running')) {
-      this.start(cb, ctx);
-    } else {
-      this.restart(cb, ctx);
-    }
+    // if (!this.get('running')) {
+    this.start(cb, ctx);
+    // } else {
+    //   this.restart(cb, ctx);
+    // }
   },
   stop: function (cb, ctx) {
     if (ctx) cb = cb.bind(ctx);

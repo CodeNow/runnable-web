@@ -9,8 +9,6 @@ module.exports = BaseView.extend({
   postRender: function () {
     this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
     this.options.termurl = this.options.boxurl + "/static/term.html";
-    // this.$('iframe').load(this.loading.bind(this, false));
-    // this.checkBoxUp();
     this.loading(true);
     this.listenToPostMessages();
     this.$('iframe').attr('src', this.options.termurl);
@@ -20,17 +18,6 @@ module.exports = BaseView.extend({
     this.options.termurl = this.options.boxurl + "/static/term.html";
     return this.options;
   },
-  // checkBoxUp: function () {
-  //   var self = this;
-  //   this.loading(true);
-  //   this.sock = new SockJS(this.options.boxurl+'/streams/log');
-  //   this.sock.onopen = this.loading.bind(this, false);
-  //   this.sock.onclose = function () {
-  //     self.loading(true);
-  //     self.sock.close();
-  //     self.checkBoxUp();
-  //   }
-  // },
   onPostMessage: function (message) {
     if (message.data === 'show:loader') {
       this.loading(true);

@@ -12,7 +12,8 @@
       </div>
       {{view "runnable_description" model=image}}
       <div class="main-controls">
-        {{view "dropdown_run_button" context=.}}
+        {{!view "dropdown_run_button" context=.}}
+        {{view "run_button" model=container collection=specifications context=.}}
         {{view "fork_button" collection=defaultFiles model=container}}
       </div>
     </div>
