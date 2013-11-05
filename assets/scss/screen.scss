@@ -1457,6 +1457,15 @@ progress {
             margin-left: 10px;
         }
 
+        .green {
+
+            &:hover,
+            &:focus {
+                color: #fff;
+            }
+        }
+
+        //if run options
         .btn-group {
 
             > button {
