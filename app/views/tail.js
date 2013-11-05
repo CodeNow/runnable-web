@@ -45,6 +45,7 @@ module.exports = BaseView.extend({
     }
     else if (message.data.indexOf('stream:') === 0) {
       this.stream = message.data.replace('stream:', '');
+      this.showParentEl();
       if (this.stream === 'build') {
         dispatch.trigger('toggle:buildMessage', true);
       }
@@ -59,6 +60,9 @@ module.exports = BaseView.extend({
         this.handleCodePostMessage(json);
       }
     }
+  },
+  showParentEl: function () {
+    this.parentView.$el.removeClass('hide');
   },
   handleCodePostMessage: function (json) {
     if (json.code+'' === '0' && this.stream === 'build') {

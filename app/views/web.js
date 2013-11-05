@@ -27,12 +27,14 @@ module.exports = BaseView.extend({
     }
   },
   postRender: function () {
-    this.listenTo(this.app.dispatch, 'change:url', this.setUrl.bind(this));
-    this.$iframe = this.$('iframe');
     // iframe loader
-    this.loading(true);
-    this.$iframe.load(this.loading.bind(this, false)); // load event remains attached, for subsequent page loads
-    this.appUrl();
+    if (!this.options.buildmessage) {
+      this.listenTo(this.app.dispatch, 'change:url', this.setUrl.bind(this));
+      this.$iframe = this.$('iframe');
+      this.loading(true);
+      this.$iframe.load(this.loading.bind(this, false)); // load event remains attached, for subsequent page loads
+      this.appUrl();
+    }
   },
   refresh: function () {
     this.$iframe.attr('src', this.$iframe.attr('src'));
