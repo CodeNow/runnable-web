@@ -25,7 +25,7 @@ module.exports = RendrBase.extend({
     var opts = utils.cbOpts(cb, ctx);
     opts.type = "POST";
     opts.data = "";
-    opts.url = utils.pathJoin(_.result(this, 'urlRoot'), attr);
+    opts.url = utils.pathJoin(_.result(this, 'url'), 'stats', attr);
     this.save({}, opts);
   }
 });
