@@ -2,51 +2,56 @@
 {{view "header_view" model=user context=.}}
 {{view "global_message"}}
 
-<section class="container" id="dashboard">
-  <div class="row">
-    <h1 class="page-title">
-      <div class="icon-container">
-        <img src="http://www.gravatar.com/avatar/5776cf8b02fedc16e69a131557be32cf?s=64" alt="erp" class="hoverZoomLink">
-      </div>
-      <span>Username</span>
-      <span class="description">My actual name</span>
-    </h1>
-  </div>
+<div class="container">
+  <section id="profile">
+    <img src="http://www.gravatar.com/avatar/5776cf8b02fedc16e69a131557be32cf?s=64" alt="erp" class="hoverZoomLink">
+    <h1>Carl_Drogo</h1>
+    <div class="edit-inline">
+      <input value="Khal Drogo" placeholder="Full Name" id="full-name">
+      <span class="glyphicon glyphicon-pencil"></span>
+    </div>
+    <div class="edit-inline">
+      <input value="5 years running" disabled>
+    </div>
+    <hr>
+    <div class="edit-inline">
+      <span class="glyphicon glyphicon-envelope"></span>
+      <input value="KhalD@Runnable.com" placeholder="Email">
+      <span class="glyphicon glyphicon-pencil"></span>
+    </div>
+    <div class="edit-inline">
+      <span class="glyphicon glyphicon-briefcase"></span>
+      <input value="Runnable" placeholder="Company">
+      <span class="glyphicon glyphicon-pencil"></span>
+    </div>
+  </section>
 
-  <div class="row" id="profile-content-filters">
+  <section id="dashboard">
     <div class="dropdown">
       <button type="button" class="dropdown">
-        <div class="filter-option pull-left">Recent</div>&nbsp;
+        <div class="filter-option pull-left">Recent </div>
         <div class="caret"></div>
       </button>
       <select>
-        <option value="Copies">Copies</option>
-        <option value="Recent">Recent</option>
-        <option value="Runs">Runs</option>
-        <option value="Views">Views</option>
+        <option value="Copies">Copies
+        <option value="Recent">Recent
+        <option value="Runs">Runs
+        <option value="Views">Views
       </select>
     </div>
     <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#">Published</a>
-      </li>
-      <li>
-        <a href="#">Drafts</a>
-      </li>
+      <li class="active"><a href="#">Published</a>
+      <li><a href="#">Drafts</a>
     </ul>
-  </div>
-
-  <ul id="profile-content" class="row">
-{{!--     <li>
-      <div class="btn-group">
-        <button class="btn silver active">Published</button>
-        <button class="btn silver">Drafts</button>
-      </div>
-    </li> --}}
-    {{view "dashboard_item_view"}}
-    {{view "dashboard_item_view"}}
-    {{view "dashboard_item_view"}}
-  </ul>
-</section>
+    <ul id="profile-content">
+      {{view "dashboard_item_view"}}
+      {{view "dashboard_item_view"}}
+      {{view "dashboard_item_view"}}
+      {{view "dashboard_item_view"}}
+      {{view "dashboard_item_view"}}
+      {{view "dashboard_item_view"}}
+    </ul>
+  </section>
+</div>
 
 {{view "footer_view" model=user context=.}}
