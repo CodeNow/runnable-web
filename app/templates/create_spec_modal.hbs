@@ -6,7 +6,6 @@
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h4 class="modal-title">{{header}}</h4>
     </div><!--/.modal-header-->
-
       {{#if_eq step compare=1}}
       <form class="name-form step1">
         <div class="modal-body">
@@ -18,7 +17,9 @@
         </div><!--/.modal-body-->
 
         <div class="modal-footer">
+          {{#unless nogoback}}
           <a href="javascript:" class="back">Go Back</a>
+          {{/unless}}
           <button class="orange">Next</button>
         </div><!--/.modal-footer-->
 

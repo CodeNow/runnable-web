@@ -40,7 +40,9 @@
 
       <div class="modal-footer">
         {{#unless runbutton}}
+        {{#unless nogoback}}
         <a class="prev" href="javascript:">Go Back</a>
+        {{/unless}}
         {{/unless}}
         <button name="save" class="orange">{{savetext}}</button>
       </div><!--/.modal-footer-->

@@ -40,8 +40,9 @@ module.exports = BaseView.extend({
   },
   openImplementModal: function (evt) {
     if (evt) evt.preventDefault();
-
-    var implementModal = new ImplementModal(this.options);
+    var opts = _.clone(this.options);
+    opts.nogoback = true;
+    var implementModal = new ImplementModal(opts);
     implementModal.open();
 
     return implementModal;
