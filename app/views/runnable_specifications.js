@@ -42,15 +42,16 @@ module.exports = BaseView.extend({
   addSpec: function (evt) {
     evt&&evt.preventDefault();
     var opts = _.pick(this.options, 'model', 'collection', 'app');
+    opts.nogoback = true;
     (new AddSpecModal(opts)).open(); //model:container, collection:specifications
   },
   openEditSpecModal: function () {
     var CreateSpecModal = require('./create_spec_modal');
     var opts = _.pick(this.options, 'app', 'model', 'collection');
     opts.editSpecification = this.options.specification;
+    opts.nogoback = true;
     var modal = new CreateSpecModal(opts);
     if (modal.canEdit()) {
-      this.close();
       modal.open()
     }
   },

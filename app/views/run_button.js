@@ -52,7 +52,7 @@ module.exports = EditorButtonView.extend({
   },
   openImplementModal: function () {
     var opts = {
-      header: 'Before you Run  Please Enter Required Keys for {{name}}',
+      header: 'Before you Run Please Enter Required Keys for {{name}}',
       savetext: 'Save',
       onSaveSuccess: this.saveImplementationSuccess.bind(this),
       runbutton: this

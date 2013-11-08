@@ -164,7 +164,9 @@
         }
     }
 }
-
+.popover-content {
+    color: #333;
+}
 @include keyframes(blinker) {
     from {opacity: 1;}
     to {opacity: 0;}

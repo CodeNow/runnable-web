@@ -26,11 +26,10 @@
             <input id="{{.}}" name="{{.}}" value="{{findWhere ../implementation.attributes.requirements name=.}}" class="form-control" required>
           </div>
           {{/each}}
-
-          <hr>
-
-          <p>Base URL <a href="javascript:void(0);" class="url-popover">(?)</a></p>
-          <input readonly value="{{invoke implementation method='appUrl'}}" class="form-control">
+          <div class="form-group">
+            <label>BASE_URL <a href="javascript:void(0);" class="url-popover">(?)</a></label>
+            <input readonly value="{{invoke implementation method='appUrl'}}" class="form-control">
+          </div>
         </div><!--/.implement-env-tab-->
 
         <div id="implement-instructions-tab">
@@ -41,7 +40,9 @@
 
       <div class="modal-footer">
         {{#unless runbutton}}
+        {{#unless nogoback}}
         <a class="prev" href="javascript:">Go Back</a>
+        {{/unless}}
         {{/unless}}
         <button name="save" class="orange">{{savetext}}</button>
       </div><!--/.modal-footer-->

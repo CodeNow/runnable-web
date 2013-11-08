@@ -25,7 +25,7 @@ module.exports = ModalView.extend({
   postRender: function () {
     Super.postRender.apply(this, arguments);
     this.$('.url-popover').popover({
-      content: 'Use this as the base for a callback URL or redirect URL. This can be used as the permanent url of this application.',
+      content: 'Use this as the base for a callback URL or redirect URL. This is the permanent URL for the application.',
       show: false
     });
     this.$('.keys-popover').popover({

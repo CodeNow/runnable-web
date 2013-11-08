@@ -356,5 +356,6 @@ var utils = module.exports = {
     var s4 = utils.s4;
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
            s4() + '-' + s4() + s4() + s4();
-  }
+  },
+  noop: function () {}
 };
