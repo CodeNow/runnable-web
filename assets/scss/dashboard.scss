@@ -8,14 +8,60 @@
 #profile {
     width: 25%;
 
-    > img {
-        border: 20px solid #fff;
-        @include border-radius(50%);
-        @include box-shadow(0 2px 3px rgba(0,0,0,0.3));
-        display: block;
-        height: 50%;
-        margin: 20px 0 0;
-        width: 50%;
+    > .gravitar {
+        margin-top: 20px;
+        position: relative;
+        width: 100%;
+
+        > img {
+            border: 20px solid #fff;
+            @include border-radius(50%);
+            @include box-shadow(0 2px 3px rgba(0,0,0,0.3));
+            display: block;
+            width: 50%;
+        }
+
+        > a {
+            background: #000;
+            @include border-radius(50%);
+            color: #fff;
+            display: block;
+            font-size: 10px;
+            height: 100%;
+            line-height: 10;
+            opacity: 0;
+            position: absolute;
+                top: 0;
+            text-align: center;
+            text-decoration: none;
+            @include transition(opacity 0.2s);
+            width: 50%;
+
+            &:hover {
+                opacity: 0.75;
+            }
+
+            @include media(md) {
+                font-size: 12px;
+            }
+
+            @include media(lg) {
+                font-size: 14px;
+            }
+        }
+
+        span {
+            color: rgba(255,255,255,0.5);
+            font-size: 9px;
+
+            &:hover {
+                color: #fff;
+            }
+
+            @include media(md) {
+                font-size: 12px;
+            }
+        }
     }
 
     > h1 {
@@ -33,6 +79,7 @@
         margin: 4px 0;
         position: relative;
         width: 220px;
+        width: calc(100% - 40px);
 
         > span {
             color: #bbb;
@@ -63,8 +110,12 @@
         cursor: pointer;
         display: block;
         font-size: 15px;
+        overflow: hidden;
         position: relative;
+        text-overflow: ellipsis;
         width: 200px;
+        width: calc(100% - 20px);
+        white-space: nowrap;
 
         &:focus {
             border-bottom: 1px dashed $purple-light;

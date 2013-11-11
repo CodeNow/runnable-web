@@ -26,9 +26,9 @@ module.exports.add = function (Handlebars) {
     return new Handlebars.SafeString(str);
   });
 
-  Handlebars.registerHelper('dateAgo', function (str) {
+  Handlebars.registerHelper('dateAgo', function (str, noAgo) {
     var moment = require('moment');
-    str = moment(str).fromNow();
+    str = moment(str).fromNow(noAgo);
     return new Handlebars.SafeString(str);
   });
 
