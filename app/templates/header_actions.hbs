@@ -11,9 +11,9 @@
   </a>
   <ul class="dropdown-menu">
     {{#if_result model method="isVerified"}}
-    <li><a href="#">Profile</a></li>
-    <li><a href="/me/published">Published Runnables</a></li>
-    <li><a href="/me/drafts">Draft Runnables</a></li>
+    <li><a href="/me">Profile</a></li>
+    {{! <li><a href="/me/published">Published Runnables</a></li>
+    <li><a href="/me/drafts">Draft Runnables</a></li> }}
     {{else}}
     <li><a href="/me/drafts">Saved Runnables</a></li>
     {{/if_result}}

@@ -4,7 +4,7 @@
 
 <div class="container">
   <section id="profile">
-    {{#with user.attributes}}
+    {{#with model.attributes}}
     <img src="{{gravitar}}?s=128" alt="{{username}}" alt="erp" class="hoverZoomLink">
     <h1>{{username}}</h1>
     {{! <div class="edit-inline">
@@ -46,12 +46,12 @@
       <li><a href="#">Drafts</a>
     </ul>
     <ul id="profile-content">
-      {{#each published.models}}
+      {{#each published}}
       {{view "dashboard_item_view" model=.}}
       {{/each}}
     </ul>
     <ul id="profile-content">
-      {{#each drafts.models}}
+      {{#each drafts}}
       {{view "dashboard_item_view" model=.}}
       {{/each}}
     </ul>

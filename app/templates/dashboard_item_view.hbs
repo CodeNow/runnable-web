@@ -1,15 +1,16 @@
+{{#with model.attributes}}
 <h3>
-  <a href="#">Using Hypercubed/frontman</a>
+  <a href="#">{{name}}</a>
 </h3>
 <p>
-  <span><span class="glyphicon glyphicon-play"></span> 10k</span>&bull;
-  <span><span class="glyphicon glyphicon-eye-open"></span> 22k</span>&bull;
-  <span><span class="glyphicon glyphicon-copyright-mark"></span> 102</span>&bull;
-  <span>Published 3 months ago</span>&bull;
+  <span><span class="glyphicon glyphicon-play"></span> {{runs}}</span>&bull;
+  <span><span class="glyphicon glyphicon-eye-open"></span> {{views}}</span>&bull;
+  <span><span class="glyphicon glyphicon-copyright-mark"></span> {{copies}}</span>&bull;
+  <span>{{dateAgo created}}</span>&bull;
   <span class="tags">
-    <a href="/Node.js" data-view="tag_link" data-name="Node.js">
-      <img class="display-none" data-view="channel_image" data-name="Node.js" data-tag="true" data-height="12" data-width="12">Node.js
-    </a>
-    <a href="/front matter" data-view="tag_link" data-name="front matter">front matter</a>
+    {{#each tags}}
+    {{view "tag_link" name=name}}
+    {{/each}}
   </span>
 </p>
+{{/with}}
