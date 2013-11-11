@@ -2,7 +2,7 @@ var Runnable = require('../models/runnable');
 var Base = require('./base');
 
 module.exports = Base.extend({
-  model: Runnable
+  model: Runnable,
   comparator: 'created',
   sortByCreated: function () {
     return this.sortByAttr('created');
