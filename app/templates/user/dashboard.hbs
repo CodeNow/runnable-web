@@ -2,34 +2,8 @@
 {{view "header_view" model=user context=.}}
 {{view "global_message"}}
 
-<main class="container">
-  <section id="profile">
-    {{#with user.attributes}}
-    <div class="gravitar">
-        <img src="{{gravitar}}?s=128" alt="{{username}}">
-        <a href="http://en.gravatar.com/" target="_blank">Change Gravitar <span class="glyphicon glyphicon-new-window"></span></a>
-    </div>
-    <h1>{{username}}</h1>
-    {{! <div class="edit-inline">
-      <input value="Khal Drogo" placeholder="Full Name" id="full-name">
-      <span class="glyphicon glyphicon-pencil"></span>
-    </div> }}
-    <div class="edit-inline">
-      <input value="{{dateAgo created true}} running" disabled>
-    </div>
-    {{! <hr>
-    <div class="edit-inline">
-      <span class="glyphicon glyphicon-envelope"></span>
-      <input value="KhalD@Runnable.com" placeholder="Email">
-      <span class="glyphicon glyphicon-pencil"></span>
-    </div>
-    <div class="edit-inline">
-      <span class="glyphicon glyphicon-briefcase"></span>
-      <input value="Runnable" placeholder="Company">
-      <span class="glyphicon glyphicon-pencil"></span>
-    </div> }}
-    {{/with}}
-  </section>
+<div class="container">
+  {{view "dashboard_profile" model=user}}
 
   <section id="dashboard">
     <div class="dropdown">
@@ -49,14 +23,10 @@
       <li><a href="#"><span>2</span> Drafts</a>
     </ul>
     <ul id="profile-content">
-      {{#each published.models}}
-      {{view "dashboard_item_view" model=.}}
-      {{/each}}
+      {{view "dashboard_runnables" collection=published}}
     </ul>
     <ul id="profile-content">
-      {{#each drafts.models}}
-      {{view "dashboard_item_view" model=.}}
-      {{/each}}
+      {{view "dashboard_runnables" collection=drafts}}
     </ul>
   </section>
 </main>

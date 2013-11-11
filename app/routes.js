@@ -18,8 +18,8 @@ module.exports = function(match) {
   match('new/:from',            'runnable#newFrom');
   match('me',                   'user#published');
   match('u/:username',          'user#profile');
-  match('me/drafts',            'user#drafts');
-  match('me/published',         'user#published');
+  match('me/drafts',            'user#dashboard');
+  match('me/published',         'user#dashboard');
   match('me/:_id',              'runnable#container');
   match('c/:category',          'channel#category');
   if (lock) {
