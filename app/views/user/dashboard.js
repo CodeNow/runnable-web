@@ -8,7 +8,7 @@ module.exports = BaseView.extend({
     'click .delete-published' : 'deletePublished',
     'click .delete-drafts'    : 'deleteDrafts',
     'change select'           : 'reSort',
-    'click .edit-inline'      : 'editInline'
+    'click .edit-inline' : 'editInline'
   },
   clickTab: function (evt) {
     evt.preventDefault();
