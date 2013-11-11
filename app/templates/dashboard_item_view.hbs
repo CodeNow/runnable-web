@@ -1,17 +1,23 @@
-{{#with model.attributes}}
 <h3>
+  {{#with model.attributes}}
   <a href="#">{{name}}</a>
+  {{/with}}
 </h3>
 <p>
+  {{#unless nostats}}
+  {{#with model.attributes}}
   <span><span class="glyphicon glyphicon-play"></span> {{runs}}</span>&bull;
   <span><span class="glyphicon glyphicon-eye-open"></span> {{views}}</span>&bull;
   <span><span class="glyphicon glyphicon-copyright-mark"></span> {{copies}}</span>&bull;
-  <span>{{dateAgo created}}</span>&bull;
+  {{/with}}
+  {{/unless}}
+  <span>Created {{dateAgo model.attributes.created}}</span>&bull;
   <span class="tags">
-    {{#each tags}}
+    {{#each model.attributes.tags}}
     {{view "tag_link" name=name}}
     {{/each}}
   </span>
+  {{#if editmode}}
   <button type="button">x</button>
+  {{/if}}
 </p>
-{{/with}}

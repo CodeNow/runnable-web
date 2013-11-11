@@ -32,8 +32,8 @@ module.exports = {
       if (err) return callback(err);
       if (!results.user.isRegistered()) return self.redirectTo('/');
       // no error, registered user
-      results.published.sortByCreated();
-      results.drafts.sortByCreated();
+      results.published.sortByAttr('-created');
+      results.drafts.sortByAttr('-created');
       callback(null, addSEO(results));
     });
     function addSEO (results) {

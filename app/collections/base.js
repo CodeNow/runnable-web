@@ -28,6 +28,16 @@ module.exports = RendrBase.extend({
     model = Super._prepareModel.call(this, attrs, options);
     model.app = this.app;
     return model;
+  },
+  sortByAttr: function (attr) {
+    if (attr.indexOf('-') === 0) {
+      descending = true;
+      attr = attr.slice(1);
+    }
+    this.comparator = attr;
+    this.sort();
+    if (descending) this.models.reverse();
+    return this;
   }
 });
 

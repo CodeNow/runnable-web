@@ -3,7 +3,7 @@
 {{view "global_message"}}
 
 <div class="container">
-  {{view "dashboard_profile" model=user}}
+  {{view "dashboard_profile" model=user editmode=true}}
 
   <section id="dashboard">
     <div class="dropdown">
@@ -12,21 +12,21 @@
         <div class="caret"></div>
       </button>
       <select>
+        <option value="Recent" selected>Recent
         <option value="Copies">Copies
-        <option value="Recent">Recent
         <option value="Runs">Runs
         <option value="Views">Views
       </select>
     </div>
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#"><span>25</span> Published</a>
-      <li><a href="#"><span>2</span> Drafts</a>
+      <li class="active"><a href="#"><span>{{published.length}}</span> Published</a>
+      <li><a href="#"><span>{{drafts.length}}</span> Drafts</a>
     </ul>
     <ul id="profile-content">
-      {{view "dashboard_runnables" collection=published}}
+      {{view "dashboard_runnables" collection=published editmode=true}}
     </ul>
     <ul id="profile-content">
-      {{view "dashboard_runnables" collection=drafts}}
+      {{view "dashboard_runnables" collection=drafts editmode=true}}
     </ul>
   </section>
 </main>

@@ -7,8 +7,7 @@ module.exports = BaseView.extend({
     'click .nav-tabs a'       : 'clickTab',
     'click .delete-published' : 'deletePublished',
     'click .delete-drafts'    : 'deleteDrafts',
-    'change select'           : 'reSort',
-    'click .edit-inline' : 'editInline'
+    'change select'           : 'reSort'
   },
   clickTab: function (evt) {
     evt.preventDefault();
@@ -26,11 +25,6 @@ module.exports = BaseView.extend({
   },
   reSort: function () {
     this.$('.filter-option').text($('select')[0].value);
-  },
-  editInline: function (evt) {
-    var $thisInput = this.$(evt.currentTarget)
-      .children('input')
-      .focus();
   }
 });
 

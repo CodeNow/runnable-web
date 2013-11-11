@@ -16,8 +16,8 @@ module.exports = function(match) {
   // match('blob',                 'home#blob');
   match('new',                  'runnable#new');
   match('new/:from',            'runnable#newFrom');
-  match('me',                   'user#published');
   match('u/:username',          'user#profile');
+  match('me',                   'user#dashboard');
   match('me/drafts',            'user#dashboard');
   match('me/published',         'user#dashboard');
   match('me/:_id',              'runnable#container');
