@@ -18,9 +18,7 @@
         <option value="Views">Views
       </select>
     </div>
-    <ul class="profile-content">
-      {{view "dashboard_runnables" collection=published editmode=true}}
-    </ul>
+    {{view "dashboard_runnables" classname="dashboard-runnables" collection=published editmode=false}}
   </section>
 </main>
 

@@ -13,13 +13,13 @@
   {{else}}
   <span>Created {{dateAgo created}}</span>&bull;
   {{/if}}
-  {{/with}}
   <span class="tags">
-    {{#each model.attributes.tags}}
+    {{#each tags}}
     {{view "tag_link" name=name}}
     {{/each}}
   </span>
-  {{#if editmode}}
-  <button type="button">x</button>
+  {{#if ../editmode}}
+  <button class="delete" type="button">x</button>
   {{/if}}
+  {{/with}}
 </p>

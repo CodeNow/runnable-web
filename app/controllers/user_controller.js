@@ -3,9 +3,14 @@ var helpers = require('./helpers');
 var fetchWithMe = helpers.fetchWithMe;
 var formatTitle = helpers.formatTitle;
 var canonical = helpers.canonical;
+var utils = require('../utils');
 
 module.exports = {
   dashboard: function(params, callback) {
+    var app = this.app;
+    if (!utils.isCurrentURL(app, '/me/published') && !utils.isCurrentURL(app, '/me/drafts')) {
+      return this.redirectTo('/me/drafts');
+    }
     var self = this;
     var spec = {
       user    : {
@@ -31,6 +36,8 @@ module.exports = {
     fetchWithMe.call(this, spec, function (err, results) {
       if (err) return callback(err);
       if (!results.user.isRegistered()) return self.redirectTo('/');
+      if (utils.isCurrentURL(app, '/me/published') && !results.user.isVerified)
+        return self.redirectTo('/me/drafts');
       // no error, registered user
       results.published.sortByAttr('-created');
       results.drafts.sortByAttr('-created');
@@ -63,7 +70,8 @@ module.exports = {
     var self = this;
     fetch.call(this, spec, function (err, results) {
       if (err) return callback(err);
-      if (results.users.length === 0) return callback({status:404});
+      if (results.users.length === 0)
+        return callback({status:404});
       results.user = results.users.models[0];
       delete results.users;
       callback(null, addSEO(results));

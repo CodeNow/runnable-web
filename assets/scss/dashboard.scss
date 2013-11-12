@@ -342,7 +342,7 @@
                         position: absolute;
                             top: 32%;
                             left: 0;
-                        @include transition-transforms(0.25s linear);
+                        // @include transition-transforms(0.25s linear);
                         width: 0;
                     }
                 }

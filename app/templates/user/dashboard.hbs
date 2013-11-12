@@ -18,16 +18,20 @@
         <option value="Views">Views
       </select>
     </div>
+    {{#if verifiedUser}}
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#"><span>{{published.length}}</span> Published</a>
-      <li><a href="#"><span>{{drafts.length}}</span> Drafts</a>
+      <li {{#if publishedActive}}class="active"{{/if}}><a href="#published"><span>{{published.length}}</span> Published</a>
+      <li {{#if draftsActive}}class="active"{{/if}}><a href="#drafts"><span>{{drafts.length}}</span> Drafts</a>
     </ul>
-    <ul class="dashboard-runnables">
-      {{view "dashboard_runnables" collection=published}}
-    </ul>
-    <ul class="dashboard-runnables">
-      {{view "dashboard_runnables" collection=drafts}}
-    </ul>
+    <div class="tab-content">
+      <div id="published" class="tab-pane{{#if publishedActive}} active in{{/if}}">
+        {{view "dashboard_runnables" classname="dashboard-runnables" collection=published editmode=true}}
+      </div>
+      {{/if}}
+      <div id="drafts" class="tab-pane{{#if draftsActive}} active in{{/if}}">
+        {{view "dashboard_runnables" classname="dashboard-runnables" collection=drafts editmode=true}}
+      </div>
+    </div>
   </section>
 </main>
 
