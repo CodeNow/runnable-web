@@ -2015,58 +2015,91 @@ div#output-terminal-container{
     #about-logos {
         text-align: center;
         padding: 75px 0;
+
         .logo {
             display: inline-block;
-            margin: 0 28px 60px 28px;
-            &.engadget {
-                background: url(../images/sprite-engadget.png);
-                @include background-image-retina('../images/sprite-engadget@2x.png');
-                @include background-size(100% auto);
-                width: 150px;
-                height: 51px;
+            background: url(/images/about-press.svg);
+            height: 100px;
+            position: relative;
+            margin: 0 28px 28px;
+            @include transition-transforms(0.2s);
+            width: 150px;
+
+            &.venturebeat {
+                background-position: 0 0;
             }
+
+            &.forbes {
+                background-position: 300px 0;
+            }
+
+            &.techcrunch {
+                background-position: 150px 0;
+            }
+
+            &.wired {
+                background-position: 0 100px;
+            }
+
+            &.gigaom {
+                background-position: 300px 100px;
+            }
+
+            &.pandodaily {
+                background-position: 150px 100px;
+            }
+
             &:hover {
-                background-position: 0 -100%;
+                @include transform-3d(0,2px,0);
             }
         }
+
         blockquote {
             border: none;
-            margin: 0;
-            padding: 0;
             font-family: Georgia, serif;
             font-style: italic;
-            color: $purple-light;
+            margin: 0;
+            padding: 0;
+
             p {
-                position: relative;
                 font-size: 24px;
-                &:before {
-                    content: "“";
-                    position: absolute;
-                    top: -40px;
-                    left: -55px;
-                    font-size: 120px;
-                    color: #E1E3E5;
-                }
+                color: $link-on;
+                position: relative;
+
+                &:before,
                 &:after {
-                    content: "”";
-                    position: absolute;
-                    top: 40px;
-                    right: -35px;
-                    font-size: 120px;
                     color: #E1E3E5;
+                    font-size: 120px;
+                    position: absolute;
+                    width: 60px;
+                }
+
+                &:before {
+                    content: '“';
+                    top: -40px;
+                    left: -70px;
+                }
+
+                &:after {
+                    content: '”';
+                    top: 40px;
+                    right: -50px;
                 }
             }
         }
-        h3.read-the-article {
+
+        h3 {
             margin-top: 40px;
+
             a {
                 font-size: 18px;
-                text-transform: uppercase;
-                color: #C8C9CB;
                 font-weight: bold;
+                color: $link-off;
+                text-transform: uppercase;
+
                 &:hover {
-                    text-decoration: underline;
-                    color: $purple-light;
+                    color: $link-on;
+                    text-decoration: none;
                 }
             }
         }
@@ -2132,31 +2165,45 @@ div#output-terminal-container{
     }
 
     #about-team {
-        text-align: center;
         padding: 40px 0;
+        text-align: center;
+        
         img {
-            max-width: 100%;
             height: auto;
+            max-width: 100%;
         }
+
         h2 {
-            font-weight: bold;
             font-size: 36px;
+            font-weight: bold;
         }
+
         p {
             font-size: 18px;
             font-weight: bold;
         }
-        #team-list {
-            margin-top: 40px;
+
+        ul {
+            margin: 40px auto 0;
+            padding: 0;
+            width: 80%;
+
+            li {
+                display: inline-block;
+                list-style-type: none;
+                width: calc(100% / 6);
+            }
+
             h3 {
                 font-size: 16px;
                 font-weight: bold;
                 margin-bottom: 0;
                 white-space: nowrap;
             }
+
             p {
-                font-weight: normal;
                 font-size: 14px;
+                font-weight: normal;
                 margin: 0;
             }
         }
@@ -2323,46 +2370,80 @@ div#output-terminal-container{
     }
 }
 
-#contact-body, #about-contact-body {
-    background-color: #fff;
-    background-image: url('../images/about-contact.png');
-    @include background-image-retina('../images/about-contact@2x.png');
+#contact-body, 
+#about-contact > div {
+    background: #fff url(/images/about-contact.jpg) no-repeat;
+    @include background-image-retina('/images/about-contact@2x.jpg');
     @include background-size(100% auto);
-    background-repeat: no-repeat;
+    @include border-radius(3px);
+    @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0px rgba(0,0,0, 0.05));
+    margin: 0 auto;
+    padding: 0 20px 20px;
+    width: 800px;
+
     address {
-        height: 200px;
-        text-align: center;
-        p {
-            padding: 40px 0 0 0;
-            margin: 0;
+        background: rgba(255,255,255,0.9);
+        @include border-radius(3px);
+        @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0px rgba(0,0,0, 0.05));
+        display: table;
+        height: 120px;
+        margin: 65px auto;
+        width: 260px;
+
+        > span {
+            color: $link-on;
+            display: table-cell;
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: center;
+            vertical-align: middle;
         }
-        h3 {
-            margin: 12px 0 0 0;
-            padding: 0;
+
+        strong {
+            color: #333;
+            font-size: 16px;
+        }
+
+        a {
+            color: $link-on;
+
+            &:hover {
+                color: $link-on;
+                cursor: default;
+                text-decoration: none;
+            }
         }
     }
+
     h2 {
+        color: #333;
         font-weight: bold;
-        font-size: 24px;
-        color: $purple-light;
-        margin: 10px 0 30px 0;
+        font-size: 30px;
+        margin: 30px 0;
+        padding: 0 20px;
     }
-    input.form-control {
+
+    input {
         margin-bottom: 20px;
     }
-    textarea.form-control {
-        margin-top: 66px;
+
+    textarea {
+        margin-bottom: 20px;
+        max-height: 500px;
         min-height: 100px;
-        margin-bottom: 20px;
+        resize: vertical;
     }
+
     button {
         width: 100%;
         height: 40px;
     }
+
     h4 {
         font-weight: bold;
-        margin-top: 20px;
+        margin-top: 30px;
     }
+
     p {
         font-size: 14px;
     }
