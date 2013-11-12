@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var helpers = require('./helpers');
+var fetch = helpers.fetch;
 var fetchWithMe = helpers.fetchWithMe;
 var formatTitle = helpers.formatTitle;
 var canonical = helpers.canonical;
@@ -53,6 +54,12 @@ module.exports = {
   },
   profile: function (params, callback) {
     var spec = {
+      user    : {
+        model  : 'User',
+        params : {
+          _id: 'me'
+        }
+      },
       users    : {
         collection : 'Users',
         params : {
@@ -63,7 +70,7 @@ module.exports = {
         collection : 'Images',
         params     : {
           sort: 'votes',
-          owner: params.username // add api support
+          ownerUsername: params.username // add api support
         }
       }
     };
@@ -72,12 +79,13 @@ module.exports = {
       if (err) return callback(err);
       if (results.users.length === 0)
         return callback({status:404});
-      results.user = results.users.models[0];
+      results.profileuser = results.users.models[0];
       delete results.users;
+      results.published.sortByAttr('-created');
       callback(null, addSEO(results));
     });
     function addSEO (results) {
-      var user = results.user;
+      var user = results.profileuser;
       results.page = {
         title    : formatTitle(user.get('username')+"'s Profile"),
         canonical: canonical.call(self)
