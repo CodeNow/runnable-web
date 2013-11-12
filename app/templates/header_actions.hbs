@@ -1,26 +1,29 @@
-<li><a href="/all">Browse All</a></li>
-<li class="active">
-  {{view "create_new_button" model=model}}
-</li>
 {{#if_result model method="isRegistered"}}
-<li class="dropdown">
-  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-    {{#with model.attributes}}
-    <img src="{{gravitar}}?s=64" alt="{{username}}" />{{username}}<span class="caret"></span>
-    {{/with}}
-  </a>
-  <ul class="dropdown-menu">
-    {{#if_result model method="isVerified"}}
-    <li><a href="/me">Profile</a></li>
-    {{! <li><a href="/me/published">Published Runnables</a></li>
-    <li><a href="/me/drafts">Draft Runnables</a></li> }}
-    {{else}}
-    <li><a href="/me/drafts">Saved Runnables</a></li>
-    {{/if_result}}
-    <li><a href="/logout">Logout</a></li>
-  </ul>
+<li id="user-info">
+  {{#with model.attributes}}
+  <img src="{{gravitar}}?s=64" alt="{{username}}" height="35" width="35">
+  <div class="user-name">
+    <a>{{username}}</a>
+    <a>Full Name</a>
+  </div>
+  {{/with}}
+  <div class="user-expanded">
+    <a class="glyphicon glyphicon-off" href="/logout"></a>
+    <ul>
+      {{#if_result model method="isVerified"}}
+      <li><a href="/me/published">Published Runnables</a></li>
+      <li><a href="/me/drafts">Draft Runnables</a></li>
+      {{else}}
+      <li><a href="/me/drafts">Saved Runnables</a></li>
+      {{/if_result}}
+    </ul>
+  </div>
 </li>
 {{else}}
-  {{! <li><a id="header-login-link" href="#">Sign In</a></li> }}
-  <li><a id="header-signup-link" href="#">Sign Up</a></li>
+<li><a id="header-signup-link" href="#">Sign Up</a></li>
 {{/if_result}}
+
+<li>
+  {{view "create_new_button" model=model}}
+</li>
+<li><a href="/all">Browse All</a></li>

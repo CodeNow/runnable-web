@@ -3,6 +3,7 @@ var SignupModal = require('./signup_modal');
 
 module.exports = BaseView.extend({
   tagName: 'a',
+  className: 'btn purple',
   attributes: {
     href: '/new'
   },

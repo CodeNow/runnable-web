@@ -5,10 +5,11 @@ var PublishRequestModal = require('./publish_request_modal');
 
 module.exports = BaseView.extend({
   tagName: 'ul',
-  className: 'nav nav-pills navbar-right',
+  className: 'nav nav-pills',
   events: {
-    'click #header-login-link' : 'openLogin',
-    'click #header-signup-link' : 'openSignup'
+    'click #header-login-link'  : 'openLogin',
+    'click #header-signup-link' : 'openSignup',
+    'click #user-info'          : 'toggleUserInfo'
   },
   postHydrate: function () {
     this.listenTo(this.model, 'change:username', this.render.bind(this));
@@ -22,6 +23,9 @@ module.exports = BaseView.extend({
     evt.preventDefault();
     var signupModal = new SignupModal({ app:this.app });
     signupModal.open();
+  },
+  toggleUserInfo: function () {
+    this.$('#user-info').toggleClass('in');
   }
 });
 
