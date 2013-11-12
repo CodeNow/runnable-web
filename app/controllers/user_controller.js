@@ -46,8 +46,8 @@ module.exports = {
   },
   profile: function (params, callback) {
     var spec = {
-      user    : {
-        model  : 'User',
+      users    : {
+        collection : 'Users',
         params : {
           username: params.username
         }
@@ -63,11 +63,15 @@ module.exports = {
     var self = this;
     fetch.call(this, spec, function (err, results) {
       if (err) return callback(err);
+      if (results.users.length === 0) return callback({status:404});
+      results.user = results.users.models[0];
+      delete results.users;
       callback(null, addSEO(results));
     });
     function addSEO (results) {
+      var user = results.user;
       results.page = {
-        title    : formatTitle('Published', 'Dashboard'),
+        title    : formatTitle(user.get('username')+"'s Profile"),
         canonical: canonical.call(self)
       }
       return results;

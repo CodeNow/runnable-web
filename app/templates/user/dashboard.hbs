@@ -22,10 +22,10 @@
       <li class="active"><a href="#"><span>{{published.length}}</span> Published</a>
       <li><a href="#"><span>{{drafts.length}}</span> Drafts</a>
     </ul>
-    <ul id="profile-content">
+    <ul class="profile-content">
       {{view "dashboard_runnables" collection=published editmode=true}}
     </ul>
-    <ul id="profile-content">
+    <ul class="profile-content">
       {{view "dashboard_runnables" collection=drafts editmode=true}}
     </ul>
   </section>

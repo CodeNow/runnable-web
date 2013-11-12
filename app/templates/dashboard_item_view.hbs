@@ -4,14 +4,16 @@
   {{/with}}
 </h3>
 <p>
-  {{#unless nostats}}
   {{#with model.attributes}}
+  {{#if ../isimage}}
   <span><span class="glyphicon glyphicon-play"></span> {{runs}}</span>&bull;
   <span><span class="glyphicon glyphicon-eye-open"></span> {{views}}</span>&bull;
   <span><span class="glyphicon glyphicon-copyright-mark"></span> {{copies}}</span>&bull;
+  <span>Published {{dateAgo created}}</span>&bull;
+  {{else}}
+  <span>Created {{dateAgo created}}</span>&bull;
+  {{/if}}
   {{/with}}
-  {{/unless}}
-  <span>Created {{dateAgo model.attributes.created}}</span>&bull;
   <span class="tags">
     {{#each model.attributes.tags}}
     {{view "tag_link" name=name}}

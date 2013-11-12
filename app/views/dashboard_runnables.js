@@ -2,7 +2,7 @@ var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
   getTemplateData: function () {
-    this.options.nostats = this.collection instanceof require('../collections/containers');
+    this.options.isimage = this.collection instanceof require('../collections/images');
     return this.options;
   }
 });

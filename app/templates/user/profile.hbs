@@ -2,34 +2,8 @@
 {{view "header_view" model=user context=.}}
 {{view "global_message"}}
 
-<main class="container">
-  <section id="profile">
-    {{#with model.attributes}}
-    <div class="gravitar">
-          <img src="{{gravitar}}?s=128" alt="{{username}}">
-      <a href="http://en.gravatar.com/" target="_blank">Change Gravitar <span class="glyphicon glyphicon-new-window"></span></a>
-    </div>
-    <h1>{{username}}</h1>
-    {{! <div class="edit-inline">
-      <input value="Khal Drogo" placeholder="Full Name" id="full-name">
-      <span class="glyphicon glyphicon-pencil"></span>
-    </div> }}
-    <div class="edit-inline">
-      <input value="{{dateAgo created true}} running" disabled>
-    </div>
-    {{! <hr>
-    <div class="edit-inline">
-      <span class="glyphicon glyphicon-envelope"></span>
-      <input value="KhalD@Runnable.com" placeholder="Email">
-      <span class="glyphicon glyphicon-pencil"></span>
-    </div>
-    <div class="edit-inline">
-      <span class="glyphicon glyphicon-briefcase"></span>
-      <input value="Runnable" placeholder="Company">
-      <span class="glyphicon glyphicon-pencil"></span>
-    </div> }}
-    {{/with}}
-  </section>
+<div class="container">
+  {{view "dashboard_profile" model=user editmode=true}}
 
   <section id="dashboard">
     <div class="dropdown">
@@ -38,25 +12,14 @@
         <div class="caret"></div>
       </button>
       <select>
+        <option value="Recent" selected>Recent
         <option value="Copies">Copies
-        <option value="Recent">Recent
         <option value="Runs">Runs
         <option value="Views">Views
       </select>
     </div>
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#">Published</a>
-      <li><a href="#">Drafts</a>
-    </ul>
-    <ul id="profile-content">
-      {{#each published}}
-      {{view "dashboard_item_view" model=.}}
-      {{/each}}
-    </ul>
-    <ul id="profile-content">
-      {{#each drafts}}
-      {{view "dashboard_item_view" model=.}}
-      {{/each}}
+    <ul class="profile-content">
+      {{view "dashboard_runnables" collection=published editmode=true}}
     </ul>
   </section>
 </main>
