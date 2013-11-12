@@ -2,8 +2,8 @@
 {{view "header_view" model=user context=.}}
 {{view "global_message"}}
 
-<div class="container">
-  {{view "dashboard_profile" model=user editmode=true}}
+<main class="container">
+  {{view "dashboard_profile" model=user}}
 
   <section id="dashboard">
     <div class="dropdown">
@@ -22,11 +22,11 @@
       <li class="active"><a href="#"><span>{{published.length}}</span> Published</a>
       <li><a href="#"><span>{{drafts.length}}</span> Drafts</a>
     </ul>
-    <ul class="profile-content">
-      {{view "dashboard_runnables" collection=published editmode=true}}
+    <ul class="dashboard-runnables">
+      {{view "dashboard_runnables" collection=published}}
     </ul>
-    <ul class="profile-content">
-      {{view "dashboard_runnables" collection=drafts editmode=true}}
+    <ul class="dashboard-runnables">
+      {{view "dashboard_runnables" collection=drafts}}
     </ul>
   </section>
 </main>
