@@ -28,11 +28,29 @@
   }
 }
 
-//transition mixin for translate3d
-@mixin transition-3d($transition) {
-  -o-transition: $transition;
-  -webkit-transition: -webkit-+$transition;
-  transition: $transition;
+//scale3d mixin
+@mixin scale-3d($x: 0, $y: 0, $z: 0) {
+  -ms-transform: scale3d($x, $y, $z);
+  -webkit-transform: scale3d($x, $y, $z);
+  transform: scale3d($x, $y, $z);
+
+  @include modernizr(no-csstransforms3d) {
+    -ms-transform: scale($x, $y);
+    -webkit-transform: scale($x, $y);
+    transform: scale($x, $y);
+  }
+
+  @include modernizr(no-csstransforms) {
+    height: $y;
+    width: $x;
+  }
+}
+
+//transition mixin for transforms
+@mixin transition-transforms($transition) {
+  -o-transition: transform+" "+$transition;
+  -webkit-transition: -webkit-transform+" "+$transition;
+  transition: transform+" "+$transition;
 }
 
 //bootstrap's LESS media queries for SASS
