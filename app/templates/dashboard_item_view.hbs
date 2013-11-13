@@ -6,9 +6,9 @@
 <p>
   {{#with model.attributes}}
   {{#if ../isimage}}
-  <span><span class="glyphicon glyphicon-play"></span> {{runs}}</span>&bull;
-  <span><span class="glyphicon glyphicon-eye-open"></span> {{views}}</span>&bull;
-  <span><img src="/images/button-save.png" height="12" width="14"> {{copies}}</span>&bull;
+  <span><span class="glyphicons play"></span> {{runs}}</span>&bull;
+  <span><span class="glyphicons eye-open"></span> {{views}}</span>&bull;
+  <span><span class="glyphicons more-items"></span> {{copies}}</span>&bull;
   <span>Published {{dateAgo created}}</span>&bull;
   {{else}}
   <span>Created {{dateAgo created}}</span>&bull;

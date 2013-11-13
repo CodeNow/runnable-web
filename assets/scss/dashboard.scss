@@ -11,15 +11,15 @@
     //adding the class .no-edit disables hover effects
     &.no-edit {
 
-        .glyphicon {
+        .glyphicons {
 
             &:hover {
                 cursor: default;
             }
 
-            &.glyphicon-pencil,
-            &.glyphicon-eye-close,
-            &.glyphicon-eye-open {
+            &.pencil,
+            &.lock,
+            &.unlock {
                 display: none;
                 pointer-events: none;
             }
@@ -112,7 +112,7 @@
         width: 220px;
         width: calc(100% - 40px);
 
-        .glyphicon {
+        .glyphicons {
             color: #bbb;
             line-height: 20px;
             position: absolute;
@@ -123,14 +123,14 @@
                 width: 22px;
             }
 
-            &.glyphicon-pencil {
+            &.pencil {
                 opacity: 0;
                 right: 0;
                 width: 20px;
             }
 
-            &.glyphicon-eye-close,
-            &.glyphicon-eye-open {
+            &.lock,
+            &.unlock {
                 right: 0;
                 width: 20px;
 
@@ -139,7 +139,7 @@
                 }
             }
 
-            &.glyphicon-eye-open {
+            &.unlock {
                 color: $orange;
 
                 &:hover {
@@ -148,7 +148,7 @@
             }
         }
 
-        &:hover > .glyphicon-pencil {
+        &:hover > .pencil {
             opacity: 1;
         }
 
@@ -163,6 +163,17 @@
                 background: $orange;
                 color: #fff;
                 outline: none;
+
+                .glyphicons {
+                    color: #fff;
+                }
+            }
+
+            ul .glyphicons {
+                color: #333;
+                font-size: 12px;
+                position: relative;
+                    left: 0;
             }
         }
     }
@@ -188,7 +199,7 @@
             outline: none;
         }
 
-        &:focus ~ .glyphicon-pencil {
+        &:focus ~ .pencil {
             color: $purple-light;
             opacity: 1;
         }

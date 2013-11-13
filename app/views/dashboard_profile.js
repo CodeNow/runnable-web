@@ -19,12 +19,12 @@ module.exports = BaseView.extend({
   },
   permissionToggle: function (evt) {
     var $menuItem = this.$(evt.currentTarget);
-    var $menuStatus = this.$('.permission > .glyphicon');
+    var $menuStatus = this.$('.permission > .glyphicons');
     if ($menuItem.hasClass('public')) {
-      $menuStatus.prop('class','glyphicon glyphicon-eye-open');
+      $menuStatus.prop('class','glyphicons unlock');
       this.save('show_email', true);
     } else {
-      $menuStatus.prop('class','glyphicon glyphicon-eye-close');
+      $menuStatus.prop('class','glyphicons lock');
       this.save('show_email', false);
     }
   },
