@@ -1,0 +1,68 @@
+{{#with model.attributes}}
+{{#if ../editmode}}
+  <div class="gravitar">
+    <img src="{{gravitar}}?s=128" alt="{{username}}">
+    <a href="http://en.gravatar.com/" target="_blank">Change Gravitar <span class="glyphicons new-window"></span></a>
+  </div>
+  <h1>{{username}}</h1>
+  <div class="edit-inline">
+<<<<<<< HEAD
+    <input value="{{name}}" placeholder="Full Name" name="name">
+    <span class="glyphicons pencil"></span>
+=======
+    <input value="{{name}}" placeholder="First and Last Name" name="name">
+    <span class="glyphicon glyphicon-pencil"></span>
+>>>>>>> 3cad4c9f914dbe6cd0aa10580ca49852dfcb211f
+  </div>
+  <div>
+    <input value="{{dateAgo created true}} running" disabled>
+  </div>
+  <hr>
+  <div class="edit-inline">
+    <span class="glyphicons envelope"></span>
+    <input value="{{email}}" placeholder="Email" disabled>
+    <div class="permission">
+      <span class="glyphicons {{#if show_email}}unlock{{else}}lock{{/if}}" data-toggle="dropdown"></span>
+      <ul class="dropdown-menu">
+        <li>
+          <a tabindex="-1" class="public"><span class="glyphicons unlock"></span> Publicly Viewable</a>
+        <li>
+          <a tabindex="-1" class="private"><span class="glyphicons lock"></span> Only Me</a>
+      </ul>
+    </div>
+  </div>
+  <div class="edit-inline">
+    <span class="glyphicons briefcase"></span>
+    <input name="company" value="{{company}}" placeholder="Company">
+    <span class="glyphicons pencil"></span>
+  </div>
+{{else}}
+  <div class="gravitar">
+    <img src="{{gravitar}}?s=128" alt="{{username}}">
+  </div>
+  <h1>{{username}}</h1>
+  {{#if name}}
+  <div class="inline">
+    <input value="{{name}}" placeholder="Full Name" name="name" disabled>
+  </div>
+  {{/if}}
+  <div class="inline">
+    <input value="{{dateAgo created true}} running" disabled>
+  </div>
+  {{#if show_email}}<hr>
+  {{else}}{{#if company}}<hr>{{/if}}
+  {{/if}}
+  {{#if show_email}}
+  <div class="inline">
+    <span class="glyphicons envelope"></span>
+    <input value="{{email}}" placeholder="Email" disabled>
+  </div>
+  {{/if}}
+  {{#if company}}
+  <div class="inline">
+    <span class="glyphicons briefcase"></span>
+    <input value="{{company}}" placeholder="Company" disabled>
+  </div>
+  {{/if}}
+{{/if}}
+{{/with}}

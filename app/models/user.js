@@ -140,6 +140,9 @@ var User = module.exports = Base.extend({
   isOwnerOf: function (model) {
     owner = (model.toJSON) ? model.get('owner') : model.owner;
     return this.id === owner;
+  },
+  appURL: function () {
+    return '/u/'+this.get('username');
   }
 });
 module.exports.id = 'User';

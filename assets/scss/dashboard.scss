@@ -423,27 +423,27 @@
                     }
                 }
             }
+        }
+    }
+}
+li {
+    .tags {
+        img {
+            margin-right: 4px;
+        }
 
-            &.tags {
-
-                img {
-                    margin-right: 4px;
-                }
-
-                a {
-                    background: $purple-lighter;
-                    border: 1px solid $purple-light;
-                    @include border-radius(3px);
-                    display: inline-block;
-                    font-size: 11px;
-                    font-weight: bold;
-                    height: 21px;
-                    line-height: 21px;
-                    padding: 0 4px;
-                    margin-right: 5px;
-                    @include transition(all 0.2s ease-in-out);
-                }
-            }
+        a {
+            background: $purple-lighter;
+            border: 1px solid $purple-light;
+            @include border-radius(3px);
+            display: inline-block;
+            font-size: 11px;
+            font-weight: bold;
+            height: 21px;
+            line-height: 21px;
+            padding: 0 4px;
+            margin-right: 5px;
+            @include transition(all 0.2s ease-in-out);
         }
     }
 }

@@ -1,9 +1,9 @@
-{{#with model.attributes}}
 <h3>
-  <a href="/{{_id}}/{{urlFriendly name}}">
-    {{name}}
+  <a href="{{invoke model method='appURL'}}">
+    {{model.attributes.name}}
   </a>
 </h3>
+{{#with model.attributes}}
 <p>
   {{#unless ../novotes}}
   <span class="vote-up">

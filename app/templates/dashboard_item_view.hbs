@@ -1,7 +1,5 @@
 <h3>
-  {{#with model.attributes}}
-  <a href="{{#unless ../isimage}}/me{{/unless}}/{{_id}}">{{name}}</a>
-  {{/with}}
+  <a href="{{invoke model method='appURL'}}">{{model.attributes.name}}</a>
 </h3>
 <p>
   {{#with model.attributes}}
