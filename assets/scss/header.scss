@@ -246,24 +246,26 @@
     cursor: pointer;
     margin-left: 20px !important;
     max-width: 200px;
-    min-width: 120px;
-    padding: 0 20px;
-    @include transition(min-width .3s ease-in-out);
+    min-width: 100px;
+    padding: 0 10px;
+    @include transition(min-width .25s ease-in-out);
     z-index: 3;
 
     img {
         @include border-radius(50%);
         float: left;
         margin: 10px 10px 0 0;
-        @include transition-transforms(.3s ease-in-out);
+        @include transition-transforms(.25s ease-in-out);
     }
 
     .user-name {
         float: left;
 
         > a {
-            max-width: 180px;
+            display: block;
+            max-width: 135px;
             overflow: hidden;
+            padding-right: 20px;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
@@ -275,6 +277,7 @@
 
     .user-expanded {
         background: #fff;
+        @include border-radius(0 0 3px 3px);
         @include box-shadow(0 2px 3px rgba(0,0,0,.3));
         padding-top: 70px;
         position: absolute;
@@ -290,13 +293,19 @@
         }
 
         li {
+            border-top: 1px solid rgba(0,0,0,0.1);
             height: 40px;
             line-height: 40px;
             list-style-type: none;
 
+            &:first-child {
+                border-top: none;
+            }
+
             a {
                 color: #333;
                 display: block;
+                font-size: 14px;
                 height: 100%;
                 padding: 0 20px;
                 width: 100%;
@@ -307,24 +316,17 @@
                     text-decoration: none;
                 }
             }
-        }
 
-        .glyphicon-off {
-            color: #bbb;
-            font-size: 16px;
-            position: absolute;
-                top: 10px;
-                right: 10px;
-
-            &:hover {
-                color: #999;
-                text-decoration: none;
+            &:last-child > a {
+                @include border-radius(0 0 3px 3px);
             }
         }
     }
 
     &.in {
-        min-width: 300px;
+        margin-left: 40px !important;
+        max-width: 250px;
+        min-width: 200px;
 
         img {
             @include scale-3d(1.4,1.4,0);
@@ -341,6 +343,7 @@
                 font-size: 15px;
                 font-weight: bold;
                 line-height: 1.5;
+                max-width: 160px;
                 text-decoration: none;
             }
 
@@ -354,7 +357,8 @@
         .user-expanded {
             background: #fff;
             @include transform-3d(0,0%,0);
-            width: 285px;
+            max-width: 235px;
+            min-width: 185px;
         }
     }
 }
