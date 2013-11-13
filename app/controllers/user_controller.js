@@ -13,13 +13,15 @@ function fetchRunnablesFor (userId, cb) {
     published: {
       collection: 'Images',
       params: {
-        owner: userId
+        owner: userId,
+        limit: 100 // default limit is 25
       }
     },
     drafts: {
       collection: 'Containers',
       params: {
-        owner: userId
+        owner: userId,
+        limit: 100 // default limit is 25
       }
     }
   }
@@ -37,8 +39,8 @@ function fetchProfileInfo (username, cb) {
     published: {
       collection : 'Images',
       params     : {
-        sort: 'votes',
-        ownerUsername: username // add api support
+        ownerUsername: username, // add api support
+        limit: 100 // default limit is 25
       }
     }
   };
