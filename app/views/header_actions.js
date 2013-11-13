@@ -13,6 +13,7 @@ module.exports = BaseView.extend({
   },
   postHydrate: function () {
     this.listenTo(this.model, 'change:username', this.render.bind(this));
+    this.boundHide = this.hideUserInfo.bind(this);
   },
   openLogin: function (evt) {
     evt.preventDefault();
@@ -24,8 +25,16 @@ module.exports = BaseView.extend({
     var signupModal = new SignupModal({ app:this.app });
     signupModal.open();
   },
-  toggleUserInfo: function () {
+  toggleUserInfo: function (evt) {
+    evt.stopPropagation();
     this.$('#user-info').toggleClass('in');
+    setTimeout(function () {
+      $(document).once('click', this.boundHide);
+    }.bind(this), 0);
+  },
+  hideUserInfo: function() {
+    this.$('#user-info').removeClass('in');
+    $(document).off('click', this.boundHide);
   }
 });
 

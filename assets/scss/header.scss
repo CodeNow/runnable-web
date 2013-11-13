@@ -279,7 +279,7 @@
         padding-top: 70px;
         position: absolute;
             top: 0;
-            right: 0;
+            right: 15px;
             z-index: -1;
         @include transform-3d(0,-200%,0);
         width: 100%;
@@ -295,23 +295,29 @@
             list-style-type: none;
 
             a {
-                color: #333 !important;
+                color: #333;
                 display: block;
                 height: 100%;
                 padding: 0 20px;
                 width: 100%;
+
+                &:hover {
+                    background: $orange;
+                    color: #fff;
+                    text-decoration: none;
+                }
             }
         }
 
         .glyphicon-off {
-            color: #bbb !important;
-            font-size: 16px !important;
+            color: #bbb;
+            font-size: 16px;
             position: absolute;
                 top: 10px;
                 right: 10px;
 
             &:hover {
-                color: #999 !important;
+                color: #999;
                 text-decoration: none;
             }
         }
@@ -348,7 +354,7 @@
         .user-expanded {
             background: #fff;
             @include transform-3d(0,0%,0);
-            width: 300px;
+            width: 285px;
         }
     }
 }
