@@ -6,13 +6,13 @@
     <a>{{username}}</a>
     {{#if name}}<a>{{name}}</a>{{/if}}
   </div>
+  {{/with}}
   <div class="user-expanded">
     <ul>
-      <li><a href="/u/{{username}}">Profile</a>
+      <li><a href="{{invoke model method='appURL'}}">Profile</a>
       <li><a href="/logout">Log Out</a>
     </ul>
   </div>
-  {{/with}}
 </li>
 {{else}}
 <li><a id="header-signup-link" href="#">Sign Up</a></li>
