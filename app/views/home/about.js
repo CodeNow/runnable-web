@@ -7,10 +7,8 @@ module.exports = BaseView.extend({
       $.stellar();
     }, 100); // timeout for clientside hit, else doesnt work..
 
-    /*
-      Getting images embedded in an SVG to show up in Safari...
-      http://stackoverflow.com/questions/12513308/svg-used-as-background-image-loses-embed-images
-    */
+    // Getting images embedded in an SVG to show up in Safari...
+    // http://stackoverflow.com/questions/12513308/svg-used-as-background-image-loses-embed-images
     function loadSVG(svgpath){
          if( /webkit/gi.test(navigator.userAgent.toLowerCase()) ){
            var obj = document.createElement("object");
