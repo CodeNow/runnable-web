@@ -8,6 +8,35 @@
 #profile {
     width: 25%;
 
+    &.no-edit {
+
+        .glyphicon {
+
+            &:hover {
+                cursor: default;
+            }
+
+            &.glyphicon-pencil,
+            &.glyphicon-eye-close,
+            &.glyphicon-eye-open {
+                display: none;
+                pointer-events: none;
+            }
+        }
+
+        input {
+            cursor: text;
+        }
+
+        .edit-inline {
+            cursor: default;
+        }
+
+        .gravitar > a {
+            display: none;
+        }
+    }
+
     > .gravitar {
         margin-top: 20px;
         position: relative;
@@ -75,13 +104,13 @@
 
     .edit-inline {
         cursor: pointer;
-        height: 24px;
+        min-height: 24px;
         margin: 4px 0;
         position: relative;
         width: 220px;
         width: calc(100% - 40px);
 
-        > span {
+        .glyphicon {
             color: #bbb;
             line-height: 20px;
             position: absolute;
@@ -89,6 +118,7 @@
 
             &:first-child {
                 left: -22px;
+                width: 22px;
             }
 
             &.glyphicon-pencil {
@@ -96,10 +126,42 @@
                 right: 0;
                 width: 20px;
             }
+
+            &.glyphicon-eye-close,
+            &.glyphicon-eye-open {
+                right: 0;
+                width: 20px;
+
+                &:hover {
+                    color: #999;
+                }
+            }
+
+            &.glyphicon-eye-open {
+                color: $orange;
+
+                &:hover {
+                    color: $orange;
+                }
+            }
         }
 
         &:hover > .glyphicon-pencil {
             opacity: 1;
+        }
+
+        .permission {
+            float: right;
+            position: relative;
+                top: -23px;
+
+            a:hover,
+            a:active,
+            a:focus {
+                background: $orange;
+                color: #fff;
+                outline: none;
+            }
         }
     }
 
