@@ -51,7 +51,8 @@ module.exports = {
     async.waterfall([
       fetchUser.bind(this),
       function (results, cb) {
-        var viewingOwnProfile = results.user.get('username').toLowerCase() === params.username.toLowerCase();
+        var currentUsername = (results.user.get('username') || '').toLowerCase()
+        var viewingOwnProfile =  currentUsername === params.username.toLowerCase();
 
         results.editmode = viewingOwnProfile;
         if (viewingOwnProfile) {
@@ -76,6 +77,9 @@ module.exports = {
     ],
     function (err, results) {
       if (err) return callback(err);
+      var profileUsername = results.profileuser.get('username');
+      if (profileUsername !== params.username)
+        return self.redirectTo('/u/'+profileUsername);
       callback(null, addSEO(results));
     });
     function addSEO (results) {

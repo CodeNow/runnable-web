@@ -1,6 +1,6 @@
 <h3>
   {{#with model.attributes}}
-  <a href="#">{{name}}</a>
+  <a href="{{#unless ../isimage}}/me{{/unless}}/{{_id}}">{{name}}</a>
   {{/with}}
 </h3>
 <p>

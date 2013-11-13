@@ -4,15 +4,15 @@
   <img src="{{gravitar}}?s=64" alt="{{username}}" height="35" width="35">
   <div class="user-name">
     <a>{{username}}</a>
-    <a>Full Name</a>
+    {{#if name}}<a>{{name}}</a>{{/if}}
   </div>
-  {{/with}}
   <div class="user-expanded">
     <a class="glyphicon glyphicon-off" href="/logout"></a>
     <ul>
       <li><a href="/u/{{username}}">Profile</a></li>
     </ul>
   </div>
+  {{/with}}
 </li>
 {{else}}
 <li><a id="header-signup-link" href="#">Sign Up</a></li>
