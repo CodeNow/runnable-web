@@ -1,6 +1,6 @@
 <div class="clearfix">
   {{#if model.attributes.gravitar}}
-  <a href="/u/{{model.attributes.username}}">
+  <a href="{{invoke model method='appURL'}}">
     <img class="project-author-icon" src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}">
   </a>
   {{/if}}
@@ -9,7 +9,7 @@
   </p>
   <h4 class="author-title">
     {{#if model.attributes.username}}
-    <a href="/u/{{model.attributes.username}}">{{model.attributes.username}}</a>
+    <a href="{{invoke model method='appURL'}}">{{model.attributes.username}}</a>
     {{else}}
     <b>Anonymous</b>
     {{/if}}
