@@ -7,8 +7,16 @@ module.exports = BaseView.extend({
     'click .delete': 'deleteRunnable'
   },
   deleteRunnable: function () {
-    var opts = utils.cbOpts(this.showIfError, this);
-    this.model.destroy(opts);
+    var self = this;
+    alertify.confirm("Are you sure you want to delete '"+this.model.get('name')+"'?", function (e) {
+      if (e) {
+        // user clicked "ok"
+        var opts = utils.cbOpts(self.showIfError, self);
+        self.model.destroy(opts);
+      } else {
+          // user clicked "cancel"
+      }
+    });
   }
 });
 
