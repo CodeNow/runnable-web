@@ -28,26 +28,32 @@
   </div>
   <div class="edit-inline">
     <span class="glyphicon glyphicon-briefcase"></span>
-    <input value="{{company}}" placeholder="Company">
+    <input name="company" value="{{company}}" placeholder="Company">
     <span class="glyphicon glyphicon-pencil"></span>
   </div>
 {{else}}
   <div class="gravitar">
     <img src="{{gravitar}}?s=128" alt="{{username}}">
   </div>
+  <h1>{{username}}</h1>
   {{#if name}}
   <div><input value="{{name}}" placeholder="Full Name" name="name" disabled></div>
   {{/if}}
-  <h1>{{username}}</h1>
   <div><input value="{{dateAgo created true}} running" disabled></div>
   {{#if show_email}}<hr>
   {{else}}{{#if company}}<hr>{{/if}}
   {{/if}}
   {{#if show_email}}
-  <div><input value="{{email}}" placeholder="Email" disabled></div>
+  <div>
+    <span class="glyphicon glyphicon-envelope"></span>
+    <input value="{{email}}" placeholder="Email" disabled>
+  </div>
   {{/if}}
   {{#if company}}
-  <div><input value="{{company}}" placeholder="Company"></div>
+  <div>
+    <span class="glyphicon glyphicon-briefcase"></span>
+    <input value="{{company}}" placeholder="Company">
+  </div>
   {{/if}}
 {{/if}}
 {{/with}}
