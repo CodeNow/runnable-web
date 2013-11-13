@@ -1,41 +1,42 @@
 {{view "app_user" model=user}}
 {{view "header_view" model=user context=.}}
 {{view "global_message"}}
-<div id="about-header" class="jumbotron" data-stellar-background-ratio="0.5">
+
+<section id="about-header" class="jumbotron" data-stellar-background-ratio="0.5">
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
         <h2>We're bringing the world's code to life</h2>
         <p>Discovering, collaborating and working with code should be simple. We're on a mission to empower anyone to build amazing things with software</p>
       </div>
-    </div>
-  </div>
-</div>
+    </div><!--/.row-->
+  </div><!--/.container-->
+</section>
 
-<!--div id="about-logos">
+<section id="about-logos">
   <div class="container">
-    <a href="#" class="logo engadget"></a>
-    <a href="#" class="logo engadget"></a>
-    <a href="#" class="logo engadget"></a>
-    <a href="#" class="logo engadget"></a>
-    <a href="#" class="logo engadget"></a>
-    <a href="#" class="logo engadget"></a>
-    <a href="#" class="logo engadget"></a>
-    <a href="#" class="logo engadget"></a>
-    <a href="#" class="logo engadget"></a>
-    <a href="#" class="logo engadget"></a>
+    <div class="row">
+      <a href="http://venturebeat.com/2013/10/30/dont-want-to-reinvent-the-wheel-runnables-library-lets-devs-copy-and-paste-code/" class="logo venturebeat" target="_blank"></a>
+      <a href="http://www.forbes.com/sites/anthonykosner/2013/10/02/runnable-aims-to-be-the-youtube-of-code-only-with-less-cat-videos/" class="logo forbes" target="_blank"></a>
+      <a href="http://techcrunch.com/2013/10/02/runnable-wants-to-become-the-youtube-of-code/" class="logo techcrunch" target="_blank"></a>
+    </div><!--/.row-->
+    <div class="row">
+      <a href="http://www.wired.com/wiredenterprise/2013/10/runnable/" class="logo wired" target="_blank"></a>
+      <a href="http://gigaom.com/2013/10/02/startup-runnable-fancies-itself-as-the-youtube-of-code/" class="logo gigaom" target="_blank"></a>
+      <a href="http://pandodaily.com/2013/10/30/runnable-raises-2m-to-centralize-all-the-worlds-open-source-code/" class="logo pandodaily" target="_blank"></a>
+    </div><!--/.row-->
     <div class="row">
       <div class="col-sm-6 col-sm-offset-1">
         <blockquote>
-          <p>We&rsquo;ve got some really fantastic news this week. It&rsquo;s an article about Runnable, the tech startup that&rsquo;s been taking Silicon Valley by storm. They&rsquo;ve already started turning heads, and are being hyped by the biggest names in the scene.</p>
+          <p>Runnable appears to have stumbled on a much needed solution to a very real problem. The timing couldn’t be better, in terms of the shift in the way developers work and the availability of the underlying infrastructure required to run such a platform.</p>
         </blockquote>
-        <h3 class="read-the-article"><a href="#">Read The Article</a></h3>
+        <h3 class="read-the-article"><a href="http://pandodaily.com/2013/10/30/runnable-raises-2m-to-centralize-all-the-worlds-open-source-code/" target="_blank">Read The Article</a></h3>
       </div>
-    </div>
-  </div>
-</div-->
+    </div><!--/.row-->
+  </div><!--/.container-->
+</section>
 
-<div id="about-stack" class="jumbotron">
+<section id="about-stack" class="jumbotron">
   <div class="container">
     <img class="amazon" data-stellar-ratio="2.5" data-stellar-horizontal-offset="200" src="assets/images/stack-amazon.png" />
 
@@ -50,85 +51,80 @@
         <h2>Node.JS, Docker and CoffeeScript</h2>
         <p>We think Javascript is the new x86, Docker the DevOps platform of the future and AWS the basic building blocks for the web</p>
       </div>
-    </div>
-  </div>
-</div>
+    </div><!--/.row-->
+  </div><!--/.container-->
+</section>
 
-<div id="about-satellite" class="jumbotron">
+<section id="about-satellite" class="jumbotron">
   <div class="container">
     <div class="row">
-      <div class="col-sm-5">
-        <h2>Located in the Heart of Silicon Valley.</h2>
-        <p>We're in Palo Alto, one block away from University Ave.</p>
-      </div>
-    </div>
-  </div>
-</div>
+      <h2>Located in the Heart of Silicon Valley.</h2>
+      <p>We're in Palo Alto, one block away from University Ave.</p>
+    </div><!--/.row-->
+  </div><!--/.container-->
+</section>
 
-<div id="about-team">
+<section id="about-team">
   <div class="container">
     <h2>Our Team</h2>
     <!--p>Nulla vitae elit libero, a pharetra augue.</p-->
-    <div id="team-list" class="row">
-      <div class="col-sm-1 col-sm-offset-1">
-        <img src="assets/images/team-yash.png" height="120" width="120" />
+    <ul>
+      <li>
+        <img src="assets/images/team-yash.png" height="120" width="120">
         <h3>Yash Kumar</h3>
         <p>CEO/Engineer</p>
-      </div>
-      <div class="col-sm-1">
-        <img src="assets/images/team-tejesh.png" height="120" width="120" />
+      <li>
+        <img src="assets/images/team-tejesh.png" height="120" width="120">
         <h3>Tejesh Mehta</h3>
         <p>Engineer</p>
-      </div>
-      <div class="col-sm-1">
-        <img src="assets/images/team-jeff.png" height="120" width="120" />
+      <li>
+        <img src="assets/images/team-jeff.png" height="120" width="120">
         <h3>Jeff Kingyens</h3>
         <p>Engineer</p>
-      </div>
-      <div class="col-sm-1">
-        <img src="assets/images/team-sundip.png" height="120" width="120" />
+      <li>
+        <img src="assets/images/team-sundip.png" height="120" width="120">
         <h3>Sundip Patel</h3>
         <p>Product/Engineer</p>
-      </div>
-      <div class="col-sm-1">
-        <img src="assets/images/team-henry.png" height="120" width="120" />
-        <h3 style="text-indent: -0.7em">Henry Allen-Tilford</h3>
+      <li>
+        <img src="assets/images/team-henry.png" height="120" width="120">
+        <h3>Henry Allen-Tilford</h3>
         <p>Engineer</p>
-      </div>
-      <div class="col-sm-1">
-        <img src="assets/images/team-praful.png" height="120" width="120" />
+      <li>
+        <img src="assets/images/team-praful.png" height="120" width="120">
         <h3>Praful Rana</h3>
         <p>Product/Engineer</p>
-      </div>
-    </div>
-  </div>
-</div>
+    </ul>
+  </div><!--/.container-->
+</section>
 
-<div id="about-contact">
+<section id="about-contact">
   <div class="container">
-    <div class="row">
-      <div id="about-contact-body" method="post" action="" class="col-sm-6 col-sm-offset-1">
-        <address>
-          <p>459 Hamilton Ave, Suite 304<br />
-             Palo Alto, CA 94301</p>
-          <h3>(866) 216-4762</h3>
-        </address>
-        {{view "contact_form"}}
-        <div class="col-sm-5">
-          <h4>Having trouble with something? Don’t forget FAQ.</h4>
-          <p>If you’re having trouble figuring something out, remember to check out the FAQ Section to see if your question has already been answered. There are plenty of other developers that are sharing information on the FAQ boards. Other than that, feel free to give us a shout!</p>
-        </div>
-        <div class="col-sm-3">
-          <h4>Palo Alto</h4>
-          <p>Runnable Headquarters<br />
-          459 Hamilton Ave, Suite 304<br />
-          Palo Alto, CA 94301<br />
-          (866) 216-4762</p>
-        </div>
+    <address>
+      <span>
+        <strong>Runnable Headquarters</strong>
+        <br>
+        459 Hamilton Ave, Suite 304
+        <br>
+        Palo Alto, CA 94301
+        <br>
+        <a href="tel:1-866-216-4762">(866) 216-4762</a>
+      </span>
+    </address>
+    <form id="about-contact-body" method="post" action="" class="row">
+      {{view "contact_form"}}
+      <h4>Having trouble with something? <a href="http://support.runnable.com/runnable/questions/popular">Don’t forget the FAQ</a>.</h4>
+      <p>If you’re having trouble figuring something out, check out the FAQ Section to see if your question has already been answered. There are plenty of other developers that are sharing information on the FAQ boards. Other than that, feel free to give us a shout!</p>
+{{!--    
+      <div class="col-sm-3">
+        <h4>Palo Alto</h4>
+        <p>Runnable Headquarters<br>
+        459 Hamilton Ave, Suite 304<br>
+        Palo Alto, CA 94301<br>
+        (866) 216-4762</p>
       </div>
-    </div>
-  </div>
-</div>
-
+ --}}
+    </form>
+  </div><!--/.container-->
+</section>
 
 {{view "footer_view" model=user context=.}}
