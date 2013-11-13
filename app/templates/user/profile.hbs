@@ -6,7 +6,7 @@
   {{view "dashboard_profile" model=profileuser editmode=editmode}}
 
   <section id="dashboard">
-    <div class="dropdown">
+    {{! <div class="dropdown">
       <button type="button" class="dropdown">
         <div class="filter-option pull-left">Recent </div>
         <div class="caret"></div>
@@ -17,7 +17,7 @@
         <option value="Runs">Runs
         <option value="Views">Views
       </select>
-    </div>
+    </div> }}
     {{#if editmode}}
     <ul class="nav nav-tabs">
       <li {{#if publishedActive}}class="active"{{/if}}><a href="#published"><span>{{published.length}}</span> Published</a>

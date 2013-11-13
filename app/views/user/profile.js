@@ -6,7 +6,7 @@ module.exports = BaseView.extend({
     'click .nav-tabs a'       : 'clickTab',
     'click .delete-published' : 'deletePublished',
     'click .delete-drafts'    : 'deleteDrafts',
-    'change select'           : 'changeSort'
+    // 'change select'           : 'changeSort'
   },
   clickTab: function (evt) {
     evt.preventDefault();
@@ -22,9 +22,10 @@ module.exports = BaseView.extend({
     opts.publishedActive = !opts.draftsActive;
     return this.options;
   },
-  changeSort: function () {
+  // changeSort: function () {
+  //   _.find(this.childViews, {name:'dashboard_runnables'});
 
-  }
+  // }
 });
 
 module.exports.id = "user/profile";
