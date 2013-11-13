@@ -4,14 +4,14 @@
   <a href="http://en.gravatar.com/" target="_blank">Change Gravitar <span class="glyphicon glyphicon-new-window"></span></a>
 </div>
 <h1>{{username}}</h1>
-{{! <div class="edit-inline">
-  <input value="Khal Drogo" placeholder="Full Name" id="full-name">
-  <span class="glyphicon glyphicon-pencil"></span>
-</div> }}
 <div class="edit-inline">
+  <input value="{{#if name}}{{name}}{{else}}Full Name" placeholder="Full Name" name="name">
+  <span class="glyphicon glyphicon-pencil"></span>
+</div>
+<div>
   <input value="{{dateAgo created true}} running" disabled>
 </div>
-{{! <hr>
+<hr>
 <div class="edit-inline">
   <span class="glyphicon glyphicon-envelope"></span>
   <input value="KhalD@Runnable.com" placeholder="Email">
@@ -21,5 +21,5 @@
   <span class="glyphicon glyphicon-briefcase"></span>
   <input value="Runnable" placeholder="Company">
   <span class="glyphicon glyphicon-pencil"></span>
-</div> }}
+</div>
 {{/with}}

@@ -10,12 +10,7 @@
   <div class="user-expanded">
     <a class="glyphicon glyphicon-off" href="/logout"></a>
     <ul>
-      {{#if_result model method="isVerified"}}
-      <li><a href="/me/published">Published Runnables</a></li>
-      <li><a href="/me/drafts">Draft Runnables</a></li>
-      {{else}}
-      <li><a href="/me/drafts">Saved Runnables</a></li>
-      {{/if_result}}
+      <li><a href="/u/{{username}}">Profile</a></li>
     </ul>
   </div>
 </li>

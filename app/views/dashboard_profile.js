@@ -6,7 +6,11 @@ module.exports = BaseView.extend({
   events: {
     'click .edit-inline' : 'editInline'
   },
+  preRender: function () {
+    if (this.options.editmode) this.className = 'editmode';
+  },
   editInline: function (evt) {
+    if (!this.options.editmode) return;
     var $thisInput = this.$(evt.currentTarget)
       .children('input')
       .focus();
