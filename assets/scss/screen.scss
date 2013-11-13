@@ -287,6 +287,24 @@ $prefix-for-spec:      true !default; // required for keyframe mixin
     filter: blur(3px);
 }
 
+// .dropdown-menu
+.dropdown-menu {
+    padding: 0;
+
+    li {
+        border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    li:first-child {
+        border-top: none;
+    }
+
+    a {
+        padding: 8px 20px !important; //overriding bootstrap...
+    }
+}
+
+
 // inputs
 .form-control {
         min-height: 40px;
@@ -1166,32 +1184,38 @@ progress {
 
 #project-author {
     margin: 30px 0 0 0;
-    img.project-author-icon {
-        width: 52px;
-        @include border-radius(3px);
-        overflow: hidden;
+
+    .project-author-icon {
+        @include border-radius(50%);
         float: left;
         margin-right: 10px;
+        overflow: hidden;
+        width: 52px;
     }
-    p.publish-date {
+
+    .publish-date {
         color: #bcbcbc;
         font-size: 13px;
         padding: 0;
         margin: 5px 0 0 0;
     }
-    h4.author-title {
+
+    .author-title {
         padding: 0;
         margin: 0;
+
         a {
             font-size: 15px;
             font-weight: bold;
             color: #333;
             text-decoration: none;
+
             &:hover {
                 text-decoration: underline;
             }
         }
     }
+    
     #share-options {
         text-align: center;
         input.form-control {
@@ -2240,7 +2264,7 @@ div#output-terminal-container{
     @include background-image-retina('/images/about-contact@2x.jpg');
     background-size: 800px 250px;
     @include border-radius(3px);
-    @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0px rgba(0,0,0, 0.05));
+    @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(0,0,0, 0.05));
     margin: 0 auto;
     max-width: 800px;
     padding: 0 15px 20px;
@@ -2252,7 +2276,7 @@ div#output-terminal-container{
     address {
         background: rgba(255,255,255,0.9);
         @include border-radius(3px);
-        @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0px rgba(0,0,0, 0.05));
+        @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(0,0,0, 0.05));
         display: table;
         height: 120px;
         margin: 65px auto;
