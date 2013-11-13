@@ -11,8 +11,8 @@ module.exports = BaseView.extend({
   clickTab: function (evt) {
     evt.preventDefault();
     var $a = this.$(evt.currentTarget);
-    var page = $a.attr('href').replace('#', '/');
-    this.app.router.navigate('/me'+page);
+    // var page = $a.attr('href').replace('#', '/');
+    // this.app.router.navigate('/me'+page);
     $a.tab('show');
   },
   getTemplateData: function () {

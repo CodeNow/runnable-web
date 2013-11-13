@@ -1,11 +1,13 @@
 var BaseView = require('./base_view');
+var utils = require('../utils');
 
 module.exports = BaseView.extend({
   tagName: 'section',
   id: 'profile',
   events: {
     'click .edit-inline'      : 'editInline',
-    'click .permission a'     : 'permissionToggle'
+    'click .permission a'     : 'permissionToggle',
+    'change input'            : 'updateAttr'
   },
   preRender: function () {
     if (this.options.editmode) this.className = 'editmode';
@@ -20,9 +22,24 @@ module.exports = BaseView.extend({
     var $menuStatus = this.$('.permission > .glyphicon');
     if ($menuItem.hasClass('public')) {
       $menuStatus.prop('class','glyphicon glyphicon-eye-open');
+      this.save('show_email', true);
     } else {
       $menuStatus.prop('class','glyphicon glyphicon-eye-close');
+      this.save('show_email', false);
     }
+  },
+  updateAttr: function (evt) {
+    var $input = $(evt.currentTarget);
+    var attr = $input.attr('name');
+    var val  = $input.val();
+    this.save(attr, val);
+  },
+  save: function (attr, val) {
+    var data = {};
+    data[attr] = val;
+    var opts = utils.cbOpts(this.showIfError, this);
+    opts.patch = true;
+    this.model.save(data, opts);
   }
 });
 

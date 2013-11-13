@@ -6,13 +6,13 @@
     <a>{{username}}</a>
     <a>Full Name</a>
   </div>
-  {{/with}}
   <div class="user-expanded">
     <a class="glyphicon glyphicon-off" href="/logout"></a>
     <ul>
       <li><a href="/u/{{username}}">Profile</a></li>
     </ul>
   </div>
+  {{/with}}
 </li>
 {{else}}
 <li><a id="header-signup-link" href="#">Sign Up</a></li>

@@ -1,33 +1,53 @@
 {{#with model.attributes}}
-<div class="gravitar">
-  <img src="{{gravitar}}?s=128" alt="{{username}}">
-  <a href="http://en.gravatar.com/" target="_blank">Change Gravitar <span class="glyphicon glyphicon-new-window"></span></a>
-</div>
-<h1>{{username}}</h1>
-<div class="edit-inline">
-  <input value="{{#if name}}{{name}}{{else}}{{/if}}" placeholder="Full Name" name="name">
-  <span class="glyphicon glyphicon-pencil"></span>
-</div>
-<div>
-  <input value="{{dateAgo created true}} running" disabled>
-</div>
-<hr>
-<div class="edit-inline">
-  <span class="glyphicon glyphicon-envelope"></span>
-  <input value="KhalD@Runnable.com" placeholder="Email" disabled>
-  <div class="permission">
-    <span class="glyphicon glyphicon-eye-close" data-toggle="dropdown"></span>
-    <ul class="dropdown-menu">
-      <li>
-        <a tabindex="-1" class="public">Publicly Viewable</a>
-      <li>
-        <a tabindex="-1" class="only-me">Only Me</a>
-    </ul>
+{{#if ../editmode}}
+  <div class="gravitar">
+    <img src="{{gravitar}}?s=128" alt="{{username}}">
+    <a href="http://en.gravatar.com/" target="_blank">Change Gravitar <span class="glyphicon glyphicon-new-window"></span></a>
   </div>
-</div>
-<div class="edit-inline">
-  <span class="glyphicon glyphicon-briefcase"></span>
-  <input value="Runnable" placeholder="Company">
-  <span class="glyphicon glyphicon-pencil"></span>
-</div>
+  <h1>{{username}}</h1>
+  <div class="edit-inline">
+    <input value="{{name}}" placeholder="Full Name" name="name">
+    <span class="glyphicon glyphicon-pencil"></span>
+  </div>
+  <div>
+    <input value="{{dateAgo created true}} running" disabled>
+  </div>
+  <hr>
+  <div class="edit-inline">
+    <span class="glyphicon glyphicon-envelope"></span>
+    <input value="{{email}}" placeholder="Email" disabled>
+    <div class="permission">
+      <span class="glyphicon glyphicon-eye-{{#if show_email}}open{{else}}close{{/if}}" data-toggle="dropdown"></span>
+      <ul class="dropdown-menu">
+        <li>
+          <a tabindex="-1" class="public">Publicly Viewable</a>
+        <li>
+          <a tabindex="-1" class="private">Only Me</a>
+      </ul>
+    </div>
+  </div>
+  <div class="edit-inline">
+    <span class="glyphicon glyphicon-briefcase"></span>
+    <input value="{{company}}" placeholder="Company">
+    <span class="glyphicon glyphicon-pencil"></span>
+  </div>
+{{else}}
+  <div class="gravitar">
+    <img src="{{gravitar}}?s=128" alt="{{username}}">
+  </div>
+  {{#if name}}
+  <div><input value="{{name}}" placeholder="Full Name" name="name" disabled></div>
+  {{/if}}
+  <h1>{{username}}</h1>
+  <div><input value="{{dateAgo created true}} running" disabled></div>
+  {{#if show_email}}<hr>
+  {{else}}{{#if company}}<hr>{{/if}}
+  {{/if}}
+  {{#if show_email}}
+  <div><input value="{{email}}" placeholder="Email" disabled></div>
+  {{/if}}
+  {{#if company}}
+  <div><input value="{{company}}" placeholder="Company"></div>
+  {{/if}}
+{{/if}}
 {{/with}}
