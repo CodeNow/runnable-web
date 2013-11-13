@@ -7,6 +7,9 @@ module.exports = BaseView.extend({
     'click .edit-inline'      : 'editInline',
     'click .permission a'     : 'permissionToggle'
   },
+  preRender: function () {
+    if (this.options.editmode) this.className = 'editmode';
+  },
   editInline: function (evt) {
     this.$(evt.currentTarget)
       .children('input')

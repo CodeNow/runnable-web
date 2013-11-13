@@ -4,11 +4,11 @@
   <a href="http://en.gravatar.com/" target="_blank">Change Gravitar <span class="glyphicon glyphicon-new-window"></span></a>
 </div>
 <h1>{{username}}</h1>
-{{! <div class="edit-inline">
-  <input value="Khal Drogo" placeholder="Full Name" id="full-name">
-  <span class="glyphicon glyphicon-pencil"></span>
-</div> }}
 <div class="edit-inline">
+  <input value="{{#if name}}{{name}}{{else}}{{/if}}" placeholder="Full Name" name="name">
+  <span class="glyphicon glyphicon-pencil"></span>
+</div>
+<div>
   <input value="{{dateAgo created true}} running" disabled>
 </div>
 <hr>

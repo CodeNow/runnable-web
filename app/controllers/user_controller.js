@@ -1,93 +1,90 @@
+var async = require('async');
 var _ = require('underscore');
 var helpers = require('./helpers');
 var fetch = helpers.fetch;
+var fetchUser = helpers.fetchUser;
 var fetchWithMe = helpers.fetchWithMe;
 var formatTitle = helpers.formatTitle;
 var canonical = helpers.canonical;
 var utils = require('../utils');
 
+function fetchRunnablesFor (userId, cb) {
+  var spec = {
+    published: {
+      collection: 'Images',
+      params: {
+        owner: userId
+      }
+    },
+    drafts: {
+      collection: 'Containers',
+      params: {
+        owner: userId
+      }
+    }
+  }
+  fetch.call(this, spec, cb);
+}
+
+function fetchProfileInfo (username, cb) {
+  var spec = {
+    users    : {
+      collection : 'Users',
+      params : {
+        username: username
+      }
+    },
+    published: {
+      collection : 'Images',
+      params     : {
+        sort: 'votes',
+        ownerUsername: username // add api support
+      }
+    }
+  };
+  fetch.call(this, spec, cb);
+}
+
 module.exports = {
-  dashboard: function(params, callback) {
-    var app = this.app;
-    if (!utils.isCurrentURL(app, '/me/published') && !utils.isCurrentURL(app, '/me/drafts')) {
-      return this.redirectTo('/me/drafts');
-    }
-    var self = this;
-    var spec = {
-      user    : {
-        model  : 'User',
-        params : {
-          _id: 'me'
-        }
-      },
-      published: {
-        collection : 'Images',
-        params     : {
-          sort: 'votes',
-          owner: 'me'
-        }
-      },
-      drafts: {
-        collection : 'Containers',
-        params     : {
-          owner: 'me'
-        }
-      }
-    };
-    fetchWithMe.call(this, spec, function (err, results) {
-      if (err) return callback(err);
-      if (!results.user.isRegistered()) return self.redirectTo('/');
-      if (utils.isCurrentURL(app, '/me/published') && !results.user.isVerified)
-        return self.redirectTo('/me/drafts');
-      // no error, registered user
-      results.published.sortByAttr('-created');
-      results.drafts.sortByAttr('-created');
-      callback(null, addSEO(results));
-    });
-    function addSEO (results) {
-      results.page = {
-        title    : formatTitle('Published', 'Dashboard'),
-        canonical: canonical.call(self)
-      }
-      return results;
-    }
-  },
   profile: function (params, callback) {
-    var spec = {
-      user    : {
-        model  : 'User',
-        params : {
-          _id: 'me'
+    var self = this;
+    async.waterfall([
+      fetchUser.bind(this),
+      function (results, cb) {
+        var viewingOwnProfile = results.user.get('username').toLowerCase() === params.username.toLowerCase();
+
+        results.editmode = viewingOwnProfile;
+        if (viewingOwnProfile) {
+          results.profileuser = results.user;
+          fetchRunnablesFor.call(self, results.user.id, function (err, results2) {
+            if (err) return cb(err);
+            results2.published.sortByAttr('-created');
+            results2.drafts.sortByAttr('-created');
+            cb(null, _.extend(results, results2));
+          });
         }
-      },
-      users    : {
-        collection : 'Users',
-        params : {
-          username: params.username
-        }
-      },
-      published: {
-        collection : 'Images',
-        params     : {
-          sort: 'votes',
-          ownerUsername: params.username // add api support
+        else {
+          fetchProfileInfo.call(self, params.username, function (err, results2) {
+            if (err) return cb(err);
+            results2.profileuser = results2.users.models[0];
+            delete results2.users;
+            results2.published.sortByAttr('-created');
+            cb(null, _.extend(results, results2));
+          });
         }
       }
-    };
-    var self = this;
-    fetch.call(this, spec, function (err, results) {
+    ],
+    function (err, results) {
       if (err) return callback(err);
-      if (results.users.length === 0)
-        return callback({status:404});
-      results.profileuser = results.users.models[0];
-      delete results.users;
-      results.published.sortByAttr('-created');
       callback(null, addSEO(results));
     });
     function addSEO (results) {
       var user = results.profileuser;
+      var title = results.editmode ?
+        "Your Profile" :
+        user.get('username')+"'s Profile";
       results.page = {
-        title    : formatTitle(user.get('username')+"'s Profile"),
+        title    : formatTitle(title),
         canonical: canonical.call(self)
       }
       return results;
