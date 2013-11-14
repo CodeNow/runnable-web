@@ -385,7 +385,6 @@ main {
     background: #fff;
     @include border-radius(0 5px 5px 5px);
     @include box-shadow(0 2px 5px rgba(0,0,0,0.1));
-    overflow: hidden;
     padding: 0;
     position: relative;
         z-index: 2;
