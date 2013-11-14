@@ -4338,10 +4338,9 @@ a.thumbnail:focus {
   color: #333333;
 }
 .alert {
-  padding: 15px;
-  margin-bottom: 20px;
+  height: 54px;
+  line-height: 54px;
   border: 1px solid transparent;
-  border-radius: 4px;
 }
 .alert h4 {
   margin-top: 0;

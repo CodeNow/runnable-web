@@ -1,3 +1,7 @@
+<li><a href="/all">Browse All</a>
+
+<li>{{view "create_new_button" model=model}}
+
 {{#if_result model method="isRegistered"}}
 <li id="user-info">
   {{#with model.attributes}}
@@ -13,12 +17,7 @@
       <li><a href="/logout">Log Out</a>
     </ul>
   </div>
-</li>
-{{else}}
-<li><a id="header-signup-link" href="#">Sign Up</a></li>
-{{/if_result}}
 
-<li>
-  {{view "create_new_button" model=model}}
-</li>
-<li><a href="/all">Browse All</a></li>
+{{else}}
+<li><a id="header-signup-link" href="#">Sign Up</a>
+{{/if_result}}
