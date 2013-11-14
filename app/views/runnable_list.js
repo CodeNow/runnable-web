@@ -3,6 +3,7 @@ var _ = require('underscore');
 
 module.exports = BaseView.extend({
   postHydrate: function () {
+    this.listenTo(this.app.user, 'auth', this.render.bind(this));
     this.listenTo(this.collection, 'remove', this.render.bind(this));
   },
   getTemplateData: function () {
