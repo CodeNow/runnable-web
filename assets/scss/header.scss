@@ -6,14 +6,29 @@
         height: 54px;
     }
 
-    #logo {
-        margin-right: 45px;
+    .container {
         position: relative;
-            z-index: 1;
+
+        @include media(xs) {
+            margin: 0;
+            max-width: 100%;
+        }
+    }
+
+    #logo {
+        height: 54px;
         width: 100%;
 
-        @include media(md) {
+        @include media(xs) {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @include media(sm) {
             width: auto;
+        }
+
+        @include media (md) {
+            margin-right: 20px;
         }
 
         .navbar-brand {
@@ -43,17 +58,29 @@
 
     .nav {
         margin: 0;
-        position: relative;
+
+        @include media(sm) {
+            position: absolute;
+                top: 0;
+                right: 0;
+        }
 
         > li {
-            float: right;
             height: 54px;
             line-height: 54px;
-            margin-left: 40px;
+            margin-left: 20px;
 
-            @include breakpoint(screen-xs) {
-                margin-left: 6px;
-                padding: 0;
+            @include media(xs) {
+                &:nth-child(2) {
+                    float: right;
+                    margin-right: 15px;
+                }
+
+                &:last-child {
+                    position: absolute;
+                        top: 0;
+                        right: 0;
+                }
             }
         }
 
@@ -61,11 +88,6 @@
             color: #fff;
             font-size: 12px;
             padding: 0;
-            // @include transition(all .2s ease-in-out);
-
-            &:hover {
-                text-decoration: underline;
-            }
         }
 
         .btn {
@@ -207,23 +229,48 @@
     }
 
     .navbar-form {
-        height: 54px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        @include box-shadow(none);
+        height: 56px;
         margin: 0;
-        padding-top: 5px;
+        padding: 0 15px;
+
+        @include media(sm) {
+            border: none;
+            height: 54px;
+        }
+
+        .form-group {
+            margin: 0;
+
+            > span {
+                display: block !important;
+                height: 34px;
+                top: 10px;
+
+                @include media(sm) {
+                    top: 0;
+                }
+            }
+        }
 
         input {
             border: none;
             @include border-radius(3px);
-            font-size: 12px;
-            min-height: 32px;
-            margin-top: 3px;
-            width: 100%;
-            margin: 4px auto 0 auto;
-        }
+            font-size: 14px;
+            min-height: 34px;
+            margin: 0;
 
-        @media screen and (min-width: 768px) {
-            input {
-                width: 290px;
+            @include media(sm) {
+                width: 150px;
+            }
+
+            @include media(md) {
+                width: 300px;
+            }
+
+            @include media(lg) {
+                width: 400px;
             }
         }
 
@@ -232,8 +279,6 @@
                 @include border-radius(3px 3px 0 0);
             }
         }
-
-        @include breakpoint(screen-sm) { margin: 0 }
     }
 
     .navbar-right {
@@ -244,7 +289,6 @@
 //user profile link
 #user-info {
     cursor: pointer;
-    margin-left: 20px !important;
     max-width: 200px;
     min-width: 100px;
     padding: 0 10px;
