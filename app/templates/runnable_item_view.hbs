@@ -19,6 +19,9 @@
     {{view "tag_link" name=name}}
     {{/each}}
   </span>
+  {{#if_result ../../user method="isModerator"}}
+  <button class="delete" type="button">x</button>
+  {{/if_result}}
   {{/if}}
 </p>
 {{/with}}

@@ -1690,6 +1690,7 @@ div#output-terminal-container{
             margin: 0;
             border-bottom: solid 1px #eee;
             @include transition(background 0.2s ease-in-out);
+            position: relative;
             h3 {
                 margin: 0;
                 a {
@@ -1755,6 +1756,25 @@ div#output-terminal-container{
             }
             &:hover {
                 background: #FCF7FF;
+            }
+
+            button {
+                background: none;
+                border: none;
+                color: rgba(0,0,0,0.2);
+                font-size: 14px;
+                font-weight: bold;
+                outline: none;
+                position: absolute;
+                    top: 7px;
+                    right: 10px;
+                text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+                @include transition(all 0.2s ease-in-out);
+
+                &:hover {
+                    color: rgba(0,0,0,0.6);
+                    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+                }
             }
         }
     }
