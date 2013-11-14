@@ -6,6 +6,11 @@ module.exports = BaseView.extend({
   events: {
     'click .delete': 'deleteRunnable'
   },
+  postHydrate: function () {
+    this.$('[data-toggle=tooltip]').tooltip({
+      placement: 'bottom'
+    });
+  },
   deleteRunnable: function () {
     var self = this;
     alertify.confirm("Are you sure you want to delete '"+this.model.get('name')+"'?", function (e) {

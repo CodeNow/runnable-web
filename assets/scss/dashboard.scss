@@ -4,8 +4,21 @@ main {
 
 //profile
 #profile {
-    float: left;
-    width: 25%;
+
+    //email privacy menu
+    .dropdown-menu {
+        top: 30px;
+        left: -170px;
+    }
+
+    @include media(xs) {
+        padding: 0 20px;
+    }
+
+    @include media(md) {
+        float: left;
+        width: 25%;
+    }
 
     //adding the class .no-edit disables hover effects
     &.no-edit {
@@ -38,16 +51,37 @@ main {
     }
 
     > .gravitar {
-        margin-top: 20px;
+        float: left;
+        margin: 20px 60px 20px 0;
         position: relative;
-        width: 100%;
+        width: 25%;
+
+        img {
+            width: 100%;
+        }
+
+        @include media(xs) {
+            float: none;
+            display: block;
+            margin: 20px auto 0;
+            width: 200px;
+        }
+
+        @include media(md) {
+            float: none;
+            margin: 20px 0 0;
+            width: 100%;
+
+            > img {
+                width: 50%;
+            }
+        }
 
         > img {
             border: 20px solid #fff;
             @include border-radius(50%);
             @include box-shadow(0 2px 3px rgba(0,0,0,0.3));
             display: block;
-            width: 50%;
         }
 
         > a {
@@ -55,7 +89,7 @@ main {
             @include border-radius(50%);
             color: #fff;
             display: block;
-            font-size: 10px;
+            font-size: 18px;
             height: 100%;
             line-height: 10;
             opacity: 0;
@@ -64,14 +98,19 @@ main {
             text-align: center;
             text-decoration: none;
             @include transition(opacity 0.2s);
-            width: 50%;
+            width: 100%;
 
             &:hover {
                 opacity: 0.75;
             }
 
+            @include media(xs) {
+                font-size: 20px;
+            }
+
             @include media(md) {
                 font-size: 12px;
+                width: 50%;
             }
 
             @include media(lg) {
@@ -81,15 +120,30 @@ main {
 
         span {
             color: rgba(255,255,255,0.5);
-            font-size: 9px;
+            font-size: 16px;
 
             &:hover {
                 color: #fff;
             }
 
+            @include media(xs) {
+                font-size: 14px;
+            }
+
             @include media(md) {
                 font-size: 12px;
             }
+        }
+    }
+
+    > h1,
+    > div,
+    > hr {
+        display: inline-block;
+        width: calc(75% - 60px);
+
+        @include media(xs) {
+            width: 100%;
         }
     }
 
@@ -99,7 +153,11 @@ main {
 
     > hr {
         border-top-color: rgba(0,0,0,0.1);
-        margin: 22px 40px 22px 0;
+        margin: 11px 0;
+
+        @include media(md) {
+            margin: 22px 40px 22px 0;
+        }
     }
 
     .inline,
@@ -108,8 +166,11 @@ main {
         min-height: 24px;
         margin: 4px 0;
         position: relative;
-        width: 220px;
-        width: calc(100% - 40px);
+
+        @include media(md) {
+            width: 220px;
+            width: calc(100% - 40px);
+        }
 
         .glyphicons {
             color: #bbb;
@@ -216,9 +277,12 @@ main {
 
 //dashboard
 #dashboard {
-    float: right;
     padding-top: 40px;
-    width: 75%;
+
+    @include media(md) {
+        float: right;
+        width: 75%;
+    }
 
     //tabs
     .nav-tabs {
@@ -321,7 +385,6 @@ main {
     background: #fff;
     @include border-radius(0 5px 5px 5px);
     @include box-shadow(0 2px 5px rgba(0,0,0,0.1));
-    overflow: hidden;
     padding: 0;
     position: relative;
         z-index: 2;

@@ -1385,16 +1385,6 @@ progress {
                     }
                 }
             }
-            .tooltip {
-                top: -34px  !important;
-                .tooltip-inner {
-                    background: $orange; /* is the new black */
-                    @include border-radius(3px);
-                }
-                &.top .tooltip-arrow {
-                    border-top-color: $orange;
-                }
-            }
         }
         .nav {
             li {
