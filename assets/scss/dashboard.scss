@@ -5,6 +5,16 @@ main {
 //profile
 #profile {
 
+    //email privacy menu
+    .dropdown-menu {
+        top: 30px;
+        left: -170px;
+    }
+
+    @include media(xs) {
+        padding: 0 20px;
+    }
+
     @include media(md) {
         float: left;
         width: 25%;
@@ -50,6 +60,13 @@ main {
             width: 100%;
         }
 
+        @include media(xs) {
+            float: none;
+            display: block;
+            margin: 20px auto 0;
+            width: 200px;
+        }
+
         @include media(md) {
             float: none;
             margin: 20px 0 0;
@@ -88,7 +105,7 @@ main {
             }
 
             @include media(xs) {
-                font-size: 10px;
+                font-size: 20px;
             }
 
             @include media(md) {
@@ -110,7 +127,7 @@ main {
             }
 
             @include media(xs) {
-                font-size: 10px;
+                font-size: 14px;
             }
 
             @include media(md) {
@@ -124,6 +141,10 @@ main {
     > hr {
         display: inline-block;
         width: calc(75% - 60px);
+
+        @include media(xs) {
+            width: 100%;
+        }
     }
 
     > h1 {
