@@ -14,14 +14,14 @@ function fetchRunnablesFor (userId, cb) {
       collection: 'Images',
       params: {
         owner: userId,
-        limit: 30 // default limit is 25
+        limit: 200 // default limit is 25
       }
     },
     drafts: {
       collection: 'Containers',
       params: {
         owner: userId,
-        limit: 30 // default limit is 25
+        limit: 200 // default limit is 25
       }
     }
   }
@@ -40,7 +40,7 @@ function fetchProfileInfo (username, cb) {
       collection : 'Images',
       params     : {
         ownerUsername: username, // add api support
-        limit: 30 // default limit is 25
+        limit: 200 // default limit is 25
       }
     }
   };
