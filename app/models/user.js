@@ -86,39 +86,29 @@ var User = module.exports = Base.extend({
       }
     }
   },
-  vote: function (project, cb) {
-    var self = this;
-    cb = cb || function(){};
-    var applyVote = function () {
-      var match = self.votes.findWhere({ runnable: project.id });
-      if (match) {
-        cb('You have already voted on this project');
-      } else {
-        project.incVote();
-        self.votes.create({
-          runnable: project.id
-        }, {
-          success: function () {
-            cb();
-          },
-          error: function () {
-            project.decVote();
-            cb('Error voting on project');
-          }
-        });
-      }
-    };
+  vote: function (image, cb) {
     if (!this.votes) {
-      var currentVotes = this.get('votes') || [];
-      this.votes = new BaseCollection(currentVotes, {
-        model: Base,
-        app: this.app,
-        url: '/users/' + this.id + '/votes'
-      });
-      this.votes.fetch();
-      this.listenToOnce(this.votes, 'sync', applyVote);
-    } else {
-      applyVote();
+      this.createVotesCollection(this.get('votes'));
+    }
+    var data = { runnable: image.id };
+    var opts = utils.cbOpts(callback, this);
+
+    if (this.votes.findWhere(data))
+      return cb ('You have already voted on this runnable');
+
+    this.votes.create(data, opts);
+    image.incVote(); // assume success
+    function callback (err, vote) {
+      if (err) {
+        // rollback
+        vote = this.votes.findWhere(data);
+        this.votes.remove(vote);
+        image.decVote();
+        cb (err);
+      }
+      else {
+        cb();
+      }
     }
   },
   hasVoted: function (project, cb) {
