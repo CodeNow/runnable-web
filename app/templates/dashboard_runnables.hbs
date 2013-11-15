@@ -1,0 +1,7 @@
+{{#each collection.models}}
+{{view "dashboard_item_view" model=. isimage=../isimage editmode=../editmode}}
+{{else}}
+<li>
+  <h3><a>No {{#if isimage}}Published{{else}}Draft{{/if}} Runnables</a></h3>
+</li>
+{{/each}}

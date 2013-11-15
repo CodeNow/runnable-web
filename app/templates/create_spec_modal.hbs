@@ -6,7 +6,6 @@
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h4 class="modal-title">{{header}}</h4>
     </div><!--/.modal-header-->
-
       {{#if_eq step compare=1}}
       <form class="name-form step1">
         <div class="modal-body">
@@ -18,7 +17,9 @@
         </div><!--/.modal-body-->
 
         <div class="modal-footer">
+          {{#unless nogoback}}
           <a href="javascript:" class="back">Go Back</a>
+          {{/unless}}
           <button class="orange">Next</button>
         </div><!--/.modal-footer-->
 
@@ -38,7 +39,7 @@
             </ul>
             <div class="tab-content">
               <div id="create-spec-instructions" class="tab-pane active in">
-                <textarea name="instructions" class="form-control" placeholder="Instructions">{{specification.attributes.instructions}}</textarea>
+                <textarea name="instructions" class="form-control" placeholder="Enter Instructions Here">{{specification.attributes.instructions}}</textarea>
               </div>
               <div id="create-spec-preview" class="tab-pane">
                 {{markdown specification.attributes.instructions}}

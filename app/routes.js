@@ -16,8 +16,10 @@ module.exports = function(match) {
   // match('blob',                 'home#blob');
   match('new',                  'runnable#new');
   match('new/:from',            'runnable#newFrom');
-  match('me/drafts',            'user#drafts');
-  match('me/published',         'user#published');
+  match('u/:username',          'user#profile');
+  // match('me',                   'user#dashboard');
+  // match('me/drafts',            'user#dashboard');
+  // match('me/published',         'user#dashboard');
   match('me/:_id',              'runnable#container');
   match('c/:category',          'channel#category');
   if (lock) {

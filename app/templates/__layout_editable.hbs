@@ -36,6 +36,10 @@
       };
       if (!this.console) this.console = {};
       if (!this.console.log) this.console.log = window.log;
+      // HTTPS REDIRECT
+      if (window.location.href.match(/^https/)) {
+        window.location = window.location.href.replace(/^https/, 'http');
+      }
     </script>
   </head>
 
@@ -115,7 +119,7 @@
 
     <!-- getsatisfaction -->
     <div id="getsat-widget-6707"></div>
-    <script type="text/javascript" src="https://loader.engage.gsfn.us/loader.js"></script>;
+    <script type="text/javascript" src="https://loader.engage.gsfn.us/loader.js"></script>
     <script type="text/javascript">
     if (typeof GSFN !== "undefined") { GSFN.loadWidget(6707,{"containerId":"getsat-widget-6707"}); }
     </script>

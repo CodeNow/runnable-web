@@ -13,18 +13,19 @@ marked.setOptions({
 module.exports = ModalView.extend({
   id: 'implement-modal',
   events: {
-    'submit form'     : 'submit',
-    'click .nav li a' : 'switchTab',
-    'click input[readonly]' : 'baseUrl',
+    'submit form'            : 'submit',
+    'click .nav li a'        : 'switchTab',
+    'click input[readonly]'  : 'baseUrl',
     'mouseover .url-popover' : 'showHint',
     'mouseout .url-popover'  : 'hideHint',
     'mouseover .keys-popover': 'showHint',
-    'mouseout .keys-popover' : 'hideHint'
+    'mouseout .keys-popover' : 'hideHint',
+    'click .run-button'      : 'run'
   },
   postRender: function () {
     Super.postRender.apply(this, arguments);
     this.$('.url-popover').popover({
-      content: 'Use this as the base for a callback URL or redirect URL. This can be used as the permanent url of this application.',
+      content: 'Use this as the base for a callback URL or redirect URL. This is the permanent URL for the application.',
       show: false
     });
     this.$('.keys-popover').popover({
@@ -69,7 +70,13 @@ module.exports = ModalView.extend({
         return this.showError(err);
       }
       this.collection.add(implementation);
-      this.close();
+      if (this.hasRunButton()) {
+        this.options.showrun = true;
+        this.render();
+      }
+      else {
+        this.close();
+      }
     }
   },
   switchTab: function (evt) {
@@ -84,6 +91,18 @@ module.exports = ModalView.extend({
   },
   baseUrl: function (evt) {
     $(evt.currentTarget).select();
+  },
+  run: function () {
+    if (this.hasRunButton()) {
+      this.options.runbutton.run();
+      this.close();
+    }
+    else {
+      throw new Error('parent must be run button to run..');
+    }
+  },
+  hasRunButton: function () {
+    return Boolean(this.options.runbutton);
   }
 });
 

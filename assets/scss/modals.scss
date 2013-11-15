@@ -47,6 +47,14 @@
     }
 }
 
+//popovers within modals
+.modal {
+  .popover {
+    font-weight: normal;
+    z-index: 1050;
+  }
+}
+
 // modal
 .modal-dialog {
   width: 365px;
@@ -74,26 +82,6 @@
     }
   }
 }
-
-/*
-
-#implement-modal {
-  .tab-content {
-    margin-top: 20px;
-    min-height: 315px;
-  }
-}
-#implement-modal, #service-modal {
-  .modal-dialog {
-    width: 700px;
-    .modal-body {
-      max-height: 500px;
-      overflow-y: scroll;
-    }
-  }
-}
-
-*/
 
 .modal-dialog .modal-content .modal-body .input-group {
   margin-bottom: 20px;
@@ -144,7 +132,7 @@ body.modal-open,
 .spec-modal {
 
   .modal-body {
-    max-height: 450px;
+    max-height: 400px;
     overflow: auto;
     padding: 20px 20px 0;
 
@@ -166,6 +154,7 @@ body.modal-open,
 
       .popover {
         font-weight: normal;
+        max-width: 350px;
       }
 
       input {
@@ -260,6 +249,10 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
   .modal-body {
     padding: 0;
 
+    .run-button {
+      margin: 50px 220px;
+    }
+
     #implement-env-tab {
       padding: 20px 20px 0;
 
@@ -281,9 +274,22 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
     #implement-instructions-tab {
       background: lightyellow;
       border: 1px solid rgba(0,0,0,0.1);
+      border-bottom: none;
       height: 100%;
       padding: 20px;
       width: 100%;
+    }
+
+    #implement-saved {
+      padding: 20px;
+
+      > p {
+        font-weight: bold;
+      }
+
+      > button {
+        float: right;
+      }
     }
 
   }
@@ -354,13 +360,15 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
 
   .step2 {
 
+    > .modal-body {
+      padding: 20px;
+    }
+
     //markdown link
     .help-link {
       color: $link-off;
-      display: block;
       font-size: 12px;
       font-weight: 700;
-      margin-bottom: 20px;
 
       &.hover {
         color: $link-on;

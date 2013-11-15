@@ -1,0 +1,40 @@
+{{view "app_user" model=user}}
+{{view "header_view" model=user context=.}}
+{{view "global_message"}}
+
+<main class="container">
+  {{view "dashboard_profile" model=profileuser editmode=editmode}}
+
+  <section id="dashboard">
+    {{! <div class="dropdown">
+      <button type="button" class="dropdown">
+        <div class="filter-option pull-left">Recent </div>
+        <div class="caret"></div>
+      </button>
+      <select>
+        <option value="Recent" selected>Recent
+        <option value="Copies">Copies
+        <option value="Runs">Runs
+        <option value="Views">Views
+      </select>
+    </div> }}
+    {{#if editmode}}
+    <ul class="nav nav-tabs">
+      <li {{#if publishedActive}}class="active"{{/if}}><a href="#published"><span>{{published.length}}</span> Published</a>
+      <li {{#if draftsActive}}class="active"{{/if}}><a href="#drafts"><span>{{drafts.length}}</span> Drafts</a>
+    </ul>
+    <div class="tab-content">
+      <div id="published" class="tab-pane{{#if publishedActive}} active in{{/if}}">
+        {{view "dashboard_runnables" classname="dashboard-runnables" collection=published editmode=editmode}}
+      </div>
+      <div id="drafts" class="tab-pane{{#if draftsActive}} active in{{/if}}">
+        {{view "dashboard_runnables" classname="dashboard-runnables" collection=drafts editmode=editmode}}
+      </div>
+    </div>
+    {{else}}
+    {{view "dashboard_runnables" classname="dashboard-runnables" collection=published}}
+    {{/if}}
+  </section>
+</main>
+
+{{view "footer_view" model=user context=.}}

@@ -2,12 +2,21 @@ var _ = require('underscore');
 var EditorButtonView = require('./editor_button_view');
 var Super = EditorButtonView.prototype;
 var utils = require('../utils');
+var noop = function () {};
 
 module.exports = EditorButtonView.extend({
   tagName: 'button',
-  className: 'green',
+  className: 'btn green run-button',
   events: {
     'click' : 'click'
+  },
+  postInitialize: function () {
+    if (this.options.htmlonly) {
+      this.events = {};
+      this.postHydrate = noop;
+      this.postRender = noop;
+      this.getTemplateData = function () { return this.options; };
+    }
   },
   preRender: function () {
     Super.preRender.call(this);
@@ -29,9 +38,6 @@ module.exports = EditorButtonView.extend({
   click: function () {
     if (!this.userImplementedSpec()) {
       var modal = this.openImplementModal();
-      this.listenToOnce(modal, 'close', function () {
-        if (this.userImplementedSpec()) this.run();
-      }.bind(this))
     }
     else {
       this.run();
@@ -46,28 +52,45 @@ module.exports = EditorButtonView.extend({
   },
   openImplementModal: function () {
     var opts = {
-      header: 'Before you Run  Please Enter Required Keys for {{name}}',
-      savetext: 'Save and Run'
+      header: 'Before you Run Please Enter Required Keys for {{name}}',
+      savetext: 'Save',
+      onSaveSuccess: this.saveImplementationSuccess.bind(this),
+      runbutton: this
     };
     return this.implementLink.openImplementModal(null, opts);
   },
-  run: function () {
+  openOutput: function () {
     var url = '/'+this.model.id+'/output';
     var windowName = this.model.id+'output';
-    var popup = window.open(url, windowName);
+    this.popup = window.open(url, windowName);
+
+  },
+  refreshOutput: function () {
+    this.popup.location = this.popup.location;
+  },
+  closeOutput: function () {
+    if (this.popup) {
+      this.popup.close()
+    }
+  },
+  run: function () {
+    this.openOutput();
     this.disable(true);
     this.model.run(function (err) {
       this.disable(false);
       if (err) {
         this.showError(err);
-        popup.close();
+        this.popup.close();
         _rollbar.push({level: 'error', msg: "Couldn't start container", errMsg: err});
       }
       else {
-        popup.postMessage("Refresh", "*");
+        // this.refreshOutput();
       }
     }, this);
     this.app.dispatch.trigger('run');
+  },
+  saveImplementationSuccess: function () {
+    if (this.userImplementedSpec()) this.run();
   },
   onChangeUnsaved: function (bool) {
     if (bool)

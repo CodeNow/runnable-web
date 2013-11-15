@@ -1,17 +1,17 @@
-<div class="status-bar">
+<section class="status-bar">
   <div class="container">
-    <div class="status-message col-sm-8">
+    <div class="row">
       <p>Your code is currently in <b>Draft Mode</b>. When you're ready to show it off to the world, hit <b>Publish</b>.</p>
-    </div>
-    <div class="status-buttons">
-      {{#if_result user method="canEdit" a0=model}}
-      <button id="pubwarn-back-button" class="purple">Publish Back</button>
-      {{/if_result}}
-      {{#if_result user method="isVerified"}}
-      <button id="pubwarn-new-button" class="purple">Publish as New Example</button>
-      {{else}}
-      <button id="pubwarn-request-button" class="purple">Publish as New Example</button>
-      {{/if_result}}
-    </div>
-  </div>
-</div>
+      <div>
+        {{#if_result user method="canEdit" a0=model}}
+        <button id="pubwarn-back-button" class="purple">Publish Back</button>
+        {{/if_result}}
+        {{#if_result user method="isVerified"}}
+        <button id="pubwarn-new-button" class="purple">Publish as New Example</button>
+        {{else}}
+        <button id="pubwarn-request-button" class="purple">Publish as New Example</button>
+        {{/if_result}}
+      <div>
+    </div><!--/.row-->
+  </div><!--/.container-->
+</section>

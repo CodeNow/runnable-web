@@ -26,6 +26,7 @@ var minCSS = [
   'node_modules/nprogress/nprogress.css',
   'public/vendor/bower/alertify.js/themes/alertify.core.css',
   'public/vendor/bower/alertify.js/themes/alertify.default.css',
+  'public/vendor/glyphicons.css',
   compassCSS // must be last
 ];
 //stitch

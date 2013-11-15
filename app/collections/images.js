@@ -1,7 +1,7 @@
 var Image = require('../models/image');
-var Base = require('./base');
+var Runnables = require('./runnables');
 
-module.exports = Base.extend({
+module.exports = Runnables.extend({
   model: Image,
   url: '/runnables',
   comparator: function (a, b) {

@@ -20,8 +20,8 @@ module.exports = BaseView.extend({
   },
   openImplementModal: function (evt, options) {
     if (evt) evt.preventDefault();
-
-    var opts = _.extend(this.options, options || {});
+    var opts = _.clone(this.options);
+    opts = _.extend(opts, options || {});
     var implementModal = new ImplementModal(opts);
     implementModal.open();
 

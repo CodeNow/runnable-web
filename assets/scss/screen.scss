@@ -156,10 +156,6 @@ $prefix-for-spec:      true !default; // required for keyframe mixin
     $prefix-for-spec:      $original-prefix-for-spec;
 }
 
-
-
-
-
 // Animations ------------------------- //
 
 @include keyframes(bounceySmall) {
@@ -292,6 +288,24 @@ $prefix-for-spec:      true !default; // required for keyframe mixin
     filter: blur(3px);
 }
 
+// .dropdown-menu
+.dropdown-menu {
+    padding: 0;
+
+    li {
+        border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    li:first-child {
+        border-top: none;
+    }
+
+    a {
+        padding: 8px 20px !important; //overriding bootstrap...
+    }
+}
+
+
 // inputs
 .form-control {
         min-height: 40px;
@@ -329,7 +343,8 @@ $prefix-for-spec:      true !default; // required for keyframe mixin
     }
 
 // UI KIT
-button {
+button,
+.btn {
     @include border-radius(3px);
     @include transition(all 0.2s ease-in-out);
     &.green {
@@ -344,11 +359,10 @@ button {
         font-size: 13px;
         padding: 8px 18px 8px 16px;
         img, span {
-            vertical-align: middle;
             display: inline-block;
         }
         img {
-            margin-right: 8px;
+            margin: -3px 8px 0 0;
         }
         &:hover {
             background-color: adjust-lightness(#81B638,5);
@@ -484,7 +498,7 @@ button {
         }
     }
     span {
-        margin-top: -3px;
+        // margin-top: -3px;
     }
     // Alternate Disabled Styling
     //
@@ -1300,42 +1314,78 @@ progress {
     }
     .main-controls {
         margin: 30px 0 35px 0;
-        button {
-            margin-right: 10px;
-            padding-bottom: 10px;
-            max-height: 39px;
+
+        .silver {
+            height: 38px;
+            margin-left: 10px;
+        }
+
+        .green {
+            height: 38px;
+
+            &:hover,
+            &:focus {
+                color: #fff;
+            }
+        }
+
+        //if run options
+        .btn-group {
+            display: block;
+
+            > button {
+                &:hover,
+                &:focus {
+                    color: #fff;
+                }
+            }
+
+            .run-options, {
+                @include border-radius(0 3px 3px 0);
+                padding: 8px 9px 8px 8px;
+
+                .caret {
+                    border-top-color: #fff;
+                }
+            }
         }
     }
 }
 
 #project-author {
     margin: 30px 0 0 0;
-    img.project-author-icon {
-        width: 52px;
-        @include border-radius(3px);
-        overflow: hidden;
+
+    .project-author-icon {
+        @include border-radius(50%);
         float: left;
         margin-right: 10px;
+        overflow: hidden;
+        width: 52px;
     }
-    p.publish-date {
+
+    .publish-date {
         color: #bcbcbc;
         font-size: 13px;
         padding: 0;
         margin: 5px 0 0 0;
     }
-    h4.author-title {
+
+    .author-title {
         padding: 0;
         margin: 0;
+
         a {
             font-size: 15px;
             font-weight: bold;
             color: #333;
             text-decoration: none;
+
             &:hover {
                 text-decoration: underline;
             }
         }
     }
+
     #share-options {
         text-align: center;
         input.form-control {
@@ -1509,16 +1559,6 @@ progress {
                         border: solid 1px $purple-light;
                         @include box-shadow(0 0 0 1px $orange);
                     }
-                }
-            }
-            .tooltip {
-                top: -34px  !important;
-                .tooltip-inner {
-                    background: $orange; /* is the new black */
-                    @include border-radius(3px);
-                }
-                &.top .tooltip-arrow {
-                    border-top-color: $orange;
                 }
             }
         }
@@ -1787,6 +1827,7 @@ div#output-terminal-container{
             background: none;
             vertical-align: middle;
             margin-top: 14px;
+
             .btn {
                 background: none;
                 box-shadow: none;
@@ -1825,6 +1866,7 @@ div#output-terminal-container{
             margin: 0;
             border-bottom: solid 1px #eee;
             @include transition(background 0.2s ease-in-out);
+            position: relative;
             h3 {
                 margin: 0;
                 a {
@@ -1890,6 +1932,25 @@ div#output-terminal-container{
             }
             &:hover {
                 background: #FCF7FF;
+            }
+
+            button {
+                background: none;
+                border: none;
+                color: rgba(0,0,0,0.2);
+                font-size: 14px;
+                font-weight: bold;
+                outline: none;
+                position: absolute;
+                    top: 7px;
+                    right: 10px;
+                text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+                @include transition(all 0.2s ease-in-out);
+
+                &:hover {
+                    color: rgba(0,0,0,0.6);
+                    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+                }
             }
         }
     }
@@ -1975,58 +2036,107 @@ div#output-terminal-container{
     #about-logos {
         text-align: center;
         padding: 75px 0;
+
         .logo {
             display: inline-block;
-            margin: 0 28px 60px 28px;
-            &.engadget {
-                background: url(../images/sprite-engadget.png);
-                @include background-image-retina('../images/sprite-engadget@2x.png');
-                @include background-size(100% auto);
-                width: 150px;
-                height: 51px;
+            background: url(/images/about-press.svg);
+            height: 100px;
+            margin: 0 10px;
+            position: relative;
+            @include transition-transforms(0.2s);
+            width: 150px;
+
+            @include media(xs) {
+                background-size: 300%;
+                height: 50px;
+                margin: 0 10px 20px;
+                width: 75px;
             }
-            &:hover {
-                background-position: 0 -100%;
+
+            @include media(sm) {
+                margin: 0 28px 28px;
+            }
+
+            &.venturebeat {
+                background-position: 0 0;
+            }
+
+            &.forbes {
+                background-position: 50% 0;
+            }
+
+            &.techcrunch {
+                background-position: 100% 0;
+            }
+
+            &.wired {
+                background-position: 0 100%;
+            }
+
+            &.gigaom {
+                background-position: 50% 100%;
+            }
+
+            &.pandodaily {
+                background-position: 100% 100%;
+            }
+
+            &:hover,
+            &:active {
+                @include transform-3d(0,2px,0);
             }
         }
+
         blockquote {
             border: none;
-            margin: 0;
-            padding: 0;
             font-family: Georgia, serif;
             font-style: italic;
-            color: $purple-light;
+            margin: 0;
+            padding: 0;
+
+            @include media(xs) {
+                margin-top: 20px;
+            }
+
             p {
-                position: relative;
                 font-size: 24px;
-                &:before {
-                    content: "“";
-                    position: absolute;
-                    top: -40px;
-                    left: -55px;
-                    font-size: 120px;
-                    color: #E1E3E5;
-                }
+                color: $link-on;
+                position: relative;
+
+                &:before,
                 &:after {
-                    content: "”";
-                    position: absolute;
-                    top: 40px;
-                    right: -35px;
-                    font-size: 120px;
                     color: #E1E3E5;
+                    font-size: 120px;
+                    position: absolute;
+                    width: 60px;
+                }
+
+                &:before {
+                    content: '“';
+                    top: -40px;
+                    left: -70px;
+                }
+
+                &:after {
+                    content: '”';
+                    top: 40px;
+                    right: -50px;
                 }
             }
         }
-        h3.read-the-article {
+
+        h3 {
             margin-top: 40px;
+
             a {
                 font-size: 18px;
-                text-transform: uppercase;
-                color: #C8C9CB;
                 font-weight: bold;
+                color: $link-off;
+                text-transform: uppercase;
+
                 &:hover {
-                    text-decoration: underline;
-                    color: $purple-light;
+                    color: $link-on;
+                    text-decoration: none;
                 }
             }
         }
@@ -2038,26 +2148,32 @@ div#output-terminal-container{
         @include background-size(cover);
         color: #fff;
         overflow: hidden;
+
         .container {
             position: relative;
+
             img {
                 position: absolute;
                 height: auto;
+
                 &.amazon {
                     width: 15%;
                     top: -20px;
                     left: -10% !important;
                 }
+
                 &.node {
                     width: 28%;
                     top: 130px;
                     left: 6% !important;
                 }
+
                 &.codeigniter {
                     width: 11%;
                     top: 100px;
                     left: 95% !important;
                 }
+
                 &.diamond {
                     width: 5%;
                     top: 0;
@@ -2065,12 +2181,16 @@ div#output-terminal-container{
                 }
             }
         }
+
         h2 {
             margin-top: 160px;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
         }
+
         p {
             font-size: 18px;
             margin-right: 15%;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
     }
 
@@ -2092,31 +2212,66 @@ div#output-terminal-container{
     }
 
     #about-team {
-        text-align: center;
         padding: 40px 0;
+        text-align: center;
+
         img {
-            max-width: 100%;
             height: auto;
+            max-width: 100%;
         }
+
         h2 {
-            font-weight: bold;
             font-size: 36px;
+            font-weight: bold;
         }
+
         p {
             font-size: 18px;
             font-weight: bold;
         }
-        #team-list {
-            margin-top: 40px;
+
+        ul {
+            margin: 40px auto 0;
+            padding: 0;
+            width: 100%;
+
+            @include media(xs) {
+                max-width: 660px;
+            }
+
+            @include media(sm) {
+                width: 720px;
+            }
+
+            @include media(lg) {
+                width: 1020px;
+            }
+
+            li {
+                display: inline-block;
+                list-style-type: none;
+                margin: 10px;
+                width: 150px;
+
+                @include media(sm) {
+                    margin: 20px;
+                }
+
+                @include media(lg) {
+                    margin: 10px;
+                }
+            }
+
             h3 {
                 font-size: 16px;
                 font-weight: bold;
                 margin-bottom: 0;
                 white-space: nowrap;
             }
+
             p {
-                font-weight: normal;
                 font-size: 14px;
+                font-weight: normal;
                 margin: 0;
             }
         }
@@ -2283,48 +2438,107 @@ div#output-terminal-container{
     }
 }
 
-#contact-body, #about-contact-body {
-    background-color: #fff;
-    background-image: url('../images/about-contact.png');
-    @include background-image-retina('../images/about-contact@2x.png');
-    @include background-size(100% auto);
-    background-repeat: no-repeat;
+#contact-body,
+#about-contact > div {
+    background: #fff url(/images/about-contact.jpg) no-repeat;
+    @include background-image-retina('/images/about-contact@2x.jpg');
+    background-size: 800px 250px;
+    @include border-radius(3px);
+    @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(0,0,0, 0.05));
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0 15px 20px;
+
+    @include media(xs) {
+        @include border-radius(0);
+    }
+
     address {
-        height: 200px;
-        text-align: center;
-        p {
-            padding: 40px 0 0 0;
-            margin: 0;
+        background: rgba(255,255,255,0.9);
+        @include border-radius(3px);
+        @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(0,0,0, 0.05));
+        display: table;
+        height: 120px;
+        margin: 65px auto;
+        width: 260px;
+
+        > span {
+            color: $link-on;
+            display: table-cell;
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: center;
+            vertical-align: middle;
         }
-        h3 {
-            margin: 12px 0 0 0;
-            padding: 0;
+
+        strong {
+            color: #333;
+            font-size: 16px;
+        }
+
+        a {
+            color: $link-on;
+
+            &:hover {
+                color: $link-on;
+                cursor: default;
+                text-decoration: none;
+            }
         }
     }
+
+    form {
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        @include box-shadow(0 -1px 1px rgba(0,0,0,0.1));
+        padding: 40px 40px 30px;
+
+        > div {
+            width: 100%;
+        }
+
+        @include media(sm) {
+            > div {
+                float: left;
+                width: calc(50% - 10px);
+            }
+
+            > div + div {
+                margin-left: 20px;
+            }
+        }
+    }
+
     h2 {
+        color: #333;
         font-weight: bold;
-        font-size: 24px;
-        color: $purple-light;
-        margin: 10px 0 30px 0;
+        font-size: 30px;
+        margin: 0 0 20px;
     }
-    input.form-control {
+
+    input {
         margin-bottom: 20px;
     }
-    textarea.form-control {
-        margin-top: 66px;
+
+    textarea {
+        margin-bottom: 20px;
+        max-height: 500px;
         min-height: 100px;
-        margin-bottom: 20px;
+        resize: vertical;
     }
+
     button {
         width: 100%;
         height: 40px;
     }
+
     h4 {
         font-weight: bold;
-        margin-top: 20px;
+        margin: 30px 20px 20px;
     }
+
     p {
         font-size: 14px;
+        margin: 0 20px 5px;
     }
 }
 
@@ -2534,6 +2748,9 @@ div#output-terminal-container{
         left: 0;
         right: 0;
         height: 70%;
+        .build-message {
+            padding-top: 100px
+        }
         #output-results {
             border: none;
             width: 100%;
@@ -2556,6 +2773,9 @@ div#output-terminal-container{
             z-index: 1000000;
             cursor: ns-resize;
         }
+        &.full-height {
+            height: 100%;
+        }
     }
     #output-terminal-container {
         position: absolute;
@@ -2574,6 +2794,11 @@ div#output-terminal-container{
             right: 0;
             bottom: 0;
         }
+        &.full-height {
+            height: 100%;
+            top: 0;
+            bottom: auto;
+        }
     }
 }
 
@@ -2591,73 +2816,50 @@ div#output-terminal-container{
     background: $purple-lighter;
     color: $purple-light;
     font-size: 14px;
+    height: 54px;
+    line-height: 54px;
+
     p {
+        display: inline;
         margin: 0;
-        padding: 12px 0;
+        padding-left: 15px;
     }
-    .status-message {
-        padding-left: 0;
-        display: inline-block;
-        float: left;
+
+    p + div {
+        float: right;
     }
-    .status-buttons {
-        padding-right: 0;
-        padding-top: 6px;
-        text-align: right;
-        display: inline-block;
-        float:left;
+
+    button {
+        border-color: #432658;
+        background: #693C89;
+        @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.1));
+        font-size: 12px;
+        height: 32px;
+        line-height: 1;
+        margin-top: 10px;
         white-space: nowrap;
-        button.purple {
-            border-color: #432658;
-            background: #693C89;
-            @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.1));
-            font-size: 12px;
-            height: 32px;
-            padding-top: 6px;
-            margin-left: 0;
-            margin-bottom: 10px;
-            &:hover {
-                background: adjust-lightness(#693C89,8);
-                text-decoration: none;
-            }
-            &:active {
-                background: adjust-lightness(#693C89,-5);
-                @include box-shadow(inset 0 0 4px rgba(0,0,0,0.3));
-                @include transition(all 0.1s ease-in-out);
-                color: adjust-lightness(#693C89, 30);
-            }
-            &.light {
-                background: $purple-lighter;
-                color: $purple-light;
-                text-shadow: none;
-                border-color: $purple-light;
-                @include box-shadow(inset 0 1px rgba(255,255,255,0.7));
-                &:hover {
-                    background: adjust-lightness($purple-lighter,3);
-                    text-decoration: none;
-                }
-                &:active {
-                    background: adjust-lightness($purple-lighter,-5);
-                    @include box-shadow(inset 0 0 4px rgba(0,0,0,0.3));
-                    @include transition(all 0.1s ease-in-out);
-                    color: adjust-lightness($purple-light, 3);
-                }
-            }
+
+        &:hover {
+            background: adjust-lightness(#693C89,8);
+            text-decoration: none;
+        }
+
+        &:active {
+            background: adjust-lightness(#693C89,-5);
+            @include box-shadow(inset 0 0 4px rgba(0,0,0,0.3));
+            @include transition(all 0.1s ease-in-out);
+            color: adjust-lightness(#693C89, 30);
         }
     }
-    @media screen and (min-width: 768px) {
-        .status-buttons {
-            float: right;
-            margin-bottom: 0;
-            button.purple {
-                margin-left: 10px;
-            }
-        }
+
+    button + button {
+        margin-left: 10px;
     }
 }
 
 #site-credits {
     background: #eee;
+
     .navbar-brand {
         font-size: 13px;
         color: #aaa;

@@ -1,7 +1,7 @@
 var Container = require('../models/container');
-var Base = require('./base');
+var Runnables = require('./runnables');
 
-module.exports = Base.extend({
+module.exports = Runnables.extend({
   model: Container,
   url: '/users/me/runnables'
 });

@@ -69,7 +69,7 @@ function initMiddleware() {
 
   // set the middleware stack
   var maxAge = 0;
-  if (envIs(['production', 'staging'])) {
+  if (envIs(['production', 'integration'])) {
     app.use(express.compress());
     app.use(express.staticCache());
     maxAge = 1000*60*60*24;

@@ -1,28 +1,38 @@
 {{view "app_user" model=user}}
 {{view "header_view" model=user context=.}}
 {{view "global_message"}}
-<div class="container">
-  <h1>Dashboard</h1>
-  <ul class="nav nav-tabs">
-    {{#if verifiedUser}}
-    <li{{#if publishedActive}} class="active"{{/if}}>
-      <a href="#published">Published</a>
-    </li>
-    {{/if}}
-    <li{{#if draftsActive}} class="active"{{/if}}>
-      <a href="#drafts" class="selected">Drafts</a>
-    </li>
-  </ul>
-  <div class="tab-content">
-    {{#if verifiedUser}}
-    <div class="tab-pane fade{{#if publishedActive}} active in{{/if}}" id="published">
-      {{view "published_table" collection=published}}
+
+<main class="container">
+  {{view "dashboard_profile" model=user}}
+
+  <section id="dashboard">
+    <div class="dropdown">
+      <button type="button" class="dropdown">
+        <div class="filter-option pull-left">Recent </div>
+        <div class="caret"></div>
+      </button>
+      <select>
+        <option value="Recent" selected>Recent
+        <option value="Copies">Copies
+        <option value="Runs">Runs
+        <option value="Views">Views
+      </select>
     </div>
-    {{/if}}
-    <div class="tab-pane fade{{#if draftsActive}} active in{{/if}}" id="drafts">
-      {{view "drafts_table" collection=drafts}}
+    {{#if verifiedUser}}
+    <ul class="nav nav-tabs">
+      <li {{#if publishedActive}}class="active"{{/if}}><a href="#published"><span>{{published.length}}</span> Published</a>
+      <li {{#if draftsActive}}class="active"{{/if}}><a href="#drafts"><span>{{drafts.length}}</span> Drafts</a>
+    </ul>
+    <div class="tab-content">
+      <div id="published" class="tab-pane{{#if publishedActive}} active in{{/if}}">
+        {{view "dashboard_runnables" classname="dashboard-runnables" collection=published editmode=true}}
+      </div>
+      {{/if}}
+      <div id="drafts" class="tab-pane{{#if draftsActive}} active in{{/if}}">
+        {{view "dashboard_runnables" classname="dashboard-runnables" collection=drafts editmode=true}}
+      </div>
     </div>
-  </div>
-</div>
+  </section>
+</main>
 
 {{view "footer_view" model=user context=.}}

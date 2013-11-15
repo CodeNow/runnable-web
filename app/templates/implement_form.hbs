@@ -3,6 +3,7 @@
 <div class="form-group">
   <label for="{{.}}" class="control-label">{{.}}</label>
   <input name="{{.}}" value="{{findWhere ../implementation.attributes.requirements name=.}}" class="form-control">
+  <div class="saved">Saved</div>
 </div>
 {{/each}}
 <button type="button" class="enter-keys silver col-sm-12">Instructions</button>

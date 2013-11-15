@@ -111,8 +111,9 @@
   }
 }
 
-//#publish-loader
-#publish-loader {
+//loaders with text
+#publish-loader,
+#output-results-container {
 
   > .loader {
     top: 30%;
@@ -130,7 +131,7 @@
         top: -20px;
       text-align: center;
       text-shadow: 0 1px 1px rgba(0,0,0,0.75);
-      @include transition-3d(transform 0.75s);
+      @include transition-transforms(0.75s);
       width: 60px;
     }
   }
@@ -204,5 +205,25 @@
     &.in ~ a {
       @include transform-3d(0,120px,0);
     }
+  }
+}
+
+#output-results-container {
+  h1 {
+    @include animation(loaderText 0.2s forwards);
+    color: #999;
+    margin: 0;
+    text-shadow: none;
+  }
+}
+
+@include keyframes(loaderText) {
+  from {
+    opacity: 0;
+    @include transform-3d(0,-150%,0);
+  }
+  to {
+    opacity: 1;
+    @include transform-3d(0,-0%,0);
   }
 }

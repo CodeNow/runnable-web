@@ -36,19 +36,9 @@ module.exports = BaseView.extend({
     var self = this;
 
     return function (trackingData) {
-      self.increment(stat);
+      model.increment(stat);
       self.track(eventName, trackingData);
     };
-  },
-  increment: function (stat) {
-    var model = this.model;
-    var plusone = model.get(stat) + 1;
-
-    model.set(stat, plusone);
-    model.save({}, {
-      url: '/runnables/' + model.id + '/stats/' + stat,
-      method: 'post'
-    });
   },
   track: function (name, data) {
     var model = this.model;

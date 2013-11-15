@@ -1,0 +1,57 @@
+{{view "app_user" model=user}}
+{{view "header_view" model=user context=.}}
+{{view "global_message"}}
+
+<<<<<<< Updated upstream
+<div class="container">
+  {{view "dashboard_profile" model=user editmode=true}}
+=======
+<main class="container">
+  <section id="profile">
+    {{#with model.attributes}}
+    <div class="gravitar">
+      <img src="{{gravitar}}?s=128" alt="{{username}}">
+    </div>
+    <h1>{{username}}</h1>
+    {{! <div class="edit-inline">
+      <input value="Khal Drogo" placeholder="Full Name" id="full-name">
+      <span class="glyphicon glyphicon-pencil"></span>
+    </div> }}
+    <div class="edit-inline">
+      <input value="{{dateAgo created true}} running" disabled>
+    </div>
+    {{! <hr>
+    <div class="edit-inline">
+      <span class="glyphicon glyphicon-envelope"></span>
+      <input value="KhalD@Runnable.com" placeholder="Email">
+      <span class="glyphicon glyphicon-pencil"></span>
+    </div>
+    <div class="edit-inline">
+      <span class="glyphicon glyphicon-briefcase"></span>
+      <input value="Runnable" placeholder="Company">
+      <span class="glyphicon glyphicon-pencil"></span>
+    </div> }}
+    {{/with}}
+  </section>
+>>>>>>> Stashed changes
+
+  <section id="dashboard">
+    <div class="dropdown">
+      <button type="button" class="dropdown">
+        <div class="filter-option pull-left">Recent </div>
+        <div class="caret"></div>
+      </button>
+      <select>
+        <option value="Recent" selected>Recent
+        <option value="Copies">Copies
+        <option value="Runs">Runs
+        <option value="Views">Views
+      </select>
+    </div>
+    <ul class="profile-content">
+      {{view "dashboard_runnables" collection=published editmode=true}}
+    </ul>
+  </section>
+</main>
+
+{{view "footer_view" model=user context=.}}

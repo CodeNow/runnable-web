@@ -40,8 +40,9 @@ module.exports = BaseView.extend({
   },
   openImplementModal: function (evt) {
     if (evt) evt.preventDefault();
-
-    var implementModal = new ImplementModal(this.options);
+    var opts = _.clone(this.options);
+    opts.nogoback = true;
+    var implementModal = new ImplementModal(opts);
     implementModal.open();
 
     return implementModal;
@@ -68,8 +69,13 @@ module.exports = BaseView.extend({
         this.showError('Error saving changes to keys, try again');
       }
       else {
-        $input.addClass('success');
-        setTimeout($input.removeClass.bind($input, 'success'), 1000);
+        $input.removeClass.bind($input, 'success');
+
+        var $save = $input.next();
+        $save.addClass('in');
+        $input.on('focus',function(){
+          $save.removeClass('in');
+        });
       }
     }
   },

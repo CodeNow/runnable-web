@@ -2,6 +2,10 @@ var BaseView = require('./base_view');
 var _ = require('underscore');
 
 module.exports = BaseView.extend({
+  postHydrate: function () {
+    this.listenTo(this.app.user, 'auth', this.render.bind(this));
+    this.listenTo(this.collection, 'remove', this.render.bind(this));
+  },
   getTemplateData: function () {
     var paramPage = this.collection.options.page || this.collection.params.page;
     var page = (paramPage+1) || 1;

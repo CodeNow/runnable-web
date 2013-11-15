@@ -1,0 +1,173 @@
+.main-controls .popover {
+    background: #f6f6f6;
+    border: none;
+    @include border-radius(3px);
+    display: block;
+    opacity: 0;
+    padding: 0;
+    pointer-events: none;
+    top: 40px;
+    width: 365px;
+        max-width: none;
+    z-index: -1;
+
+    &.in {
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 1010;
+    }
+
+    > .arrow {
+        border-width: 6px;
+        margin-left: -6px;
+        left: 94px;
+    }
+
+    > .arrow:after {
+        border-bottom-color: $purple-light;
+    }
+
+    > .popover-title {
+        $popover-header-height: 40px;
+
+        background: $purple-light;
+        border-bottom: 1px solid #e5e5e5;
+        @include border-radius(3px 3px 0 0);
+        @include box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.25));
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        height: $popover-header-height;
+        line-height: $popover-header-height;
+        padding: 0 20px;
+        width: 100%;
+
+        > button {
+            line-height: $popover-header-height;
+            padding: 0;
+        }
+    }
+
+    > .popover-content {
+        padding: 15px;
+
+        label {
+            font-weight: normal;
+            line-height: 40px;
+        }
+
+        //run and build and run
+        .form-horizontal {
+            height: 40px;
+            margin: 0;
+
+            label {
+                float: left;
+                margin-right: 10px;
+                width: 70px;
+            }
+
+            input {
+                width: 255px;
+            }
+        }
+
+        hr {
+            margin: 15px -15px;
+        }
+    }
+
+    //set default view
+    .toggle-group {
+        background: #EEE;
+        border: 1px solid rgba(0,0,0,0.1);
+        @include border-radius(3px);
+        margin: 0;
+
+        > label {
+            cursor: pointer;
+            display: block;
+            height: 50px;
+            line-height: 50px;
+            margin: 0;
+            padding: 0 10px;
+            width: 100%;
+
+            &:nth-child(n+2) {
+                border-top: 1px solid rgba(0,0,0,0.1);
+            }
+
+            &:first-child  {
+                .sprite-icons-output {
+                    background-position: -61px 0px;
+
+                    &::after {
+                        height: 12px;
+                    }
+                }
+            }
+
+            &:nth-child(2) {
+                .sprite-icons-output {
+                    background-position: 0px 0px;
+                }
+            }
+
+            &:nth-child(3) {
+                .sprite-icons-output {
+                    background-position: -31px 0px;
+
+                    &::after {
+                        height: 22px;
+                    }
+                }
+            }
+
+            &.active {
+                background: #f2dfff;
+
+                .sprite-icons-output::after {
+                    @include animation(blinker 1s infinite);
+                }
+            }
+        }
+
+        input[type="radio"] {
+            float: right;
+            margin: 19px 10px 0 0;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .sprite-icons-output {
+            background: url(/images/sprite-icons-output.svg) no-repeat;
+            border: 1px solid;
+            border-color: rgba(0,0,0,0.15) rgba(0,0,0,0.15) rgba(0,0,0,0.2);
+            float: left;
+            height: 30px;
+            margin: 10px 10px 0 0;
+            overflow: hidden;
+            position: relative;
+            width: 30px;
+
+            &::after {
+                background: #383734;
+                content: '';
+                display: block;
+                opacity: 0;
+                position: absolute;
+                    bottom: 0;
+                width: 100%;
+            }
+        }
+    }
+}
+.popover-content {
+    color: #333;
+}
+@include keyframes(blinker) {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
