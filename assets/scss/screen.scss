@@ -1563,6 +1563,11 @@ div#output-terminal-container{
 
 #sidebar {
     padding: 35px 0 0 0;
+
+    @include media(xs) {
+        padding: 35px 15px 0;
+    }
+
     > li {
         margin-bottom: 35px;
         list-style: none;
@@ -2640,17 +2645,29 @@ div#output-terminal-container{
     background: $purple-lighter;
     color: $purple-light;
     font-size: 14px;
-    height: 54px;
-    line-height: 54px;
 
     p {
-        display: inline;
-        margin: 0;
-        padding-left: 15px;
+        margin: 10px 0 0;
     }
 
-    p + div {
-        float: right;
+    @include media(xs) {
+        .row {
+            margin: 0;
+        }
+    }
+
+    @include media(md) {
+        height: 54px;
+        line-height: 54px;
+
+        p {
+            display: inline;
+            margin: 0 0 0 15px;
+        }
+
+        p + div {
+            float: right;
+        }
     }
 
     button {
@@ -2660,7 +2677,7 @@ div#output-terminal-container{
         font-size: 12px;
         height: 32px;
         line-height: 1;
-        margin-top: 10px;
+        margin: 10px 0;
         white-space: nowrap;
 
         &:hover {
@@ -2674,10 +2691,18 @@ div#output-terminal-container{
             @include transition(all 0.1s ease-in-out);
             color: adjust-lightness(#693C89, 30);
         }
+
+        @include media(md) {
+            margin: 10px 0 0;
+        }
     }
 
     button + button {
         margin-left: 10px;
+
+        @include media(xs) {
+            margin-left: 0;
+        }
     }
 }
 

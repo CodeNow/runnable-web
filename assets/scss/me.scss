@@ -473,12 +473,20 @@ button.btn-sm, .btn-xs {
   border-radius: 3px;
 }
 
-#runnable-tags-edit{
-  .form-control{
+.services-body button {
+  width: 100%;
+}
+
+#runnable-tags-edit {
+
+  .form-control {
     display:inline-block;
-    max-height: 31px;
-    min-height: 25px;
-    width: 75%;
+    width: calc(100% - 95px);
+  }
+
+  button {
+    float: right;
+    min-width: 85px;
   }
 }
 
