@@ -1,9 +1,7 @@
 var _ = require('underscore');
 var BaseView = require('./base_view');
-var Image = require('../models/image');
 var utils = require('../utils');
 var PublishRequestModal = require('./publish_request_modal');
-var PublishLoader = require('./publish_loader');
 
 module.exports = BaseView.extend({
   events: {
@@ -25,6 +23,8 @@ module.exports = BaseView.extend({
     this.$pubBack = $('#pubwarn-back-button');
   },
   publishNew: function () {
+    this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
+    this.publishLoader.initLoading();
     this.$pubNew.attr('disabled', 'disabled');
 
     //test
