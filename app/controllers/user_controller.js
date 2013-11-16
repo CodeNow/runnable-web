@@ -79,6 +79,7 @@ module.exports = {
     ],
     function (err, results) {
       if (err) return callback(err);
+      if (!results.profileuser) return callback({status:404});
       var profileUsername = results.profileuser.get('username');
       if (profileUsername !== params.username)
         return self.redirectTo('/u/'+profileUsername);
