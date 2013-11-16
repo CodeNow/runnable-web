@@ -4,6 +4,7 @@ var utils = require('../utils');
 module.exports = BaseView.extend({
   tagName: 'section',
   id: 'profile',
+  className: 'clearfix',
   events: {
     'click .edit-inline'      : 'editInline',
     'click .permission a'     : 'permissionToggle',
