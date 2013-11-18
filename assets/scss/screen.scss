@@ -1722,6 +1722,14 @@ div#output-terminal-container{
                 span {
                     display: inline-block;
                     margin: 0 5px 5px;
+
+                    &:first-child {
+                        margin-left: 0;
+
+                        > span {
+                            margin-left: 0;
+                        }
+                    }
                     &.vote-up {
                         margin-left: 0;
                         a {
