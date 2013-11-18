@@ -176,17 +176,17 @@ h2.page-title{
 }
 
 //runnable list
-#tags-main #tags-content li p b {
+#tags-content li p b {
   color: #222222;
 }
-#tags-main #tags-content li p span.vote-up span {
+#tags-content li p span.vote-up span {
   color: #bbb;
   text-decoration: none;
   position: relative;
   display: inline-block;
   padding-left: 15px;
 }
-#tags-main #tags-content li p span.vote-up span:before {
+#tags-content li p span.vote-up span:before {
   content: "";
   position: absolute;
   width: 0;

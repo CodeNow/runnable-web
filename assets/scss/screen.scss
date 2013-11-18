@@ -1720,7 +1720,8 @@ div#output-terminal-container{
                     }
                 }
                 span {
-                    margin: 0 5px;
+                    display: inline-block;
+                    margin: 0 5px 5px;
                     &.vote-up {
                         margin-left: 0;
                         a {
@@ -1754,6 +1755,7 @@ div#output-terminal-container{
                             margin-right: 4px;
                         }
                         a {
+                            margin-top: 5px;
                             margin-right: 5px;
                         }
                     }
