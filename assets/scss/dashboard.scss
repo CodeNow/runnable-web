@@ -465,6 +465,14 @@ main {
         > span {
             margin: 0 5px;
 
+            &:first-child {
+                margin-left: 0;
+
+                > span {
+                    margin-left: 0;
+                }
+            }
+
             &.vote-up {
                 margin-left: 0;
 
