@@ -40,37 +40,32 @@ module.exports = RendrView.extend({
       }, this);
     }
   },
-  trackEvent: function (actionName, properties) {
+  trackEvent: function (actionName, properties, viewNameOverride) {
     actionName = _str.humanize(actionName);
     properties = properties || {};
+    function addModelProperties(properties, model, prependKey) {
+      prependKey = prependKey || '';
+      var modelName = (model.constructor.id || model.constructor.name).toLowerCase();
+      var json = model.toJSON();
+      for (var key in json) {
+        var value = json[key];
+        var type = typeof value;
+        if (type === 'object') value = JSON.stringify(value);
+        properties[prependKey+modelName+'.'+key] = value;
+      }
+    }
     if (this.model) {
-      var model = this.model;
-      var modelName = model.constructor.id || model.constructor.name;
-      properties = _.extend(properties, {
-        dataType: modelName,
-        dataName: model.get('name'),
-        dataId  : model.id
-      });
-      if (this.model instanceof Image) {
-        properties.projectId = this.model.id;
-        properties.imageId = this.model.id;
-      }
-      else if (this.model instanceof Container) {
-        properties.projectId = this.model.id;
-        properties.containerId = this.model.id;
-      }
-      if (this.app && this.app.user) properties.userId = this.app.user.id;
+      addModelProperties(properties, this.model);
     }
     else if (this.collection) {
       var collection = this.collection;
-      var collectionName = collection.constructor.id || collection.constructor.name;
-      properties = _.extend(properties, {
-        dataType: collectionName,
-        dataName: JSON.stringify(collection.params)
-      });
+      var collectionName = (collection.constructor.id || collection.constructor.name).toLowerCase();
+      properties[collectionName+'.params'] = JSON.stringify(collection.params);
+      properties[collectionName+'.modelIds'] = collection.models.map(utils.pluck('id'));
     }
+    addModelProperties(properties, this.app.user, 'app.');
 
-    Track.event(this.viewName(), actionName, properties);
+    Track.event(viewNameOverride || this.viewName(), actionName, properties);
   },
   trackError: function (actionName, err) {
     if (err && err.message) {

@@ -41,12 +41,7 @@ module.exports = BaseView.extend({
     };
   },
   track: function (name, data) {
-    var model = this.model;
-
-    data = data || {};
-    data.projectId = model.id;
-    data.isImage = model instanceof Image;
-    Track.event('Code', name, data);
+    this.trackEvent(name, data, 'Code');
     Track.increment(name.toLowerCase());
   },
   showFiles: function (evt) {
