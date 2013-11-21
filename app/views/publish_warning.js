@@ -24,32 +24,13 @@ module.exports = BaseView.extend({
   },
   publishNew: function () {
     this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
-    this.publishLoader.initLoading();
+    this.publishLoader.initLoading('new');
     this.$pubNew.attr('disabled', 'disabled');
-
-    //test
-    this.testLoader();
-    return;
-
-    this.app.set('loading', true);
-    var publishLoader = new PublishLoader({app:this.app});
-    var image = new Image({}, {app:this.app});
-    image.publishFromContainer(this.options.containerid, this.publishCallback.bind(this));
   },
   publishBack: function () {
+    this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
+    this.publishLoader.initLoading('back');
     this.$pubBack.attr('disabled', 'disabled');
-
-    //test
-    this.testLoader();
-    return;
-    
-    this.app.set('loading', true);
-    if (!this.app.user.canEdit(this.model)) { // this shouldn't ever happen..
-      this.showError('You cannot publish back since you are not the owner of the original runnable');
-      return;
-    }
-    // this.model is container's parent image;
-    this.model.publishFromContainer(this.options.containerid, this.publishCallback.bind(this));
   },
   openPublishRequest: function (evt) {
     evt.preventDefault();

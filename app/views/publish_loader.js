@@ -56,11 +56,11 @@ module.exports = BaseView.extend({
     primus.substream('subscriptions').write('progress');
 
   },
-  initLoading: function () {
+  initLoading: function (type) {
     var opts = utils.cbOpts(callback, this);
     opts.patch = true;
     var data = {
-      status: 'Committing new'
+      status: 'Committing ' + type
     };
     this.model.save(data, opts);
     function callback (err, model) {
