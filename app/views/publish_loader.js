@@ -35,7 +35,9 @@ module.exports = BaseView.extend({
     //   i = 1;
     // });
 
-    var primus = new Primus('http://localhost:3480');
+    var primus = new Primus('http://cybertron.' + this.app.get('domain'));
+
+    console.log('http://cybertron.' + this.app.get('domain'));
 
     primus.substream('done').on('data', console.log.bind(console, 'done:'));
     primus.substream('subscriptions').write('done');
@@ -46,6 +48,9 @@ module.exports = BaseView.extend({
         self.$('h1.in').prop('class','out');
         self.$('h1:nth-child(' + i + ')').addClass('in');
         i++;
+      }
+      if (data === 'Finished') {
+        window.location = window.location;
       }
     });
     primus.substream('subscriptions').write('progress');

@@ -107,7 +107,7 @@
       _kiq.push(['identify', USER.email || USER._id]);
     </script>
     {{/if_eq}}
-    <script src="http://localhost:3480/primus/primus.js"></script>
+    <script src="http://cybertron.{{app.attributes.domain}}/primus/primus.js"></script>
     <script src="/mergedAssets.min.js"></script>
     <script>
     (function() {
