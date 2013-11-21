@@ -65,8 +65,10 @@ module.exports = BaseView.extend({
     this.model.save(data, opts);
     function callback (err, model) {
       if (err) {
+        console.log('COMMIT INIT ERROR');
         this.showError(err);
       } else {
+        console.log('COMMIT INIT SUCCESS');
         this.$el.show();
       }
     }
