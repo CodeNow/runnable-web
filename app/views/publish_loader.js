@@ -57,8 +57,6 @@ module.exports = BaseView.extend({
 
   },
   initLoading: function () {
-    console.log('INIT LOADING');
-    this.$el.show();
     var opts = utils.cbOpts(callback, this);
     opts.patch = true;
     var data = {
@@ -68,6 +66,8 @@ module.exports = BaseView.extend({
     function callback (err, model) {
       if (err) {
         this.showError(err);
+      } else {
+        this.$el.show();
       }
     }
   },
