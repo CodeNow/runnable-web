@@ -24,12 +24,12 @@ module.exports = BaseView.extend({
   },
   publishNew: function () {
     this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
-    this.publishLoader.initLoading('new');
+    this.publishLoader.initLoading('new', this.pushblishCallback.bind(this));
     this.$pubNew.attr('disabled', 'disabled');
   },
   publishBack: function () {
     this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
-    this.publishLoader.initLoading('back');
+    this.publishLoader.initLoading('back', this.pushblishCallback.bind(this));
     this.$pubBack.attr('disabled', 'disabled');
   },
   openPublishRequest: function (evt) {

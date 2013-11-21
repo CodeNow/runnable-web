@@ -56,7 +56,7 @@ module.exports = BaseView.extend({
     primus.substream('subscriptions').write('progress');
 
   },
-  initLoading: function (type) {
+  initLoading: function (type, cb) {
     var opts = utils.cbOpts(callback, this);
     opts.patch = true;
     var data = {
@@ -65,8 +65,7 @@ module.exports = BaseView.extend({
     this.model.save(data, opts);
     function callback (err, model) {
       if (err) {
-        console.log('COMMIT INIT ERROR');
-        this.showError(err);
+        cb(err);
       } else {
         console.log('COMMIT INIT SUCCESS');
         this.$el.show();
