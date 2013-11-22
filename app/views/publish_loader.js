@@ -8,7 +8,7 @@ module.exports = BaseView.extend({
     var i = 1, self = this, status = this.model.get('status');
     this.$('h1:first-child').addClass('in');
 
-    if (status !== 'Editing' && status !== 'Draft' %% status !== undefined) {
+    if (status !== 'Editing' && status !== 'Draft' && status !== undefined) {
       this.$el.show();
       this.progress(status);
     }
