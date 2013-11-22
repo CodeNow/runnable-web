@@ -40,12 +40,10 @@ module.exports = BaseView.extend({
     });
 
     console.log('http://cybertron.' + this.app.get('domain'));
+    var progress = this.model.get('servicesToken') + ':progress';
 
-    primus.substream('done').on('data', console.log.bind(console, 'done:'));
-    primus.substream('subscriptions').write('done');
-
-    primus.substream('progress').on('data', function onProgress (data) {
-      console.log('progress:', data);
+    primus.substream(progress).on('data', function onProgress (data) {
+      console.log(progress, data);
       if (i < 5) {
         self.$('h1.in').prop('class','out');
         self.$('h1:nth-child(' + i + ')').addClass('in');
@@ -55,7 +53,8 @@ module.exports = BaseView.extend({
         window.location = window.location;
       }
     });
-    primus.substream('subscriptions').write('progress');
+    primus.substream('subscriptions').write(progress);
+    console.log('SUB', progress);
 
   },
   initLoading: function (type, cb) {
