@@ -6,31 +6,19 @@ module.exports = BaseView.extend({
   className: 'overlay-loader',
   postRender: function () {
     var i = 1, self = this, status = this.model.get('status');
+    this.$('h1:first-child').addClass('in');
+
     if (status !== 'Editing' && status !== 'Draft') {
       this.$el.show();
+      this.progress(status);
     }
-    this.$('h1:first-child').addClass('in');
 
     var primus = new Primus('http://cybertron.' + this.app.get('domain'), { 
       transformer: 'engine.io' 
     });
-
-    console.log('http://cybertron.' + this.app.get('domain'));
     var progress = this.model.get('servicesToken') + ':progress';
-
-    primus.substream(progress).on('data', function onProgress (data) {
-      console.log(progress, data);
-      if (i < 5) {
-        self.$('h1.in').prop('class','out');
-        self.$('h1:nth-child(' + i + ')').addClass('in');
-        i++;
-      }
-      if (data === 'Finished') {
-        window.location = window.location;
-      }
-    });
+    primus.substream(progress).on('data', this.progress.bind(this));
     primus.substream('subscriptions').write(progress);
-    console.log('SUB', progress);
 
   },
   initLoading: function (type, cb) {
@@ -51,6 +39,21 @@ module.exports = BaseView.extend({
   stoppedVirtualMachine: function () {
     this.options.step2 = true;
     this.render();
+  },
+  progress: function (name) {
+    var step = {
+      'Stopping Virtual Machine': 1,
+      'Saving Changes': 2, 
+      'Optimizing': 3, 
+      'Distributing Project': 4,
+      'Finished': 'end'
+    }[name];
+    if (step === 'end') {
+      window.location = window.location;
+    } else {
+      this.$('h1.in').prop('class','out');
+      this.$('h1:nth-child(' + step + ')').addClass('in');
+    }
   }
 });
 
