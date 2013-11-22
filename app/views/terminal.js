@@ -19,6 +19,7 @@ module.exports = BaseView.extend({
     return this.options;
   },
   onPostMessage: function (message) {
+    console.log('POST MESSAGE', message);
     if (message.data === 'show:loader') {
       this.loading(true);
     }
