@@ -35,7 +35,9 @@ module.exports = BaseView.extend({
     //   i = 1;
     // });
 
-    var primus = new Primus('http://cybertron.' + this.app.get('domain'));
+    var primus = new Primus('http://cybertron.' + this.app.get('domain'), { 
+      transformer: 'engine.io' 
+    });
 
     console.log('http://cybertron.' + this.app.get('domain'));
 
