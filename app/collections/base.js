@@ -29,6 +29,13 @@ module.exports = RendrBase.extend({
     model.app = this.app;
     return model;
   },
+  sort: function () {
+    var sort = this.options.sort || this.params.sort;
+    if (!this.comparator && arguments.length === 0 && sort) {
+      this.comparator = sort;
+    }
+    Super.sort.apply(this, arguments);
+  },
   sortByAttr: function (attr, fn) {
     var descending = false;
     if (attr.indexOf('-') === 0) {

@@ -7,6 +7,7 @@ module.exports = BaseView.extend({
     this.listenTo(this.collection, 'remove', this.render.bind(this));
   },
   getTemplateData: function () {
+    this.collection.sort();
     var paramPage = this.collection.options.page || this.collection.params.page;
     var page = (paramPage+1) || 1;
     var showPrev = page >= 2;

@@ -244,7 +244,7 @@ function fetchChannelContents (channelName, page, callback) {
     images: {
       collection : 'Images',
       params     : {
-        sort: 'votes',
+        sort: '-runs',
         channel: channelName,
         page: (page && page-1) || 0
       }

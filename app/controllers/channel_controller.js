@@ -145,7 +145,7 @@ module.exports = {
       images: {
         collection : 'Images',
         params     : {
-          sort: 'votes',
+          sort: '-runs',
           page: (params.page && params.page-1) || 0
         }
       },
