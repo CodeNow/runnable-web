@@ -34,7 +34,7 @@ module.exports = RendrBase.extend({
     if (!this.comparator && arguments.length === 0 && sort) {
       this.comparator = sort;
     }
-    if (this.comparator) Super.sort.apply(this, arguments);
+    if (this.comparator || arguments.length) Super.sort.apply(this, arguments);
   },
   sortByAttr: function (attr, fn) {
     var descending = false;
