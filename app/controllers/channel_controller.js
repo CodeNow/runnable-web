@@ -12,36 +12,34 @@ var canonical = helpers.canonical;
 var formatTitle = helpers.formatTitle;
 
 module.exports = {
-  index: function(params, callback) {
+  index: function (params, callback) {
+    params.page = utils.getQueryParam(this.app, 'page');
+    params.sort = utils.getQueryParam(this.app, 'sort');
     var self = this;
+    var app = this.app;
     async.waterfall([
       fetchUserAndChannel.bind(this, params.channel),
       function redirectCheck (channelResult, cb) {
-        var channelName = channelResult.channel.get('name');
-        if (channelName !== params.channel) {
-          var url = '/'+ channelName + ((params.page) ? '/page/'+params.page : '');
-          self.redirectTo(url);
-        }
-        else {
-          cb(null, channelResult);
-        }
+        var channel = channelResult.channel;
+        if (channel.get('name') !== params.channel)
+          return self.redirectTo(channel.appUrl(params));
+        cb(null, channelResult);
       },
-      function (channelResult, cb) {
-        fetchChannelContents.call(self, params.channel, params.page, function (err, results) {
-          cb(err, !err && _.extend(results, channelResult, {page:params.page}));
-        });
-      }.bind(this),
       function (results, cb) {
-        if (results.images.length === 0) {
-          cb(null, results);
-        } else {
-          fetchOwnersFor.call(self, results.user, results.images, function (err, ownerResults) {
-            cb(err, !err && _.extend(results, ownerResults));
-          });
-        }
+        // default values AFTER redirect check
+        fetchChannelContents.call(self, params, function (err, channelResults) {
+          if (err) return cb(err);
+          cb(null, _.extend(results, channelResults, {page:params.page}));
+        });
+      },
+      function (results, cb) {
+        fetchOwnersFor.call(self, results.user, results.images, function (err, ownerResults) {
+          if (err) return cb(err);
+          cb(null, _.extend(results, ownerResults));
+        });
       },
       function addSEO (results, cb) {
-        var pageText = (params.page) ? " Page "+params.page : "";
+        var pageText = (params.page>1) ? " Page "+params.page : "";
         results.page = {
           title: formatTitle(results.channel.get('name')+" code"+pageText),
           canonical: canonical.call(self)
