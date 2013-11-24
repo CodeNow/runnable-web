@@ -68,7 +68,7 @@ module.exports = {
         },
         function nameInUrl (results, cb) {
           var imageURL = results.image.appURL();
-          if (!utils.isCurrentURL(app, imageURL)|| params.channel) {
+          if (!utils.isCurrentUrl(app, imageURL)|| params.channel) {
             self.redirectTo(imageURL);
           }
           else {
@@ -322,7 +322,7 @@ module.exports = {
         },
         function nameInUrl (results, cb) {
           var imageURL = results.image.appURL();
-          if (!utils.isCurrentURL(app, imageURL)|| params.channel) {
+          if (!utils.isCurrentUrl(app, imageURL)|| params.channel) {
             self.redirectTo(imageURL);
           }
           else {

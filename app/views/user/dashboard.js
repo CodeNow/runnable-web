@@ -19,7 +19,7 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     var opts = this.options;
     opts.verifiedUser = opts.user.isVerified();
-    opts.draftsActive    = !opts.verifiedUser || utils.isCurrentURL(this.app, '/me/drafts');
+    opts.draftsActive    = !opts.verifiedUser || utils.isCurrentUrl(this.app, '/me/drafts');
     opts.publishedActive = !opts.draftsActive;
     return this.options;
   },

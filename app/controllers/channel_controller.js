@@ -54,7 +54,7 @@ module.exports = {
   category: function (params, callback) {
     var self = this;
     var app = this.app;
-    var isHomepage = utils.isCurrentURL(app, '');
+    var isHomepage = utils.isCurrentUrl(app, '');
     params.category = params.category || 'Featured';
     var isFeaturedCategory = (params.category.toLowerCase() == 'featured');
     // if (isServer && !this.app.req.cookies.pressauth) {
