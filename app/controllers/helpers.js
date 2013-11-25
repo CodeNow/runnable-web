@@ -249,6 +249,7 @@ function fetchChannelContents (params, callback) {
       params     : {
         sort: sort,
         channel: channel,
+        limit: 50,
         page: page-1 // api page starts at 0
       }
     },

@@ -144,7 +144,8 @@ module.exports = {
         collection : 'Images',
         params     : {
           sort: '-runs',
-          page: (params.page && params.page-1) || 0
+          page: (params.page && params.page-1) || 0,
+          limit: 50
         }
       },
       channels: {
