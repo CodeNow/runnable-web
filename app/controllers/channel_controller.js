@@ -155,12 +155,9 @@ module.exports = {
     async.waterfall([
       fetch.bind(this, spec),
       function owners (results, cb) {
-        if (results.images.length) {
-          fetchOwnersFor.call(self, results.user, results.images, function (err, ownerResults) {
-            cb(err, !err && _.extend(results, ownerResults));
-          });
-        }
-        else { cb(null, results); }
+        fetchOwnersFor.call(self, results.user, results.images, function (err, ownerResults) {
+          cb(err, !err && _.extend(results, ownerResults));
+        });
       },
       function extend (results, cb) {
         results.channel = new Channel({name:'All'}, {app:self.app});
