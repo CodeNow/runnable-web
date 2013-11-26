@@ -334,51 +334,6 @@ main {
             }
         }
     }
-
-    //select
-    .dropdown {
-        height: 36px;
-        float: right;
-        top: -5px;
-        width: 82px;
-
-        button {
-            background: none;
-            @include box-shadow(none);
-            border: 1px solid #bbb;
-            color: #bbb;
-            font-size: 12px;
-            font-weight: bold;
-            height: 36px;
-            line-height: 36px;
-            padding: 0 12px;
-            width: 82px;
-
-            &:before {
-                color: #bbb;
-                content: 'Sort by';
-                position: absolute;
-                    left: -52px;
-            }
-        }
-
-        .caret {
-            border-top-color: #bbb;
-            float: right;
-            margin-top: 16px;
-        }
-    }
-
-    select {
-        cursor: pointer;
-        min-height: 100%;
-        opacity: 0;
-        position: absolute;
-            top: -5px;
-            left: 0;
-            z-index: 2;
-        width: 100%;
-    }
 }
 
 .dashboard-runnables {

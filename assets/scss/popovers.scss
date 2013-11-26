@@ -1,3 +1,4 @@
+//main-controls popover
 .main-controls .popover {
     background: #f6f6f6;
     border: none;
@@ -39,7 +40,7 @@
         font-weight: bold;
         height: $popover-header-height;
         line-height: $popover-header-height;
-        padding: 0 20px;
+        padding: 0 20px 0 15px;
         width: 100%;
 
         > button {
@@ -163,6 +164,10 @@
             }
         }
     }
+
+    .modal-footer {
+        padding-bottom: 0;
+    }
 }
 .popover-content {
     color: #333;
@@ -170,4 +175,25 @@
 @include keyframes(blinker) {
     from {opacity: 1;}
     to {opacity: 0;}
+}
+
+//improve popover
+.improve-btn .popover {
+
+    //textarea
+    textarea {
+        margin-top: 15px;
+        max-height: 300px;
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    //footer
+    .modal-footer {
+        margin: 15px -15px 0;
+    }
+
+    .orange {
+        width: 100%;
+    }
 }

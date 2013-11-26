@@ -1139,6 +1139,16 @@ progress {
     .main-controls {
         margin: 30px 0 35px 0;
 
+        > .btn-group,
+        > button {
+            float: left;
+
+            .glyphicons {
+                margin-right: 2px;
+                vertical-align: baseline;
+            }
+        }
+
         .silver {
             height: 38px;
             margin-left: 10px;
