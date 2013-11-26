@@ -135,6 +135,7 @@ body.modal-open,
     max-height: 400px;
     overflow: auto;
     padding: 20px 20px 0;
+    width: 100%;
 
       label {
         color: $link-off;
@@ -329,7 +330,6 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
 
     .status-buttons {
       float: right;
-      margin-right: 5px;
     }
   }
 }

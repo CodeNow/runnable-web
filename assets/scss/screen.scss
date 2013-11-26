@@ -345,7 +345,11 @@ $prefix-for-spec:      true !default; // required for keyframe mixin
 button,
 .btn {
     @include border-radius(3px);
+    height: 36px;
+    line-height: 36px;
+    padding: 0 18px 0 16px;
     @include transition(all 0.2s ease-in-out);
+
     &.green {
         border: solid 1px #538823;
         font-weight: bold;
@@ -356,12 +360,11 @@ button,
         color: #fff;
         text-shadow: 0 -1px 0 #4F7C20;
         font-size: 13px;
-        padding: 8px 18px 8px 16px;
         img, span {
             display: inline-block;
         }
         img {
-            margin: -3px 8px 0 0;
+            margin: -4px 4px 0 0;
         }
         &:hover {
             background-color: adjust-lightness(#81B638,5);
@@ -384,6 +387,7 @@ button,
             cursor: not-allowed;
         }
     }
+
     &.silver {
         border: solid 1px #ccc;
         background-color: #E4E4E4;
@@ -393,14 +397,12 @@ button,
         color: #999;
         text-shadow: 0 1px 0 #fff;
         font-size: 13px;
-        padding: 8px 18px 8px 16px;
         img, span {
-            vertical-align: middle;
             display: inline-block;
         }
         img {
-            margin-right: 8px;
-            margin-top: 1px;
+            margin-top: -2px;
+            margin-right: 4px;
         }
         &:hover {
             background-color: #ddd;
@@ -422,6 +424,7 @@ button,
             cursor: not-allowed;
         }
     }
+
     &.purple {
         border: solid 1px #56349E;
         background-color: #9A58BA;
@@ -431,9 +434,7 @@ button,
         color: #fff;
         text-shadow: 0 -1px 0 #633791;
         font-size: 13px;
-        padding: 8px 18px 8px 16px;
         img, span {
-            vertical-align: middle;
             display: inline-block;
         }
         img {
@@ -459,6 +460,7 @@ button,
             cursor: not-allowed;
         }
     }
+
     &.orange {
         border: solid 1px #C3531E;
         background-color: #FD8524;
@@ -468,9 +470,7 @@ button,
         color: #fff;
         text-shadow: 0 -1px 0 #F06B20;
         font-size: 13px;
-        padding: 8px 18px 8px 16px;
         img, span {
-            vertical-align: middle;
             display: inline-block;
         }
         img {
@@ -1151,12 +1151,10 @@ progress {
 
         .silver {
             @include border-radius(3px);
-            height: 38px;
             margin-left: 10px;
         }
 
         .green {
-            height: 38px;
 
             &:hover,
             &:focus {
@@ -1177,7 +1175,7 @@ progress {
 
             .run-options, {
                 @include border-radius(0 3px 3px 0);
-                padding: 8px 9px 8px 8px;
+                padding: 0 9px 0 8px;
 
                 .caret {
                     border-top-color: #fff;
@@ -1244,6 +1242,7 @@ progress {
         button {
             padding: 0;
             height: 30px;
+            line-height: 30px;
             width: 30%;
             vertical-align: middle;
             span, img { vertical-align: middle }
@@ -1777,6 +1776,9 @@ div#output-terminal-container{
                             margin-top: 5px;
                             margin-right: 5px;
                         }
+                    }
+                    &.glyphicons {
+                        margin: 0 5px 0 0;
                     }
                 }
             }
@@ -2519,7 +2521,7 @@ div#output-terminal-container{
                 .providers-register-submit {
                     text-align: right;
                     button {
-                        padding: 10px 30px;
+                        padding: 0 30px;
                         margin-top: 50px;
                     }
                 }

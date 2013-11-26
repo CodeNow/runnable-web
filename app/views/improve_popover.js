@@ -51,7 +51,7 @@ module.exports = BaseView.extend({
       .addClass('thanks')
       .prop('disabled',true)
       .children('.btn-text')[0]
-      .innerHTML = 'Feedback Received';
+      .innerHTML = 'Feedback Sent';
 
     // $.post("/campaigns/",)
   }

@@ -180,8 +180,11 @@
 //improve popover
 .improve-btn {
 
+    .btn {
+        @include transition(0.2s 0.4s all ease-in-out);
+    }
+
     .embed-close {
-        top: 4px;
         min-width: 16px;
     }
 
@@ -189,9 +192,7 @@
 
         .glyphicons {
             font-size: 22px;
-            line-height: 0;
-            margin-right: 4px;
-            top: 4px;
+            top: 2px;
 
             &:before {
                 content: '☺';
