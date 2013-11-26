@@ -178,22 +178,44 @@
 }
 
 //improve popover
-.improve-btn .popover {
+.improve-btn {
 
-    //textarea
-    textarea {
-        margin-top: 15px;
-        max-height: 300px;
-        min-height: 150px;
-        resize: vertical;
+    .thanks {
+        padding-left: 40px;
+
+        .glyphicons {
+            font-size: 22px;
+            line-height: 0;
+            position: absolute;
+                top: 15px;
+                left: 15px;
+
+            &:before {
+                content: '☺';
+            }
+        }
     }
 
-    //footer
-    .modal-footer {
-        margin: 15px -15px 0;
-    }
+    .popover {
+        margin-left: 10px;
 
-    .orange {
-        width: 100%;
+        .arrow {
+            left: 25px;
+        }
+
+        textarea {
+            margin-top: 15px;
+            max-height: 300px;
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .modal-footer {
+            margin: 15px -15px 0;
+        }
+
+        .orange {
+            width: 100%;
+        }
     }
 }

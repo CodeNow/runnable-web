@@ -7,7 +7,7 @@ var SignupModal = require('./signup_modal');
 
 module.exports = EditorButtonView.extend({
   tagName: 'button',
-  className: 'silver',
+  className: 'btn silver',
   events: {
     'click' : 'click'
   },
