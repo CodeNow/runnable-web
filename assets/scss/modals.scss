@@ -315,6 +315,23 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
       }
     }
   }
+
+  .status-bar {
+    padding: 0;
+
+    .status-message {
+      padding-left: 10px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .status-buttons {
+      float: right;
+      margin-right: 5px;
+    }
+  }
 }
 
 //#create-spec-modal
