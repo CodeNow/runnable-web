@@ -50,9 +50,8 @@ module.exports = BaseView.extend({
     $improveBtn
       .addClass('thanks')
       .prop('disabled',true)
-      .contents()
-      .last()
-      .replaceWith('Feedback Received');
+      .children('.btn-text')[0]
+      .innerHTML = 'Feedback Received';
 
     // $.post("/campaigns/",)
   }

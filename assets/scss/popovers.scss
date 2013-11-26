@@ -181,14 +181,12 @@
 .improve-btn {
 
     .thanks {
-        padding-left: 40px;
 
         .glyphicons {
             font-size: 22px;
             line-height: 0;
-            position: absolute;
-                top: 15px;
-                left: 15px;
+            margin-right: 4px;
+            top: 4px;
 
             &:before {
                 content: '☺';
