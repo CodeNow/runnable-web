@@ -2,15 +2,9 @@ var utils = require('../utils');
 var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
-  tagName: 'p',
-  className: 'runnable-stats',
-  events: {
-    'click .vote button' : 'heartScale'
-  },
   preRender: function () {
-    var optsTitle = this.options.title;
-
-    if (optsTitle) {
+    if (this.options.title) {
+      this.tagName = 'p';
       this.className = 'runnable-stats title';
     }
   },
