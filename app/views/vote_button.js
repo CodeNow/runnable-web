@@ -2,17 +2,24 @@ var BaseView = require('./base_view');
 var Super = BaseView.prototype;
 var utils = require('../utils');
 module.exports = BaseView.extend({
-  tagName: 'div',
-  className: 'vote',
+  tagName: 'button',
+  className: 'vote btn silver',
   events: {
-    'click button': 'vote'
+    'click': 'vote'
   },
   preRender: function () {
     // preRender is called before .getAttributes so setting attributes here still works
     var user = this.app.user;
     this.attributes = this.attributes || {};
     this.attributes.href = 'javascript:void(0);';
-    if (user.isOwnerOf(this.model) || !utils.exists(user.get('votes'))) {
+
+    if (user.isOwnerOf(this.model)) {
+      this.attributes = {
+        disabled: 'disabled'
+      };
+    }
+
+    if (!utils.exists(user.get('votes'))) {
       this.attributes = {
         disabled: 'disabled'
       };
@@ -26,18 +33,12 @@ module.exports = BaseView.extend({
     this.listenTo(this.app.user, 'change:_id', this.render.bind(this));
     this.listenTo(this.model, 'change:votes', this.render.bind(this));
   },
-  postRender: function() {
-    // if (voted) {
-    //   this.$('.vote > button').addClass('in')l;
-    // }
-  },
   vote: function (evt) {
     evt.preventDefault();
 
     // var self = this;
-    var voteButton = $(evt.currentTarget);
 
-    voteButton.addClass('voted');
+    $(evt.currentTarget).addClass('voted');
 
     // this.app.user.vote(this.model, function (errMessage) {
     //   if (errMessage) {
