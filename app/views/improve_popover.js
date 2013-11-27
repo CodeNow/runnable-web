@@ -44,16 +44,27 @@ module.exports = BaseView.extend({
   submitFeedback: function (evt) {
     evt.preventDefault();
     this.hide();
+    var self = this;
 
-    var $improveBtn = this.$el.siblings('.silver');
+    $.ajax({
+      type: "POST",
+      url: "/api/-/request/Improve",
+      data: { url: "http://runnable.com" + window.location.pathname, 
+        description : "MENU VALUE: <<" + 
+          $("#improve_from_1337").find("select")[0].value  + 
+          ">>\n\n IMPROVEMENT: " + $("#improve_from_1337").find("textarea")[0].value 
+        },
+      success: function (data) {
+        // show success regardless for now
+        var $improveBtn = self.$el.siblings('.silver');
 
-    $improveBtn
-      .addClass('thanks')
-      .prop('disabled',true)
-      .children('.btn-text')[0]
-      .innerHTML = 'Feedback Sent';
-
-    // $.post("/campaigns/",)
+        $improveBtn
+          .addClass('thanks')
+          .prop('disabled',true)
+          .children('.btn-text')[0]
+          .innerHTML = 'Feedback Sent';
+        }
+    });
   }
 });
 
