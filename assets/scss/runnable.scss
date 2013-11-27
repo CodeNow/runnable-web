@@ -81,17 +81,15 @@
       @include scale-3d(0.5,0.5,1);
       @include transition(0.2s ease-in-out);
     }
+  }
 
-    &::after {
-      background: rgba(0,0,0,0.1);
-      content: ' ';
-      display: block;
-      height: 55px;
-      position: absolute;
-        top: 0;
-        left: 65px;
-      width: 1px;
-    }
+  .vertical-div {
+    background: rgba(0,0,0,0.1);
+    display: block;
+    float: left;
+    height: 60px;
+    margin-left: 15px;
+    width: 1px;
   }
 }
 
