@@ -12,12 +12,12 @@ module.exports = BaseView.extend({
     var user = this.app.user;
     this.attributes = this.attributes || {};
     this.attributes.href = 'javascript:void(0);';
-    // if (user.isOwnerOf(this.model) || !utils.exists(user.get('votes'))) {
-    //   this.attributes = {
-    //     disabled: 'disabled'
-    //   };
-    //   delete this.attributes.href;
-    // }
+    if (user.isOwnerOf(this.model) || !utils.exists(user.get('votes'))) {
+      this.attributes = {
+        disabled: 'disabled'
+      };
+      delete this.attributes.href;
+    }
   },
   getTemplateData: function () {
     return this.model.toJSON();
@@ -26,11 +26,11 @@ module.exports = BaseView.extend({
     this.listenTo(this.app.user, 'change:_id', this.render.bind(this));
     this.listenTo(this.model, 'change:votes', this.render.bind(this));
   },
-  // postRender: function() {
+  postRender: function() {
     // if (voted) {
     //   this.$('.vote > button').addClass('in')l;
     // }
-  // },
+  },
   vote: function (evt) {
     evt.preventDefault();
 
