@@ -21,6 +21,7 @@
   }
 }
 
+//vote button
 .page-title {
 
   .vote {
@@ -34,6 +35,7 @@
       color: $link-off;
       font-size: 14px;
       height: 50px;
+      margin: 2px 0;
       outline: none;
       padding: 0;
       @include transition(0.2 ease-in-out 1s);
@@ -41,7 +43,7 @@
 
       &:hover {
 
-        .heart {
+        .glyphicons {
           color: $purple-light;
         }
       }
@@ -50,14 +52,14 @@
         cursor: default;
         pointer-events: none;
 
-        .heart {
+        .glyphicons {
           @include animation(scaleHeart 1s ease-in-out);
           color: $purple-light;
         }
       }
     }
 
-    .heart {
+    .glyphicons {
       color: $link-off;
       display: block;
       font-size: 32px;
@@ -66,21 +68,18 @@
       @include transition(0.2s ease-in-out);
     }
   }
-
-  p {
-    margin: 6px 0 0 90px;
-  }
 }
 
-@include keyframes(scaleHeart) {
-  0% {
-    @include scale-3d(0.5,0.5,1);
-  }
-  70% {
-    @include scale-3d(0.7,0.7,1);
-  }
-  100% {
-    @include scale-3d(0.5,0.5,1);
+//image/container title
+#project-details {
+
+  .page-title {
+
+    > h1 {
+      display: block;
+      line-height: 1;
+      margin: 0 0 0 90px;
+    }
   }
 }
 
@@ -92,7 +91,8 @@
 
   &.title {
     font-size: 14px;
-    margin-top: 8px;
+    font-weight: normal;
+    margin: 8px 0 0 90px;
   }
 
   a {
