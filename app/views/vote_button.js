@@ -19,12 +19,12 @@ module.exports = BaseView.extend({
       };
     }
 
-    if (!utils.exists(user.get('votes'))) {
-      this.attributes = {
-        disabled: 'disabled'
-      };
-      delete this.attributes.href;
-    }
+    // if (!utils.exists(user.get('votes'))) {
+    //   this.attributes = {
+    //     disabled: 'disabled'
+    //   };
+    //   delete this.attributes.href;
+    // }
   },
   getTemplateData: function () {
     return this.model.toJSON();
@@ -36,16 +36,15 @@ module.exports = BaseView.extend({
   vote: function (evt) {
     evt.preventDefault();
 
-    // var self = this;
-
     $(evt.currentTarget).addClass('voted');
 
-    // this.app.user.vote(this.model, function (errMessage) {
-    //   if (errMessage) {
-    //     self.showError(errMessage);
-    //     self.trackError('vote', errMessage);
-    //   }
-    // });
+    var self = this;
+    this.app.user.vote(this.model, function (errMessage) {
+      if (errMessage) {
+        self.showError(errMessage);
+        self.trackError('vote', errMessage);
+      }
+    });
   }
 });
 

@@ -31,7 +31,7 @@
     color: $link-off;
     font-size: 14px;
     height: 50px;
-    margin: 2px 0;
+    margin: 5px 0;
     outline: none;
     padding: 0;
     position: relative;
@@ -82,11 +82,11 @@
       @include transition(0.2s ease-in-out);
     }
 
-    &:after {
+    &::after {
       background: rgba(0,0,0,0.1);
-      content: '';
+      content: ' ';
       display: block;
-      height: 50px;
+      height: 55px;
       position: absolute;
         top: 0;
         left: 65px;
@@ -104,6 +104,7 @@
       display: block;
       line-height: 1;
       margin: 0 0 0 90px;
+      min-height: 35px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
