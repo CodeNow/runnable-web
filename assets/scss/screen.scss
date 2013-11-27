@@ -1051,48 +1051,50 @@ progress {
 }
 
 #project-details, #tags-details {
+
     div.page-title {
         color: #333;
         font-size: 29px;
         margin-top: 20px;
         margin-bottom: 10px;
+
         > h1 {
-            margin: 7px 0 0 14px;
-            line-height: 1.6em;
+            display: block;
             font-size: 30px;
-            display: inline;
+            line-height: 1;
+            margin: 0 0 0 70px;
         }
-        .vote-up {
-            float: left;
-            color: #bcbcbc;
-            text-align: center;
-            line-height: 0.7em;
-            font-weight: 500;
-            width: 22px;
-            .vote-up-icon {
-                margin: 0 auto;
-                display: inline-block;
-                height: 14px;
-                width: 16px;
-                background-image: url(../images/sprite-upvote.png);
-                @include background-image-retina('../images/sprite-upvote@2x.png');
-                background-size: 16px auto;
-            }
-            span {
-                display: inline;
-                font-size: 16px;
-            }
-            &:hover, &.active {
-                text-decoration: none;
-                color: $purple-light;
-                .vote-up-icon {
-                    background-position: 0 -15px;
-                }
-            }
-            &.active {
-                -webkit-animation: click 1s ease-out normal;
-            }
-        }
+        // .vote-up {
+        //     float: left;
+        //     color: #bcbcbc;
+        //     text-align: center;
+        //     line-height: 0.7em;
+        //     font-weight: 500;
+        //     width: 22px;
+        //     .vote-up-icon {
+        //         margin: 0 auto;
+        //         display: inline-block;
+        //         height: 14px;
+        //         width: 16px;
+        //         background-image: url(../images/sprite-upvote.png);
+        //         @include background-image-retina('../images/sprite-upvote@2x.png');
+        //         background-size: 16px auto;
+        //     }
+        //     span {
+        //         display: inline;
+        //         font-size: 16px;
+        //     }
+        //     &:hover, &.active {
+        //         text-decoration: none;
+        //         color: $purple-light;
+        //         .vote-up-icon {
+        //             background-position: 0 -15px;
+        //         }
+        //     }
+        //     &.active {
+        //         -webkit-animation: click 1s ease-out normal;
+        //     }
+        // }
         a.edit-title {
             display: inline-block;
             width: 19px;

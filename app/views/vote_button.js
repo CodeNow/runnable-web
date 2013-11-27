@@ -2,10 +2,10 @@ var BaseView = require('./base_view');
 var Super = BaseView.prototype;
 var utils = require('../utils');
 module.exports = BaseView.extend({
-  tagName: 'a',
-  className: 'vote-up',
+  tagName: 'div',
+  className: 'vote',
   events: {
-    'click': 'vote'
+    'click button': 'vote'
   },
   preRender: function () {
     // preRender is called before .getAttributes so setting attributes here still works
