@@ -9,11 +9,7 @@
       <div class="page-title clearfix">
         {{view "vote_button" model=image}}
         {{view "runnable_title" model=image}}
-        <p>
-          <span data-toggle="tooltip" title="{{runs}} runs"><span class="glyphicons play"></span> {{runs}}</span>&bull;
-          <span data-toggle="tooltip" title="{{views}} views"><span class="glyphicons eye-open"></span> {{views}}</span>&bull;
-          <span data-toggle="tooltip" title="{{copies}} copies"><span class="glyphicons more-items"></span> {{copies}}</span>
-        </p>
+        {{view "runnable_stats" model=image title=true}}
       </div>
       {{view "runnable_description" model=image}}
       <div class="main-controls clearfix">

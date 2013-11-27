@@ -26,15 +26,25 @@ module.exports = BaseView.extend({
     this.listenTo(this.app.user, 'change:_id', this.render.bind(this));
     this.listenTo(this.model, 'change:votes', this.render.bind(this));
   },
+  // postRender: function() {
+    // if (voted) {
+    //   this.$('.vote > button').addClass('in')l;
+    // }
+  // },
   vote: function (evt) {
     evt.preventDefault();
-    var self = this;
-    this.app.user.vote(this.model, function (errMessage) {
-      if (errMessage) {
-        self.showError(errMessage);
-        self.trackError('vote', errMessage);
-      }
-    });
+
+    // var self = this;
+    var voteButton = $(evt.currentTarget);
+
+    voteButton.addClass('voted');
+
+    // this.app.user.vote(this.model, function (errMessage) {
+    //   if (errMessage) {
+    //     self.showError(errMessage);
+    //     self.trackError('vote', errMessage);
+    //   }
+    // });
   }
 });
 
