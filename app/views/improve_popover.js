@@ -48,7 +48,7 @@ module.exports = BaseView.extend({
 
     $.ajax({
       type: "POST",
-      url: "/api/-/request/Improve",
+      url: "/api/-/request/improve",
       data: { url: "http://runnable.com" + window.location.pathname, 
         description : "MENU VALUE: <<" + 
           $("#improve_from_1337").find("select")[0].value  + 
