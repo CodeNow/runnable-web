@@ -1,5 +1,11 @@
-{{#with model.attributes}}
-<span data-toggle="tooltip" title="{{runs}} runs"><span class="glyphicons play"></span> {{runs}}</span>&bull;
-<span data-toggle="tooltip" title="{{views}} views"><span class="glyphicons eye-open"></span> {{views}}</span>&bull;
-<span data-toggle="tooltip" title="{{copies}} copies to clipboard"><span class="glyphicons notes-2"></span> {{copies}}</span>
-{{/with}}
+{{#if title}}
+  {{#with model.attributes}}
+  <span data-toggle="tooltip" title="{{runs}} runs"><span class="glyphicons play"></span> {{runs}}</span>
+  <span data-toggle="tooltip" title="{{views}} views"><span class="glyphicons eye-open"></span> {{views}}</span>
+  <span data-toggle="tooltip" title="{{copies}} copies to clipboard"><span class="glyphicons notes-2"></span> {{copies}}</span>
+  {{/with}}
+{{else}}
+  <span data-toggle="tooltip" title="{{../runs}} runs"><span class="glyphicons play"></span> {{../runs}}</span>
+  <span data-toggle="tooltip" title="{{../views}} views"><span class="glyphicons eye-open"></span> {{../views}}</span>
+  <span data-toggle="tooltip" title="{{../copies}} copies to clipboard"><span class="glyphicons notes-2"></span> {{../copies}}</span>
+{{/if}}

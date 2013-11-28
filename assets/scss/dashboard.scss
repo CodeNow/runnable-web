@@ -416,40 +416,6 @@ main {
                 }
             }
         }
-
-        > span {
-            margin: 0 5px;
-
-            &:first-child {
-                margin-left: 0;
-
-                > span {
-                    margin-left: 0;
-                }
-            }
-
-            &.vote-up {
-                margin-left: 0;
-
-                > span {
-                    padding-left: 15px;
-                    position: relative;
-
-                    &:before {
-                        border-right: 5px solid transparent;
-                        border-bottom: 7px solid #bbb;
-                        border-left: 5px solid transparent;
-                        content: "";
-                        height: 0;
-                        position: absolute;
-                            top: 32%;
-                            left: 0;
-                        // @include transition-transforms(0.25s linear);
-                        width: 0;
-                    }
-                }
-            }
-        }
     }
 }
 li {

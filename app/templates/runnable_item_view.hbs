@@ -14,9 +14,7 @@
   {{/unless}}
  --}}
 
-  <span data-toggle="tooltip" title="{{runs}} runs"><span class="glyphicons play"></span> {{runs}}</span>&bull;
-  <span data-toggle="tooltip" title="{{views}} views"><span class="glyphicons eye-open"></span> {{views}}</span>&bull;
-  <span data-toggle="tooltip" title="{{copies}} copies to clipboard"><span class="glyphicons notes-2"></span> {{copies}}</span>
+  {{view "runnable_stats" runs=runs views=views copies=copies}}
   &bull;
   {{view "runnable_item_owner" model=../model.owner model_id=owner model_name='user' created=created}}
   {{#if tags.length}}

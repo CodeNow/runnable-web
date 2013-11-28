@@ -120,6 +120,20 @@
     font-size: 14px;
     font-weight: normal;
     margin: 8px 0 0 90px;
+
+    > span {
+      margin-right: 10px;
+    }
+  }
+
+  .runnable-stats-wrapper {
+    > span {
+      margin-left: 10px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
   }
 
   a {
@@ -130,14 +144,14 @@
     }
   }
 
-  span {
+  > span {
     display: inline-block;
     margin: 0 5px 5px;
 
     &:first-child {
       margin-left: 0;
 
-      > span {
+      > .glyphicons {
         margin-left: 0;
       }
     }
@@ -188,7 +202,7 @@
     }
 
     &.glyphicons {
-      margin: 0 5px 0 0;
+      margin: 0 2px 0 0;
     }
   }
 }

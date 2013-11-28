@@ -6,6 +6,9 @@ module.exports = BaseView.extend({
     if (this.options.title) {
       this.tagName = 'p';
       this.className = 'runnable-stats title';
+    } else {
+      this.tagName = 'span';
+      this.className = 'runnable-stats-wrapper'
     }
   },
   postHydrate: function () {
