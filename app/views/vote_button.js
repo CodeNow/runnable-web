@@ -36,13 +36,13 @@ module.exports = BaseView.extend({
   vote: function (evt) {
     evt.preventDefault();
 
-    $(evt.currentTarget).addClass('voted');
-
     var self = this;
     this.app.user.vote(this.model, function (errMessage) {
       if (errMessage) {
         self.showError(errMessage);
         self.trackError('vote', errMessage);
+      } else {
+        $(evt.currentTarget).addClass('voted');
       }
     });
   }
