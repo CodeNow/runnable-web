@@ -8,9 +8,10 @@
     <div class="col-sm-9">
       <div class="page-title clearfix">
         {{view "vote_button" model=image}}
-        <div class="vertical-div"></div>
+        <div>
         {{view "runnable_title" model=image}}
         {{view "runnable_stats" model=image title=true}}
+        </div>
       </div>
       {{view "runnable_description" model=image}}
       <div class="main-controls clearfix">
