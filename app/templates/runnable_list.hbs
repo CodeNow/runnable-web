@@ -1,3 +1,7 @@
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#trending"> Trending</a>
+    <li><a href="#popular"> Popular</a>
+  </ul>
 <ul id="tags-content">
   {{#each collection.models}}
     {{view "runnable_item_view" model=. novotes=../novotes}}
