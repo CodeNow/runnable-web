@@ -1,12 +1,11 @@
 <h3>
   <a href="{{invoke model method='appURL'}}">{{model.attributes.name}}</a>
 </h3>
-<p>
+<p class="runnable-stats">
   {{#with model.attributes}}
   {{#if ../isimage}}
-  <span data-toggle="tooltip" title="{{runs}} runs"><span class="glyphicons play"></span> {{runs}}</span>&bull;
-  <span data-toggle="tooltip" title="{{views}} views"><span class="glyphicons eye-open"></span> {{views}}</span>&bull;
-  <span data-toggle="tooltip" title="{{copies}} copies"><span class="glyphicons more-items"></span> {{copies}}</span>&bull;
+  {{view "runnable_stats" runs=runs views=views copies=copies}}
+  &bull;
   <span>Published {{dateAgo created}}</span>&bull;
   {{else}}
   <span>Created {{dateAgo created}}</span>&bull;

@@ -2,8 +2,8 @@ var BaseView = require('./base_view');
 var Super = BaseView.prototype;
 var utils = require('../utils');
 module.exports = BaseView.extend({
-  tagName: 'a',
-  className: 'vote-up',
+  tagName: 'button',
+  className: 'vote btn silver',
   events: {
     'click': 'vote'
   },
@@ -12,7 +12,14 @@ module.exports = BaseView.extend({
     var user = this.app.user;
     this.attributes = this.attributes || {};
     this.attributes.href = 'javascript:void(0);';
-    // if (user.isOwnerOf(this.model) || !utils.exists(user.get('votes'))) {
+
+    if (user.isOwnerOf(this.model)) {
+      this.attributes = {
+        disabled: 'disabled'
+      };
+    }
+
+    // if (!utils.exists(user.get('votes'))) {
     //   this.attributes = {
     //     disabled: 'disabled'
     //   };
@@ -28,11 +35,14 @@ module.exports = BaseView.extend({
   },
   vote: function (evt) {
     evt.preventDefault();
+
     var self = this;
     this.app.user.vote(this.model, function (errMessage) {
       if (errMessage) {
         self.showError(errMessage);
         self.trackError('vote', errMessage);
+      } else {
+        $(evt.currentTarget).addClass('voted');
       }
     });
   }

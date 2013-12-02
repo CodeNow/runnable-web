@@ -20,3 +20,190 @@
     }
   }
 }
+
+//vote button
+.page-title {
+
+  .vote {
+    @include border-radius(50%);
+    color: $link-off;
+    float: left;
+    color: $link-off;
+    font-size: 14px;
+    height: 50px;
+    margin: 5px 0;
+    outline: none;
+    padding: 0;
+    position: relative;
+    @include transition(0.2 ease-in-out);
+    width: 50px;
+
+    &:hover {
+      color: $purple-light;
+
+      .glyphicons {
+        color: $purple-light;
+      }
+    }
+
+    &.voted,
+    &:active,
+    &[disabled] {
+      background-color: rgba(0,0,0,0.075);
+      background-image: none;
+      border: 1px solid;
+      border-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.1);
+      @include box-shadow(inset 0 2px 6px rgba(0, 0, 0, 0.1), 1px 0px rgba(255,255,255,1));
+      color: $purple-light;
+
+      .glyphicons {
+        @include animation(scaleHeart 1s ease-in-out);
+        color: $purple-light;
+      }
+    }
+
+    &.voted,
+    &[disabled] {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    &[disabled] {
+      @include box-shadow(inset 0 2px 6px rgba(0, 0, 0, 0.1), 1px 0px rgba(255,255,255,1) !important);
+      opacity: 1;
+    }
+
+    .glyphicons {
+      color: $link-off;
+      display: block;
+      font-size: 32px;
+      margin: -6px 0;
+      @include scale-3d(0.5,0.5,1);
+      @include transition(0.2s ease-in-out);
+    }
+  }
+}
+
+//image/container title
+#project-details {
+
+  .page-title {
+
+    h1 {
+      display: block;
+      line-height: 1;
+      margin: 0;
+      min-height: 35px;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
+      // white-space: nowrap;
+    }
+
+    > div {
+      border-left: 1px solid $grey;
+      margin-left: 70px;
+      padding-left: 20px;
+
+      span {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.runnable-stats {
+  color: #bbb;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 8px 0 0 0;
+
+  &.title {
+    font-size: 14px;
+    font-weight: normal;
+    margin: 8px 0 0;
+
+    > span {
+      margin-right: 10px;
+    }
+  }
+
+  .runnable-stats-wrapper {
+    > span {
+      margin-left: 10px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  a {
+    color: $purple-light;
+
+    &:hover img {
+      text-decoration: none;
+    }
+  }
+
+  > span {
+    display: inline-block;
+    margin: 0 5px 5px;
+
+    &:first-child {
+      margin-left: 0;
+
+      > .glyphicons {
+        margin-left: 0;
+      }
+    }
+
+    &.vote-up {
+      margin-left: 0;
+
+      a {
+        color: #bbb;
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+        padding-left: 15px;
+
+        &:before {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 0;
+          top: 32%;
+          left: 0;
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-bottom: 7px solid #bbb;
+          @include transition(transform 0.25s linear);
+        }
+
+        &:hover {
+          color: #777;
+
+          &:before {
+            border-bottom: 7px solid #777;
+          }
+        }
+      }
+    }
+
+    &.tags {
+
+      img {
+        margin-right: 4px;
+      }
+
+      a {
+        margin-top: 5px;
+        margin-right: 5px;
+      }
+    }
+
+    &.glyphicons {
+      margin: 0 2px 0 0;
+    }
+  }
+}
