@@ -9,3 +9,14 @@
     @include scale-3d(0.5,0.5,1);
   }
 }
+
+@include keyframes(loaderText) {
+  from {
+    opacity: 0;
+    @include transform-3d(0,-150%,0);
+  }
+  to {
+    opacity: 1;
+    @include transform-3d(0,-0%,0);
+  }
+}
