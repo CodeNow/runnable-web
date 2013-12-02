@@ -13,8 +13,8 @@ module.exports = BaseView.extend({
       this.progress(status);
     }
 
-    var primus = new Primus('http://cybertron.' + this.app.get('domain'), { 
-      transformer: 'engine.io' 
+    var primus = new Primus('http://cybertron.' + this.app.get('domain'), {
+      transformer: 'engine.io'
     });
     var progress = this.model.get('servicesToken') + ':progress';
     primus.substream(progress).on('data', this.progress.bind(this));
@@ -34,7 +34,19 @@ module.exports = BaseView.extend({
       } else {
         this.$el.show();
       }
-    }
+    };
+
+    setTimeout(function(){
+      this.$('#progress-text').addClass('in');
+    },1000);
+
+    setTimeout(function(){
+      this.$('#progress-text em').addClass('in');
+    },5000);
+
+    setTimeout(function(){
+      this.$('#progress-text-2').addClass('in');
+    },10000);
   },
   stoppedVirtualMachine: function () {
     this.options.step2 = true;
@@ -43,8 +55,8 @@ module.exports = BaseView.extend({
   progress: function (name) {
     var step = {
       'Stopping Virtual Machine': 1,
-      'Saving Changes': 2, 
-      'Optimizing': 3, 
+      'Saving Changes': 2,
+      'Optimizing': 3,
       'Distributing Project': 4,
       'Finished': 'end'
     }[name];
