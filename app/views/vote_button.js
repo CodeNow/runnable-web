@@ -10,15 +10,15 @@ module.exports = BaseView.extend({
   preRender: function () {
     // preRender is called before .getAttributes so setting attributes here still works
     var user = this.app.user;
+    var model = this.model;
     this.attributes = this.attributes || {};
     this.attributes.href = 'javascript:void(0);';
 
-    if (user.isOwnerOf(this.model)) {
+    if (user.isOwnerOf(model) || user.hasVotedOn(model)) {
       this.attributes = {
         disabled: 'disabled'
       };
     }
-
     // if (!utils.exists(user.get('votes'))) {
     //   this.attributes = {
     //     disabled: 'disabled'
@@ -37,13 +37,9 @@ module.exports = BaseView.extend({
     evt.preventDefault();
 
     var self = this;
+
     this.app.user.vote(this.model, function (errMessage) {
-      if (errMessage) {
-        self.showError(errMessage);
-        self.trackError('vote', errMessage);
-      } else {
-        $(evt.currentTarget).addClass('voted');
-      }
+      $(evt.currentTarget).addClass('voted');
     });
   }
 });
