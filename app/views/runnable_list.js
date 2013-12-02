@@ -10,6 +10,28 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     var currentUrl = utils.getCurrentUrlPath(this.app);
     var opts = this.options;
+    // page links
+    this.pageLinks(currentUrl, opts);
+    // sort tabs
+    var currentUrlNoQuery = utils.getCurrentUrlPath(this.app, true);
+    opts.sorts = [
+      {
+        sort: 'created',
+        href: currentUrlNoQuery,
+        label: 'Trending'
+      },
+      {
+        sort: 'runs',
+        href: currentUrlNoQuery + '?sort=runs',
+        label: 'Popular'
+      }
+    ];
+    opts.sort = utils.getQueryParam(this.app, 'sort') || 'created';
+
+    this.collection.sort();
+    return opts;
+  },
+  pageLinks: function (currentUrl, opts) {
     var collectionParams = this.collection.params || {};
     opts.page = collectionParams.page + 1;
     var lastPage = opts.lastPage = collectionParams.lastPage || 1;
@@ -47,9 +69,6 @@ module.exports = BaseView.extend({
         link: utils.addPageQuery(currentUrl, i)
       });
     }
-
-    this.collection.sort();
-    return opts;
   }
 });
 

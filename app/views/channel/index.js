@@ -15,25 +15,6 @@ module.exports = BaseView.extend({
     var value = $(evt.currentTarget).val();
     var path = utils.getCurrentUrlPath(this.app, true);
     this.app.router.navigate(path+'?sort='+value, true);
-  },
-  getTemplateData: function () {
-    var opts = this.options;
-    opts.sorts = [
-      {
-        value: 'created',
-        label: 'Most Recent'
-      },
-      {
-        value: 'views',
-        label: 'Most Views'
-      },
-      {
-        value: 'runs',
-        label: 'Most Runs'
-      }
-    ];
-    opts.selectedsort = utils.getQueryParam(this.app, 'sort') || 'created';
-    return opts;
   }
 });
 

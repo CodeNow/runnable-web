@@ -1,7 +1,10 @@
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#trending"> Trending</a>
-    <li><a href="#popular"> Popular</a>
-  </ul>
+  {{#each sorts}}
+  <li {{#if_eq sort compare=../sort}}class="active"{{/if_eq}}>
+    <a href="{{href}}">{{label}}</a>
+  </li>
+  {{/each}}
+</ul>
 <ul id="tags-content">
   {{#each collection.models}}
     {{view "runnable_item_view" model=. novotes=../novotes}}
@@ -11,19 +14,19 @@
 <center>
   <ul class="pagination">
     {{#if prevLink}}
-    <li><a href="{{prevLink}}">«</a></li>
+    <li><a href="{{prevLink}}" title="Previous Page">«</a></li>
     {{/if}}
     {{#each links}}
     <li>
     {{#if_eq page compare=../page}}
-    <a class="active" href="{{link}}">{{page}} of {{../../lastPage}}</a>
+    <a class="active" href="{{link}}" title="Current Page">{{page}} of {{../../lastPage}}</a>
     {{else}}
-    <a href="{{link}}">{{page}}</a>
+    <a href="{{link}}" title="Page {{page}}">{{page}}</a>
     {{/if_eq}}
     </li>
     {{/each}}
     {{#if nextLink}}
-    <li><a href="{{nextLink}}">»</a></li>
+    <li><a href="{{nextLink}}" title="Next Page">»</a></li>
     {{/if}}
   </ul>
 </center>
