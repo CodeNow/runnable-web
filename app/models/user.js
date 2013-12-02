@@ -93,8 +93,7 @@ var User = module.exports = Base.extend({
     var data = { runnable: image.id };
     var opts = utils.cbOpts(callback, this);
 
-    if (this.votes.findWhere(data))
-      return cb ('You have already voted on this runnable');
+    if (this.hasVotedOn(image.id)) return cb ('You have already voted on this runnable');
 
     this.votes.create(data, opts);
     image.incVote(); // assume success
@@ -111,21 +110,25 @@ var User = module.exports = Base.extend({
       }
     }
   },
-  hasVoted: function (project, cb) {
-    var self = this;
-    cb = cb || function(){};
-    var checkVote = function () {
-      var match = self.votes.findWhere({ runnable: project.id });
-      cb(null, match !== null && match !== undefined);
-      return match;
-    };
-    if (!this.votes) {
-      this.createVotesCollection([]);
-      this.votes.fetch();
-      this.listenToOnce(this.votes, 'sync', checkVote);
-    } else {
-      return checkVote();
-    }
+  // hasVoted: function (project, cb) {
+  //   var self = this;
+  //   cb = cb || function(){};
+  //   var checkVote = function () {
+  //     var match = self.votes.findWhere({ runnable: project.id });
+  //     cb(null, match !== null && match !== undefined);
+  //     return match;
+  //   };
+  //   if (!this.votes) {
+  //     this.createVotesCollection([]);
+  //     this.votes.fetch();
+  //     this.listenToOnce(this.votes, 'sync', checkVote);
+  //   } else {
+  //     return checkVote();
+  //   }
+  // },
+  hasVotedOn: function (projectOrProjectId) {
+    var projectId = projectOrProjectId.id || projectOrProjectId;
+    return this.votes.findWhere({ runnable:projectId });
   },
   isOwnerOf: function (model) {
     owner = (model.toJSON) ? model.get('owner') : model.owner;
