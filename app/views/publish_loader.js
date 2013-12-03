@@ -59,7 +59,7 @@ module.exports = BaseView.extend({
     }
   },
   refresh: function () {
-    location.reload();
+    window.location.reload();
   }
 });
 

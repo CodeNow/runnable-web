@@ -193,7 +193,7 @@
   }
 
   button {
-    @include animation(dropIn 0.5s forwards 5s ease-in-out);
+    @include animation(dropIn 0.5s forwards 15s ease-in-out);
     display: block;
     margin: 70px auto 0;
     opacity: 0;
