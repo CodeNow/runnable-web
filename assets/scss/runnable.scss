@@ -35,7 +35,7 @@
     outline: none;
     padding: 0;
     position: relative;
-    @include transition(0.2 ease-in-out);
+    @include transition(0.2s ease-in-out);
     width: 50px;
 
     &:hover {
@@ -65,7 +65,6 @@
     &.voted,
     &[disabled] {
       cursor: default;
-      pointer-events: none;
     }
 
     &[disabled] {

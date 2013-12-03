@@ -7,6 +7,7 @@ module.exports = BaseView.extend({
   events: {
     'click': 'vote'
   },
+  dontTrackEvents: ['click'],
   preRender: function () {
     // preRender is called before .getAttributes so setting attributes here still works
     var user = this.app.user;
@@ -15,16 +16,11 @@ module.exports = BaseView.extend({
     this.attributes.href = 'javascript:void(0);';
 
     if (user.isOwnerOf(model) || user.hasVotedOn(model)) {
-      this.attributes = {
-        disabled: 'disabled'
-      };
+      // this.attributes = {
+      //   disabled: 'disabled'
+      // };
+      this.className = 'vote voted btn silver';
     }
-    // if (!utils.exists(user.get('votes'))) {
-    //   this.attributes = {
-    //     disabled: 'disabled'
-    //   };
-    //   delete this.attributes.href;
-    // }
   },
   getTemplateData: function () {
     return this.model.toJSON();
@@ -37,10 +33,28 @@ module.exports = BaseView.extend({
     evt.preventDefault();
 
     var self = this;
+    var user = this.app.user;
+    var $el = $(evt.currentTarget);
+    var blocked;
 
-    this.app.user.vote(this.model, function (errMessage) {
-      $(evt.currentTarget).addClass('voted');
-    });
+    if (user.hasVotedOn(this.model)) {
+      blocked = true;
+      self.trackError('vote', 'disabled vote clicked');
+    }
+    else {
+      $el.addClass('voted');
+      user.vote(this.model, function (errMessage) {
+        if (errMessage) {
+          blocked = true;
+          self.showError(errMessage);
+          self.trackError('vote', errMessage);
+        }
+        else {
+          blocked = false;
+        }
+        self.trackEvent('vote', {blocked:blocked});
+      });
+    }
   }
 });
 
