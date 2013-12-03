@@ -40,8 +40,9 @@ module.exports = {
       },
       function addSEO (results, cb) {
         var pageText = (params.page>1) ? " Page "+params.page : "";
+        var sort = (params.sort) || 'created';
         results.page = {
-          title: formatTitle(results.channel.get('name')+" code"+pageText),
+          title: formatTitle(utils.sortLabel(sort)+' '+results.channel.get('name')+" code"+pageText),
           canonical: canonical.call(self)
         };
         cb(null, results);

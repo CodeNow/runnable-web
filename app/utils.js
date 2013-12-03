@@ -314,9 +314,14 @@ var utils = module.exports = {
       utils.urlsMatch(currentUrl, url);
   },
   getCurrentUrlPath: function (app, ignoreQueryString) {
-    var path = (isServer) ?
-      app.req && app.req.url && app.req.url :
-      Backbone.history.fragment;
+    var path;
+    if (isServer) {
+      path = app.req && app.req.url && app.req.url;
+    }
+    else {
+      var domain = window.location.protocol +'//'+window.location.host;
+      path = window.location.href.replace(domain, '');
+    }
     if (ignoreQueryString)
       path = path.split('?')[0];
     return path;
@@ -409,6 +414,16 @@ var utils = module.exports = {
       count      : '',
       url        : '/publish'
     }, { app:app });
+  },
+  sortLabel: function (sort) {
+    // put it here so that it's just in one place
+    var labelMap = {
+      'created':'Newest',
+      'runs'   :'Popular',
+      '-created':'Newest',
+      '-runs'   :'Popular'
+    };
+    return labelMap[sort];
   },
   s4: function () {
     return Math.floor((1 + Math.random()) * 0x10000)

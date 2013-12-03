@@ -18,12 +18,12 @@ module.exports = BaseView.extend({
       {
         sort: 'created',
         href: currentUrlNoQuery,
-        label: 'Trending'
+        label: utils.sortLabel('created')
       },
       {
         sort: 'runs',
         href: currentUrlNoQuery + '?sort=runs',
-        label: 'Popular'
+        label: utils.sortLabel('runs')
       }
     ];
     opts.sort = utils.getQueryParam(this.app, 'sort') || 'created';
