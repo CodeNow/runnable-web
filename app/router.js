@@ -167,7 +167,7 @@ Router.prototype.navigate = function (fragment) {
   var domain, frag = Backbone.history.getFragment(fragment || '');
   if (Backbone.history.fragment === frag) {
     domain = window.location.protocol +'//'+window.location.host+'/';
-    Backbone.history.fragment = window.location.href.replace(domain, '');
+    Backbone.history.fragment = Backbone.history.getFragment(window.location.href.replace(domain, ''));
   }
   Super.navigate.apply(this, arguments);
 }
