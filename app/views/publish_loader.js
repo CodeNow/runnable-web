@@ -4,6 +4,9 @@ var utils = require('../utils');
 module.exports = BaseView.extend({
   id: 'publish-loader',
   className: 'overlay-loader',
+  events: {
+    'click button' : 'refresh'
+  },
   postRender: function () {
     var i = 1, self = this, status = this.model.get('status');
     this.$('h1:first-child').addClass('in');
@@ -35,18 +38,6 @@ module.exports = BaseView.extend({
         this.$el.show();
       }
     };
-
-    setTimeout(function(){
-      this.$('#progress-text').addClass('in');
-    },1000);
-
-    setTimeout(function(){
-      this.$('#progress-text em').addClass('in');
-    },5000);
-
-    setTimeout(function(){
-      this.$('#progress-text-2').addClass('in');
-    },10000);
   },
   stoppedVirtualMachine: function () {
     this.options.step2 = true;
@@ -66,6 +57,9 @@ module.exports = BaseView.extend({
       this.$('h1.in').prop('class','out');
       this.$('h1:nth-child(' + step + ')').addClass('in');
     }
+  },
+  refresh: function () {
+    location.reload();
   }
 });
 

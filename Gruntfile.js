@@ -37,6 +37,7 @@ var aceScripts = [
 var frontendScripts = [
   'public/vendor/bower/jquery/jquery.js',
   'public/vendor/jquery-ui-custom/js/jquery-ui-1.10.3.custom.min.js',
+  'public/vendor/modernizr/modernizr.custom.61873.js',
   'public/vendor/*.js', //include jquery plugins, must be after jquery
   'public/vendor/bower/sockjs/sockjs.js',
   'public/vendor/bower/es5-shim/es5-shim.js',
@@ -53,7 +54,6 @@ var frontendScripts = [
   'public/vendor/bower/bootstrap-select/bootstrap-select.min.js',
   'public/vendor/bower/textillate/assets/jquery.lettering.js',
   'public/vendor/bower/textillate/jquery.textillate.js',
-  'public/vendor/bower/isotope/jquery.isotope.min.js',
   'public/vendor/bower/jquery.stellar/jquery.stellar.min.js',
   'public/vendor/bower/frontend-track/frontend-track.js',
   'public/vendor/bower/autocompletejs/js/autocomplete.js'
