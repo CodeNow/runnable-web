@@ -239,20 +239,24 @@ function fetchUserAndChannel (channelName, callback) {
   fetch.call(this, spec, callback);
 }
 
-function fetchChannelContents (channelName, page, callback) {
+function fetchChannelContents (params, callback) {
+  var channel = params.channel;
+  var page = params.page || 1;
+  var sort = params.sort ? '-'+params.sort : '-created';
   var spec = {
     images: {
       collection : 'Images',
       params     : {
-        sort: '-runs',
-        channel: channelName,
-        page: (page && page-1) || 0
+        sort: sort,
+        channel: channel,
+        limit: 50,
+        page: page-1 // api page starts at 0
       }
     },
     channels: {
       collection : 'Channels',
       params     : {
-        channel: channelName
+        channel: channel
       }
     }
   };
@@ -260,6 +264,7 @@ function fetchChannelContents (channelName, page, callback) {
 }
 
 function fetchOwnersFor (user, runnables, callback) {
+  if (runnables.length === 0) return callback(null, {});
   var userIds = runnables.map(function (run) {
     return run.get('owner');
   });

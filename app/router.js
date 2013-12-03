@@ -161,8 +161,14 @@ Router.prototype.navigate = function (fragment) {
       }
     });
   }
-
+  // modal fix - not sure if this is still necessary
   $('body').removeClass('modal-open');
+  // navigate fix - (query params -> no query params fix)
+  var domain, frag = Backbone.history.getFragment(fragment || '');
+  if (Backbone.history.fragment === frag) {
+    domain = window.location.protocol +'//'+window.location.host+'/';
+    Backbone.history.fragment = Backbone.history.getFragment(window.location.href.replace(domain, ''));
+  }
   Super.navigate.apply(this, arguments);
 }
 

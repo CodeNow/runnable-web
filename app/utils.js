@@ -1,4 +1,3 @@
-var Channel = require('./models/channel');
 var _ = require('underscore');
 
 var utils = module.exports = {
@@ -67,6 +66,33 @@ var utils = module.exports = {
       .replace(/^(http(s){0,1}[:]\/)([^\/])/, '$1/$3') //fix links whose double slashes were replaced
     ;
     return ret;
+  },
+  addPageQuery: function (currentUrl, page) {
+    var newUrl;
+    if (page === 1) {
+      newUrl = currentUrl.replace(/[?]page=[^&]+[&]/, '?');
+      newUrl = newUrl.replace(/[&?]page=[^&]+/, '');
+    }
+    else if (
+      ~currentUrl.indexOf('?page=') ||
+      ~currentUrl.indexOf('&page=')
+    ) {
+      newUrl = currentUrl.replace(/([?&]page=)[^&]+([&].*)?/, '$1'+page+'$2');
+    }
+    else if (~currentUrl.indexOf('?')) {
+      newUrl = currentUrl.replace('?', '?page='+page+'&');
+    }
+    else {
+      newUrl = currentUrl + '?page='+page;
+    }
+    return newUrl;
+  },
+  toQueryString: function (query) {
+    return Object.keys(query).reduce(function (qs, key) {
+      var sep = (qs === '') ? '?' : '&';
+      var val = query[key];
+      return val ? (qs+sep+key+'='+val) : qs;
+    }, '');
   },
   parseJSON: function (string, cb) {
     var err, json;
@@ -281,19 +307,49 @@ var utils = module.exports = {
       if (++count >= max) cb();
     }
   },
-  isCurrentURL: function (app, url) {
-    var currentUrl = utils.getCurrentUrlPath(app);
-    return utils.urlsMatch(currentUrl, url);
+  isCurrentUrl: function (app, url, ignoreQueryString) {
+    var currentUrl = utils.getCurrentUrlPath(app, ignoreQueryString);
+    return ignoreQueryString ?
+      utils.urlPathsMatch(currentUrl, url):
+      utils.urlsMatch(currentUrl, url);
   },
-  getCurrentUrlPath: function (app) {
-    return (isServer) ?
-      app.req && app.req.url :
-      Backbone.history.fragment;
+  getCurrentUrlPath: function (app, ignoreQueryString) {
+    var path;
+    if (isServer) {
+      path = app.req && app.req.url && app.req.url;
+    }
+    else {
+      var domain = window.location.protocol +'//'+window.location.host;
+      path = window.location.href.replace(domain, '');
+    }
+    if (ignoreQueryString)
+      path = path.split('?')[0];
+    return path;
+  },
+  getQueryParam: function (app, key) {
+    if (isServer) {
+      return app.req.query[key];
+    }
+    else {
+      var re = new RegExp('[?\&]'+key+'=([^\&]*)');
+      var qs = window.location.search;
+      var match = re.exec(qs);
+      return match && match[1];
+    }
   },
   getCurrentUrl: function (app) {
     return (isServer) ?
       app.req.protocol+'://'+app.req.host+utils.getCurrentUrlPath(app) :
       window.location.href;
+  },
+  urlPathsMatch: function (url1, url2) {
+    url1 = url1 && url1.toLowerCase && url1.toLowerCase().split('?')[0];
+    url2 = url2 && url2.toLowerCase && url2.toLowerCase().split('?')[0];
+    return url1 === url2 ||
+      url1+'/' === url2 ||
+      '/'+url1 === url2 ||
+      url1 === url2+'/' ||
+      url1 === '/'+url2;
   },
   urlsMatch: function (url1, url2) {
     url1 = url1 && url1.toLowerCase && url1.toLowerCase();
@@ -303,6 +359,17 @@ var utils = module.exports = {
       '/'+url1 === url2 ||
       url1 === url2+'/' ||
       url1 === '/'+url2;
+  },
+  getQueryParam: function (app, key) {
+    if (isServer) {
+      return app.req.query[key];
+    }
+    else {
+      var re = new RegExp('[?\&]'+key+'=([^\&]*)');
+      var qs = window.location.search;
+      var match = re.exec(qs);
+      return match && match[1];
+    }
   },
   clientSetCookie: function (c_name, value, exdays){
     var exdate=new Date();
@@ -338,6 +405,7 @@ var utils = module.exports = {
   },
   customChannel: function (app) {
     // put it here so that it's just in one place
+    var Channel = require('./models/channel');
     return new Channel({
       _id        : "111122223333444455556666",
       name       : "Add your own",
@@ -346,6 +414,16 @@ var utils = module.exports = {
       count      : '',
       url        : '/publish'
     }, { app:app });
+  },
+  sortLabel: function (sort) {
+    // put it here so that it's just in one place
+    var labelMap = {
+      'created':'Newest',
+      'runs'   :'Popular',
+      '-created':'Newest',
+      '-runs'   :'Popular'
+    };
+    return labelMap[sort];
   },
   s4: function () {
     return Math.floor((1 + Math.random()) * 0x10000)

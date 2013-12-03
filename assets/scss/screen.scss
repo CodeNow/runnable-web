@@ -1665,11 +1665,13 @@ div#output-terminal-container{
     }
     #tags-content {
         background: #fff;
+        @include border-radius(0 5px 5px 5px);
+        @include box-shadow(0 2px 5px rgba(0,0,0,0.1));
         overflow: hidden;
         padding: 0;
-        margin: 20px 0 40px 0;
-        @include border-radius(5px);
-        @include box-shadow(0 2px 5px rgba(0,0,0,0.1));
+        position: relative;
+            z-index: 2;
+
         li {
             list-style: none;
             padding: 0 25px 25px 25px;

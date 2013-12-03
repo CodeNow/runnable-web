@@ -1,3 +1,10 @@
+<ul class="nav nav-tabs">
+  {{#each sorts}}
+  <li {{#if_eq sort compare=../sort}}class="active"{{/if_eq}}>
+    <a href="{{href}}">{{label}}</a>
+  </li>
+  {{/each}}
+</ul>
 <ul id="tags-content">
   {{#each collection.models}}
     {{view "runnable_item_view" model=. novotes=../novotes}}
@@ -7,24 +14,20 @@
 <center>
   <ul class="pagination">
     {{#if prevLink}}
-    <li><a href="{{prevLink}}">«</a></li>
+    <li><a href="{{prevLink}}" title="Previous Page">«</a></li>
     {{/if}}
-    <li><a class="active" href="javascript:void(0);">{{page}}</a></li>
+    {{#each links}}
+    <li>
+    {{#if_eq page compare=../page}}
+    <a class="active" href="{{link}}" title="Current Page">{{page}} of {{../../lastPage}}</a>
+    {{else}}
+    <a href="{{link}}" title="Page {{page}}">{{page}}</a>
+    {{/if_eq}}
+    </li>
+    {{/each}}
     {{#if nextLink}}
-    <li><a href="{{nextLink}}">»</a></li>
+    <li><a href="{{nextLink}}" title="Next Page">»</a></li>
     {{/if}}
   </ul>
 </center>
 {{/unless}}
-<!--nav class="pagination">
-  {{#if prevLink}}
-    <a href="{{prevLink}}" class="previous"><i class="icon-chevron-left"></i> Previous page</a>
-  {{/if}}
-  {{#if prevLink}}
-  {{#if nextLink}}
-    {{page}}
-  {{/if}}{{/if}}
-  {{#if nextLink}}
-    <a href="{{nextLink}}" class="next">Next page <i class="icon-chevron-right"></i></a>
-  {{/if}}
-</nav-->
