@@ -58,7 +58,7 @@ module.exports = BaseView.extend({
     if (start !== 1) {
       opts.firstPageLink = {
         page: 1,
-        link: utils.addPageQuery(currentUrl, lastPage),
+        link: utils.addPageQuery(currentUrl, 1),
         ellipsis: start > (1+1)
       };
     }
