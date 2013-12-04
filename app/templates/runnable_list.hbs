@@ -11,23 +11,36 @@
   {{/each}}
 </ul>
 {{#unless nopaging}}
-<center>
-  <ul class="pagination">
-    {{#if prevLink}}
-    <li><a href="{{prevLink}}" title="Previous Page">«</a></li>
-    {{/if}}
-    {{#each links}}
+<ul class="pagination">
+  {{#if prevLink}}
+    <li><a href="{{prevLink}}" title="Previous Page"><span class="glyphicons chevron-left"></span> Previous</a>
+  {{/if}}
+
+  {{#if firstPageLink}}
+    {{#with firstPageLink}}
+      <li><a href="{{link}}" title="Page {{page}}">{{page}}</a>
+      {{#if ellipsis}}<span class="ellipsis">• • •</span>{{/if}}
+    {{/with}}
+  {{/if}}
+
+  {{#each links}}
     <li>
     {{#if_eq page compare=../page}}
-    <a class="active" href="{{link}}" title="Current Page">{{page}} of {{../../lastPage}}</a>
+    <a class="active" href="{{link}}" title="Current Page">{{page}}{{!--  of {{../../lastPage}} --}}</a>
     {{else}}
     <a href="{{link}}" title="Page {{page}}">{{page}}</a>
     {{/if_eq}}
-    </li>
-    {{/each}}
-    {{#if nextLink}}
-    <li><a href="{{nextLink}}" title="Next Page">»</a></li>
-    {{/if}}
-  </ul>
-</center>
+  {{/each}}
+
+  {{#if lastPageLink}}
+    {{#with lastPageLink}}
+      {{#if ellipsis}}<span class="ellipsis">• • •</span>{{/if}}
+      <li><a href="{{link}}" title="Page {{page}}">{{page}}</a>
+    {{/with}}
+  {{/if}}
+
+  {{#if nextLink}}
+    <li><a href="{{nextLink}}" title="Next Page">Next <span class="glyphicons chevron-right"></span></a>
+  {{/if}}
+</ul>
 {{/unless}}

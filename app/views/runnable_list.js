@@ -32,6 +32,7 @@ module.exports = BaseView.extend({
     return opts;
   },
   pageLinks: function (currentUrl, opts) {
+    // messy :(
     var collectionParams = this.collection.params || {};
     opts.page = collectionParams.page + 1;
     var lastPage = opts.lastPage = collectionParams.lastPage || 1;
@@ -45,23 +46,31 @@ module.exports = BaseView.extend({
     }
 
     // page links
-    var span = 9, start, end;
+    var margin = 2, start, end;
     opts.links = [];
-    if (opts.page < span/2) {
-      start = 1;
-      end = start+span;
-    }
-    else if (opts.page > (lastPage - span/2)) {
-      start = lastPage-span;
-      end = lastPage;
-    }
-    else {
-      start = Math.floor(opts.page - span/2);
-      end   = Math.floor(opts.page + span/2);
-    }
+    start = Math.floor(opts.page - margin);
+    end   = Math.floor(opts.page + margin);
+
     // start end corrections
     if (start <= 0) start = 1;
     if (lastPage < end) end = lastPage;
+
+    if (start !== 1) {
+      opts.firstPageLink = {
+        page: 1,
+        link: utils.addPageQuery(currentUrl, lastPage),
+        ellipsis: start > (1+1)
+      };
+    }
+    if (end !== lastPage) {
+      opts.lastPageLink = {
+        page: lastPage,
+        link: utils.addPageQuery(currentUrl, lastPage),
+        ellipsis: end < (lastPage-1)
+      };
+    }
+
+    //build links
     for (var i = start; i<=end; i++) {
       console.log(i);
       opts.links.push({
