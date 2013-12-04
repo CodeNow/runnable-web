@@ -2,6 +2,10 @@ var BaseView = require('./base_view');
 var _ = require('underscore');
 var Images = require('../collections/images');
 
+function sortBySort(a, b) {
+  return (a.sort>b.sort) ? -1 : 1;
+}
+
 module.exports = BaseView.extend({
   tagName:'form',
   preRender: function () {
@@ -36,10 +40,9 @@ module.exports = BaseView.extend({
                 result.sort = index;
               });
               var images = new Images(results, {app:this.app});
+              images.comparator = sortBySort;
               var ret = images
-                .sort(function (a, b) {
-                  return (a.sort>b.sort) ? -1 : 1;
-                })
+                .sort()
                 .map(function (image) {
                   var json = _.pick(image.attributes, 'name', 'description');
                   json.url = image.appURL();
