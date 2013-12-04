@@ -2,11 +2,6 @@
     display: table;
     margin: 40px auto 20px;
 
-    @include media(xs) {
-        text-align: center;
-        width: 100%;
-    }
-
     a {
         border-color: #bbb !important;
         @include border-radius(3px);
@@ -52,5 +47,32 @@
         line-height: 26px;
         margin-right: 5px;
         padding: 0 5px;
+
+        @include media(xs) {
+            height: 36px;
+            line-height: 36px;
+            min-width: 36px;
+        }
+    }
+
+    @include media(xs) {
+        height: 87px;
+        margin: 0;
+        position: relative;
+        text-align: center;
+        width: 100%;
+
+        li > a,
+        li > .ellipsis {
+            margin-top: 15px;
+        }
+
+        .prev,
+        .next{
+            display: block;
+            margin: 15px 0 0;
+            position: relative;
+            width: 100%;
+        }
     }
 }
