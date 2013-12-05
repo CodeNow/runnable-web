@@ -8,7 +8,6 @@
     "bootstrap": "~3.0.0",
     "textillate": "*",
     "fittext": "*",
-    "isotope": "~1.5.25",
     "bootstrap-select": "~1.2.0",
     "jquery.stellar": "~0.6.2",
     "alertify.js": "~0.3.10",

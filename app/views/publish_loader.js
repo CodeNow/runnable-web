@@ -4,6 +4,9 @@ var utils = require('../utils');
 module.exports = BaseView.extend({
   id: 'publish-loader',
   className: 'overlay-loader',
+  events: {
+    'click button' : 'refresh'
+  },
   postRender: function () {
     var i = 1, self = this, status = this.model.get('status');
     this.$('h1:first-child').addClass('in');
@@ -13,8 +16,8 @@ module.exports = BaseView.extend({
       this.progress(status);
     }
 
-    var primus = new Primus('http://cybertron.' + this.app.get('domain'), { 
-      transformer: 'engine.io' 
+    var primus = new Primus('http://cybertron.' + this.app.get('domain'), {
+      transformer: 'engine.io'
     });
     var progress = this.model.get('servicesToken') + ':progress';
     primus.substream(progress).on('data', this.progress.bind(this));
@@ -34,7 +37,7 @@ module.exports = BaseView.extend({
       } else {
         this.$el.show();
       }
-    }
+    };
   },
   stoppedVirtualMachine: function () {
     this.options.step2 = true;
@@ -43,8 +46,8 @@ module.exports = BaseView.extend({
   progress: function (name) {
     var step = {
       'Stopping Virtual Machine': 1,
-      'Saving Changes': 2, 
-      'Optimizing': 3, 
+      'Saving Changes': 2,
+      'Optimizing': 3,
       'Distributing Project': 4,
       'Finished': 'end'
     }[name];
@@ -54,6 +57,9 @@ module.exports = BaseView.extend({
       this.$('h1.in').prop('class','out');
       this.$('h1:nth-child(' + step + ')').addClass('in');
     }
+  },
+  refresh: function () {
+    window.location.reload();
   }
 });
 
