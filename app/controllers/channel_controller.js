@@ -149,7 +149,7 @@ module.exports = {
       images: {
         collection : 'Images',
         params     : {
-          sort: '-created',
+          sort: params.sort ? '-'+params.sort : '-created',
           page: (params.page && params.page-1) || 0,
           limit: 50
         }
