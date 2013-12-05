@@ -33,6 +33,9 @@ module.exports = {
         });
       },
       function (results, cb) {
+        results.channels.reset(results.channels.filter(function (channel) {
+          return channel.get('count') !== 0;
+        }));
         fetchOwnersFor.call(self, results.user, results.images, function (err, ownerResults) {
           if (err) return cb(err);
           cb(null, _.extend(results, ownerResults));
@@ -133,6 +136,8 @@ module.exports = {
     // }
   },
   all: function(params, callback) {
+    params.page = utils.getQueryParam(this.app, 'page');
+    params.sort = utils.getQueryParam(this.app, 'sort');
     var self = this;
     var spec = {
       user    : {
@@ -162,11 +167,15 @@ module.exports = {
         });
       },
       function extend (results, cb) {
+        results.channels.reset(results.channels.filter(function (channel) {
+          return channel.get('count') !== 0;
+        }));
         results.channel = new Channel({name:'All'}, {app:self.app});
         var pageText = (params.page) ? " Page "+params.page : "";
+        var sort = (params.sort) || 'created';
         results.page = {
-          title: formatTitle('Runnable code for JQuery, Codeigniter, NodeJS, PHP, Python and more'+pageText),
-          description: 'Runnable code for '+utils.tagsToString(results.channels.toJSON(), 'and'),
+          title: formatTitle(utils.sortLabel(sort)+' '+'Runnable code for JQuery, Codeigniter, NodeJS, PHP, Python and more'+pageText),
+          description: utils.sortLabel(sort)+' '+'Runnable code for '+utils.tagsToString(results.channels.toJSON(), 'and'),
           canonical: canonical.call(self)
         };
         cb(null, results);
