@@ -1,5 +1,13 @@
 @import "compass/css3/opacity";
 
+#output {
+  visibility: hidden;
+
+  &.in {
+    visibility: visible;
+  }
+}
+
 .services-body {
 
   .name {
