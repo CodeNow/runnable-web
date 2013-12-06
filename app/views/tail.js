@@ -15,7 +15,7 @@ module.exports = BaseView.extend({
   },
   postRender: function () {
     this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
-    this.options.tailurl = this.options.boxurl + "/dynamic/tail";
+    this.options.tailurl = this.options.boxurl + "/static/log.html";
     this.loading(true);
     this.listenToPostMessages();
     this.$('iframe').attr('src', this.options.tailurl);
