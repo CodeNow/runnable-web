@@ -62,7 +62,7 @@ module.exports = BaseView.extend({
     }
   },
   showParentEl: function () {
-    this.parentView.$el.removeClass('hide');
+    this.parentView.$el.addClass('in');
   },
   handleCodePostMessage: function (json) {
     if (json.code+'' === '0' && this.stream === 'build') {
