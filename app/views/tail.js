@@ -50,7 +50,7 @@ module.exports = BaseView.extend({
         dispatch.trigger('toggle:buildMessage', true);
       }
       else if (this.stream === 'error') {
-        $('#output-results-container').addClass('out');
+        this.$el.addClass('out');
         $('#output-terminal-container').addClass('in');
       }
       else {
