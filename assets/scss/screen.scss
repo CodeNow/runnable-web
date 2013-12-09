@@ -1155,7 +1155,7 @@ progress {
     h4 {
         clear: both;
         padding: 0;
-        margin: 0 0 12px;
+        margin: 0 0 20px;
 
         a {
             font-size: 14px;
@@ -1205,7 +1205,7 @@ progress {
             @include border-radius(50%);
             float: left;
             overflow: hidden;
-            width: $width32*2;
+            width: 69px;
         }
 
         > span {
@@ -1220,12 +1220,13 @@ progress {
         > li {
             display: inline-block;
             height: $width32;
-            margin-left: 10px;
+            margin-left: 32px;
             position: relative;
             width: $width32;
 
-            &:nth-child(even) {
-                margin-left: $width32;
+            &:nth-child(1),
+            &:nth-child(4) {
+                margin-left: 10px;
             }
         }
 
@@ -1242,7 +1243,7 @@ progress {
     }
 
     #share-options {
-        margin-top: 30px;
+        margin-top: 10px;
         text-align: center;
         input.form-control {
             min-height: 25px;
