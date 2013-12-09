@@ -1,17 +1,19 @@
-  {{#if model.attributes.gravitar}}
-  <a href="{{invoke model method='appURL'}}">
-    <img class="project-author-icon" src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}">
-    <span class="btn silver">13k</span>
-  </a>
+<h4 class="author-title">
+  {{#if model.attributes.username}}
+  <a href="{{invoke model method='appURL'}}">{{model.attributes.username}}</a>
+  {{else}}
+  <b>Anonymous</b>
   {{/if}}
-  <p class="publish-date">
-    Published {{dateAgo created}} by
-  </p>
-  <h4 class="author-title">
-    {{#if model.attributes.username}}
-    <a href="{{invoke model method='appURL'}}">{{model.attributes.username}}</a>
-    {{else}}
-    <b>Anonymous</b>
-    {{/if}}
-  </h4>
+  <span class="publish-date">published {{dateAgo created}}.</span>
+</h4>
+{{#if model.attributes.gravitar}}
+<a href="{{invoke model method='appURL'}}">
+  <img class="project-author-icon" src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}">
+  <span class="btn silver rating">13k</span>
+</a>
+<ul>
+  <li>{{view "tag_score"}}
+  <li>{{view "tag_score"}}
+</ul>
+{{/if}}
 {{view "runnable_share" model=image}}

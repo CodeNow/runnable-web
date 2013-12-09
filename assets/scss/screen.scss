@@ -1145,55 +1145,20 @@ progress {
 }
 
 #project-author {
-    margin: 30px 0 0 0;
+    margin: 30px 0 0;
 
-    > a {
-        display: block;
-        float: left;
-        height: 52px;
-        margin-right: 15px;
-        position: relative;
-        width: 52px;
-
-        > span {
-            @include border-radius(50%);
-            display: block;
-            font-size: 11px;
-            height: 30px;
-            line-height: 30px;
-            margin: 0 auto;
-            padding: 0;
-            position: absolute;
-                top: 0;
-                right: -15px;
-            width: 30px;
-        }
-
-        .tooltip-inner {
-            white-space: nowrap;
-        }
+    //tooltips
+    .tooltip-inner {
+        white-space: nowrap;
     }
 
-    .project-author-icon {
-        @include border-radius(50%);
-        float: left;
-        overflow: hidden;
-        width: 52px;
-    }
-
-    .publish-date {
-        color: #bcbcbc;
-        font-size: 13px;
+    h4 {
+        clear: both;
         padding: 0;
-        margin: 0;
-    }
-
-    .author-title {
-        padding: 0;
-        margin: 0;
+        margin: 0 0 12px;
 
         a {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             color: #333;
             text-decoration: none;
@@ -1202,16 +1167,89 @@ progress {
                 text-decoration: underline;
             }
         }
+
+        span {
+            color: #bcbcbc;
+            font-size: 12px;
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    $width32: 32px;
+
+    //rating
+    .rating {
+        @include border-radius(50%);
+        display: block;
+        font-size: 11px;
+        height: $width32;
+        line-height: $width32;
+        margin: 0 auto;
+        padding: 0;
+        position: absolute;
+            top: 0;
+        width: $width32;
+    }
+
+    //author link & img
+    > a {
+        display: block;
+        float: left;
+        height: $width32*2;
+        margin-right: $width32/2;
+        position: relative;
+        width: $width32*2;
+
+        > img {
+            @include border-radius(50%);
+            float: left;
+            overflow: hidden;
+            width: $width32*2;
+        }
+
+        > span {
+            right: -($width32/2);
+        }
+    }
+
+    //top rated
+    > ul {
+        margin: 0;
+
+        > li {
+            display: inline-block;
+            height: $width32;
+            margin-left: 10px;
+            position: relative;
+            width: $width32;
+
+            &:nth-child(even) {
+                margin-left: $width32;
+            }
+        }
+
+        img {
+            @include border-radius(50%);
+            display: block;
+            height: $width32;
+            width: $width32;
+        }
+
+        span {
+            right: -24px;
+        }
     }
 
     #share-options {
+        margin-top: 30px;
         text-align: center;
         input.form-control {
             min-height: 25px;
             color: #bbb;
             font-size: 12px;
             border-color: #bbb;
-            margin: 15px 0;
+            margin: 15px 0 10px;
             @extend .clearfix !optional;
             background-image: url(../images/icon-link.png);
             @include background-image-retina('../images/icon-link@2x.png');
