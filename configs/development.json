@@ -20,7 +20,7 @@
   "rollbar": "bbbd8090514a4b40a0ec53fbed32d882",
   "api": {
     "default": {
-      "host": "api.cloudcosmos.com",
+      "host": "api.runnable.com",
       "protocol": "http"
     }
   },
@@ -29,12 +29,12 @@
     "env" : "development",
     "commitHash": "{COMMIT_HASH}",
     "mixpanel" : {
-      "key": "de848319a0091fb3a5876184d81a40ec"
+      "key": "8790acfcca0cab43adebbc796f1d4f96"
     },
     "googleAnalytics" : {
       "id": "UA-36631837-2"
     },
     "pageSize" : 25,
-    "domain": "cloudcosmos.com"
+    "domain": "runnable.com"
   }
 }
