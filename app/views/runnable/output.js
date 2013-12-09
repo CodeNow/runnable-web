@@ -2,7 +2,6 @@ var BaseView = require('../base_view');
 
 module.exports = BaseView.extend({
   id: 'output',
-  className: '',
   postRender:  function () {
     var self = this;
     var container = this.childViews[0].model;

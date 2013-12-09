@@ -49,6 +49,10 @@ module.exports = BaseView.extend({
       if (this.stream === 'build') {
         dispatch.trigger('toggle:buildMessage', true);
       }
+      else if (this.stream === 'error') {
+        this.$el.addClass('out');
+        $('#output-terminal-container').addClass('in');
+      }
       else {
         clearTimeout(this.buildMessageTimeout);
         dispatch.trigger('toggle:buildMessage', false);
