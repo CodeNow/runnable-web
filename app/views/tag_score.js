@@ -12,10 +12,10 @@ module.exports = BaseView.extend({
   },
   postRender: function () {
     var options = this.options;
-    var rating = options.rating;
+    var reputation = options.reputation;
     var name = options.name;
-    this.$('.rating').tooltip({
-      title: rating + ' published in ' + name,
+    this.$('.reputation').tooltip({
+      title: reputation + ' published in ' + name,
       placement: 'bottom'
     });
   }

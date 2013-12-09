@@ -5,7 +5,7 @@ module.exports = BaseView.extend({
 	id:'project-author',
   className: 'col-sm-3 clearfix',
   postRender: function () {
-    this.$('.project-author-icon ~ .rating').tooltip({
+    this.$('.project-author-icon').siblings('span').tooltip({
       title: '26,295 published Runnables',
       placement: 'bottom'
     });
