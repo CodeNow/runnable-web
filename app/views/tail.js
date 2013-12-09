@@ -37,7 +37,10 @@ module.exports = BaseView.extend({
   },
   onPostMessage: function (message) {
     var dispatch = this.app.dispatch;
-    if (message.data === 'show:loader') {
+    if (!message || !message.data || !message.data.indexOf) {
+      return; // unexpected message format (suspected to cause rollbar #1758)
+    }
+    else if (message.data === 'show:loader') {
       this.loading(true);
     }
     else if (message.data === 'hide:loader') {
