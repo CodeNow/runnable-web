@@ -1,39 +1,23 @@
-<h4 class="author-title">
-  {{#if model.attributes.username}}
-  <a href="{{invoke model method='appURL'}}">{{model.attributes.username}}</a>
-  {{else}}
-  <b>Anonymous</b>
-  {{/if}}
-  <span class="publish-date">published {{dateAgo created}}.</span>
-</h4>
 {{#if model.attributes.gravitar}}
 <a href="{{invoke model method='appURL'}}">
   <img class="project-author-icon" src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}">
   <span class="btn purple reputation">13k</span>
 </a>
 
-{{!--
-<ul>
-  <li>
-    {{view "tag_score" name="Node.js" reputation="10k"}}
-  <li>
-    {{view "tag_score" name="jQuery" reputation="8k"}}
-  <li>
-    {{view "tag_score" name="PHP" reputation="4,421"}}
-  <li>
-    {{view "tag_score" name="Firebase" reputation="1,402"}}
-  <li>
-    {{view "tag_score" name="Twilio" reputation="734"}}
-  <li>
-    {{view "tag_score" name="express" reputation="32"}}
-</ul>
- --}}
+<h4 class="author-title">
+  <span class="publish-date">Published {{dateAgo created}} by</span>
+  {{#if model.attributes.username}}
+  <a href="{{invoke model method='appURL'}}">{{model.attributes.username}}</a>
+  {{else}}
+  <b>Anonymous</b>
+  {{/if}}
+</h4>
 
-<ul>
+<ul class="tags">
   <li>
-    {{view "tag_link" name="Node.js" reputation="10k"}}
+    #12 in {{view "tag_link" name="Node.js"}}
   <li>
-    {{view "tag_link" name="jQuery" reputation="8k"}}
+    #23 in {{view "tag_link" name="jQuery"}}
 </ul>
 
  {{/if}}

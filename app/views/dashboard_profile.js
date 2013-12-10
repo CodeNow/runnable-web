@@ -16,7 +16,7 @@ module.exports = BaseView.extend({
   postRender: function () {
     this.$('.reputation').tooltip({
       placement: 'bottom',
-      title: '26,295 published Runnables'
+      title: '13,295 published Runnables'
     });
   },
   editInline: function (evt) {

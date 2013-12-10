@@ -24,8 +24,8 @@ module.exports = BaseView.extend({
 
     if (meter) {
       this.$('img').tooltip({
-        placement: 'bottom',
-        title: 'Contributed ' + meter + '% to ' + name
+        placement: 'top',
+        title: 'Contributed ' + meter + '% towards ' + name
       });;
     }
   }

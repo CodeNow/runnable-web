@@ -663,7 +663,7 @@ progress {
             a {
                 display: block;
                 background: #F1DEFE;
-                border: solid 1px #BC9FD0;
+                border: solid 1px $purple-light;
                 font-size: 11px;
                 font-weight: bold;
                 padding: 2px 4px;
@@ -1153,12 +1153,20 @@ progress {
     }
 
     h4 {
-        clear: both;
+        float: left;
         padding: 0;
-        margin: 0 0 20px;
+        margin: 0 0 0 10px;
+
+        span {
+            color: #bcbcbc;
+            display: block;
+            font-size: 13px;
+            padding: 0;
+            margin: 0;
+        }
 
         a {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: bold;
             color: #333;
             text-decoration: none;
@@ -1167,18 +1175,11 @@ progress {
                 text-decoration: underline;
             }
         }
-
-        span {
-            color: #bcbcbc;
-            font-size: 12px;
-            padding: 0;
-            margin: 0;
-        }
     }
 
     $width32: 32px;
 
-    //rating
+    // rating
     .reputation {
         @include border-radius(50%);
         display: block;
@@ -1192,7 +1193,7 @@ progress {
         width: $width32;
     }
 
-    //author link & img
+    // author link & img
     > a {
         display: block;
         float: left;
@@ -1215,32 +1216,36 @@ progress {
         }
     }
 
-    //top rated
-    > ul {
-        margin: 0;
+    //tags
+    .tags {
+        float: left;
+        margin: 10px 0 0 10px;
+        padding: 0;
 
-        > li {
+        li {
+            color: #bbb;
+            font-size: 12px;
+            font-weight: bold;
+            list-style-type: none;
+            margin-bottom: 8px;
+        }
+
+        a {
+            background: #F1DEFE;
+            border: solid 1px $purple-light;
+            @include border-radius(3px);
             display: inline-block;
-            height: $width32;
-            margin: 0 0 4px 32px;
-            position: relative;
-            width: $width32;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 2px;
+            padding: 2px 4px;
+            @include transition(all 0.2s ease-in-out);
 
-            &:nth-child(1),
-            &:nth-child(4) {
-                margin-left: 10px;
+            &:hover {
+                border-color: $purple;
+                color: $purple;
+                text-decoration: none;
             }
-        }
-
-        img {
-            @include border-radius(50%);
-            display: block;
-            height: $width32;
-            width: $width32;
-        }
-
-        span {
-            right: -24px;
         }
     }
 
