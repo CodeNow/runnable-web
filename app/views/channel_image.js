@@ -12,16 +12,26 @@ module.exports = BaseView.extend({
     if ((lower in channelImages) && !opts.tag) {
       //no icon-lg for til all images are in
       var pre = (opts.large) ? 'icon-' : (opts.tag) ? 'icon-tag-' : 'icon-';
-      var src = '/images/provider-icons/:pre:lower@2x.png'
-        .replace(':pre', pre)
-        .replace(':lower', lower);
+
+      if (opts.retina) {
+        var src = '/images/provider-icons/:pre:lower@2x.png'
+          .replace(':pre', pre)
+          .replace(':lower', lower);
+      } else {
+        var src = '/images/provider-icons/:pre:lower.png'
+          .replace(':pre', pre)
+          .replace(':lower', lower);
+      }
 
       this.attributes = {
         src: src,
         alt: name,
         // width: opts.width
       };
-      if (opts.large) this.attributes.height = 39;
+
+      if (opts.large) {
+        this.attributes.height = 39;
+      }
     }
     else {
       this.className='display-none';
