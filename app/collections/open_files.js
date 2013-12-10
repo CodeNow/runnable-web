@@ -22,7 +22,7 @@ module.exports = Base.extend({
     var dispatch = this.app.dispatch;
     if (dispatch) {
       this.listenTo(dispatch, 'open:file', this.openFile.bind(this));
-      this.listenTo(dispatch, 'saveAll', this.saveAll.bind(this));
+      this.listenTo(dispatch, 'save:files', this.saveAll.bind(this));
       this.listenTo(dispatch, 'sync:files', this.syncAllFiles.bind(this));
     }
   },

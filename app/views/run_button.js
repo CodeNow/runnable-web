@@ -76,18 +76,14 @@ module.exports = EditorButtonView.extend({
   run: function () {
     this.openOutput();
     this.disable(true);
-    this.model.run(function (err) {
+    this.model.saveOpenFiles(function (err) {
       this.disable(false);
       if (err) {
         this.showError(err);
         this.popup.close();
-        _rollbar.push({level: 'error', msg: "Couldn't start container", errMsg: err});
-      }
-      else {
-        // this.refreshOutput();
       }
     }, this);
-    this.app.dispatch.trigger('run');
+    this.app.dispatch.trigger('run'); // for tracking
   },
   saveImplementationSuccess: function () {
     if (this.userImplementedSpec()) this.run();
