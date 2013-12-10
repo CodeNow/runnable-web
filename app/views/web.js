@@ -52,12 +52,10 @@ module.exports = BaseView.extend({
     }
   },
   addResizeHandle: function () {
-    tony = this;
     var self = this;
     var container = this.model;
     var showingBothPanes = !container.get('output_format');
     if (showingBothPanes && !this.options.buildmessage) {
-      debugger;
       this.$el.resizable({
         alsoResizeReverse: "#output-terminal-container",
         handles: "s",

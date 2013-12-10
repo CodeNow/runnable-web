@@ -69,10 +69,6 @@ module.exports = BaseView.extend({
       this.$el.addClass('out');
       $('#output-terminal-container').addClass('in');
     }
-    else if (this.stream === 'error') {
-      this.$el.addClass('out');
-      $('#output-terminal-container').addClass('in');
-    }
     else {
       this.building = false;
       clearTimeout(this.buildMessageTimeout);
