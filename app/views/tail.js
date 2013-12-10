@@ -47,32 +47,36 @@ module.exports = BaseView.extend({
       this.loading(false);
     }
     else if (message.data.indexOf('stream:') === 0) {
-      this.stream = message.data.replace('stream:', '');
-      this.showParentEl();
-      if (this.stream === 'build') {
-        dispatch.trigger('toggle:buildMessage', true);
-        this.building = true;
-      }
-      else if (this.stream === 'error' && this.building) {
-        this.building = false;
-        this.$el.addClass('out');
-        $('#output-terminal-container').addClass('in');
-      }
-      else if (this.stream === 'error') {
-        this.$el.addClass('out');
-        $('#output-terminal-container').addClass('in');
-      }
-      else {
-        this.building = false;
-        clearTimeout(this.buildMessageTimeout);
-        dispatch.trigger('toggle:buildMessage', false);
-      }
+      this.onStreamPostMessage(message);
     }
     else if (message.data.indexOf('{') === 0) {
       var json = JSON.parse(message.data);
       if (json.type === 'code') {
         this.handleCodePostMessage(json);
       }
+    }
+  },
+  onStreamPostMessage: function (message) {
+    var dispatch = this.app.dispatch;
+    this.stream = message.data.replace('stream:', '');
+    this.showParentEl();
+    if (this.stream === 'build') {
+      dispatch.trigger('toggle:buildMessage', true);
+      this.building = true;
+    }
+    else if (this.stream === 'error' && this.building) {
+      this.building = false;
+      this.$el.addClass('out');
+      $('#output-terminal-container').addClass('in');
+    }
+    else if (this.stream === 'error') {
+      this.$el.addClass('out');
+      $('#output-terminal-container').addClass('in');
+    }
+    else {
+      this.building = false;
+      clearTimeout(this.buildMessageTimeout);
+      dispatch.trigger('toggle:buildMessage', false);
     }
   },
   showParentEl: function () {
