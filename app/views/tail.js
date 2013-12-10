@@ -37,7 +37,10 @@ module.exports = BaseView.extend({
   },
   onPostMessage: function (message) {
     var dispatch = this.app.dispatch;
-    if (message.data === 'show:loader') {
+    if (!message || !message.data || !message.data.indexOf) {
+      return; // unexpected message format (suspected to cause rollbar #1758)
+    }
+    else if (message.data === 'show:loader') {
       this.loading(true);
     }
     else if (message.data === 'hide:loader') {
@@ -48,8 +51,15 @@ module.exports = BaseView.extend({
       this.showParentEl();
       if (this.stream === 'build') {
         dispatch.trigger('toggle:buildMessage', true);
+        this.building = true;
+      }
+      else if (this.stream === 'error' && this.building) {
+        this.building = false;
+        this.$el.addClass('out');
+        $('#output-terminal-container').addClass('in');
       }
       else {
+        this.building = false;
         clearTimeout(this.buildMessageTimeout);
         dispatch.trigger('toggle:buildMessage', false);
       }
