@@ -6,6 +6,7 @@ module.exports = BaseView.extend({
   preRender: function () {
     var name = this.options.name;
     var href = '/' + name;
+
     this.attributes = {
       href: href
     };
@@ -14,10 +15,19 @@ module.exports = BaseView.extend({
     var options = this.options;
     var reputation = options.reputation;
     var name = options.name;
+    var meter = options.meter;
+
     this.$('.reputation').tooltip({
-      title: reputation + ' published in ' + name,
-      placement: 'bottom'
+      placement: 'bottom',
+      title: reputation + ' published in ' + name
     });
+
+    if (meter) {
+      this.$('img').tooltip({
+        placement: 'bottom',
+        title: 'Contributed ' + meter + '% to ' + name
+      });;
+    }
   }
 });
 

@@ -1,2 +1,8 @@
 {{view "channel_image" name=name}}
 <span class="btn silver reputation">{{reputation}}</span>
+{{#if meter}}
+  <figure class="_{{meter}}">
+    <div></div>
+    <div></div>
+  </figure>
+{{/if}}

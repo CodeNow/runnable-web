@@ -13,6 +13,12 @@ module.exports = BaseView.extend({
   preRender: function () {
     if (this.options.editmode) this.className = 'editmode';
   },
+  postRender: function () {
+    this.$('.reputation').tooltip({
+      placement: 'bottom',
+      title: '26,295 published Runnables'
+    });
+  },
   editInline: function (evt) {
     this.$(evt.currentTarget)
       .children('input')

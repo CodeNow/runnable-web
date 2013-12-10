@@ -12,7 +12,7 @@ module.exports = BaseView.extend({
     if ((lower in channelImages) && !opts.tag) {
       //no icon-lg for til all images are in
       var pre = (opts.large) ? 'icon-' : (opts.tag) ? 'icon-tag-' : 'icon-';
-      var src = '/images/provider-icons/:pre:lower.png'
+      var src = '/images/provider-icons/:pre:lower@2x.png'
         .replace(':pre', pre)
         .replace(':lower', lower);
 

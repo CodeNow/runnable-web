@@ -56,7 +56,20 @@ main {
         position: relative;
         width: 25%;
 
-        img {
+        > .reputation {
+            color: #fff;
+            font-size: 14px;
+            height: 52px;
+            line-height: 52px;
+            left: 115px;
+            width: 52px;
+
+            &:hover {
+                // color: #999;
+            }
+        }
+
+        > img {
             width: 100%;
         }
 
@@ -485,13 +498,34 @@ li {
     }
 }
 
-//ratings
+//reputation
+.reputation {
+    @include border-radius(50%);
+    display: block;
+    font-size: 11px;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 auto;
+    padding: 0;
+    position: absolute;
+        top: 0;
+        z-index: 1;
+    width: 32px;
+}
+
+//reputation
 #reputation {
     height: 100px;
     margin: 0;
     padding: 0;
 
     li {
+        display: inline-block;
+        margin-left: 10px;
+
+        &:first-child {
+            margin-left: 0;
+        }
 
         //tooltips
         .tooltip-inner {
@@ -500,22 +534,10 @@ li {
 
         $width32: 32px;
 
-        //rating
-        .reputation {
-            @include border-radius(50%);
-            display: block;
-            font-size: 11px;
-            height: $width32;
-            line-height: $width32;
-            margin: 0 auto;
-            padding: 0;
-            position: absolute;
-                top: 0;
-            width: $width32;
-        }
-
         //author link & img
         > a {
+            background: #fff;
+            @include border-radius(50%);
             display: block;
             float: left;
             height: $width32*2;
@@ -524,12 +546,14 @@ li {
             width: $width32*2;
 
             > img {
-                border: 10px solid #fff;
+                border: 10px solid transparent;
                 @include border-radius(50%);
                 @include box-shadow(0 2px 3px rgba(0,0,0,0.3));
                 float: left;
                 height: 60px;
                 overflow: hidden;
+                position: absolute;
+                    z-index: 1;
                 width: 62px;
             }
 
@@ -537,34 +561,182 @@ li {
                 right: -($width32/2);
             }
         }
+    }
 
-        //top rated
-        > ul {
-            margin: 0;
+    figure {
+        @include animation(closeWrapper 0s 0.5s 1 forwards linear);
+        @include border-radius(50%);
+        clip: rect(0px, 62px, 60px, 31px);
+        height: 60px;
+        pointer-events: none;
+        position: absolute;
+        width: 62px;
 
-            > li {
-                display: inline-block;
-                height: $width32;
-                margin-left: 32px;
-                position: relative;
-                width: $width32;
+        div {
+            border: 10px solid $purple-lighter;
+            @include border-radius(50%);
+            clip: rect(0px, 31px, 60px, 0px);
+            height: 60px;
+            position: absolute;
+            width: 62px;
+        }
 
-                &:nth-child(1),
-                &:nth-child(4) {
-                    margin-left: 10px;
-                }
-            }
-
-            img {
-                @include border-radius(50%);
-                display: block;
-                height: $width32;
-                width: $width32;
-            }
-
-            span {
-                right: -24px;
+        &[class^='_1'], &[class^='_2'], &[class^='_3'], &[class^='_4'], &[class^='_5'] {
+            > div:first-child {
+                border-color: #fff;
+                z-index: 1;
             }
         }
+
+        &[class^='_5'], &[class^='_6'], &[class^='_7'], &[class^='_8'], &[class^='_9'], &._100 {
+            > div:last-child {
+                @include animation(rightSpan50 0.5s 1 forwards linear);
+            }
+        }
+
+        &[class^='_1'] > div:last-child {
+            @include animation(rightSpan10 0.1s 1 forwards linear);
+        }
+
+        &[class^='_2'] > div:last-child {
+            @include animation(rightSpan20 0.2s 1 forwards linear);
+        }
+
+        &[class^='_3'] > div:last-child {
+            @include animation(rightSpan30 0.3s 1 forwards linear);
+        }
+
+        &[class^='_4'] > div:last-child {
+            @include animation(rightSpan40 0.4s 1 forwards linear);
+        }
+
+        &[class^='_5'] > div:last-child {
+            @include animation(rightSpan50 0.5s 1 forwards linear);
+        }
+
+        &[class^='_6'] > div:first-child {
+            @include animation(leftSpan60 0.2s 1 forwards linear);
+        }
+
+        &[class^='_7'] > div:first-child {
+            @include animation(leftSpan70 0.4s 1 forwards linear);
+        }
+
+        &[class^='_8'] > div:first-child {
+            @include animation(leftSpan80 0.6s 1 forwards linear);
+        }
+
+        &[class^='_9'] > div:first-child {
+            @include animation(leftSpan90 0.8s 1 forwards linear);
+        }
+
+        &._100 > div:first-child {
+            @include animation(leftSpan100 1s 1 forwards linear);
+        }
+    }
+}
+
+@include keyframes(closeWrapper) {
+    100% {
+        clip: rect(auto, auto, auto, auto);
+    }
+}
+
+@include keyframes(leftSpan50) {
+    0% {
+        @include rotate-3d(0deg);
+    }
+    100% {
+        @include rotate-3d(0deg);
+    }
+}
+
+@include keyframes(leftSpan60) {
+    0% {
+        @include rotate-3d(0deg);
+    }
+    100% {
+        @include rotate-3d(6*36deg);
+    }
+}
+
+@include keyframes(leftSpan70) {
+    0% {
+        @include rotate-3d(0deg);
+    }
+    100% {
+        @include rotate-3d(7*36deg);
+    }
+}
+
+@include keyframes(leftSpan80) {
+    0% {
+        @include rotate-3d(0deg);
+    }
+    100% {
+        @include rotate-3d(8*36deg);
+    }
+}
+
+@include keyframes(leftSpan90) {
+    0% {
+        @include rotate-3d(0deg);
+    }
+    100% {
+        @include rotate-3d(9*36deg);
+    }
+}
+
+@include keyframes(leftSpan100) {
+    0% {
+        @include rotate-3d(360deg);
+    }
+    100% {
+        @include rotate-3d(360deg);
+    }
+}
+
+@include keyframes(rightSpan10) {
+    0% {
+        @include rotate-3d(0deg);
+    }
+    100% {
+        @include rotate-3d(2*18deg);
+    }
+}
+
+@include keyframes(rightSpan20) {
+    0% {
+        @include rotate-3d(0deg);
+    }
+    100% {
+        @include rotate-3d(4*18deg);
+    }
+}
+
+@include keyframes(rightSpan30) {
+    0% {
+        @include rotate-3d(0deg);
+    }
+    100% {
+        @include rotate-3d(6*18deg);
+    }
+}
+
+@include keyframes(rightSpan40) {
+    0% {
+        @include rotate-3d(0deg);
+    }
+    100% {
+        @include rotate-3d(8*18deg);
+    }
+}
+
+@include keyframes(rightSpan50) {
+    0% {
+        @include rotate-3d(0deg);
+    }
+    100% {
+        @include rotate-3d(10*18deg);
     }
 }

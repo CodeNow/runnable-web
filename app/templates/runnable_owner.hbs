@@ -9,8 +9,10 @@
 {{#if model.attributes.gravitar}}
 <a href="{{invoke model method='appURL'}}">
   <img class="project-author-icon" src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}">
-  <span class="btn silver reputation">13k</span>
+  <span class="btn purple reputation">13k</span>
 </a>
+
+{{!--
 <ul>
   <li>
     {{view "tag_score" name="Node.js" reputation="10k"}}
@@ -25,5 +27,14 @@
   <li>
     {{view "tag_score" name="express" reputation="32"}}
 </ul>
-{{/if}}
+ --}}
+
+<ul>
+  <li>
+    {{view "tag_link" name="Node.js" reputation="10k"}}
+  <li>
+    {{view "tag_link" name="jQuery" reputation="8k"}}
+</ul>
+
+ {{/if}}
 {{!-- {{view "runnable_share" model=image}} --}}

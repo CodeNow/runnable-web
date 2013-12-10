@@ -6,8 +6,8 @@ module.exports = BaseView.extend({
   className: 'col-sm-3 clearfix',
   postRender: function () {
     this.$('.project-author-icon').siblings('span').tooltip({
-      title: '26,295 published Runnables',
-      placement: 'bottom'
+      placement: 'bottom',
+      title: '26,295 published Runnables'
     });
   }
 });

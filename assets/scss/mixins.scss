@@ -51,6 +51,21 @@
   }
 }
 
+//rotate3d mixin
+@mixin rotate-3d($a: 0deg) {
+  -moz-transform: rotate3d(0,0,1,$a);
+  -ms-transform: rotate3d(0,0,1,$a);
+  -webkit-transform: rotate3d(0,0,1,$a);
+  transform: rotate3d(0,0,1,$a);
+
+  @include modernizr(no-csstransforms3d) {
+    -moz-transform: rotate($a);
+    -ms-transform: rotate($a);
+    -webkit-transform: rotate($a);
+    transform: rotate($a);
+  }
+}
+
 //
 @mixin transform-origin($x: 50%, $y: 50%) {
   -moz-transform-origin: $x, $y;
