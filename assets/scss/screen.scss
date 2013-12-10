@@ -1205,7 +1205,7 @@ progress {
             @include border-radius(50%);
             float: left;
             overflow: hidden;
-            width: 69px;
+            width: 73px;
         }
 
         > span {
@@ -1220,7 +1220,7 @@ progress {
         > li {
             display: inline-block;
             height: $width32;
-            margin-left: 32px;
+            margin: 0 0 4px 32px;
             position: relative;
             width: $width32;
 
