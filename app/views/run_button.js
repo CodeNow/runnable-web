@@ -63,7 +63,14 @@ module.exports = EditorButtonView.extend({
     var url = '/'+this.model.id+'/output';
     var windowName = this.model.id+'output';
     this.popup = window.open(url, windowName);
-
+    this.popup.onload = function () {
+      if (this.model.get('build_cmd') && this.filesAreUnsaved) {
+        this.popup.postMessage('stream:build', '*');
+      }
+      else {
+        this.popup.postMessage('stream:run', '*');
+      }
+    }.bind(this);
   },
   refreshOutput: function () {
     this.popup.location = this.popup.location;
@@ -89,10 +96,13 @@ module.exports = EditorButtonView.extend({
     if (this.userImplementedSpec()) this.run();
   },
   onChangeUnsaved: function (bool) {
-    if (bool)
-      this.$('span').html('Save and Run');
-    else
-      this.$('span').html('Run');
+    this.filesAreUnsaved = bool;
+    if (bool) {
+      this.$('span').eq(0).html('Save and Run');
+    }
+    else {
+      this.$('span').eq(0).html('Run');
+    }
   },
   setImplementLinkModel: function () {
     //hack
