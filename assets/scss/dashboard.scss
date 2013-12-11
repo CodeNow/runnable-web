@@ -652,7 +652,8 @@ li {
             @include animation(rightSpan40 0.4s 1 forwards linear);
         }
 
-        &[class^='_5'] > div:last-child {
+        &[class^='_5'] > div:last-child,
+        &._100 > div:last-child {
             @include animation(rightSpan50 0.5s 1 forwards linear);
         }
 
@@ -672,8 +673,12 @@ li {
             @include animation(leftSpan90 0.8s 1 forwards linear);
         }
 
-        &._100 > div:first-child {
-            @include animation(leftSpan100 1s 1 forwards linear);
+        &._100 {
+
+            > div:first-child {
+                border-color: $purple-lighter;
+                @include animation(leftSpan100 1s 1 forwards linear);
+            }
         }
     }
 }

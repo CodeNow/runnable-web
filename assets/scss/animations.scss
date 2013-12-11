@@ -113,7 +113,7 @@
 
 @include keyframes(leftSpan100) {
     0% {
-        @include rotate-3d(360deg);
+        @include rotate-3d(0);
     }
     100% {
         @include rotate-3d(360deg);
