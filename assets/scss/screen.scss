@@ -1096,6 +1096,10 @@ progress {
         .silver {
             @include border-radius(3px);
             margin-left: 10px;
+
+            @include media(xs) {
+                margin-top: 10px;
+            }
         }
 
         .green {
@@ -1125,12 +1129,25 @@ progress {
                     border-top-color: #fff;
                 }
             }
+
+            @include media(xs) {
+                clear: both;
+
+                > button {
+                    margin-left: 0;
+                }
+            }
         }
     }
 }
 
 #project-author {
     margin: 30px 0 0;
+
+    @include media(xs) {
+        margin: 30px 0;
+        max-width: 320px;
+    }
 
     //tooltips
     .tooltip-inner {
@@ -1140,14 +1157,14 @@ progress {
     h4 {
         float: left;
         padding: 0;
-        margin: 0 0 0 10px;
+        margin: 6px 0 0 10px;
 
         span {
             color: #bcbcbc;
             display: block;
             font-size: 13px;
             padding: 0;
-            margin: 0;
+            margin: 4px 0;
         }
 
         a {
@@ -1182,10 +1199,10 @@ progress {
     > a {
         display: block;
         float: left;
-        height: $width32*2;
+        height: 73px;
         margin-right: $width32/2;
         position: relative;
-        width: $width32*2;
+        width: 73px;
 
         > img {
             border: 10px solid #fff;
