@@ -1,0 +1,18 @@
+.tag {
+    background: $purple-lighter;
+    border: 1px solid $purple;
+    @include border-radius(3px);
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    height: 21px;
+    line-height: 21px;
+    padding: 0 4px;
+    @include transition(background 0.2s ease-in-out);
+
+    &:hover {
+        background: lighten($purple-lighter,4);
+        color: $purple;
+        text-decoration: none;
+    }
+}

@@ -660,21 +660,6 @@ progress {
             float: left;
             margin: 0 9px 9px 0;
             padding: 0;
-            a {
-                display: block;
-                background: #F1DEFE;
-                border: solid 1px $purple-light;
-                font-size: 11px;
-                font-weight: bold;
-                padding: 2px 4px;
-                @include border-radius(3px);
-                @include transition(all 0.2s ease-in-out);
-                &:hover {
-                    color: $purple;
-                    border-color: $purple;
-                    text-decoration: none;
-                }
-            }
         }
     }
 }
@@ -1228,24 +1213,6 @@ progress {
             font-weight: bold;
             list-style-type: none;
             margin-bottom: 8px;
-        }
-
-        a {
-            background: #F1DEFE;
-            border: solid 1px $purple-light;
-            @include border-radius(3px);
-            display: inline-block;
-            font-size: 11px;
-            font-weight: bold;
-            margin-left: 2px;
-            padding: 2px 4px;
-            @include transition(all 0.2s ease-in-out);
-
-            &:hover {
-                border-color: $purple;
-                color: $purple;
-                text-decoration: none;
-            }
         }
     }
 
