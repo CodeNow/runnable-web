@@ -83,7 +83,10 @@
 
 //bootstrap's LESS media queries for SASS
 @mixin media($point) {
-  @if $point == xs {
+  @if $point == xxs {
+    @media (max-width: 400px) { @content; }
+  }
+  @else if $point == xs {
     @media (max-width: 768px) { @content; }
   }
   /* Small devices (tablets, 768px and up) */

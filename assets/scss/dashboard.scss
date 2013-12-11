@@ -159,17 +159,29 @@ main {
         width: calc(75% - 60px);
 
         @include media(xs) {
+            display: block;
+            margin: 0 auto;
             width: 100%;
+                max-width: 320px;
         }
     }
 
     > h1 {
         font-size: 30px;
+
+        @include media(xs) {
+            margin-top: 10px;
+            text-align: center;
+        }
     }
 
     > hr {
         border-top-color: rgba(0,0,0,0.1);
         margin: 11px 0;
+
+        @include media(xs) {
+            margin: 11px auto;
+        }
 
         @include media(md) {
             margin: 22px 40px 22px 0;
@@ -182,6 +194,12 @@ main {
         min-height: 24px;
         margin: 4px 0;
         position: relative;
+
+        @include media(xs) {
+            margin: 4px auto;
+            max-width: 320px;
+            padding-left: 20px;
+        }
 
         @include media(md) {
             width: 220px;
@@ -268,6 +286,10 @@ main {
         width: calc(100% - 20px);
         white-space: nowrap;
 
+        @include media(xs) {
+            text-align: center;
+        }
+
         &:focus {
             border-bottom: 1px dashed $purple-light;
             color: #333;
@@ -293,10 +315,14 @@ main {
 
 //dashboard
 #dashboard {
-    padding-top: 40px;
+
+    @include media(sm) {
+        padding-top: 0;
+    }
 
     @include media(md) {
         float: right;
+        padding-top: 40px;
         width: 75%;
     }
 
@@ -501,9 +527,35 @@ li {
     margin: 0 0 30px;
     padding: 0;
 
+    @include media(xs) {
+        display: block;
+        margin: 20px auto 30px;
+    }
+
+    @include media(xxs) {
+        display: table;
+    }
+
+    @include media(sm) {
+        margin-top: 20px;
+    }
+
+    @include media(md) {
+        margin-top: 0;
+    }
+
     li {
         display: inline-block;
         margin-left: 30px;
+
+        @include media(xs) {
+            margin: 10px 0;
+            width: 25%;
+        }
+
+        @include media(xxs) {
+            width: 50%;
+        }
 
         &:first-child {
             margin-left: 0;
