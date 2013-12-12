@@ -13,7 +13,7 @@ module.exports = BaseView.extend({
     var userCount = this.model.get('leaderImagesCount');
     var totalCount = this.model.get('count');
 
-    opts.meter = Math.round(userCount/totalCount * 100);
+    opts.meter = Math.round(userCount/totalCount * 10);
 
     return opts;
   },
