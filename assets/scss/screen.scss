@@ -660,21 +660,6 @@ progress {
             float: left;
             margin: 0 9px 9px 0;
             padding: 0;
-            a {
-                display: block;
-                background: #F1DEFE;
-                border: solid 1px #BC9FD0;
-                font-size: 11px;
-                font-weight: bold;
-                padding: 2px 4px;
-                @include border-radius(3px);
-                @include transition(all 0.2s ease-in-out);
-                &:hover {
-                    color: $purple;
-                    border-color: $purple;
-                    text-decoration: none;
-                }
-            }
         }
     }
 }
