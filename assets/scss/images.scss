@@ -12,8 +12,21 @@
     float: left;
     font-size: 20px;
     height: 30px;
+    text-transform: uppercase;
     width: 31px;
       max-width: 12.5%;
+
+      @include media(sm) {
+        height: 24px;
+        line-height: 1;
+        width: 25px;
+      }
+
+      @include media(md) {
+        height: 30px;
+        line-height: 1.428571429;
+        width: 31px;
+      }
   }
 
   //on channel page
