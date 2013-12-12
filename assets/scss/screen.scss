@@ -660,6 +660,21 @@ progress {
             float: left;
             margin: 0 9px 9px 0;
             padding: 0;
+            a {
+                display: block;
+                background: #F1DEFE;
+                border: solid 1px #BC9FD0;
+                font-size: 11px;
+                font-weight: bold;
+                padding: 2px 4px;
+                @include border-radius(3px);
+                @include transition(all 0.2s ease-in-out);
+                &:hover {
+                    color: $purple;
+                    border-color: $purple;
+                    text-decoration: none;
+                }
+            }
         }
     }
 }
@@ -1013,8 +1028,7 @@ progress {
     }
 }
 
-#project-details,
-#tags-details {
+#project-details, #tags-details {
 
     .page-title {
         color: #333;
@@ -1028,7 +1042,6 @@ progress {
             font-size: 30px;
             display: inline;
         }
-
         a.edit-title {
             display: inline-block;
             width: 19px;
@@ -1037,33 +1050,27 @@ progress {
             background-image: url(../images/sprite-edit-title.png);
             margin-left: 12px;
             @include background-image-retina('../images/sprite-edit-title@2x.png');
-
             &:hover, &.active {
                 background-position: 0 -18px;
             }
-
             &.active {
                 margin-left: 14px;
                 margin-bottom: -3px;
             }
         }
-
         input.form-control {
             display: inline-block;
             margin: 0;
         }
-
         button.silver {
             line-height: normal;
         }
     }
-
-    .description {
+    p.description {
         color: #ababab;
         font-size: 15px;
         padding-top: 5px;
-
-        .more {
+        a.more {
             display: inline-block;
             color: #fff;
             background: #ccc;
@@ -1072,14 +1079,12 @@ progress {
             margin-left: 5px;
             @include border-radius(3px);
             @include transition(all 0.25s ease-in-out);
-
             &:hover {
                 text-decoration: none;
                 background: #999;
             }
         }
     }
-
     .main-controls {
         margin: 30px 0 35px 0;
 
@@ -1096,10 +1101,6 @@ progress {
         .silver {
             @include border-radius(3px);
             margin-left: 10px;
-
-            @include media(xs) {
-                margin-top: 10px;
-            }
         }
 
         .green {
@@ -1129,43 +1130,31 @@ progress {
                     border-top-color: #fff;
                 }
             }
-
-            @include media(xs) {
-                clear: both;
-
-                > button {
-                    margin-left: 0;
-                }
-            }
         }
     }
 }
 
 #project-author {
-    margin: 30px 0 0;
+    margin: 30px 0 0 0;
 
-    @include media(xs) {
-        margin: 30px 0;
-        max-width: 320px;
-    }
-
-    //tooltips
-    .tooltip-inner {
-        white-space: nowrap;
-    }
-
-    h4 {
+    .project-author-icon {
+        @include border-radius(50%);
         float: left;
-        padding: 0;
-        margin: 6px 0 0 10px;
+        margin-right: 10px;
+        overflow: hidden;
+        width: 52px;
+    }
 
-        span {
-            color: #bcbcbc;
-            display: block;
-            font-size: 13px;
-            padding: 0;
-            margin: 4px 0;
-        }
+    .publish-date {
+        color: #bcbcbc;
+        font-size: 13px;
+        padding: 0;
+        margin: 5px 0 0 0;
+    }
+
+    .author-title {
+        padding: 0;
+        margin: 0;
 
         a {
             font-size: 15px;
@@ -1179,69 +1168,14 @@ progress {
         }
     }
 
-    $width32: 32px;
-
-    // rating
-    .reputation {
-        @include border-radius(50%);
-        display: block;
-        font-size: 11px;
-        height: $width32;
-        line-height: $width32;
-        margin: 0 auto;
-        padding: 0;
-        position: absolute;
-            top: 0;
-        width: $width32;
-    }
-
-    // author link & img
-    > a {
-        display: block;
-        float: left;
-        height: 73px;
-        margin-right: $width32/2;
-        position: relative;
-        width: 73px;
-
-        > img {
-            border: 10px solid #fff;
-            @include border-radius(50%);
-            @include box-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
-            float: left;
-            overflow: hidden;
-            width: 73px;
-        }
-
-        > span {
-            right: -($width32/2);
-        }
-    }
-
-    //tags
-    .tags {
-        float: left;
-        margin: 10px 0 0 10px;
-        padding: 0;
-
-        li {
-            color: #bbb;
-            font-size: 12px;
-            font-weight: bold;
-            list-style-type: none;
-            margin-bottom: 8px;
-        }
-    }
-
     #share-options {
-        margin-top: 10px;
         text-align: center;
         input.form-control {
             min-height: 25px;
             color: #bbb;
             font-size: 12px;
             border-color: #bbb;
-            margin: 15px 0 10px;
+            margin: 15px 0;
             @extend .clearfix !optional;
             background-image: url(../images/icon-link.png);
             @include background-image-retina('../images/icon-link@2x.png');
@@ -1344,7 +1278,6 @@ progress {
         margin: 0;
         border: none;
         @include border-radius(0);
-        font-family: 'Source Code Pro', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     }
     a.open-file-explorer {
         display: block;
@@ -1709,16 +1642,12 @@ div#output-terminal-container{
     }
     #tags-content {
         background: #fff;
-        @include border-radius(5px);
+        @include border-radius(0 5px 5px 5px);
         @include box-shadow(0 2px 5px rgba(0,0,0,0.1));
         overflow: hidden;
         padding: 0;
         position: relative;
             z-index: 2;
-
-        &.tabs {
-            @include border-radius(0 5px 5px 5px);
-        }
 
         li {
             list-style: none;

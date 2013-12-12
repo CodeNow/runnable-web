@@ -17,7 +17,8 @@ module.exports = BaseView.extend({
         var src = '/images/provider-icons/:pre:lower@2x.png'
           .replace(':pre', pre)
           .replace(':lower', lower);
-      } else {
+      }
+      else {
         var src = '/images/provider-icons/:pre:lower.png'
           .replace(':pre', pre)
           .replace(':lower', lower);
@@ -33,8 +34,10 @@ module.exports = BaseView.extend({
         this.attributes.height = 39;
       }
     }
-    else {
-      this.className='display-none';
+    else if (!opts.tag) {
+      opts.firstletter = name[0];
+      this.tagName = 'div';
+      this.className = 'no-img btn purple';
     }
   },
   postRender: function () {

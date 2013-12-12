@@ -569,22 +569,20 @@ li {
             white-space: nowrap;
         }
 
-        $width32: 32px;
-
         //author link & img
         > a:first-child {
             background: #fff;
             @include border-radius(50%);
+            @include box-shadow(0 2px 3px rgba(0,0,0,0.3));
             display: block;
-            height: $width32*2;
+            height: 60px;
             margin: 0 auto;
             position: relative;
-            width: $width32*2;
+            width: 62px;
 
             > img {
                 border: 10px solid transparent;
                 @include border-radius(50%);
-                @include box-shadow(0 2px 3px rgba(0,0,0,0.3));
                 float: left;
                 height: 60px;
                 overflow: hidden;
