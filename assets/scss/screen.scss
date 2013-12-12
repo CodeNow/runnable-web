@@ -1101,6 +1101,10 @@ progress {
         .silver {
             @include border-radius(3px);
             margin-left: 10px;
+
+            @include media(xs) {
+                margin-top: 10px;
+            }
         }
 
         .green {
@@ -1130,6 +1134,14 @@ progress {
                     border-top-color: #fff;
                 }
             }
+
+            @include media(xs) {
+                clear: both;
+
+                > button {
+                    margin-left: 0;
+                }
+            }
         }
     }
 }
@@ -1137,24 +1149,41 @@ progress {
 #project-author {
     margin: 30px 0 0 0;
 
-    .project-author-icon {
-        @include border-radius(50%);
+    @include media(xs) {
+        margin: 30px 0;
+        max-width: 320px;
+    }
+
+    $width32: 32px;
+
+    > a {
+        display: block;
         float: left;
-        margin-right: 10px;
-        overflow: hidden;
-        width: 52px;
+        height: 73px;
+        margin-right: $width32/2;
+        position: relative;
+        width: 73px;
+
+        > span {
+            right: -($width32/2);
+        }
+
+        //project author icon
+        > img {
+            border: 10px solid #fff;
+            @include border-radius(50%);
+            @include box-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+            float: left;
+            overflow: hidden;
+            width: 73px;
+        }
     }
 
-    .publish-date {
-        color: #bcbcbc;
-        font-size: 13px;
+    //author title
+    h4 {
+        float: left;
         padding: 0;
-        margin: 5px 0 0 0;
-    }
-
-    .author-title {
-        padding: 0;
-        margin: 0;
+        margin: 6px 0 0 10px;
 
         a {
             font-size: 15px;
@@ -1165,6 +1194,41 @@ progress {
             &:hover {
                 text-decoration: underline;
             }
+        }
+
+        span {
+            color: #bcbcbc;
+            display: block;
+            font-size: 13px;
+            margin: 5px 0 0 0;
+            padding: 0;
+        }
+    }
+
+    // rating
+    .reputation {
+        @include border-radius(50%);
+        display: block;
+        font-size: 11px;
+        height: $width32;
+        line-height: $width32;
+        margin: 0 auto;
+        padding: 0;
+        position: absolute;
+            top: 0;
+        width: $width32;
+    }
+
+    ul {
+        float: left;
+        margin: 10px 0 0 10px;
+        padding: 0;
+
+        li {
+            color: #bbb;
+            font-size: 12px;
+            list-style-type: none;
+            margin-bottom: 8px;
         }
     }
 

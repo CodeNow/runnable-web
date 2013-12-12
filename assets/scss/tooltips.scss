@@ -10,7 +10,7 @@
 
   &.bottom {
     margin-top: 7px;
-    
+
     .tooltip-arrow {
       border-bottom-color: $orange;
     }
@@ -21,4 +21,5 @@
     background: $orange; /* is the new black */
     @include border-radius(3px);
     font-weight: normal;
+    white-space: no-wrap;
 }
