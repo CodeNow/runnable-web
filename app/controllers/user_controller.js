@@ -91,7 +91,7 @@ module.exports = {
             });
           }
         ],
-        function (err,) {
+        function (err) {
           if (err) return cb(err);
           cb(null, results);
         });
