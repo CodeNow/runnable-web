@@ -14,9 +14,10 @@ module.exports = BaseView.extend({
     if (this.options.editmode) this.className = 'editmode';
   },
   postRender: function () {
+    var imagesCount = this.model.get('imagesCount');
     this.$('.reputation').tooltip({
       placement: 'bottom',
-      title: '13,295 published Runnables'
+      title: imagesCount+' published Runnables'
     });
   },
   editInline: function (evt) {

@@ -1,7 +1,7 @@
 {{#if model.attributes.gravitar}}
 <a href="{{invoke model method='appURL'}}">
   <img class="project-author-icon" src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}">
-  <span class="btn purple reputation">13k</span>
+  <span class="btn purple reputation">{{model.attributes.imagesCount}}</span>
 </a>
 
 <h4 class="author-title">
