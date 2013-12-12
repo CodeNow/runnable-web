@@ -23,11 +23,11 @@ module.exports = BaseView.extend({
     console.log(this.model.get('leaderImagesCount'));
     console.log(this.model.get('count'));
     var reputation = opts.reputation;
-    var name       = opts.name;
+    var name       = opts.model.get('name');
     var meter      = opts.meter;
 
     if (meter) {
-      this.$('img').tooltip({
+      this.$('img, .no-img').tooltip({
         placement: 'top',
         title: 'Contributed ' + meter + '% towards ' + name
       });;

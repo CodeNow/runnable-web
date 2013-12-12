@@ -17,9 +17,13 @@
   }
 }
 
+.no-img ~ .tooltip {
+  margin-top: -13px !important;
+}
+
 .tooltip-inner {
     background: $orange; /* is the new black */
     @include border-radius(3px);
     font-weight: normal;
-    white-space: no-wrap;
+    white-space: nowrap;
 }
