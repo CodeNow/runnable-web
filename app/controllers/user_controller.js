@@ -60,7 +60,7 @@ module.exports = {
         var viewingOwnProfile =  currentUsername === params.username.toLowerCase();
         results.editmode = viewingOwnProfile;
 
-        async.parallel([
+        async.series([
           function (cb) {
             if (viewingOwnProfile) {
               results.profileuser = results.user;
@@ -68,7 +68,8 @@ module.exports = {
                 if (err) return cb(err);
                 results2.published.sortByAttr('-created');
                 results2.drafts.sortByAttr('-created');
-                cb(null, results2);
+                _.extend(results, results2);
+                cb();
               });
             }
             else {
@@ -77,15 +78,21 @@ module.exports = {
                 results2.profileuser = results2.users.models[0];
                 delete results2.users;
                 results2.published.sortByAttr('-created');
-                cb(null, results2);
+                _.extend(results, results2);
+                cb();
               });
             }
           },
-          fetchLeaderBadges.bind(self, 3, results.profileuser.id, null, null)
+          function (cb) {
+            fetchLeaderBadges.bind(self, 3, results.profileuser.id, null, null, function (err, results3) {
+              if (err) return cb(err);
+              _.extend(results, results3);
+              cb();
+            });
+          }
         ],
-        function (err, data) {
+        function (err,) {
           if (err) return cb(err);
-          _.extend(results, data[0], data[1]);
           cb(null, results);
         });
       }
