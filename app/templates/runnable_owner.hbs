@@ -5,12 +5,12 @@
 </a>
 
 <h4 class="author-title">
-  <span class="publish-date">Published {{dateAgo created}} by</span>
   {{#if model.attributes.username}}
   <a href="{{invoke model method='appURL'}}">{{model.attributes.username}}</a>
   {{else}}
   <b>Anonymous</b>
   {{/if}}
+  <span class="publish-date">published {{dateAgo created}}.</span>
 </h4>
 
 {{view "leader_badges" collection=context.leaderBadges}}
