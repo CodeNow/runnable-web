@@ -84,7 +84,7 @@ module.exports = {
             }
           },
           function (cb) {
-            fetchLeaderBadges.bind(self, 3, results.profileuser.id, null, null, function (err, results3) {
+            fetchLeaderBadges.call(self, 3, results.profileuser.id, null, null, function (err, results3) {
               if (err) return cb(err);
               _.extend(results, results3);
               cb();
