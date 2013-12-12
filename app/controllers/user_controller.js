@@ -7,6 +7,9 @@ var fetchWithMe = helpers.fetchWithMe;
 var formatTitle = helpers.formatTitle;
 var canonical = helpers.canonical;
 var utils = require('../utils');
+var helpers = require('./helpers');
+
+var fetchLeaderBadges = helpers.fetchLeaderBadges;
 
 function fetchRunnablesFor (userId, cb) {
   var spec = {
@@ -55,31 +58,42 @@ module.exports = {
       function (results, cb) {
         var currentUsername = (results.user.get('username') || '').toLowerCase()
         var viewingOwnProfile =  currentUsername === params.username.toLowerCase();
-
         results.editmode = viewingOwnProfile;
-        if (viewingOwnProfile) {
-          results.profileuser = results.user;
-          fetchRunnablesFor.call(self, results.user.id, function (err, results2) {
-            if (err) return cb(err);
-            results2.published.sortByAttr('-created');
-            results2.drafts.sortByAttr('-created');
-            cb(null, _.extend(results, results2));
-          });
-        }
-        else {
-          fetchProfileInfo.call(self, params.username, function (err, results2) {
-            if (err) return cb(err);
-            results2.profileuser = results2.users.models[0];
-            delete results2.users;
-            results2.published.sortByAttr('-created');
-            cb(null, _.extend(results, results2));
-          });
-        }
+
+        async.parallel([
+          function (cb) {
+            if (viewingOwnProfile) {
+              results.profileuser = results.user;
+              fetchRunnablesFor.call(self, results.user.id, function (err, results2) {
+                if (err) return cb(err);
+                results2.published.sortByAttr('-created');
+                results2.drafts.sortByAttr('-created');
+                cb(null, results2);
+              });
+            }
+            else {
+              fetchProfileInfo.call(self, params.username, function (err, results2) {
+                if (err) return cb(err);
+                results2.profileuser = results2.users.models[0];
+                delete results2.users;
+                results2.published.sortByAttr('-created');
+                cb(null, results2);
+              });
+            }
+          },
+          fetchLeaderBadges.bind(self, 3, results.user.id, null)
+        ],
+        function (err, data) {
+          if (err) return cb(err);
+          _.extend(results, data[0], data[1]);
+          cb(null, results);
+        });
       }
     ],
     function (err, results) {
       if (err) return callback(err);
       if (!results.profileuser) return callback({status:404});
+      // redirect if url incorrect
       var profileUsername = results.profileuser.get('username');
       if (profileUsername !== params.username)
         return self.redirectTo('/u/'+profileUsername);

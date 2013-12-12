@@ -26,7 +26,8 @@ module.exports = {
   'fetchFilesForContainer': fetchFilesForContainer,
   'createContainerFrom':    createContainerFrom,
   'canonical':              canonical,
-  'formatTitle':            formatTitle
+  'formatTitle':            formatTitle,
+  'fetchLeaderBadges':      fetchLeaderBadges
 };
 
 
@@ -389,6 +390,38 @@ function fetchFilesForContainer (containerId, callback) {
       callback(err, results);
     }
   });
+}
+
+function fetchLeaderboard (channel, cb) {
+  var spec = {
+    leaderboard: {
+      collection: 'Users',
+      params: {
+        channel: channel._id
+      }
+    }
+  };
+  fetch.call(this, spec, function (err, results) {
+    if (err) return cb(err);
+    channel.leaderboard = results.leaderboard;
+    var results2 = {}; // each leaderboard needs a unique key on results to be 'stored'
+    results2[channel._id+'leaderboard'] = results.leaderboard;
+    cb(null, results2);
+  });
+}
+
+function fetchLeaderBadges (count, userId, channelIds, cb) {
+  var spec = {
+    leaderBadges: {
+      collection: 'Channels',
+      params: {
+        _ids   : channelIds,
+        leader : userId,
+        count  : count
+      }
+    }
+  };
+  fetch.call(this, spec, cb);
 }
 
 function fetchRelated (imageId, tags, cb) {

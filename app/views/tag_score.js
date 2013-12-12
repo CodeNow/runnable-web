@@ -4,23 +4,27 @@ var channelImages = require('../channelImages');
 module.exports = BaseView.extend({
   tagName: 'a',
   preRender: function () {
-    var name = this.options.name;
-    var href = '/' + name;
-
     this.attributes = {
-      href: href
+      href: this.model.appUrl()
     };
   },
-  postRender: function () {
-    var options = this.options;
-    var reputation = options.reputation;
-    var name = options.name;
-    var meter = options.meter;
+  getTemplateData: function () {
+    var opts = this.options;
+    var userCount = this.model.get('leaderImagesCount');
+    var totalCount = this.model.get('count');
 
-    this.$('.reputation').tooltip({
-      placement: 'bottom',
-      title: reputation + ' published in ' + name
-    });
+    opts.meter = Math.round(userCount/totalCount * 100);
+
+    return opts;
+  },
+  postRender: function () {
+    var opts = this.options;
+    console.log(opts.meter);
+    console.log(this.model.get('leaderImagesCount'));
+    console.log(this.model.get('count'));
+    var reputation = opts.reputation;
+    var name       = opts.name;
+    var meter      = opts.meter;
 
     if (meter) {
       this.$('img').tooltip({

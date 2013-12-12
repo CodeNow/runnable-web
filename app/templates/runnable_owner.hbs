@@ -13,11 +13,6 @@
   {{/if}}
 </h4>
 
-<ul class="tags">
-  <li>
-    #12 in {{view "tag_link" name="Node.js"}}
-  <li>
-    #23 in {{view "tag_link" name="jQuery"}}
-</ul>
+{{view "leader_badges" collection=context.leaderBadges}}
 {{/if}}
 {{!-- {{view "runnable_share" model=image}} --}}
