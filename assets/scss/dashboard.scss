@@ -628,7 +628,7 @@ li {
             }
         }
 
-        &[class^='_5'], &[class^='_6'], &[class^='_7'], &[class^='_8'], &[class^='_9'], &._100 {
+        &[class^='_5'], &[class^='_6'], &[class^='_7'], &[class^='_8'], &[class^='_9'], &[class^='_10'] {
             > div:last-child {
                 @include animation(rightSpan50 0.5s 1 forwards linear);
             }
@@ -651,7 +651,7 @@ li {
         }
 
         &[class^='_5'] > div:last-child,
-        &._100 > div:last-child {
+        &[class^='_10'] > div:last-child {
             @include animation(rightSpan50 0.5s 1 forwards linear);
         }
 
@@ -671,7 +671,7 @@ li {
             @include animation(leftSpan90 0.8s 1 forwards linear);
         }
 
-        &._100 {
+        &[class^='_10'] {
 
             > div:first-child {
                 border-color: $purple-lighter;
