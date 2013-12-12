@@ -81,7 +81,7 @@ module.exports = {
               });
             }
           },
-          fetchLeaderBadges.bind(self, 3, results.user.id, null)
+          fetchLeaderBadges.bind(self, 3, results.profileuser.id, null, null)
         ],
         function (err, data) {
           if (err) return cb(err);

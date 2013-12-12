@@ -410,14 +410,15 @@ function fetchLeaderboard (channel, cb) {
   });
 }
 
-function fetchLeaderBadges (count, userId, channelIds, cb) {
+function fetchLeaderBadges (count, userId, channelIds, userLeads, cb) {
   var spec = {
     leaderBadges: {
       collection: 'Channels',
       params: {
         _ids   : channelIds,
         leader : userId,
-        count  : count
+        count  : count,
+        userLeads: userLeads
       }
     }
   };
