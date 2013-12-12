@@ -39,6 +39,9 @@ module.exports = BaseView.extend({
       this.tagName = 'div';
       this.className = 'no-img btn purple';
     }
+    else {
+      this.className = 'display-none';
+    }
   },
   postRender: function () {
     this.$el.error(this.loadError);
