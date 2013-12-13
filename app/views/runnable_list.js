@@ -35,7 +35,7 @@ module.exports = BaseView.extend({
     // messy :(
     var collectionParams = this.collection.params || {};
     opts.page = collectionParams.page + 1;
-    var lastPage = opts.lastPage = collectionParams.lastPage || 1;
+    var lastPage = opts.lastPage = collectionParams.lastPage+1 || 1;
 
     // next and prev links
     if (opts.page > 1) {
