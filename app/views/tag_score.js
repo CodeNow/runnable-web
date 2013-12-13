@@ -10,7 +10,7 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     var opts = this.options;
-    var userCount = this.model.get('leaderImagesCount');
+    var userCount = this.model.get('userImagesCount');
     var totalCount = this.model.get('count');
 
     opts.meter = Math.round(userCount/totalCount * 10);
