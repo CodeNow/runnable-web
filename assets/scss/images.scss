@@ -2,9 +2,10 @@
 .no-img {
   @include border-radius(50%);
   font-weight: bold;
-  line-height: 1.428571429;
+  line-height: 1.5;
   margin: 0 auto;
   padding: 0;
+  text-transform: uppercase;
 }
 
   //home and create new pages
@@ -12,7 +13,6 @@
     float: left;
     font-size: 20px;
     height: 30px;
-    text-transform: uppercase;
     width: 31px;
       max-width: 12.5%;
 
@@ -24,7 +24,7 @@
 
       @include media(md) {
         height: 30px;
-        line-height: 1.428571429;
+        line-height: 1.4;
         width: 31px;
       }
   }
