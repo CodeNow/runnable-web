@@ -6,12 +6,13 @@
   {{view "dashboard_profile" model=profileuser editmode=editmode}}
 
   <section id="dashboard">
-
+  {{#if leaderBadges.length}}
     <ul id="reputation">
       {{#each leaderBadges.models}}
       <li>{{view "tag_score" model=.}}
       {{/each}}
     </ul>
+  {{/if}}
 
     {{#if editmode}}
     <ul class="nav nav-tabs">
