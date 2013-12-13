@@ -410,15 +410,29 @@ function fetchLeaderboard (channel, cb) {
   });
 }
 
-function fetchLeaderBadges (count, userId, channelIds, userLeads, cb) {
+function fetchPopUserAffectedChannels (count, userId, cb) {
   var spec = {
     leaderBadges: {
       collection: 'Channels',
       params: {
-        _ids   : channelIds,
-        leader : userId,
+        userId  : userId,
+        count   : count,
+        popular : true
+      }
+    }
+  };
+  fetch.call(this, spec, cb);
+}
+
+function fetchLeaderBadges (count, userId, channelIds, cb) {
+  var spec = {
+    leaderBadges: {
+      collection: 'Channels',
+      params: {
+        channelIds : channelIds,
+        userId : userId,
         count  : count,
-        userLeads: userLeads
+        badges : true
       }
     }
   };

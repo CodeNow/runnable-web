@@ -14,22 +14,20 @@ module.exports = BaseView.extend({
     var totalCount = this.model.get('count');
 
     opts.meter = Math.round(userCount/totalCount * 10);
+    opts.ratio = Math.round(userCount/totalCount * 100);
 
     return opts;
   },
   postRender: function () {
     var opts = this.options;
-    console.log(opts.meter);
-    console.log(this.model.get('leaderImagesCount'));
-    console.log(this.model.get('count'));
     var reputation = opts.reputation;
     var name       = opts.model.get('name');
-    var meter      = opts.meter;
+    var ratio      = opts.ratio;
 
-    if (meter) {
+    if (ratio) {
       this.$('img, .no-img').tooltip({
         placement: 'top',
-        title: 'Contributed ' + meter + '% towards ' + name
+        title: 'Contributed ' + ratio + '% towards ' + name
       });;
     }
   }

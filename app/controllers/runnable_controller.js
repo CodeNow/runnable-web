@@ -89,7 +89,7 @@ module.exports = {
             fetchFilesForContainer.bind(self, results.container.id),
             fetchOwnerOf.bind(self, results.user, results.image), //image owner
             fetchRelated.bind(self, results.image.id, results.container.attributes.tags),
-            fetchLeaderBadges.bind(self, 2, results.image.get('owner'), channelIds, true)
+            fetchLeaderBadges.bind(self, 2, results.image.get('owner'), channelIds)
           ],
           function (err, data) {
             if (err) return cb(err);
