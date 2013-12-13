@@ -1698,10 +1698,6 @@ div#output-terminal-container{
         position: relative;
             z-index: 2;
 
-        &.tabs {
-            @include border-radius(0 5px 5px 5px);
-        }
-
         li {
             list-style: none;
             padding: 0 25px 25px 25px;
@@ -1743,6 +1739,15 @@ div#output-terminal-container{
             }
         }
     }
+
+    .nav-tabs + #tags-content {
+        @include border-radius(0 5px 5px 5px);
+
+        &.round {
+            @include border-radius(5px);
+        }
+    }
+
     #tags-sidebar {
         ul {
             margin: 0;

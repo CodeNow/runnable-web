@@ -19,7 +19,7 @@
       <li {{#if publishedActive}}class="active"{{/if}}><a href="#published"><span>{{published.length}}</span> Published</a>
       <li {{#if draftsActive}}class="active"{{/if}}><a href="#drafts"><span>{{drafts.length}}</span> Drafts</a>
     </ul>
-    <div class="tab-content" class="tabs">
+    <div class="tab-content">
       <div id="published" class="tab-pane{{#if publishedActive}} active in{{/if}}">
         {{view "dashboard_runnables" classname="dashboard-runnables" collection=published editmode=editmode}}
       </div>

@@ -6,18 +6,13 @@
   </li>
   {{/each}}
 </ul>
-<ul id="tags-content" class="tabs">
-  {{#each collection.models}}
-    {{view "runnable_item_view" model=. novotes=../novotes}}
-  {{/each}}
-</ul>
-{{else}}
-<ul id="tags-content">
-  {{#each collection.models}}
-    {{view "runnable_item_view" model=. novotes=../novotes}}
-  {{/each}}
-</ul>
 {{/unless}}
+
+<ul id="tags-content" {{#if_eq sort compare="runs"}}class="round"{{/if_eq}}>
+  {{#each collection.models}}
+    {{view "runnable_item_view" model=. novotes=../novotes}}
+  {{/each}}
+</ul>
 
 {{#unless nopaging}}
 <ul class="pagination">
