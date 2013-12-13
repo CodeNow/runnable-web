@@ -84,6 +84,10 @@ module.exports = {
             }
           },
           function (cb) {
+            if (!results.profileuser) return callback({status:404});
+            cb();
+          },
+          function (cb) {
             fetchPopUserAffectedChannels.call(self, 3, results.profileuser.id, function (err, results3) {
               if (err) return cb(err);
               _.extend(results, results3);
