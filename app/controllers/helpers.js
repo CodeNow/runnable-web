@@ -27,7 +27,8 @@ module.exports = {
   'createContainerFrom':    createContainerFrom,
   'canonical':              canonical,
   'formatTitle':            formatTitle,
-  'fetchLeaderBadges':      fetchLeaderBadges
+  'fetchLeaderBadges':      fetchLeaderBadges,
+  'fetchPopUserAffectedChannels':      fetchPopUserAffectedChannels
 };
 
 
