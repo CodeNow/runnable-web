@@ -425,12 +425,16 @@ main {
 
 .dashboard-runnables {
     background: #fff;
-    @include border-radius(0 5px 5px 5px);
+    @include border-radius(5px);
     @include box-shadow(0 2px 5px rgba(0,0,0,0.1));
     padding: 0;
     position: relative;
         z-index: 2;
     width: 100%;
+
+    &.tabs {
+        @include border-radius(0 5px 5px 5px);
+    }
 
     li {
         border-bottom: solid 1px #eee;
@@ -445,6 +449,7 @@ main {
         }
 
         &:first-child {
+            @include border-radius(5px 5px 0 0);
             border-top: 1px solid transparent;
 
             &:hover {
