@@ -9,7 +9,7 @@ var canonical = helpers.canonical;
 var utils = require('../utils');
 var helpers = require('./helpers');
 
-var fetchLeaderBadges = helpers.fetchLeaderBadges;
+var fetchPopUserAffectedChannels = helpers.fetchPopUserAffectedChannels;
 
 function fetchRunnablesFor (userId, cb) {
   var spec = {
