@@ -61,8 +61,19 @@ main {
             font-size: 14px;
             height: 52px;
             line-height: 52px;
-            left: 115px;
             width: 52px;
+
+            @include media(xs) {
+                left: 150px;
+            }
+
+            @include media(sm) {
+                left: 135px;
+            }
+
+            @include media(md) {
+                left: 115px;
+            }
 
             &:hover,
             &:active {
@@ -315,10 +326,7 @@ main {
 
 //dashboard
 #dashboard {
-
-    @include media(sm) {
-        padding-top: 0;
-    }
+    padding-top: 20px;
 
     @include media(md) {
         float: right;
@@ -537,7 +545,7 @@ li {
     padding: 0;
 
     @include media(xs) {
-        display: block;
+        display: table;
         margin: 20px auto 30px;
     }
 
@@ -560,6 +568,7 @@ li {
         @include media(xs) {
             margin: 10px 0;
             width: 25%;
+                min-width: 150px;
         }
 
         @include media(xxs) {
@@ -607,6 +616,7 @@ li {
         font-size: 12px;
         font-weight: bold;
         margin-top: 14px;
+        text-align: center;
 
         > a + a {
             margin-right: 6px;
