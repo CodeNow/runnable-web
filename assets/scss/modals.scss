@@ -1,123 +1,126 @@
-#contact-modal,
-#new-file-modal,
-#publish-request-modal,
-#login, #signup {
-    .modal-dialog {
-        width: 30%;
-
-        .modal-content {
-            background: #f6f6f6;
-            @include border-radius(3px);
-            border: none;
-
-            .modal-header {
-                background: $purple-light;
-                @include border-radius(3px 3px 0 0);
-                @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.25));
-                color: #fff;
-                padding: 10px 20px;
-
-                h4 {
-                    font-size: 14px;
-                    font-weight: bold;
-                }
-            }
-
-            .modal-body {
-                input, textarea {
-                    margin-bottom: 20px;
-                }
-
-                button {
-                    margin-bottom: 20px;
-                    width: 100%;
-                }
-
-                p {
-                    text-align: center;
-
-                    a {
-                        color: #bcbcbc;
-                        font-size: 12px;
-                        text-shadow: 0 1px 0 #fff;
-                    }
-                }
-            }
-        }
-    }
-}
-
-//popovers within modals
 .modal {
+
+  .modal-dialog {
+    width: 30%;
+      max-width: 460px;
+      min-width: 320px;
+  }
+
+  .modal-content {
+    background: #f6f6f6;
+    @include border-radius(3px);
+    border: none;
+  }
+
+  .modal-header {
+    background: $purple-light;
+    @include border-radius(3px 3px 0 0);
+    @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.25));
+    color: #fff;
+    height: 40px;
+    padding: 0 20px;
+
+    h4 {
+      font-size: 14px;
+      font-weight: bold;
+      height: 40px;
+      line-height: 40px;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+    }
+
+    .close {
+      color: rgba(0,0,0,0.5);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+      opacity: 1;
+
+      &:hover {
+        color: rgba(0,0,0,0.75);
+        text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+        opacity: 1;
+      }
+    }
+  }
+
+  .modal-body {
+    ::-webkit-input-placeholder { /* WebKit browsers */
+      color:    #666;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color:    #666;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color:    #666;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10+ */
+        color:    #666;
+    }
+
+    input,
+    textarea {
+      margin-bottom: 20px;
+    }
+
+    button {
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    p {
+      text-align: center;
+
+      a {
+        color: $purple;
+        font-size: 14px;
+        font-weight: bold;
+        text-shadow: 0 1px 0 #fff;
+      }
+    }
+
+    textarea {
+      max-height: 400px;
+      min-height: 80px;
+      resize: vertical;
+    }
+  }
+
+  button[type=submit] {
+    margin-bottom: 0;
+  }
+
   .popover {
     font-weight: normal;
     z-index: 1050;
   }
 }
 
-// modal
-.modal-dialog {
-  width: 365px;
+//publish request modal
+#publish-request-modal {
 
-  .modal-content {
-    background: #f6f6f6;
-    border: none;
-    @include border-radius(3px);
-
-    .tab-content {
-      margin-top: 20px;
-    }
-
-    .modal-header {
-      background: $purple-light;
-      @include border-radius(3px 3px 0 0);
-      @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.25));
-      color: #fff;
-      padding: 10px 20px;
-
-      h4 {
-        font-size: 14px;
-        font-weight: bold;
-      }
-    }
+  a {
+    color: $purple;
+    display: table;
+    font-weight: bold;
+    margin: 20px auto 0;
   }
+}
+
+#signup,
+#login {
+
+  p {
+    margin: 20px 0 0;
+  }
+}
+
+// modal
+.modal-dialog .tab-content {
+  margin-top: 20px;
 }
 
 .modal-dialog .modal-content .modal-body .input-group {
   margin-bottom: 20px;
   input{
     margin-bottom: 0;
-  }
-}
-
-
-#publish-request-modal {
-  p a{
-    color: #6e3e8e;
-  }
-}
-
-.modal-body{
-  ::-webkit-input-placeholder { /* WebKit browsers */
-      color:    #666;
-  }
-  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-      color:    #666;
-  }
-  ::-moz-placeholder { /* Mozilla Firefox 19+ */
-      color:    #666;
-  }
-  :-ms-input-placeholder { /* Internet Explorer 10+ */
-      color:    #666;
-  }
-  p{
-
-    a{
-      color: #834dab !important;
-      font-weight: bold;
-      font-size: 14px !important;
-      margin-left: 2px;
-    }
   }
 }
 
@@ -129,7 +132,8 @@ body.modal-open,
 }
 
 //.spec-modals
-.spec-modal {
+.modal .spec-modal {
+  width: 50%;
 
   .modal-body {
     max-height: 400px;
@@ -141,6 +145,11 @@ body.modal-open,
         color: $link-off;
         font-size: 14px;
         font-weight: normal;
+      }
+
+      p {
+        font-weight: bold;
+        text-align: left;
       }
 
       a {
@@ -187,6 +196,8 @@ body.modal-open,
 
 //#add-spec-modal
 #add-spec-modal {
+  width: 30%;
+    min-width: 320px;
 
   .modal-body {
 
@@ -240,12 +251,8 @@ body.modal-open,
   }
 }
 
-//implement, review, & create modals should be the same size
-$spec-modal-width: 365px*1.5; //default modal size is 365px
-
 //#implement-modal
 #implement-modal > .modal-dialog {
-  width: $spec-modal-width;
 
   .modal-body {
     padding: 0;
@@ -298,7 +305,6 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
 
 //#review-spec-modal
 #review-spec-modal {
-  width: $spec-modal-width;
 
   .modal-body {
 
@@ -336,13 +342,8 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
 
 //#create-spec-modal
 #create-spec-modal {
-  width: $spec-modal-width;
 
   .modal-body {
-
-    > p {
-      font-weight: 700;
-    }
 
     //primary action
     > .orange {
@@ -366,6 +367,7 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
         position: absolute;
           top: 1px;
           right: 1px;
+        width: 38px;
       }
     }
 
