@@ -102,9 +102,9 @@ module.exports = {
             self.redirectTo('/c/'+catName);
           }
           else {
-            if (isFeaturedCategory) {
-              results.channels.insert(2, utils.customChannel(app));
-            }
+            // if (isFeaturedCategory) {
+            //   // results.channels.insert(2, utils.customChannel(app));
+            // }
             var featured = results.categories.findWhere({
               name: 'Featured'
             });
