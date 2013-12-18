@@ -2,11 +2,8 @@
   <section class="status-bar">
     <div class="container">
       <div class="row">
-        <p>You are the owner of this project, you can Edit{{!or Delete}} it.</p>
-        <div>
-          {{view "edit_button" containerid=containerid}}
-          {{! <button class="purple light">Delete Project</button> }}
-        </div>
+        {{view "edit_button" containerid=containerid}}
+        <p><b>You own this project!</b><span> Feel free to edit it.</span></p>
       </div><!--/.row-->
     </div><!--/.container-->
   </section>
