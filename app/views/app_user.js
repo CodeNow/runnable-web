@@ -27,6 +27,7 @@ module.exports = BaseView.extend({
       if (!user.isRegistered()) {
         this.listenToOnce(user, 'auth', function () {
           Track.initIntercom(user.toJSON());
+          Track.user(user.toJSON());
         });
       }
     }
