@@ -16,7 +16,19 @@ module.exports = BaseView.extend({
     // read long comment above, postHydrate - same reason for clientside
     if (this.options.model) {
       this.app.user = this.options.model;
+      this.app.user.set('referrer', document.referrer);
       console.log("HeaderView postHydrate this.app.user", this.app.user.id);
+    }
+  },
+  postRender: function () {
+    if (!window.viewControllingIntercom) {
+      window.viewControllingIntercom = true;
+      var user = this.app.user;
+      if (!user.isRegistered()) {
+        this.listenToOnce(user, 'auth', function () {
+          Track.initIntercom(user.toJSON());
+        });
+      }
     }
   }
 });

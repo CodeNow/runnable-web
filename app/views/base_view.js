@@ -16,6 +16,7 @@ module.exports = RendrView.extend({
     this.trigger('postRender');
   },
   autoTrackEvents: true,
+  actionNamesToIgnore: ['stop propagation'],
   trackEvents: function () {
     var autoTrackEvents = this.autoTrackEvents;
     if (!isServer && this.events && autoTrackEvents) {
@@ -42,6 +43,9 @@ module.exports = RendrView.extend({
   },
   trackEvent: function (actionName, properties, viewNameOverride) {
     actionName = _str.humanize(actionName);
+    if (~this.actionNamesToIgnore.indexOf(actionName.toLowerCase())) {
+      return;
+    }
     properties = properties || {};
     function addModelProperties(properties, model, prependKey) {
       prependKey = prependKey || '';
