@@ -53,9 +53,9 @@ function fetch (spec, options, callback) {
   }
   function createUser(cb) {
     var user = new User({}, { app:app });
-    user.set('just_created', true);
     user.save({}, {
       success: function (model) {
+        if (model) model.set('just_created', true);
         cb(null, model);
       },
       error: function () {
