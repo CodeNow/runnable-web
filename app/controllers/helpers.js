@@ -53,7 +53,10 @@ function fetch (spec, options, callback) {
   }
   function createUser(cb) {
     var user = new User({}, { app:app });
-    user.save({}, {
+    var data = {
+      initial_referrer: utils.getReferrer(app)
+    };
+    user.save(data, {
       success: function (model) {
         cb(null, model);
       },
