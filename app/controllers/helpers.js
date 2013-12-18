@@ -55,7 +55,6 @@ function fetch (spec, options, callback) {
     var user = new User({}, { app:app });
     user.save({}, {
       success: function (model) {
-        if (model) model.set('just_created', true);
         cb(null, model);
       },
       error: function () {
@@ -69,7 +68,10 @@ function fetch (spec, options, callback) {
       createUser(function (err) {
         if (err) { callback(err); } else {
           app.fetch.call(app, spec, options, function (err, results) {
-            if (!err && results.user) { app.user = results.user; } // find some place better for this
+            if (!err && results.user) {
+              results.user.set('just_created', true);
+              app.user = results.user;
+            } // find some place better for this
             callback(err, results);
           });
         }
