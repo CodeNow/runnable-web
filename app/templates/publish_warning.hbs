@@ -1,17 +1,15 @@
 <section class="status-bar">
   <div class="container">
     <div class="row">
-      <p>Your code is currently in <b>Draft Mode</b>. When you're ready to show it off to the world, hit <b>Publish</b>.</p>
-      <div>
-        {{#if_result user method="canEdit" a0=model}}
-        <button id="pubwarn-back-button" class="purple">Publish Back</button>
-        {{/if_result}}
-        {{#if_result user method="isVerified"}}
-        <button id="pubwarn-new-button" class="purple">Publish as New Example</button>
-        {{else}}
-        <button id="pubwarn-request-button" class="purple">Publish as New Example</button>
-        {{/if_result}}
-      <div>
+      {{#if_result user method="canEdit" a0=model}}
+      <button id="pubwarn-back-button" class="purple">Publish</button>
+      {{/if_result}}
+      {{#if_result user method="isVerified"}}
+      <button id="pubwarn-new-button" class="silver">Publish as a New Project</button>
+      {{else}}
+      <button id="pubwarn-request-button" class="purple">Publish as a New Project</button>
+      {{/if_result}}
+      <p><strong>You're in <b>Draft Mode</b>!</strong><span> Publish it when you're ready to show it off to the world.</span></p>
     </div><!--/.row-->
   </div><!--/.container-->
   {{view "publish_loader" model=context.container}}
