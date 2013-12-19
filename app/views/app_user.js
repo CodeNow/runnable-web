@@ -38,6 +38,7 @@ module.exports = BaseView.extend({
       // the just created user's initial_referrer
       var user = this.app.user;
       if (user.get('just_created')) {
+        user.set('just_created', false);
         user.save({
           initial_referrer: document.referrer
         }, { patch:true }); //ignore errors..
