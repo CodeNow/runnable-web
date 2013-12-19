@@ -324,12 +324,20 @@ $spec-modal-width: 365px*1.5; //default modal size is 365px
       padding-left: 10px;
     }
 
-    p {
+    button {
       margin: 0;
+
+      @include media(xs) {
+        width: auto;
+      }
     }
 
-    .status-buttons {
-      float: right;
+    p {
+      margin: 0 0 0 15px;
+
+      @include media(xs) {
+            display: inline;
+        }
     }
   }
 }
