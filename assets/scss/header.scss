@@ -257,46 +257,48 @@
 #user-info {
     cursor: pointer;
     min-width: 100px;
-    padding: 0 40px 0 10px;
-    @include transition(min-width .3s ease-in-out);
+    @include transition(min-width .2s ease-in-out .1s);
     white-space: nowrap;
 
-    // @include media(xs) {
-    //     right: 0 !important;
-    // }
+    @include media(xs) {
+        right: 0 !important;
+    }
+
+    > a {
+        display: block;
+        height: 100%;
+        left: -5px;
+        width: 100%;
+        z-index: 1;
+    }
 
     img {
         @include border-radius(50%);
         float: left;
-        margin: 10px 10px 0 0;
+        margin: 10px 10px 10px 0;
         position: relative;
             z-index: 4;
-        @include transition(all .3s ease-in-out);
+        @include transition(all .3s ease-in-out .1s);
     }
 
-    .user-name {
-        display: inline-block;
-        position: relative;
+    .username {
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        @include transition(all .2s ease-in-out .1s);
+        white-space: nowrap;
+    }
 
-        > a:first-child {
-            max-width: 100px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            @include transition(all .3s ease-in-out);
-            white-space: nowrap;
-        }
+    .realname {
+        color: #bbb;
+        display: block;
+        margin-top: -36px;
+        opacity: 0;
+        pointer-events: none;
+        @include transition(opacity .1s ease-in-out);
 
-        > a + a {
-            color: #bbb;
-            display: block;
-            margin-top: -36px;
-            opacity: 0;
-            pointer-events: none;
-            @include transition(opacity .1s ease-in-out);
-
-            &:hover {
-                text-decoration: none;
-            }
+        &:hover {
+            text-decoration: none;
         }
     }
 
@@ -346,33 +348,34 @@
     }
 
     &:hover {
-        cursor: default;
-        min-width: 250px;
+        min-width: 220px;
+        padding: 0;
         z-index: 3;
 
         img {
             height: 52px;
+            margin-left: 10px;
             width: 52px;
         }
 
-        .user-name {
-            z-index: 1;
+        .username,
+        .realname {
+            @include transition-delay(.1s);
+        }
 
-            > a:first-child {
-                color: #333;
-                font-size: 15px;
-                font-weight: bold;
-                text-decoration: none;
-            }
+        .username {
+            color: #333;
+            font-size: 16px;
+            text-decoration: none;
+        }
 
-            a + a {
-                opacity: 1;
-                pointer-events: auto;
-            }
+        .realname {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .user-expanded {
-            @include animation(dropdownIn .3s ease-in-out forwards);
+            @include animation(dropdownIn .3s ease-in-out forwards .1s);
         }
     }
 }

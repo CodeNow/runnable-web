@@ -22,7 +22,7 @@ module.exports = BaseView.extend({
     evt.preventDefault();
     var signupModal = new SignupModal({ app:this.app });
     signupModal.open();
-  },
+  }
 });
 
 module.exports.id = "HeaderActions";

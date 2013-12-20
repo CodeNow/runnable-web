@@ -4,13 +4,13 @@
 
 {{#if_result model method="isRegistered"}}
 <li id="user-info">
-  {{#with model.attributes}}
-  <img src="{{gravitar}}?s=64" alt="{{username}}" height="35" width="35">
-  <span class="user-name">
-    <a>{{username}}</a>
-    {{#if name}}<a>{{name}}</a>{{/if}}
-  </span>
-  {{/with}}
+  <a href="{{invoke model method='appURL'}}">
+    {{#with model.attributes}}
+    <img src="{{gravitar}}?s=64" alt="{{username}}" height="35" width="35">
+    <span class="username">{{username}}</span>
+    {{#if name}}<span class="realname">{{name}}</span>{{/if}}
+    {{/with}}
+  </a>
   <div class="user-expanded">
     <ul>
       <li><a href="{{invoke model method='appURL'}}">Profile</a>
