@@ -13,6 +13,13 @@ module.exports = BaseView.extend({
   preRender: function () {
     if (this.options.editmode) this.className = 'editmode';
   },
+  postRender: function () {
+    var imagesCount = this.model.get('imagesCount');
+    this.$('.reputation').tooltip({
+      placement: 'bottom',
+      title: imagesCount+' published Runnables'
+    });
+  },
   editInline: function (evt) {
     this.$(evt.currentTarget)
       .children('input')

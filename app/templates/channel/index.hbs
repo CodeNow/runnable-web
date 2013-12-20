@@ -6,11 +6,9 @@
     <div class="col-sm-9{{#if channels.length}} col-sm-offset-3{{/if}}">
       <h1 class="page-title">
       {{#with channel.attributes}}
-        {{#channelHasImage name}}
         <span class="icon-container">
           {{view "channel_image" name=name large=true height="39" width="35"}}
         </span>
-        {{/channelHasImage}}
         <span>{{name}} code</span>
       {{/with}}
       </h1>

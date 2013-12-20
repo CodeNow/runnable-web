@@ -4915,9 +4915,6 @@ body.modal-open,
   border-bottom: 1px solid #e5e5e5;
   min-height: 16.428571429px;
 }
-.modal-header .close {
-  margin-top: -2px;
-}
 .modal-title {
   margin: 0;
   line-height: 1.428571429;
@@ -5010,7 +5007,7 @@ body.modal-open,
   padding: 0 5px;
 }
 .tooltip-inner {
-  max-width: 200px;
+  max-width: 240px;
   padding: 3px 8px;
   color: #ffffff;
   text-align: center;

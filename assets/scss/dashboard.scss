@@ -56,7 +56,34 @@ main {
         position: relative;
         width: 25%;
 
-        img {
+        > .reputation {
+            color: #fff;
+            font-size: 14px;
+            height: 52px;
+            line-height: 52px;
+            width: 52px;
+
+            @include media(xs) {
+                left: 150px;
+            }
+
+            @include media(sm) {
+                left: 135px;
+            }
+
+            @include media(md) {
+                left: 115px;
+            }
+
+            &:hover,
+            &:active {
+                background-color: #9A58BA;
+                @include background-image(linear-gradient(rgba(107,64,155,0),#6B409B));
+                @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 0 rgba(0,0,0,0.1));
+            }
+        }
+
+        > img {
             width: 100%;
         }
 
@@ -143,17 +170,29 @@ main {
         width: calc(75% - 60px);
 
         @include media(xs) {
+            display: block;
+            margin: 0 auto;
             width: 100%;
+                max-width: 320px;
         }
     }
 
     > h1 {
         font-size: 30px;
+
+        @include media(xs) {
+            margin-top: 10px;
+            text-align: center;
+        }
     }
 
     > hr {
         border-top-color: rgba(0,0,0,0.1);
         margin: 11px 0;
+
+        @include media(xs) {
+            margin: 11px auto;
+        }
 
         @include media(md) {
             margin: 22px 40px 22px 0;
@@ -166,6 +205,12 @@ main {
         min-height: 24px;
         margin: 4px 0;
         position: relative;
+
+        @include media(xs) {
+            margin: 4px auto;
+            max-width: 320px;
+            padding-left: 20px;
+        }
 
         @include media(md) {
             width: 220px;
@@ -252,6 +297,10 @@ main {
         width: calc(100% - 20px);
         white-space: nowrap;
 
+        @include media(xs) {
+            text-align: center;
+        }
+
         &:focus {
             border-bottom: 1px dashed $purple-light;
             color: #333;
@@ -277,11 +326,20 @@ main {
 
 //dashboard
 #dashboard {
-    padding-top: 40px;
+    padding-top: 20px;
 
     @include media(md) {
         float: right;
+        padding-top: 40px;
         width: 75%;
+    }
+
+    .nav-tabs + .tab-content .dashboard-runnables {
+        @include border-radius(0 5px 5px 5px);
+    }
+
+    #drafts .dashboard-runnables {
+        @include border-radius(5px);
     }
 
     //tabs
@@ -383,8 +441,9 @@ main {
 
 .dashboard-runnables {
     background: #fff;
-    @include border-radius(0 5px 5px 5px);
+    @include border-radius(5px);
     @include box-shadow(0 2px 5px rgba(0,0,0,0.1));
+    overflow: hidden;
     padding: 0;
     position: relative;
         z-index: 2;
@@ -451,36 +510,192 @@ main {
         font-weight: bold;
         color: #bbb;
         margin: 8px 0 0 0;
-
-        a {
-            color: $purple-light;
-
-            &:hover {
-                img {
-                    text-decoration: none;
-                }
-            }
-        }
     }
 }
+
 li {
     .tags {
+
         img {
             margin-right: 4px;
         }
-
-        a {
-            background: $purple-lighter;
-            border: 1px solid $purple-light;
-            @include border-radius(3px);
-            display: inline-block;
-            font-size: 11px;
-            font-weight: bold;
-            height: 21px;
-            line-height: 21px;
-            padding: 0 4px;
             margin-right: 5px;
-            @include transition(all 0.2s ease-in-out);
+    }
+}
+
+//reputation
+.reputation {
+    @include border-radius(50%);
+    display: block;
+    font-size: 11px;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 auto;
+    padding: 0;
+    position: absolute;
+        top: 0;
+        z-index: 1;
+    width: 32px;
+}
+
+//reputation
+#reputation {
+    height: 100px;
+    margin: 0 0 30px;
+    padding: 0;
+
+    @include media(xs) {
+        display: table;
+        margin: 20px auto 30px;
+    }
+
+    @include media(xxs) {
+        display: table;
+    }
+
+    @include media(sm) {
+        margin-top: 20px;
+    }
+
+    @include media(md) {
+        margin-top: 0;
+    }
+
+    li {
+        display: inline-block;
+        margin-left: 30px;
+
+        @include media(xs) {
+            margin: 10px 0;
+            width: 25%;
+                min-width: 150px;
+        }
+
+        @include media(xxs) {
+            width: 50%;
+        }
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        //tooltips
+        .tooltip {
+            margin-top: -3px;
+        }
+        .tooltip-inner {
+            white-space: nowrap;
+        }
+
+        //author link & img
+        > a:first-child {
+            background: #fff;
+            @include border-radius(50%);
+            @include box-shadow(0 2px 3px rgba(0,0,0,0.3));
+            display: block;
+            height: 60px;
+            margin: 0 auto;
+            position: relative;
+            width: 62px;
+
+            > img {
+                border: 10px solid transparent;
+                @include border-radius(50%);
+                float: left;
+                height: 60px;
+                overflow: hidden;
+                position: absolute;
+                    z-index: 1;
+                width: 62px;
+            }
+        }
+    }
+
+    figcaption {
+        color: #bbb;
+        font-size: 12px;
+        font-weight: bold;
+        margin-top: 14px;
+        text-align: center;
+
+        > a + a {
+            margin-right: 6px;
+        }
+    }
+
+    figure {
+        @include animation(closeWrapper 0s 0.5s 1 forwards linear);
+        @include border-radius(50%);
+        clip: rect(0px, 62px, 60px, 31px);
+        height: 60px;
+        pointer-events: none;
+        width: 62px;
+
+        div {
+            border: 10px solid $purple-lighter;
+            @include border-radius(50%);
+            clip: rect(0px, 31px, 60px, 0px);
+            height: 60px;
+            position: absolute;
+            width: 62px;
+        }
+
+        &[class^='_1'], &[class^='_2'], &[class^='_3'], &[class^='_4'], &[class^='_5'] {
+            > div:first-child {
+                border-color: #fff;
+                z-index: 1;
+            }
+        }
+
+        &[class^='_5'], &[class^='_6'], &[class^='_7'], &[class^='_8'], &[class^='_9'], &[class^='_10'] {
+            > div:last-child {
+                @include animation(rightSpan50 0.5s 1 forwards linear);
+            }
+        }
+
+        &[class^='_1'] > div:last-child {
+            @include animation(rightSpan10 0.1s 1 forwards linear);
+        }
+
+        &[class^='_2'] > div:last-child {
+            @include animation(rightSpan20 0.2s 1 forwards linear);
+        }
+
+        &[class^='_3'] > div:last-child {
+            @include animation(rightSpan30 0.3s 1 forwards linear);
+        }
+
+        &[class^='_4'] > div:last-child {
+            @include animation(rightSpan40 0.4s 1 forwards linear);
+        }
+
+        &[class^='_5'] > div:last-child,
+        &[class^='_10'] > div:last-child {
+            @include animation(rightSpan50 0.5s 1 forwards linear);
+        }
+
+        &[class^='_6'] > div:first-child {
+            @include animation(leftSpan60 0.2s 1 forwards linear);
+        }
+
+        &[class^='_7'] > div:first-child {
+            @include animation(leftSpan70 0.4s 1 forwards linear);
+        }
+
+        &[class^='_8'] > div:first-child {
+            @include animation(leftSpan80 0.6s 1 forwards linear);
+        }
+
+        &[class^='_9'] > div:first-child {
+            @include animation(leftSpan90 0.8s 1 forwards linear);
+        }
+
+        &[class^='_10'] {
+
+            > div:first-child {
+                border-color: $purple-lighter;
+                @include animation(leftSpan100 1s 1 forwards linear);
+            }
         }
     }
 }

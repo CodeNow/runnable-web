@@ -32,6 +32,7 @@
   }
 }
 
+<<<<<<< HEAD
 @include keyframes(dropdownIn) {
   0% {
     opacity: 0;
@@ -47,8 +48,7 @@
     opacity: 1;
     width: 210px;
   }
-}
-
+=======
 @include keyframes(heightUp) {
   0% {
     height: 30%;
@@ -180,4 +180,5 @@
     100% {
         @include rotate-3d(10*18deg);
     }
+>>>>>>> 4471888baf4fbf7b78bfcb96bea389b3ef736bec
 }

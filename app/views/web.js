@@ -26,6 +26,7 @@ module.exports = BaseView.extend({
       this.render();
     }
   },
+  renderCount: 0,
   postRender: function () {
     // iframe loader
     if (!this.options.buildmessage) {
@@ -34,6 +35,49 @@ module.exports = BaseView.extend({
       this.loading(true);
       this.$iframe.load(this.loading.bind(this, false)); // load event remains attached, for subsequent page loads
       this.appUrl();
+    }
+    if (this.model.get('build_cmd')) {
+      // resize handle cannot be added multiple times.
+      // since this view is rendered multiple times when there
+      // is a build step 1 before receiving build message
+      // 2 after recieving, and 3 for final render; wait
+      // for final render to add resize handle
+      this.renderCount++;
+      if (this.renderCount === 3) {
+        this.addResizeHandle();
+      }
+    }
+    else {
+      this.addResizeHandle();
+    }
+  },
+  addResizeHandle: function () {
+    var self = this;
+    var container = this.model;
+    var showingBothPanes = !container.get('output_format');
+    if (showingBothPanes && !this.options.buildmessage) {
+      this.$el.resizable({
+        alsoResizeReverse: "#output-terminal-container",
+        handles: "s",
+        start: function () {
+          $(".resizable-iframe").each(function (index, element) {
+            var d = $('<div class="iframe-cover" style="z-index:1000000;position:absolute;width:100%;top:0px;left:0px;bottom:0;"></div>');
+            $(element).append(d);
+          });
+        },
+        stop: function (e, ui) {
+          $('.iframe-cover').remove();
+          var parent = $(window);
+          $('.resizable-iframe').each(function(){
+            var $this = $(this);
+            $this.css({
+              width : $this.width()  / parent.width()  * 100 + "%" ,
+              height: $this.height() / parent.height() * 100 + "%"
+            });
+          });
+        }
+      });
+      $( "#output-terminal-container" ).resizable();
     }
   },
   refresh: function () {

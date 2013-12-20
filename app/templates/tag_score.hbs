@@ -1,0 +1,10 @@
+{{view "channel_image" name=model.attributes.name retina=true}}
+{{#if meter}}
+  <figure class="_{{meter}}">
+    <div></div>
+    <div></div>
+  </figure>
+{{/if}}
+{{#with model.attributes}}
+<figcaption>{{view "tag_link" name=name}} x {{userImagesCount}}</figcaption>
+{{/with}}

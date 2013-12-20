@@ -10,15 +10,20 @@
 
   &.bottom {
     margin-top: 7px;
-    
+
     .tooltip-arrow {
       border-bottom-color: $orange;
     }
   }
 }
 
+.no-img ~ .tooltip {
+  margin-top: -13px !important;
+}
+
 .tooltip-inner {
     background: $orange; /* is the new black */
     @include border-radius(3px);
     font-weight: normal;
+    white-space: nowrap;
 }

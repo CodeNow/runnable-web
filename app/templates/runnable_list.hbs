@@ -1,3 +1,4 @@
+{{#unless notabs}}
 <ul class="nav nav-tabs">
   {{#each sorts}}
   <li {{#if_eq sort compare=../sort}}class="active"{{/if_eq}}>
@@ -5,11 +6,14 @@
   </li>
   {{/each}}
 </ul>
-<ul id="tags-content">
+{{/unless}}
+
+<ul id="tags-content" {{#if_eq sort compare="runs"}}class="round"{{/if_eq}}>
   {{#each collection.models}}
     {{view "runnable_item_view" model=. novotes=../novotes}}
   {{/each}}
 </ul>
+
 {{#unless nopaging}}
 <ul class="pagination">
   {{#if prevLink}}

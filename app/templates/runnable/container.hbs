@@ -24,9 +24,8 @@
     <ul id="sidebar" class="col-sm-3">
       {{#if isVerified}}
       <li class="services">
-      <h3 class="widget-title">API Keys</h3>
-        {{view "runnable_specifications" model=container collection=specifications context=. editmode=isVerified}}
-      </li>
+        <h3 class="widget-title">API Keys</h3>
+          {{view "runnable_specifications" model=container collection=specifications context=. editmode=isVerified}}
       {{/if}}
       <li class="tags">
         <h3 class="widget-title">Tags</h3>
@@ -34,7 +33,6 @@
         {{#if isVerified}}
         {{view "runnable_new_tag_form" model=container}}
         {{/if}}
-      </li>
     </ul>
   </div>
 </section>

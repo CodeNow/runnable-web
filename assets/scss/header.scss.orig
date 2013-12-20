@@ -353,9 +353,15 @@
         z-index: 3;
 
         img {
+<<<<<<< HEAD
             height: 52px;
             margin-left: 10px;
             width: 52px;
+=======
+            @include scale-3d(1.4,1.4,1);
+            margin-top: 15px;
+            margin-right: 15px;
+>>>>>>> 4471888baf4fbf7b78bfcb96bea389b3ef736bec
         }
 
         .username,

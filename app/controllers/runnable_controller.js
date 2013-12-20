@@ -21,6 +21,7 @@ var canonical = helpers.canonical;
 var formatTitle = helpers.formatTitle;
 var fetchUserAndSearch = helpers.fetchUserAndSearch;
 var fetchOwnersFor = helpers.fetchOwnersFor;
+var fetchLeaderBadges = helpers.fetchLeaderBadges;
 
 module.exports = {
   index: function(params, callback) {
@@ -83,13 +84,17 @@ module.exports = {
           });
         },
         function filesOwnerRelated (results, cb) {
+          var channelIds = results.container.get('tags').map(utils.pluck('channel'));
           async.parallel([
             fetchFilesForContainer.bind(self, results.container.id),
             fetchOwnerOf.bind(self, results.user, results.image), //image owner
-            fetchRelated.bind(self, results.image.id, results.container.attributes.tags)
+            fetchRelated.bind(self, results.image.id, results.container.attributes.tags),
+            fetchLeaderBadges.bind(self, 2, results.image.get('owner'), channelIds)
           ],
           function (err, data) {
-            cb(err, !err && _.extend(results, data[0], data[1], data[2], data[3]));
+            if (err) return cb(err);
+            _.extend(results, data[0], data[1], data[2], data[3]);
+            cb(null, results);
           });
         },
         // function anonCheck (results, cb) {

@@ -62,8 +62,18 @@ module.exports = EditorButtonView.extend({
   openOutput: function () {
     var url = '/'+this.model.id+'/output';
     var windowName = this.model.id+'output';
+    this.closeOutput();
     this.popup = window.open(url, windowName);
-
+    this.popup.onload = function () {
+      if (this.model.get('build_cmd') && this.filesAreUnsaved) {
+        this.popup.postMessage('stream:build', '*');
+      }
+      else {
+        this.popup.postMessage('stream:run', '*');
+      }
+      // for some reason the output's window.parent is not the original project window., so send it the window using this.
+      this.popup.postMessage('parent:window', '*');
+    }.bind(this);
   },
   refreshOutput: function () {
     this.popup.location = this.popup.location;
@@ -76,27 +86,26 @@ module.exports = EditorButtonView.extend({
   run: function () {
     this.openOutput();
     this.disable(true);
-    this.model.run(function (err) {
+    this.model.saveOpenFiles(function (err) {
       this.disable(false);
       if (err) {
         this.showError(err);
         this.popup.close();
-        _rollbar.push({level: 'error', msg: "Couldn't start container", errMsg: err});
-      }
-      else {
-        // this.refreshOutput();
       }
     }, this);
-    this.app.dispatch.trigger('run');
+    this.app.dispatch.trigger('run'); // for tracking
   },
   saveImplementationSuccess: function () {
     if (this.userImplementedSpec()) this.run();
   },
   onChangeUnsaved: function (bool) {
-    if (bool)
-      this.$('span').html('Save and Run');
-    else
-      this.$('span').html('Run');
+    this.filesAreUnsaved = bool;
+    if (bool) {
+      this.$('span').eq(0).html('Save and Run');
+    }
+    else {
+      this.$('span').eq(0).html('Run');
+    }
   },
   setImplementLinkModel: function () {
     //hack

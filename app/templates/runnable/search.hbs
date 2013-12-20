@@ -12,7 +12,7 @@
   <div class="row">
     <div id="tags-details" class="col-sm-12">
       {{#if images.length}}
-      {{view "runnable_list" collection=images nopaging=true novotes=true}}
+      {{view "runnable_list" collection=images nopaging=true novotes=true notabs=true}}
       {{else}}
         <h4> No Results </h4>
       {{/if}}

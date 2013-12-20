@@ -1,18 +1,18 @@
-<div class="clearfix">
-  {{#if model.attributes.gravitar}}
-  <a href="{{invoke model method='appURL'}}">
-    <img class="project-author-icon" src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}">
-  </a>
+{{#if model.attributes.gravitar}}
+<a href="{{invoke model method='appURL'}}">
+  <img class="project-author-icon" src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}">
+  <span class="btn purple reputation">{{model.attributes.imagesCount}}</span>
+</a>
+
+<h4 class="author-title">
+  {{#if model.attributes.username}}
+  <a href="{{invoke model method='appURL'}}">{{model.attributes.username}}</a>
+  {{else}}
+  <b>Anonymous</b>
   {{/if}}
-  <p class="publish-date">
-    Published {{dateAgo created}} by
-  </p>
-  <h4 class="author-title">
-    {{#if model.attributes.username}}
-    <a href="{{invoke model method='appURL'}}">{{model.attributes.username}}</a>
-    {{else}}
-    <b>Anonymous</b>
-    {{/if}}
-  </h4>
-</div>
-{{view "runnable_share" model=image}}
+  <span class="publish-date">published {{dateAgo created}}.</span>
+</h4>
+
+{{view "leader_badges" collection=context.leaderBadges}}
+{{/if}}
+{{!-- {{view "runnable_share" model=image}} --}}

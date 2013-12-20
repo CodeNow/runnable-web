@@ -26,7 +26,9 @@ module.exports = {
   'fetchFilesForContainer': fetchFilesForContainer,
   'createContainerFrom':    createContainerFrom,
   'canonical':              canonical,
-  'formatTitle':            formatTitle
+  'formatTitle':            formatTitle,
+  'fetchLeaderBadges':      fetchLeaderBadges,
+  'fetchPopUserAffectedChannels':      fetchPopUserAffectedChannels
 };
 
 
@@ -319,7 +321,7 @@ function createContainerFrom (imageIdOrChannelName, callback) {
   var app = this.app;
   var container = new Container({}, { app:app });
   var options = utils.successErrorToCB(callback);
-  options.url = _.result(container, 'url') + '?from=' + imageIdOrChannelName;
+  options.url = _.result(container, 'url') + '?from=' + encodeURIComponent(imageIdOrChannelName);
   container.save({}, options);
 }
 
@@ -392,6 +394,53 @@ function fetchFilesForContainer (containerId, callback) {
       callback(err, results);
     }
   });
+}
+
+function fetchLeaderboard (channel, cb) {
+  var spec = {
+    leaderboard: {
+      collection: 'Users',
+      params: {
+        channel: channel._id
+      }
+    }
+  };
+  fetch.call(this, spec, function (err, results) {
+    if (err) return cb(err);
+    channel.leaderboard = results.leaderboard;
+    var results2 = {}; // each leaderboard needs a unique key on results to be 'stored'
+    results2[channel._id+'leaderboard'] = results.leaderboard;
+    cb(null, results2);
+  });
+}
+
+function fetchPopUserAffectedChannels (count, userId, cb) {
+  var spec = {
+    leaderBadges: {
+      collection: 'Channels',
+      params: {
+        userId  : userId,
+        count   : count,
+        popular : true
+      }
+    }
+  };
+  fetch.call(this, spec, cb);
+}
+
+function fetchLeaderBadges (count, userId, channelIds, cb) {
+  var spec = {
+    leaderBadges: {
+      collection: 'Channels',
+      params: {
+        channelIds : channelIds,
+        userId : userId,
+        count  : count,
+        badges : true
+      }
+    }
+  };
+  fetch.call(this, spec, cb);
 }
 
 function fetchRelated (imageId, tags, cb) {

@@ -10,6 +10,23 @@ module.exports = BaseView.extend({
   events: {
     'click' : 'click'
   },
+  postHydrate: function () {
+    this.onPostMessage = this.onPostMessage.bind(this);
+    this.listenToPostMessages()
+  },
+  listenToPostMessages: function () {
+    window.addEventListener("message", this.onPostMessage);
+  },
+  stopListeningToPostMessages: function () {
+    window.removeEventListener("message", this.onPostMessage);
+  },
+  onPostMessage: function (message) {
+    if (message && message.data == 'completed:build') {
+      debugger;
+
+      this.$el.click()
+    }
+  },
   click: function (evt) {
     evt.preventDefault();
     if ($(evt.currentTarget).attr('disabled')) {
@@ -29,6 +46,10 @@ module.exports = BaseView.extend({
         dispatch.trigger('sync:files')
       }
     }
+  },
+  remove: function () {
+    this.stopListeningToPostMessages();
+    Super.remove.apply(this, arguments);
   },
   showError: function () {
     this.disable(false);

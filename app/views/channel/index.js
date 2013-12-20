@@ -8,7 +8,9 @@ module.exports = BaseView.extend({
   dontTrackEvents: ['change .selectpicker'],
   postRender: function () {
     // Enable Bootstrap-Select
-    this.$('.selectpicker').selectpicker();
+    // this.$('.selectpicker').selectpicker();
+
+
   },
   changeSort: function (evt) {
     this.trackEvent('Change Sort', {value:value});
