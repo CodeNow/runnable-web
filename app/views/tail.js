@@ -37,6 +37,7 @@ module.exports = BaseView.extend({
   },
   onPostMessage: function (message) {
     var dispatch = this.app.dispatch;
+    console.log(message && message.data)
     if (!message || !message.data || !message.data.indexOf) {
       return; // unexpected message format (suspected to cause rollbar #1758)
     }
@@ -46,14 +47,12 @@ module.exports = BaseView.extend({
     else if (message.data === 'hide:loader') {
       this.loading(false);
     }
+    else if (message.data === 'parent:window') {
+      // for some reason window.parent is not the original project window.
+      this.parentWindow = message.source;
+    }
     else if (message.data.indexOf('stream:') === 0) {
       this.onStreamPostMessage(message);
-    }
-    else if (message.data.indexOf('{') === 0) {
-      var json = JSON.parse(message.data);
-      if (json.type === 'code') {
-        this.handleCodePostMessage(json);
-      }
     }
   },
   onStreamPostMessage: function (message) {
@@ -69,7 +68,13 @@ module.exports = BaseView.extend({
       this.$el.addClass('out');
       $('#output-terminal-container').addClass('in');
     }
-    else {
+    else { // this.stream === 'run'
+      if (this.building) {
+        // just finished building
+        if (this.parentWindow && this.parentWindow.postMessage) {
+          this.parentWindow.postMessage('completed:build', '*');
+        }
+      }
       this.building = false;
       clearTimeout(this.buildMessageTimeout);
       dispatch.trigger('toggle:buildMessage', false);
@@ -77,12 +82,6 @@ module.exports = BaseView.extend({
   },
   showParentEl: function () {
     this.parentView.$el.addClass('in');
-  },
-  handleCodePostMessage: function (json) {
-    if (json.code+'' === '0' && this.stream === 'build') {
-      // process completed successfully and was build process
-      this.refreshIframe();
-    }
   },
   refreshIframe: function () {
     var src = this.$('iframe').attr('src');

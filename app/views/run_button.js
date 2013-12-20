@@ -62,6 +62,7 @@ module.exports = EditorButtonView.extend({
   openOutput: function () {
     var url = '/'+this.model.id+'/output';
     var windowName = this.model.id+'output';
+    this.closeOutput();
     this.popup = window.open(url, windowName);
     this.popup.onload = function () {
       if (this.model.get('build_cmd') && this.filesAreUnsaved) {
@@ -70,6 +71,8 @@ module.exports = EditorButtonView.extend({
       else {
         this.popup.postMessage('stream:run', '*');
       }
+      // for some reason the output's window.parent is not the original project window., so send it the window using this.
+      this.popup.postMessage('parent:window', '*');
     }.bind(this);
   },
   refreshOutput: function () {
