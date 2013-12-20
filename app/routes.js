@@ -3,7 +3,7 @@ var lock = require('./lock');
 module.exports = function(match) {
   match('',                     'channel#category');
   // match('',                     'home#press');
-  match('login',                'home#login');
+  // match('login',                'home#login');
   match('signup',               'home#signup');
   match('search',               'runnable#search');
   match('all',                  'channel#all');
