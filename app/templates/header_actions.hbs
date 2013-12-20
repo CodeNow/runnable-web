@@ -6,10 +6,10 @@
 <li id="user-info">
   {{#with model.attributes}}
   <img src="{{gravitar}}?s=64" alt="{{username}}" height="35" width="35">
-  <div class="user-name">
+  <span class="user-name">
     <a>{{username}}</a>
     {{#if name}}<a>{{name}}</a>{{/if}}
-  </div>
+  </span>
   {{/with}}
   <div class="user-expanded">
     <ul>

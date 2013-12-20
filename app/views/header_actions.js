@@ -8,8 +8,7 @@ module.exports = BaseView.extend({
   className: 'nav nav-pills',
   events: {
     'click #header-login-link'  : 'openLogin',
-    'click #header-signup-link' : 'openSignup',
-    'click #user-info'          : 'toggleUserInfo'
+    'click #header-signup-link' : 'openSignup'
   },
   postHydrate: function () {
     this.listenTo(this.model, 'change:username', this.render.bind(this));
@@ -25,17 +24,6 @@ module.exports = BaseView.extend({
     var signupModal = new SignupModal({ app:this.app });
     signupModal.open();
   },
-  toggleUserInfo: function (evt) {
-    evt.stopPropagation();
-    this.$('#user-info').toggleClass('in');
-    setTimeout(function () {
-      $(document).once('click', this.boundHide);
-    }.bind(this), 0);
-  },
-  hideUserInfo: function() {
-    this.$('#user-info').removeClass('in');
-    $(document).off('click', this.boundHide);
-  }
 });
 
 module.exports.id = "HeaderActions";

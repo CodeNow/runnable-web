@@ -100,25 +100,6 @@
             }
         }
 
-        // > li.active a {
-        //     width: 107px;
-        //     text-align: center;
-        //     border: solid 1px $purple;
-        //     @include box-shadow(inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(0,0,0,.3));
-
-        //     &:hover {
-        //         background: adjust-lightness(#693C89,8);
-        //         text-decoration: none;
-        //     }
-
-        //     &:active {
-        //         background: adjust-lightness(#693C89,-5);
-        //         @include box-shadow(inset 0 0 4px rgba(0,0,0,.3));
-        //         @include transition(all .1s ease-in-out);
-        //         color: adjust-lightness(#693C89, 30);
-        //     }
-        // }
-
         &.signed-out {
 
             > li.active a {
@@ -134,19 +115,6 @@
                     margin-left: 8px;
                 }
             }
-
-            // img {
-            //     width: 32px;
-            //     height: 32px;
-            //     @include border-radius(3px);
-            //     overflow: hidden;
-            //     margin-right: 12px;
-            //     @include breakpoint(screen-xs) {
-            //         width: 24px;
-            //         height: 24px;
-            //         margin-right: 4px;
-            //     }
-            // }
 
             .caret {
                 border-top-color: #B48BD1;
@@ -166,7 +134,6 @@
                 margin: 0;
                 left: 0;
                 width: 100%;
-                // overflow: hidden;
                 @include box-shadow(0 2px 3px rgba(0,0,0,.3));
 
                 li {
@@ -289,32 +256,33 @@
 //user profile link
 #user-info {
     cursor: pointer;
-    max-width: 200px;
     min-width: 100px;
-    padding: 0 10px;
-    @include transition(min-width .25s ease-in-out);
-    z-index: 3;
+    padding: 0 40px 0 10px;
+    @include transition(min-width .3s ease-in-out);
+    white-space: nowrap;
 
-    @include media(xs) {
-        right: 0 !important;
-    }
+    // @include media(xs) {
+    //     right: 0 !important;
+    // }
 
     img {
         @include border-radius(50%);
         float: left;
         margin: 10px 10px 0 0;
-        @include transition-transforms(.25s ease-in-out);
+        position: relative;
+            z-index: 2;
+        @include transition(all .3s ease-in-out);
     }
 
     .user-name {
-        float: left;
+        display: inline-block;
+        position: relative;
 
         > a {
-            display: block;
-            max-width: 135px;
+            max-width: 100px;
             overflow: hidden;
-            padding-right: 20px;
             text-overflow: ellipsis;
+            @include transition(all .3s ease-in-out);
             white-space: nowrap;
         }
 
@@ -327,13 +295,14 @@
         background: #fff;
         @include border-radius(0 0 3px 3px);
         @include box-shadow(0 2px 3px rgba(0,0,0,.3));
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
         padding-top: 70px;
         position: absolute;
             top: 0;
             right: 15px;
-            z-index: -1;
-        @include transform-3d(0,-200%,0);
-        width: 100%;
+        width: 0;
 
         ul {
             border-top: 1px solid #efefef;
@@ -341,7 +310,7 @@
         }
 
         li {
-            border-top: 1px solid rgba(0,0,0,0.1);
+            border-top: 1px solid rgba(0,0,0,.1);
             height: 40px;
             line-height: 40px;
             list-style-type: none;
@@ -364,34 +333,25 @@
                     text-decoration: none;
                 }
             }
-
-            &:last-child > a {
-                @include border-radius(0 0 3px 3px);
-            }
         }
     }
 
-    &.in {
-        margin-left: 40px !important;
-        max-width: 250px;
-        min-width: 200px;
+    &:hover {
+        min-width: 250px;
+        z-index: 1;
 
         img {
-            @include scale-3d(1.4,1.4,0);
-            margin-top: 15px;
-            margin-right: 15px;
+            height: 52px;
+            width: 52px;
         }
 
         .user-name {
-            margin-top: 10px;
+            z-index: 1;
 
-            a {
+            > a {
                 color: #333;
-                display: block;
                 font-size: 15px;
                 font-weight: bold;
-                line-height: 1.5;
-                max-width: 160px;
                 text-decoration: none;
             }
 
@@ -399,14 +359,12 @@
                 color: #bbb;
                 display: block;
                 font-weight: normal;
+                margin-top: -36px;
             }
         }
 
         .user-expanded {
-            background: #fff;
-            @include transform-3d(0,0%,0);
-            max-width: 235px;
-            min-width: 185px;
+            @include animation(dropdownIn 0.3s ease-in-out forwards);
         }
     }
 }
