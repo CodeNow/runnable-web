@@ -372,7 +372,7 @@
         }
 
         .user-expanded {
-            @include animation(dropdownIn 0.3s ease-in-out forwards);
+            @include animation(dropdownIn .3s ease-in-out forwards);
         }
     }
 }

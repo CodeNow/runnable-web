@@ -12,7 +12,6 @@ module.exports = BaseView.extend({
   },
   postHydrate: function () {
     this.listenTo(this.model, 'change:username', this.render.bind(this));
-    this.boundHide = this.hideUserInfo.bind(this);
   },
   openLogin: function (evt) {
     evt.preventDefault();
