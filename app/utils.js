@@ -371,6 +371,14 @@ var utils = module.exports = {
       return match && match[1];
     }
   },
+  getReferrer: function (app) {
+    if (isServer) {
+      return app.req.get('Referrer');
+    }
+    else {
+      return document.referrer;
+    }
+  },
   clientSetCookie: function (c_name, value, exdays){
     var exdate=new Date();
     exdate.setDate(exdate.getDate() + exdays);

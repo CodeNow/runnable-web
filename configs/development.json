@@ -34,6 +34,9 @@
     "googleAnalytics" : {
       "id": "UA-36631837-2"
     },
+    "intercom" : {
+      "app_id": "980118989fd561bd1dce4ba4c7f8cb32da859c16"
+    },
     "pageSize" : 25,
     "domain": "cloudcosmos.com"
   }

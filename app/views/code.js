@@ -42,8 +42,8 @@ module.exports = BaseView.extend({
     this.listenTo(openFiles, 'change:selected', this.changeSelected.bind(this));
     //debounce events
     this.adjustHeightToContents = _.debounce(this.adjustHeightToContents, 100, true);
-    this.onScrollLeft = _.debounce(this.onScrollLeft, 200, true);
-    this.onScrollTop = _.debounce(this.onScrollTop, 200, true);
+    this.onScrollLeft = _.debounce(this.onScrollLeft, 5000, true);
+    this.onScrollTop = _.debounce(this.onScrollTop, 5000, true);
   },
   setTheme: function (theme) {
     var currentTheme = this.editor.getTheme() || {cssClass:''};

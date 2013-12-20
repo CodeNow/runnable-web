@@ -13,8 +13,11 @@ module.exports = BaseAppView.extend({
   },
   _interceptClick: function(e) {
     var properties = {}
+    var $el;
     if (e.currentTarget) {
-      properties.href =  $(e.currentTarget).attr('href');
+      $el = $(e.currentTarget);
+      properties.href =  $el.attr('href');
+      properties.label = $el.html();
     }
     this.trackEvent('Click Link', properties, 'App');
     Super._interceptClick.apply(this, arguments);

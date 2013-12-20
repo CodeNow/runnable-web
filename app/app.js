@@ -14,11 +14,6 @@ module.exports = BaseApp.extend({
     BaseApp.prototype.start.call(this);
   },
 
-  _interceptClick: function(e) {
-    Track.event('App', 'Click Link')
-    Super._interceptClick.apply(this, arguments);
-  },
-
   utils: utils
 
 });

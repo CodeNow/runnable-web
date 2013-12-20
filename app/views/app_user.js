@@ -16,7 +16,33 @@ module.exports = BaseView.extend({
     // read long comment above, postHydrate - same reason for clientside
     if (this.options.model) {
       this.app.user = this.options.model;
+      this.app.user.set('referrer', document.referrer);
       console.log("HeaderView postHydrate this.app.user", this.app.user.id);
+    }
+  },
+  postRender: function () {
+    if (!window.appUserOnce) {
+      // there are multiple app_user views
+      // but we only want this logic to be called once..
+      window.appUserOnce = true;
+      var user = this.app.user;
+      if (!user.isRegistered()) {
+        this.listenToOnce(user, 'auth', function () {
+          Track.initIntercom(user.toJSON());
+          Track.user(user.toJSON());
+        });
+      }
+      // optimally, we want to save initial referrer on creation of new anon user.
+      // unfortunately, referrer is not in the 'request' serverside. so we have this
+      // logic here check if the user_model has a just_created property, and save
+      // the just created user's initial_referrer
+      var user = this.app.user;
+      if (user.get('just_created')) {
+        user.set('just_created', false);
+        user.save({
+          initial_referrer: document.referrer
+        }, { patch:true }); //ignore errors..
+      }
     }
   }
 });

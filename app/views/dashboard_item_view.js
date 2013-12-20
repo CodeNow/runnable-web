@@ -18,6 +18,11 @@ module.exports = BaseView.extend({
         // user clicked "ok"
         var opts = utils.cbOpts(self.showIfError, self);
         self.model.destroy(opts);
+
+        //set # of items
+        var oldCount = $('li.active').find('span')[0];
+        var newCount = oldCount.innerHTML - 1;
+        oldCount.innerHTML = newCount;
       } else {
           // user clicked "cancel"
       }
