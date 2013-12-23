@@ -3,7 +3,6 @@ var Super = EditorButtonView.prototype;
 
 module.exports = EditorButtonView.extend({
   tagName: 'button',
-  className: 'purple',
   events: {
     'click': 'openContainerPage'
   },

@@ -1,8 +1,35 @@
+//colors
+$grey:           #E8E8E8;
+$grey-lighter:   #F6F6F6;
+$grey-light:     #EEEEEE;
+$grey-dark:      #888;
+$grey-darker:    #555;
+
+$green:          #81B638;
+$green-lighter:  lighten($green,14);
+$green-light:    lighten($green,5);
+$green-dark:     darken($green,9);
+$green-darker:   darken($green,14);
+
+$silver:         #E4E4E4;
+$silver-lighter: lighten($silver,8);
+$silver-light:   lighten($silver,7);
+$silver-dark:    darken($silver,9);
+$silver-darker:  darken($silver,25);
+
+$purple:         #5B3777;
+$purple-lighter: lighten($purple,59);
+$purple-light:   lighten($purple,14);
+
+$orange:         #FD7022;
+$orange-lighter: lighten($orange,10);
+$orange-light:   lighten($orange,5);
+$orange-dark:    darken($orange,12);
+$orange-darker:  darken($orange,17);
+
+
 $br:2px;
 $primary-color: #198dd2;
-/*Link colors*/
-$link-off:#999; /* e.g. subtle links with icons */
-$link-on:#555;
 /*Gray toolbar top of code and web output*/
 $toolbar-height:30px;
 $border-color: #e5e5e5;
