@@ -18,7 +18,7 @@ $silver-dark:    darken($silver,9);
 $silver-darker:  darken($silver,25);
 
 $purple:         #5B3777;
-$purple-lighter: lighten($purple,59);
+$purple-lighter: adjust_hue(saturate(lighten($purple, 60), 63), 1);
 $purple-light:   lighten($purple,14);
 
 $orange:         #FD7022;
