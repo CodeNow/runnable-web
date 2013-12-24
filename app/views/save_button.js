@@ -4,7 +4,7 @@ var Super = EditorButtonView.prototype;
 module.exports = EditorButtonView.extend({
   tagName: 'button',
   id: 'save-button-view',
-  className: 'btn silver',
+  className: 'silver',
   events: {
     'click' : 'saveAll'
   },

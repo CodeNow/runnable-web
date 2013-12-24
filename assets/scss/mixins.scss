@@ -19,6 +19,12 @@
   animation: $animation;
 }
 
+@mixin user-select($user-select) {
+  -moz-user-select: $user-select;
+  -ms-user-select: $user-select;
+  -webkit-user-select: $user-select;
+  user-select: $user-select;
+}
 
 //transform3d mixin with fallback for top
 @mixin transform-3d($x: 0, $y: 0, $z: 1) {
@@ -26,7 +32,6 @@
   transform: translate3d($x, $y, $z);
 
   @include modernizr(no-csstransforms3d) {
-    -moz-transform: translate($x, $y);
     -ms-transform: translate($x, $y);
     -webkit-transform: translate($x, $y);
     transform: translate($x, $y);
@@ -43,7 +48,6 @@
   transform: scale3d($x, $y, $z);
 
   @include modernizr(no-csstransforms3d) {
-    -moz-transform: scale($x, $y);
     -ms-transform: scale($x, $y);
     -webkit-transform: scale($x, $y);
     transform: scale($x, $y);
@@ -57,13 +61,10 @@
 
 //rotate3d mixin
 @mixin rotate-3d($a: 0deg) {
-  -moz-transform: rotate3d(0,0,1,$a);
-  -ms-transform: rotate3d(0,0,1,$a);
   -webkit-transform: rotate3d(0,0,1,$a);
   transform: rotate3d(0,0,1,$a);
 
   @include modernizr(no-csstransforms3d) {
-    -moz-transform: rotate($a);
     -ms-transform: rotate($a);
     -webkit-transform: rotate($a);
     transform: rotate($a);
@@ -72,7 +73,6 @@
 
 //
 @mixin transform-origin($x: 50%, $y: 50%) {
-  -moz-transform-origin: $x, $y;
   -ms-transform-origin: $x, $y;
   -webkit-transform-origin: $x, $y;
   transform-origin: $x, $y;
@@ -80,7 +80,7 @@
 
 //transition mixin for transforms
 @mixin transition-transforms($transition) {
-  -o-transition: transform+" "+$transition;
+  -ms-transition: -ms-transform+" "+$transition;
   -webkit-transition: -webkit-transform+" "+$transition;
   transition: transform+" "+$transition;
 }
