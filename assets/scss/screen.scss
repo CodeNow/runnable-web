@@ -1565,7 +1565,7 @@ div#output-terminal-container{
         list-style: none;
         h3.widget-title {
             font-size: 13px;
-            color: $grey-darker;
+            color: $grey-dark;
             border-bottom: solid 1px #bbb;
             padding: 0 0 4px 0;
             margin: 0 0 8px 0;
@@ -1616,7 +1616,7 @@ div#output-terminal-container{
 
         form {
             label {
-                color: $grey-darker;
+                color: $grey-dark;
                 font-weight: normal;
             }
         }
@@ -1879,7 +1879,7 @@ div#output-terminal-container{
 
             p {
                 font-size: 24px;
-                color: $grey-dark;
+                color: $grey-darker;
                 position: relative;
 
                 &:before,
@@ -1910,11 +1910,11 @@ div#output-terminal-container{
             a {
                 font-size: 18px;
                 font-weight: bold;
-                color: $grey-darker;
+                color: $grey-dark;
                 text-transform: uppercase;
 
                 &:hover {
-                    color: $grey-dark;
+                    color: $grey-darker;
                     text-decoration: none;
                 }
             }
@@ -2259,7 +2259,7 @@ div#output-terminal-container{
             color: $grey-dark;
 
             &:hover {
-                color: $grey-dark;
+                color: $grey-darker;
                 cursor: default;
                 text-decoration: none;
             }
@@ -2508,22 +2508,25 @@ div#output-terminal-container{
         }
     }
 
-    button {
-        @extend .purple;
-        margin-left: 15px;
+    .row {
 
-        @include media(xs) {
-            margin: 0;
-            width: calc(50% - 7.5px);
+        button {
+            @extend .purple;
+            margin-left: 15px;
 
-            &:only-of-type {
-                width: 100%;
+            @include media(xs) {
+                margin: 0;
+                width: calc(50% - 7.5px);
+
+                &:only-of-type {
+                    width: 100%;
+                }
             }
-        }
 
-        & + button {
-            @extend .silver;
-            margin-left: 10px;
+            & + button {
+                @extend .silver;
+                margin-left: 10px;
+            }
         }
     }
 

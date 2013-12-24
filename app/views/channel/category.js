@@ -129,7 +129,6 @@ module.exports = BaseView.extend({
     var queries = examples;
     var $button = this.$('.hero button');
     var $search = this.$('.hero input.tt-query');
-    // var removeShine = $button.removeClass.bind($button, 'shine');
 
     this.index = -1;
     self.animIntervals = [];
@@ -168,13 +167,6 @@ module.exports = BaseView.extend({
       var slice = str.slice(0, i);
       // add letter
       $search.val(slice);
-      // shine button if done
-      // if (i === str.length) {
-      //   // shine button
-      //   // $button.addClass('shine');
-      //   // tim3 = setTimeout(removeShine, 3000);
-      //   self.animTimeouts.push(tim3);
-      // }
     }
   },
   imageTile: function () {
