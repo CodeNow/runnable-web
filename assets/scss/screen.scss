@@ -1035,6 +1035,12 @@ progress {
       border-color: $purple-light;
       text-decoration: none;
     }
+
+    @include media(xs) {
+      span {
+        display: none;
+      }
+    }
   }
 
   label {
@@ -2415,6 +2421,12 @@ div#output-terminal-container{
                   position: absolute;
                     top: 6px;
                     left: -50px;
+
+                  @include media(xs) {
+                    position: relative;
+                      top: -6px;
+                      left: -6px;
+                  }
                 }
             }
 
@@ -2468,30 +2480,51 @@ div#output-terminal-container{
     }
     #providers-register {
         height: 580px;
+        position: relative;
+
         @include breakpoint(screen-sm) {
             height: auto;
             padding-bottom: 40px;
         }
         .bubbles-container {
-            height: 580px;
+            height: 100%;
             @include breakpoint(screen-sm) { height: auto; }
             @include box-shadow(inset 0 10px 100px rgba(0,0,0,0.3));
-            .bubbles {
-                @include breakpoint(screen-sm) { height: auto; }
+
+            @include media(xs) {
+              height: 100%;
             }
         }
         #providers-register-form {
             position: relative;
             margin-bottom: 0;
             padding-top: 40px;
+
+            .col-sm-8 {
+              @include media(xs) {
+                padding: 0 10%;
+              }
+              @include media(xxs) {
+                padding: 0 15px;
+              }
+            }
+
             .input-group {
-                padding: 20px 10px;
-                margin: 0 12%;
-                @include breakpoint(screen-sm) { width: 76% }
+                padding: 20px 15px;
+                margin: 0 auto;
                 @include background-image(linear-gradient(#2E1340, #441E5B));
                 @include box-shadow(inset 0 0 4px rgba(0,0,0,0.2), 0 1px 0 rgba(255,255,255,0.15));
                 @include border-radius(5px);
                 text-align: center;
+
+                @include media(xs) {
+                  width: 100%;
+                }
+
+                @include media(md) {
+                  margin: 0 12%;
+                }
+
                 .input-group-addon {
                     font-size: 30px;
                     font-weight: bold;
@@ -2503,11 +2536,21 @@ div#output-terminal-container{
                     @include border-radius(3px);
                     margin-right: 4%;
                     width: 96%;
+
+                    @include media(xs) {
+                      margin: 6px 0 0;
+                      width: 100%;
+                    }
                 }
             }
             #form-columns {
+                margin: 0;
                 text-align: left;
-                margin: 0 10%;
+
+                @include media(md) {
+                  margin: 0 10%;
+                }
+
                 label {
                     color: #C39EDD;
                     font-weight: normal;
@@ -2519,12 +2562,23 @@ div#output-terminal-container{
                 }
                 textarea.form-control {
                     height: 135px;
+                    max-height: 200px;
+                    resize: vertical;
                 }
                 .providers-register-submit {
                     text-align: right;
+
+                    @include media(sm) {
+                      float: right;
+                    }
+
                     button {
+                        margin-top: 30px;
                         padding: 0 30px;
-                        margin-top: 50px;
+
+                        @include media(xxs) {
+                          width: 100%;
+                        }
                     }
                 }
             }
