@@ -965,6 +965,11 @@ progress {
                 color: #333;
                 font-weight: bold;
                 font-size: 20px;
+
+                .form-control {
+                  height: 34px;
+                  min-height: 0;
+                }
             }
             p {
                 margin: 5px 0 0 0;
