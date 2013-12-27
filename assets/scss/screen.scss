@@ -2423,19 +2423,39 @@ div#output-terminal-container{
                     left: -50px;
 
                   @include media(xs) {
+                    display: block;
+                    margin: 0 auto;
                     position: relative;
-                      top: -6px;
-                      left: -6px;
+                      top: -10px;
+                      left: auto;
+                    width: 44px;
+                  }
+                }
+
+                button {
+                  @include media(xs) {
+                    margin-bottom: 25px;
                   }
                 }
             }
 
             #providers-computer {
+                top: 5px;
+
+                @include media(sm) {
+
+                }
+
                 img {
                     position: static;
-                    margin: 28px 0;
                     max-width: 100%;
                     height: auto;
+
+                    @include media(sm) {
+                      position: absolute;
+                        right: 0;
+                        bottom: 0;
+                    }
                 }
             }
         }
