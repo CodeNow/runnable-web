@@ -19,10 +19,15 @@ module.exports = BaseView.extend({
         var opts = utils.cbOpts(self.showIfError, self);
         self.model.destroy(opts);
 
-        //set # of items
+        //set new count for images and containers
         var oldCount = $('li.active').find('span')[0];
         var newCount = oldCount.innerHTML - 1;
         oldCount.innerHTML = newCount;
+
+        //if image, update reputation count as well
+        if (self.options.isimage) {
+          $('.gravitar').children('span')[0].innerHTML = newCount;
+        }
       } else {
           // user clicked "cancel"
       }
