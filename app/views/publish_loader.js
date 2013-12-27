@@ -53,7 +53,7 @@ module.exports = BaseView.extend({
     }[name];
     if (step === 'end') {
       window.location = window.location;
-    } else {
+    } else if (step) {
       this.$('h1.in').prop('class','out');
       this.$('h1:nth-child(' + step + ')').addClass('in');
     }
