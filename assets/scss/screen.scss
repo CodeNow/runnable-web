@@ -2507,12 +2507,7 @@ div#output-terminal-container{
         }
         .bubbles-container {
             height: 100%;
-            @include breakpoint(screen-sm) { height: auto; }
             @include box-shadow(inset 0 10px 100px rgba(0,0,0,0.3));
-
-            @include media(xs) {
-              height: 100%;
-            }
         }
         #providers-register-form {
             position: relative;

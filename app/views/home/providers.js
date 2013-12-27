@@ -18,7 +18,7 @@ module.exports = BaseView.extend({
         itemPositionDataEnabled : true,
         transformsEnabled       : false,
         onLayout : function(){
-          //$bubbles.find('.bubble').addClass('hero-animate');
+          $bubbles.find('.bubble').addClass('hero-animate');
         }
       });
     });
