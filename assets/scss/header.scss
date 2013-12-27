@@ -246,6 +246,11 @@
                 @include border-radius(3px 3px 0 0);
             }
         }
+
+        //typeahead
+        .tt-dropdown-menu {
+            width: 100%;
+        }
     }
 
     .navbar-right {

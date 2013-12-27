@@ -1,0 +1,52 @@
+//defaults
+.searchbar {
+
+  .tt-dropdown-menu {
+    @include border-radius(0 0 3px 3px);
+    border-top: 0;
+    overflow: hidden;
+    padding-top: 3px;
+  }
+
+  .tt-suggestion:hover {
+    background: $orange;
+
+    p {
+      color: #fff;
+    }
+  }
+}
+
+.search-name {
+  color: $grey-darker;
+  font-weight: bold;
+  margin: 0;
+  text-align: left;
+}
+
+//hero
+#searchbox {
+
+  .tt-dropdown-menu {
+    top: 47px !important;
+    width: calc(100% - 56px);
+  }
+
+  .search-name {
+    color: $grey-darker;
+    font-size: 18px;
+    margin: 0;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+//header
+form.navbar-form {
+
+  .tt-dropdown-menu {
+    top: 31px !important;
+  }
+}

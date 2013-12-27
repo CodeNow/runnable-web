@@ -476,6 +476,7 @@ main {
         button {
             background: none;
             border: none;
+            @include box-shadow(none);
             color: rgba(0,0,0,0.2);
             font-size: 14px;
             font-weight: bold;

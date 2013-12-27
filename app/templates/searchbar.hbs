@@ -1,6 +1,6 @@
 <div class="{{divclass}}">
   <input name="q" type="text" placeholder="{{placeholder}}" class="{{inputclass}}"/>
-  <span class="input-group-btn" {{#unless hasbutton}}style="visibility:hidden; position:absolute; top:-9999;"{{/unless}}>
-    <button class="btn btn-default" type="submit"><img src="/images/icon-search.png" height="16" width="16" /></button>
-  </span>
+  {{#if hasbutton}}
+    <button class="orange"><span class="glyphicons search"></span></button>
+  {{/if}}
 </div>
