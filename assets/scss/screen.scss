@@ -795,7 +795,7 @@ progress {
         }
 
         button {
-            @include animation(shine 4s ease-in-out infinite 1s);
+            @include animation(shine 5s ease-in-out infinite .5s);
             @include border-radius(0 3px 3px 0);
             font-size: 20px;
             height: 52px;
