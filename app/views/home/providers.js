@@ -25,7 +25,7 @@ module.exports = BaseView.extend({
   },
   scrollToPublishRequest: function (evt) {
     evt.preventDefault();
-    $('body').animate({
+    $('html, body').animate({
         scrollTop: this.$("#providers-register-form").offset().top
     }, 400);
   }
