@@ -11,18 +11,9 @@ module.exports = BaseView.extend({
       $.stellar();
     }, 100); // timeout for clientside hit, else doesnt work..
   },
-  learnMoreFrontend: function (evt) {
-    evt.preventDefault();
-    var info = [
-      "<li>Learning APIs and creating code examples</li>",
-      "<li>Working directly with API Providers to create content</li>",
-      "<li>Heavily engaging with the developer community</li>"
-    ].join('');
-    this.showMessage(info);
-  },
   scrollToJobs: function (evt) {
     evt.preventDefault();
-    $('body').animate({
+    $('html, body').animate({
         scrollTop: this.$("#jobs-open-positions-list").offset().top
     }, 400);
   }
