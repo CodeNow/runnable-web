@@ -39,10 +39,32 @@ module.exports = BaseView.extend({
   },
   publishCallback: function (err, image) {
     if (err) {
-      this.app.set('loading', false);
+      var self = this;
+
+      self.app.set('loading', false);
       this.$pubNew.removeAttr('disabled');
       this.$pubBack.removeAttr('disabled');
-      this.showError(err);
+
+      if (err === "a shared runnable by that name already exists") {
+        alertify.prompt('Give your project a unique name.',function(e,err){
+          if (e) {
+            debugger;
+            e.preventDefault;
+            var formData = $('#alertify-text').serializeObject();
+            var options = utils.cbOpts(cb, self);
+            self.model.save(formData,  options);
+            function cb (err) {
+              if (err) {
+                self.showError(err);
+              }
+            }
+          } else {
+            //cancel
+          }
+        });
+      } else {
+        self.showError(err);
+      }
     }
     else {
       // could do backbone pushstate too... just dont know how from a rendr view..
