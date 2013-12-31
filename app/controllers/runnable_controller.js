@@ -156,7 +156,7 @@ module.exports = {
         // results.channels.insert(1, utils.customChannel(this.app));
         callback(null, _.extend(results, {
           page: {
-            title: formatTitle('Create a New Example for JQuery, Codeigniter, NodeJS, PHP, Python, Ruby and more'),
+            title: formatTitle('Create a New Example for JQuery, Codeigniter, NodeJS, PHP, Python, Ruby, C++, Java and more'),
             description: 'Create a New Code Example' + tags,
             canonical: canonical.call(self)
           }
