@@ -175,8 +175,8 @@ module.exports = BaseView.extend({
       $bubbles.isotope({
         itemSelector : 'img',
         layoutMode   : 'masonry',
-        itemPositionDataEnabled : true,
-        transformsEnabled       : false
+        // itemPositionDataEnabled : true,
+        // transformsEnabled       : false
         // onLayout : function(){f
         //   // $bubbles.find('.bubble').addClass('hero-animate'); // commented out = no pattern spinning..
         // }
