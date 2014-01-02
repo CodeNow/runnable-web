@@ -146,6 +146,9 @@ module.exports = BaseView.extend({
     }
 
     function nextQuery () {
+      if (self.stopped) {
+        return self.stopSearchAnimation();
+      }
       self.animIntervals = [];
       self.animTimeouts = [];
       self.index++;
