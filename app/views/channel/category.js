@@ -41,7 +41,7 @@ module.exports = BaseView.extend({
   sortChannels: function () {
     var opts = this.options;
     var category = opts.channels.params.category.toLowerCase();
-    var sortOrder = [ "firebase", "twilio", "add your own", "dart", "nodejs", "python", "ruby-on-rails", "php", ".net", "jquery", "django", "cakephp", "mysql"];
+    var sortOrder = [ "c++", "java", "firebase", "twilio", "dart", "nodejs", "python", "ruby-on-rails", "php", ".net", "jquery", "django", "cakephp", "mysql"]; //"add your own"
     function getOrder (channel) {
       var sortIndex;
       channel.get('aliases').some(function (alias) {
@@ -146,6 +146,9 @@ module.exports = BaseView.extend({
     }
 
     function nextQuery () {
+      if (self.stopped) {
+        return self.stopSearchAnimation();
+      }
       self.animIntervals = [];
       self.animTimeouts = [];
       self.index++;
