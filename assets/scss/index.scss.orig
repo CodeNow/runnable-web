@@ -22,5 +22,8 @@
 @import "tags";
 @import "output";
 @import "images";
+<<<<<<< Updated upstream
 @import "typeahead";
+=======
 @import "alertify";
+>>>>>>> Stashed changes

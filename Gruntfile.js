@@ -24,8 +24,6 @@ var minCSS = [
   'public/vendor/bower/textillate/assets/animate.css',
   'public/vendor/bower/autocompletejs/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
-  'public/vendor/bower/alertify.js/themes/alertify.core.css',
-  'public/vendor/bower/alertify.js/themes/alertify.default.css',
   'public/vendor/glyphicons.css',
   compassCSS // must be last
 ];
