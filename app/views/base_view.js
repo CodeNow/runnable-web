@@ -82,10 +82,42 @@ module.exports = RendrView.extend({
     alertify.alert(str);
   },
   showError: function (err) {
+    alertify.set({
+      labels: {
+        ok     : "Okay",
+        cancel : "Cancel"
+      }
+    });
     if (err) {
       err = '<div class="red">'+err+'</div>';
       alertify.alert(err);
     }
+  },
+  showPrompt: function (self) {
+    alertify.set({
+      labels: {
+        ok     : "Save and Publish",
+        cancel : "Cancel"
+      }
+    });
+    alertify.prompt('Give your project a unique name.',function(evt){
+      if (evt) {
+        // user selects primary action
+        evt.preventDefault;
+        // var formData = $('#alertify-text').serializeObject();
+        // serializeObject() will not work with alertify forms
+        var formData = {name:$('#alertify-text')[0].value};
+        var options = utils.cbOpts(cb, self);
+        self.model.save(formData,  options);
+        function cb (err) {
+          if (err) {
+            self.showError(err);
+          }
+        }
+      } else {
+        // user selects cancel
+      }
+    });
   },
   showIfError: function (err) {
     if (err) this.showError(err);

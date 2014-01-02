@@ -42,26 +42,11 @@ module.exports = BaseView.extend({
       var self = this;
 
       self.app.set('loading', false);
-      this.$pubNew.removeAttr('disabled');
-      this.$pubBack.removeAttr('disabled');
+      self.$pubNew.removeAttr('disabled');
+      self.$pubBack.removeAttr('disabled');
 
       if (err === "a shared runnable by that name already exists") {
-        alertify.prompt('Give your project a unique name.',function(e,err){
-          if (e) {
-            debugger;
-            e.preventDefault;
-            var formData = $('#alertify-text').serializeObject();
-            var options = utils.cbOpts(cb, self);
-            self.model.save(formData,  options);
-            function cb (err) {
-              if (err) {
-                self.showError(err);
-              }
-            }
-          } else {
-            //cancel
-          }
-        });
+        self.showPrompt(self);
       } else {
         self.showError(err);
       }
