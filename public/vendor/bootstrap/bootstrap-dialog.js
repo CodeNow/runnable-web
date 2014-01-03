@@ -380,7 +380,7 @@ var BootstrapDialog = null;
             return $container;
         },
         createButton: function(button) {
-            var $button = $('<button></button>');
+            var $button = $('<button type="button"></button>');
             // $button.addClass(this.getButtonSize());
 
             // Icon
@@ -391,15 +391,15 @@ var BootstrapDialog = null;
             // Label
             if (typeof button.label !== undefined) {
                 $button.append(button.label);
+
+                if (/Save and Publish/i.test(button.label)) {
+                    $button[0].removeAttribute('type');
+                }
             }
 
             // Css class
             if (typeof button.cssClass !== undefined && $.trim(button.cssClass) !== '') {
                 $button.addClass(button.cssClass);
-
-                if (/silver/i.test(button.cssClass)) {
-                    $button.prop('type','button');
-                }
             } else {
                 $button.addClass('silver').prop('type','button');
             }
