@@ -1,9 +1,9 @@
 {{#if editmode}}
 <form action="javascript:void(0);">
   <div class="item">
-    <input type="text" class="form-control" name="name" autofocus placeholder="Give your code example a title" value="{{model.attributes.name}}" />
+    <input type="text" class="form-control" name="name" autofocus placeholder="Give your code example a title" value="{{model.attributes.name}}" required>
   </div>
-  <button class="silver" type="submit">Save</button>
+  <button class="silver">Save</button>
   <button class="silver btn-cancel" type="button">Cancel</button>
 </form>
 {{else}}

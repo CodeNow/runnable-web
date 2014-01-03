@@ -31,6 +31,7 @@
 
 //vote button
 .page-title {
+  position: relative;
 
   .vote {
     @include border-radius(50%);
@@ -43,7 +44,7 @@
     outline: none;
     padding: 0;
     position: relative;
-    @include transition(0.2s ease-in-out);
+    @include transition(.2s ease-in-out);
     width: 50px;
 
     &:hover {
@@ -57,11 +58,11 @@
     &.voted,
     &:active,
     &[disabled] {
-      background-color: rgba(0,0,0,0.075);
+      background-color: rgba(0,0,0,.075);
       background-image: none;
       border: 1px solid;
-      border-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.1);
-      @include box-shadow(inset 0 2px 6px rgba(0, 0, 0, 0.1), 1px 0px rgba(255,255,255,1));
+      border-color: rgba(0, 0, 0, .3) rgba(0, 0, 0, .2) rgba(0, 0, 0, .1);
+      @include box-shadow(inset 0 2px 6px rgba(0, 0, 0, .1), 1px 0px rgba(255,255,255,1));
       color: $purple-light;
 
       .glyphicons {
@@ -76,7 +77,7 @@
     }
 
     &[disabled] {
-      @include box-shadow(inset 0 2px 6px rgba(0, 0, 0, 0.1), 1px 0px rgba(255,255,255,1) !important);
+      @include box-shadow(inset 0 2px 6px rgba(0, 0, 0, .1), 1px 0px rgba(255,255,255,1) !important);
       opacity: 1;
     }
 
@@ -85,9 +86,23 @@
       display: block;
       font-size: 32px;
       margin: -6px 0;
-      @include scale-3d(0.5,0.5,1);
-      @include transition(0.2s ease-in-out);
+      @include scale-3d(.5,.5,1);
+      @include transition(.2s ease-in-out);
     }
+  }
+
+  .alert {
+    @include animation(alertIn .4s ease-in-out forwards);
+    @include border-radius(3px);
+    font-size: 14px;
+    height: 26px;
+    line-height: 26px;
+    opacity: 0;
+    padding: 0 10px;
+    position: absolute;
+      top: 7px;
+      right: 7px;
+    @include scale-3d(.5,.5,1);
   }
 }
 
@@ -183,7 +198,7 @@
           border-left: 5px solid transparent;
           border-right: 5px solid transparent;
           border-bottom: 7px solid #bbb;
-          @include transition(transform 0.25s linear);
+          @include transition(transform .25s linear);
         }
 
         &:hover {
