@@ -40,7 +40,6 @@ var frontendScripts = [
   'public/vendor/bower/sockjs/sockjs.js',
   'public/vendor/bower/es5-shim/es5-shim.js',
   'public/vendor/bower/es5-shim/es5-sham.js',
-  'public/vendor/bower/alertify.js/lib/alertify.js',
   'public/vendor/bower/bootstrap/js/collapse.js',
   'public/vendor/bower/bootstrap/js/dropdown.js',
   'public/vendor/bower/bootstrap/js/tab.js',

@@ -19,14 +19,29 @@ module.exports = BaseView.extend({
   },
   deleteRunnable: function () {
     var self = this;
-    alertify.confirm("Are you sure you want to delete '"+this.model.get('name')+"'?", function (e) {
-      if (e) {
-        // user clicked "ok"
-        var opts = utils.cbOpts(self.showIfError, self);
-        self.model.destroy(opts);
-      } else {
-          // user clicked "cancel"
+    var self = this;
+    var actionHandler = function(dialogItself){
+      // delete
+      var opts = utils.cbOpts(self.showIfError, self);
+      self.model.destroy(opts);
+
+      //set new count for images and containers
+      var oldCount = $('li.active').find('span')[0];
+      var newCount = oldCount.innerHTML - 1;
+      oldCount.innerHTML = newCount;
+
+      //if image, update reputation count as well
+      if (self.options.isimage) {
+        $('.gravitar').children('span')[0].innerHTML = newCount;
       }
+      dialogItself.close();
+    };
+
+    this.showPrompt({
+      message:
+        '<h3>Confirm Delete</h3><p>'+this.model.get('name'),
+      actionLabel: 'Delete',
+      actionHandler: actionHandler
     });
   }
 });
