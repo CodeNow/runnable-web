@@ -47,9 +47,10 @@ module.exports = BaseView.extend({
 
       if (err === 'a shared runnable by that name already exists') {
         var actionHandler = function(dialogItself){
-          //save and publish again
-          self.publishNew();
-          dialogItself.close();
+          if (dialogItself.$modalContent[0].checkValidity()) {
+            self.publishNew();
+            dialogItself.close();
+          }
         };
 
         self.showPrompt({

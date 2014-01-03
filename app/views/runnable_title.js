@@ -48,20 +48,18 @@ module.exports = BaseView.extend({
     function cb (err) {
       if (err === 'a shared runnable by that name already exists') {
         var actionHandler = function(dialogItself){
-          this.publishNew();
-          // dialogItself.close();
+          dialogItself.close();
         };
-
-        self.showPrompt({
+        this.showPrompt({
           message:
-            '<p>Choose a unique name for your project. Lorem Ipsum is taken.'+
+            '<p>Choose a unique name for your project.<br><strong>Basic Java Example</strong> is taken.'+
             '<input type="text" class="form-control" required>',
-          actionLabel: 'Save and Publish',
+          actionLabel: 'Save Title',
           actionHandler: actionHandler
         });
       } else if (err) {
         this.setEditMode(true);
-        self.showError(err);
+        this.showError(err);
       }
     }
   }

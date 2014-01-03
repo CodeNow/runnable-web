@@ -165,10 +165,10 @@ var BootstrapDialog = null;
             return $('<div class="modal-footer"></div>');
         },
         getModalFooter: function() {
-            return this.$modaFooter;
+            return this.$modalFooter;
         },
-        setModalFooter: function($modaFooter) {
-            this.$modaFooter = $modaFooter;
+        setModalFooter: function($modalFooter) {
+            this.$modalFooter = $modalFooter;
 
             return this;
         },
@@ -396,14 +396,16 @@ var BootstrapDialog = null;
             // Css class
             if (typeof button.cssClass !== undefined && $.trim(button.cssClass) !== '') {
                 $button.addClass(button.cssClass);
+
+                if (/silver/i.test(button.cssClass)) {
+                    $button.prop('type','button');
+                }
             } else {
-                $button.addClass('silver');
+                $button.addClass('silver').prop('type','button');
             }
 
             // Button on click
             $button.on('click', {dialog: this, button: button}, function(event) {
-                event.preventDefault();
-
                 var dialog = event.data.dialog;
                 var button = event.data.button;
                 if (typeof button.action === 'function') {
