@@ -45,9 +45,21 @@ module.exports = BaseView.extend({
       self.$pubNew.removeAttr('disabled');
       self.$pubBack.removeAttr('disabled');
 
-      if (err === "a shared runnable by that name already exists") {
-        self.showPrompt(self);
-      } else {
+      if (err === 'a shared runnable by that name already exists') {
+        var actionHandler = function(dialogItself){
+          //save and publish again
+          self.publishNew();
+          dialogItself.close();
+        };
+
+        self.showPrompt({
+          message:
+            '<p>Choose a unique name for your project.<br><strong>Basic Java Example</strong> is taken.'+
+            '<input type="text" class="form-control" name="name" required>',
+          actionLabel: 'Save and Publish',
+          actionHandler: actionHandler
+        });
+      } else if (err) {
         self.showError(err);
       }
     }

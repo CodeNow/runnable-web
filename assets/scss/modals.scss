@@ -175,7 +175,6 @@ body.modal-open,
 
   .modal-footer {
       margin-top: 0;
-      padding: 10px 20px;
 
     //primary action
     > button {
@@ -435,5 +434,45 @@ body.modal-open,
       background: lightyellow;
       border: 1px solid rgba(0,0,0,0.1);
     }
+  }
+}
+
+//bootstrap-dialogs
+.bootstrap-dialog {
+
+  .modal-content {
+    background: #fcf8e3;
+    background-image: linear-gradient(45deg,desaturate(darken(#fcf8e3,5),10) 25%,transparent 25%,transparent 50%,desaturate(darken(#fcf8e3,5),10) 50%,desaturate(darken(#fcf8e3,5),10) 75%,transparent 75%,transparent);
+    background-size: 40px 40px;
+    @include border-radius(3px);
+    box-shadow: 0 3px 3px rgba(0,0,0,.3);
+    color: #8a6d3b;
+    padding: 10px;
+  }
+
+  .modal-body,
+  .modal-footer {
+    background: rgba(255,255,255,0.75);
+    border: 1px solid #e5e5e5;
+  }
+
+  .modal-body {
+    @include border-radius(3px 3px 0 0);
+
+    input {
+      margin: 20px 0 0;
+    }
+  }
+
+  .modal-footer {
+    border-top: 0;
+    @include border-radius(0 0 3px 3px);
+    margin-top: 0;
+  }
+
+  h3 {
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
   }
 }

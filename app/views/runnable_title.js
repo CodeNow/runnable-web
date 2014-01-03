@@ -44,10 +44,24 @@ module.exports = BaseView.extend({
     if (formData.name === this.model.get('name')) this.render();
     var options = utils.cbOpts(cb, this);
     this.model.save(formData,  options);
+
     function cb (err) {
-      if (err) {
+      if (err === 'a shared runnable by that name already exists') {
+        var actionHandler = function(dialogItself){
+          this.publishNew();
+          // dialogItself.close();
+        };
+
+        self.showPrompt({
+          message:
+            '<p>Choose a unique name for your project. Lorem Ipsum is taken.'+
+            '<input type="text" class="form-control" required>',
+          actionLabel: 'Save and Publish',
+          actionHandler: actionHandler
+        });
+      } else if (err) {
         this.setEditMode(true);
-        this.showError(err);
+        self.showError(err);
       }
     }
   }
