@@ -47,7 +47,15 @@ module.exports = BaseView.extend({
 
       if (err === 'a shared runnable by that name already exists') {
         var actionHandler = function(dialogItself){
-          if (dialogItself.$modalContent[0].checkValidity()) {
+          var formValidity = dialogItself.$modalContent[0].checkValidity();
+
+          if (formValidity && err === 'a shared runnable by that name already exists') {
+            dialogItself.$modalBody
+              .find('.alert')
+              .remove()
+              .end()
+              .append('<div class="alert alert-warning"><strong>That name is taken!</strong> Try something else.</div>');
+          } else if (formValidity) {
             self.publishNew();
             dialogItself.close();
           }
@@ -55,7 +63,7 @@ module.exports = BaseView.extend({
 
         self.showPrompt({
           message:
-            '<p>Choose a unique name for your project.<br><strong>Basic Java Example</strong> is taken.'+
+            '<p>Choose a unique name for your project.<br><strong>'+self.model.get('name')+'</strong> already exists.'+
             '<input type="text" class="form-control" name="name" required>',
           actionLabel: 'Save and Publish',
           actionHandler: actionHandler

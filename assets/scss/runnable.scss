@@ -90,20 +90,6 @@
       @include transition(.2s ease-in-out);
     }
   }
-
-  .alert {
-    @include animation(alertIn .4s ease-in-out forwards);
-    @include border-radius(3px);
-    font-size: 14px;
-    height: 26px;
-    line-height: 26px;
-    opacity: 0;
-    padding: 0 10px;
-    position: absolute;
-      top: 7px;
-      right: 7px;
-    @include scale-3d(.5,.5,1);
-  }
 }
 
 //image/container title

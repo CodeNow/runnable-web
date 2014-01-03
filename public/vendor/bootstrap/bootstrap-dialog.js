@@ -136,7 +136,9 @@ var BootstrapDialog = null;
         },
         setModalContent: function($modalContent) {
             this.$modalContent = $modalContent;
-
+            this.$modalContent.on('submit',function(evt){
+                evt.preventDefault();
+            })
             return this;
         },
         // createModalHeader: function() {
