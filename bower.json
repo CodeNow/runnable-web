@@ -10,7 +10,6 @@
     "fittext": "*",
     "bootstrap-select": "~1.2.0",
     "jquery.stellar": "~0.6.2",
-    "alertify.js": "~0.3.10",
     "typeahead.js": "~0.9.3",
     "sockjs": "~0.3.4"
   },
