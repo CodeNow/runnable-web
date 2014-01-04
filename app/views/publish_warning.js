@@ -46,36 +46,58 @@ module.exports = BaseView.extend({
       self.$pubBack.removeAttr('disabled');
 
       if (err === 'a shared runnable by that name already exists') {
-        var actionHandler = function(dialogItself){
-          var formValidity = dialogItself.$modalContent[0].checkValidity();
-
-          if (formValidity && err === 'a shared runnable by that name already exists') {
-            dialogItself.$modalBody
-              .find('.alert')
-              .remove()
-              .end()
-              .append('<div class="alert alert-warning"><strong>That name is taken!</strong> Try something else.</div>');
-          } else if (formValidity) {
-            self.publishNew();
-            dialogItself.close();
-          }
-        };
-
-        self.showPrompt({
-          message:
-            '<p>Choose a unique name for your project.<br><strong>'+self.model.get('name')+'</strong> already exists.'+
-            '<input type="text" class="form-control" name="name" required>',
-          actionLabel: 'Save and Publish',
-          actionHandler: actionHandler
-        });
+        self.showRenameModal();
       } else if (err) {
         self.showError(err);
       }
     }
     else {
-      // could do backbone pushstate too... just dont know how from a rendr view..
       this.app.router.navigate('/'+image.id, true);
     }
+  },
+  showRenameModal: function () {
+    var self = this;
+    var actionHandler = function(dialogItself){
+      var $form = dialogItself.$modalContent;
+      var container = self.publishLoader.model;
+      var showError = function (message) {
+        dialogItself.$modalBody
+          .find('.alert')
+          .remove()
+          .end()
+          .append('<div class="alert alert-warning">'+message+'</div>');
+      }
+
+      if ($form[0].checkValidity()) {
+        var opts = utils.cbOpts(callback);
+        container.save({
+          name: $form.find('input').val()
+        }, opts);
+      }
+
+      function callback (err) {
+        if (err === 'a shared runnable by that name already exists') {
+          return showError('<strong>That name is taken!</strong> Try something else.')
+        }
+        else if (err) {
+          return showError(err);
+        }
+        else {
+          dialogItself.close();
+          self.publishLoader.initLoading('new', function () {
+            self.app.router.navigate('/'+image.id, true);
+          });
+        }
+      }
+    };
+
+    self.showPrompt({
+      message:
+        '<p>Choose a unique name for your project.<br><strong>'+self.model.get('name')+'</strong> already exists.'+
+        '<input type="text" class="form-control" name="name" placeholder="Project name" required>',
+      actionLabel: 'Save and Publish',
+      actionHandler: actionHandler
+    });
   },
   testLoader: function(){
     $('#page-loader').hide();
