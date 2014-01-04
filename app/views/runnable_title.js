@@ -2,7 +2,6 @@ var BaseView = require('./base_view');
 var utils = require('../utils');
 var Image = require('../models/image');
 var _ = require('underscore');
-var utils = require('../utils');
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
