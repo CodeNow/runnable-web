@@ -8,10 +8,7 @@
     margin-top: 15px;
     width: 140px;
 
-    @media (min--moz-device-pixel-ratio: 1.3),
-           (-o-min-device-pixel-ratio: 2.6/2),
-           (-webkit-min-device-pixel-ratio: 1.3),
-           (min-device-pixel-ratio: 1.3),
+    @media (min-device-pixel-ratio: 1.3),
            (min-resolution: 1.3dppx) {
       background-size: 100%;
     }
@@ -45,6 +42,18 @@
     color: #AC87C6;
     margin: 20% auto 30px;
     text-align: center;
+
+    @include media(xs) {
+      font-size: 20px;
+    }
+
+    @include media(sm) {
+      font-size: 28px;
+    }
+
+    @include media(md) {
+      font-size: 36px;
+    }
   }
 
   //link
@@ -70,12 +79,12 @@
 
   //or
   .or {
-    content: 'or';
     height: 30px;
     margin: 0 auto;
     position: relative;
     text-align: center;
     width: 30%;
+      max-width: 350px;
 
     > span {
       color: #AC87C6;
@@ -100,6 +109,10 @@
         float: right;
       }
     }
+
+    @include media(xs) {
+      width: 80%;
+    }
   }
 
   //search
@@ -122,6 +135,14 @@
       position: absolute;
         top: -1px;
         right: 0;
+    }
+
+    @include media(xxs) {
+      width: 100%;
+    }
+
+    @include media(xs) {
+      width: 80%;
     }
   }
 
