@@ -1,32 +1,32 @@
-<head>
-  <meta charset="utf-8">
-  <title>Sorry, we're down</title>
-  <style>
+<link href="/styles/index.css" rel="stylesheet">
+
+<style>
+  html,
+  body,
+  #content {
+    height: 100%;
+  }
+
   body {
-      font-family: "Proxima-Nova","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: 300;
-      font-style: normal;
-    font-size:100%;
-    color:#666;
-    text-align:center;
-    margin:50px;
+    background: #5B3777; /* $purple */
+    overflow: hidden;
+    position: relative;
   }
-  h2,h3{
-    font-weight:normal;
-  }
-  h1{
-    color:#fc2a48;
-  }
-  </style>
-</head>
-<body>
-  <center>
-  <h1>Oh no, there's a problem with Runnable!</h1>
-  <h2>Our developers have been notified and are working hard to fix the issue.</h2>
-  <h3>We recommend you <strong>refresh this page in a bit</strong>.</h3>
-  <p>You can watch Steve Ballmer in the mean time.</p>
-  <p><iframe width="480" height="360" src="http://www.youtube.com/embed/8To-6VIJZRE" frameborder="0" allowfullscreen></iframe></p>
-  <p>Email <a href="mailto:support@runnable.com">support@runnable.com</a> if you need to contact us.</p>
-  </center>
-  <img src="/images/bear-alt.jpg" width="150" alt="Please bear with us" title="Please bear with us" style="position:absolute;bottom:0;right:20px;">
-</body>
+</style>
+
+<main id="error">
+  <div class="container">
+    <a id="logo" href="/"></a>
+    <img class="hero-animate cog" src="/images/hero-logos/cog.svg">
+    <h1>Oh no, there's a problem with Runnable!</h1>
+    <p>Head to <a href="http://support.runnable.com">support.runnable.com</a> for help.</p>
+
+    <div class="or">
+      <span>or</span>
+    </div>
+
+    <p>Tweet <a href="https://twitter.com/Generalhenry" target="_blank">@Generalhenry</a>, the developer responsible.</p>
+    <img src="/images/bear.png" height="244" width="250" alt="Please bear with us." title="Please bear with us." id="bear">
+    <aside>500</aside>
+  </div>
+</main>
