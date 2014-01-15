@@ -300,23 +300,6 @@ div.search-results{
   display:inline-block;
 }
 
-//page loader
-#page-loader{
-  filter: alpha(opacity=0);
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transition: opacity 0.15s ease-in-out, visibility 0s linear;
-  -moz-transition: opacity 0.15s ease-in-out, visibility 0s linear;
-  -ms-transition: opacity 0.15s ease-in-out, visibility 0s linear;
-  -o-transition: opacity 0.15s ease-in-out, visibility 0s linear;
-  transition: opacity 0.15s ease-in-out, visibility 0s linear;
-  &.loading{
-    visibility: visible;
-    display: block;
-    opacity: 1.0;
-  }
-}
-
 .no-padding{
   padding:0 !important;
   margin: 0 !important;

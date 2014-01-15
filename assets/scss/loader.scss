@@ -1,27 +1,20 @@
-.overlay-loader{
-  display: none;
-}
-
 .overlay-loader {
-
-  .loader {
-    top: 40%;
-  }
-}
-.loading.overlay-loader{
-  display: block;
-}
-
-.overlay-loader {
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,.6);
   height: 100%;
+  opacity: 0;
   position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 10000000000;
+    z-index: -10000000000;
+  @include transition(opacity .2s ease-in-out);
   width: 100%;
+
+  &.loading {
+    opacity: 1;
+    z-index: 10000000000;
+  }
 
   .loader {
       height: 80px;
@@ -53,10 +46,10 @@
     width: 8px;
 
       &.dot-1 {
-          @include animation(spin 1s linear 0 infinite);
-          left: 50%;
-          margin: 0 0 0 -4px;
-          top: 0;
+        @include animation(spin 1s linear 0 infinite);
+        left: 50%;
+        margin: 0 0 0 -4px;
+        top: 0;
       }
 
       &.dot-2 {

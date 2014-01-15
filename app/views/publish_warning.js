@@ -51,7 +51,7 @@ module.exports = BaseView.extend({
   },
   testLoader: function(){
     $('#page-loader').hide();
-    $('#publish-loader').show();
+    $('#publish-loader').addClass('loading');
   }
 });
 
