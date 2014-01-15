@@ -224,15 +224,15 @@ $prefix-for-spec:      true !default; // required for keyframe mixin
 @include keyframes(spin) {
     0% {
         opacity: 0;
-        @include transform(scale(0));
+        @include scale-3d(0,0,1);
     }
     50% {
         opacity: 1;
-        @include transform(scale(1.05));
+        @include scale-3d(1.05,1.05,1);
     }
     100% {
         opacity: 0;
-        @include transform(scale(1.05));
+        @include scale-3d(1.05,1.05,1);
     }
 }
 
