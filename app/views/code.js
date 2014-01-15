@@ -44,6 +44,7 @@ module.exports = BaseView.extend({
     this.adjustHeightToContents = _.debounce(this.adjustHeightToContents, 100, true);
     this.onScrollLeft = _.debounce(this.onScrollLeft, 5000, true);
     this.onScrollTop = _.debounce(this.onScrollTop, 5000, true);
+    this.trackEdit = _.debounce(this.trackEdit, 5000, true);
   },
   setTheme: function (theme) {
     var currentTheme = this.editor.getTheme() || {cssClass:''};
@@ -66,7 +67,7 @@ module.exports = BaseView.extend({
     // set current file
     if (!file) {
       // all files closed
-      this.file = null;
+      this.model = this.file = null; // set this.model for tracking purposes
       this.$el.hide();
     }
     else {
@@ -93,11 +94,11 @@ module.exports = BaseView.extend({
     if (!utils.exists(file.get('content'))) { //TODO:  content null.. right now content null does not mean unfetched it means unsupported
       alert('This file format is not supported by our editor.');
       _rollbar.push({level: 'error', msg: "Couldn't open client requested file", errMsg: {name:file.get('name'), user:this.app.user.id}});
-      this.file = null;
+      this.model = this.file = null; // set this.model for tracking purposes
       file.trigger('close:file', file);
     }
     else {
-      this.file = file;
+      this.model = this.file = file; // set this.model for tracking purposes
       session = file.editorSession = ace.createEditSession(file.get('content'));
       this.editor.setSession(session);
       session.setMode(this.getMode(file.get('name')));
@@ -109,7 +110,7 @@ module.exports = BaseView.extend({
     // else if (file.get('content').length > 10000 &&
     //   !confirm('This file is huge are you sure you want to open it (might crash or take a looong time)?')
     // ) {
-    //   this.file = null;
+    //   this.model = this.file = null; // set this.model for tracking purposes
     //   file.trigger('close:file', file);
     // }
   },
@@ -141,7 +142,7 @@ module.exports = BaseView.extend({
     // if (false) {
       this.hideLoader();
       // resume session if session exists
-      var session = file.editorSession;
+      session = file.editorSession;
       editor.setSession(session);
       if (session.getValue() !== file.get('content')) {
         session.setValue(file.get('content')); // sync for previously opened files but not currently open
@@ -197,7 +198,7 @@ module.exports = BaseView.extend({
   },
   onEdit: function (file, evt) {
     var self = this;
-
+    this.model = this.file; // for tracking properties // set this.model for tracking purposes
     if (evt.data.action === 'insertText' && evt.data.text && evt.data.text.length >= 4) {
       self.justPasted = evt.data.text;
       self.evtStartLine = evt.data.range.start.row;
@@ -208,10 +209,16 @@ module.exports = BaseView.extend({
       self.evtStartLine = evt.data.range.start.row;
       self.evtStartColumn = evt.data.range.start.column;
     }
+    else {
+      this.trackEdit(file, evt);
+    }
 
     this.adjustHeightToContents();
     var value = this.editor.getValue();
     file.set('content', value);
+  },
+  trackEdit: function (file, evt) {
+    this.trackEvent('Edit');
   },
   adjustHeightToContents: function () {
     var editor = this.editor;
@@ -238,7 +245,8 @@ module.exports = BaseView.extend({
     console.log('show loader');
   },
   copy: function (evt) {
-    this.app.dispatch.trigger('copy', {
+    this.app.dispatch.trigger('copy'); // to increment image model
+    this.trackEvent('Copy', {
       content  : this.editor.getCopyText()
     });
   },
@@ -251,7 +259,8 @@ module.exports = BaseView.extend({
       dispatch();
     }
     function dispatch () {
-      self.app.dispatch.trigger('paste', {
+      self.app.dispatch.trigger('paste'); // to increment image model
+      self.trackEvent('Paste', {
         content  : self.justPasted,
         line     : self.evtStartLine,
         column   : self.evtStartColumn
@@ -268,7 +277,8 @@ module.exports = BaseView.extend({
       dispatch();
     }
     function dispatch () {
-      self.app.dispatch.trigger('cut', {
+      self.app.dispatch.trigger('cut'); // to increment image model
+      self.trackEvent('Cut', {
         content  : self.justCut,
         line     : self.evtStartLine,
         column   : self.evtStartColumn
