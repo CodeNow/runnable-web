@@ -80,7 +80,7 @@ module.exports = EditorButtonView.extend({
   },
   closeOutput: function () {
     if (this.popup) {
-      this.popup.close()
+      this.popup.close();
     }
   },
   run: function () {

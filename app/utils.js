@@ -443,5 +443,17 @@ var utils = module.exports = {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
            s4() + '-' + s4() + s4() + s4();
   },
+  addModelProperties: function (properties, model, prependKey) {
+    prependKey = prependKey || '';
+    var modelName = (model.constructor.id || model.constructor.name).toLowerCase();
+    var json = model.toJSON();
+    for (var key in json) {
+      var value = json[key];
+      var type = typeof value;
+      if (type === 'object') value = JSON.stringify(value);
+      properties[prependKey+modelName+'.'+key] = value;
+    }
+    return properties;
+  },
   noop: function () {}
 };

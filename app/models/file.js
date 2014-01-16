@@ -2,6 +2,7 @@ var Base = require('./fs'); //!FS
 var Super = Base.prototype;
 var utils = require('../utils');
 var _ = require('underscore');
+var JSDiff = require('diff');
 
 module.exports = Base.extend({
   defaults: {
@@ -32,6 +33,22 @@ module.exports = Base.extend({
     this.savedContent = this.get('content');
     this.unsaved(false);
   },
+  save: function (attrs, opts) {
+    Super.save.apply(this, arguments);
+    if (attrs && utils.exists(attrs.content)) {
+      var diff = JSDiff.diffLines(this.savedContent, attrs.content)
+        .map(function (d) {
+          if (!d.added && !d.removed) {
+            d.split = d.value.split('\n');
+          }
+          return d;
+        });
+      var data = { diff: diff };
+      utils.addModelProperties(data, this);
+      utils.addModelProperties(data, this.app.user, 'app.');
+      Track.event('File', 'Save', data);
+    }
+  },
   unsaved: function (bool) {
     if (utils.exists(bool)) {
       var prevUnsaved = this._unsaved;
@@ -59,13 +76,13 @@ module.exports = Base.extend({
       if (xhr.readyState === 4) {
         if (xhr.status === 200 || xhr.status === 201) {
           utils.parseJSON(xhr.responseText, function (err, json) {
-            if (err) { cb('Server error, please try again later.') } else {
+            if (err) { cb('Server error, please try again later.'); } else {
               json = json[0]; //json is array
               self.set(json, {silent:true});
               self.updateSaved();
               cb(null, self);
             }
-          })
+          });
         }
         else if (xhr.status === 403) {
           cb('File already exists');
