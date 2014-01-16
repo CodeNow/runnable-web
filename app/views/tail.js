@@ -1,5 +1,6 @@
 var BaseView = require('./base_view');
 var Super = BaseView.prototype;
+var utils = require('../utils');
 
 module.exports = BaseView.extend({
   id: 'output-terminal-container',
@@ -32,12 +33,12 @@ module.exports = BaseView.extend({
       this.setBuildMessageTimeout();
     }
     else if (this.stream != 'build') {
-      dispatch.trigger('toggle:buildMessage', false);
+      this.app.dispatch.trigger('toggle:buildMessage', false);
     }
   },
   onPostMessage: function (message) {
     var dispatch = this.app.dispatch;
-    console.log(message && message.data)
+    console.log(message && message.data);
     if (!message || !message.data || !message.data.indexOf) {
       return; // unexpected message format (suspected to cause rollbar #1758)
     }
