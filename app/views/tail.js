@@ -1,5 +1,6 @@
 var BaseView = require('./base_view');
 var Super = BaseView.prototype;
+var utils = require('../utils');
 
 module.exports = BaseView.extend({
   id: 'output-terminal-container',
@@ -55,7 +56,7 @@ module.exports = BaseView.extend({
       this.setBuildMessageTimeout();
     }
     else if (this.stream != 'build') {
-      dispatch.trigger('toggle:buildMessage', false);
+      this.app.dispatch.trigger('toggle:buildMessage', false);
     }
   },
   onPostMessage: function (message) {
