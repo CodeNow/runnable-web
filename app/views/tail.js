@@ -21,6 +21,29 @@ module.exports = BaseView.extend({
     this.$('iframe').attr('src', this.options.tailurl);
     // in case build message gets stuck
     this.setBuildMessageTimeout();
+    this.watchForIframeFocus();
+  },
+  watchForIframeFocus: function () {
+    var self = this;
+    this.iframeFocused = false;
+    function checkFocus() {
+      if (!document.activeElement) return;
+      var iframeFocused = document.activeElement == self.$("iframe")[0];
+      if(iframeFocused !== self.iframeFocused) {
+        self.iframeFocused = iframeFocused;
+        if (iframeFocused) {
+          self.trackEvent('Focus');
+        }
+        else {
+          self.trackEvent('Blur');
+        }
+      }
+    }
+
+    this.iframeFocusInterval = window.setInterval(checkFocus, 1000);
+  },
+  stopWatchingIframeFocus: function () {
+    window.clearInterval(this.iframeFocusInterval);
   },
   setBuildMessageTimeout: function () {
     this.buildMessageTimeout = setTimeout(
@@ -37,7 +60,7 @@ module.exports = BaseView.extend({
   },
   onPostMessage: function (message) {
     var dispatch = this.app.dispatch;
-    console.log(message && message.data)
+    console.log(message && message.data);
     if (!message || !message.data || !message.data.indexOf) {
       return; // unexpected message format (suspected to cause rollbar #1758)
     }
@@ -97,6 +120,7 @@ module.exports = BaseView.extend({
     this.blockWarning = true;
     this.stopWarningTimeout();
     this.stopListeningToPostMessages();
+    this.stopWatchingIframeFocus();
     // this.sock.onclose = function () {};
     // this.sock.close();
     Super.remove.apply(this, arguments);
