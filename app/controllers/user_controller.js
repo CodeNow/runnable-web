@@ -11,7 +11,11 @@ var helpers = require('./helpers');
 
 var fetchPopUserAffectedChannels = helpers.fetchPopUserAffectedChannels;
 
-function fetchRunnablesFor (userId, cb) {
+function fetchRunnablesFor (userId, username, cb) {
+  if (typeof username == 'function') {
+    cb = username;
+    username = false;
+  }
   var spec = {
     published: {
       collection: 'Images',
@@ -29,6 +33,14 @@ function fetchRunnablesFor (userId, cb) {
       }
     }
   };
+  if (username) {
+    spec.users = {
+      collection : 'Users',
+      params : {
+        username: username
+      }
+    };
+  }
   fetch.call(this, spec, cb);
 }
 
@@ -59,14 +71,23 @@ module.exports = {
       function (results, cb) {
         var currentUsername = (results.user.get('username') || '').toLowerCase();
         var viewingOwnProfile =  currentUsername === params.username.toLowerCase();
-        results.editmode = viewingOwnProfile;
+        results.editmode = viewingOwnProfile || results.user.isModerator(); //admin editmode override
 
         async.series([
           function (cb) {
-            if (viewingOwnProfile) {
-              results.profileuser = results.user;
-              fetchRunnablesFor.call(self, results.user.id, function (err, results2) {
+            if (results.editmode) {
+              var fetchUsername = false;
+              if (viewingOwnProfile) {
+                results.profileuser = results.user;
+              }
+              else if (results.user.isModerator()) {
+                fetchUsername = params.username;
+              }
+              fetchRunnablesFor.call(self, results.user.id, fetchUsername, function (err, results2) {
                 if (err) return cb(err);
+                if (results.user.isModerator()) {
+                  results2.profileuser = results2.users.models[0];
+                }
                 results2.published.sortByAttr('-created');
                 results2.drafts.sortByAttr('-created');
                 _.extend(results, results2);
@@ -107,13 +128,13 @@ module.exports = {
       if (!results.profileuser) return callback({status:404});
       // redirect if url incorrect
       var profileUsername = results.profileuser.get('username');
-      if (profileUsername !== params.username)
+      if (profileUsername !== params.username && !results.user.isModerator())
         return self.redirectTo('/u/'+profileUsername);
       callback(null, addSEO(results));
     });
     function addSEO (results) {
       var user = results.profileuser;
-      var title = results.editmode ?
+      var title = results.editmode && !results.user.isModerator() ?
         "Your Profile" :
         user.get('username')+"'s Profile";
       results.page = {
