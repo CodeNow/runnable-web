@@ -1,15 +1,5 @@
-.overlay-loader {
-  background: rgba(0,0,0,.6);
-  height: 100%;
-  opacity: 0;
-  position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -10000000000;
-  @include transition(opacity .2s ease-in-out);
-  width: 100%;
+.overlay-loader,
+#output-results-container {
 
   .loader {
     background: url(/images/loader-play.svg) no-repeat center center;
@@ -85,6 +75,25 @@
         top: 20%;
       }
     }
+  }
+
+  &.overlay-loader {
+    background: rgba(0,0,0,.6);
+    height: 100%;
+    opacity: 0;
+    position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -10000000000;
+    @include transition(opacity .2s ease-in-out);
+    width: 100%;
+  }
+
+  &#output-results-container .loader {
+    display: block;
+    top: 35%;
   }
 
   &.loading {

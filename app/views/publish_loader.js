@@ -16,12 +16,12 @@ module.exports = BaseView.extend({
       this.progress(status);
     }
 
-    // var primus = new Primus('http://cybertron.' + this.app.get('domain'), {
-    //   transformer: 'engine.io'
-    // });
+    var primus = new Primus('http://cybertron.' + this.app.get('domain'), {
+      transformer: 'engine.io'
+    });
     var progress = this.model.get('servicesToken') + ':progress';
-    // primus.substream(progress).on('data', this.progress.bind(this));
-    // primus.substream('subscriptions').write(progress);
+    primus.substream(progress).on('data', this.progress.bind(this));
+    primus.substream('subscriptions').write(progress);
 
   },
   initLoading: function (type, cb) {
