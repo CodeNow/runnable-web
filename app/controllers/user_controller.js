@@ -85,7 +85,7 @@ module.exports = {
               }
               fetchRunnablesFor.call(self, results.user.id, fetchUsername, function (err, results2) {
                 if (err) return cb(err);
-                if (results.user.isModerator()) {
+                if (!viewingOwnProfile && results.user.isModerator()) {
                   results2.profileuser = results2.users.models[0];
                 }
                 results2.published.sortByAttr('-created');
