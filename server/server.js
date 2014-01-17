@@ -15,6 +15,7 @@ var express = require('express'),
     app;
 var path = require('path');
 var config = require('./lib/env').current;
+var hbs = require('hbs');
 
 function envIs (envs) {
   if (!Array.isArray(envs)) envs = [envs];
@@ -66,6 +67,11 @@ function initMiddleware() {
   app.set('views', __dirname + '/../app/views');
   app.set('view engine', 'js');
   app.engine('js', viewEngine);
+  // for 404 and 500 pages. rendr's viewEngine is stupid.
+  hbs.registerHelper('view', function() { return ''; });
+  hbs.registerHelper('json', function() { return ''; });
+  hbs.registerHelper('if_eq', function() { return ''; });
+  app.engine('hbs', hbs.__express);
 
   // set the middleware stack
   var maxAge = 0;
@@ -146,7 +152,7 @@ function buildRoutes(app) {
     }
     res.redirect('/');
   });
-  app.get(/^(?!\/api\/)/, mw.handle404.handle404);
+  app.get(/^(?!\/api\/)/, mw.handle404);
 }
 
 // Insert these methods before Rendr method chain for all routes, plus API.
