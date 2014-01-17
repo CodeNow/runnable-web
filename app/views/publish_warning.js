@@ -48,10 +48,6 @@ module.exports = BaseView.extend({
       // could do backbone pushstate too... just dont know how from a rendr view..
       this.app.router.navigate('/'+image.id, true);
     }
-  },
-  testLoader: function(){
-    $('#page-loader').hide();
-    $('#publish-loader').addClass('loading');
   }
 });
 
