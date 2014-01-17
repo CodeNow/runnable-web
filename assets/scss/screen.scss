@@ -1132,10 +1132,6 @@ progress {
 
         .silver {
             margin-left: 10px;
-
-            @include media(xxs) {
-                margin-top: 10px;
-            }
         }
 
         .green {
@@ -1143,6 +1139,10 @@ progress {
             &:hover,
             &:focus {
                 color: #fff;
+            }
+
+            @include media(xxs) {
+                margin-bottom: 10px;
             }
         }
 
