@@ -12,7 +12,7 @@ module.exports = BaseView.extend({
     this.$('h1:first-child').addClass('in');
 
     if (status !== 'Editing' && status !== 'Draft' && status !== undefined) {
-      this.$el.show();
+      this.$el.addClass('loading');
       this.progress(status);
     }
 
@@ -35,7 +35,7 @@ module.exports = BaseView.extend({
       if (err) {
         cb(err);
       } else {
-        this.$el.show();
+        this.$el.addClass('loading');
       }
     };
   },
