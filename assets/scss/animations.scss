@@ -97,6 +97,27 @@
   }
 }
 
+@include keyframes(bearUp) {
+  0% {
+    @include transform-3d(0,0,1);
+  }
+  100% {
+    @include transform-3d(0,-100%,0);
+  }
+}
+
+@include keyframes(cogError) {
+  0% {
+    @include rotate-3d(0deg);
+  }
+  70% {
+    @include rotate-3d(180deg);
+  }
+  100% {
+    @include rotate-3d(0deg);
+  }
+}
+
 //circular percentage
 @include keyframes(closeWrapper) {
     100% {
@@ -151,7 +172,7 @@
 
 @include keyframes(leftSpan100) {
     0% {
-        @include rotate-3d(0);
+        @include rotate-3d(0deg);
     }
     100% {
         @include rotate-3d(360deg);

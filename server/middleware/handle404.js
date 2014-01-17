@@ -7,12 +7,11 @@ module.exports.handle404 = function (req, res, next) {
 
     // Respond with HTML
     if (req.accepts('html')) {
+      res.set('Content-Type', 'text/html');
       res.sendfile(path.join(__dirname, '/../../app/templates/404.hbs'));
-
     // Respond with JSON
     } else if (req.accepts('json')) {
       res.json({error: 'Not found'});
-
     // Respond with plain-text.
     } else {
       res.type('txt').send('Not found');

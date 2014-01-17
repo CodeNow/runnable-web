@@ -62,7 +62,11 @@
 //rotate3d mixin
 @mixin rotate-3d($a: 0deg) {
   -webkit-transform: rotate3d(0,0,1,$a);
-  transform: rotate3d(0,0,1,$a);
+  transform: rotate($a);
+  // ff doesn't rotate in the correct direction
+  // unless -webkit-, using 2d transforms for now
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=769892
+  // the bug in action: http://jsbin.com/AnaFICAY/2/edit
 
   @include modernizr(no-csstransforms3d) {
     -ms-transform: rotate($a);
