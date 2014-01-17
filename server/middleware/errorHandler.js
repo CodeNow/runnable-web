@@ -1,5 +1,6 @@
 var express = require('express');
 var handle404 = require('./handle404');
+var path = require('path');
 //
 // This is the error handler used with Rendr routes.
 //
@@ -8,7 +9,6 @@ module.exports = function() {
     if (err.status === 401) {
       res.redirect('/login');
     } else if (err.status === 404 || err.status === 403) { //permission denied as 404 for now
-      debugger;
       handle404(req, res, next);
     } else { // 500
       if (process.env.NODE_ENV == 'development') {
@@ -35,4 +35,4 @@ function handle500 (req, res, next) {
     } else {
       res.type('txt').send('Application error');
     }
-};
+}
