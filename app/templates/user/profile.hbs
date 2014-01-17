@@ -5,7 +5,7 @@
 <main class="container">
   {{view "dashboard_profile" model=profileuser editmode=editmode}}
 
-  <section id="dashboard">
+  <section id="dashboard" class="col-sm-9">
   {{#if leaderBadges.length}}
     <ul id="reputation">
       {{#each leaderBadges.models}}
