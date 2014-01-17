@@ -40,6 +40,7 @@ module.exports = Base.extend({
         .map(function (d) {
           if (!d.added && !d.removed) {
             d.split = d.value.split('\n');
+            d.value = undefined;
           }
           return d;
         });
