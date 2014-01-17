@@ -3,7 +3,10 @@ var Runnables = require('./runnables');
 
 module.exports = Runnables.extend({
   model: Container,
-  url: '/users/me/runnables'
+  url: function () {
+    var userId = this.params.owner || 'me';
+    return '/users/' + userId + '/runnables';
+  }
 });
 
 module.exports.id = "Containers";
