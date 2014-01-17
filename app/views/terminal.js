@@ -12,6 +12,7 @@ module.exports = BaseView.extend({
     this.loading(true);
     this.listenToPostMessages();
     this.$('iframe').attr('src', this.options.termurl);
+    this.watchForIframeFocus();
   },
   getTemplateData: function () {
     this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
@@ -33,10 +34,33 @@ module.exports = BaseView.extend({
   stopListeningToPostMessages: function () {
     window.removeEventListener("message", this.onPostMessage);
   },
+  watchForIframeFocus: function () {
+    var self = this;
+    this.iframeFocused = false;
+    function checkFocus() {
+      if (!document.activeElement) return;
+      var iframeFocused = document.activeElement == self.$("iframe")[0];
+      if(iframeFocused !== self.iframeFocused) {
+        self.iframeFocused = iframeFocused;
+        if (iframeFocused) {
+          self.trackEvent('Focus');
+        }
+        else {
+          self.trackEvent('Blur');
+        }
+      }
+    }
+
+    this.iframeFocusInterval = window.setInterval(checkFocus, 1000);
+  },
+  stopWatchingIframeFocus: function () {
+    window.clearInterval(this.iframeFocusInterval);
+  },
   remove: function () {
     this.blockWarning = true;
     this.stopWarningTimeout();
     this.stopListeningToPostMessages();
+    this.stopWatchingIframeFocus();
     // this.sock.onclose = function () {};
     // this.sock.close();
     Super.remove.apply(this, arguments);

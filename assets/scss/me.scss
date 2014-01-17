@@ -33,97 +33,6 @@ h2.page-title{
   position: static !important;
 }
 
-#output-results-container .loader{
-  height: 80px;
-  margin: -40px 0 0 -40px;
-  position: absolute;
-    top: 30%;
-    left: 50%;
-  width: 80px;
-
-  img {
-    position: absolute;
-      top: 0;
-      left: 0;
-
-    &.play {
-      // -webkit-animation: pulsate 1s ease 0 infinite;
-      left: 50%;
-      margin: -17px 0 0 -8px;
-      top: 50%;
-      opacity: 0.75;
-    }
-    &.spin {
-      // -webkit-animation: spin 2s linear infinite;
-    }
-  }
-
-  .dot {
-    background-color: #999;
-    @include border-radius(50%);
-    height: 8px;
-    position: absolute;
-    opacity: 0;
-    width: 8px;
-
-    &.dot-1 {
-      @include animation(spin 1s linear 0 infinite);
-      left: 50%;
-      margin: 0 0 0 -4px;
-      // opacity: 1;
-      top: 0;
-    }
-    &.dot-2 {
-      @include animation(spin 1s linear 0.125s infinite);
-      left: 20%;
-      margin: -4px 0 0 -4px;
-      // opacity: 0.875;
-      top: 20%;
-    }
-    &.dot-3 {
-      @include animation(spin 1s linear 0.25s infinite);
-      left: 0;
-      margin: -4px 0 0 0;
-      // opacity: 0.75;
-      top: 50%;
-    }
-    &.dot-4 {
-      @include animation(spin 1s linear 0.375s infinite);
-      left: 20%;
-      margin: -4px 0 0 -4px;
-      // opacity: 0.625;
-      top: 82%;
-    }
-    &.dot-5 {
-      @include animation(spin 1s linear 0.5s infinite);
-      left: 50%;
-      margin: -4px 0 0 -4px;
-      // opacity: 0.5;
-      top: 95%;
-    }
-    &.dot-6 {
-      @include animation(spin 1s linear 0.625s infinite);
-      left: 80%;
-      margin: -4px 0 0 -4px;
-      // opacity: 0.375;
-      top: 82%;
-    }
-    &.dot-7 {
-      @include animation(spin 1s linear 0.75s infinite);
-      left: 95%;
-      margin: -4px 0 0 -4px;
-      // opacity: 0.25;
-      top: 50%;
-    }
-    &.dot-8 {
-      @include animation(spin 1s linear 0.875s infinite);
-      left: 80%;
-      margin: -4px 0 0 -4px;
-      // opacity: 0.125;
-      top: 20%;
-    }
-  }
-}
 .terminal-view.loading .loader{
   display: block;
 }
@@ -298,23 +207,6 @@ div.search-results{
 
 .search-bar{
   display:inline-block;
-}
-
-//page loader
-#page-loader{
-  filter: alpha(opacity=0);
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transition: opacity 0.15s ease-in-out, visibility 0s linear;
-  -moz-transition: opacity 0.15s ease-in-out, visibility 0s linear;
-  -ms-transition: opacity 0.15s ease-in-out, visibility 0s linear;
-  -o-transition: opacity 0.15s ease-in-out, visibility 0s linear;
-  transition: opacity 0.15s ease-in-out, visibility 0s linear;
-  &.loading{
-    visibility: visible;
-    display: block;
-    opacity: 1.0;
-  }
 }
 
 .no-padding{

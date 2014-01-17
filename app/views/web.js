@@ -20,12 +20,6 @@ module.exports = BaseView.extend({
     this.options.buildmessage = this.options.buildmessage || false; //init
     this.listenTo(this.app.dispatch, 'toggle:buildMessage', this.toggleBuildMessage);
   },
-  toggleBuildMessage: function (bool) {
-    if (this.options.buildmessage !== bool) {
-      this.options.buildmessage = bool;
-      this.render();
-    }
-  },
   renderCount: 0,
   postRender: function () {
     // iframe loader
@@ -50,6 +44,40 @@ module.exports = BaseView.extend({
     else {
       this.addResizeHandle();
     }
+    //
+    this.watchForIframeFocus();
+  },
+  toggleBuildMessage: function (bool) {
+    if (this.options.buildmessage !== bool) {
+      this.options.buildmessage = bool;
+      this.render();
+    }
+  },
+  watchForIframeFocus: function () {
+    var self = this;
+    this.iframeFocused = false;
+    function checkFocus() {
+      if (!document.activeElement) return;
+      var iframeFocused = document.activeElement == self.$("iframe")[0];
+      if(iframeFocused !== self.iframeFocused) {
+        self.iframeFocused = iframeFocused;
+        if (iframeFocused) {
+          self.trackEvent('Focus');
+        }
+        else {
+          self.trackEvent('Blur');
+        }
+      }
+    }
+
+    this.iframeFocusInterval = window.setInterval(checkFocus, 1000);
+  },
+  stopWatchingIframeFocus: function () {
+    window.clearInterval(this.iframeFocusInterval);
+  },
+  remove: function () {
+    this.stopWatchingIframeFocus();
+    Super.remove.apply(this, arguments);
   },
   addResizeHandle: function () {
     var self = this;

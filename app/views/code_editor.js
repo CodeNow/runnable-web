@@ -1,6 +1,6 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
-var Image = require('../models/image')
+var Image = require('../models/image');
 
 module.exports = BaseView.extend({
   events: {
@@ -17,19 +17,20 @@ module.exports = BaseView.extend({
     // if not canEdit(owner or admin) and Image page
     var dispatch = this.app.dispatch;
     if (!canEdit && model instanceof Image) {
-      this.incAndTrack('views', 'View')();
-      dispatch.on('copy',  this.incAndTrack('copies', 'Copy'));
-      dispatch.on('paste', this.incAndTrack('pastes', 'Paste'));
-      dispatch.on('cut',   this.incAndTrack('cuts',   'Cut'));
-      dispatch.on('run',   this.incAndTrack('runs',   'Run'));
+      model.increment('views');
+      dispatch.on('copy',  model.increment.bind(model, 'copies'));
+      dispatch.on('paste', model.increment.bind(model, 'pastes'));
+      dispatch.on('cut',   model.increment.bind(model, 'cuts'));
+      dispatch.on('run',   model.increment.bind(model, 'runs'));
     }
     else {
       this.track('View');
-      dispatch.on('copy',  this.track.bind(this, 'Copy'));
-      dispatch.on('paste', this.track.bind(this, 'Paste'));
-      dispatch.on('cut',   this.track.bind(this, 'Cut'));
-      dispatch.on('run',   this.track.bind(this, 'Run'));
     }
+  },
+  increment: function (statName) {
+    return function (trackingData) {
+      model.increment(statName);
+    };
   },
   incAndTrack: function (stat, eventName) {
     var model = this.model;

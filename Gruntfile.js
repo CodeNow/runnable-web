@@ -4,7 +4,7 @@ var livereloadPort = 35731;
 // in
 var sassDir   = 'assets/scss';
 var sassIndex = path.join(sassDir, 'index.scss');
-var fontsDir  = undefined;//'assets/stylesheets/assets/fonts';
+var fontsDir;//'assets/stylesheets/assets/fonts';
 // out
 var layoutPath = 'app/templates/__layout_editable.hbs';
 var verLayoutPath = 'app/templates/__layout.hbs';
@@ -223,7 +223,8 @@ module.exports = function(grunt) {
             moment: '../moment/moment.js',
             marked: '../marked/lib/marked.js',
             'node-uuid': '../node-uuid/uuid.js',
-            nprogress: '../nprogress/nprogress.js'
+            nprogress: '../nprogress/nprogress.js',
+            diff: '../diff/diff.js'
           },
           aliases: [
             {from: rendrDir + '/client', to: 'rendr/client'},
@@ -261,7 +262,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-rendr-stitch');
   grunt.registerTask('noop', 'noop', function () {});
   // copy ace files top public
-  grunt.registerTask('copy-ace-files', 'Copy ace editor files to public')
+  grunt.registerTask('copy-ace-files', 'Copy ace editor files to public');
   // generate app/channelImages.js
   grunt.registerTask('channel-images-hash', 'Create channel images hash to prevent 404s', function () {
     var fs = require('fs');
@@ -269,7 +270,7 @@ module.exports = function(grunt) {
     var providerIconsDir = path.join(__dirname, 'public/images/provider-icons/');
     fs.readdir(providerIconsDir, function (err, files) {
       var imageHash = {};
-      var iconDash = /^icon-/
+      var iconDash = /^icon-/;
       files.forEach(function (filename) {
         if (iconDash.test(filename)) {
           var channelName = filename
@@ -305,10 +306,10 @@ module.exports = function(grunt) {
     var fs = require('fs');
     var p = require('path');
     var commitHash = require('./'+commitHashPath);
-    function matches (re) { return function (str) { return re.test(str); } }
+    function matches (re) { return function (str) { return re.test(str); }; }
     function toPath (path) { return function (filename) { return p.join(path, filename); }; }
     function deletePath (filepath) {
-      grunt.file.delete(filepath)
+      grunt.file.delete(filepath);
       grunt.log.writeln('deleted', p.relative(__dirname, filepath));
     }
     // delete old versioned files
@@ -330,16 +331,16 @@ module.exports = function(grunt) {
     verAssetsPath = assetsPath.replace(/[.]js$/, '.'+commitHash+'.js');
     grunt.file.copy(stylesPath, verStylesPath);
     grunt.file.delete(stylesPath);
-    grunt.log.writeln('moved', p.relative(__dirname, stylesPath)+' > '+p.relative(__dirname, verStylesPath))
+    grunt.log.writeln('moved', p.relative(__dirname, stylesPath)+' > '+p.relative(__dirname, verStylesPath));
     grunt.file.copy(assetsPath, verAssetsPath);
     grunt.file.delete(assetsPath);
-    grunt.log.writeln('moved', p.relative(__dirname, stylesPath)+' > '+p.relative(__dirname, verStylesPath))
+    grunt.log.writeln('moved', p.relative(__dirname, stylesPath)+' > '+p.relative(__dirname, verStylesPath));
     // create versioned layout
     var layoutString = fs.readFileSync(p.join(__dirname, layoutPath)).toString()
       .replace(/mergedAssets[.]min[.]js/g, 'mergedAssets.min.'+commitHash+'.js')
       .replace(/index[.]css/g, 'index.'+commitHash+'.css');
     grunt.file.write(p.join(__dirname, verLayoutPath), layoutString);
-    grunt.log.writeln('overwrote', verLayoutPath)
+    grunt.log.writeln('overwrote', verLayoutPath);
   });
   // jslint
   grunt.registerTask('jshint', ['jshint:all']);

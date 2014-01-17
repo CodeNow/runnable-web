@@ -47,19 +47,8 @@ module.exports = RendrView.extend({
       return;
     }
     properties = properties || {};
-    function addModelProperties(properties, model, prependKey) {
-      prependKey = prependKey || '';
-      var modelName = (model.constructor.id || model.constructor.name).toLowerCase();
-      var json = model.toJSON();
-      for (var key in json) {
-        var value = json[key];
-        var type = typeof value;
-        if (type === 'object') value = JSON.stringify(value);
-        properties[prependKey+modelName+'.'+key] = value;
-      }
-    }
     if (this.model) {
-      addModelProperties(properties, this.model);
+      utils.addModelProperties(properties, this.model);
     }
     else if (this.collection) {
       var collection = this.collection;
@@ -67,7 +56,7 @@ module.exports = RendrView.extend({
       properties[collectionName+'.params'] = JSON.stringify(collection.params);
       properties[collectionName+'.modelIds'] = collection.models.map(utils.pluck('id'));
     }
-    addModelProperties(properties, this.app.user, 'app.');
+    utils.addModelProperties(properties, this.app.user, 'app.');
 
     Track.event(viewNameOverride || this.viewName(), actionName, properties);
   },

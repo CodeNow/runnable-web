@@ -23,11 +23,12 @@ function fetchRunnablesFor (userId, cb) {
     drafts: {
       collection: 'Containers',
       params: {
+        saved: true,
         owner: userId,
         limit: 200 // default limit is 25
       }
     }
-  }
+  };
   fetch.call(this, spec, cb);
 }
 
@@ -56,7 +57,7 @@ module.exports = {
     async.waterfall([
       fetchUser.bind(this),
       function (results, cb) {
-        var currentUsername = (results.user.get('username') || '').toLowerCase()
+        var currentUsername = (results.user.get('username') || '').toLowerCase();
         var viewingOwnProfile =  currentUsername === params.username.toLowerCase();
         results.editmode = viewingOwnProfile;
 
@@ -118,7 +119,7 @@ module.exports = {
       results.page = {
         title    : formatTitle(title),
         canonical: canonical.call(self)
-      }
+      };
       return results;
     }
   }

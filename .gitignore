@@ -24,4 +24,4 @@ assets/scss/forms.scss
 assets/scss/popovers.scss
 assets/bower
 
-dump.rdb
+*.rdb
