@@ -38,7 +38,7 @@ module.exports = Base.extend({
     if (attrs && utils.exists(attrs.content)) {
       var diff = JSDiff.diffLines(this.savedContent, attrs.content)
         .map(function (d) {
-          if (!d.added && !d.removed) {
+          if (!d.added && !d.removed && d.value) {
             d.split = d.value.split('\n');
             d.value = undefined;
           }
