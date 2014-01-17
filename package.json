@@ -39,7 +39,8 @@
     "nprogress": "git://github.com/tjmehta/nprogress#e03c00d1756f4bb6960ef12551aaf2557708cab0",
     "http-proxy": "~0.10.3",
     "npm": "~1.3.11",
-    "diff": "~1.0.8"
+    "diff": "~1.0.8",
+    "hbs": "~2.4.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
