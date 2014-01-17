@@ -11,11 +11,24 @@ var helpers = require('./helpers');
 
 var fetchPopUserAffectedChannels = helpers.fetchPopUserAffectedChannels;
 
-function fetchRunnablesFor (userId, username, cb) {
-  if (typeof username == 'function') {
-    cb = username;
-    username = false;
-  }
+function fetchUserByUsername (username, callback) {
+  var spec = {
+    users: {
+      collection:'Users',
+      params:{
+        username: username
+      }
+    }
+  };
+  fetch.call(this, spec, function (err, results) {
+    if (err) return callback(err);
+    results.user = results.users.models[0];
+    delete results.users;
+    callback(null, results);
+  });
+}
+
+function fetchRunnablesFor (userId, cb) {
   var spec = {
     published: {
       collection: 'Images',
@@ -33,14 +46,6 @@ function fetchRunnablesFor (userId, username, cb) {
       }
     }
   };
-  if (username) {
-    spec.users = {
-      collection : 'Users',
-      params : {
-        username: username
-      }
-    };
-  }
   fetch.call(this, spec, cb);
 }
 
@@ -75,19 +80,25 @@ module.exports = {
 
         async.series([
           function (cb) {
-            if (results.editmode) {
-              var fetchUsername = false;
+            if (!viewingOwnProfile && results.user.isModerator()) {
+              fetchUserByUsername.call(self, params.username, function (err, userResults) {
+                if (err) return cb(err);
+                results.profileuser = userResults.user;
+                cb();
+              });
+            }
+            else {
               if (viewingOwnProfile) {
                 results.profileuser = results.user;
               }
-              else if (results.user.isModerator()) {
-                fetchUsername = params.username;
-              }
-              fetchRunnablesFor.call(self, results.user.id, fetchUsername, function (err, results2) {
+              cb();
+            }
+          },
+          function (cb) {
+            if (results.editmode) {
+              var fetchUsername = false;
+              fetchRunnablesFor.call(self, results.profileuser.id, function (err, results2) {
                 if (err) return cb(err);
-                if (!viewingOwnProfile && results.user.isModerator()) {
-                  results2.profileuser = results2.users.models[0];
-                }
                 results2.published.sortByAttr('-created');
                 results2.drafts.sortByAttr('-created');
                 _.extend(results, results2);
