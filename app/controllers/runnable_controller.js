@@ -237,8 +237,8 @@ module.exports = {
       function check404 (results, cb) {
         if (!results || !results.container) {
           cb({ status: 404 });
-        } else {
-          console.log('container', results.container);
+        }
+        else {
           if (results.container.get('status') === 'Finished') {
             console.log('REDIRECT', '/' + results.container.get('child'));
             self.redirectTo('/' + results.container.get('child'));

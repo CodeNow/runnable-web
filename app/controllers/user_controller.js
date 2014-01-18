@@ -84,12 +84,14 @@ module.exports = {
               fetchUserByUsername.call(self, params.username, function (err, userResults) {
                 if (err) return cb(err);
                 results.profileuser = userResults.user;
+                if (!results.profileuser) return callback({status:404});
                 cb();
               });
             }
             else {
               if (viewingOwnProfile) {
                 results.profileuser = results.user;
+                if (!results.profileuser) return callback({status:404});
               }
               cb();
             }
@@ -109,16 +111,13 @@ module.exports = {
               fetchProfileInfo.call(self, params.username, function (err, results2) {
                 if (err) return cb(err);
                 results2.profileuser = results2.users.models[0];
+                if (!results.profileuser) return callback({status:404});
                 delete results2.users;
                 results2.published.sortByAttr('-created');
                 _.extend(results, results2);
                 cb();
               });
             }
-          },
-          function (cb) {
-            if (!results.profileuser) return callback({status:404});
-            cb();
           },
           function (cb) {
             fetchPopUserAffectedChannels.call(self, 3, results.profileuser.id, function (err, results3) {
