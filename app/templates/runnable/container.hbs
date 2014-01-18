@@ -3,8 +3,8 @@
 {{view "global_message"}}
 {{view "publish_warning" model=image containerid=container.id context=.}}
 
-<section id="main" class="container">
-  <div id="project-details" class="row">
+<main class="container">
+  <section id="project-details" class="row">
     <div class="col-sm-9">
       <div class="page-title clearfix">
         {{view "runnable_title" model=container}}
@@ -15,12 +15,12 @@
         {{view "save_button" collection=defaultFiles}}
       </div>
     </div>
-  </div>
+  </section>
   <div class="row">
-    <div class="col-sm-9">
+    <section class="col-sm-9">
       {{view "code_editor" context=. editmode=true model=container}}
       {{view "terminal" model=container}}
-    </div>
+    </section>
     <ul id="sidebar" class="col-sm-3">
       {{#if isVerified}}
       <li class="services">
@@ -35,6 +35,6 @@
         {{/if}}
     </ul>
   </div>
-</section>
+</main>
 
 {{view "footer_view" model=user context=.}}

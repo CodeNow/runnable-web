@@ -4,19 +4,19 @@ var utils = require('../utils');
 module.exports = BaseView.extend({
   tagName: 'section',
   id: 'profile',
-  className: 'clearfix',
+  className: 'col-sm-3',
   events: {
     'click .edit-inline'      : 'editInline',
     'click .permission a'     : 'permissionToggle',
     'change input'            : 'updateAttr'
   },
   preRender: function () {
-    if (this.options.editmode) this.className = 'editmode';
+    if (this.options.editmode) this.className = 'editmode col-sm-3';
   },
   postRender: function () {
     var imagesCount = this.model.get('imagesCount');
     this.$('.reputation').tooltip({
-      placement: 'bottom',
+      placement: 'top',
       title: imagesCount+' published Runnables'
     });
   },

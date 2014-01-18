@@ -1278,6 +1278,11 @@ pre code {
     margin-left: 91.66666666666666%;
   }
 }
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1570px;
+  }
+}
 table {
   max-width: 100%;
   background-color: transparent;

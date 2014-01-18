@@ -1132,10 +1132,6 @@ progress {
 
         .silver {
             margin-left: 10px;
-
-            @include media(xs) {
-                margin-top: 10px;
-            }
         }
 
         .green {
@@ -1143,6 +1139,10 @@ progress {
             &:hover,
             &:focus {
                 color: #fff;
+            }
+
+            @include media(xxs) {
+                margin-bottom: 10px;
             }
         }
 
@@ -1165,7 +1165,7 @@ progress {
                 border-top-color: #fff;
             }
 
-            @include media(xs) {
+            @include media(xxs) {
                 clear: both;
 
                 > button {
@@ -1178,24 +1178,53 @@ progress {
 
 #project-author {
     margin: 30px 0 0 0;
+    padding-left: 0;
 
     @include media(xs) {
         margin: 30px 0;
-        max-width: 320px;
     }
 
-    $width32: 32px;
+    @include media(xl) {
+        padding-left: 15px;
+    }
+
+    > [class^='col'] {
+
+        @include media(sm) {
+            padding-left: 0;
+        }
+
+        @include media(xl) {
+            padding-left: 15px;
+
+            &.col-lg-8 {
+                padding-left: 0;
+            }
+        }
+    }
 
     > a {
-        display: block;
-        float: left;
+        display: inline-block;
         height: 73px;
-        margin-right: $width32/2;
         position: relative;
-        width: 73px;
+
+        @include media(xs) {
+            float: left;
+            height: 120px;
+            margin-right: 20px;
+        }
 
         > span {
-            right: -($width32/2);
+            top: -8px;
+            right: 0;
+
+            @include media(lg) {
+                right: 4px;
+            }
+
+            @include media(xl) {
+                right: 16px;
+            }
         }
 
         //project author icon
@@ -1211,9 +1240,6 @@ progress {
 
     //author title
     h4 {
-        float: left;
-        padding: 0;
-        margin: 6px 0 0 10px;
 
         a {
             font-size: 15px;
@@ -1232,33 +1258,24 @@ progress {
             font-size: 13px;
             margin: 5px 0 0 0;
             padding: 0;
+            white-space: nowrap;
         }
     }
 
-    // rating
-    .reputation {
-        @include border-radius(50%);
-        display: block;
-        font-size: 11px;
-        height: $width32;
-        line-height: $width32;
-        margin: 0 auto;
-        padding: 0;
-        position: absolute;
-            top: 0;
-        width: $width32;
-    }
-
     ul {
-        float: left;
-        margin: 10px 0 0 10px;
-        padding: 0;
 
-        li {
+        > li {
             color: #bbb;
             font-size: 12px;
             list-style-type: none;
             margin-bottom: 8px;
+        }
+    }
+
+    h4,
+    ul {
+        @include media(lg) {
+            padding-left: 25px;
         }
     }
 
@@ -1385,6 +1402,7 @@ progress {
     aside#file-explorer {
         position: absolute;
         width: 26%;
+            max-width: 260px;
         top: 0;
         right: 0;
         bottom: 0;
@@ -1626,7 +1644,7 @@ div#output-terminal-container{
         h3.widget-title {
             font-size: 13px;
             color: $grey-dark;
-            border-bottom: solid 1px #bbb;
+            border-bottom: solid 1px rgba(0, 0, 0, 0.1);
             padding: 0 0 4px 0;
             margin: 0 0 8px 0;
             font-weight: bold;
