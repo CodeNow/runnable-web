@@ -251,6 +251,13 @@
         .tt-dropdown-menu {
             width: 100%;
         }
+
+        button {
+            position: absolute;
+                top: 0;
+                right: 0;
+            visibility: hidden;
+        }
     }
 
     .navbar-right {
