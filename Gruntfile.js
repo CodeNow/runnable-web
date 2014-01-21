@@ -197,6 +197,7 @@ module.exports = function(grunt) {
         files: _.without([sassDir + '/**/*.{scss,sass}'].concat(minCSS), compassCSS),
         tasks: ['compass:server', 'concat:dev'],
         options: {
+          livereload: true,
           interrupt: true
         }
       },
