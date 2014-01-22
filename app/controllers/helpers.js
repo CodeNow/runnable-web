@@ -277,7 +277,7 @@ function fetchOwnersFor (user, runnables, callback) {
     owners: {
       collection: 'Users',
       params    : {
-        ids: userIds
+        _id: userIds
       }
     }
   };
