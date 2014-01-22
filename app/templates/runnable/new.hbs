@@ -1,15 +1,49 @@
 {{view "app_user" model=user}}
 {{view "header_view" model=user context=.}}
-{{view "global_message"}}<div class="content">
-  <div class="container">
-    <article>
-      <h1>Create a New Runnable from:</h1>
-      {{#if lock}}
-        {{view "channel_cards" collection=channels}}
-      {{else}}
-        {{view "channel_cards" collection=channels basehref="/new"}}
-      {{/if}}
-    </article>
+{{view "global_message"}}
+<div class="container">
+
+  <div id="choose">
+    <section class="clearfix">
+      <h1 class="col-sm-12">
+        <img src="/images/icon-git.svg" height="22" width="22" alt="Git">
+        Create from Git
+      </h1>
+      <form>
+        <input class="col-sm-6" placeholder="Git url or SSH clone URL" required>
+        <div class="dropdown-wrapper col-sm-4">
+          <div class="dropdown">
+            Select Language
+          </div>
+          <select required>
+            <option value="" disabled>Select One
+            <option value=".Net">.Net
+            <option value="bash">bash
+            <option value="C++">C++
+            <option value="CakePHP">CakePHP
+            <option value="Codeigniter">Codeigniter
+            <option value="Dart">Dart
+            <option value="Django">Django
+            <option value="express">express
+            <option value="Flask">Flask
+            <option value="Java">Java
+            <option value="Javascript">Javascript
+            <option value="Node.js">Node.js
+            <option value="PHP">PHP
+            <option value="Python">Python
+          </select>
+        </div>
+        <button class="col-sm-2 orange">Create from Git</button>
+      </form>
+    </section>
+
+    <hr class="col-sm-12">
+
+    <section>
+      <h1 class="col-sm-12">Create a new example</h1>
+      {{view "channel_cards" collection=channels basehref="/new"}}
+    </section>
   </div>
+
 </div>
 {{view "footer_view" model=user context=.}}

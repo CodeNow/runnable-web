@@ -1,0 +1,79 @@
+#choose {
+  background: #fff;
+  @include border-radius(5px);
+  @include box-shadow(0 2px 5px rgba(0, 0, 0, 0.1));
+  margin-top: 40px;
+
+  h1 {
+    font-size: 20px;
+
+    > img {
+      float: left;
+      margin-right: 8px;
+    }
+  }
+
+  section {
+    padding: 20px 40px;
+
+    &:first-child {
+
+      input {
+        border: 1px solid #ccc;
+        @include border-radius(4px);
+        @include box-shadow(none);
+        font-weight: bold;
+        min-height: 40px;
+        padding: 6px 12px;
+        @include transition(border-color ease-in-out .15s, box-shadow ease-in-out .15s);
+
+        &:focus {
+            @include box-shadow(none);
+            border-color: $purple-light;
+            outline: none;
+        }
+      }
+
+      .dropdown-wrapper,
+      .dropdown {
+        height: 40px;
+        line-height: 40px;
+      }
+
+      .dropdown {
+        width: calc(100% - 30px);
+      }
+
+      select {
+        left: 15px;
+        width: calc(100% - 30px);
+      }
+
+      button {
+        height: 40px;
+      }
+    }
+  }
+
+  hr {
+    margin-top: 30px;
+  }
+
+  hr:after {
+    background: #fff;
+    border: 1px solid #eee;
+    @include border-radius(50%);
+    color: #ccc;
+    content: 'or';
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    margin: -20px 0 0 20px;
+    text-align: center;
+    width: 40px;
+  }
+
+  #cards {
+    padding: 0;
+  }
+}

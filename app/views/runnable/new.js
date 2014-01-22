@@ -4,7 +4,8 @@ var lock = require('../../lock');
 module.exports = BaseView.extend({
   events: {
     'submit form' : 'submit',
-    'click .card' : 'create'
+    'click .card' : 'create',
+    'change select' : 'changeLanguage'
   },
   submit: function (evt) {
     evt.preventDefault();
@@ -17,6 +18,10 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     this.options.lock = lock;
     return this.options;
+  },
+  changeLanguage: function () {
+    var langVal = this.$('select')[0].value;
+    this.$('.dropdown').text(langVal);
   }
 });
 
