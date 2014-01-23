@@ -49,8 +49,13 @@
         width: calc(100% - 30px);
       }
 
-      button {
+      a {
         height: 40px;
+
+        &:hover {
+          color: #fff;
+          text-decoration: none;
+        }
       }
     }
   }

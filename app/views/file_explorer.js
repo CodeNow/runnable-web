@@ -28,7 +28,7 @@ else {
 module.exports = BaseView.extend({
   tagName: 'aside',
   id: 'file-explorer',
-  className: 'closed',
+  className: 'open',
   events: events,
   postHydrate: function () {
     this.listenTo(this.app.dispatch, 'toggle:files', this.toggleFiles.bind(this));
