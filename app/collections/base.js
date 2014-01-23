@@ -1,6 +1,8 @@
 var RendrBase = require('rendr/shared/base/collection');
 var Super = RendrBase.prototype;
 var _ = require('underscore');
+var async = require('async');
+var utils = require('../utils');
 
 module.exports = RendrBase.extend({
   initialize: function (attrs, options) {
@@ -54,6 +56,19 @@ module.exports = RendrBase.extend({
     };
     this.sort();
     return this;
+  },
+  removeAll: function (except) {
+    if (!Array.isArray(except)) {
+      except = [except];
+    }
+    var removeModels = _.difference(this.models, except);
+    this.remove(removeModels);
+  },
+  destroyAll: function (callback) {
+    async.forEach(this.models, function (model, cb) {
+      cb = utils.cbOpts(cb);
+      model.destroy(cb);
+    }, callback);
   }
 });
 

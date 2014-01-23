@@ -11,11 +11,12 @@ module.exports = BaseView.extend({
   },
   postHydrate: function () {
     this.listenTo(this.model, 'change:name', this.render.bind(this));
+    this.listenTo(this.model, 'change:highlight', this.render.bind(this));
   },
   preRender: function () {
     var model = this.model;
     if (model.isDir()) {
-      this.className = 'arrow'
+      this.className = 'arrow';
       if (!model.open()) this.className += ' collapsed';
     }
     this.attributes.title = model.get('name');
@@ -27,8 +28,12 @@ module.exports = BaseView.extend({
   click: function (evt) {
     evt.preventDefault();
     var model = this.model;
-    if (model.isFile()) {
+    if (evt.metaKey || evt.ctrlKey) {
+      this.app.dispatch.trigger('highlight:file', model);
+    }
+    else if (model.isFile()) {
       this.app.dispatch.trigger('open:file', model);
+      // this.app.dispatch.trigger('highlight:file', model, true);
     }
     else { // isDir
       var animating = this.$el.next().hasClass('animating');

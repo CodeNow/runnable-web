@@ -3,7 +3,7 @@ var async = require('async');
 var utils = require('../utils');
 var channelController = require('./channel_controller');
 var helpers = require('./helpers');
-
+var HighlightedFiles = require('../collections/highlighted_files');
 var fetch = helpers.fetch;
 var fetchUser = helpers.fetchUser;
 var fetchImplementation = helpers.fetchImplementation;
@@ -94,6 +94,7 @@ module.exports = {
           function (err, data) {
             if (err) return cb(err);
             _.extend(results, data[0], data[1], data[2], data[3]);
+            _.extend(results, { highlightedFiles: new HighlightedFiles([], {app:self.app, containerId:results.container.id}) });
             cb(null, results);
           });
         },
@@ -262,6 +263,7 @@ module.exports = {
         function (err, data) {
           var container = results.container;
           cb(err, _.extend(results, { image:data[0] }, data[1], {
+            highlightedFiles: new HighlightedFiles([], {app:self.app, containerId:container.id}),
             page: {
               title: formatTitle('Unpublished: '+results.container.nameWithTags()),
               description: 'Unpublished Runnable Example:' + container.get('name'),

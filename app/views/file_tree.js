@@ -39,6 +39,12 @@ module.exports = BaseView.extend({
     }
   },
   postRender: function () {
+    // get highlighted files using dispatch
+    var self = this;
+    this.app.dispatch.trigger('get:highlighted', function (err, collection) {
+      self.highlightedFiles = collection;
+    });
+
     this.$contentsUL = this.$('ul').first();
     this.fileList = _.findWhere(this.childViews, {name:'fs_list'});
     // IMPORTANT must be set to this.model.contents for rerendering.. else when parent dir rerenders child dirs will lose their collection
@@ -66,7 +72,13 @@ module.exports = BaseView.extend({
     var model = collection.get(modelId);
     var createOnly = !Boolean(modelId); // if grey area clicked don't show rename or delete..could be confusing to user
     model = model || this.model;
+    debugger;
+    var multiSelect = model.get('highlight') && (this.highlightedFiles.length > 1);
+    if (!multiSelect) {
+      this.highlightedFiles.removeAll(this.model);
+    }
     var menu = this.menu = new FileMenu({
+      multiSelect: multiSelect,
       createOnly: createOnly,
       showDefault: this.options.editmode,
       model: model,
@@ -76,12 +88,21 @@ module.exports = BaseView.extend({
     });
     this.listenToOnce(menu, 'rename',    model.trigger.bind(model, 'rename'));
     this.listenToOnce(menu, 'delete',    this.del.bind(this, model));
+    this.listenToOnce(menu, 'deleteAll', this.delAll.bind(this, model));
     this.listenToOnce(menu, 'default',   this.def.bind(this, model));
     this.listenToOnce(menu, 'undefault', this.undefault.bind(this, model));
     this.listenToOnce(menu, 'upload',    this.upload.bind(this, model));
     this.listenToOnce(menu, 'create',    this.create.bind(this));
     // stop listening
     this.listenToOnce(menu, 'remove', this.stopListening.bind(this, menu));
+  },
+  delAll: function (model) {
+    var self = this;
+    this.highlightedFiles.destroyAll(function (err, model) {
+      if (err) {
+        self.showError(err);
+      }
+    });
   },
   del: function (model) {
     var options = utils.cbOpts(callback, this);

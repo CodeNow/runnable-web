@@ -1,4 +1,7 @@
 <ul class="menu-options">
+  {{#if multiSelect}}
+  <li><a href="javascript:void(0)" class="delete-all" href=""><i class="glyphicon glyphicon-trash"></i> Delete All</a></li>
+  {{else}}
   {{#unless createOnly}}
   <li><a href="javascript:void(0)" class="rename" href=""><i class="glyphicon glyphicon-pencil"></i> Rename</a></li>
   <li><a href="javascript:void(0)" class="delete" href=""><i class="glyphicon glyphicon-trash"></i> Delete</a></li>
@@ -31,4 +34,5 @@
       <i class="icon-download-alt"></i> Download {{fsJSON.niceType}}</a>
   </li>
   -->
+  {{/if}}
 </ul>
