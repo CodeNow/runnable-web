@@ -72,7 +72,6 @@ module.exports = BaseView.extend({
     var model = collection.get(modelId);
     var createOnly = !Boolean(modelId); // if grey area clicked don't show rename or delete..could be confusing to user
     model = model || this.model;
-    debugger;
     var multiSelect = model.get('highlight') && (this.highlightedFiles.length > 1);
     if (!multiSelect) {
       this.highlightedFiles.removeAll(this.model);

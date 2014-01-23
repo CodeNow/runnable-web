@@ -24,6 +24,9 @@ module.exports = BaseView.extend({
   },
   postRender: function () {
     this.makeDraggable();
+    if (this.model.attributes.highlight) {
+      this.$el.closest('li').addClass('active');
+    }
   },
   click: function (evt) {
     evt.preventDefault();

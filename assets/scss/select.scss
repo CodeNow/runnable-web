@@ -24,12 +24,12 @@
       background: #fff;
     }
 
-    &:after,
-    &:before {
+    &:before,
+    &:after {
       color: #bbb;
-      content: '\E174';
+      content: '';
       display: block;
-      font-family: 'Glyphicons Regular';
+      // font-family: 'Glyphicons Regular';
       font-size: 10px;
       pointer-events: none;
       position: absolute;
@@ -37,13 +37,17 @@
     }
 
     &:before {
-      @include rotate-3d(-90deg);
-      bottom: 4px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 7px solid #bbb;
+      top: 10px;
     }
 
     &:after {
-      @include rotate-3d(90deg);
-      top: 4px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 7px solid #bbb;
+      bottom: 10px;
     }
   }
 

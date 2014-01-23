@@ -57,20 +57,20 @@
 
   hr {
     margin-top: 30px;
-  }
 
-  hr:after {
-    background: #fff;
-    border: 1px solid #eee;
-    @include border-radius(50%);
-    color: #ccc;
-    content: 'or';
-    display: block;
-    height: 40px;
-    line-height: 40px;
-    margin: -20px 0 0 20px;
-    text-align: center;
-    width: 40px;
+    &:after {
+      background: #fff;
+      border: 1px solid #eee;
+      @include border-radius(50%);
+      color: #bbb;
+      content: 'or';
+      display: block;
+      height: 40px;
+      line-height: 40px;
+      margin: -20px 0 0 20px;
+      text-align: center;
+      width: 40px;
+    }
   }
 
   #cards {
