@@ -28,27 +28,13 @@ else {
 module.exports = BaseView.extend({
   tagName: 'aside',
   id: 'file-explorer',
-  className: 'closed',
   events: events,
-  postHydrate: function () {
-    this.listenTo(this.app.dispatch, 'toggle:files', this.toggleFiles.bind(this));
-  },
   postRender: function () {
-    this.$("[rel='tooltip']").tooltip();
+    this.$('[rel="tooltip"]').tooltip({
+      // append to body to get around overflow: hidden on container
+      container: 'body'
+    });
     this.fileRoot = _.findWhere(this.childViews, {name:'file_tree'});
-  },
-  toggleFiles: function (open) {
-    if (open) { this.showFiles(); } else {
-      this.hideFiles();
-    }
-  },
-  hideFiles: function (evt) {
-    if (evt) evt.preventDefault();
-    this.$el.addClass('closed');
-  },
-  showFiles: function (evt) {
-    if (evt) evt.preventDefault();
-    this.$el.removeClass('closed');
   },
   showFileMenu: function (evt) {
     evt.preventDefault();

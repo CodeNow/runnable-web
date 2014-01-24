@@ -29,9 +29,6 @@ h2.page-title{
 .relative{
   position:relative;
 }
-#project-editor {
-  position: static !important;
-}
 
 .terminal-view.loading .loader{
   display: block;
@@ -292,10 +289,6 @@ button.btn-sm, .btn-xs {
   margin-right:0;
 }
 
-#project-editor-container {
-  background: #ddd;
-}
-
 .container > .navbar-header, .container > .navbar-collapse {
   text-align: center;
   height: 38px !important;
@@ -309,178 +302,8 @@ button.btn-sm, .btn-xs {
   }
 }
 
-
-/* RIGHT HERE */
-
-#project-editor-container {
-  aside#file-explorer {
-    .nav {
-      position: absolute;
-      top: 25px;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      overflow: scroll;
-      font-size: 12px;
-      padding: 6px 0;
-      > li {
-        height: 100%;
-        @include box-sizing(border-box);
-        > ul {
-          padding-bottom: $dropzone-height+10px;
-        }
-      }
-      li {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        a,
-        img,
-        input,
-        span {
-          padding: 6px 6.5%;
-          margin: 0;
-          color: #333;
-          position: relative;
-          white-space: nowrap;
-          display: block;
-          &:hover {
-            text-decoration: none;
-            color: $purple-light;
-          }
-          &:before {
-            content: "";
-            float: left;
-            margin: 6px 10px 0 0;
-            border-left: 4px solid transparent;
-            border-right: 4px solid transparent;
-            border-top: 6px solid transparent;
-          }
-        }
-        img {
-          @include box-sizing(content-box);
-        }
-        ul {
-          padding-left: 0;
-          li {
-            a,
-            img,
-            input,
-            span {
-              // padding-left: 0;
-            }
-            li a,
-            li img,
-            li input,
-            li span {
-              padding-left: 15%;
-            }
-            li li a,
-            li li img,
-            li li input,
-            li li span {
-              padding-left: 23%;
-            }
-            li li li a,
-            li li li img,
-            li li li input,
-            li li li span {
-              padding-left: 31%;
-            }
-            li li li li a,
-            li li li li img,
-            li li li li input,
-            li li li li span {
-              padding-left: 39%;
-            }
-            li li li li li a,
-            li li li li li img,
-            li li li li li input,
-            li li li li li span {
-              padding-left: 47%;
-            }
-            li li li li li li a,
-            li li li li li li img,
-            li li li li li li input,
-            li li li li li li span {
-              padding-left: 55%;
-            }
-            li li li li li li li a,
-            li li li li li li li img,
-            li li li li li li li input,
-            li li li li li li li span {
-              padding-left: 63%;
-            }
-            li li li li li li li li a,
-            li li li li li li li li img,
-            li li li li li li li li input,
-            li li li li li li li li span {
-              padding-left: 71%;
-            }
-            li li li li li li li li li a,
-            li li li li li li li li li img,
-            li li li li li li li li li input,
-            li li li li li li li li li span {
-              padding-left: 79%;
-            }
-            li li li li li li li li li li a,
-            li li li li li li li li li li img,
-            li li li li li li li li li li input,
-            li li li li li li li li li li span {
-              padding-left: 86%;
-            }
-            li li li li li li li li li li li a,
-            li li li li li li li li li li li img,
-            li li li li li li li li li li li input,
-            li li li li li li li li li li li span {
-              padding-left: 94%;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
 #about #about-team #team-list h3 {
   white-space: normal;
-}
-
-#project-editor-container aside#file-explorer > #drop-to-add {
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
-  left: 10px;
-  height: $dropzone-height;
-  border: dashed 2px #BDBDBD;
-  overflow: hidden;
-  display: block;
-  text-align: center;
-  font-size: 12px;
-  font-weight: bold;
-  color: #BDBDBD;
-  opacity: 0.95;
-  background: white;
-  @include border-radius(5px);
-  .drop-to-add-icon {
-    margin-top: 10px;
-    height: 30px;
-    width: 25px;
-    background-image: url(../images/sprite-upload.png);
-    background-repeat: no-repeat;
-    @include background-image-retina('../images/sprite-upload@2x.png');
-    background-size: 25px auto;
-    overflow: hidden;
-    display: inline-block;
-  }
-  &:hover {
-    border: solid 2px $purple-light;
-    text-decoration: none;
-    color: $purple-light;
-    .drop-to-add-icon {
-      background-position: 0 -30px;
-    }
-  }
 }
 
 #project-editor-container aside#file-explorer .nav li.active a,

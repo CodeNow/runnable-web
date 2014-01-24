@@ -1,0 +1,438 @@
+#code-editor {
+  border-left: 1px solid rgba(0,0,0,0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+#project-editor-tabs {
+  border: none;
+  position: relative;
+    left: 38px;
+  @include transition-transforms(.2s ease-in-out);
+
+  li {
+    position: relative;
+
+    > a {
+      cursor: pointer;
+    }
+
+    > .tab-body {
+      background: $grey-light;
+      border-color: rgba(0,0,0,0.1);
+      border-bottom: none;
+      @include border-radius(0);
+      color: $grey-darker;
+      font-size: 12px;
+      line-height: 36px;
+      height: 36px;
+      padding: 0 40px 0 10px;
+      text-align: center;
+
+      &:hover {
+        background: $grey-lighter;
+      }
+
+      &:active {
+        color: $purple-light;
+      }
+    }
+
+    > .remove-2 {
+      background: none;
+      border: none;
+      color: darken($grey,10%);
+      font-size: 11px;
+      padding: 0;
+      position: absolute;
+        top: 12px;
+        right: 10px;
+
+      &:hover {
+        color: darken($grey,20%);
+        top: 8px;
+        right: 8px;
+      }
+
+      &:hover:before {
+        content: '\E193';
+        font-size: 16px;
+      }
+
+      &:active {
+        color: darken($grey,30%);
+      }
+    }
+
+    &.active {
+
+      > .tab-body {
+        background-color: $grey-lighter;
+        color: $purple-light;
+        cursor: default;
+      }
+
+      > .remove-2 {
+        color: darken($grey,20%);
+
+        &:hover {
+          color: darken($grey,30%);
+        }
+
+        &:active {
+          color: darken($grey,40%);
+        }
+      }
+    }
+  }
+}
+
+
+#project-editor-container {
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-right: 1px solid transparent;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  position: relative;
+    top: -1px;
+  @include transform-3d(0,0,0);
+  @include transition-transforms(.2s ease-in-out, width 0s ease-in-out);
+  width: 100%;
+
+  #project-editor {
+    border-right: 1px solid rgba(0,0,0,0.1);
+  }
+}
+
+// file explorer icon
+.open-file-explorer {
+  background: $purple-light;
+  color: $grey-light;
+  cursor: pointer;
+  display: block;
+  font-size: 18px;
+  height: 36px;
+  line-height: 36px;
+  position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  text-align: center;
+  width: 36px;
+
+  &:hover {
+    background: lighten($purple-light,5%);
+    color: $grey-light;
+    text-decoration: none;
+  }
+
+  &:active {
+    background: darken($purple-light,5%);
+  }
+}
+
+#file-explorer {
+  background: $grey-light;
+  @include box-shadow(0 1px 0 rgba(0,0,0,0.1));
+  float: left;
+  height: calc(100% - 36px);
+  position: absolute;
+  @include transform-3d(-100%,0,0);
+  @include transition-transforms(.2s ease-in-out, width 0s ease-in-out);
+  width: 240px;
+
+  // file explorer controls
+  .controls {
+    background: $purple-light;
+    height: 36px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+      top: -36px;
+      left: 36px;
+      z-index: 1;
+    width: 204px;
+
+    li {
+      color: $grey-lighter;
+      cursor: pointer;
+      display: block;
+      float: left;
+      font-size: 16px;
+      height: 36px;
+      line-height: 36px;
+      list-style: none;
+      margin: 0;
+      top: 0;
+      text-align: center;
+      width: 36px;
+
+      &.dark-theme,
+      &.light-theme {
+        &:after {
+          border: 1px solid transparent;
+          @include border-radius(50%);
+          content: '';
+          display: block;
+          height: 18px;
+          margin: 8px auto;
+          width: 18px;
+        }
+      }
+
+      &.dark-theme:after {
+        background: $purple;
+      }
+
+      &.light-theme:after {
+        background: $grey-lighter;
+      }
+
+      &.active {
+        pointer: default;
+
+        &:after {
+          border: 1px solid $orange;
+        }
+      }
+    }
+  }
+  .nav {
+    font-size: 12px;
+    height: calc(100% - 54px);
+    overflow: scroll;
+    padding-top: 8px;
+
+    li {
+      &.active > a {
+        background: $orange;
+        color: #fff;
+        @include border-radius(0);
+        &.arrow:before {
+          border-top: 6px solid #fff !important;
+        }
+      }
+      &.folder {
+        cursor: pointer;
+        a.arrow:before {
+          content: "";
+          float: left;
+          margin: 6px 5% 0 0;
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          border-top: 6px solid #bbb;
+          @include transition(transform .25s linear);
+        }
+        a.collapsed:before {
+          @include rotate-3d(-90deg);
+        }
+      }
+      &.ui-draggable-dragging {
+        z-index: 100000;
+        position: absolute;
+        width: 100%;
+        background: rgba(242,242,242,.8);
+        @include border-radius(3px);
+        a {
+          background: transparent;
+          color: #333;
+        }
+      }
+      &.ui-draggable-hover {
+        background: #ddd;
+        color: #777;
+        @include box-shadow(0 0 0 2px #777);
+        @include transition(all 0.2s ease-in-out);
+      }
+    }
+    &.ui-draggable-hover {
+      background: #ddd;
+      color: #777;
+      @include transition(all .2s ease-in-out);
+    }
+  }
+}
+
+// upload
+#drop-to-add {
+  background: rgba(0,0,0,.025);
+  @include box-shadow(inset 0 0 10px rgba(0,0,0,.1));
+  cursor: pointer;
+  color: $grey-dark;
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  height: 54px;
+  line-height: 58px;
+  text-align: center;
+
+  .glyphicons {
+    margin-left: -8px;
+  }
+
+  &:hover {
+    background: rgba(255,255,255,.025);
+    text-decoration: none;
+  }
+}
+
+/* RIGHT HERE */
+
+  aside#file-explorer {
+    .nav {
+      > li {
+        height: 100%;
+        @include box-sizing(border-box);
+        > ul {
+          padding-bottom: $dropzone-height+10px;
+        }
+      }
+      li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        a,
+        img,
+        input,
+        span {
+          padding: 6px 6.5%;
+          margin: 0;
+          color: #333;
+          position: relative;
+          white-space: nowrap;
+          display: block;
+          &:hover {
+            text-decoration: none;
+            color: $purple-light;
+          }
+          &:before {
+            content: "";
+            float: left;
+            margin: 6px 10px 0 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 6px solid transparent;
+          }
+        }
+        img {
+          @include box-sizing(content-box);
+        }
+        ul {
+          padding-left: 0;
+          li {
+            a,
+            img,
+            input,
+            span {
+              // padding-left: 0;
+            }
+            li a,
+            li img,
+            li input,
+            li span {
+              padding-left: 15%;
+            }
+            li li a,
+            li li img,
+            li li input,
+            li li span {
+              padding-left: 23%;
+            }
+            li li li a,
+            li li li img,
+            li li li input,
+            li li li span {
+              padding-left: 31%;
+            }
+            li li li li a,
+            li li li li img,
+            li li li li input,
+            li li li li span {
+              padding-left: 39%;
+            }
+            li li li li li a,
+            li li li li li img,
+            li li li li li input,
+            li li li li li span {
+              padding-left: 47%;
+            }
+            li li li li li li a,
+            li li li li li li img,
+            li li li li li li input,
+            li li li li li li span {
+              padding-left: 55%;
+            }
+            li li li li li li li a,
+            li li li li li li li img,
+            li li li li li li li input,
+            li li li li li li li span {
+              padding-left: 63%;
+            }
+            li li li li li li li li a,
+            li li li li li li li li img,
+            li li li li li li li li input,
+            li li li li li li li li span {
+              padding-left: 71%;
+            }
+            li li li li li li li li li a,
+            li li li li li li li li li img,
+            li li li li li li li li li input,
+            li li li li li li li li li span {
+              padding-left: 79%;
+            }
+            li li li li li li li li li li a,
+            li li li li li li li li li li img,
+            li li li li li li li li li li input,
+            li li li li li li li li li li span {
+              padding-left: 86%;
+            }
+            li li li li li li li li li li li a,
+            li li li li li li li li li li li img,
+            li li li li li li li li li li li input,
+            li li li li li li li li li li li span {
+              padding-left: 94%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+// when file explorer is open
+#code-editor.in {
+
+  // file explorer icon
+  .open-file-explorer {
+    background: $purple-light;
+
+    &:before {
+      content: '\E145';
+    }
+
+    &:hover {
+      background: lighten($purple-light, 5%);
+    }
+
+    &:active {
+      background: darken($purple-light,5%);
+    }
+  }
+
+  // file explorer
+  #file-explorer {
+    @include transform-3d(0%,0,0);
+    z-index: 10;
+  }
+
+  // tabs
+  #project-editor-tabs {
+    @include transform-3d(204px,0,0);
+  }
+
+  // ace editor
+  #project-editor-container {
+    @include transform-3d(240px,0,0);
+    width: calc(100% - 240px);
+    @include transition-transforms(.2s ease-in-out, width .2s ease-in-out);
+  }
+}

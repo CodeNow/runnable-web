@@ -1,8 +1,8 @@
+<a class="open-file-explorer glyphicons folder-closed"></a>
 {{view "file_tabs" collection=defaultFiles}}
+{{view "file_explorer" container=container rootDir=rootDir editmode=editmode lock=lock}}
 <div id="project-editor-container">
   <!--googleoff: anchor-->
   {{view "code" collection=defaultFiles}}
   <!--googleon: anchor-->
-  <a class="open-file-explorer" href="#"><img src="/images/icon-expand.png" height="17" width="24" alt="Open File Explorer" /></a>
-  {{view "file_explorer" container=container rootDir=rootDir editmode=editmode lock=lock}}
 </div>

@@ -5,8 +5,12 @@ var FilesSync = require('../models/files_sync')
 var Super = BaseView.prototype;
 
 module.exports = BaseView.extend({
-  tagName: 'a',
-  attributes: { 'href':'javascript:void(0);' },
+  tagName: 'li',
+  attributes: {
+    'rel' : 'tooltip',
+    'title' : 'Refresh Files'
+  },
+  className: 'glyphicons refresh',
   events: {
     'click' : 'click'
   },

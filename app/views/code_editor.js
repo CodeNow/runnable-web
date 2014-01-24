@@ -3,6 +3,8 @@ var _ = require('underscore');
 var Image = require('../models/image');
 
 module.exports = BaseView.extend({
+  id: 'code-editor',
+  className: 'in',
   events: {
     'click .open-file-explorer' : 'showFiles'
   },
@@ -46,8 +48,7 @@ module.exports = BaseView.extend({
     Track.increment(name.toLowerCase());
   },
   showFiles: function (evt) {
-    // show file browser
-    this.app.dispatch.trigger('toggle:files', true);
+    this.$el.toggleClass('in');
   },
   getTemplateData: function () {
     // only rendered once.. passes through context
