@@ -450,7 +450,7 @@ var utils = module.exports = {
     for (var key in json) {
       var value = json[key];
       var type = typeof value;
-      if (type === 'object') value = JSON.stringify(value);
+      if (type === 'object') value = value;
       properties[prependKey+modelName+'.'+key] = value;
     }
     return properties;
