@@ -94,7 +94,11 @@ module.exports = RendrView.extend({
     }
   },
   showIfError: function (err) {
-    if (err) this.showError(err);
+    if (err === 'cannot move folder to itself') {
+      // no feedback
+    } else if (err) {
+      this.showError(err);
+    }
   },
   showPrompt: function (options) {
     BootstrapDialog.show({

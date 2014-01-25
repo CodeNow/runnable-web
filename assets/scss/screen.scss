@@ -269,34 +269,6 @@ $prefix-for-spec:      true !default; // required for keyframe mixin
     }
 }
 
-// ----------------------------------- //
-
-#page-effect.blur {
-    -webkit-filter: blur(3px);
-    -moz-filter: blur(3px);
-    -o-filter: blur(3px);
-    -ms-filter: blur(3px);
-    filter: blur(3px);
-}
-
-// .dropdown-menu
-.dropdown-menu {
-    padding: 0;
-
-    li {
-        border-top: 1px solid rgba(0,0,0,0.1);
-    }
-
-    li:first-child {
-        border-top: none;
-    }
-
-    a {
-        padding: 8px 20px !important; //overriding bootstrap...
-    }
-}
-
-
 // inputs
 .form-control {
         min-height: 40px;
