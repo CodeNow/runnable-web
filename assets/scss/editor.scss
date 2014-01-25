@@ -1,5 +1,5 @@
 #code-editor {
-  border-left: 1px solid rgba(0,0,0,0.1);
+  border-left: 1px solid rgba(0,0,0,.1);
   overflow: hidden;
   position: relative;
 }
@@ -19,7 +19,7 @@
 
     > .tab-body {
       background: $grey-light;
-      border-color: rgba(0,0,0,0.1);
+      border-color: rgba(0,0,0,.1);
       border-bottom: none;
       @include border-radius(0);
       color: $grey-darker;
@@ -89,9 +89,9 @@
 
 
 #project-editor-container {
-  border-top: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(0,0,0,.1);
   border-right: 1px solid transparent;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,.1);
   position: relative;
     top: -1px;
   @include transform-3d(0,0,0);
@@ -99,7 +99,7 @@
   width: 100%;
 
   #project-editor {
-    border-right: 1px solid rgba(0,0,0,0.1);
+    border-right: 1px solid rgba(0,0,0,.1);
   }
 }
 
@@ -132,7 +132,7 @@
 
 #file-explorer {
   background: $grey-light;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,.1);
   float: left;
   height: calc(100% - 36px);
   position: absolute;
@@ -196,6 +196,8 @@
       }
     }
   }
+
+  // file tree
   .nav {
     font-size: 12px;
     height: calc(100% - 54px);
@@ -203,52 +205,44 @@
     padding-top: 8px;
 
     li {
-      &.active > a {
-        background: $orange;
-        color: #fff;
-        @include border-radius(0);
+
+      &.active > div > a, {
+        background-color: $grey-lighter;
+        color: $purple-light;
+
         &.arrow:before {
           border-top: 6px solid #fff !important;
         }
       }
+
       &.folder {
-        cursor: pointer;
-        a.arrow:before {
-          content: "";
-          float: left;
-          margin: 6px 5% 0 0;
+
+        .arrow:before {
+          border-top: 6px solid #bbb;
           border-left: 4px solid transparent;
           border-right: 4px solid transparent;
-          border-top: 6px solid #bbb;
-          @include transition(transform .25s linear);
+          content: '';
+          float: left;
+          margin: 6px 5% 0 0;
+          @include transition-transforms(.1s linear);
         }
-        a.collapsed:before {
+
+        .collapsed:before {
           @include rotate-3d(-90deg);
         }
       }
-      &.ui-draggable-dragging {
-        z-index: 100000;
-        position: absolute;
-        width: 100%;
-        background: rgba(242,242,242,.8);
-        @include border-radius(3px);
-        a {
-          background: transparent;
-          color: #333;
-        }
-      }
+
       &.ui-draggable-hover {
-        background: #ddd;
-        color: #777;
-        @include box-shadow(0 0 0 2px #777);
-        @include transition(all 0.2s ease-in-out);
+        background: rgba(0,0,0,.05);
+        @include transition(background .1s ease-in-out);
       }
     }
-    &.ui-draggable-hover {
-      background: #ddd;
-      color: #777;
-      @include transition(all .2s ease-in-out);
-    }
+  }
+
+  // file tree item
+  .ui-draggable:hover {
+    background: $grey-lighter;
+    text-decoration: none;
   }
 }
 
@@ -300,10 +294,10 @@
           position: relative;
           white-space: nowrap;
           display: block;
-          &:hover {
-            text-decoration: none;
-            color: $purple-light;
-          }
+          // &:hover {
+          //   text-decoration: none;
+          //   color: $purple-light;
+          // }
           &:before {
             content: "";
             float: left;

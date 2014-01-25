@@ -7,8 +7,7 @@ if (lock) {
   events = {
     'click .dark-theme'  : 'setDarkTheme',
     'click .light-theme' : 'setLightTheme',
-    'click .open-context-menu'   : 'showFileMenu',
-    'click .close-file-explorer' : 'hideFiles',
+    'click .open-context-menu'   : 'showFileMenu'
   };
 }
 else {
@@ -16,7 +15,6 @@ else {
     'click .dark-theme'  : 'setDarkTheme',
     'click .light-theme' : 'setLightTheme',
     'click .open-context-menu'   : 'showFileMenu',
-    'click .close-file-explorer' : 'hideFiles',
     'click #drop-to-add' : 'showUploadMessage',
     'drop #drop-to-add' : 'uploadToRoot',
     'dragover #drop-to-add'  : 'stopPropagation',

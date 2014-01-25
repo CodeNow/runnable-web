@@ -260,16 +260,6 @@ button.btn-sm, .btn-xs {
   white-space: normal;
 }
 
-#project-editor-container aside#file-explorer .nav li.active a,
-aside#file-explorer .nav li.active > div > a {
-  background: $orange;
-  color: #fff;
-  @include border-radius(0);
-  &.arrow:before {
-    border-top: 6px solid #fff !important;
-  }
-}
-
 button.silver img {
   margin-right: 0;
 }

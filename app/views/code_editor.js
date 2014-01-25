@@ -49,6 +49,7 @@ module.exports = BaseView.extend({
   },
   showFiles: function (evt) {
     this.$el.toggleClass('in');
+    this.$('#project-editor').resize();
   },
   getTemplateData: function () {
     // only rendered once.. passes through context
