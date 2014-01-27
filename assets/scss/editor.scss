@@ -202,7 +202,7 @@
     font-size: 12px;
     height: calc(100% - 54px);
     overflow: scroll;
-    padding-top: 8px;
+    padding-top: 1px;
 
     li {
 
@@ -248,9 +248,8 @@
 
 // upload
 #drop-to-add {
-  background: rgba(0,0,0,.025);
-  @include box-shadow(inset 0 0 10px rgba(0,0,0,.1));
-  cursor: pointer;
+  background: #fff;
+  @include box-shadow(0 1px 0 rgba(0,0,0,.1));
   color: $grey-dark;
   font-size: 14px;
   font-weight: bold;
@@ -258,14 +257,50 @@
   height: 54px;
   line-height: 58px;
   text-align: center;
+  @include user-select(none);
 
   .glyphicons {
-    margin-left: -8px;
+    border: 2px dotted #ccc;
+    @include border-radius(50%);
+    height: 26px;
+    top: 8px;
+    width: 26px;
+
+    &::before,
+    &::after {
+      position: absolute;
+        right: 0;
+        left: 0;
+    }
+
+    &::before {
+      top: 4px;
+    }
+
+    &::after {
+      content: "\E213";
+      opacity: 0;
+      top: 4px;
+      @include transform-3d(0,-100%,0);
+    }
   }
 
   &:hover {
-    background: rgba(255,255,255,.025);
     text-decoration: none;
+  }
+
+  &.in {
+
+    .glyphicons {
+
+      &::before {
+        @include animation(dropIn reverse .2s ease-in-out forwards);
+      }
+
+      &::after {
+        @include animation(dropIn .2s ease-in-out forwards);
+      }
+    }
   }
 }
 

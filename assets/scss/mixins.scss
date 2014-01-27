@@ -4,21 +4,25 @@
   }
 }
 
+// transition-delay mixin
 @mixin transition-delay($delay) {
   -webkit-transition-delay: $delay;
   transition-delay: $delay;
 }
 
+// animation-delay mixin
 @mixin animation-delay($delay) {
   -webkit-animation-delay: $delay;
   animation-delay: $delay;
 }
 
+// animation mixin
 @mixin animation($animation) {
   -webkit-animation: $animation;
   animation: $animation;
 }
 
+// user-select mixin
 @mixin user-select($user-select) {
   -moz-user-select: $user-select;
   -ms-user-select: $user-select;
