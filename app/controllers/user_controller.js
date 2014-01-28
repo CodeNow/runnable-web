@@ -80,6 +80,8 @@ module.exports = {
 
         async.series([
           function (cb) {
+            console.log(!viewingOwnProfile && results.user.isModerator());
+            console.log(viewingOwnProfile);
             if (!viewingOwnProfile && results.user.isModerator()) {
               fetchUserByUsername.call(self, params.username, function (err, userResults) {
                 if (err) return cb(err);
@@ -111,7 +113,7 @@ module.exports = {
               fetchProfileInfo.call(self, params.username, function (err, results2) {
                 if (err) return cb(err);
                 results2.profileuser = results2.users.models[0];
-                if (!results.profileuser) return cb({status:404});
+                if (!results2.profileuser) return cb({status:404});
                 delete results2.users;
                 results2.published.sortByAttr('-created');
                 _.extend(results, results2);
