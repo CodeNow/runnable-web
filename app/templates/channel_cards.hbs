@@ -5,15 +5,37 @@
 {{/if_modulo}}
 
 {{#if_eq attributes.name compare="runnableid"}}
-  <div class="col-sm-4">
+  <div class="col-sm-4" id="git-card">
     <a class="card">
+      <img src="/images/icon-git.svg" height="30" width="31" alt="Github">
       <div class="description">
         <h2>
-          <form>
-            <input name='id' placeholder="Runnable Id" class="form-control">
+          Import from Github
+          <form class="clearfix">
+            <input placeholder="Git Url" class="form-control" required>
+            <div class="dropdown-wrapper">
+              <select disabled required>
+                <option value="" disabled>Select Language
+                <option value=".Net">.Net
+                <option value="bash">bash
+                <option value="C++">C++
+                <option value="CakePHP">CakePHP
+                <option value="Codeigniter">Codeigniter
+                <option value="Dart">Dart
+                <option value="Django">Django
+                <option value="express">express
+                <option value="Flask">Flask
+                <option value="Java">Java
+                <option value="Javascript">Javascript
+                <option value="Node.js">Node.js
+                <option value="PHP">PHP
+                <option value="Python">Python
+              </select>
+              <div class="dropdown">Select</div>
+            </div>
           </form>
         </h2>
-        <p>Find an existing code example to start with (RunnableId is in the url).</p>
+        {{!-- <p>Import repo from Github. --}}
       </div>
     </a>
   </div>
