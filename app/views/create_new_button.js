@@ -11,14 +11,14 @@ module.exports = BaseView.extend({
     click: 'click'
   },
   click: function (evt) {
-    if (this.app.user.isRegistered()) {
-      // let the link work...
-    }
-    else {
-      evt.stopPropagation();
-      evt.preventDefault();
-      this.openLogin();
-    }
+    // if (this.app.user.isRegistered()) {
+    //   // let the link work...
+    // }
+    // else {
+    //   evt.stopPropagation();
+    //   evt.preventDefault();
+    //   this.openLogin();
+    // }
   },
   openLogin: function () {
     var user = this.app.user;
