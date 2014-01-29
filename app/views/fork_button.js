@@ -21,17 +21,17 @@ module.exports = EditorButtonView.extend({
     evt.preventDefault();
     var user = this.app.user;
     var dispatch = this.app.dispatch;
-    if (user.isRegistered()) {
-      this.saveAndRedirect();
-    }
-    else {
-      var signupModal = new SignupModal({
-        app    : this.app,
-        onClose: this.stopListening.bind(this, user)
-      });
-      this.listenToOnce(user, 'auth', this.saveAndRedirect.bind(this));
-      signupModal.open();
-    }
+    // if (user.isRegistered()) {
+    this.saveAndRedirect();
+    // }
+    // else {
+    //   var signupModal = new SignupModal({
+    //     app    : this.app,
+    //     onClose: this.stopListening.bind(this, user)
+    //   });
+    //   this.listenToOnce(user, 'auth', this.saveAndRedirect.bind(this));
+    //   signupModal.open();
+    // }
   },
   saveAndRedirect: function () {
     var self = this;

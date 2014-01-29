@@ -48,7 +48,10 @@ module.exports = BaseView.extend({
       app    : this.app,
       onClose: this.stopListening.bind(this, user)
     });
-    this.listenToOnce(user, 'change:username', router.navigate.bind(router, href, {trigger:true}));
+    // refresh once the username has changed
+    this.listenToOnce(user, 'change:username', function () {
+      location.reload();
+    });
     signupModal.open();
   },
   publishCallback: function (err, image) {
