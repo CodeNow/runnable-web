@@ -33,8 +33,7 @@
   }
 
   select[disabled] {
-    cursor: default;
-    pointer-events: none;
+    cursor: not-allowed;
 
     ~ div {
       background: transparent;

@@ -1024,12 +1024,17 @@ progress {
 
   input {
     float: left;
-    width: 50%;
+    font-size: 13px;
+    width: calc(50% + 15px);
   }
 
   .dropdown-wrapper {
     float: right;
-    width: calc(50% - 10px);
+    width: calc(50% - 25px);
+
+    > div {
+      font-size: 13px;
+    }
   }
 }
 

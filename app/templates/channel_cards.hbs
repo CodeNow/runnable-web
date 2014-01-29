@@ -5,17 +5,17 @@
 {{/if_modulo}}
 
 {{#if_eq attributes.name compare="runnableid"}}
-  <div class="col-sm-4" id="git-card">
+  <div id="git-card" class="col-sm-4">
     <a class="card">
       <img src="/images/icon-git.svg" height="30" width="31" alt="Github">
       <div class="description">
         <h2>
-          Import from Github
+          Import from GitHub
           <form class="clearfix">
             <input placeholder="Git Url" class="form-control" required>
             <div class="dropdown-wrapper">
               <select disabled required>
-                <option value="" disabled>Select Language
+                <option value="" selected disabled>Select Language
                 <option value=".Net">.Net
                 <option value="bash">bash
                 <option value="C++">C++
@@ -31,11 +31,10 @@
                 <option value="PHP">PHP
                 <option value="Python">Python
               </select>
-              <div class="dropdown">Select</div>
+              <div class="dropdown">Language</div>
             </div>
           </form>
         </h2>
-        {{!-- <p>Import repo from Github. --}}
       </div>
     </a>
   </div>

@@ -2,7 +2,7 @@ var BaseView = require('./base_view');
 var Channel = require('../models/channel');
 
 module.exports = BaseView.extend({
-  tagName: 'section',
+  tagName: 'main',
   id: 'cards',
   className: 'container',
   events: {
@@ -21,7 +21,9 @@ module.exports = BaseView.extend({
     if ($(evt.currentTarget)[0].value) {
       select.prop('disabled',false);
     } else {
-      select.prop('disabled',true);
+      select.prop('disabled',true)
+        .siblings().text('Language')
+        .end()[0].selectedIndex = 0;
     }
   },
   changeLanguage: function () {
