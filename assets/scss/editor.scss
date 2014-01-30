@@ -4,13 +4,21 @@
   position: relative;
 }
 
+// default tabs
 #project-editor-tabs {
   border: none;
+  height: 36px;
   position: relative;
     left: 38px;
+  overflow-x: auto;
+  overflow-y: hidden;
   @include transition-transforms(.2s ease-in-out);
+  white-space: nowrap;
+  width: calc(100% - 72px);
 
   li {
+    display: inline-block;
+    float: none;
     position: relative;
 
     > a {
@@ -87,6 +95,34 @@
   }
 }
 
+// select menu tabs
+#project-select-tabs {
+  background: $grey-lighter;
+  position: absolute;
+    top: 0;
+    right: 0;
+
+  &:hover > .dropdown {
+
+    &:before {
+      border-bottom-color: $grey-dark;
+    }
+
+    &:after {
+      border-top-color: $grey-dark;
+    }
+  }
+
+  > .dropdown {
+    border: none;
+    position: relative;
+
+    &:before,
+    &:after {
+      right: 13px;
+    }
+  }
+}
 
 #project-editor-container {
   border-top: 1px solid rgba(0,0,0,.1);
@@ -188,7 +224,7 @@
       }
 
       &.active {
-        pointer: default;
+        cursor: default;
 
         &:after {
           border: 1px solid $orange;
@@ -202,9 +238,19 @@
     font-size: 12px;
     height: calc(100% - 54px);
     overflow: scroll;
-    padding-top: 1px;
+    padding: 1px 0 36px 0;
 
+    ul {
+      padding: 0;
+    }
+
+    > li {
+      cursor: pointer;
+    }
+
+    // style folders and files
     li {
+      list-style-type: none;
 
       &.active > div > a, {
         background-color: $grey-lighter;
@@ -213,6 +259,11 @@
         &.arrow:before {
           border-top: 6px solid #fff !important;
         }
+      }
+
+      &.ui-draggable-hover {
+        background: rgba(0,0,0,.05);
+        @include transition(background .1s ease-in-out);
       }
 
       &.folder {
@@ -231,10 +282,28 @@
           @include rotate-3d(-90deg);
         }
       }
+    }
 
-      &.ui-draggable-hover {
-        background: rgba(0,0,0,.05);
-        @include transition(background .1s ease-in-out);
+    a,
+    img,
+    span {
+      color: $grey-dark;
+      display: block;
+      padding: 6px 5%;
+      white-space: nowrap;
+
+      &:hover {
+        text-decoration: none;
+      }
+
+      &:before {
+        border-top: 6px solid transparent;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+        content: '';
+        float: left;
+        margin: 6px 10px 0 0;
+
       }
     }
   }
@@ -243,6 +312,101 @@
   .ui-draggable:hover {
     background: $grey-lighter;
     text-decoration: none;
+  }
+}
+
+// nested folders
+#file-explorer .nav {
+
+  li {
+
+    img {
+      @include box-sizing(content-box);
+    }
+
+    ul {
+      padding-left: 0;
+
+      li {
+
+        a,
+        img,
+        input,
+        span {
+          // padding-left: 0;
+        }
+
+        li {
+          a, img, input, span, form {
+            padding-left: 13%;
+          }
+        }
+
+        li li {
+          a, img, input, span, form {
+            padding-left: 21%;
+          }
+        }
+
+        li li li {
+          a, img, input, span, form {
+            padding-left: 29%;
+          }
+        }
+
+        li li li li {
+          a, img, input, span, form {
+            padding-left: 37%;
+          }
+        }
+
+        li li li li li {
+          a, img, input, span, form {
+            padding-left: 45%;
+          }
+        }
+
+        li li li li li li {
+          a, img, input, span, form {
+            padding-left: 53%;
+          }
+        }
+
+        li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 61%;
+          }
+        }
+
+        li li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 69%;
+          }
+        }
+
+        li li li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 77%;
+          }
+        }
+
+        li li li li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 85%;
+          }
+        }
+        li li li li li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 93%;
+          }
+        }
+      }
+    }
+  }
+
+  .name-input {
+    padding: 6px 14px;
+    width: 100%;
   }
 }
 
@@ -304,129 +468,6 @@
   }
 }
 
-/* RIGHT HERE */
-
-  aside#file-explorer {
-    .nav {
-      > li {
-        height: 100%;
-        @include box-sizing(border-box);
-        > ul {
-          padding-bottom: $dropzone-height+10px;
-        }
-      }
-      li {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        a,
-        img,
-        input,
-        span {
-          padding: 6px 6.5%;
-          margin: 0;
-          color: #333;
-          position: relative;
-          white-space: nowrap;
-          display: block;
-          // &:hover {
-          //   text-decoration: none;
-          //   color: $purple-light;
-          // }
-          &:before {
-            content: "";
-            float: left;
-            margin: 6px 10px 0 0;
-            border-left: 4px solid transparent;
-            border-right: 4px solid transparent;
-            border-top: 6px solid transparent;
-          }
-        }
-        img {
-          @include box-sizing(content-box);
-        }
-        ul {
-          padding-left: 0;
-          li {
-            a,
-            img,
-            input,
-            span {
-              // padding-left: 0;
-            }
-            li a,
-            li img,
-            li input,
-            li span {
-              padding-left: 15%;
-            }
-            li li a,
-            li li img,
-            li li input,
-            li li span {
-              padding-left: 23%;
-            }
-            li li li a,
-            li li li img,
-            li li li input,
-            li li li span {
-              padding-left: 31%;
-            }
-            li li li li a,
-            li li li li img,
-            li li li li input,
-            li li li li span {
-              padding-left: 39%;
-            }
-            li li li li li a,
-            li li li li li img,
-            li li li li li input,
-            li li li li li span {
-              padding-left: 47%;
-            }
-            li li li li li li a,
-            li li li li li li img,
-            li li li li li li input,
-            li li li li li li span {
-              padding-left: 55%;
-            }
-            li li li li li li li a,
-            li li li li li li li img,
-            li li li li li li li input,
-            li li li li li li li span {
-              padding-left: 63%;
-            }
-            li li li li li li li li a,
-            li li li li li li li li img,
-            li li li li li li li li input,
-            li li li li li li li li span {
-              padding-left: 71%;
-            }
-            li li li li li li li li li a,
-            li li li li li li li li li img,
-            li li li li li li li li li input,
-            li li li li li li li li li span {
-              padding-left: 79%;
-            }
-            li li li li li li li li li li a,
-            li li li li li li li li li li img,
-            li li li li li li li li li li input,
-            li li li li li li li li li li span {
-              padding-left: 86%;
-            }
-            li li li li li li li li li li li a,
-            li li li li li li li li li li li img,
-            li li li li li li li li li li li input,
-            li li li li li li li li li li li span {
-              padding-left: 94%;
-            }
-          }
-        }
-      }
-    }
-  }
-
-
 // when file explorer is open
 #code-editor.in {
 
@@ -456,6 +497,7 @@
   // tabs
   #project-editor-tabs {
     @include transform-3d(204px,0,0);
+    width: calc(100% - 276px);
   }
 
   // ace editor

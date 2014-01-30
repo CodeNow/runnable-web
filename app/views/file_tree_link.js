@@ -4,7 +4,6 @@ var _ = require('underscore');
 module.exports = BaseView.extend({
   tagName: 'a',
   attributes: {
-    href: 'javascript:void(0)'
   },
   events: {
     click: 'click'
