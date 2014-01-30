@@ -45,12 +45,8 @@ module.exports = BaseView.extend({
     var router = this.app.router;
     var href = window.location.pathname;
     var signupModal = new SignupModal({
-      app    : this.app,
-      onClose: this.stopListening.bind(this, user)
-    });
-    // refresh once the username has changed
-    this.listenToOnce(user, 'change:username', function () {
-      location.reload();
+      app    : this.app
+      // onClose: this.stopListening.bind(this, user)
     });
     signupModal.open();
   },
