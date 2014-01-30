@@ -2,8 +2,6 @@ var _ = require('underscore');
 var BaseView = require('./base_view');
 var utils = require('../utils');
 var PublishRequestModal = require('./publish_request_modal');
-var SignupModal = require('./signup_modal');
-
 
 module.exports = BaseView.extend({
   events: {
@@ -36,19 +34,8 @@ module.exports = BaseView.extend({
   },
   openPublishRequest: function (evt) {
     evt.preventDefault();
-    // var publishRequestModal = new PublishRequestModal({app:this.app});
-    // publishRequestModal.open();
-    this.openLogin();
-  },
-  openLogin: function () {
-    var user = this.app.user;
-    var router = this.app.router;
-    var href = window.location.pathname;
-    var signupModal = new SignupModal({
-      app    : this.app
-      // onClose: this.stopListening.bind(this, user)
-    });
-    signupModal.open();
+    var publishRequestModal = new PublishRequestModal({app:this.app});
+    publishRequestModal.open();
   },
   publishCallback: function (err, image) {
     if (err) {
