@@ -42,6 +42,7 @@ module.exports = ModalView.extend({
           this.showError(err);
         }
         else {
+          debugger;
           this.close();
         }
       }.bind(this));
