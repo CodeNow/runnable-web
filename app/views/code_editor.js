@@ -4,7 +4,6 @@ var Image = require('../models/image');
 
 module.exports = BaseView.extend({
   id: 'code-editor',
-  className: 'in',
   events: {
     'click .open-file-explorer' : 'showFiles'
   },

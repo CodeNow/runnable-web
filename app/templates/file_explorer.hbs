@@ -1,7 +1,8 @@
 <ul class="controls">
   <li class="dark-theme theme active" rel="tooltip" title="Dark Theme">
   <li class="light-theme theme" rel="tooltip" title="Light Theme">
-  <li class="open-context-menu glyphicons plus" rel="tooltip" title="Add">
+  <li class="open-context-menu glyphicons plus pull-right" rel="tooltip" title="Add">
+  <li class="glyphicons disk-save pull-right" rel="tooltip" title="Download ZIP">
   {{#unless lock}}
     {{view "sync_button" model=container}}
   {{/unless}}
@@ -9,8 +10,8 @@
 
 {{#unless lock}}
 <a id="drop-to-add">
-  <span class="glyphicons file"></span>
-  Drag a file in to add it.
+  <div>Drag a file in to add it.</div>
+  <div>Drop it here, or in the file tree.</div>
 </a>
 {{/unless}}
 

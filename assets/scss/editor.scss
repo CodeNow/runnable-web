@@ -21,6 +21,10 @@
     float: none;
     position: relative;
 
+    &:last-child {
+      margin-right: 1px;
+    }
+
     > a {
       cursor: pointer;
     }
@@ -34,6 +38,7 @@
       font-size: 12px;
       line-height: 36px;
       height: 36px;
+      margin: 0;
       padding: 0 40px 0 10px;
       text-align: center;
 
@@ -97,30 +102,26 @@
 
 // select menu tabs
 #project-select-tabs {
-  background: $grey-lighter;
+  background: transparent;
+  border: none;
   position: absolute;
     top: 0;
     right: 0;
 
-  &:hover > .dropdown {
+  &:hover > button {
 
     &:before {
-      border-bottom-color: $grey-dark;
+      border-right-color: $grey-dark;
     }
 
     &:after {
-      border-top-color: $grey-dark;
+      border-left-color: $grey-dark;
     }
   }
 
-  > .dropdown {
+  > button {
     border: none;
     position: relative;
-
-    &:before,
-    &:after {
-      right: 13px;
-    }
   }
 }
 
@@ -287,7 +288,7 @@
     a,
     img,
     span {
-      color: $grey-dark;
+      color: $grey-darker;
       display: block;
       padding: 6px 5%;
       white-space: nowrap;
@@ -415,55 +416,35 @@
   background: #fff;
   @include box-shadow(0 1px 0 rgba(0,0,0,.1));
   color: $grey-dark;
-  font-size: 14px;
-  font-weight: bold;
   display: block;
   height: 54px;
   line-height: 58px;
+  overflow: hidden;
+  position: relative;
   text-align: center;
   @include user-select(none);
-
-  .glyphicons {
-    border: 2px dotted #ccc;
-    @include border-radius(50%);
-    height: 26px;
-    top: 8px;
-    width: 26px;
-
-    &::before,
-    &::after {
-      position: absolute;
-        right: 0;
-        left: 0;
-    }
-
-    &::before {
-      top: 4px;
-    }
-
-    &::after {
-      content: "\E213";
-      opacity: 0;
-      top: 4px;
-      @include transform-3d(0,-100%,0);
-    }
-  }
 
   &:hover {
     text-decoration: none;
   }
 
-  &.in {
+  > div {
+    position: absolute;
+    @include transition-transforms(.2s ease-in-out);
+    width: 100%;
 
-    .glyphicons {
+    &:last-child {
+      @include transform-3d(0,-100%,0);
+    }
+  }
 
-      &::before {
-        @include animation(dropIn reverse .2s ease-in-out forwards);
-      }
+  &.in > div {
+    &:first-child {
+      @include transform-3d(0,100%,0);
+    }
 
-      &::after {
-        @include animation(dropIn .2s ease-in-out forwards);
-      }
+    &:last-child {
+      @include transform-3d(0,0%,0);
     }
   }
 }

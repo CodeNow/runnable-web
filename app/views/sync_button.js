@@ -10,7 +10,7 @@ module.exports = BaseView.extend({
     'rel' : 'tooltip',
     'title' : 'Refresh Files'
   },
-  className: 'glyphicons refresh',
+  className: 'glyphicons refresh pull-right',
   events: {
     'click' : 'click'
   },

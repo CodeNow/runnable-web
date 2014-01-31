@@ -26,8 +26,6 @@ module.exports = BaseView.extend({
     this.listenTo(this.model, 'change:name', this.render.bind(this));
     this.listenTo(this.model, 'change:selected', this.onChangeSelected.bind(this));
   },
-  postRender: function () {
-  },
   onChangeSelected: function (model, selected) {
     if (selected) {
       this.$el.addClass('active').prop('selected',true);
