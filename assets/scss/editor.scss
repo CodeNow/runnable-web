@@ -1,7 +1,20 @@
 #code-editor {
-  border-left: 1px solid rgba(0,0,0,.1);
+  border: 1px solid rgba(0,0,0,.1);
+  border-top: none;
+  border-right: none;
   overflow: hidden;
   position: relative;
+
+  &:after {
+    background: rgba(0,0,0,.1);
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+      top: 36px;
+      right: 0;
+    width: 1px;
+  }
 }
 
 // default tabs
@@ -127,17 +140,11 @@
 
 #project-editor-container {
   border-top: 1px solid rgba(0,0,0,.1);
-  border-right: 1px solid transparent;
-  border-bottom: 1px solid rgba(0,0,0,.1);
   position: relative;
     top: -1px;
   @include transform-3d(0,0,0);
   @include transition-transforms(.2s ease-in-out, width 0s ease-in-out);
   width: 100%;
-
-  #project-editor {
-    border-right: 1px solid rgba(0,0,0,.1);
-  }
 }
 
 // file explorer icon
@@ -169,7 +176,7 @@
 
 #file-explorer {
   background: $grey-light;
-  border-bottom: 1px solid rgba(0,0,0,.1);
+  border-right: 1px solid rgba(0,0,0,0.1);
   float: left;
   height: calc(100% - 36px);
   position: absolute;
@@ -239,13 +246,17 @@
     font-size: 12px;
     height: calc(100% - 54px);
     overflow: scroll;
-    padding: 1px 0 36px 0;
+    padding: 1px 0 0;
 
     ul {
       padding: 0;
     }
 
     > li {
+      height: 100%;
+    }
+
+    .fs-list li {
       cursor: pointer;
     }
 
