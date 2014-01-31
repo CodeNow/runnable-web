@@ -32,6 +32,7 @@ module.exports = BaseView.extend({
   events: events,
   postHydrate: function () {
     this.listenTo(this.app.dispatch, 'toggle:files', this.toggleFiles.bind(this));
+    this.toggleFiles(true);
   },
   postRender: function () {
     this.$("[rel='tooltip']").tooltip();
