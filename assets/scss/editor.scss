@@ -22,7 +22,7 @@
   border: none;
   height: 36px;
   position: relative;
-    left: 38px;
+    left: 36px;
   overflow-x: auto;
   overflow-y: hidden;
   @include transition-transforms(.2s ease-in-out);
@@ -32,7 +32,12 @@
   li {
     display: inline-block;
     float: none;
+    margin-left: -4px;
     position: relative;
+
+    &:first-child {
+      margin-left: 0;
+    }
 
     &:last-child {
       margin-right: 1px;
@@ -53,14 +58,9 @@
       height: 36px;
       margin: 0;
       padding: 0 40px 0 10px;
-      text-align: center;
 
       &:hover {
         background: $grey-lighter;
-      }
-
-      &:active {
-        color: $purple-light;
       }
     }
 
@@ -94,8 +94,8 @@
 
       > .tab-body {
         background-color: $grey-lighter;
-        color: $purple-light;
         cursor: default;
+        font-weight: bold;
       }
 
       > .remove-2 {
@@ -145,11 +145,20 @@
   @include transform-3d(0,0,0);
   @include transition-transforms(.2s ease-in-out, width 0s ease-in-out);
   width: 100%;
+
+  .ace_scrollbar {
+    overflow: hidden;
+  }
+
+  .ace_scroller {
+    bottom: -20px;
+  }
 }
 
 // file explorer icon
 .open-file-explorer {
   background: $purple-light;
+  border-top: 1px solid rgba(0,0,0,.2);
   color: $grey-light;
   cursor: pointer;
   display: block;
@@ -187,6 +196,7 @@
   // file explorer controls
   .controls {
     background: $purple-light;
+    border-top: 1px solid rgba(0,0,0,.2);
     height: 36px;
     margin: 0;
     padding: 0;
@@ -245,7 +255,7 @@
   .nav {
     font-size: 12px;
     height: calc(100% - 54px);
-    overflow: scroll;
+    overflow: auto;
     padding: 1px 0 0;
 
     ul {
@@ -264,9 +274,8 @@
     li {
       list-style-type: none;
 
-      &.active > div > a, {
-        background-color: $grey-lighter;
-        color: $purple-light;
+      &.active > div > a {
+        font-weight: bold;
 
         &.arrow:before {
           border-top: 6px solid #fff !important;
@@ -275,7 +284,7 @@
 
       &.ui-draggable-hover {
         background: rgba(0,0,0,.05);
-        @include transition(background .1s ease-in-out);
+        border-color: rgba(0,0,0,.1);
       }
 
       &.folder {
@@ -293,6 +302,10 @@
         .collapsed:before {
           @include rotate-3d(-90deg);
         }
+      }
+
+      &.empty span {
+        color: #aaa;
       }
     }
 
@@ -323,7 +336,7 @@
   // file tree item
   .ui-draggable:hover {
     background: $grey-lighter;
-    text-decoration: none;
+    @include box-shadow(inset 0 -1px 0px rgba(0,0,0,.05), inset 0 1px 0px rgba(0,0,0,.05));
   }
 }
 
