@@ -15,7 +15,7 @@
   .modal-header {
     background: $purple-light;
     @include border-radius(3px 3px 0 0);
-    @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.25));
+    @include box-shadow(inset 0 1px 0 rgba(255,255,255,.25));
     color: #fff;
     height: 40px;
     padding: 0 20px;
@@ -25,19 +25,25 @@
       font-weight: bold;
       height: 40px;
       line-height: 40px;
-      text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 1px 0 rgba(0,0,0,.2);
+      white-space: nowrap;
     }
 
     .close {
       @include box-shadow(none);
-      color: rgba(0,0,0,0.5);
-      text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-      opacity: 1;
+      color: rgba(0,0,0,.5);
+      height: 36px;
+      opacity: .8;
+      text-align: right;
+      text-shadow: 0 1px 0 rgba(255,255,255,.2);
+      width: 18px;
 
       &:hover {
-        color: rgba(0,0,0,0.75);
-        text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+        color: rgba(0,0,0,.75);
         opacity: 1;
+        text-shadow: 0 1px 0 rgba(255,255,255,.2);
       }
     }
   }
@@ -158,7 +164,7 @@ body.modal-open,
       }
 
       hr {
-        border-top: 1px solid rgba(0,0,0,0.1);
+        border-top: 1px solid rgba(0,0,0,.1);
         margin-right: -20px;
         margin-left: -20px;
       }
@@ -281,7 +287,7 @@ body.modal-open,
 
     #implement-instructions-tab {
       background: lightyellow;
-      border: 1px solid rgba(0,0,0,0.1);
+      border: 1px solid rgba(0,0,0,.1);
       border-bottom: none;
       height: 100%;
       padding: 20px;
@@ -311,7 +317,7 @@ body.modal-open,
     //wrapping div
     > div {
       background: lightyellow;
-      border: 1px solid rgba(0,0,0,0.1);
+      border: 1px solid rgba(0,0,0,.1);
       height: 100%;
       margin-bottom: 20px;
       padding: 20px;
@@ -432,7 +438,7 @@ body.modal-open,
 
     #create-spec-preview {
       background: lightyellow;
-      border: 1px solid rgba(0,0,0,0.1);
+      border: 1px solid rgba(0,0,0,.1);
     }
   }
 }
@@ -452,7 +458,7 @@ body.modal-open,
 
   .modal-body,
   .modal-footer {
-    background: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,.75);
     border: 1px solid #e5e5e5;
   }
 
