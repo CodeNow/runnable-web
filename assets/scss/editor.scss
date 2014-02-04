@@ -3,6 +3,7 @@
   border-top: none;
   border-right: none;
   overflow: hidden;
+  padding-top: 36px;
   position: relative;
 
   &:after {
@@ -20,8 +21,9 @@
 // default tabs
 #project-editor-tabs {
   border: none;
-  height: 36px;
-  position: relative;
+  height: 51px;
+  position: absolute;
+    top: 0;
     left: 36px;
   overflow-x: auto;
   overflow-y: hidden;
