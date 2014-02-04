@@ -22,7 +22,7 @@
   "rollbar": "bbbd8090514a4b40a0ec53fbed32d882",
   "api": {
     "default": {
-      "host": "api.cloudcosmos.com",
+      "host": "10.0.1.86",
       "protocol": "http"
     }
   },
