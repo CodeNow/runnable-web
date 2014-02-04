@@ -27,7 +27,7 @@
   overflow-y: hidden;
   @include transition-transforms(.2s ease-in-out);
   white-space: nowrap;
-  width: calc(100% - 72px);
+  width: calc(100% - 71px);
 
   li {
     display: inline-block;
@@ -115,7 +115,6 @@
 
 // select menu tabs
 #project-select-tabs {
-  background: transparent;
   border: none;
   position: absolute;
     top: 0;
@@ -430,6 +429,9 @@
   }
 
   .name-input {
+    @include border-radius(0);
+    height: 29px;
+    min-height: 0;
     padding: 6px 14px;
     width: 100%;
   }
@@ -502,7 +504,7 @@
   // tabs
   #project-editor-tabs {
     @include transform-3d(204px,0,0);
-    width: calc(100% - 276px);
+    width: calc(100% - 275px);
   }
 
   // ace editor

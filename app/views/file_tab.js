@@ -2,8 +2,8 @@ var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
   events: {
-    'click .tab-body'   : 'select',
-    'click .close-tab' : 'close'
+    'click .tab-body' : 'select',
+    'click .remove-2' : 'close'
   },
   preRender: function () {
     var self = this;
