@@ -27,7 +27,7 @@
   overflow-y: hidden;
   @include transition-transforms(.2s ease-in-out);
   white-space: nowrap;
-  width: calc(100% - 71px);
+  width: calc(100% - 61px);
 
   li {
     display: inline-block;
@@ -123,11 +123,11 @@
   &:hover > button {
 
     &:before {
-      border-right-color: $grey-dark;
+      border-bottom-color: $grey-dark;
     }
 
     &:after {
-      border-left-color: $grey-dark;
+      border-top-color: $grey-dark;
     }
   }
 
@@ -504,7 +504,7 @@
   // tabs
   #project-editor-tabs {
     @include transform-3d(204px,0,0);
-    width: calc(100% - 275px);
+    width: calc(100% - 265px);
   }
 
   // ace editor
