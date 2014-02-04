@@ -54,7 +54,7 @@
       border-color: rgba(0,0,0,.1);
       border-bottom: none;
       @include border-radius(0);
-      color: $grey-darker;
+      color: $grey-dark;
       font-size: 12px;
       line-height: 36px;
       height: 36px;
@@ -96,6 +96,7 @@
 
       > .tab-body {
         background-color: $grey-lighter;
+        color: $grey-darker;
         cursor: default;
         font-weight: bold;
       }
@@ -305,8 +306,17 @@
         }
       }
 
-      &.empty span {
+      &.empty {
+        cursor: default;
+
+        span {
+          color: #aaa;
+        }
+      }
+
+      [title='empty'] {
         color: #aaa;
+        pointer-events: none;
       }
     }
 
