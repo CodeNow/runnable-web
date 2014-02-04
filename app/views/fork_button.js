@@ -48,7 +48,7 @@ module.exports = EditorButtonView.extend({
       if (err) {
         self.disable(false);
         self.app.set('loading', false);
-        self.showError(err)
+        self.showError(err);
       }
       else {
         self.app.router.navigate('/me/'+self.options.model.id, true);
