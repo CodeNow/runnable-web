@@ -1,0 +1,10 @@
+<button type="button"></button>
+<select class="file_select_menu_class">
+{{#each collection.models}}
+	{{#if attributes.selected}}
+		<option selected>{{attributes.name}}
+	{{else}}
+		<option>{{attributes.name}}
+	{{/if}}
+{{/each}}
+</select>
