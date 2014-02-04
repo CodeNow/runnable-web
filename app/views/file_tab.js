@@ -1,22 +1,14 @@
 var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
+  tagName: 'li',
   events: {
     'click .tab-body' : 'select',
     'click .remove-2' : 'close'
   },
   preRender: function () {
     var self = this;
-    var opts = self.options;
-    var file = opts.model;
-
-    if (!opts.select) {
-      // default tabs
-      self.tagName = 'li';
-    } else {
-      // select menu tabs
-      self.tagName = 'option';
-    }
+    var file = self.options.model;
 
     if (file.get('selected')) {
       self.className = 'active';
@@ -28,10 +20,10 @@ module.exports = BaseView.extend({
   },
   onChangeSelected: function (model, selected) {
     if (selected) {
-      this.$el.addClass('active').prop('selected',true);
+      this.$el.addClass('active');
     }
     else {
-      this.$el.removeClass('active').prop('selected',false);
+      this.$el.removeClass('active');
     }
   },
   select: function (evt) {
