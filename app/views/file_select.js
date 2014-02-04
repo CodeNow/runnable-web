@@ -11,7 +11,7 @@ module.exports = BaseView.extend({
     this.collection.at(selectedIndex).set('selected', true);
   },
   postHydrate: function () {
-    this.listenTo(this.collection, 'change', this.render.bind(this));
+    this.listenTo(this.collection, 'change add remove', this.render.bind(this));
   }
 });
 
