@@ -180,10 +180,6 @@
 //improve popover
 #improve-btn {
 
-  .btn {
-    @include transition(.2s all ease-in-out);
-  }
-
   .embed-close {
     min-width: 16px;
   }
@@ -201,14 +197,12 @@
   }
 
   .popover {
-    margin-left: 10px;
 
     .arrow {
-      left: 25px;
+      left: 50px;
     }
 
     textarea {
-      margin-top: 15px;
       max-height: 300px;
       min-height: 150px;
       resize: vertical;

@@ -1096,17 +1096,17 @@ progress {
         > button {
             float: left;
 
-            .glyphicons {
-                margin-right: 2px;
-                vertical-align: baseline;
-            }
+            // .glyphicons {
+            //     margin-right: 2px;
+            //     vertical-align: baseline;
+            // }
         }
 
-        .silver {
+        > .silver {
             margin-left: 10px;
         }
 
-        .green {
+        > .green {
 
             &:hover,
             &:focus {
