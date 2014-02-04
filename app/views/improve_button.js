@@ -3,7 +3,8 @@ var _ = require('underscore');
 
 module.exports = BaseView.extend({
   tagName: 'div',
-  className: 'btn-group improve-btn',
+  id: 'improve-btn',
+  className: 'btn-group',
   events: {
     'click .silver' : 'togglePopover'
   },
