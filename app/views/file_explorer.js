@@ -5,51 +5,34 @@ var lock = require('../lock');
 var events;
 if (lock) {
   events = {
-    'click .dark-theme'  : 'setDarkTheme',
-    'click .light-theme' : 'setLightTheme',
-    'click .open-context-menu'   : 'showFileMenu',
-    'click .close-file-explorer' : 'hideFiles',
+    'click .dark-theme'              : 'setDarkTheme',
+    'click .light-theme'             : 'setLightTheme',
+    'click .open-context-menu'       : 'showFileMenu',
+    'contextmenu .open-context-menu' : 'showFileMenu',
   };
 }
 else {
   events = {
-    'click .dark-theme'  : 'setDarkTheme',
-    'click .light-theme' : 'setLightTheme',
-    'click .open-context-menu'   : 'showFileMenu',
-    'click .close-file-explorer' : 'hideFiles',
-    'click #drop-to-add' : 'showUploadMessage',
-    'drop #drop-to-add' : 'uploadToRoot',
-    'dragover #drop-to-add'  : 'stopPropagation',
-    'dragleave #drop-to-add' : 'stopPropagation',
-    'contextmenu #drop-to-add' : 'stopPropagation',
+    'click .dark-theme'              : 'setDarkTheme',
+    'click .light-theme'             : 'setLightTheme',
+    'click .open-context-menu'       : 'showFileMenu',
+    'contextmenu .open-context-menu' : 'showFileMenu',
+    'drop #drop-to-add'              : 'uploadToRoot',
+    'dragover #drop-to-add'          : 'dragOver',
+    'dragleave #drop-to-add'         : 'dragLeave',
   };
 }
 
 module.exports = BaseView.extend({
   tagName: 'aside',
   id: 'file-explorer',
-  className: 'closed',
   events: events,
-  postHydrate: function () {
-    this.listenTo(this.app.dispatch, 'toggle:files', this.toggleFiles.bind(this));
-    this.toggleFiles(true);
-  },
   postRender: function () {
-    this.$("[rel='tooltip']").tooltip();
+    this.$('[rel="tooltip"]').tooltip({
+      // append to body to get around overflow: hidden on container
+      container: 'body'
+    });
     this.fileRoot = _.findWhere(this.childViews, {name:'file_tree'});
-  },
-  toggleFiles: function (open) {
-    if (open) { this.showFiles(); } else {
-      this.hideFiles();
-    }
-  },
-  hideFiles: function (evt) {
-    if (evt) evt.preventDefault();
-    this.$el.addClass('closed');
-  },
-  showFiles: function (evt) {
-    if (evt) evt.preventDefault();
-    this.$el.removeClass('closed');
   },
   showFileMenu: function (evt) {
     evt.preventDefault();
@@ -68,14 +51,17 @@ module.exports = BaseView.extend({
     this.$('.light-theme').addClass('active');
     this.app.dispatch.trigger('change:theme', 'light');
   },
-  showUploadMessage: function (evt) {
-    evt.stopPropagation();
-    this.showMessage('To upload files drop them in the file browser');
-  },
   uploadToRoot: function (evt) {
-    evt.stopPropagation();
-    evt.preventDefault();
+    this.stopPropagation(evt);
     this.fileRoot.uploadFiles(evt);
+  },
+  dragOver: function (evt) {
+    this.stopPropagation(evt);
+    this.$('#drop-to-add').addClass('in');
+  },
+  dragLeave: function (evt) {
+    this.stopPropagation(evt);
+    this.$('#drop-to-add').removeClass('in');
   },
   stopPropagation: function (evt) {
     evt.stopPropagation();

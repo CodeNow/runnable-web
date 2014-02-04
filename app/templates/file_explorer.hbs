@@ -1,30 +1,20 @@
-<ul class="controls clearfix">
-  <li class="left">
-    {{#unless lock}}
+<ul class="controls">
+  <li class="dark-theme theme active" rel="tooltip" title="Dark Theme">
+  <li class="light-theme theme" rel="tooltip" title="Light Theme">
+  <li class="open-context-menu glyphicons plus pull-right" rel="tooltip" title="Add">
+  {{!-- <li class="glyphicons disk-save pull-right" rel="tooltip" title="Download ZIP"> --}}
+  {{#unless lock}}
     {{view "sync_button" model=container}}
-    {{/unless}}
-  </li>
-  <li class="dark-theme theme active">
-    <a href="javascript:void(0);" rel="tooltip" title="Dark Theme"></a>
-  </li>
-  <li class="light-theme theme">
-    <a href="javascript:void(0);" rel="tooltip" title="Light Theme"></a>
-  </li>
-  <li class="close-file-explorer right">
-    <a href="javascript:void(0);"><img src="/images/control-close.png" height="12" width="12" alt="Close" /></a>
-  </li>
-  <li class="open-context-menu right">
-    <a href="javascript:void(0);"><img src="/images/control-settings.png" height="12" width="12" alt="Settings" /></a>
-  </li>
+  {{/unless}}
 </ul>
+
+{{#unless lock}}
+<a id="drop-to-add">
+  <div>Drag a file in to add it.</div>
+  <div>Drop it here, or in the file tree.</div>
+</a>
+{{/unless}}
+
 <ul class="nav nav-pills nav-stacked">
   {{view "file_tree" model=rootDir editmode=editmode}}
 </ul>
-{{#unless lock}}
-<a id="drop-to-add" href="#">
-  <div class="drop-to-add-icon-container">
-    <div class="drop-to-add-icon"></div>
-    <p>Drop to add</p>
-  </div>
-</a>
-{{/unless}}

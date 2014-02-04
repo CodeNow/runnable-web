@@ -1,34 +1,51 @@
-<ul class="menu-options">
-  {{#unless createOnly}}
-  <li><a href="javascript:void(0)" class="rename" href=""><i class="glyphicon glyphicon-pencil"></i> Rename</a></li>
-  <li><a href="javascript:void(0)" class="delete" href=""><i class="glyphicon glyphicon-trash"></i> Delete</a></li>
+{{#unless createOnly}}
+  <li>
+    <a class="rename">
+      <i class="glyphicon glyphicon-pencil"></i>
+      Rename
+    </a>
+  <li>
+    <a class="delete">
+      <i class="glyphicon glyphicon-trash"></i>
+      Delete
+    </a>
   {{#if showDefault}}
-  {{#if isFile}}
-    {{#if model.attributes.default}}
-    <li><a href="javascript:void(0)" class="undefault" href=""><i class="glyphicon glyphicon-star-empty"></i> Set: Closed by Default</a></li>
-    {{else}}
-    <li><a href="javascript:void(0)" class="default" href=""><i class="glyphicon glyphicon-star"></i> Set: Opened by Default</a></li>
+    {{#if isFile}}
+      {{#if model.attributes.default}}
+      <li>
+        <a class="undefault">
+          <i class="glyphicon glyphicon-star-empty"></i>
+          Set: Closed by Default
+        </a>
+      {{else}}
+      <li>
+        <a class="default">
+          <i class="glyphicon glyphicon-star"></i>
+          Set: Opened by Default
+        </a>
+      {{/if}}
     {{/if}}
   {{/if}}
-  {{/if}}
-  <hr>
-  {{/unless}}
-  <li>
-    <a href="javascript:void(0)" class="create-file" href="">
-      <i class="glyphicon glyphicon-file"></i> New file</a>
-  </li>
-  <li>
-    <a href="javascript:void(0)" class="create-dir" href="">
-      <i class="glyphicon glyphicon-folder-close"></i> New folder</a>
-  </li>
-  <li>
-    <a href="javascript:void(0)" class="upload" href="">
-      <i class="glyphicon glyphicon-upload"></i> Upload</a>
-  </li>
-  <!--
-  <li>
-    <a href="javascript:void(0)" class="download" href="{{fsJSON.downloadUrl}}" data-bypass>
-      <i class="icon-download-alt"></i> Download {{fsJSON.niceType}}</a>
-  </li>
-  -->
-</ul>
+  <li class="divider">
+{{/unless}}
+<li>
+  <a class="create-file">
+    <i class="glyphicon glyphicon-file"></i>
+    New file
+  </a>
+<li>
+  <a class="create-dir">
+    <i class="glyphicon glyphicon-folder-close"></i>
+    New folder
+  </a>
+{{!--
+<li>
+  <a class="upload">
+    <i class="glyphicon glyphicon-upload"></i>
+    Upload
+  </a>
+<li>
+  <a href="javascript:void(0)" class="download" href="{{fsJSON.downloadUrl}}" data-bypass>
+    <i class="icon-download-alt"></i> Download {{fsJSON.niceType}}
+  </a>
+ --}}

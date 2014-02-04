@@ -110,11 +110,11 @@
   0% {
     @include rotate-3d(0deg);
   }
-  70% {
-    @include rotate-3d(180deg);
+  80% {
+    @include rotate-3d(90deg);
   }
   100% {
-    @include rotate-3d(0deg);
+    @include rotate-3d(90deg);
   }
 }
 
