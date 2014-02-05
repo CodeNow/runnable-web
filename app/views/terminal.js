@@ -61,7 +61,9 @@ module.exports = BaseView.extend({
       if(iframeFocused !== self.iframeFocused) {
         self.iframeFocused = iframeFocused;
         if (iframeFocused) {
-          self.$('.TerminalHelp').show();
+          if (this.app.user.isVerified())
+            self.$('.TerminalHelp').show();
+
           self.trackEvent('Focus');
         }
         else {
