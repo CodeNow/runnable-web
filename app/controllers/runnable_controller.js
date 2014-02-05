@@ -314,7 +314,7 @@ module.exports = {
       }
       else {
         var weboutputUrl = "http://" + results.container.get("webToken") + "." + self.app.get('domain');
-        self.redirectTo(weboutputUrl);
+        self.redirectTo(302, weboutputUrl);
       }
     });
   },
