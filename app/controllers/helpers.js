@@ -433,9 +433,8 @@ function fetchLeaderBadges (count, userId, channelIds, cb) {
     leaderBadges: {
       collection: 'Channels',
       params: {
-        channelIds : channelIds,
+        _ids : channelIds,
         userId : userId,
-        count  : count,
         badges : true
       }
     }
