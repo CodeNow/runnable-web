@@ -2,6 +2,7 @@ var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
   tagName: 'div',
+  thumbsDirection: 'none',
   className: 'popover fade bottom',
   events: {
     'click' : 'stopPropagation',
@@ -25,6 +26,7 @@ module.exports = BaseView.extend({
   hide: function () {
     this.$el.removeClass('in');
     this.trigger('hide');
+    this.$('textarea').val('');
     $(document).off('click', this.boundHide);
   },
   changeSelect: function (evt) {
@@ -43,26 +45,35 @@ module.exports = BaseView.extend({
   },
   submitFeedback: function (evt) {
     evt.preventDefault();
-    this.hide();
     var self = this;
+    var description = "Feedback: " + $(".feedback-description")[0].value + "\n\n\n" + 
+
+                      "User: " + this.app.user.username + "\n\n\n" + 
+                      "User_id: " + this.app.user.id + "\n\n\n" + 
+                      "thumbsDirection: " + this.app.thumbsDirection;
+
+
+    self.hide();
+
 
     $.ajax({
       type: "POST",
       url: "/api/-/request/improve",
-      data: { url: "http://runnable.com" + window.location.pathname, 
-        description : "MENU VALUE: <<" + 
-          $("#improve_from_1337").find("select")[0].value  + 
-          ">>\n\n IMPROVEMENT: " + $("#improve_from_1337").find("textarea")[0].value 
-        },
+      data: { 
+        url: "http://runnable.com" + window.location.pathname,
+        description : description
+      },
       success: function (data) {
-        // show success regardless for now
-        var $improveBtn = self.$el.siblings('.silver');
+        // TO BE DONE
 
-        $improveBtn
-          .addClass('thanks')
-          .prop('disabled',true)
-          .children('.btn-text')[0]
-          .innerHTML = 'Feedback Sent';
+        // show success regardless for now
+        // var $improveBtn = self.$el.siblings('.silver');
+
+        // $improveBtn
+        //   .addClass('thanks')
+        //   .prop('disabled',true)
+        //   .children('.btn-text')[0]
+        //   .innerHTML = 'Feedback Sent';
         }
     });
   }
