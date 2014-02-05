@@ -33,6 +33,7 @@ module.exports = BaseView.extend({
     this.watchForIframeFocus();
   },
   getTemplateData: function () {
+    this.options.isUserVerified = this.app.user.isVerified();
     this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
     this.options.termurl = this.options.boxurl + "/static/term.html";
     return this.options;
@@ -61,9 +62,7 @@ module.exports = BaseView.extend({
       if(iframeFocused !== self.iframeFocused) {
         self.iframeFocused = iframeFocused;
         if (iframeFocused) {
-          if (self.app.user.isVerified())
-            self.$('.TerminalHelp').show();
-
+          self.$('.TerminalHelp').show();
           self.trackEvent('Focus');
         }
         else {
