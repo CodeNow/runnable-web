@@ -17,7 +17,6 @@
 // terminal-help
 #terminal-help {
   border: 1px solid rgba(0, 0, 0, .1);
-  @include border-radius(3px 3px 0 0);
   color: $grey-dark;
   font-size: 12px;
   height: 36px;
