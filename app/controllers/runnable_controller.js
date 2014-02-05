@@ -273,6 +273,51 @@ module.exports = {
       }
     });
   },
+  imageweboutput: function(params, callback) {
+    var self = this;
+    var app = this.app;
+    async.waterfall([
+      function data (cb) {
+        var spec = {
+          user: {
+            model:'User',
+            params:{
+              _id: 'me'
+            }
+          },
+          image: {
+            model : 'Image',
+            params: {_id:params._id}
+          },
+          specifications: {
+            collection: 'Specifications',
+            params: {}
+          },
+          implementations: {
+            collection: 'Implementations',
+            params: {}
+          }
+        };
+        fetch.call(self, spec, cb);
+      },
+      function container (results, cb) {
+        createContainerFrom.call(self, results.image.id, function (err, container) {
+          cb(err, _.extend(results, {
+            container: container
+          }));
+        });
+      }
+    ],
+    function (err, results) {
+      if (err) {
+        callback(err);
+      }
+      else {
+        var weboutputUrl = "http://" + results.container.get("webToken") + "." + self.app.get('domain');
+        self.redirectTo(weboutputUrl);
+      }
+    });
+  },
   container: function (params, callback) {
     var self = this;
     async.waterfall([

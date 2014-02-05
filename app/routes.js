@@ -31,6 +31,7 @@ module.exports = function(match) {
     match(':_id',                 'runnable#index');
     match(':_id/output',          'runnable#output');
     match(':_id/imageoutput',     'runnable#imageoutput'); // for pingdom and monitoring, direct access to output page
+    match(':_id/imageweboutput',  'runnable#imageweboutput'); // for pingdom and monitoring, direct access to output page
     match(':_id/:name',           'runnable#index');
   }
   match(':channel',             'channel#index');
