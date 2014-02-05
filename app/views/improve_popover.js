@@ -48,7 +48,7 @@ module.exports = BaseView.extend({
     var self = this;
     var description = "Feedback: " + $(".feedback-description")[0].value + "\n\n\n" + 
 
-                      "User: " + this.app.user.username + "\n\n\n" + 
+                      "User: " + this.app.user.get("username") + "\n\n\n" + 
                       "User_id: " + this.app.user.id + "\n\n\n" + 
                       "thumbsDirection: " + this.app.thumbsDirection;
 
