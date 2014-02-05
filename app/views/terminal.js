@@ -1,10 +1,28 @@
 var BaseView = require('./base_view');
 var Super = BaseView.prototype;
+var FilesSync = require('../models/files_sync');
+var utils = require('../utils');
+
 
 module.exports = BaseView.extend({
   className: 'terminal-view relative loading',
+  events: {
+    "click .TerminalHelp li" : "syncFiles",
+    "click .TerminalHelp .messageTrigger" : "popIntercom"
+  },
+  popIntercom: function(evt) {
+    evt.stopImmediatePropagation();
+    window.Intercom('show');
+  },
   postHydrate: function () {
+    var self = this;
+
     this.onPostMessage = this.onPostMessage.bind(this);
+    this.$('.TerminalHelp').hide();
+
+    this.$('.TerminalHelp').focusout(function() {
+      self.$(".TerminalHelp").hide();
+    });
   },
   postRender: function () {
     this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
@@ -40,9 +58,13 @@ module.exports = BaseView.extend({
     function checkFocus() {
       if (!document.activeElement) return;
       var iframeFocused = document.activeElement == self.$("iframe")[0];
+      var syncButtonFocused = document.activeElement == self.$("li")[0];
+
       if(iframeFocused !== self.iframeFocused) {
+
         self.iframeFocused = iframeFocused;
         if (iframeFocused) {
+          self.$('.TerminalHelp').show();
           self.trackEvent('Focus');
         }
         else {
@@ -80,7 +102,29 @@ module.exports = BaseView.extend({
   },
   stopWarningTimeout: function () {
     clearTimeout(this.warningTimeout);
-  }
+  },
+  syncFiles: function (evt) {
+    evt.preventDefault();
+    if ($(evt.currentTarget).attr('disabled')) {
+      return;
+    }
+    var dispatch = this.app.dispatch;
+    var sync = new FilesSync({
+      containerId: this.model.id
+    });
+    var opts = utils.cbOpts(cb, this);
+    this.disable(true);
+    sync.save({}, opts);
+
+    function cb (err) {
+      var self = this;
+      console.log("Listening to the trigger event 1337");
+      if (err) { this.showError(err); } else {
+        this.disable(false);
+        dispatch.trigger('sync:files')
+      }
+    }
+  },
 });
 
 module.exports.id = "Terminal";
