@@ -58,10 +58,7 @@ module.exports = BaseView.extend({
     function checkFocus() {
       if (!document.activeElement) return;
       var iframeFocused = document.activeElement == self.$("iframe")[0];
-      var syncButtonFocused = document.activeElement == self.$("li")[0];
-
       if(iframeFocused !== self.iframeFocused) {
-
         self.iframeFocused = iframeFocused;
         if (iframeFocused) {
           self.$('.TerminalHelp').show();
