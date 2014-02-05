@@ -224,4 +224,28 @@
       @include border-radius(0 3px 3px 0);
     }
   }
+
+  .thumbs-up {
+
+    &:hover {
+      color: transparentize($green,.2);
+    }
+
+    &:active,
+    &.active {
+      color: $green;
+    }
+  }
+
+  .thumbs-down {
+
+    &:hover {
+      color: transparentize($orange,.2);
+    }
+
+    &:active,
+    &.active {
+      color: $orange;
+    }
+  }
 }
