@@ -208,6 +208,71 @@ module.exports = {
       }
     });
   },
+  imageoutput: function(params, callback) {
+    var self = this;
+    var app = this.app;
+    async.waterfall([
+      function data (cb) {
+        var spec = {
+          user: {
+            model:'User',
+            params:{
+              _id: 'me'
+            }
+          },
+          image: {
+            model : 'Image',
+            params: {_id:params._id}
+          },
+          specifications: {
+            collection: 'Specifications',
+            params: {}
+          },
+          implementations: {
+            collection: 'Implementations',
+            params: {}
+          }
+        };
+        fetch.call(self, spec, cb);
+      },
+      function container (results, cb) {
+        createContainerFrom.call(self, results.image.id, function (err, container) {
+          cb(err, _.extend(results, {
+            container: container
+          }));
+        });
+      }
+    ],
+    function (err, results) {
+      if (err) { callback(err); } else {
+        var container = results.container;
+        if (container.get('specification')) {
+          fetchImplementation.call(self, container.get('specification'), function (err, implementation) {
+            if (err) { callback(err); } else {
+              // IF NO IMPLEMENTATION DEAL WITH IT AS ERROR
+              container.set('webToken', implementation.get('subdomain'));
+              callback(null, _.extend(results, {
+                page: {
+                  title: 'Output: ' + results.container.nameWithTags(),
+                  description: 'Web and console output for ' + container.get('name'),
+                  canonical: canonical.call(self)
+                }
+              }));
+            }
+          });
+        }
+        else {
+          callback(null, 'runnable/output', _.extend(results, {
+            page: {
+              title: 'Output: '+results.container.nameWithTags(),
+              description: 'Web and console output for '+container.get('name'),
+              canonical: canonical.call(self)
+            }
+          }));
+        }
+      }
+    });
+  },
   container: function (params, callback) {
     var self = this;
     async.waterfall([
