@@ -7,26 +7,15 @@ var utils = require('../utils');
 module.exports = BaseView.extend({
   className: 'terminal-view relative loading',
   events: {
-    "click .TerminalHelp li" : "syncFiles",
-    "click .TerminalHelp .messageTrigger" : "popIntercom"
-  },
-  popIntercom: function(evt) {
-    evt.stopImmediatePropagation();
-    window.Intercom('show');
+    'click .file-sync'    : 'syncFiles',
+    'click .message-us'   : 'popIntercom'
   },
   postHydrate: function () {
-    var self = this;
-
     this.onPostMessage = this.onPostMessage.bind(this);
-    this.$('.TerminalHelp').hide();
-
-    this.$('.TerminalHelp').focusout(function() {
-      self.$(".TerminalHelp").hide();
-    });
   },
   postRender: function () {
-    this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
-    this.options.termurl = this.options.boxurl + "/static/term.html";
+    this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('domain');
+    this.options.termurl = this.options.boxurl + '/static/term.html';
     this.loading(true);
     this.listenToPostMessages();
     this.$('iframe').attr('src', this.options.termurl);
@@ -34,9 +23,13 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     this.options.isUserVerified = this.app.user.isVerified();
-    this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
-    this.options.termurl = this.options.boxurl + "/static/term.html";
+    this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('domain');
+    this.options.termurl = this.options.boxurl + '/static/term.html';
     return this.options;
+  },
+  popIntercom: function(evt) {
+    evt.stopImmediatePropagation();
+    window.Intercom('show');
   },
   onPostMessage: function (message) {
     console.log('POST MESSAGE', message);
@@ -48,24 +41,27 @@ module.exports = BaseView.extend({
     }
   },
   listenToPostMessages: function () {
-    window.addEventListener("message", this.onPostMessage);
+    window.addEventListener('message', this.onPostMessage);
   },
   stopListeningToPostMessages: function () {
-    window.removeEventListener("message", this.onPostMessage);
+    window.removeEventListener('message', this.onPostMessage);
   },
   watchForIframeFocus: function () {
     var self = this;
+    var terminalHelp = self.$('#terminal-help');
+
     this.iframeFocused = false;
     function checkFocus() {
       if (!document.activeElement) return;
-      var iframeFocused = document.activeElement == self.$("iframe")[0];
+      var iframeFocused = document.activeElement == self.$('iframe')[0];
       if(iframeFocused !== self.iframeFocused) {
         self.iframeFocused = iframeFocused;
         if (iframeFocused) {
-          self.$('.TerminalHelp').show();
+          terminalHelp.addClass('in');
           self.trackEvent('Focus');
         }
         else {
+          terminalHelp.removeClass();
           self.trackEvent('Blur');
         }
       }
@@ -92,7 +88,7 @@ module.exports = BaseView.extend({
   },
   startWarningTimeout: function () {
     var self = this;
-    var warningMessage = "Uh oh, looks like your box is having some problems.<br> Try refreshing to the window - you may lose your changes.";
+    var warningMessage = 'Uh oh, looks like your box is having some problems.<br> Try refreshing to the window - you may lose your changes.';
     this.warningTimeout = setTimeout(function () {
       if (this.blockWarning) return;
       self.showError.bind(this, warningMessage);
@@ -103,9 +99,6 @@ module.exports = BaseView.extend({
   },
   syncFiles: function (evt) {
     evt.preventDefault();
-    if ($(evt.currentTarget).attr('disabled')) {
-      return;
-    }
     var dispatch = this.app.dispatch;
     var sync = new FilesSync({
       containerId: this.model.id
@@ -116,12 +109,15 @@ module.exports = BaseView.extend({
 
     function cb (err) {
       var self = this;
-      if (err) { this.showError(err); } else {
+      if (err) {
+        this.showError(err);
+      }
+      else {
         this.disable(false);
-        dispatch.trigger('sync:files')
+        dispatch.trigger('sync:files');
       }
     }
-  },
+  }
 });
 
 module.exports.id = "Terminal";

@@ -11,16 +11,22 @@
   </div>
 </div>
 <h3 class="terminal-title">
-  <span>Terminal</span>
-  <a href="{{termurl}}" target="_blank"><img src="/images/control-popout.png" height="11" width="11" alt="Pop Out" /></a>
-  <div class="TerminalHelp" style="display: block; color: rgb(68, 68, 68); background-color: rgb(238, 238, 238); padding: 2px 5px 10px; margin-bottom: 0px; float: right; font-size: 12px; border: 2px solid rgb(238, 238, 238);">
-  Making changes to your files? Click <a href="#"><li style="padding-left:3px; padding-right:3px;" class="glyphicons refresh"></li></a> to refresh the File Browser. 
+  Terminal
+  <a href="{{termurl}}" target="_blank" class="glyphicons new-window-alt"></a>
+  <aside id="terminal-help">
+    <a class="file-sync">
+      <span>Making changes to your files?</span>
+      <i class="glyphicons refresh"></i>
+      <span>Refresh the File Browser.</span>
+    </a>
 
-  {{#if isUserVerified}}
-    <a href="#" class="messageTrigger">Message us</a> if you need to auto-start a service or command.
-  {{/if}}
-  
-  </div>
+    {{#if isUserVerified}}
+    <a class="message-us">
+      <i class="glyphicons circle-question-mark"></i>
+      <span>Message us if you need to auto-start a service or command.</span>
+    </a>
+    {{/if}}
+  </aside>
 </h3>
 <iframe class="terminal-iframe" src="" frameborder="0" height='100%' width='100%'>
 </iframe>
