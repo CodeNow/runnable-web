@@ -1,0 +1,528 @@
+#code-editor {
+  border: 1px solid rgba(0,0,0,.1);
+  border-top: none;
+  border-right: none;
+  overflow: hidden;
+  padding-top: 36px;
+  position: relative;
+
+  &:after {
+    background: rgba(0,0,0,.1);
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+      top: 36px;
+      right: 0;
+    width: 1px;
+  }
+}
+
+// default tabs
+#project-editor-tabs {
+  border: none;
+  height: 51px;
+  position: absolute;
+    top: 0;
+    left: 36px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  @include transition-transforms(.2s ease-in-out);
+  white-space: nowrap;
+  width: calc(100% - 61px);
+
+  li {
+    display: inline-block;
+    float: none;
+    margin-left: -5px;
+    position: relative;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 1px;
+    }
+
+    > a {
+      cursor: pointer;
+    }
+
+    > .tab-body {
+      background: $grey-light;
+      border-color: rgba(0,0,0,.1);
+      border-bottom: none;
+      @include border-radius(0);
+      color: $grey-dark;
+      font-size: 12px;
+      line-height: 36px;
+      height: 36px;
+      margin: 0;
+      padding: 0 40px 0 10px;
+
+      &:hover {
+        background: $grey-lighter;
+      }
+    }
+
+    > .remove-2 {
+      background: none;
+      border: none;
+      color: darken($grey,10%);
+      font-size: 11px;
+      padding: 0;
+      position: absolute;
+        top: 12px;
+        right: 10px;
+
+      &:hover {
+        color: darken($grey,20%);
+        top: 8px;
+        right: 8px;
+      }
+
+      &:hover:before {
+        content: '\E193';
+        font-size: 16px;
+      }
+
+      &:active {
+        color: darken($grey,30%);
+      }
+    }
+
+    &.active {
+
+      > .tab-body {
+        background-color: $grey-lighter;
+        color: $grey-darker;
+        cursor: default;
+        font-weight: bold;
+      }
+
+      > .remove-2 {
+        color: darken($grey,20%);
+
+        &:hover {
+          color: darken($grey,30%);
+        }
+
+        &:active {
+          color: darken($grey,40%);
+        }
+      }
+    }
+  }
+}
+
+// select menu tabs
+#project-select-tabs {
+  border: none;
+  position: absolute;
+    top: 0;
+    right: 0;
+
+  &:hover > button {
+
+    &:before {
+      border-bottom-color: $grey-dark;
+    }
+
+    &:after {
+      border-top-color: $grey-dark;
+    }
+  }
+
+  > button {
+    border: none;
+    position: relative;
+  }
+}
+
+#project-editor-container {
+  border-top: 1px solid rgba(0,0,0,.1);
+  position: relative;
+    top: -1px;
+  @include transform-3d(0,0,0);
+  @include transition-transforms(.2s ease-in-out, width 0s ease-in-out);
+  width: 100%;
+
+  .ace_scrollbar {
+    overflow: hidden;
+  }
+
+  .ace_scroller {
+    bottom: -20px;
+  }
+}
+
+// file explorer icon
+.open-file-explorer {
+  background: $purple-light;
+  border-top: 1px solid rgba(0,0,0,.2);
+  color: $grey-light;
+  cursor: pointer;
+  display: block;
+  font-size: 18px;
+  height: 36px;
+  line-height: 36px;
+  position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  text-align: center;
+  width: 36px;
+
+  &:hover {
+    background: lighten($purple-light,5%);
+    color: $grey-light;
+    text-decoration: none;
+  }
+
+  &:active {
+    background: darken($purple-light,5%);
+  }
+}
+
+#file-explorer {
+  background: $grey-light;
+  border-right: 1px solid rgba(0,0,0,0.1);
+  float: left;
+  height: calc(100% - 36px);
+  position: absolute;
+  @include transform-3d(-100%,0,0);
+  @include transition-transforms(.2s ease-in-out, width 0s ease-in-out);
+  width: 240px;
+
+  // file explorer controls
+  .controls {
+    background: $purple-light;
+    border-top: 1px solid rgba(0,0,0,.2);
+    height: 36px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+      top: -36px;
+      left: 36px;
+      z-index: 1;
+    width: 204px;
+
+    li {
+      color: $grey-lighter;
+      cursor: pointer;
+      display: block;
+      float: left;
+      font-size: 16px;
+      height: 36px;
+      line-height: 36px;
+      list-style: none;
+      margin: 0;
+      top: 0;
+      text-align: center;
+      width: 36px;
+
+      &.dark-theme,
+      &.light-theme {
+        &:after {
+          border: 1px solid transparent;
+          @include border-radius(50%);
+          content: '';
+          display: block;
+          height: 18px;
+          margin: 8px auto;
+          width: 18px;
+        }
+      }
+
+      &.dark-theme:after {
+        background: $purple;
+      }
+
+      &.light-theme:after {
+        background: $grey-lighter;
+      }
+
+      &.active {
+        cursor: default;
+
+        &:after {
+          border: 1px solid $orange;
+        }
+      }
+    }
+  }
+
+  // file tree
+  .nav {
+    font-size: 12px;
+    height: calc(100% - 54px);
+    overflow: auto;
+    padding: 1px 0 0;
+
+    ul {
+      padding: 0;
+    }
+
+    > li {
+      height: 100%;
+    }
+
+    .fs-list li {
+      cursor: pointer;
+    }
+
+    // style folders and files
+    li {
+      list-style-type: none;
+
+      &.active > div > a {
+        font-weight: bold;
+
+        &.arrow:before {
+          border-top: 6px solid #fff !important;
+        }
+      }
+
+      &.ui-draggable-hover {
+        background: rgba(0,0,0,.05);
+        border-color: rgba(0,0,0,.1);
+      }
+
+      &.folder {
+
+        .arrow:before {
+          border-top: 6px solid #bbb;
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          content: '';
+          float: left;
+          margin: 6px 5% 0 0;
+          @include transition-transforms(.1s linear);
+        }
+
+        .collapsed:before {
+          @include rotate-3d(-90deg);
+        }
+      }
+
+      &.empty {
+        cursor: default;
+
+        span {
+          color: #aaa;
+        }
+      }
+
+      [title='empty'] {
+        color: #aaa;
+        pointer-events: none;
+      }
+    }
+
+    a,
+    img,
+    span {
+      color: $grey-darker;
+      display: block;
+      padding: 6px 5%;
+      white-space: nowrap;
+
+      &:hover {
+        text-decoration: none;
+      }
+
+      &:before {
+        border-top: 6px solid transparent;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+        content: '';
+        float: left;
+        margin: 6px 10px 0 0;
+
+      }
+    }
+  }
+
+  // file tree item
+  .ui-draggable:hover {
+    background: $grey-lighter;
+    @include box-shadow(inset 0 -1px 0px rgba(0,0,0,.05), inset 0 1px 0px rgba(0,0,0,.05));
+  }
+}
+
+// nested folders
+#file-explorer .nav {
+
+  li {
+
+    img {
+      @include box-sizing(content-box);
+    }
+
+    ul {
+      padding-left: 0;
+
+      li {
+
+        a,
+        img,
+        input,
+        span {
+          // padding-left: 0;
+        }
+
+        li {
+          a, img, input, span, form {
+            padding-left: 13%;
+          }
+        }
+
+        li li {
+          a, img, input, span, form {
+            padding-left: 21%;
+          }
+        }
+
+        li li li {
+          a, img, input, span, form {
+            padding-left: 29%;
+          }
+        }
+
+        li li li li {
+          a, img, input, span, form {
+            padding-left: 37%;
+          }
+        }
+
+        li li li li li {
+          a, img, input, span, form {
+            padding-left: 45%;
+          }
+        }
+
+        li li li li li li {
+          a, img, input, span, form {
+            padding-left: 53%;
+          }
+        }
+
+        li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 61%;
+          }
+        }
+
+        li li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 69%;
+          }
+        }
+
+        li li li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 77%;
+          }
+        }
+
+        li li li li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 85%;
+          }
+        }
+        li li li li li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 93%;
+          }
+        }
+      }
+    }
+  }
+
+  .name-input {
+    @include border-radius(0);
+    height: 29px;
+    min-height: 0;
+    padding: 6px 14px;
+    width: 100%;
+  }
+}
+
+// upload
+#drop-to-add {
+  background: #fff;
+  @include box-shadow(0 1px 0 rgba(0,0,0,.1));
+  color: $grey-dark;
+  display: block;
+  height: 54px;
+  line-height: 58px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  @include user-select(none);
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  > div {
+    position: absolute;
+    @include transition-transforms(.2s ease-in-out);
+    width: 100%;
+
+    &:last-child {
+      @include transform-3d(0,-100%,0);
+    }
+  }
+
+  &.in > div {
+    &:first-child {
+      @include transform-3d(0,100%,0);
+    }
+
+    &:last-child {
+      @include transform-3d(0,0%,0);
+    }
+  }
+}
+
+// when file explorer is open
+#code-editor.in {
+
+  // file explorer icon
+  .open-file-explorer {
+    background: $purple-light;
+
+    &:before {
+      content: '\E145';
+    }
+
+    &:hover {
+      background: lighten($purple-light, 5%);
+    }
+
+    &:active {
+      background: darken($purple-light,5%);
+    }
+  }
+
+  // file explorer
+  #file-explorer {
+    @include transform-3d(0%,0,0);
+    z-index: 10;
+  }
+
+  // tabs
+  #project-editor-tabs {
+    @include transform-3d(204px,0,0);
+    width: calc(100% - 265px);
+  }
+
+  // ace editor
+  #project-editor-container {
+    @include transform-3d(240px,0,0);
+    width: calc(100% - 240px);
+    @include transition-transforms(.2s ease-in-out, width .2s ease-in-out);
+  }
+}

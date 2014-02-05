@@ -34,7 +34,7 @@
       }
 
       &.cog {
-        @include animation(cogError 5s infinite ease);
+        @include animation(cogError 1.5s infinite linear);
       }
   }
 

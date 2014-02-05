@@ -1,6 +1,6 @@
 {{#if editmode}}
   <form>
-    <input class="name-input" name='name' value="{{model.attributes.name}}" autofocus required />
+    <input class="name-input form-control" name='name' value="{{model.attributes.name}}" autofocus required>
   </form>
 {{else}}
   {{view "file_tree_link" model=model}}

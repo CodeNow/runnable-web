@@ -160,18 +160,6 @@ main {
             position: relative;
                 top: -23px;
 
-            a:hover,
-            a:active,
-            a:focus {
-                background: $orange;
-                color: #fff;
-                outline: none;
-
-                .glyphicons {
-                    color: #fff;
-                }
-            }
-
             ul .glyphicons {
                 color: $grey-darker;
                 font-size: 12px;

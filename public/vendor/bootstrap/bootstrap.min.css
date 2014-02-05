@@ -623,8 +623,10 @@ pre {
   word-wrap: break-word;
   color: #333333;
   background-color: #f5f5f5;
+  /*
   border: 1px solid #cccccc;
   border-radius: 4px;
+  */
 }
 pre.prettyprint {
   margin-bottom: 20px;
@@ -2150,12 +2152,13 @@ input[type="button"].btn-block {
   list-style: none;
   font-size: 14px;
   background-color: #ffffff;
-  border: 1px solid #cccccc;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  border-radius: 3px;
+  -webkit-box-shadow: 0 2px 3px rgba(0,0,0,.15);
+  box-shadow: 0 2px 3px rgba(0,0,0,.15);
   background-clip: padding-box;
+}
+.dropdown-menu.in {
+  display: block;
 }
 .dropdown-menu.pull-right {
   right: 0;
@@ -2169,6 +2172,7 @@ input[type="button"].btn-block {
 }
 .dropdown-menu > li > a {
   display: block;
+  cursor: pointer;
   padding: 3px 20px;
   clear: both;
   font-weight: normal;
@@ -2179,16 +2183,14 @@ input[type="button"].btn-block {
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
   text-decoration: none;
-  color: #ffffff;
-  background-color: #6e3e8e;
+  background-color: #EEE;
 }
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
 .dropdown-menu > .active > a:focus {
-  color: #ffffff;
   text-decoration: none;
   outline: 0;
-  background-color: #6e3e8e;
+  background-color: #EEE;
 }
 .dropdown-menu > .disabled > a,
 .dropdown-menu > .disabled > a:hover,
@@ -2273,27 +2275,36 @@ input[type="button"].btn-block {
   vertical-align: middle;
 }
 .btn-group > .btn,
+.btn-group > button,
 .btn-group-vertical > .btn {
   position: relative;
   float: left;
 }
 .btn-group > .btn:hover,
+.btn-group > button:hover,
 .btn-group-vertical > .btn:hover,
 .btn-group > .btn:focus,
+.btn-group > button:focus,
 .btn-group-vertical > .btn:focus,
 .btn-group > .btn:active,
+.btn-group > button:active,
 .btn-group-vertical > .btn:active,
 .btn-group > .btn.active,
+.btn-group > button.active,
 .btn-group-vertical > .btn.active {
   z-index: 2;
 }
 .btn-group > .btn:focus,
+.btn-group > button:focus,
 .btn-group-vertical > .btn:focus {
   outline: none;
 }
 .btn-group .btn + .btn,
+.btn-group button + button,
 .btn-group .btn + .btn-group,
+.btn-group button + .btn-group,
 .btn-group .btn-group + .btn,
+.btn-group .btn-group + button,
 .btn-group .btn-group + .btn-group {
   margin-left: -1px;
 }
@@ -2330,17 +2341,21 @@ input[type="button"].btn-block {
 .btn-toolbar > .btn-group + .btn-group {
   margin-left: 5px;
 }
-.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle),
+.btn-group > button:not(:first-child):not(:last-child):not(.dropdown-toggle)  {
   border-radius: 0;
 }
-.btn-group > .btn:first-child {
+.btn-group > .btn:first-child,
+.btn-group > button:first-child {
   margin-left: 0;
 }
-.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle),
+.btn-group > button:first-child:not(:last-child):not(.dropdown-toggle) {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
 .btn-group > .btn:last-child:not(:first-child),
+.btn-group > button:last-child:not(:first-child),
 .btn-group > .dropdown-toggle:not(:first-child) {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
@@ -2348,15 +2363,18 @@ input[type="button"].btn-block {
 .btn-group > .btn-group {
   float: left;
 }
-.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn,
+.btn-group > .btn-group:not(:first-child):not(:last-child) > button {
   border-radius: 0;
 }
 .btn-group > .btn-group:first-child > .btn:last-child,
+.btn-group > .btn-group:first-child > button:last-child,
 .btn-group > .btn-group:first-child > .dropdown-toggle {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
-.btn-group > .btn-group:last-child > .btn:first-child {
+.btn-group > .btn-group:last-child > .btn:first-child,
+.btn-group > .btn-group:last-child > button:first-child {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
@@ -2364,26 +2382,30 @@ input[type="button"].btn-block {
 .btn-group.open .dropdown-toggle {
   outline: 0;
 }
-.btn-group-xs > .btn {
+.btn-group-xs > .btn,
+.btn-group-xs > button {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
   padding: 1px 5px;
 }
-.btn-group-sm > .btn {
+.btn-group-sm > .btn,
+.btn-group-sm > button {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
 }
-.btn-group-lg > .btn {
+.btn-group-lg > .btn,
+.btn-group-lg > button {
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
   border-radius: 6px;
 }
-.btn-group > .btn + .dropdown-toggle {
+.btn-group > .btn + .dropdown-toggle,
+.btn-group > button + .dropdown-toggle {
   padding-left: 8px;
   padding-right: 8px;
 }
