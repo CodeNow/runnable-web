@@ -19,6 +19,8 @@ module.exports = BaseView.extend({
     evt.stopPropagation();
   },
   thumbsUp: function (evt) {
+    this.app.thumbsDirection = "UP";
+
     var thumbsUp = this.$('.thumbs-up');
     var thumbsDown = this.$('.thumbs-down');
 
@@ -32,6 +34,8 @@ module.exports = BaseView.extend({
     thumbsUp.toggleClass('active');
   },
   thumbsDown: function (evt) {
+    this.app.thumbsDirection = "down";
+
     var thumbsUp = this.$('.thumbs-up');
     var thumbsDown = this.$('.thumbs-down');
 
