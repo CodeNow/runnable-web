@@ -118,7 +118,6 @@ module.exports = BaseView.extend({
 
     function cb (err) {
       var self = this;
-      console.log("Listening to the trigger event 1337");
       if (err) { this.showError(err); } else {
         this.disable(false);
         dispatch.trigger('sync:files')
