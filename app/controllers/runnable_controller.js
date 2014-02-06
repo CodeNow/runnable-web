@@ -273,7 +273,7 @@ module.exports = {
       }
     });
   },
-  imageweboutput: function(params, callback) {
+  imageoutputtoken: function(params, callback) {
     var self = this;
     var app = this.app;
     async.waterfall([
@@ -313,8 +313,9 @@ module.exports = {
         callback(err);
       }
       else {
-        var weboutputUrl = "http://" + results.container.get("webToken") + "." + self.app.get('domain');
-        self.redirectTo(302, weboutputUrl);
+        var url = "http://" + results.container.get(params.token) + "." + self.app.get('domain');
+        console.log('REDIRECT:', url);
+        self.redirectTo(302, url);
       }
     });
   },
