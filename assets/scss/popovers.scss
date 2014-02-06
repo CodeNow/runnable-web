@@ -1,8 +1,5 @@
 //main-controls popover
 .main-controls .popover {
-  background: #f6f6f6;
-  border: none;
-  @include border-radius(3px);
   display: block;
   opacity: 0;
   padding: 0;
@@ -19,13 +16,11 @@
   }
 
   > .arrow {
-    border-width: 6px;
-    margin-left: -6px;
-    left: 94px;
+    left: 92px;
   }
 
   > .arrow:after {
-    border-bottom-color: $purple-light;
+    border-bottom-color: #fff;
   }
 
   > .popover-title {
@@ -54,17 +49,16 @@
 
     label {
       font-weight: normal;
-      line-height: 40px;
+      line-height: 36px;
     }
 
     //run and build and run
     .form-horizontal {
-      height: 40px;
       margin: 0;
 
       label {
         float: left;
-        margin-right: 10px;
+        margin: 0 10px 0 0;
         width: 70px;
       }
 
@@ -80,7 +74,6 @@
 
   //set default view
   .toggle-group {
-    background: #EEE;
     border: 1px solid rgba(0,0,0,.1);
     @include border-radius(3px);
     margin: 0;
@@ -100,7 +93,7 @@
 
       &:first-child  {
         .sprite-icons-output {
-          background-position: -61px 0px;
+          background-position: -61px -1px;
 
           &::after {
             height: 12px;
@@ -110,13 +103,13 @@
 
       &:nth-child(2) {
         .sprite-icons-output {
-          background-position: 0px 0px;
+          background-position: 0px -1px;
         }
       }
 
       &:nth-child(3) {
         .sprite-icons-output {
-          background-position: -31px 0px;
+          background-position: -31px -1px;
 
           &::after {
             height: 22px;
@@ -124,8 +117,12 @@
         }
       }
 
+      &:hover {
+        background: $grey-lighter;
+      }
+
       &.active {
-        background: #f2dfff;
+        background: $grey-light;
 
         .sprite-icons-output::after {
           @include animation(blinker 1s infinite);
@@ -144,6 +141,7 @@
 
     .sprite-icons-output {
       background: url(/images/sprite-icons-output.svg) no-repeat;
+      background-size: 90px 30px;
       border: 1px solid;
       border-color: rgba(0,0,0,.15) rgba(0,0,0,.15) rgba(0,0,0,.2);
       float: left;
@@ -184,22 +182,19 @@
     min-width: 16px;
   }
 
-  .thanks {
+  .thanks .glyphicons {
+    font-size: 22px;
+    top: 2px;
 
-    .glyphicons {
-      font-size: 22px;
-      top: 2px;
-
-      &:before {
-        content: '☺';
-      }
+    &:before {
+      content: '☺';
     }
   }
 
   .popover {
 
     .arrow {
-      left: 50px;
+      left: 52px;
     }
 
     textarea {
@@ -208,12 +203,8 @@
       resize: vertical;
     }
 
-    .modal-footer {
-      margin: 15px -15px 0;
-      padding: 15px 15px 0;
-    }
-
     .orange {
+      margin-top: 15px;
       width: 100%;
     }
   }
