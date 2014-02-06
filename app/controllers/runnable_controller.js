@@ -319,7 +319,6 @@ module.exports = {
         if (token === 'servicesToken') {
           url += '/static/'+split[1]+'.html';
         }
-        console.log(split);
         self.redirectTo(302, url);
       }
     });
