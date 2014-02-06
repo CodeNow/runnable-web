@@ -290,6 +290,7 @@ body.modal-open,
       border: 1px solid rgba(0,0,0,.1);
       border-bottom: none;
       height: 100%;
+      overflow: auto;
       padding: 20px;
       width: 100%;
     }
@@ -426,6 +427,7 @@ body.modal-open,
       height: 100%;
       margin-bottom: 20px;
       min-height: 200px;
+      overflow: auto;
       padding: 20px;
       width: 100%;
     }
