@@ -313,8 +313,13 @@ module.exports = {
         callback(err);
       }
       else {
-        var url = "http://" + results.container.get(params.token) + "." + self.app.get('domain');
-        console.log('REDIRECT:', url);
+        var split = params.token.split('-');
+        var token = split[0];
+        var url = "http://" + results.container.get(token) + "." + self.app.get('domain');
+        if (token === 'servicesToken') {
+          url += '/static/'+split[1]+'.html';
+        }
+        console.log(split);
         self.redirectTo(302, url);
       }
     });
