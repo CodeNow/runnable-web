@@ -83,7 +83,7 @@ main {
   > h1 {
     font-size: 30px;
     white-space: normal;
-    word-break: break-word;
+    word-break: break-all;
 
     @include media(xs) {
       margin-top: 10px;
