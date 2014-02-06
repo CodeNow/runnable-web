@@ -100,7 +100,7 @@
   }
 }
 
-//publish request modal
+// publish request modal
 #publish-request-modal {
 
   a {
@@ -131,14 +131,14 @@
   }
 }
 
-//wth modal is shifting whole page bc of margin
+// wth modal is shifting whole page bc of margin
 body.modal-open,
 .modal-open .navbar-fixed-top,
 .modal-open .navbar-fixed-bottom {
   margin-right: 0;
 }
 
-//.spec-modals
+// .spec-modals
 .modal .spec-modal {
   width: 50%;
 
@@ -182,12 +182,12 @@ body.modal-open,
   .modal-footer {
       margin-top: 0;
 
-    //primary action
+    // primary action
     > button {
       float: right;
     }
 
-    //secondary action
+    // secondary action
     .back,
     .prev {
       color: $purple-light;
@@ -195,12 +195,12 @@ body.modal-open,
       float: left;
       font-size: 14px;
       font-weight: 700;
-      line-height: 36px; //match height of button
+      line-height: 36px; // match height of button
     }
   }
 }
 
-//#add-spec-modal
+// #add-spec-modal
 #add-spec-modal {
   width: 30%;
     min-width: 320px;
@@ -239,14 +239,14 @@ body.modal-open,
       }
     }
 
-    //icons
+    // icons
     img {
       height: auto;
       margin-right: 10px;
       width: 22px;
     }
 
-  //add new api link
+  // add new api link
   > .new {
       display: block;
       font-size: 14px;
@@ -257,7 +257,7 @@ body.modal-open,
   }
 }
 
-//#implement-modal
+// #implement-modal
 #implement-modal > .modal-dialog {
 
   .modal-body {
@@ -310,12 +310,12 @@ body.modal-open,
   }
 }
 
-//#review-spec-modal
+// #review-spec-modal
 #review-spec-modal {
 
   .modal-body {
 
-    //wrapping div
+    // wrapping div
     > div {
       background: lightyellow;
       border: 1px solid rgba(0,0,0,.1);
@@ -359,7 +359,7 @@ body.modal-open,
   }
 }
 
-//#create-spec-modal
+// #create-spec-modal
 #create-spec-modal {
 
   .modal-body {
@@ -373,15 +373,14 @@ body.modal-open,
 
   .step1 {
 
-    //api key inputs
+    // api key inputs
     .form-group {
       position: relative;
 
       button {
         border: none;
-        border-left: 1px solid #ccc;
-        @include border-radius(0 2px 2px 0);
-        @include box-shadow(none);
+        border-left: 1px solid #cdcdcd;
+        @include border-radius(0 3px 3px 0);
         height: 34px;
         line-height: 34px;
         position: absolute;
@@ -391,7 +390,7 @@ body.modal-open,
       }
     }
 
-    //.add-key
+    // .add-key
     .add-key {
       margin-bottom: 20px;
     }
@@ -450,7 +449,7 @@ body.modal-open,
   }
 }
 
-//bootstrap-dialogs
+// bootstrap-dialogs
 .bootstrap-dialog {
 
   .modal-content {
