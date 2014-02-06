@@ -271,7 +271,6 @@ $prefix-for-spec:      true !default; // required for keyframe mixin
 
 // inputs
 .form-control {
-        min-height: 40px;
         font-weight: bold;
         @include box-shadow(none);
         &:focus {
@@ -927,15 +926,11 @@ progress {
         .description {
             margin: 0 7.5% 0 12.5%;
             h2 {
-                margin: 0;
                 color: #333;
-                font-weight: bold;
                 font-size: 20px;
-
-                .form-control {
-                  height: 34px;
-                  min-height: 0;
-                }
+                font-weight: bold;
+                height: 30px;
+                margin: 0;
             }
             p {
                 margin: 5px 0 0 0;
