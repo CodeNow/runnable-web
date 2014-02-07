@@ -1,9 +1,21 @@
+{{!-- <div class="loader"><b>Loading..</b></div>
+ --}}
+
 {{#if buildmessage}}
-{{view 'spinner'}}
-<div class="loader-text">
-  <h1>Building</h1>
+<div class="loader">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+<div id="progress-steps">
+  <h1>Building...</h1>
 </div>
 {{else}}
-<iframe id="output-results">
+<iframe id="output-results" frameborder="0" height='100%' width='100%'>
 </iframe>
 {{/if}}

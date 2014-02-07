@@ -98,6 +98,10 @@ module.exports = BaseView.extend({
       actionLabel: 'Save and Publish',
       actionHandler: actionHandler
     });
+  },
+  testLoader: function(){
+    $('#page-loader').hide();
+    $('#publish-loader').show();
   }
 });
 

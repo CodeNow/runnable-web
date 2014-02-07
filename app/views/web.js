@@ -5,7 +5,7 @@ var Super = BaseView.prototype;
 
 module.exports = BaseView.extend({
   id: 'output-results-container',
-  className: 'resizable-iframe with-text',
+  className: 'resizable-iframe',
   preRender: function () {
     var optClassName = this.options.classname;
     if (optClassName && !~this.className.indexOf(optClassName)) {

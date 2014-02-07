@@ -1,27 +1,6 @@
-// spinner
-.overlay-loader {
-  background: rgba(0,0,0,.6);
-  height: 100%;
-  opacity: 0;
-  position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -10000000000;
-  @include transition(opacity .2s ease-in-out);
-  width: 100%;
+.overlay-loader,
+#output-results-container {
 
-  &.loading {
-    opacity: 1;
-    z-index: 10000000000;
-
-    .loader {
-      display: block;
-    }
-  }
-}
-  // spinner
   .loader {
     background: url(/images/loader-play.svg) no-repeat center center;
     background-size: 25px 38px;
@@ -98,103 +77,135 @@
     }
   }
 
-  // spinner on output
-  #output-results-container .loader {
-    display: block;
-    top: 40%;
+  &.overlay-loader {
+    background: rgba(0,0,0,.6);
+    height: 100%;
+    opacity: 0;
+    position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -10000000000;
+    @include transition(opacity .2s ease-in-out);
+    width: 100%;
   }
 
-// loaders with text
-.with-text {
+  &#output-results-container .loader {
+    display: block;
+    top: 35%;
+  }
+
+  &.loading {
+    opacity: 1;
+    z-index: 10000000000;
+
+    .loader {
+      display: block;
+    }
+  }
+}
+
+//loaders with text
+#publish-loader,
+#output-results-container {
 
   > .loader {
     top: 30%;
   }
 
-  > .loader-text {
+  > #progress-steps {
     position: relative;
     top: calc(30% + 80px);
+
+    //cancel
+    > a {
+      display: block;
+      margin: 0 auto;
+      position: relative;
+        top: -20px;
+      text-align: center;
+      text-shadow: 0 1px 1px rgba(0,0,0,.75);
+      @include transition-transforms(.75s);
+      width: 60px;
+    }
   }
 
   h1,
-  a,
-  p {
+  a {
     text-align: center;
   }
 
   h1 {
-    color: darken($grey,10%);
-    margin-bottom: 20px;
+    color: #bbb;
+    font-size: 24px;
+    opacity: 0;
+    position: absolute;
+      right: 0;
+      left: 0;
+    text-shadow: 0 1px 1px rgba(0,0,0,.75);
+    @include transform-3d(0,-150%,0);
+    @include transition(all 1.5s 50ms);
+
+    &.in {
+      opacity: 1;
+      @include transform-3d(0,-0%,0);
+    }
+
+    &.out {
+      opacity: 0;
+      @include transform-3d(0,150%,0);
+    }
   }
 
   a {
     color: $grey-dark;
     cursor: pointer;
-    display: table;
-    font-size: 14px;
-    margin: 0 auto;
+    text-shadow: 0 1px 1px rgba(0,0,0,.75);
 
     &:hover {
-      color: darken($grey,10%);
+      color: #ddd;
       text-decoration: none;
     }
   }
 
   p {
-    color: darken($grey,10%);
+    @include animation(dropIn .5s forwards 1s ease-in-out);
     display: block;
-    font-size: 20px;
+    color: #bbb;
+    float: none;
+    font-size: 16px;
+    line-height: 2;
     margin: 0 auto;
+    padding-bottom: 10px;
+    position: relative;
+      top: 70px;
+      z-index: 1;
+    opacity: 0;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0,0,0,.75);
+    @include transform-3d(0,-100%,0);
   }
 
   button {
+    @include animation(dropIn .5s forwards 15s ease-in-out);
     display: block;
-    margin: 20px auto 0;
-  }
+    margin: 70px auto 0;
+    opacity: 0;
+    @include transform-3d(0,-100%,-1px);
+    @include transition(none);
 
-  // if there are steps
-  .progress-steps {
-
-    h1,
-    p {
-      color: darken($grey,10%);
-      opacity: 0;
-    }
-
-    h1 {
-      position: absolute;
-        right: 0;
-        left: 0;
-      @include transform-3d(0,-300%,0);
-      @include transition(all 1.5s 50ms);
-
-      &.in {
-        opacity: 1;
-        @include transform-3d(0,-175%,0);
-      }
-
-      &.out {
-        opacity: 0;
-        @include transform-3d(0,0%,0);
-      }
-    }
-
-    p {
-      @include animation(dropIn .5s forwards 1s ease-in-out);
-      @include transform-3d(0,-100%,0);
-    }
-
-    a {
-      @include animation(dropIn .5s forwards 15s ease-in-out);
-      opacity: 0;
-      @include transform-3d(0,-100%,-1px);
-      @include transition(none);
+    &:active {
+      color: #999;
     }
   }
 }
 
-// build loader
-#output-results-container h1 {
-  color: $grey-dark;
-  margin: 0;
+#output-results-container {
+  h1 {
+    @include animation(loaderText .2s forwards);
+    color: #999;
+    margin: 0;
+    text-shadow: none;
+  }
 }
