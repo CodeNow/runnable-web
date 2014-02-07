@@ -38,6 +38,8 @@ module.exports = BaseView.extend({
     }
     else if (message.data === 'hide:loader') {
       this.loading(false);
+    } else {
+      this.trackEvent('Command', { text: message.data });
     }
   },
   listenToPostMessages: function () {
