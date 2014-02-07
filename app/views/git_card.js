@@ -1,4 +1,6 @@
 var BaseView = require('./base_view');
+var Image = require('../models/image');
+var Container = require('../models/container');
 
 module.exports = BaseView.extend({
   id: 'git-card',
@@ -20,8 +22,26 @@ module.exports = BaseView.extend({
   },
   changeLanguage: function () {
     var langVal = this.$('select')[0].value;
-
+    var self = this;
     this.$('button').text(langVal);
+    var image = new Image({}, {app:this.app});
+    image.githubImport({
+      githubUrl: this.$('input').val(),
+      stack: langVal
+    }, function (err, image) {
+      if (err) {
+        self.showError(err);
+      } else {
+        var container = new Container({}, { app:this.app });
+        container.createFrom(imageIdOrChannelName, function (err, container) {
+          if (err) {
+            self.showError(err);
+          } else {
+            self.app.router.navigateUrl(container.appURL());
+          }
+        });
+      }
+    });
   }
 });
 
