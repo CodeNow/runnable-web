@@ -4,10 +4,19 @@ module.exports = BaseView.extend({
   tagName: 'a',
   className: 'tag',
   preRender: function () {
-    var name = this.options.name;
-    this.attributes= {
-      href: '/'+name
-    };
+    var self = this;
+    var opts = self.options;
+    var name = opts.name;
+    var editMode = opts.editmode;
+
+    if (editMode) {
+      self.className =  'tag can-edit';
+    }
+    else {
+      self.attributes= {
+        href: '/'+name
+      };
+    }
   }
 });
 
