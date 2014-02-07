@@ -317,7 +317,7 @@ function fetchImage (imageId, callback) {
   });
 }
 
-function createContainerFrom (imageIdOrChannelName, callback) {
+function createContainerFrom (imageIdOrChannelName, cb) {
   var container = new Container({}, { app:this.app });
   container.createFrom(imageIdOrChannelName, cb);
 }
