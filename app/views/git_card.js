@@ -21,7 +21,7 @@ module.exports = BaseView.extend({
   changeLanguage: function () {
     var langVal = this.$('select')[0].value;
 
-    this.$('.dropdown').text(langVal);
+    this.$('button').text(langVal);
   }
 });
 

@@ -28,7 +28,7 @@ var User = module.exports = Base.extend({
     return this.get('permission_level') >= 1;
   },
   isVerified : function () {
-    return this.get('permission_level') >= 2;
+    return this.get('permission_level') >= 1;
   },
   isModerator : function () {
     return this.get('permission_level') >= 5;

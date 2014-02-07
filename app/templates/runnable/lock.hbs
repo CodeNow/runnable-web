@@ -5,10 +5,12 @@
   <div id="project-details" class="row">
     <div class="col-sm-9">
       <h2 class="page-title clearfix">
+        {{!--
         <a class="vote-up">
           <img src="/images/arrow-up.png" height="13" width="15" alt="Vote Up">
           <span>{{image.attributes.votes}}</span>
         </a>
+        --}}
         {{view "runnable_title" model=image}}
       </h2>
       {{view "runnable_description" model=image}}

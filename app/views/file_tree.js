@@ -205,14 +205,14 @@ module.exports = BaseView.extend({
         else {
           model.moveFromTo(fromCollection, collection, this.showIfError, this);
         }
-      }, this)
+      }, this);
     }
   },
   over: function (evt) {
     this.dragClass(evt);
   },
   leave: function (evt) {
-    this.dragClassOff(evt)
+    this.dragClassOff(evt);
   },
   dragClass: function (evt) {
     evt.stopPropagation();

@@ -26,6 +26,10 @@ else {
 module.exports = BaseView.extend({
   tagName: 'aside',
   id: 'file-explorer',
+<<<<<<< HEAD
+  className: 'open',
+=======
+>>>>>>> 8c05a792da8cfca6d02024fa76521c1b3afb49f1
   events: events,
   postRender: function () {
     this.$('[rel="tooltip"]').tooltip({

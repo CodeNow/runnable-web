@@ -1,7 +1,6 @@
 .tooltip {
 
   &.top {
-    margin-top: -14px;
 
     .tooltip-arrow {
       border-top-color: $orange;
@@ -9,7 +8,6 @@
   }
 
   &.bottom {
-    margin-top: 7px;
 
     .tooltip-arrow {
       border-bottom-color: $orange;

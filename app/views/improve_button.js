@@ -3,30 +3,51 @@ var _ = require('underscore');
 
 module.exports = BaseView.extend({
   tagName: 'div',
-  className: 'btn-group improve-btn',
+  id: 'improve-btn',
+  className: 'btn-group',
   events: {
-    'click .silver' : 'togglePopover'
+    'click'              : 'stopPropagation',
+    'click .thumbs-up'   : 'thumbsUp',
+    'click .thumbs-down' : 'thumbsDown'
   },
   postRender: function () {
     this.popover = _.findWhere(this.childViews, {name:'improve_popover'});
-    this.listenTo(this.popover, 'hide', this.unpress.bind(this));
-    this.listenTo(this.popover, 'show', this.press.bind(this));
+    // this.listenTo(this.popover, 'hide', this.unpress.bind(this));
+    // this.listenTo(this.popover, 'show', this.press.bind(this));
   },
-  togglePopover: function () {
-    if (this.$('.silver').hasClass('active')) {
+  stopPropagation: function (evt) {
+    evt.stopPropagation();
+  },
+  thumbsUp: function (evt) {
+    this.app.thumbsDirection = "UP";
+
+    var thumbsUp = this.$('.thumbs-up');
+    var thumbsDown = this.$('.thumbs-down');
+
+    if (thumbsUp.hasClass('active')) {
       this.popover.hide();
-    }
-    else {
+    } else {
       this.popover.show();
     }
-  },
-  press: function () {
-    this.$('.silver').addClass('active');
-  },
-  unpress: function () {
-    this.$('.silver').removeClass('active');
-  }
 
+    thumbsDown.removeClass('active');
+    thumbsUp.toggleClass('active');
+  },
+  thumbsDown: function (evt) {
+    this.app.thumbsDirection = "down";
+
+    var thumbsUp = this.$('.thumbs-up');
+    var thumbsDown = this.$('.thumbs-down');
+
+    if (thumbsDown.hasClass('active')) {
+      this.popover.hide();
+    } else {
+      this.popover.show();
+    }
+
+    thumbsUp.removeClass('active');
+    thumbsDown.toggleClass('active');
+  }
 });
 
 module.exports.id = "ImproveButton";

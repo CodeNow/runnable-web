@@ -14,10 +14,6 @@ pre.code{
   min-height: 350px;
 }
 
-ul.fs-list{
-  padding-left:0;
-}
-
 $tree-padding:15px;
 
 //page-title
@@ -28,9 +24,6 @@ h2.page-title{
 }
 .relative{
   position:relative;
-}
-#project-editor {
-  position: static !important;
 }
 
 .terminal-view.loading .loader{
@@ -99,52 +92,6 @@ h2.page-title{
   @include border-radius(25px);
   background: lightgrey;
 }
-
-// Context menu (right click)
-.context-menu{
-  position:absolute;
-  background:#fff;
-  @include border-radius($br);
-  @include box-shadow(0 10px 20px rgba(0,0,0,.1));
-  //padding:5px 0;
-  border:1px solid #eee;
-  min-width:150px;
-  z-index:990;
-  .menu-options{
-    list-style:none;
-    padding:0;
-    margin:0;
-    a{
-      display:block;
-      color:rgba(0,0,0,.4);
-      padding:5px 10px;
-      &:hover{
-        background:$primary-color;
-        //@include background-image(linear-gradient(#0c5e91,darken(#0c5e91,5%)));
-        color:#fff;
-        text-decoration:none;
-      }
-      i{
-        font-size:12px !important;
-        top: 0px;
-        padding-right: 2px;
-      }
-    }
-    li:first-child a{
-      @include border-radius($br $br 0 0);
-    }
-    li:last-child a{
-      @include border-radius(0 0 $br $br);
-    }
-    hr{
-      border:none;
-      border-top:1px solid #eee;
-      margin:0;
-    }
-  }
-}
-
-
 
 // about page uses 8-col css
 #about, #jobs {
@@ -247,13 +194,6 @@ button.btn-sm, .btn-xs {
   }
 }
 
-.terminal-view,
-#output-terminal-container{
-  iframe{
-    background: $terminal-color;
-  }
-}
-
 #output #primary .form-control {
   width: 600px;
 }
@@ -292,10 +232,6 @@ button.btn-sm, .btn-xs {
   margin-right:0;
 }
 
-#project-editor-container {
-  background: #ddd;
-}
-
 .container > .navbar-header, .container > .navbar-collapse {
   text-align: center;
   height: 38px !important;
@@ -309,188 +245,8 @@ button.btn-sm, .btn-xs {
   }
 }
 
-
-/* RIGHT HERE */
-
-#project-editor-container {
-  aside#file-explorer {
-    .nav {
-      position: absolute;
-      top: 25px;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      overflow: scroll;
-      font-size: 12px;
-      padding: 6px 0;
-      > li {
-        height: 100%;
-        @include box-sizing(border-box);
-        > ul {
-          padding-bottom: $dropzone-height+10px;
-        }
-      }
-      li {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        a,
-        img,
-        input,
-        span {
-          padding: 6px 6.5%;
-          margin: 0;
-          color: #333;
-          position: relative;
-          white-space: nowrap;
-          display: block;
-          &:hover {
-            text-decoration: none;
-            color: $purple-light;
-          }
-          &:before {
-            content: "";
-            float: left;
-            margin: 6px 10px 0 0;
-            border-left: 4px solid transparent;
-            border-right: 4px solid transparent;
-            border-top: 6px solid transparent;
-          }
-        }
-        img {
-          @include box-sizing(content-box);
-        }
-        ul {
-          padding-left: 0;
-          li {
-            a,
-            img,
-            input,
-            span {
-              // padding-left: 0;
-            }
-            li a,
-            li img,
-            li input,
-            li span {
-              padding-left: 15%;
-            }
-            li li a,
-            li li img,
-            li li input,
-            li li span {
-              padding-left: 23%;
-            }
-            li li li a,
-            li li li img,
-            li li li input,
-            li li li span {
-              padding-left: 31%;
-            }
-            li li li li a,
-            li li li li img,
-            li li li li input,
-            li li li li span {
-              padding-left: 39%;
-            }
-            li li li li li a,
-            li li li li li img,
-            li li li li li input,
-            li li li li li span {
-              padding-left: 47%;
-            }
-            li li li li li li a,
-            li li li li li li img,
-            li li li li li li input,
-            li li li li li li span {
-              padding-left: 55%;
-            }
-            li li li li li li li a,
-            li li li li li li li img,
-            li li li li li li li input,
-            li li li li li li li span {
-              padding-left: 63%;
-            }
-            li li li li li li li li a,
-            li li li li li li li li img,
-            li li li li li li li li input,
-            li li li li li li li li span {
-              padding-left: 71%;
-            }
-            li li li li li li li li li a,
-            li li li li li li li li li img,
-            li li li li li li li li li input,
-            li li li li li li li li li span {
-              padding-left: 79%;
-            }
-            li li li li li li li li li li a,
-            li li li li li li li li li li img,
-            li li li li li li li li li li input,
-            li li li li li li li li li li span {
-              padding-left: 86%;
-            }
-            li li li li li li li li li li li a,
-            li li li li li li li li li li li img,
-            li li li li li li li li li li li input,
-            li li li li li li li li li li li span {
-              padding-left: 94%;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
 #about #about-team #team-list h3 {
   white-space: normal;
-}
-
-#project-editor-container aside#file-explorer > #drop-to-add {
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
-  left: 10px;
-  height: $dropzone-height;
-  border: dashed 2px #BDBDBD;
-  overflow: hidden;
-  display: block;
-  text-align: center;
-  font-size: 12px;
-  font-weight: bold;
-  color: #BDBDBD;
-  opacity: 0.95;
-  background: white;
-  @include border-radius(5px);
-  .drop-to-add-icon {
-    margin-top: 10px;
-    height: 30px;
-    width: 25px;
-    background-image: url(../images/sprite-upload.png);
-    background-repeat: no-repeat;
-    @include background-image-retina('../images/sprite-upload@2x.png');
-    background-size: 25px auto;
-    overflow: hidden;
-    display: inline-block;
-  }
-  &:hover {
-    border: solid 2px $purple-light;
-    text-decoration: none;
-    color: $purple-light;
-    .drop-to-add-icon {
-      background-position: 0 -30px;
-    }
-  }
-}
-
-#project-editor-container aside#file-explorer .nav li.active a,
-aside#file-explorer .nav li.active > div > a {
-  background: $orange;
-  color: #fff;
-  @include border-radius(0);
-  &.arrow:before {
-    border-top: 6px solid #fff !important;
-  }
 }
 
 button.silver img {

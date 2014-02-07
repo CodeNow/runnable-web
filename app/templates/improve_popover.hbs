@@ -1,30 +1,8 @@
 <div class="arrow"></div>
-
-<h3 class="popover-title">
-  Send Feedback
-  <button type="button" class="close">×</button>
-</h3>
-
-<div class="popover-content">
+ <div class="popover-content">
   <!-- TJ You have to make this "proper" - Praful -->
   <form id="improve_from_1337" class="clearfix">
-    <div class="dropdown-wrapper">
-      <button class="dropdown" type="button">
-        <span class="selected">Category [optional]</span>
-        <span class="caret"></span>
-      </button>
-      <select>
-        <option selected disabled>Select a category
-        <option value="Doesn't seem to run.">Doesn't seem to run.
-        <option value="Doesn't run as expected.">Doesn't run as expected.
-        <option value="Error printed on run.">Error printed on run.
-        <option value="It's unclear how this example works.">It's unclear how this example works.
-        <option value="Something else.">Something else.
-      </select>
-    </div>
-    <textarea class="form-control" placeholder="Describe how you would improve this code." required></textarea>
-    <div class="modal-footer">
-      <button class="orange">Send Feedback</button>
-    </div>
+    <textarea class="form-control feedback-description" placeholder="Send a message to the author" required></textarea>
+    <button class="orange">Send</button>
   </form>
 </div>

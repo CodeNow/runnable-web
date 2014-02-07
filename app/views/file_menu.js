@@ -3,7 +3,8 @@ var _ = require('underscore');
 var Super = BaseView.prototype;
 
 module.exports = BaseView.extend({
-  className: 'context-menu',
+  tagName: 'ul',
+  className: 'dropdown-menu in',
   events: {
     'click .rename'      : 'rename',
     'click .delete-all'  : 'delAll',

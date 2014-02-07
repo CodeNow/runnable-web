@@ -15,7 +15,7 @@
   .modal-header {
     background: $purple-light;
     @include border-radius(3px 3px 0 0);
-    @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.25));
+    @include box-shadow(inset 0 1px 0 rgba(255,255,255,.25));
     color: #fff;
     height: 40px;
     padding: 0 20px;
@@ -25,19 +25,25 @@
       font-weight: bold;
       height: 40px;
       line-height: 40px;
-      text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 1px 0 rgba(0,0,0,.2);
+      white-space: nowrap;
     }
 
     .close {
       @include box-shadow(none);
-      color: rgba(0,0,0,0.5);
-      text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-      opacity: 1;
+      color: rgba(0,0,0,.5);
+      height: 36px;
+      opacity: .8;
+      text-align: right;
+      text-shadow: 0 1px 0 rgba(255,255,255,.2);
+      width: 18px;
 
       &:hover {
-        color: rgba(0,0,0,0.75);
-        text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+        color: rgba(0,0,0,.75);
         opacity: 1;
+        text-shadow: 0 1px 0 rgba(255,255,255,.2);
       }
     }
   }
@@ -94,7 +100,7 @@
   }
 }
 
-//publish request modal
+// publish request modal
 #publish-request-modal {
 
   a {
@@ -125,14 +131,14 @@
   }
 }
 
-//wth modal is shifting whole page bc of margin
+// wth modal is shifting whole page bc of margin
 body.modal-open,
 .modal-open .navbar-fixed-top,
 .modal-open .navbar-fixed-bottom {
   margin-right: 0;
 }
 
-//.spec-modals
+// .spec-modals
 .modal .spec-modal {
   width: 50%;
 
@@ -158,7 +164,7 @@ body.modal-open,
       }
 
       hr {
-        border-top: 1px solid rgba(0,0,0,0.1);
+        border-top: 1px solid rgba(0,0,0,.1);
         margin-right: -20px;
         margin-left: -20px;
       }
@@ -176,12 +182,12 @@ body.modal-open,
   .modal-footer {
       margin-top: 0;
 
-    //primary action
+    // primary action
     > button {
       float: right;
     }
 
-    //secondary action
+    // secondary action
     .back,
     .prev {
       color: $purple-light;
@@ -189,12 +195,12 @@ body.modal-open,
       float: left;
       font-size: 14px;
       font-weight: 700;
-      line-height: 36px; //match height of button
+      line-height: 36px; // match height of button
     }
   }
 }
 
-//#add-spec-modal
+// #add-spec-modal
 #add-spec-modal {
   width: 30%;
     min-width: 320px;
@@ -233,14 +239,14 @@ body.modal-open,
       }
     }
 
-    //icons
+    // icons
     img {
       height: auto;
       margin-right: 10px;
       width: 22px;
     }
 
-  //add new api link
+  // add new api link
   > .new {
       display: block;
       font-size: 14px;
@@ -251,7 +257,7 @@ body.modal-open,
   }
 }
 
-//#implement-modal
+// #implement-modal
 #implement-modal > .modal-dialog {
 
   .modal-body {
@@ -281,9 +287,10 @@ body.modal-open,
 
     #implement-instructions-tab {
       background: lightyellow;
-      border: 1px solid rgba(0,0,0,0.1);
+      border: 1px solid rgba(0,0,0,.1);
       border-bottom: none;
       height: 100%;
+      overflow: auto;
       padding: 20px;
       width: 100%;
     }
@@ -303,15 +310,15 @@ body.modal-open,
   }
 }
 
-//#review-spec-modal
+// #review-spec-modal
 #review-spec-modal {
 
   .modal-body {
 
-    //wrapping div
+    // wrapping div
     > div {
       background: lightyellow;
-      border: 1px solid rgba(0,0,0,0.1);
+      border: 1px solid rgba(0,0,0,.1);
       height: 100%;
       margin-bottom: 20px;
       padding: 20px;
@@ -319,6 +326,10 @@ body.modal-open,
 
       a {
         font-weight: 700;
+      }
+
+      div > p {
+        overflow: auto;
       }
     }
   }
@@ -348,7 +359,7 @@ body.modal-open,
   }
 }
 
-//#create-spec-modal
+// #create-spec-modal
 #create-spec-modal {
 
   .modal-body {
@@ -362,24 +373,24 @@ body.modal-open,
 
   .step1 {
 
-    //api key inputs
+    // api key inputs
     .form-group {
       position: relative;
 
       button {
         border: none;
-        border-left: 1px solid #ccc;
-        @include border-radius(0 2px 2px 0);
-        @include box-shadow(none);
-        height: 38px;
+        border-left: 1px solid #cdcdcd;
+        @include border-radius(0 3px 3px 0);
+        height: 34px;
+        line-height: 34px;
         position: absolute;
           top: 1px;
           right: 1px;
-        width: 38px;
+        width: 42px;
       }
     }
 
-    //.add-key
+    // .add-key
     .add-key {
       margin-bottom: 20px;
     }
@@ -419,6 +430,7 @@ body.modal-open,
       height: 100%;
       margin-bottom: 20px;
       min-height: 200px;
+      overflow: auto;
       padding: 20px;
       width: 100%;
     }
@@ -432,12 +444,12 @@ body.modal-open,
 
     #create-spec-preview {
       background: lightyellow;
-      border: 1px solid rgba(0,0,0,0.1);
+      border: 1px solid rgba(0,0,0,.1);
     }
   }
 }
 
-//bootstrap-dialogs
+// bootstrap-dialogs
 .bootstrap-dialog {
 
   .modal-content {
@@ -452,7 +464,7 @@ body.modal-open,
 
   .modal-body,
   .modal-footer {
-    background: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,.75);
     border: 1px solid #e5e5e5;
   }
 
