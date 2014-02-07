@@ -331,7 +331,7 @@ var utils = module.exports = {
       return app.req.query[key];
     }
     else {
-      var re = new RegExp('[?\&]'+key+'=([^\&]*)');
+      var re = new RegExp('[?&]'+key+'=([^&]*)');
       var qs = window.location.search;
       var match = re.exec(qs);
       return match && match[1];
@@ -359,17 +359,6 @@ var utils = module.exports = {
       '/'+url1 === url2 ||
       url1 === url2+'/' ||
       url1 === '/'+url2;
-  },
-  getQueryParam: function (app, key) {
-    if (isServer) {
-      return app.req.query[key];
-    }
-    else {
-      var re = new RegExp('[?\&]'+key+'=([^\&]*)');
-      var qs = window.location.search;
-      var match = re.exec(qs);
-      return match && match[1];
-    }
   },
   getReferrer: function (app) {
     if (isServer) {

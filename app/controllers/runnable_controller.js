@@ -273,7 +273,7 @@ module.exports = {
       }
     });
   },
-  imageoutputtoken: function(params, callback) {
+  dockworker: function (params, callback) {
     var self = this;
     var app = this.app;
     async.waterfall([
@@ -313,11 +313,11 @@ module.exports = {
         callback(err);
       }
       else {
-        var split = params.token.split('-');
-        var token = split[0];
+        var token = utils.getQueryParam(self.app, 'token');
+        var path = utils.getQueryParam(self.app, 'path');
         var url = "http://" + results.container.get(token) + "." + self.app.get('domain');
-        if (token === 'servicesToken') {
-          url += '/static/'+split[1]+'.html';
+        if (path) {
+          url += path;
         }
         self.redirectTo(302, url);
       }
