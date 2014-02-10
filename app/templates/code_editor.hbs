@@ -1,7 +1,11 @@
-<a class="open-file-explorer glyphicons folder-closed"></a>
-{{view "file_tabs" collection=defaultFiles}}
+<div id="project-toolbar">
+  <a class="open-file-explorer glyphicons folder-closed"></a>
+  {{view "file_tabs" collection=defaultFiles}}
+  {{view "file_select" collection=defaultFiles}}
+</div>
+
 {{view "file_explorer" container=container rootDir=rootDir editmode=editmode lock=lock}}
-{{view "file_select" collection=defaultFiles}}
+
 <div id="project-editor-container">
   <!--googleoff: anchor-->
   {{view "code" collection=defaultFiles}}

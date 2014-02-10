@@ -3,7 +3,6 @@
   border-top: none;
   border-right: none;
   overflow: hidden;
-  padding-top: 36px;
   position: relative;
 
   &:after {
@@ -18,27 +17,82 @@
   }
 }
 
+// toolbar
+#project-toolbar {
+  height: 36px;
+  overflow: hidden;
+
+  // file explorer icon
+  .open-file-explorer {
+    background: $purple-light;
+    border-top: 1px solid rgba(0,0,0,.2);
+    color: $grey-light;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-size: 18px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    width: 36px;
+
+    &:hover {
+      background: lighten($purple-light,5%);
+      color: $grey-light;
+      text-decoration: none;
+    }
+
+    &:active {
+      background: darken($purple-light,5%);
+    }
+  }
+
+  // select menu tabs
+  #project-select-tabs {
+    border: none;
+    float: right;
+
+    &:hover > button {
+
+      &:before {
+        border-bottom-color: $grey-dark;
+      }
+
+      &:after {
+        border-top-color: $grey-dark;
+      }
+    }
+
+    > button {
+      border: none;
+      position: relative;
+    }
+  }
+
+  // reset glyphicons top
+  .glyphicons {
+    top: 0;
+  }
+}
+
 // default tabs
 #project-editor-tabs {
   border: none;
+  float: left;
   height: 51px;
-  position: absolute;
-    top: 0;
-    left: 36px;
   overflow-x: auto;
   overflow-y: hidden;
   @include transition-transforms(.2s ease-in-out);
   white-space: nowrap;
-  width: calc(100% - 61px);
+  width: calc(100% - 72px);
 
   li {
     display: inline-block;
-    float: none;
     margin-left: -5px;
     position: relative;
 
     &:first-child {
-      margin-left: 0;
+      margin: 0 3px 0 0;
     }
 
     &:last-child {
@@ -92,6 +146,13 @@
       }
     }
 
+    .circle-info {
+      font-size: 18px;
+      padding: 0;
+      text-align: center;
+      width: 36px;
+    }
+
     &.active {
 
       > .tab-body {
@@ -116,30 +177,6 @@
   }
 }
 
-// select menu tabs
-#project-select-tabs {
-  border: none;
-  position: absolute;
-    top: 0;
-    right: 0;
-
-  &:hover > button {
-
-    &:before {
-      border-bottom-color: $grey-dark;
-    }
-
-    &:after {
-      border-top-color: $grey-dark;
-    }
-  }
-
-  > button {
-    border: none;
-    position: relative;
-  }
-}
-
 #project-editor-container {
   border-top: 1px solid rgba(0,0,0,.1);
   position: relative;
@@ -154,34 +191,6 @@
 
   .ace_scroller {
     bottom: -20px;
-  }
-}
-
-// file explorer icon
-.open-file-explorer {
-  background: $purple-light;
-  border-top: 1px solid rgba(0,0,0,.2);
-  color: $grey-light;
-  cursor: pointer;
-  display: block;
-  font-size: 18px;
-  height: 36px;
-  line-height: 36px;
-  position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-  text-align: center;
-  width: 36px;
-
-  &:hover {
-    background: lighten($purple-light,5%);
-    color: $grey-light;
-    text-decoration: none;
-  }
-
-  &:active {
-    background: darken($purple-light,5%);
   }
 }
 
