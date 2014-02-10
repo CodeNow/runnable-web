@@ -7,7 +7,7 @@ module.exports = BaseView.extend({
   postRender: function () {
     this.$('.project-author-icon').siblings('span').tooltip({
       placement: 'bottom',
-      title: this.model.get('imagesCount')+' published Runnables'
+      title: this.model.get('taggedImagesCount')+' published Runnables'
     });
   }
 });
