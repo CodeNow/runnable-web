@@ -623,10 +623,6 @@ pre {
   word-wrap: break-word;
   color: #333333;
   background-color: #f5f5f5;
-  /*
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  */
 }
 pre.prettyprint {
   margin-bottom: 20px;
@@ -2280,22 +2276,6 @@ input[type="button"].btn-block {
   position: relative;
   float: left;
 }
-/*
-.btn-group > .btn:hover,
-.btn-group > button:hover,
-.btn-group-vertical > .btn:hover,
-.btn-group > .btn:focus,
-.btn-group > button:focus,
-.btn-group-vertical > .btn:focus,
-.btn-group > .btn:active,
-.btn-group > button:active,
-.btn-group-vertical > .btn:active,
-.btn-group > .btn.active,
-.btn-group > button.active,
-.btn-group-vertical > .btn.active {
-  z-index: 2;
-}
-*/
 .btn-group > .btn:focus,
 .btn-group > button:focus,
 .btn-group-vertical > .btn:focus {

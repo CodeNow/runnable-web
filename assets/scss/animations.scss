@@ -61,12 +61,40 @@
   75% {
     height: 160px;
     opacity: 1;
-    width: 220px;
+    width: 215px;
   }
   100% {
     height: 150px;
     opacity: 1;
     width: 210px;
+  }
+}
+
+@include keyframes(bounceIn) {
+  0% {
+    opacity: .5;
+    @include transform(translate3d(0,-10px,0) scale3d(0,0,1));
+  }
+  75% {
+    @include transform(translate3d(0,0,0) scale3d(1.1,1.05,1));
+  }
+  100% {
+    opacity: 1;
+    @include transform(translate3d(0,0,0) scale3d(1,1,1));
+  }
+}
+
+@include keyframes(bounceInArrow) {
+  0% {
+    opacity: .5;
+    @include transform(translate3d(0,-10px,0) scale3d(0,0,1));
+  }
+  75% {
+    @include transform(translate3d(0,1px,0) scale3d(1.1,1.05,1));
+  }
+  100% {
+    opacity: 1;
+    @include transform(translate3d(0,0,0) scale3d(1,1,1));
   }
 }
 
@@ -136,7 +164,7 @@
 //circular percentage
 @include keyframes(closeWrapper) {
   100% {
-    clip: rect(auto, auto, auto, auto);
+    clip: rect(auto,auto,auto,auto);
   }
 }
 
