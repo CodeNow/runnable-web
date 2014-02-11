@@ -29,17 +29,17 @@
       left: 0;
       z-index: -1;
 
-      &.globe {
-        @include animation(leftSpan100 10s infinite reverse linear);
-      }
+    &.globe {
+      @include animation(leftSpan100 10s infinite reverse linear);
+    }
 
-      &.cog {
-        @include animation(cogError 1.5s infinite linear);
-      }
+    &.cog {
+      @include animation(cogError 1.5s infinite linear);
+    }
   }
 
   h1 {
-    color: #AC87C6;
+    color: #ac87c6;
     margin: 20% auto 30px;
     text-align: center;
 
@@ -58,21 +58,21 @@
 
   //link
   p {
-    color: #AC87C6;
+    color: #ac87c6;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
 
     > a {
-      color: lighten(#AC87C6,20%);
+      color: lighten(#ac87c6,20%);
 
       &:hover {
-        color: lighten(#AC87C6,25%);
+        color: lighten(#ac87c6,25%);
         text-decoration: none;
       }
 
       &:active {
-        color: lighten(#AC87C6,30%);
+        color: lighten(#ac87c6,30%);
       }
     }
   }
@@ -87,14 +87,14 @@
       max-width: 350px;
 
     > span {
-      color: #AC87C6;
+      color: #ac87c6;
       font-size: 18px;
       font-weight: bold;
       line-height: 1.2;
 
       &:before,
       &:after {
-        border-top: 1px solid #AC87C6;
+        border-top: 1px solid #ac87c6;
         content: '';
         display: block;
         margin: 11px auto;
@@ -147,7 +147,7 @@
   }
 
   aside {
-    color: #AC87C6;
+    color: #ac87c6;
     position: absolute;
       bottom: 10px;
       left: 20px;

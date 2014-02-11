@@ -1,4 +1,4 @@
-/* setup tooltips */
+// setup tooltips
 .tooltip {
   position: relative;
 }
@@ -20,8 +20,8 @@
   content: attr(data-title);
   font-size: 14px;
   font-weight: 400;
-  opacity: .5;
   line-height: 1;
+  opacity: .5;
   padding: 8px 10px 6px;
     top: 26px;
   @include transform(translate3d(0,-10px,0) scale3d(0,0,1));

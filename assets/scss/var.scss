@@ -1,27 +1,27 @@
 //colors
-$grey:           #E8E8E8;
-$grey-lighter:   #F6F6F6;
-$grey-light:     #EEE;
+$grey:           #e8e8e8;
+$grey-lighter:   #f6f6f6;
+$grey-light:     #eee;
 $grey-dark:      #888;
 $grey-darker:    #555;
 
-$green:          #81B638;
+$green:          #81b638;
 $green-lighter:  lighten($green,14);
 $green-light:    lighten($green,5);
 $green-dark:     darken($green,9);
 $green-darker:   darken($green,14);
 
-$silver:         #E4E4E4;
+$silver:         #e4e4e4;
 $silver-lighter: lighten($silver,8);
 $silver-light:   lighten($silver,7);
 $silver-dark:    darken($silver,9);
 $silver-darker:  darken($silver,25);
 
-$purple:         #5B3777;
-$purple-lighter: adjust_hue(saturate(lighten($purple, 60), 63), 1);
+$purple:         #5b3777;
+$purple-lighter: adjust-hue(saturate(lighten($purple, 60), 63), 1);
 $purple-light:   lighten($purple,14);
 
-$orange:         #FD7022;
+$orange:         #fd7022;
 $orange-lighter: lighten($orange,10);
 $orange-light:   lighten($orange,5);
 $orange-dark:    darken($orange,12);
@@ -30,7 +30,7 @@ $orange-darker:  darken($orange,17);
 
 $br: 2px;
 $primary-color: #198dd2;
-/*Gray toolbar top of code and web output*/
+// Gray toolbar top of code and web output
 $toolbar-height: 30px;
 $border-color: #e5e5e5;
 

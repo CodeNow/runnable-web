@@ -8,46 +8,46 @@
   text-transform: uppercase;
 }
 
-  //home and create new pages
-  #cards .no-img {
-    float: left;
-    font-size: 20px;
+//home and create new pages
+#cards .no-img {
+  float: left;
+  font-size: 20px;
+  height: 30px;
+  width: 31px;
+    max-width: 12.5%;
+
+  @include media(sm) {
+    height: 24px;
+    line-height: 1;
+    width: 25px;
+  }
+
+  @include media(md) {
     height: 30px;
+    line-height: 1.4;
     width: 31px;
-      max-width: 12.5%;
-
-      @include media(sm) {
-        height: 24px;
-        line-height: 1;
-        width: 25px;
-      }
-
-      @include media(md) {
-        height: 30px;
-        line-height: 1.4;
-        width: 31px;
-      }
   }
+}
 
-  //on channel page
-  #tags-main .no-img {
-    font-size: 24px;
-    height: 39px;
-    margin: 10px 0;
-    pointer-events: none;
-    width: 40px;
-  }
+//on channel page
+#tags-main .no-img {
+  font-size: 24px;
+  height: 39px;
+  margin: 10px 0;
+  pointer-events: none;
+  width: 40px;
+}
 
-  //on profile page
-  #reputation .no-img {
-    float: left;
-    font-size: 24px;
-    height: 40px;
-    overflow: hidden;
-    position: absolute;
-      top: 10px;
-      right: 0;
-      left: 0;
-      z-index: 1;
-    width: 42px;
-  }
+//on profile page
+#reputation .no-img {
+  float: left;
+  font-size: 24px;
+  height: 40px;
+  overflow: hidden;
+  position: absolute;
+    top: 10px;
+    right: 0;
+    left: 0;
+    z-index: 1;
+  width: 42px;
+}

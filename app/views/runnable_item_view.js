@@ -7,7 +7,7 @@ module.exports = BaseView.extend({
   tagName: 'li',
   events: {
     'click .delete': 'deleteRunnable'
-  }
+  },
   getTemplateData: function () {
     this.options.user = this.app.user;
     return this.options;
