@@ -64,6 +64,16 @@ module.exports = function(grunt) {
   var gruntConfig = {
     pkg: grunt.file.readJSON('package.json'),
 
+    autoprefixer: {
+      options: {
+        broswers: ['last 2 versions']
+      },
+      single_file: {
+        src: 'public/styles/index.css',
+        dest: 'public/styles/index.css'
+      }
+    },
+
     bgShell: {
       server: {
         cmd: 'NODE_ENV='+process.env.NODE_ENV+' LIVERELOAD_PORT='+livereloadPort+' node ./node_modules/nodemon/nodemon.js index.js',
@@ -261,6 +271,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-bg-shell');
   grunt.loadNpmTasks('grunt-rendr-stitch');
+  grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.registerTask('noop', 'noop', function () {});
   // copy ace files top public
   grunt.registerTask('copy-ace-files', 'Copy ace editor files to public');
@@ -346,7 +357,7 @@ module.exports = function(grunt) {
   // jslint
   grunt.registerTask('jshint', ['jshint:all']);
   // Compile - shared tasks for all
-  grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'commit-hash-file', 'rendr_stitch', 'compass']);
+  grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'commit-hash-file', 'rendr_stitch', 'compass', 'autoprefixer:single_file']);
   // Shared tasks for server and debug
   grunt.registerTask('dev', ['compile', 'concat', 'copy']);
   // Run the server and watch for file changes
