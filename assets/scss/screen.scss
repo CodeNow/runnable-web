@@ -1536,7 +1536,7 @@ div#output-terminal-container{
         background: #fff;
         @include border-radius(5px);
         @include box-shadow(0 2px 5px rgba(0,0,0,0.1));
-        overflow: hidden;
+        overflow: visible;
         padding: 0;
         position: relative;
             z-index: 2;
