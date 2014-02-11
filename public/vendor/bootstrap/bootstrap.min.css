@@ -2280,6 +2280,7 @@ input[type="button"].btn-block {
   position: relative;
   float: left;
 }
+/*
 .btn-group > .btn:hover,
 .btn-group > button:hover,
 .btn-group-vertical > .btn:hover,
@@ -2294,6 +2295,7 @@ input[type="button"].btn-block {
 .btn-group-vertical > .btn.active {
   z-index: 2;
 }
+*/
 .btn-group > .btn:focus,
 .btn-group > button:focus,
 .btn-group-vertical > .btn:focus {
@@ -4348,6 +4350,7 @@ body.modal-open,
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   }
 }
+/*
 .tooltip {
   position: absolute;
   z-index: 1030;
@@ -4446,6 +4449,7 @@ body.modal-open,
   border-width: 0 5px 5px;
   border-bottom-color: #000000;
 }
+*/
 .popover {
   position: absolute;
   top: 0;

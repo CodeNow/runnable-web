@@ -12,11 +12,6 @@ module.exports = BaseView.extend({
       self.tagName = 'span';
       self.className = 'runnable-stats-wrapper';
     }
-  },
-  postHydrate: function () {
-    this.$('[data-toggle=tooltip]').tooltip({
-      placement: 'bottom'
-    });
   }
 });
 

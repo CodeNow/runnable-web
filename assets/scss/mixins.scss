@@ -97,13 +97,6 @@
 
 }
 
-// // transition mixin for transforms
-// @mixin transition-transforms($transition) {
-//   -ms-transition: -ms-transform+" "+$transition;
-//   -webkit-transition: -webkit-transform+" "+$transition;
-//   transition: transform+" "+$transition;
-// }
-
 // bootstrap's LESS media queries for SASS
 @mixin media($point) {
   @if $point == xxs {

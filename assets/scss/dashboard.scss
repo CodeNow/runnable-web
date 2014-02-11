@@ -27,8 +27,9 @@ main {
       font-size: 14px;
       height: 52px;
       line-height: 52px;
-      top: -6px;
-      right: -13px;
+      position: absolute;
+        top: -6px;
+        right: -13px;
       width: 52px;
 
       &:hover,
@@ -37,6 +38,16 @@ main {
         @include background-image(linear-gradient(rgba(107,64,155,0),#6B409B));
         @include box-shadow(inset 0 1px 0 rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.1));
         cursor: pointer;
+      }
+
+      &:before {
+        top: 46px;
+        left: 10px;
+      }
+
+      &:after {
+        top: 40px;
+        left: 20px;
       }
     }
 
@@ -69,10 +80,6 @@ main {
         color: $grey-lighter;
         opacity: .75;
       }
-    }
-
-    .tooltip {
-      margin-top: 0;
     }
 
     span:hover {
@@ -328,7 +335,7 @@ main {
   background: #fff;
   @include border-radius(5px);
   @include box-shadow(0 2px 5px rgba(0,0,0,.1));
-  overflow: hidden;
+  overflow: visible;
   padding: 0;
   position: relative;
     z-index: 2;
@@ -466,16 +473,8 @@ li {
       margin-left: 0;
     }
 
-    // tooltips
-    .tooltip {
-      margin-top: -3px;
-    }
-    .tooltip-inner {
-      white-space: nowrap;
-    }
-
     // author link & img
-    > a:first-child {
+    > a {
       background: #fff;
       @include border-radius(50%);
       @include box-shadow(0 2px 3px rgba(0,0,0,.3));
@@ -494,6 +493,16 @@ li {
         position: absolute;
           z-index: 1;
         width: 62px;
+      }
+
+      &:before {
+        top: 60px;
+        left: 16px;
+      }
+
+      &:after {
+        top: 54px;
+        left: 26px;
       }
     }
   }

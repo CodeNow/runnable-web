@@ -7,10 +7,9 @@ var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName: 'li',
   attributes: {
-    'rel' : 'tooltip',
-    'title' : 'Refresh Files'
+    'data-title' : 'Refresh Files'
   },
-  className: 'glyphicons refresh pull-right',
+  className: 'pull-right tooltip',
   events: {
     'click' : 'click'
   },

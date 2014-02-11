@@ -1121,10 +1121,20 @@ progress {
                 float: left;
             }
 
-            > .run-options, {
+            > .run-options {
                 @include border-radius(0 3px 3px 0);
                 margin-left: -1px;
                 padding: 0 9px 0 8px;
+
+                &:before {
+                    top: 38px;
+                    left: 0;
+                }
+
+                &:after {
+                    top: 32px;
+                    left: 9px;
+                }
             }
 
             .caret {
@@ -1181,8 +1191,9 @@ progress {
         }
 
         > span {
-            top: -8px;
-            right: 0;
+            position: absolute;
+                top: -8px;
+                right: 0;
 
             @include media(lg) {
                 right: 4px;
@@ -1190,6 +1201,15 @@ progress {
 
             @include media(xl) {
                 right: 16px;
+            }
+
+            &:before {
+                top: 38px;
+                left: 0;
+            }
+
+            &:after {
+                top: 32px;
             }
         }
 

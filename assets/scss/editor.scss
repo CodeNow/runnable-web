@@ -222,9 +222,19 @@
       text-align: center;
       width: 36px;
 
+      &:before {
+        top: 36px;
+      }
+
+      &:after {
+        top: 30px;
+        left: 12px;
+      }
+
       &.dark-theme,
       &.light-theme {
-        &:after {
+
+        > span {
           border: 1px solid transparent;
           @include border-radius(50%);
           content: '';
@@ -235,18 +245,18 @@
         }
       }
 
-      &.dark-theme:after {
+      &.dark-theme > span {
         background: $purple;
       }
 
-      &.light-theme:after {
+      &.light-theme > span {
         background: $grey-lighter;
       }
 
       &.active {
         cursor: default;
 
-        &:after {
+         > span {
           border: 1px solid $orange;
         }
       }
