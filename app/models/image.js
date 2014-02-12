@@ -16,7 +16,7 @@ module.exports = Runnable.extend({
   // },
   githubImport: function (query, cb) {
     var opts = utils.cbOpts(cb);
-    opts.url = utils.pathJoin(this.urlRoot, 'import/github') + 
+    opts.url = utils.pathJoin('/api/-', this.urlRoot, 'import/github') + 
       utils.toQueryString(query);
     this.save({}, opts);
   },
