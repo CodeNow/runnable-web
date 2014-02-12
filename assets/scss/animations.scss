@@ -3,7 +3,7 @@
     @include box-shadow(inset 0 1px 0 rgba(255, 255, 255, .4), 0 1px 0 rgba(0, 0, 0, .1));
   }
   30% {
-    @include box-shadow(inset 0 1px 0 rgba(255, 255, 255, .4), 0 1px 0 rgba(0, 0, 0, .1), 2px 0 30px #FDAE22);
+    @include box-shadow(inset 0 1px 0 rgba(255, 255, 255, .4), 0 1px 0 rgba(0, 0, 0, .1), 2px 0 30px #fdae22);
   }
   100% {
     @include box-shadow(inset 0 1px 0 rgba(255, 255, 255, .4), 0 1px 0 rgba(0, 0, 0, .1));
@@ -61,7 +61,7 @@
   75% {
     height: 160px;
     opacity: 1;
-    width: 220px;
+    width: 215px;
   }
   100% {
     height: 150px;
@@ -108,13 +108,13 @@
 
 @include keyframes(cogError) {
   0% {
-    @include rotate-3d(0deg);
+    @include rotate-3d(0);
   }
   80% {
-    @include rotate-3d(90deg);
+    @include rotate-3d(90);
   }
   100% {
-    @include rotate-3d(90deg);
+    @include rotate-3d(90);
   }
 }
 
@@ -135,106 +135,106 @@
 
 //circular percentage
 @include keyframes(closeWrapper) {
-    100% {
-        clip: rect(auto, auto, auto, auto);
-    }
+  100% {
+    clip: rect(auto,auto,auto,auto);
+  }
 }
 
 @include keyframes(leftSpan50) {
-    0% {
-        @include rotate-3d(0deg);
-    }
-    100% {
-        @include rotate-3d(0deg);
-    }
+  0% {
+    @include rotate-3d(0);
+  }
+  100% {
+    @include rotate-3d(0);
+  }
 }
 
 @include keyframes(leftSpan60) {
-    0% {
-        @include rotate-3d(0deg);
-    }
-    100% {
-        @include rotate-3d(6*36deg);
-    }
+  0% {
+    @include rotate-3d(0);
+  }
+  100% {
+    @include rotate-3d(6*36deg);
+  }
 }
 
 @include keyframes(leftSpan70) {
-    0% {
-        @include rotate-3d(0deg);
-    }
-    100% {
-        @include rotate-3d(7*36deg);
-    }
+  0% {
+    @include rotate-3d(0);
+  }
+  100% {
+    @include rotate-3d(7*36deg);
+  }
 }
 
 @include keyframes(leftSpan80) {
-    0% {
-        @include rotate-3d(0deg);
-    }
-    100% {
-        @include rotate-3d(8*36deg);
-    }
+  0% {
+    @include rotate-3d(0);
+  }
+  100% {
+    @include rotate-3d(8*36deg);
+  }
 }
 
 @include keyframes(leftSpan90) {
-    0% {
-        @include rotate-3d(0deg);
-    }
-    100% {
-        @include rotate-3d(9*36deg);
-    }
+  0% {
+    @include rotate-3d(0);
+  }
+  100% {
+    @include rotate-3d(9*36deg);
+  }
 }
 
 @include keyframes(leftSpan100) {
-    0% {
-        @include rotate-3d(0deg);
-    }
-    100% {
-        @include rotate-3d(360deg);
-    }
+  0% {
+    @include rotate-3d(0);
+  }
+  100% {
+    @include rotate-3d(360);
+  }
 }
 
 @include keyframes(rightSpan10) {
-    0% {
-        @include rotate-3d(0deg);
-    }
-    100% {
-        @include rotate-3d(2*18deg);
-    }
+  0% {
+    @include rotate-3d(0);
+  }
+  100% {
+    @include rotate-3d(2*18deg);
+  }
 }
 
 @include keyframes(rightSpan20) {
-    0% {
-        @include rotate-3d(0deg);
-    }
-    100% {
-        @include rotate-3d(4*18deg);
-    }
+  0% {
+    @include rotate-3d(0);
+  }
+  100% {
+    @include rotate-3d(4*18deg);
+  }
 }
 
 @include keyframes(rightSpan30) {
-    0% {
-        @include rotate-3d(0deg);
-    }
-    100% {
-        @include rotate-3d(6*18deg);
-    }
+  0% {
+    @include rotate-3d(0);
+  }
+  100% {
+    @include rotate-3d(6*18deg);
+  }
 }
 
 @include keyframes(rightSpan40) {
-    0% {
-        @include rotate-3d(0deg);
-    }
-    100% {
-        @include rotate-3d(8*18deg);
-    }
+  0% {
+    @include rotate-3d(0);
+  }
+  100% {
+    @include rotate-3d(8*18deg);
+  }
 }
 
 @include keyframes(rightSpan50) {
-    0% {
-        @include rotate-3d(0deg);
-    }
-    100% {
-        @include rotate-3d(10*18deg);
-    }
+  0% {
+    @include rotate-3d(0);
+  }
+  100% {
+    @include rotate-3d(10*18deg);
+  }
 }

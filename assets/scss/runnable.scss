@@ -15,7 +15,7 @@
     margin: 10px 0;
   }
 
-  .nav > li {
+  li {
     display: inline-block;
 
     > a {
@@ -120,7 +120,7 @@
   color: #bbb;
   font-size: 12px;
   font-weight: bold;
-  margin: 8px 0 0 0;
+  margin: 8px 0 0;
 
   &.title {
     font-size: 14px;
@@ -150,7 +150,6 @@
   }
 
   > span {
-    display: inline-block;
     margin: 0 5px 5px;
 
     &:first-child {
@@ -206,8 +205,8 @@
       }
     }
 
-    &.glyphicons {
-      margin: 0 2px 0 0;
+    .glyphicons {
+      padding: 0 2px;
     }
   }
 }

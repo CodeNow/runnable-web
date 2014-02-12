@@ -1,4 +1,5 @@
 {{view "run_button" model=context.container collection=context.specifications context=context}}
-<button class="green run-options glyphicons cogwheel" title="Run Options">
+<button class="green run-options tooltip" data-title="Run Options">
+  <span class="glyphicons cogwheel"></span>
 </button>
 {{view "run_popover" model=context.container editmode=editmode}}
