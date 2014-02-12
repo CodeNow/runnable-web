@@ -43,7 +43,7 @@ module.exports = BaseView.extend({
       console.log('Terminal has been disconected');
     }
     else if (message.data 
-      && (1 !== message.data.indexOf('term:data'))){
+      && (message.data.indexOf('term:data') === 0)) {
       this.trackEvent('Command', { term_cmd: message.data.replace('term:data','') });
     }
   },
