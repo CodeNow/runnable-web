@@ -218,10 +218,6 @@ module.exports = function(grunt) {
           interrupt: true,
           livereload: 35371
         }
-      },
-      autoprefixer: {
-        files: ['public/styles/*.css'],
-        tasks: ['autoprefixer:single_file']
       }
     },
 
