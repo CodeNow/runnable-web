@@ -11,6 +11,11 @@ module.exports = BaseView.extend({
     click: 'click'
   },
   click: function (evt) {
+    /**
+     * Disabling signup modal for unauthenticated users...
+     */
+
+    /*
     if (this.app.user.isRegistered()) {
       // let the link work...
     }
@@ -19,6 +24,7 @@ module.exports = BaseView.extend({
       evt.preventDefault();
       this.openLogin();
     }
+    */
   },
   openLogin: function () {
     var user = this.app.user;
