@@ -6,7 +6,7 @@ module.exports = BaseView.extend({
   id: 'git-card',
   className: 'col-sm-4',
   events: {
-    'input input' : 'enableSelect',
+    'input input'   : 'enableSelect',
     'change select' : 'changeLanguage'
   },
   enableSelect: function (evt) {
@@ -21,6 +21,9 @@ module.exports = BaseView.extend({
     }
   },
   changeLanguage: function () {
+    $('body').addClass('modal-open');
+    $('#page-loader').addClass('loading');
+
     var langVal = this.$('select')[0].value;
     var self = this;
     this.$('button').text(langVal);
