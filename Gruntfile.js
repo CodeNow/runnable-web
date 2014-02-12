@@ -359,7 +359,7 @@ module.exports = function(grunt) {
   // Compile - shared tasks for all
   grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'commit-hash-file', 'rendr_stitch', 'compass']);
   // Shared tasks for server and debug
-  grunt.registerTask('dev', ['compile', 'concat', 'copy']);
+  grunt.registerTask('dev', ['compile', 'concat', 'copy', 'autoprefixer']);
   // Run the server and watch for file changes
   grunt.registerTask('server', ['dev', 'bgShell:server', 'watch']);
   // Debug
