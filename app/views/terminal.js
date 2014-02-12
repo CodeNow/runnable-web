@@ -32,7 +32,9 @@ module.exports = BaseView.extend({
     window.Intercom('show');
   },
   onPostMessage: function (message) {
-    console.log('POST MESSAGE', message);
+    if (this.app.get('env') !== 'production') {
+      console.log('POST MESSAGE', message);
+    }
     if (message.data === 'show:loader') {
       this.loading(true);
     }
@@ -44,8 +46,9 @@ module.exports = BaseView.extend({
     }
     else if (message.data 
       && (message.data.indexOf('term:data') === 0)) {
-      console.log("fix");
-      //this.trackEvent('Command', { term_cmd: message.data.replace('term:data','') });
+      this.trackEvent('Command', { 
+          terminal_cmd: message.data.replace('term:data','')
+        });
     }
   },
   listenToPostMessages: function () {
