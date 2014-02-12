@@ -39,6 +39,9 @@ module.exports = BaseView.extend({
     else if (message.data === 'hide:loader') {
       this.loading(false);
     } 
+    else if (message.data === 'term:dis') {
+      console.log('Terminal has been disconected');
+    }
     else if (message.data 
       && (1 !== message.data.indexOf('term:data'))){
       this.trackEvent('Command', { term_cmd: message.data.replace('term:data','') });
