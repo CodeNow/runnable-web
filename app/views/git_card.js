@@ -33,11 +33,11 @@ module.exports = BaseView.extend({
         self.showError(err);
       } else {
         var container = new Container({}, { app:this.app });
-        container.createFrom(imageIdOrChannelName, function (err, container) {
+        container.createFrom(image.id, function (err, container) {
           if (err) {
             self.showError(err);
           } else {
-            self.app.router.navigateUrl(container.appURL());
+            self.app.router.navigate(container.appURL(), true);
           }
         });
       }
