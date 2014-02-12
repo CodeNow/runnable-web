@@ -1089,15 +1089,15 @@ progress {
         > .btn-group,
         > button {
             float: left;
-
-            // .glyphicons {
-            //     margin-right: 2px;
-            //     vertical-align: baseline;
-            // }
         }
 
         > .silver {
             margin-left: 10px;
+
+            @include media(xxs) {
+                float: right;
+                width: 60%;
+            }
         }
 
         > .green {
@@ -1109,6 +1109,7 @@ progress {
 
             @include media(xxs) {
                 margin-bottom: 10px;
+                width: 100%;
             }
         }
 
@@ -1143,6 +1144,7 @@ progress {
 
             @include media(xxs) {
                 clear: both;
+                margin-left: 0;
 
                 > button {
                     margin-left: 0;
