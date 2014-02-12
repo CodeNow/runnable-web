@@ -8,8 +8,8 @@
 
   .modal-content {
     background: #f6f6f6;
+    border: 0;
     @include border-radius(3px);
-    border: none;
   }
 
   .modal-header {
@@ -49,17 +49,20 @@
   }
 
   .modal-body {
-    ::-webkit-input-placeholder { /* WebKit browsers */
-      color:    #666;
+    ::-webkit-input-placeholder { // WebKit browsers
+      color: #666;
     }
-    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        color:    #666;
+
+    :-moz-placeholder { // Mozilla Firefox 4 to 18
+      color: #666;
     }
-    ::-moz-placeholder { /* Mozilla Firefox 19+ */
-        color:    #666;
+
+    ::-moz-placeholder { // Mozilla Firefox 19+
+      color: #666;
     }
-    :-ms-input-placeholder { /* Internet Explorer 10+ */
-        color:    #666;
+
+    :-ms-input-placeholder { // Internet Explorer 10+
+      color: #666;
     }
 
     input,
@@ -124,9 +127,10 @@
   margin-top: 20px;
 }
 
-.modal-dialog .modal-content .modal-body .input-group {
+.modal-dialog .input-group {
   margin-bottom: 20px;
-  input{
+
+  input {
     margin-bottom: 0;
   }
 }
@@ -148,39 +152,39 @@ body.modal-open,
     padding: 20px 20px 0;
     width: 100%;
 
-      label {
-        color: $grey-dark;
-        font-size: 14px;
-        font-weight: normal;
-      }
+    label {
+      color: $grey-dark;
+      font-size: 14px;
+      font-weight: normal;
+    }
 
-      p {
-        font-weight: bold;
-        text-align: left;
-      }
+    p {
+      font-weight: bold;
+      text-align: left;
+    }
 
-      a {
-        cursor: pointer;
-      }
+    a {
+      cursor: pointer;
+    }
 
-      hr {
-        border-top: 1px solid rgba(0,0,0,.1);
-        margin-right: -20px;
-        margin-left: -20px;
-      }
+    hr {
+      border-top: 1px solid rgba(0,0,0,.1);
+      margin-right: -20px;
+      margin-left: -20px;
+    }
 
-      .popover {
-        font-weight: normal;
-        max-width: 350px;
-      }
+    .popover {
+      font-weight: normal;
+      max-width: 350px;
+    }
 
-      input {
-        margin-bottom: 20px;
-      }
+    input {
+      margin-bottom: 20px;
+    }
   }
 
   .modal-footer {
-      margin-top: 0;
+    margin-top: 0;
 
     // primary action
     > button {
@@ -247,7 +251,7 @@ body.modal-open,
     }
 
   // add new api link
-  > .new {
+    > .new {
       display: block;
       font-size: 14px;
       font-weight: 700;
@@ -286,9 +290,9 @@ body.modal-open,
     }
 
     #implement-instructions-tab {
-      background: lightyellow;
+      background: #ffffe0;
       border: 1px solid rgba(0,0,0,.1);
-      border-bottom: none;
+      border-bottom: 0;
       height: 100%;
       overflow: auto;
       padding: 20px;
@@ -317,7 +321,7 @@ body.modal-open,
 
     // wrapping div
     > div {
-      background: lightyellow;
+      background: #ffffe0;
       border: 1px solid rgba(0,0,0,.1);
       height: 100%;
       margin-bottom: 20px;
@@ -353,8 +357,8 @@ body.modal-open,
       margin: 0 0 0 15px;
 
       @include media(xs) {
-            display: inline;
-        }
+        display: inline;
+      }
     }
   }
 }
@@ -378,7 +382,7 @@ body.modal-open,
       position: relative;
 
       button {
-        border: none;
+        border: 0;
         border-left: 1px solid #cdcdcd;
         @include border-radius(0 3px 3px 0);
         height: 34px;
@@ -414,7 +418,7 @@ body.modal-open,
     }
 
     .nav-tabs {
-      border-bottom: none;
+      border-bottom: 0;
 
       > li > a {
         border-bottom: 1px solid #ddd;
@@ -443,7 +447,7 @@ body.modal-open,
     }
 
     #create-spec-preview {
-      background: lightyellow;
+      background: #ffffe0;
       border: 1px solid rgba(0,0,0,.1);
     }
   }

@@ -32,12 +32,22 @@ module.exports = BaseView.extend({
     window.Intercom('show');
   },
   onPostMessage: function (message) {
-    console.log('POST MESSAGE', message);
+    if (this.app.get('env') !== 'production') {
+      console.log('POST MESSAGE', message);
+    }
     if (message.data === 'show:loader') {
       this.loading(true);
     }
     else if (message.data === 'hide:loader') {
       this.loading(false);
+    }
+    else if (message.data === 'term:dis') {
+      console.log('Terminal has been disconected');
+    }
+    else if (message.data && (message.data.indexOf('term:data') === 0)) {
+      this.trackEvent('Entered Command', {
+        terminal_cmd: message.data.replace('term:data','')
+      });
     }
   },
   listenToPostMessages: function () {

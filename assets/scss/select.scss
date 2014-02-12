@@ -40,13 +40,13 @@
 
     ~ button {
       background: transparent;
-      opacity: 0.5;
+      opacity: .5;
     }
   }
 
   button {
     background: transparent;
-    border: none;
+    border: 0;
     @include box-shadow(none);
     color: $grey-dark;
     font-size: 14px;

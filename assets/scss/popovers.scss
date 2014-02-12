@@ -1,10 +1,10 @@
-//main-controls popover
+// main-controls popover
 .main-controls .popover {
   display: block;
   opacity: 0;
   padding: 0;
   pointer-events: none;
-  top: 40px;
+  top: 32px;
   width: 365px;
     max-width: none;
   z-index: -1;
@@ -12,7 +12,7 @@
   &.in {
     opacity: 1;
     pointer-events: auto;
-    z-index: 1010;
+    z-index: $zpopover;
   }
 
   > .arrow {

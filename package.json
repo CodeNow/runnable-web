@@ -59,7 +59,8 @@
     "grunt-contrib-uglify": "0.2.3",
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-copy": "~0.4.1"
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-autoprefixer": "~0.6.5"
   },
   "engines": {
     "node": ">=0.8"

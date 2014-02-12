@@ -64,7 +64,7 @@
 }
 
 // rotate3d mixin
-@mixin rotate-3d($a: 0deg) {
+@mixin rotate-3d($a: 0) {
   -webkit-transform: rotate3d(0,0,1,$a);
   transform: rotate($a);
   // ff doesn't rotate in the correct direction
@@ -88,21 +88,17 @@
 
 // transition mixin for transforms
 @mixin transition-transforms($transition, $transition2:false) {
- $params: $transition;
-  @if $transition2 { $params: $transition, $transition2; }
+  $params: $transition;
+
+  @if $transition2 {
+    $params: $transition, $transition2;
+  }
 
   -ms-transition: -ms-transform+" "+$params;
   -webkit-transition: -webkit-transform+" "+$params;
   transition: transform+" "+$params;
 
 }
-
-// // transition mixin for transforms
-// @mixin transition-transforms($transition) {
-//   -ms-transition: -ms-transform+" "+$transition;
-//   -webkit-transition: -webkit-transform+" "+$transition;
-//   transition: transform+" "+$transition;
-// }
 
 // bootstrap's LESS media queries for SASS
 @mixin media($point) {
@@ -112,19 +108,19 @@
   @else if $point == xs {
     @media (max-width: 768px) { @content; }
   }
-  /* Small devices (tablets, 768px and up) */
+  // Small devices (tablets, 768px and up)
   @else if $point == sm {
     @media (min-width: 768px) { @content; }
   }
-  /* Medium devices (desktops, 992px and up) */
+  // Medium devices (desktops, 992px and up)
   @else if $point == md {
     @media (min-width: 992px) { @content; }
   }
-  /* Large devices (large desktops, 1200px and up) */
+  // Large devices (large desktops, 1200px and up)
   @else if $point == lg {
     @media (min-width: 1200px) { @content; }
   }
-  /* Extra large devices (extra large dekstops, 1600px and up */
+  // Extra large devices (extra large dekstops, 1600px and up
   @else if $point == xl {
     @media (min-width: 1600px) { @content; }
   }

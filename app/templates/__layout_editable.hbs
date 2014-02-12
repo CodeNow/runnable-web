@@ -78,7 +78,7 @@
       mixpanel.init(CONFIG.mixpanel.key);
     </script>
 
-    {{#if_eq app.attributes.env compare="production"}}
+    {{!#if_eq app.attributes.env compare="production"}}
     <!-- begin olark code -->
     <script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
     f[z]=function(){
@@ -116,7 +116,7 @@
     <!-- Intercom Settings -->
     <!-- are within frontend-track -->
 
-    {{/if_eq}}
+    {{!/if_eq}}
 
     <script src="http://cybertron.{{app.attributes.domain}}/primus/primus.js"></script>
     <script src="/mergedAssets.min.js"></script>

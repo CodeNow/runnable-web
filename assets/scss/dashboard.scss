@@ -27,16 +27,27 @@ main {
       font-size: 14px;
       height: 52px;
       line-height: 52px;
-      top: -6px;
-      right: -13px;
+      position: absolute;
+        top: -6px;
+        right: -13px;
       width: 52px;
 
       &:hover,
       &:active {
-        background-color: #9A58BA;
+        background-color: #9a58ba;
         @include background-image(linear-gradient(rgba(107,64,155,0),#6B409B));
         @include box-shadow(inset 0 1px 0 rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.1));
         cursor: pointer;
+      }
+
+      &:before {
+        top: 52px;
+        left: 10px;
+      }
+
+      &:after {
+        top: 46px;
+        left: 20px;
       }
     }
 
@@ -71,10 +82,6 @@ main {
       }
     }
 
-    .tooltip {
-      margin-top: 0;
-    }
-
     span:hover {
       color: $grey-lighter;
     }
@@ -106,8 +113,8 @@ main {
 
   .inline,
   .edit-inline {
-    min-height: 24px;
     margin: 4px 0;
+    min-height: 24px;
     position: relative;
 
     &.edit-inline {
@@ -202,7 +209,7 @@ main {
 
     &[disabled] {
       cursor: text;
-      -webkit-text-fill-color:$grey-dark;
+      -webkit-text-fill-color: $grey-dark;
     }
   }
 
@@ -229,7 +236,7 @@ main {
 
   // tabs
   .nav-tabs {
-    border-bottom: none;
+    border-bottom: 0;
     position: relative;
       z-index: 1;
 
@@ -237,6 +244,7 @@ main {
       margin-bottom: -2px;
 
       &.active {
+
         a {
           background: #fff;
           border: 1px solid transparent;
@@ -280,8 +288,8 @@ main {
 
   // select
   .dropdown {
-    height: 36px;
     float: right;
+    height: 36px;
     top: -5px;
     width: 82px;
 
@@ -328,7 +336,7 @@ main {
   background: #fff;
   @include border-radius(5px);
   @include box-shadow(0 2px 5px rgba(0,0,0,.1));
-  overflow: hidden;
+  overflow: visible;
   padding: 0;
   position: relative;
     z-index: 2;
@@ -338,12 +346,12 @@ main {
     border-bottom: solid 1px #eee;
     list-style: none;
     margin: 0;
-    padding: 0 25px 25px 25px;
+    padding: 0 25px 25px;
     position: relative;
     @include transition(background .2s ease-in-out);
 
     &:hover {
-      background: #FCF7FF;
+      background: #fcf7ff;
     }
 
     &:first-child {
@@ -360,7 +368,7 @@ main {
 
     button {
       background: none;
-      border: none;
+      border: 0;
       @include box-shadow(none);
       color: rgba(0,0,0,.2);
       font-size: 14px;
@@ -385,27 +393,27 @@ main {
     a {
       color: $grey-darker;
       display: block;
-      font-weight: bold;
       font-size: 20px;
-      padding: 25px 0 0 0;
+      font-weight: bold;
+      padding: 25px 0 0;
     }
   }
 
   p {
+    color: #bbb;
     font-size: 12px;
     font-weight: bold;
-    color: #bbb;
-    margin: 8px 0 0 0;
+    margin: 8px 0 0;
   }
 }
 
 li {
   .tags {
+    margin-right: 5px;
 
     img {
       margin-right: 4px;
     }
-      margin-right: 5px;
   }
 }
 
@@ -466,16 +474,8 @@ li {
       margin-left: 0;
     }
 
-    // tooltips
-    .tooltip {
-      margin-top: -3px;
-    }
-    .tooltip-inner {
-      white-space: nowrap;
-    }
-
     // author link & img
-    > a:first-child {
+    > a {
       background: #fff;
       @include border-radius(50%);
       @include box-shadow(0 2px 3px rgba(0,0,0,.3));
@@ -483,6 +483,7 @@ li {
       height: 60px;
       margin: 0 auto;
       position: relative;
+      text-decoration: none;
       width: 62px;
 
       > img {
@@ -494,6 +495,16 @@ li {
         position: absolute;
           z-index: 1;
         width: 62px;
+      }
+
+      &:before {
+        top: 60px;
+        left: 16px;
+      }
+
+      &:after {
+        top: 54px;
+        left: 26px;
       }
     }
   }
@@ -513,7 +524,7 @@ li {
   figure {
     @include animation(closeWrapper 0s .5s 1 forwards linear);
     @include border-radius(50%);
-    clip: rect(0px, 62px, 60px, 31px);
+    clip: rect(0,62px,60px,31px);
     height: 60px;
     pointer-events: none;
     width: 62px;
@@ -521,7 +532,7 @@ li {
     div {
       border: 10px solid $purple-lighter;
       @include border-radius(50%);
-      clip: rect(0px, 31px, 60px, 0px);
+      clip: rect(0px,31px,60px,0px);
       height: 60px;
       position: absolute;
       width: 62px;

@@ -1,7 +1,7 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+// Welcome to Compass.
+// In this file you should write your main styles. (or centralize your imports)
+// Import this file using the following HTML or equivalent:
+// <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
 
 // @import "compass/reset";
 @import "compass/css3/images";
@@ -1112,18 +1112,18 @@ progress {
   .main-controls {
     margin: 30px 0 35px 0;
 
-    > .btn-group,
-    > button {
-      float: left;
-
-            // .glyphicons {
-            //     margin-right: 2px;
-            //     vertical-align: baseline;
-            // }
+        > .btn-group,
+        > button {
+            float: left;
         }
 
         > .silver {
             margin-left: 10px;
+
+            @include media(xxs) {
+                float: right;
+                width: 60%;
+            }
         }
 
         > .green {
@@ -1133,10 +1133,11 @@ progress {
         color: #fff;
       }
 
-      @include media(xxs) {
-        margin-bottom: 10px;
-      }
-    }
+            @include media(xxs) {
+                margin-bottom: 10px;
+                width: 100%;
+            }
+        }
 
     //if run options
     .btn-group {
@@ -1147,18 +1148,29 @@ progress {
         float: left;
       }
 
-      > .run-options, {
-        @include border-radius(0 3px 3px 0);
-        margin-left: -1px;
-        padding: 0 9px 0 8px;
-      }
+            > .run-options {
+                @include border-radius(0 3px 3px 0);
+                margin-left: -1px;
+                padding: 0 9px 0 8px;
+
+                &:before {
+                    top: 38px;
+                    left: 0;
+                }
+
+                &:after {
+                    top: 32px;
+                    left: 9px;
+                }
+            }
 
       .caret {
         border-top-color: #fff;
       }
 
-      @include media(xxs) {
-        clear: both;
+            @include media(xxs) {
+                clear: both;
+                margin-left: 0;
 
         > button {
           margin-left: 0;
@@ -1206,18 +1218,28 @@ progress {
       margin-right: 20px;
     }
 
-    > span {
-      top: -8px;
-      right: 0;
+        > span {
+            position: absolute;
+                top: -8px;
+                right: 0;
 
       @include media(lg) {
         right: 4px;
       }
 
-      @include media(xl) {
-        right: 16px;
-      }
-    }
+            @include media(xl) {
+                right: 16px;
+            }
+
+            &:before {
+                top: 38px;
+                left: 0;
+            }
+
+            &:after {
+                top: 32px;
+            }
+        }
 
     //project author icon
     > img {
@@ -1513,39 +1535,39 @@ div#output-terminal-container{
       vertical-align: middle;
       margin-top: 14px;
 
-      .btn {
-        background: none;
-        box-shadow: none;
-        border-color: #bbb;
-        color: #bbb;
-        font-size: 12px;
-        font-weight: bold;
-        .caret { border-top-color: #bbb }
-      }
-      &.open {
-        .btn {
-          background: #ccc;
-          color: #fff;
-          text-shadow: none;
-          border: solid 1px #999;
-          .caret { border-top-color: #fff }
-          &:focus {
-            outline: none !important;
-          }
+            .btn {
+                background: none;
+                box-shadow: none;
+                border-color: #bbb;
+                color: #bbb;
+                font-size: 12px;
+                font-weight: bold;
+                .caret { border-top-color: #bbb }
+            }
+            &.open {
+                .btn {
+                    background: #ccc;
+                    color: #fff;
+                    text-shadow: none;
+                    border: solid 1px #999;
+                    .caret { border-top-color: #fff }
+                    &:focus {
+                        outline: none !important;
+                    }
+                }
+            }
+            .dropdown-menu > li > a { padding: 3px 14px }
+            .dropdown-menu li a:hover { background: $orange }
         }
-      }
-      .dropdown-menu > li > a { padding: 3px 14px }
-      .dropdown-menu li a:hover { background: $orange }
     }
-  }
-  #tags-content {
-    background: #fff;
-    @include border-radius(5px);
-    @include box-shadow(0 2px 5px rgba(0,0,0,0.1));
-    overflow: hidden;
-    padding: 0;
-    position: relative;
-      z-index: 2;
+    #tags-content {
+        background: #fff;
+        @include border-radius(5px);
+        @include box-shadow(0 2px 5px rgba(0,0,0,0.1));
+        overflow: visible;
+        padding: 0;
+        position: relative;
+            z-index: 2;
 
     li {
       list-style: none;

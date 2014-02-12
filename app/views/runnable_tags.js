@@ -8,7 +8,7 @@ module.exports = BaseView.extend({
   tagName: 'ul',
   className: 'clearfix',
   events: {
-    'click .remove-tag' : 'removeTag',
+    'click .remove-2' : 'removeTag',
   },
   preRender: function () {
     if (this.options.classname) this.className = this.options.classname;
