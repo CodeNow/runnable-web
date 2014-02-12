@@ -44,6 +44,7 @@ module.exports = BaseView.extend({
     }
     else if (message.data 
       && (message.data.indexOf('term:data') === 0)) {
+      console.log("fix");
       this.trackEvent('Command', { term_cmd: message.data.replace('term:data','') });
     }
   },
