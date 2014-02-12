@@ -357,7 +357,7 @@ module.exports = function(grunt) {
   // jslint
   grunt.registerTask('jshint', ['jshint:all']);
   // Compile - shared tasks for all
-  grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'commit-hash-file', 'rendr_stitch', 'compass', 'autoprefixer:single_file']);
+  grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'commit-hash-file', 'rendr_stitch', 'compass']);
   // Shared tasks for server and debug
   grunt.registerTask('dev', ['compile', 'concat', 'copy']);
   // Run the server and watch for file changes
@@ -366,7 +366,7 @@ module.exports = function(grunt) {
   grunt.registerTask('debug', ['dev', 'bgShell:debug', 'watch']);
   grunt.registerTask('sdebug', ['dev', 'bgShell:sdebug', 'watch']); // sudo debug for port 80
   // Build for production
-  grunt.registerTask('build', ['compile', 'cssmin', 'uglify', 'version']);
+  grunt.registerTask('build', ['compile', 'cssmin', 'autoprefixer', 'uglify', 'version']);
   // Default task(s).
   grunt.registerTask('default', ['build']);
 };
