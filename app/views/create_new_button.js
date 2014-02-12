@@ -1,21 +1,21 @@
-var BaseView = require('./base_view');
-var SignupModal = require('./signup_modal');
+var BaseView     = require('./base_view');
 
 module.exports = BaseView.extend({
   tagName: 'a',
   className: 'btn purple',
   attributes: {
     href: '/new'
-  },
+  }
+
+ /**
+  * Disabling signup modal for unauthenticated users...
+  */
+ /*
   events: {
     click: 'click'
   },
   click: function (evt) {
-    /**
-     * Disabling signup modal for unauthenticated users...
-     */
 
-    /*
     if (this.app.user.isRegistered()) {
       // let the link work...
     }
@@ -24,7 +24,7 @@ module.exports = BaseView.extend({
       evt.preventDefault();
       this.openLogin();
     }
-    */
+
   },
   openLogin: function () {
     var user = this.app.user;
@@ -37,6 +37,8 @@ module.exports = BaseView.extend({
     this.listenToOnce(user, 'change:username', router.navigate.bind(router, href, {trigger:true}));
     signupModal.open();
   }
+  */
+
 });
 
 module.exports.id = "CreateNewButton";
