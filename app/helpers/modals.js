@@ -1,17 +1,19 @@
 var SignupModal = require('../views/signup_modal');
 
 module.exports = {
-  signup: function(){
+  signup: function(callback){
+    callback = (callback) ? callback : function(){};
+
     var user   = this.app.user,
         router = this.app.router,
-        href   = this.attributes.href;
+        href   = window.location.pathname;
 
     var signupModal = new SignupModal({
       app:     this.app,
-      onClose: this.stopListening.bind(this, user)
+      onClose: callback //this.stopListening.bind(this, user)
     });
 
-    this.listenToOnce(user, 'change:username', router.navigate.bind(router, href, {trigger: true}));
+    //this.listenToOnce(user, 'change:username', router.navigate.bind(router, href, {trigger: true}));
     signupModal.open();
 
   }
