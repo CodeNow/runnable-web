@@ -37,7 +37,7 @@ module.exports = BaseView.extend({
       } else {
         this.$el.addClass('loading');
       }
-    };
+    }
   },
   stoppedVirtualMachine: function () {
     this.options.step2 = true;
