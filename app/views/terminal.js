@@ -40,15 +40,14 @@ module.exports = BaseView.extend({
     }
     else if (message.data === 'hide:loader') {
       this.loading(false);
-    } 
+    }
     else if (message.data === 'term:dis') {
       console.log('Terminal has been disconected');
     }
-    else if (message.data 
-      && (message.data.indexOf('term:data') === 0)) {
-      this.trackEvent('Command', { 
-          terminal_cmd: message.data.replace('term:data','')
-        });
+    else if (message.data && (message.data.indexOf('term:data') === 0)) {
+      this.trackEvent('Entered Command', {
+        terminal_cmd: message.data.replace('term:data','')
+      });
     }
   },
   listenToPostMessages: function () {
