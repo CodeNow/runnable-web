@@ -100,6 +100,18 @@ module.exports = BaseView.extend({
     var self = this;
     var warningMessage = 'Uh oh, looks like your box is having some problems.<br> Try refreshing to the window - you may lose your changes.';
     this.warningTimeout = setTimeout(function () {
+      // dockworker has not responded. internet might be disconnected
+      console.log('dockworker unavailable');
+
+      var opts = utils.cbOpts(cb, this);
+      function cb (err) {
+        if (err) {
+          // if we get here our container is deleted or cant be found
+          console.log('dockworker deleted');
+        }
+      }
+      self.model.fetch(opts);
+
       if (this.blockWarning) return;
       self.showError.bind(this, warningMessage);
     }, 10000);
