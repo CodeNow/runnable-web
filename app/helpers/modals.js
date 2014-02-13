@@ -4,16 +4,13 @@ module.exports = {
   signup: function(callback){
     callback = (callback) ? callback : function(){};
 
-    var user   = this.app.user,
-        router = this.app.router,
-        href   = window.location.pathname;
+    var user = this.app.user;
 
     var signupModal = new SignupModal({
       app:     this.app,
-      onClose: callback //this.stopListening.bind(this, user)
+      onClose: callback
     });
 
-    //this.listenToOnce(user, 'change:username', router.navigate.bind(router, href, {trigger: true}));
     signupModal.open();
 
   }
