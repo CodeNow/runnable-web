@@ -1,13 +1,13 @@
-var _ = require('underscore');
-var BaseView = require('./base_view');
-var utils = require('../utils');
-var PublishRequestModal = require('./publish_request_modal');
+var _            = require('underscore'),
+    BaseView     = require('./base_view'),
+    utils        = require('../utils'),
+    modalHelpers = require('../helpers/modals');
 
 module.exports = BaseView.extend({
   events: {
     'click #pubwarn-new-button' : 'publishNew',
-    'click #pubwarn-back-button': 'publishBack',
-    'click #pubwarn-request-button' : 'openPublishRequest'
+    'click #pubwarn-back-button': 'publishBack'
+//    'click #pubwarn-request-button' : 'openPublishRequest'
   },
   className: 'status-bar',
   postHydrate: function () {
@@ -23,8 +23,19 @@ module.exports = BaseView.extend({
     this.$pubBack = $('#pubwarn-back-button');
   },
   publishNew: function () {
-    this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
-    this.publishLoader.initLoading('new', this.publishCallback.bind(this));
+
+    if(this.app.user.isRegistered()){
+      this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
+      this.publishLoader.initLoading('new', this.publishCallback.bind(this));
+    }else{
+      var self = this;
+      modalHelpers.signup.call(this, function(){
+        if(self.app.user.isRegistered()){
+          self.publishNew();
+        }
+      });
+    }
+
     this.$pubNew.attr('disabled', 'disabled');
   },
   publishBack: function () {
@@ -33,9 +44,12 @@ module.exports = BaseView.extend({
     this.$pubBack.attr('disabled', 'disabled');
   },
   openPublishRequest: function (evt) {
+    /**
+     * Change: Display request-invite modal --> Display sign-up modal
+     */
     evt.preventDefault();
-    var publishRequestModal = new PublishRequestModal({app:this.app});
-    publishRequestModal.open();
+    //var publishRequestModal = new PublishRequestModal({app:this.app});
+    //publishRequestModal.open();
   },
   publishCallback: function (err, image) {
     if (err) {
