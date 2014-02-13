@@ -10,8 +10,6 @@ module.exports = BaseView.extend({
     this.popover = _.findWhere(this.childViews, {name:'run_popover'});
     this.listenTo(this.popover, 'hide', this.unpress.bind(this));
     this.listenTo(this.popover, 'show', this.press.bind(this));
-
-    this.$('.run-options').tooltip();
   },
   togglePopover: function () {
     if (this.$('.run-options').hasClass('active')) {

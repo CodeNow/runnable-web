@@ -1,7 +1,7 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+// Welcome to Compass.
+// In this file you should write your main styles. (or centralize your imports)
+// Import this file using the following HTML or equivalent:
+// <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
 
 // @import "compass/reset";
 @import "compass/css3/images";
@@ -1089,15 +1089,15 @@ progress {
         > .btn-group,
         > button {
             float: left;
-
-            // .glyphicons {
-            //     margin-right: 2px;
-            //     vertical-align: baseline;
-            // }
         }
 
         > .silver {
             margin-left: 10px;
+
+            @include media(xxs) {
+                float: right;
+                width: 60%;
+            }
         }
 
         > .green {
@@ -1109,6 +1109,7 @@ progress {
 
             @include media(xxs) {
                 margin-bottom: 10px;
+                width: 100%;
             }
         }
 
@@ -1121,10 +1122,20 @@ progress {
                 float: left;
             }
 
-            > .run-options, {
+            > .run-options {
                 @include border-radius(0 3px 3px 0);
                 margin-left: -1px;
                 padding: 0 9px 0 8px;
+
+                &:before {
+                    top: 38px;
+                    left: 0;
+                }
+
+                &:after {
+                    top: 32px;
+                    left: 9px;
+                }
             }
 
             .caret {
@@ -1133,6 +1144,7 @@ progress {
 
             @include media(xxs) {
                 clear: both;
+                margin-left: 0;
 
                 > button {
                     margin-left: 0;
@@ -1181,8 +1193,9 @@ progress {
         }
 
         > span {
-            top: -8px;
-            right: 0;
+            position: absolute;
+                top: -8px;
+                right: 0;
 
             @include media(lg) {
                 right: 4px;
@@ -1190,6 +1203,15 @@ progress {
 
             @include media(xl) {
                 right: 16px;
+            }
+
+            &:before {
+                top: 38px;
+                left: 0;
+            }
+
+            &:after {
+                top: 32px;
             }
         }
 
@@ -1516,7 +1538,7 @@ div#output-terminal-container{
         background: #fff;
         @include border-radius(5px);
         @include box-shadow(0 2px 5px rgba(0,0,0,0.1));
-        overflow: hidden;
+        overflow: visible;
         padding: 0;
         position: relative;
             z-index: 2;
