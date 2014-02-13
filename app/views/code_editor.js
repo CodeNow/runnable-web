@@ -5,7 +5,7 @@ var Image = require('../models/image');
 module.exports = BaseView.extend({
   id: 'code-editor',
   events: {
-    'click .open-file-explorer' : 'showFiles'
+    'click #open-file-explorer' : 'showFiles'
   },
   postRender: function () {
     this.$showFilesButton = this.$('.btn-show-file-browser');

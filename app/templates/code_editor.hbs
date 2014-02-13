@@ -1,6 +1,9 @@
 <div id="project-toolbar">
-  <a class="open-file-explorer glyphicons folder-closed"></a>
-  {{view "file_tabs" collection=defaultFiles}}
+  <a id="open-file-explorer" class="glyphicons folder-closed"></a>
+  <a id="open-readme" class="tooltip" data-title="README"><span class="glyphicons circle-info"></span></a>
+  <div id="project-editor-tabs-wrapper">
+    {{view "file_tabs" collection=defaultFiles}}
+  </div>
   {{view "file_select" collection=defaultFiles}}
 </div>
 

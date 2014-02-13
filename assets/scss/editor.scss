@@ -20,13 +20,14 @@
 // toolbar
 #project-toolbar {
   height: 36px;
-  overflow: hidden;
+  overflow: visible;
+  position: absolute;
+    z-index: 2;
+  width: 100%;
 
-  // file explorer icon
-  .open-file-explorer {
-    background: $purple-light;
+  // #open-file-explorer & #open-readme
+  > a {
     border-top: 1px solid rgba(0,0,0,.2);
-    color: $grey-light;
     cursor: pointer;
     display: block;
     float: left;
@@ -35,6 +36,11 @@
     line-height: 36px;
     text-align: center;
     width: 36px;
+  }
+
+  #open-file-explorer {
+    background: $purple-light;
+    color: $grey-light;
 
     &:hover {
       background: lighten($purple-light,5%);
@@ -47,10 +53,32 @@
     }
   }
 
+  #open-readme {
+    background: $grey-light;
+    border-right: 1px solid rgba(0,0,0,.1);
+    color: $grey-dark;
+    line-height: 38px;
+    transition: transform .2s ease-in-out;
+
+    &:hover {
+      background: $grey-lighter;
+    }
+
+    &:active,
+    &.active {
+      background-color: $grey-lighter;
+      color: $grey-darker;
+      cursor: default;
+      font-weight: bold;
+    }
+  }
+
   // select menu tabs
   #project-select-tabs {
-    border: none;
+    border: 0;
     float: right;
+    transition: transform .2s ease-in-out;
+    width: 24px;
 
     &:hover > button {
 
@@ -64,7 +92,8 @@
     }
 
     > button {
-      border: none;
+      border: 0;
+      padding: 0;
       position: relative;
     }
   }
@@ -73,25 +102,113 @@
   .glyphicons {
     top: 0;
   }
+
+  .tooltip {
+
+    &:before {
+      top: 36px;
+    }
+
+    &:after {
+      top: 30px;
+
+    }
+  }
+}
+
+// controls
+#controls {
+  background: $purple-light;
+  border-top: 1px solid rgba(0,0,0,.2);
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  // a bit ratchet, will have to be refactored one day
+  position: absolute;
+    top: -36px;
+    left: 36px;
+    z-index: 1;
+  width: 204px;
+
+  li {
+    color: $grey-lighter;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-size: 16px;
+    height: 36px;
+    line-height: 36px;
+    list-style: none;
+    margin: 0;
+    top: 0;
+    text-align: center;
+    width: 36px;
+
+    &:before {
+      top: 36px;
+    }
+
+    &:after {
+      top: 30px;
+      left: 12px;
+    }
+
+    &.dark-theme,
+    &.light-theme {
+
+      > span {
+        border: 1px solid transparent;
+        border-radius: 50%;
+        content: '';
+        display: block;
+        height: 18px;
+        margin: 8px auto;
+        width: 18px;
+      }
+    }
+
+    &.dark-theme > span {
+      background: $purple;
+    }
+
+    &.light-theme > span {
+      background: $grey-lighter;
+    }
+
+    &.active {
+      cursor: default;
+
+       > span {
+        border: 1px solid $orange;
+      }
+    }
+  }
 }
 
 // default tabs
+#project-editor-tabs-wrapper {
+  float: left;
+  height: 36px;
+  overflow: hidden;
+  transition: transform .2s ease-in-out;
+  width: calc(100% - 96px);
+}
+
 #project-editor-tabs {
   border: 0;
   height: 51px;
-  overflow-x: auto;
+  overflow-x: scroll;
   overflow-y: hidden;
-  @include transition-transforms(.2s ease-in-out);
   white-space: nowrap;
-  width: calc(100% - 72px);
 
   li {
     display: inline-block;
+    float: none;
     margin-left: -5px;
     position: relative;
 
     &:first-child {
-      margin: 0 3px 0 0;
+      margin-left: -1px;
     }
 
     &:last-child {
@@ -106,7 +223,7 @@
       background: $grey-light;
       border-bottom: 0;
       border-color: rgba(0,0,0,.1);
-      @include border-radius(0);
+      border-radius: 0;
       color: $grey-dark;
       font-size: 12px;
       height: 36px;
@@ -145,13 +262,6 @@
       }
     }
 
-    .circle-info {
-      font-size: 18px;
-      padding: 0;
-      text-align: center;
-      width: 36px;
-    }
-
     &.active {
 
       > .tab-body {
@@ -176,36 +286,13 @@
   }
 }
 
-// select menu tabs
-#project-select-tabs {
-  border: 0;
-  position: absolute;
-    top: 0;
-    right: 0;
-
-  &:hover > button {
-
-    &:before {
-      border-bottom-color: $grey-dark;
-    }
-
-    &:after {
-      border-top-color: $grey-dark;
-    }
-  }
-
-  > button {
-    border: none;
-    position: relative;
-  }
-}
-
 #project-editor-container {
   border-top: 1px solid rgba(0,0,0,.1);
   position: relative;
-    top: -1px;
-  @include transform-3d(0,0,0);
-  @include transition-transforms(.2s ease-in-out, width 0s ease-in-out);
+    top: 35px;
+    z-index: 1;
+  transform: translate3d(0,0,0);
+  transition: transform .2s ease-in-out, width 0s ease-in-out;
   width: 100%;
 
   .ace_scrollbar {
@@ -223,77 +310,10 @@
   float: left;
   height: calc(100% - 36px);
   position: absolute;
-  @include transform-3d(-100%,0,0);
-  @include transition-transforms(.2s ease-in-out, width 0s ease-in-out);
+    top: 36px;
+  transform: translate3d(-100%,0,0);
+  transition: transform .2s ease-in-out, width 0s ease-in-out;
   width: 240px;
-
-  // file explorer controls
-  .controls {
-    background: $purple-light;
-    border-top: 1px solid rgba(0,0,0,.2);
-    height: 36px;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-      top: -36px;
-      left: 36px;
-      z-index: 1;
-    width: 204px;
-
-    li {
-      color: $grey-lighter;
-      cursor: pointer;
-      display: block;
-      float: left;
-      font-size: 16px;
-      height: 36px;
-      line-height: 36px;
-      list-style: none;
-      margin: 0;
-      top: 0;
-      text-align: center;
-      width: 36px;
-
-      &:before {
-        top: 36px;
-      }
-
-      &:after {
-        top: 30px;
-        left: 12px;
-      }
-
-      &.dark-theme,
-      &.light-theme {
-
-        > span {
-          border: 1px solid transparent;
-          @include border-radius(50%);
-          content: '';
-          display: block;
-          height: 18px;
-          margin: 8px auto;
-          width: 18px;
-        }
-      }
-
-      &.dark-theme > span {
-        background: $purple;
-      }
-
-      &.light-theme > span {
-        background: $grey-lighter;
-      }
-
-      &.active {
-        cursor: default;
-
-         > span {
-          border: 1px solid $orange;
-        }
-      }
-    }
-  }
 
   // file tree
   .nav {
@@ -340,11 +360,11 @@
           content: '';
           float: left;
           margin: 6px 5% 0 0;
-          @include transition-transforms(.1s linear);
+          transition: transform .1s linear;
         }
 
         .collapsed:before {
-          @include rotate-3d(-90deg);
+          transform: rotate3d(-90deg);
         }
       }
 
@@ -389,7 +409,7 @@
   // file tree item
   .ui-draggable:hover {
     background: $grey-lighter;
-    @include box-shadow(inset 0 -1px 0 rgba(0,0,0,.05), inset 0 1px 0 rgba(0,0,0,.05));
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.05), inset 0 1px 0 rgba(0,0,0,.05);
   }
 }
 
@@ -400,6 +420,7 @@
 
     img {
       @include box-sizing(content-box);
+      box-sizing: content-box;
     }
 
     ul {
@@ -483,7 +504,7 @@
   }
 
   .name-input {
-    @include border-radius(0);
+    border-radius: 0;
     height: 29px;
     min-height: 0;
     padding: 6px 14px;
@@ -494,7 +515,7 @@
 // upload
 #drop-to-add {
   background: #fff;
-  @include box-shadow(0 1px 0 rgba(0,0,0,.1));
+  box-shadow: 0 1px 0 rgba(0,0,0,.1);
   color: $grey-dark;
   display: block;
   height: 54px;
@@ -502,7 +523,7 @@
   overflow: hidden;
   position: relative;
   text-align: center;
-  @include user-select(none);
+  user-select: none;
 
   &:hover {
     text-decoration: none;
@@ -510,21 +531,21 @@
 
   > div {
     position: absolute;
-    @include transition-transforms(.2s ease-in-out);
+    transition: transform .2 ease-in-out;
     width: 100%;
 
     &:last-child {
-      @include transform-3d(0,-100%,0);
+      transform: translate3d(0,-100%,0);
     }
   }
 
   &.in > div {
     &:first-child {
-      @include transform-3d(0,100%,0);
+      transform: translate3d(0,100%,0);
     }
 
     &:last-child {
-      @include transform-3d(0,0%,0);
+      transform: translate3d(0,0,0);
     }
   }
 }
@@ -533,7 +554,7 @@
 #code-editor.in {
 
   // file explorer icon
-  .open-file-explorer {
+  #open-file-explorer {
     background: $purple-light;
 
     &:before {
@@ -549,22 +570,27 @@
     }
   }
 
+  // readme icon
+  #open-readme {
+    transform: translate3d(204px,0,0);
+  }
+
   // file explorer
   #file-explorer {
-    @include transform-3d(0,0,0);
+    transform: translate3d(0,0,0);
     z-index: 10;
   }
 
   // tabs
-  #project-editor-tabs {
-    @include transform-3d(204px,0,0);
-    width: calc(100% - 265px);
+  #project-editor-tabs-wrapper {
+    transform: translate3d(204px,0,0);
+    width: calc(100% - 298px);
   }
 
   // ace editor
   #project-editor-container {
-    @include transform-3d(240px,0,0);
+    transform: translate3d(240px,0,0);
+    transition: all .2s ease-in-out;
     width: calc(100% - 240px);
-    @include transition-transforms(.2s ease-in-out, width .2s ease-in-out);
   }
 }
