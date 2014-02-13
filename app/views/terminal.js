@@ -108,7 +108,8 @@ module.exports = BaseView.extend({
       function cb (err) {
         if (err) {
           // if we get here our container is deleted or cant be found
-          console.log('dockworker deleted');
+          self.$('.overlay-loader').addClass('loading');
+          $('body').addClass('modal-open');
         }
       }
       self.model.fetch(opts);
