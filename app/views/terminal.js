@@ -16,7 +16,7 @@ module.exports = BaseView.extend({
   },
   postRender: function () {
     this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('domain');
-    this.options.termurl = this.options.boxurl + '/static/term.html';
+    this.options.termurl = this.options.boxurl + '/stastic/term.html';
     this.loading(true);
     this.listenToPostMessages();
     this.$('iframe').attr('src', this.options.termurl);
@@ -25,7 +25,7 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     this.options.isUserVerified = this.app.user.isVerified();
     this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('domain');
-    this.options.termurl = this.options.boxurl + '/static/term.html';
+    this.options.termurl = this.options.boxurl + '/statisc/term.html';
     return this.options;
   },
   popIntercom: function(evt) {
@@ -101,19 +101,35 @@ module.exports = BaseView.extend({
     var self = this;
     var warningMessage = 'Uh oh, looks like your box is having some problems.<br> Try refreshing to the window - you may lose your changes.';
     this.warningTimeout = setTimeout(function () {
-      // dockworker has not responded. internet might be disconnected
-      console.log('dockworker unavailable');
+      // If we got here that means dockworker did not finish loading on connect or reconnect.
 
-      var opts = utils.cbOpts(cb, this);
-      function cb (err) {
-        if (err) {
-          // if we get here our container is deleted or cant be found
-          self.$('.overlay-loader').addClass('loading');
-          $('body').addClass('modal-open');
+      // data sent for error tracking
+      var data = {model_id:self.model.id, user:self.app.user.id};
+      _rollbar.push({level: 'error', msg: "dockworker did not finish loading (hide:loader message not seen)", errMsg: data});
+      self.trackEvent('Error Encountered', {
+        errMsg: "dockworker did not finish loading"
+      });
+      // We want to check if the model is still available
+      self.model.fetch({
+        error: function (resp) {
+          if (resp.status === 404) {
+            // 404 usualy means the model is deleted
+            self.$('.overlay-loader').addClass('loading');
+            $('body').addClass('modal-open');
+            _rollbar.push({level: 'error', msg: "model could not be fetched (resp.status=404)", errMsg: data});
+            self.trackEvent('Error Encountered', {
+              errMsg: "model could not be fetched (404)"
+            });
+          }
+          else if (resp.status === 500) {
+            // dockworker has not responded. internet might be disconnected
+            _rollbar.push({level: 'error', msg: "model could not be fetched (resp.status=500)", errMsg: data});
+            self.trackEvent('Error Encountered', {
+              errMsg: "model could not be fetched (resp.status=500)"
+            });
+          }
         }
-      }
-      self.model.fetch(opts);
-
+      });
       if (this.blockWarning) return;
       self.showError.bind(this, warningMessage);
     }, 10000);
