@@ -16,7 +16,7 @@ module.exports = BaseView.extend({
   },
   postRender: function () {
     this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('domain');
-    this.options.termurl = this.options.boxurl + '/stastic/term.html';
+    this.options.termurl = this.options.boxurl + '/static/term.html';
     this.loading(true);
     this.listenToPostMessages();
     this.$('iframe').attr('src', this.options.termurl);
@@ -25,7 +25,7 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     this.options.isUserVerified = this.app.user.isVerified();
     this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('domain');
-    this.options.termurl = this.options.boxurl + '/statisc/term.html';
+    this.options.termurl = this.options.boxurl + '/static/term.html';
     return this.options;
   },
   popIntercom: function(evt) {
@@ -118,7 +118,7 @@ module.exports = BaseView.extend({
             $('body').addClass('modal-open');
             _rollbar.push({level: 'error', msg: "model could not be fetched (resp.status=404)", errMsg: data});
             self.trackEvent('Error Encountered', {
-              errMsg: "model could not be fetched (404)"
+              errMsg: "model could not be fetched (resp.status=404)"
             });
           }
           else if (resp.status === 500) {
