@@ -43,8 +43,7 @@ module.exports = BaseView.extend({
       this.loading(false);
     }
     else if (message.data === 'term:dis') {
-      this.$('.overlay-loader').addClass('loading');
-      $('body').addClass('modal-open');
+      this.loading(true);
     }
     else if (message.data && (message.data.indexOf('term:data') === 0)) {
       this.trackEvent('Entered Command', {
