@@ -8,7 +8,8 @@ module.exports = BaseView.extend({
   className: 'terminal-view relative loading',
   events: {
     'click .file-sync'    : 'syncFiles',
-    'click .message-us'   : 'popIntercom'
+    'click .message-us'   : 'popIntercom',
+    'click iframe' : 'terminalTimeout'
   },
   postHydrate: function () {
     this.onPostMessage = this.onPostMessage.bind(this);
@@ -42,7 +43,8 @@ module.exports = BaseView.extend({
       this.loading(false);
     }
     else if (message.data === 'term:dis') {
-      console.log('Terminal has been disconected');
+      this.$('.overlay-loader').addClass('loading');
+      $('body').addClass('modal-open');
     }
     else if (message.data && (message.data.indexOf('term:data') === 0)) {
       this.trackEvent('Entered Command', {
