@@ -25,3 +25,7 @@ assets/scss/popovers.scss
 assets/bower
 
 *.rdb
+
+scss-lint-0.17.1.gem
+
+assets/scss/.scss-lint.yml
