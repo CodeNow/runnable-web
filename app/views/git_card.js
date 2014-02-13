@@ -21,11 +21,9 @@ module.exports = BaseView.extend({
     }
   },
   changeLanguage: function () {
-    $('body').addClass('modal-open');
-    $('#page-loader').addClass('loading');
-
     var langVal = this.$('select')[0].value;
     var self = this;
+    self.gitLoader(true);
     this.$('button').text(langVal);
     var image = new Image({}, {app:this.app});
     image.githubImport({
@@ -34,17 +32,32 @@ module.exports = BaseView.extend({
     }, function (err, image) {
       if (err) {
         self.showError(err);
+        self.gitLoader(false);
       } else {
         var container = new Container({}, { app:this.app });
         container.createFrom(image.id, function (err, container) {
           if (err) {
             self.showError(err);
+            self.gitLoader(false);
           } else {
             self.app.router.navigate(container.appURL(), true);
           }
         });
       }
     });
+  },
+  gitLoader: function (bool) {
+    var $body = $('body');
+    var $gitLoader = this.$('.overlay-loader')
+
+    if (bool) {
+      $body.addClass('modal-open');
+      $gitLoader.addClass('loading');
+    }
+    else {
+      $body.removeClass('modal-open');
+      $gitLoader.removeClass('loading');
+    }
   }
 });
 

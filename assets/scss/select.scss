@@ -1,7 +1,6 @@
 //select
 .dropdown {
   @include border-radius(3px);
-  border: 1px solid $grey-dark;
   height: 36px;
   position: relative;
 
@@ -40,13 +39,14 @@
 
     ~ button {
       background: transparent;
+      border-color: darken($grey,10%);
       opacity: .5;
     }
   }
 
   button {
     background: transparent;
-    border: 0;
+    border: 1px solid darken($grey,20%);
     @include box-shadow(none);
     color: $grey-dark;
     font-size: 14px;

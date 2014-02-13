@@ -106,6 +106,95 @@
   }
 }
 
+// loaders with text
+.with-text {
+
+  > .loader {
+    top: 30%;
+  }
+
+  > .loader-text {
+    position: relative;
+    top: calc(30% + 80px);
+  }
+
+  h1,
+  a,
+  p {
+    text-align: center;
+  }
+
+  h1 {
+    color: darken($grey,10%);
+    margin-bottom: 20px;
+  }
+
+  a {
+    color: $grey-dark;
+    cursor: pointer;
+    display: table;
+    font-size: 14px;
+    margin: 0 auto;
+
+    &:hover {
+      color: darken($grey,10%);
+      text-decoration: none;
+    }
+  }
+
+  p {
+    color: darken($grey,10%);
+    display: block;
+    font-size: 20px;
+    margin: 0 auto;
+  }
+
+  button {
+    display: block;
+    margin: 20px auto 0;
+  }
+
+  // if there are steps
+  .progress-steps {
+
+    h1,
+    p {
+      color: darken($grey,10%);
+      opacity: 0;
+    }
+
+    h1 {
+      position: absolute;
+        right: 0;
+        left: 0;
+      @include transform-3d(0,-300%,0);
+      @include transition(all 1.5s 50ms);
+
+      &.in {
+        opacity: 1;
+        @include transform-3d(0,-175%,0);
+      }
+
+      &.out {
+        opacity: 0;
+        @include transform-3d(0,0%,0);
+      }
+    }
+
+    p {
+      @include animation(dropIn .5s forwards 1s ease-in-out);
+      @include transform-3d(0,-100%,0);
+    }
+
+    a {
+      @include animation(dropIn .5s forwards 15s ease-in-out);
+      opacity: 0;
+      @include transform-3d(0,-100%,-1px);
+      @include transition(none);
+    }
+  }
+}
+
 //loaders with text
 #publish-loader,
 #output-results-container {
