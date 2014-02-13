@@ -7,7 +7,6 @@ module.exports = BaseView.extend({
   events: {
     'click #pubwarn-new-button' : 'publishNew',
     'click #pubwarn-back-button': 'publishBack'
-//    'click #pubwarn-request-button' : 'openPublishRequest'
   },
   className: 'status-bar',
   postHydrate: function () {
@@ -42,14 +41,6 @@ module.exports = BaseView.extend({
     this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
     this.publishLoader.initLoading('back', this.publishCallback.bind(this));
     this.$pubBack.attr('disabled', 'disabled');
-  },
-  openPublishRequest: function (evt) {
-    /**
-     * Change: Display request-invite modal --> Display sign-up modal
-     */
-    evt.preventDefault();
-    //var publishRequestModal = new PublishRequestModal({app:this.app});
-    //publishRequestModal.open();
   },
   publishCallback: function (err, image) {
     if (err) {
