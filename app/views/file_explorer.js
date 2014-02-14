@@ -13,9 +13,9 @@ var events = {
 if (lock) {
   
 } else {
-  events['drop #drop-to-add']     = 'uploadToRoot';
-  events['dragover #drop-to-add'  = 'dragOver';
-  events['dragleave #drop-to-add' = 'dragLeave';
+  events['drop #drop-to-add']      = 'uploadToRoot';
+  events['dragover #drop-to-add']  = 'dragOver';
+  events['dragleave #drop-to-add'] = 'dragLeave';
 }
 
 
