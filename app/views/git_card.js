@@ -15,9 +15,8 @@ module.exports = BaseView.extend({
     if ($(evt.currentTarget)[0].value) {
       select.prop('disabled',false);
     } else {
-      select.prop('disabled',true)
-        .siblings().text('Language')
-        .end()[0].selectedIndex = 0;
+      select.prop('disabled',true);
+      resetSelect();
     }
   },
   changeLanguage: function () {
@@ -33,12 +32,14 @@ module.exports = BaseView.extend({
       if (err) {
         self.showError(err);
         self.gitLoader(false);
+        self.resetSelect();
       } else {
         var container = new Container({}, { app:this.app });
         container.createFrom(image.id, function (err, container) {
           if (err) {
             self.showError(err);
             self.gitLoader(false);
+            self.resetSelect();
           } else {
             self.app.router.navigate(container.appURL(), true);
           }
@@ -58,6 +59,15 @@ module.exports = BaseView.extend({
       $body.removeClass('modal-open');
       $gitLoader.removeClass('loading');
     }
+  },
+  resetSelect: function () {
+    var select = this.$('select');
+
+    select
+      .siblings()
+      .text('Language')
+      .end()[0]
+      .selectedIndex = 0;
   }
 });
 
