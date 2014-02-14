@@ -202,9 +202,11 @@
   white-space: nowrap;
 
   li {
+    border: 1px solid rgba(0,0,0,.1);
+    border-bottom: 0;
     display: inline-block;
     float: none;
-    margin-left: -5px;
+    margin-left: -4px;
     position: relative;
 
     &:first-child {
@@ -221,8 +223,7 @@
 
     > .tab-body {
       background: $grey-light;
-      border-bottom: 0;
-      border-color: rgba(0,0,0,.1);
+      border: 0;
       border-radius: 0;
       color: $grey-dark;
       font-size: 12px;
@@ -264,11 +265,22 @@
 
     &.active {
 
+      &:after {
+        color: $grey-darker;
+        content: attr(data-title);
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 36px;
+        padding-left: 10px;
+        pointer-events: none;
+        position: absolute;
+          top: 0;
+      }
+
       > .tab-body {
         background-color: $grey-lighter;
-        color: $grey-darker;
+        color: rgba($grey-lighter,0);
         cursor: default;
-        font-weight: bold;
       }
 
       > .remove-2 {

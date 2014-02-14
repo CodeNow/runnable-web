@@ -13,6 +13,10 @@ module.exports = BaseView.extend({
     if (file.get('selected')) {
       self.className = 'active';
     }
+
+    this.attributes = {
+      'data-title' : this.model.attributes.name
+    };
   },
   postHydrate: function () {
     this.listenTo(this.model, 'change:name', this.render.bind(this));
