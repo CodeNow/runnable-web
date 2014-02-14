@@ -11,6 +11,12 @@ module.exports = BaseView.extend({
     this.listenTo(this.popover, 'hide', this.unpress.bind(this));
     this.listenTo(this.popover, 'show', this.press.bind(this));
   },
+  postHydrate: function () {
+    var dispatch = this.app.dispatch;
+    if (dispatch) {
+      this.listenTo(dispatch, 'unsaved:files', this.onChangeUnsaved.bind(this));
+    }
+  },
   togglePopover: function () {
     if (this.$('.run-options').hasClass('active')) {
       this.popover.hide();
@@ -24,6 +30,18 @@ module.exports = BaseView.extend({
   },
   unpress: function () {
     this.$('.run-options').removeClass('active');
+  },
+  onChangeUnsaved: function (bool) {
+    var self = this;
+    var greenText = self.$('span')[0];
+
+    self.filesAreUnsaved = bool;
+    if (bool) {
+      greenText.innerHTML = 'Save and Run';
+    }
+    else {
+      greenText.innerHTML = 'Run';
+    }
   }
 });
 
