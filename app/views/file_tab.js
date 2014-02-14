@@ -28,6 +28,7 @@ module.exports = BaseView.extend({
   },
   select: function (evt) {
     evt.preventDefault();
+    this.$el.trigger('event-file-open');
     this.model.set('selected', true);
   },
   close: function (evt) {

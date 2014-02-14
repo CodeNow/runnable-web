@@ -5,11 +5,15 @@ var Image = require('../models/image');
 module.exports = BaseView.extend({
   id: 'code-editor',
   events: {
-    'click #open-file-explorer' : 'showFiles'
+    'click #open-file-explorer': 'showFiles',
+    'click #open-readme':        'openReadme',
+    'event-file-open':           'closeReadme'
   },
   postRender: function () {
     this.$showFilesButton = this.$('.btn-show-file-browser');
-    this.$fileBrowser = this.$('.file-browser');
+    this.$fileBrowser     = this.$('.file-browser');
+    this.$openReadme      = this.$('#open-readme');
+    this.$el.toggleClass('in');
   },
   postHydrate: function () {
     var model = this.model;
@@ -47,8 +51,16 @@ module.exports = BaseView.extend({
     Track.increment(name.toLowerCase());
   },
   showFiles: function (evt) {
-    this.$el.toggleClass('in');
     this.$('#project-editor').resize();
+  },
+  openReadme: function (evt) {
+    this.$openReadme.addClass('active');
+    this.$('ul#project-editor-tabs li.active').removeClass('active');
+    this.$('aside#file-explorer li.active').removeClass('active');
+  },
+  closeReadme: function (evt) {
+    this.$openReadme.removeClass('active');
+
   },
   getTemplateData: function () {
     // only rendered once.. passes through context
