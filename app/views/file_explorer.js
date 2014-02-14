@@ -2,26 +2,22 @@ var BaseView = require('./base_view');
 var _ = require('underscore');
 var lock = require('../lock');
 
-var events;
+var events = {
+  'click .dark-theme':              'setDarkTheme',
+  'click .light-theme':             'setLightTheme',
+  'click .open-context-menu':       'showFileMenu',
+  'contextmenu .open-context-menu': 'showFileMenu'
+};
+
+
 if (lock) {
-  events = {
-    'click .dark-theme'              : 'setDarkTheme',
-    'click .light-theme'             : 'setLightTheme',
-    'click .open-context-menu'       : 'showFileMenu',
-    'contextmenu .open-context-menu' : 'showFileMenu',
-  };
+  
+} else {
+  events['drop #drop-to-add']     = 'uploadToRoot';
+  events['dragover #drop-to-add'  = 'dragOver';
+  events['dragleave #drop-to-add' = 'dragLeave';
 }
-else {
-  events = {
-    'click .dark-theme'              : 'setDarkTheme',
-    'click .light-theme'             : 'setLightTheme',
-    'click .open-context-menu'       : 'showFileMenu',
-    'contextmenu .open-context-menu' : 'showFileMenu',
-    'drop #drop-to-add'              : 'uploadToRoot',
-    'dragover #drop-to-add'          : 'dragOver',
-    'dragleave #drop-to-add'         : 'dragLeave',
-  };
-}
+
 
 module.exports = BaseView.extend({
   tagName: 'aside',
