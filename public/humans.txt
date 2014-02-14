@@ -6,6 +6,10 @@
   Product/Engineer: Sundip Patel
 
   Engineer: Henry Allen-Tilford
+  Contact: henry@runnable.com
+  Twitter: @generalhenry
+  github: generalhenry
+  From: Portola Valley, CA, USA
 
   Product/Engineer: Praful Rana
 
@@ -19,6 +23,13 @@
   From: Boston, MA, USA
 
 /* THANKS */
+  <3 NPM
 
 /* SITE */
+  node.js
+  docker
+  rendr
+  redis
+  mongo
+  ace
 
