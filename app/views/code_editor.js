@@ -55,10 +55,10 @@ module.exports = BaseView.extend({
   toggleReadme: function (open) {
     if (open) {
       this.$('#project-editor-container > #project-editor').hide();
-      this.$('#project-editor-container > #project-readme').show();
+      this.$('#project-editor-container > #html-readme').show();
     } else {
       this.$('#project-editor-container > #project-editor').show();
-      this.$('#project-editor-container > #project-readme').hide();
+      this.$('#project-editor-container > #html-readme').hide();
     }
   },
   getTemplateData: function () {
