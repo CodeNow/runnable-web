@@ -50,6 +50,7 @@ module.exports = BaseView.extend({
     Track.increment(name.toLowerCase());
   },
   showFiles: function (evt) {
+    this.$el.toggleClass('in');
     this.$('#project-editor').resize();
   },
   toggleReadme: function (open) {
