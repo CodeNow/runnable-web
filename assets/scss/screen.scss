@@ -1144,6 +1144,7 @@ progress {
 
             @include media(xxs) {
                 clear: both;
+                margin-bottom: 10px;
                 margin-left: 0;
 
                 > button {
