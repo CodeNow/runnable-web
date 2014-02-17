@@ -10,7 +10,6 @@ module.exports = BaseView.extend({
   postRender: function () {
     this.$showFilesButton = this.$('.btn-show-file-browser');
     this.$fileBrowser     = this.$('.file-browser');
-    this.$el.toggleClass('in');
   },
   postHydrate: function () {
     var model = this.model;
@@ -54,12 +53,16 @@ module.exports = BaseView.extend({
     this.$('#project-editor').resize();
   },
   toggleReadme: function (open) {
+    var $projectEditorContainer = this.$('#project-editor-container');
+    var $projectEditor = $projectEditorContainer.children('#project-editor');
+    var $htmlReadme = $projectEditorContainer.children('#html-readme');
+
     if (open) {
-      this.$('#project-editor-container > #project-editor').hide();
-      this.$('#project-editor-container > #html-readme').show();
+      $projectEditor.hide();
+      $htmlReadme.show();
     } else {
-      this.$('#project-editor-container > #project-editor').show();
-      this.$('#project-editor-container > #html-readme').hide();
+      $projectEditor.show();
+      $htmlReadme.hide();
     }
   },
   getTemplateData: function () {
