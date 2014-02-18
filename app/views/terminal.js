@@ -99,7 +99,7 @@ module.exports = BaseView.extend({
   },
   startWarningTimeout: function () {
     var self = this;
-    var warningMessage = 'Uh oh, looks like your box is having some problems.<br> Try refreshing to the window - you may lose your changes.';
+    if (this.blockWarning) return;
     this.warningTimeout = setTimeout(function () {
       // If we got here that means dockworker did not finish loading on connect or reconnect.
 
@@ -130,8 +130,6 @@ module.exports = BaseView.extend({
           }
         }
       });
-      if (this.blockWarning) return;
-      self.showError.bind(this, warningMessage);
     }, 10000);
   },
   stopWarningTimeout: function () {

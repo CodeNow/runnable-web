@@ -20,7 +20,7 @@
   "rollbar": "bbbd8090514a4b40a0ec53fbed32d882",
   "api": {
     "default": {
-      "host": "api.cloudcosmos.com",
+      "host": "api.runnable.com",
       "protocol": "http"
     }
   },
@@ -35,6 +35,10 @@
       "id": "UA-36631837-2"
     },
     "pageSize" : 25,
-    "domain": "cloudcosmos.com"
+    "domain": "runnable.com"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c07f4420d4d0efb6f85ff1c1cd79a2e1d26d613d
