@@ -10,8 +10,12 @@
 {{view "file_explorer" container=container rootDir=rootDir editmode=editmode lock=lock}}
 
 <div id="project-editor-container">
-  <!--googleoff: anchor-->
-  {{view "code" collection=defaultFiles}}
-  <!--googleon: anchor-->
-  {{view "html_readme" collection=defaultFiles model=rootDir}}
+  <div {{#unless showReadme}}style="display:none;"{{/unless}}>
+    <!--googleoff: anchor-->
+    {{view "code" collection=defaultFiles}}
+    <!--googleon: anchor-->
+  </div>
+  <div {{#if showReadme}}style="display:none;"{{/if}}>
+    {{view "html_readme" collection=defaultFiles model=rootDir editmode=true}}
+  </div>
 </div>
