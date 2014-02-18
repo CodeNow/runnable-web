@@ -18,7 +18,12 @@ module.exports = BaseView.extend({
 		this.lastSelectedFile = this.collection.selectedFile();
 		if(this.lastSelectedFile)
 			this.lastSelectedFile.set('selected', false);
-	}, 
+	},
+	postRender: function () {
+    if(this.collection.length === 0){
+			this.app.dispatch.trigger('toggle:readme', true);
+		}
+	},
 	toggleReadme: function (open) {
 		if (open) {
 			this.$el.addClass('active');

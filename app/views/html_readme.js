@@ -13,7 +13,6 @@ module.exports = BaseView.extend({
     var model = this.model.contents.find(function(data){
       return data.get('name') && data.get('name').toLowerCase() === 'readme.md';
     });
-
     if(!model){
       el.innerHTML = '<h1>Add a README.md</h1>';
       return;
@@ -23,6 +22,11 @@ module.exports = BaseView.extend({
         return;
       el.innerHTML = html;
     });
+  },
+  postRender: function () {
+    if(this.collection.length === 0){
+      this.app.dispatch.trigger('toggle:readme', true);
+    }
   }
 });
 
