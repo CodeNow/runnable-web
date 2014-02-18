@@ -1,7 +1,7 @@
 //select
 .dropdown {
   @include border-radius(3px);
-  border: 1px solid $grey-dark;
+  border: 1px solid $gray-dark;
   height: 36px;
   position: relative;
 
@@ -48,7 +48,7 @@
     background: transparent;
     border: 0;
     @include box-shadow(none);
-    color: $grey-dark;
+    color: $gray-dark;
     font-size: 14px;
     font-weight: bold;
     height: 36px;

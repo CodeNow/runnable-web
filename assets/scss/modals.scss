@@ -153,7 +153,7 @@ body.modal-open,
     width: 100%;
 
     label {
-      color: $grey-dark;
+      color: $gray-dark;
       font-size: 14px;
       font-weight: normal;
     }
@@ -408,12 +408,12 @@ body.modal-open,
 
     //markdown link
     .help-link {
-      color: $grey-dark;
+      color: $gray-dark;
       font-size: 12px;
       font-weight: 700;
 
       &.hover {
-        color: $grey-darker;
+        color: $gray-darker;
       }
     }
 
