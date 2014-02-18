@@ -8,7 +8,8 @@ module.exports = BaseView.extend({
   className: 'terminal-view relative loading',
   events: {
     'click .file-sync'    : 'syncFiles',
-    'click .message-us'   : 'popIntercom'
+    'click .message-us'   : 'popIntercom',
+    'click iframe' : 'terminalTimeout'
   },
   postHydrate: function () {
     this.onPostMessage = this.onPostMessage.bind(this);
@@ -42,7 +43,7 @@ module.exports = BaseView.extend({
       this.loading(false);
     }
     else if (message.data === 'term:dis') {
-      console.log('Terminal has been disconected');
+      this.loading(true);
     }
     else if (message.data && (message.data.indexOf('term:data') === 0)) {
       this.trackEvent('Entered Command', {
@@ -100,6 +101,35 @@ module.exports = BaseView.extend({
     var self = this;
     var warningMessage = 'Uh oh, looks like your box is having some problems.<br> Try refreshing to the window - you may lose your changes.';
     this.warningTimeout = setTimeout(function () {
+      // If we got here that means dockworker did not finish loading on connect or reconnect.
+
+      // data sent for error tracking
+      var data = {model_id:self.model.id, user:self.app.user.id};
+      _rollbar.push({level: 'error', msg: "dockworker did not finish loading (hide:loader message not seen)", errMsg: data});
+      self.trackEvent('Error Encountered', {
+        errMsg: "dockworker did not finish loading"
+      });
+      // We want to check if the model is still available
+      self.model.fetch({
+        error: function (resp) {
+          if (resp.status === 404) {
+            // 404 usualy means the model is deleted
+            self.$('.overlay-loader').addClass('loading');
+            $('body').addClass('modal-open');
+            _rollbar.push({level: 'error', msg: "model could not be fetched (resp.status=404)", errMsg: data});
+            self.trackEvent('Error Encountered', {
+              errMsg: "model could not be fetched (resp.status=404)"
+            });
+          }
+          else if (resp.status === 500) {
+            // dockworker has not responded. internet might be disconnected
+            _rollbar.push({level: 'error', msg: "model could not be fetched (resp.status=500)", errMsg: data});
+            self.trackEvent('Error Encountered', {
+              errMsg: "model could not be fetched (resp.status=500)"
+            });
+          }
+        }
+      });
       if (this.blockWarning) return;
       self.showError.bind(this, warningMessage);
     }, 10000);
