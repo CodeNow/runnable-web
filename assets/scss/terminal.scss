@@ -1,15 +1,15 @@
 // terminal
 .terminal-title {
-  color: $grey-dark;
+  color: $gray-dark;
   font-size: 14px;
   margin-top: 25px;
 
   .glyphicons {
-    color: $grey-dark;
+    color: $gray-dark;
   }
 
   a:hover {
-    color: $grey-darker;
+    color: $gray-darker;
     text-decoration: none;
   }
 }
@@ -17,7 +17,7 @@
 // terminal-help
 #terminal-help {
   border: 1px solid rgba(0, 0, 0, .1);
-  color: $grey-dark;
+  color: $gray-dark;
   font-size: 12px;
   height: 36px;
   line-height: 36px;
@@ -32,15 +32,15 @@
   }
 
   a {
-    background: $grey-light;
-    color: $grey-dark;
+    background: $gray-light;
+    color: $gray-dark;
     cursor: pointer;
     display: block;
     float: left;
     padding: 0 8px;
 
     &:hover {
-      background: $grey-lighter;
+      background: $gray-lighter;
     }
   }
 

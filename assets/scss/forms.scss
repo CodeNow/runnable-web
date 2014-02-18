@@ -4,10 +4,10 @@
 
 //.saved label
 .saved {
-  background: #ffffe0;
-  border: 1px solid darken(#ffffe0, 50%);
+  background: $light-yellow;
+  border: 1px solid darken($light-yellow, 50%);
   @include border-radius(3px);
-  color: darken(#ffffe0, 70%);
+  color: darken($light-yellow, 70%);
   display: none;
   font-size: 11px;
   font-weight: bold;

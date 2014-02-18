@@ -133,25 +133,25 @@
   }
 
   h1 {
-    color: darken($grey,10%);
+    color: darken($gray,10%);
     margin-bottom: 20px;
   }
 
   a {
-    color: $grey-dark;
+    color: $gray-dark;
     cursor: pointer;
     display: table;
     font-size: 14px;
     margin: 0 auto;
 
     &:hover {
-      color: darken($grey,10%);
+      color: darken($gray,10%);
       text-decoration: none;
     }
   }
 
   p {
-    color: darken($grey,10%);
+    color: darken($gray,10%);
     display: block;
     font-size: 20px;
     margin: 0 auto;
@@ -167,7 +167,7 @@
 
     h1,
     p {
-      color: darken($grey,10%);
+      color: darken($gray,10%);
       opacity: 0;
     }
 
@@ -205,6 +205,6 @@
 
 // build loader
 #output-results-container h1 {
-  color: $grey-dark;
+  color: $gray-dark;
   margin: 0;
 }
