@@ -54,20 +54,26 @@ module.exports = BaseView.extend({
   },
   toggleReadme: function (open) {
     var $projectEditorContainer = this.$('#project-editor-container');
-    var $projectEditor = $projectEditorContainer.children('#project-editor');
-    var $htmlReadme = $projectEditorContainer.children('#html-readme');
-
+    var $projectEditor = $projectEditorContainer.find('#project-editor');
+    var $htmlReadme = $projectEditorContainer.find('#html-readme');
     if (open) {
-      $projectEditor.hide();
-      $htmlReadme.show();
+      $projectEditor
+        .parent().hide();
+      $htmlReadme
+        .parent().show();
     } else {
-      $projectEditor.show();
-      $htmlReadme.hide();
+      $projectEditor
+        .parent().show();
+      $htmlReadme
+        .parent().hide();
     }
+
   },
   getTemplateData: function () {
     // only rendered once.. passes through context
-    return _.extend(this.options.context, this.options);
+    var opts = _.extend(this.options.context, this.options);
+    this.options.showReadme = (opts.defaultFiles.length === 0);
+    return opts;
   }
 });
 
