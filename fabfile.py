@@ -100,7 +100,7 @@ def checkinBranch():
     run('git fetch --all')
     run('git reset --hard origin/master')
   with cd('runnable-web'):
-    run('echo `git log origin/master | head -1` pushed on `date` on `pwd | sed "s/^.*ubuntu//"` by `cat ~/.name` >> ~/deployments/CC')
+    run('echo branch `git rev-parse --abbrev-ref HEAD` `git log origin/master | head -1` pushed on `date` on `pwd | sed "s/^.*ubuntu//"` by `cat ~/.name` >> ~/deployments/CC')
   with cd('deployments'):
     run('git add CC')
     run('git commit -m "update file"')
