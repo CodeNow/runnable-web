@@ -137,6 +137,12 @@ module.exports = Base.extend({
       file.fetch();
       // file.editorSession = undefined
     });
+  },
+  unselectAllFiles: function () {
+    var sf = this.selectedFile();
+    if(sf){
+      sf.set('selected', false);
+    }
   }
 });
 
