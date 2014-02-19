@@ -1,4 +1,5 @@
-var BaseView = require('./base_view');
+var BaseView = require('./base_view'),
+    _        = require('underscore');
 
 module.exports = BaseView.extend({
 	events: {
@@ -6,7 +7,6 @@ module.exports = BaseView.extend({
 	},
 	tagName: 'a',
 	id: 'open-readme',
-	className: 'tooltip',
 	attributes: {
 		'data-title': "README"
 	},
@@ -14,16 +14,20 @@ module.exports = BaseView.extend({
 		this.app.dispatch.on('toggle:readme', this.toggleReadme, this);
 	},
 	click: function () {
+
 		this.app.dispatch.trigger('toggle:readme', true);
-		this.lastSelectedFile = this.collection.selectedFile();
-		if(this.lastSelectedFile)
-			this.lastSelectedFile.set('selected', false);
+		this.collection.unselectAllFiles();
+
 	},
-	postRender: function () {
-    if(this.collection.length === 0){
-			this.app.dispatch.trigger('toggle:readme', true);
-		}
-	},
+	preRender: function () {
+		this.className = 'tooltip';
+		var opts       = this.options;
+    var readmeFile = this.model.contents.find(function(data){
+      return data.get('name') && data.get('name').toLowerCase() === 'readme.md';
+    });
+    if(readmeFile)
+    	this.className += ' active';
+  },
 	toggleReadme: function (open) {
 		if (open) {
 			this.$el.addClass('active');
