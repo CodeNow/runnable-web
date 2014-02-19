@@ -63,6 +63,9 @@ def setup():
 
   install_node()
   clone_repo()
+  run('echo before checkin')
+  checkinBranch()
+  run('echo after checkin')
   # checkout_latest()
   install_requirements()
   bower()
@@ -86,15 +89,35 @@ def clone_repo():
   if run('[ -d runnable-web ] && echo true || echo false') == 'false':
     run('git clone https://github.com/CodeNow/runnable-web.git')
 
+def checkinBranch():
+  """
+  Do initial clone of the git repository.
+  """
+  
+  if run('[ -d deployments ] && echo true || echo false') == 'false':
+    run('git clone https://github.com/Runnable/deployments.git')
+  with cd('deployments'):
+    run('git fetch --all')
+    run('git reset --hard origin/master')
+  with cd('runnable-web'):
+    run('git log origin/master | head -1 >> ~/deployments/CC')
+  with cd('deployments'):
+    run('git add CC')
+    run('git commit -m "update file"')
+    run('git push origin master')
+
 def checkout_latest():
   """
   Pull the latest code on the specified branch.
   """
   with cd('runnable-web'):
+    run('git config credential.helper store')
     run('git fetch')
     run('git reset --hard')
     run('git checkout %(branch)s' % env)
     run('git pull origin %(branch)s' % env)
+    run('git config --unset credential.helper')
+    run('rm ~/.git-credentials')
 
 def install_requirements():
   """
@@ -135,6 +158,9 @@ def deploy():
   require('branch', provided_by=[stable, master, branch])
 
   checkout_latest()
+  run('echo before checkin; pwd')
+  checkinBranch()
+  run('echo after checkin; pwd')
   install_requirements()
   bower()
   grunt()
