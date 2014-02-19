@@ -1,7 +1,7 @@
-var _            = require('underscore'),
-    BaseView     = require('./base_view'),
-    utils        = require('../utils'),
-    modalHelpers = require('../helpers/modals');
+var _ = require('underscore');
+var BaseView = require('./base_view');
+var utils = require('../utils');
+var modalHelpers = require('../helpers/modals');
 
 module.exports = BaseView.extend({
   events: {
@@ -103,10 +103,6 @@ module.exports = BaseView.extend({
       actionLabel: 'Save and Publish',
       actionHandler: actionHandler
     });
-  },
-  testLoader: function(){
-    $('#page-loader').hide();
-    $('#publish-loader').show();
   }
 });
 
