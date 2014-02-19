@@ -100,7 +100,7 @@ def checkinBranch():
     run('git fetch --all')
     run('git reset --hard origin/master')
   with cd('runnable-web'):
-    run('git log origin/master | head -1 >> ~/deployments/CC')
+    run('echo `git log origin/master | head -1` pushed on `date` on `pwd | sed "s/^.*ubuntu//"` by `cat ~/.name` >> ~/deployments/CC')
   with cd('deployments'):
     run('git add CC')
     run('git commit -m "update file"')
@@ -117,6 +117,7 @@ def checkout_latest():
     run('git checkout %(branch)s' % env)
     run('git pull origin %(branch)s' % env)
     run('git config --unset credential.helper')
+    run('cat ~/.git-credentials | head -1 | grep -o "//.*:" > ~/.name')
     run('rm ~/.git-credentials')
 
 def install_requirements():
