@@ -71,8 +71,11 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     // only rendered once.. passes through context
-    var opts = _.extend(this.options.context, this.options);
-    this.options.showReadme = (opts.defaultFiles.length === 0);
+    var opts = _.extend(this.options.context, this.options);   
+    var readmeFile = opts.rootDir.contents.find(function(data){
+      return data.get('name') && data.get('name').toLowerCase() === 'readme.md';
+    });
+    opts.showReadme = (readmeFile) ? true : false;
     return opts;
   }
 });
