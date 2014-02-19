@@ -1,6 +1,8 @@
 <div id="project-toolbar">
   <a id="open-file-explorer" class="glyphicons folder-closed"></a>
-  {{view "readme_button" collection=defaultFiles}}
+  
+  {{view "readme_button" model=rootDir collection=defaultFiles editmode=true}}
+
   <div id="project-editor-tabs-wrapper">
     {{view "file_tabs" collection=defaultFiles}}
   </div>
@@ -10,12 +12,12 @@
 {{view "file_explorer" container=container rootDir=rootDir editmode=editmode lock=lock}}
 
 <div id="project-editor-container">
-  <div {{#unless showReadme}}style="display:none;"{{/unless}}>
+  <div {{#if showReadme}}style="display:none;"{{/if}}>
     <!--googleoff: anchor-->
     {{view "code" collection=defaultFiles}}
     <!--googleon: anchor-->
   </div>
-  <div {{#if showReadme}}style="display:none;"{{/if}}>
+  <div {{#unless showReadme}}style="display:none;"{{/unless}}>
     {{view "html_readme" collection=defaultFiles model=rootDir editmode=true}}
   </div>
 </div>
