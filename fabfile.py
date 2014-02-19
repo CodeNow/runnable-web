@@ -91,7 +91,7 @@ def clone_repo():
 
 def checkinBranch():
   """
-  Do initial clone of the git repository.
+  Update deployments for tracking
   """
   
   if run('[ -d deployments ] && echo true || echo false') == 'false':
