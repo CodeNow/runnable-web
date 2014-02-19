@@ -18,16 +18,27 @@ module.exports = BaseView.extend({
     });
 
     if (!readmeFile) {
+
       if (this.options.editmode) { // container page
-        opts.html = '';
-      }
-      else { 
+        opts.html = '<div class="readme-help">'
+                    + '<h3>You should <a>create a README.md</a>.</h3>'
+                    + '<a href="http://daringfireball.net/projects/markdown/" target="_blank">Markdown Help</a>'
+                    + '</div>';
+      } else { 
         // show blank;
         opts.html = '';
+        //TODO: Set first file to display
+        //this.collection.at(0).set('selected', true);
       }
-    }
-    else {
-      opts.html = marked(readmeFile.get('content'));
+
+    } else {
+
+      if(readmeFile.get('content').trim() === ''){
+        opts.html = '<h3 class="readme-help">There\'s nothing in your README.md file.</h3>';
+      } else {
+        opts.html = marked(readmeFile.get('content'));
+      }
+    
     }
 
     return opts;
