@@ -50,7 +50,15 @@ module.exports = BaseView.extend({
 
   },
   postHydrate: function () {
+
+    var _this = this;
+
     this.app.dispatch.on('toggle:readme', this.toggle, this);
+    this.model.contents.on('remove', function(model, collection, options){
+      if(model.get('name').toLowerCase() == 'readme.md')
+        _this.render();
+    });
+
   },
   toggle: function (open) {
     this.options.open = open;
@@ -77,6 +85,7 @@ module.exports = BaseView.extend({
       }
     }
     else {
+
       if (readmeFile.get('content').trim() === '') {
         opts.html = '<h3 class="readme-help">There\'s nothing in your README.md file.</h3>';
       }
