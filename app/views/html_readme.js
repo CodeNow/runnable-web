@@ -1,8 +1,54 @@
 var BaseView = require('./base_view');
 var marked   = require('marked');
+var File     = require('../models/file');
+var utils    = require('../utils');
+var _        = require('underscore');
+
+var busy = false;
 
 module.exports = BaseView.extend({
   id: 'html-readme',
+  events: {
+    'click a#create-readme': 'createReadme'
+  },
+  createReadme: function (evt) {
+    evt.preventDefault();
+
+    //Don't allow repeat clicks
+    if(busy)
+      return;
+    busy = true;
+
+    var m = new File({
+      dir:     false,
+      name:    'README.md',
+      path:    '/',
+      content: '# ' + this.options.containername
+    }, {
+      app: this.app
+    });
+
+    var callback = function (err, model) {
+      if (err) {
+        alert(err);
+      }
+      else {
+        // ASK TJ ABOUT STORE
+        model.store(); // since this model created after page load.. and is used bind to a view in a (re)render..
+        
+        this.model.contents.add(model);
+        //Auto open after creating
+        this.collection.add(model);
+
+        this.app.dispatch.trigger('open:file', model);
+      }
+    };
+
+    var options = utils.successErrorToCB(callback.bind(this));
+    options.url = _.result(this.collection, 'url');
+    m.save({}, options);
+
+  },
   postHydrate: function () {
     this.app.dispatch.on('toggle:readme', this.toggle, this);
   },
@@ -19,7 +65,7 @@ module.exports = BaseView.extend({
     if (!readmeFile) {
       if (this.options.editmode) { // container page
         opts.html = '<div class="readme-help">'
-                    + '<h3>You should <a>create a README.md</a>.</h3>'
+                    + '<h3>You should <a id="create-readme">create a README.md</a>.</h3>'
                     + '<a href="http://daringfireball.net/projects/markdown/" target="_blank">Markdown Help</a>'
                     + '</div>';
       }
