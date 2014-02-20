@@ -6,7 +6,6 @@
   color: darken(desaturate($light-yellow, 90), 30);
   margin: 100px auto 0;
   text-align: center;
-  white-space: nowrap;
   width: 100%;
 
   h3 > a {
@@ -26,5 +25,11 @@
     display: table;
     font-size: 12px;
     margin: 15px auto 0;
+  }
+}
+
+.in #html-readme h3 {
+  @include media(xxs) {
+    font-size: 18px;
   }
 }
