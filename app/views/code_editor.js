@@ -7,10 +7,6 @@ module.exports = BaseView.extend({
   events: {
     'click #open-file-explorer': 'showFiles'
   },
-  postRender: function () {
-    this.$showFilesButton = this.$('.btn-show-file-browser');
-    this.$fileBrowser     = this.$('.file-browser');
-  },
   postHydrate: function () {
     var model = this.model;
     var canEdit = this.app.user.canEdit(model);
@@ -54,24 +50,18 @@ module.exports = BaseView.extend({
   },
   toggleReadme: function (open) {
     var $projectEditorContainer = this.$('#project-editor-container');
-    var $projectEditor = $projectEditorContainer.find('#project-editor');
-    var $htmlReadme = $projectEditorContainer.find('#html-readme');
+
     if (open) {
-      $projectEditor
-        .parent().hide();
-      $htmlReadme
-        .parent().show();
-    } else {
-      $projectEditor
-        .parent().show();
-      $htmlReadme
-        .parent().hide();
+      $projectEditorContainer.addClass('show-readme');
+    }
+    else {
+      $projectEditorContainer.removeClass()
     }
 
   },
   getTemplateData: function () {
     // only rendered once.. passes through context
-    var opts = _.extend(this.options.context, this.options);   
+    var opts = _.extend(this.options.context, this.options);
     var readmeFile = opts.rootDir.contents.find(function(data){
       return data.get('name') && data.get('name').toLowerCase() === 'readme.md';
     });

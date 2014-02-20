@@ -63,7 +63,7 @@ main {
     > a {
       background: #000;
       @include border-radius(50%);
-      color: $grey-light;
+      color: $gray-light;
       display: block;
       font-size: 100%;
       height: 100%;
@@ -77,13 +77,13 @@ main {
       width: 100%;
 
       &:hover {
-        color: $grey-lighter;
+        color: $gray-lighter;
         opacity: .75;
       }
     }
 
     span:hover {
-      color: $grey-lighter;
+      color: $gray-lighter;
     }
   }
 
@@ -128,7 +128,7 @@ main {
     }
 
     .glyphicons {
-      color: $grey-dark;
+      color: $gray-dark;
       line-height: 20px;
       position: absolute;
         top: 0;
@@ -150,7 +150,7 @@ main {
         width: 20px;
 
         &:hover {
-          color: $grey-dark;
+          color: $gray-dark;
         }
       }
 
@@ -170,7 +170,7 @@ main {
         top: -23px;
 
       ul .glyphicons {
-        color: $grey-darker;
+        color: $gray-darker;
         font-size: 12px;
         position: relative;
           left: 0;
@@ -181,7 +181,7 @@ main {
   input {
     background: none;
     border: none;
-    color: $grey-dark;
+    color: $gray-dark;
     display: block;
     font-size: 15px;
     overflow: hidden;
@@ -197,7 +197,7 @@ main {
 
     &:focus {
       border-bottom: 1px dashed $purple-light;
-      color: $grey-darker;
+      color: $gray-darker;
       cursor: text;
       outline: none;
     }
@@ -209,7 +209,7 @@ main {
 
     &[disabled] {
       cursor: text;
-      -webkit-text-fill-color: $grey-dark;
+      -webkit-text-fill-color: $gray-dark;
     }
   }
 
@@ -252,7 +252,7 @@ main {
         }
 
         span {
-          border: 1px solid $grey-darker;
+          border: 1px solid $gray-darker;
           color: #333;
         }
       }
@@ -391,7 +391,7 @@ main {
     margin: 0;
 
     a {
-      color: $grey-darker;
+      color: $gray-darker;
       display: block;
       font-size: 20px;
       font-weight: bold;

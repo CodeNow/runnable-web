@@ -118,11 +118,11 @@
       }
 
       &:hover {
-        background: $grey-lighter;
+        background: $gray-lighter;
       }
 
       &.active {
-        background: $grey-light;
+        background: $gray-light;
 
         .sprite-icons-output::after {
           @include animation(blinker 1s infinite);

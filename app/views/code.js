@@ -68,7 +68,6 @@ module.exports = BaseView.extend({
     if (!file) {
       // all files closed
       this.model = this.file = null; // set this.model for tracking purposes
-      this.$el.hide();
     }
     else {
       this.attachFile(file);
@@ -171,7 +170,6 @@ module.exports = BaseView.extend({
       }
     }
     // always
-    this.$el.show();
     this.editor.focus();
   },
   onScrollLeft: function() {
