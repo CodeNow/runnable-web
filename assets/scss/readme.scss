@@ -1,3 +1,30 @@
 #html-readme {
   padding: 5px 10px;
 }
+
+.readme-help {
+  color: darken(desaturate($light-yellow, 71), 15);
+  margin: 100px auto 0;
+  text-align: center;
+  white-space: nowrap;
+  width: 100%;
+
+  h3 > a {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  a {
+    color: darken(desaturate($light-yellow, 71), 15);
+
+    &:hover {
+      color: darken(desaturate($light-yellow, 90), 30);
+    }
+  }
+
+  > a {
+    display: table;
+    font-size: 12px;
+    margin: 15px auto 0;
+  }
+}

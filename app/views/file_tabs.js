@@ -6,11 +6,6 @@ module.exports = BaseView.extend({
   className: 'nav nav-tabs',
   postHydrate: function () {
     this.listenTo(this.collection, 'add remove', this.render.bind(this));
-  },
-  postRender: function () {
-    this.$('[rel="tooltip"]').tooltip({
-      container: 'body'
-    });
   }
 });
 
