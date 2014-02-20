@@ -1,4 +1,4 @@
-var BaseView     = require('./base_view');
+var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
   tagName: 'a',
@@ -6,7 +6,6 @@ module.exports = BaseView.extend({
   attributes: {
     href: '/new'
   }
-
 });
 
 module.exports.id = "CreateNewButton";

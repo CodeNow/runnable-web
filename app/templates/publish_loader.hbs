@@ -1,34 +1,19 @@
-<div class="loader">
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-</div>
+{{view 'spinner'}}
 
-<div id="progress-steps">
+<div class="loader-text progress-steps">
   <h1>Step 1 of 4: Stopping Virtual Machine</h1>
   <h1>Step 2 of 4: Saving Changes</h1>
   <h1>Step 3 of 4: Optimizing</h1>
   <h1>Step 4 of 4: Distributing Project</h1>
+  <p>We're publishing, this may take a few seconds.</p>
+  <a>Impatient? Refresh the page.</a>
 
-  <p>
-    We're publishing, this may take a few seconds.
-  </p>
-
-  <button class="silver"><span class="glyphicons restart"></span> reload</button>
-
-<!--
-
+{{!--
   <notice> I'm skipping these two for now, they should be added </notice>
   <p id="progress-message">There was an error. If you want, email us at <a href="mailto:[publisherror]support@runnable.com?subject=Publishing+failed+for+[user]&body=Step+1+of+4:+Stopping+VM+failed+on+[http://runnable.com/me/UXW1337]+at+[MM-DD-YYYY-HH:MM:SS]">support@runnable.com</a> or</p>
   <button type="button" class="orange">Retry</button>
   </p>
 
   <a>Cancel</a>
-
--->
+--}}
 </div>
