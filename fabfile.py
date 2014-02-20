@@ -72,9 +72,7 @@ def setup():
 
   install_node()
   clone_repo()
-  run('echo before checkin')
-  checkinBranch()
-  run('echo after checkin')
+  track_deployment()
   # checkout_latest()
   install_requirements()
   bower()
@@ -98,20 +96,20 @@ def clone_repo():
   if run('[ -d runnable-web ] && echo true || echo false') == 'false':
     run('git clone https://github.com/CodeNow/runnable-web.git')
 
-def checkinBranch():
+def track_deployment():
   """
   Update deployments for tracking
   """
-  
+  run('echo Track Deployment:')
   if run('[ -d deployments ] && echo true || echo false') == 'false':
     run('git clone https://github.com/Runnable/deployments.git')
   with cd('deployments'):
     run('git fetch --all')
     run('git reset --hard origin/master')
   with cd('runnable-web'):
-    run('echo branch `git rev-parse --abbrev-ref HEAD` `git log origin/master | head -1` pushed on `date` on `pwd | sed "s/^.*ubuntu//"` by `cat ~/.name` >> ~/deployments/CC')
+    run('echo branch `git rev-parse --abbrev-ref HEAD` `git log origin/master | head -1` pushed on `date` on `pwd | sed "s/^.*ubuntu//"` by `cat ~/.name` >> ~/deployments/'+env.settings)
   with cd('deployments'):
-    run('git add CC')
+    run('git add '+env.settings)
     run('git commit -m "update file"')
     run('git push origin master')
 
@@ -168,9 +166,7 @@ def deploy():
   require('branch', provided_by=[stable, master, branch])
 
   checkout_latest()
-  run('echo before checkin; pwd')
-  checkinBranch()
-  run('echo after checkin; pwd')
+  track_deployment()
   install_requirements()
   bower()
   grunt()
