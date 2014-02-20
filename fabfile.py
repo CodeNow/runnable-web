@@ -8,6 +8,15 @@ env.use_ssh_config = True
 """
 Environments
 """
+def staging():
+  """
+  Work on staging environment
+  """
+  env.settings = 'staging'
+  env.hosts = [
+    'web-rep_int',
+  ]
+
 def production():
   """
   Work on production environment
@@ -21,7 +30,7 @@ def production():
 
 def integration():
   """
-  Work on staging environment
+  Work on integration environment
   """
   env.settings = 'integration'
   env.hosts = [
@@ -58,7 +67,7 @@ def setup():
   """
   Install and start the server.
   """
-  require('settings', provided_by=[production, integration])
+  require('settings', provided_by=[production, integration, staging])
   require('branch', provided_by=[stable, master, branch])
 
   install_node()
@@ -124,12 +133,12 @@ def install_requirements():
   """
   Install the required packages using npm.
   """
-  sudo('npm install --registry http://npm.nodejs.org.au:5984/registry/_design/app/_rewrite pm2 grunt-cli bower -g')
+  sudo('npm install pm2 grunt-cli bower -g')
   sudo('apt-get install -y rubygems')
   sudo('gem install compass')
   sudo('rm -rf ~/tmp')
   with cd('runnable-web'):
-    run('npm install --registry http://npm.nodejs.org.au:5984/registry/_design/app/_rewrite')
+    run('npm install')
 
 def bower():
   with cd('runnable-web'):
@@ -155,7 +164,7 @@ def deploy():
   """
   Deploy the latest version of the site to the server.
   """
-  require('settings', provided_by=[production, integration])
+  require('settings', provided_by=[production, integration, staging])
   require('branch', provided_by=[stable, master, branch])
 
   checkout_latest()
@@ -184,7 +193,7 @@ def rollback(commit_id):
   There is NO guarantee we have committed a valid dataset for an arbitrary
   commit hash.
   """
-  require('settings', provided_by=[production, integration])
+  require('settings', provided_by=[production, integration, staging])
   require('branch', provided_by=[stable, master, branch])
 
   checkout_latest()
