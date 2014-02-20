@@ -1,5 +1,5 @@
-var BaseView = require('./base_view'),
-    marked   = require('marked');
+var BaseView = require('./base_view');
+var marked   = require('marked');
 
 module.exports = BaseView.extend({
   id: 'html-readme',

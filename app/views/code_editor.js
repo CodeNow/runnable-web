@@ -1,6 +1,6 @@
-var BaseView = require('./base_view'),
-    _        = require('underscore'),
-    Image    = require('../models/image');
+var BaseView = require('./base_view');
+var _ = require('underscore');
+var Image = require('../models/image');
 
 module.exports = BaseView.extend({
   id: 'code-editor',
@@ -55,9 +55,8 @@ module.exports = BaseView.extend({
       $projectEditorContainer.addClass('show-readme');
     }
     else {
-      $projectEditorContainer.removeClass()
+      $projectEditorContainer.removeClass('show-readme');
     }
-
   },
   getTemplateData: function () {
     // only rendered once.. passes through context
