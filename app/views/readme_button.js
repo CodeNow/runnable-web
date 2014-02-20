@@ -1,5 +1,5 @@
-var BaseView = require('./base_view'),
-    _        = require('underscore');
+var BaseView = require('./base_view');
+var _ = require('underscore');
 
 module.exports = BaseView.extend({
   tagName: 'a',
@@ -23,8 +23,9 @@ module.exports = BaseView.extend({
     var readmeFile = this.model.contents.find(function(data){
       return data.get('name') && data.get('name').toLowerCase() === 'readme.md';
     });
-    if(readmeFile)
+    if (readmeFile) {
       this.className += ' active';
+    }
   },
   toggleReadme: function (open) {
     if (open) {

@@ -3,7 +3,7 @@
 }
 
 .readme-help {
-  color: darken(desaturate($light-yellow, 71), 15);
+  color: darken(desaturate($light-yellow, 90), 30);
   margin: 100px auto 0;
   text-align: center;
   white-space: nowrap;
@@ -15,10 +15,10 @@
   }
 
   a {
-    color: darken(desaturate($light-yellow, 71), 15);
+    color: darken(desaturate($light-yellow, 90), 30);
 
     &:hover {
-      color: darken(desaturate($light-yellow, 90), 30);
+      color: darken(desaturate($light-yellow, 100), 40);
     }
   }
 
