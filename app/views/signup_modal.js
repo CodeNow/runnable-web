@@ -30,6 +30,9 @@ module.exports = ModalView.extend({
     if (!formData.username) {
       this.showError('Username is required');
     }
+    else if (/\s/g.test(formData.username)) {
+      this.showError('Whitespace is not allowed in the username.');
+    }
     else if (!formData.email) {
       this.showError('Email is required');
     }
