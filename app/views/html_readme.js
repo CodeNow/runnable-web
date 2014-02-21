@@ -19,16 +19,23 @@ module.exports = BaseView.extend({
       return;
     busy = true;
 
+    var containerName = this.options.containername + "\n";
+    for(var i = 0, len=containerName.length-1; i < len; i++){
+      containerName += '='
+    }
+    containerName += "\n";
+
     var m = new File({
       dir:     false,
       name:    'README.md',
       path:    '/',
-      content: '# ' + this.options.containername
+      content: containerName
     }, {
       app: this.app
     });
 
     var callback = function (err, model) {
+      busy = false;
       if (err) {
         alert(err);
       }
@@ -61,6 +68,8 @@ module.exports = BaseView.extend({
 
   },
   toggle: function (open) {
+    if(this.options.open === open)
+      return;
     this.options.open = open;
     this.render();
   },
@@ -96,9 +105,11 @@ module.exports = BaseView.extend({
     return opts;
   },
   preRender: function () {
+
     if(this.collection.length === 0){
       this.app.dispatch.trigger('toggle:readme', true);
     }
+
   }
 });
 
