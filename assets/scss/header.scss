@@ -53,6 +53,14 @@
         background-position: 0 100%;
       }
     }
+
+    sup {
+      color: lighten($purple-light,20%);
+      float: left;
+      line-height: 54px;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+      user-select: none;
+    }
   }
 
   .nav {
@@ -124,7 +132,7 @@
       }
 
       .dropdown-menu {
-        @include box-shadow(0 2px 3px rgba(0,0,0,.3));
+        box-shadow: 0 2px 3px rgba(0,0,0,.3);
         left: 0;
         margin: 0;
         padding: 0;
@@ -135,7 +143,7 @@
           overflow: hidden;
 
           &:first-child {
-            @include border-radius(3px 3px 0 0);
+            border-radius: 3px 3px 0 0;
 
             a:before {
               border-right: 5px solid transparent;
@@ -147,7 +155,7 @@
                 top: -6px;
                 right: 22px;
                 z-index: 100;
-              @include transition(all .2s ease-in-out);
+              transition: all .2s ease-in-out;
               width: 0;
             }
 
@@ -169,11 +177,11 @@
           }
 
           &:last-child  {
-            @include border-radius(0 0 3px 3px)
+            border-radius: 0 0 3px 3px;
           }
 
           a {
-            @include border-radius(0);
+            border-radius: 0;
             color: #333;
             display: block;
             font-size: 12px;
@@ -192,7 +200,7 @@
 
   .navbar-form {
     border-bottom: 1px solid rgba(255,255,255,.1);
-    @include box-shadow(none);
+    box-shadow: none;
     height: 56px;
     margin: 0;
     padding: 0 15px;
@@ -218,7 +226,7 @@
 
     input {
       border: 0;
-      @include border-radius(3px);
+      border-radius: 3px;
       font-size: 14px;
       margin: 0;
       min-height: 34px;
@@ -239,7 +247,7 @@
     .autocomplete-open {
 
       input {
-        @include border-radius(3px 3px 0 0);
+        border-radius: 3px 3px 0 0;
       }
     }
 
@@ -265,7 +273,7 @@
 #user-info {
   cursor: pointer;
   min-width: 100px;
-  @include transition(min-width .2s ease-in-out .1s);
+  transition: min-width .2s ease-in-out .1s;
   white-space: nowrap;
 
   @include media(xs) {
@@ -281,19 +289,19 @@
   }
 
   img {
-    @include border-radius(50%);
+    border-radius: 50%;
     float: left;
     margin: 10px 10px 10px 0;
     position: relative;
       z-index: 4;
-    @include transition(all .3s ease-in-out .1s);
+    transition: all .3s ease-in-out .1s;
   }
 
   .username {
     max-width: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
-    @include transition(all .2s ease-in-out .1s);
+    transition: all .2s ease-in-out .1s;
     white-space: nowrap;
   }
 
@@ -303,7 +311,7 @@
     margin-top: -36px;
     opacity: 0;
     pointer-events: none;
-    @include transition(opacity .1s ease-in-out);
+    transition: opacity .1s ease-in-out;
 
     &:hover {
       text-decoration: none;
@@ -312,8 +320,8 @@
 
   .user-expanded {
     background: #fff;
-    @include border-radius(0 0 3px 3px);
-    @include box-shadow(0 2px 3px rgba(0,0,0,.15));
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.15);
     height: 0;
     opacity: 0;
     overflow: hidden;
@@ -335,7 +343,7 @@
       list-style-type: none;
 
       &:first-child {
-        border-top: none;
+        border-top: 0;
       }
 
       a {
@@ -368,7 +376,7 @@
 
     .username,
     .realname {
-      @include transition-delay(.1s);
+      transition-delay: .1s;
     }
 
     .username {
@@ -383,7 +391,7 @@
     }
 
     .user-expanded {
-      @include animation(dropdownIn .3s ease-in-out forwards .1s);
+      animation: dropdownIn .3s ease-in-out forwards .1s;
     }
   }
 }

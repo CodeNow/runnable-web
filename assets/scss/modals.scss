@@ -153,7 +153,7 @@ body.modal-open,
     width: 100%;
 
     label {
-      color: $grey-dark;
+      color: $gray-dark;
       font-size: 14px;
       font-weight: normal;
     }
@@ -290,7 +290,7 @@ body.modal-open,
     }
 
     #implement-instructions-tab {
-      background: #ffffe0;
+      background: $light-yellow;
       border: 1px solid rgba(0,0,0,.1);
       border-bottom: 0;
       height: 100%;
@@ -321,7 +321,7 @@ body.modal-open,
 
     // wrapping div
     > div {
-      background: #ffffe0;
+      background: $light-yellow;
       border: 1px solid rgba(0,0,0,.1);
       height: 100%;
       margin-bottom: 20px;
@@ -408,12 +408,12 @@ body.modal-open,
 
     //markdown link
     .help-link {
-      color: $grey-dark;
+      color: $gray-dark;
       font-size: 12px;
       font-weight: 700;
 
       &.hover {
-        color: $grey-darker;
+        color: $gray-darker;
       }
     }
 
@@ -447,7 +447,7 @@ body.modal-open,
     }
 
     #create-spec-preview {
-      background: #ffffe0;
+      background: $light-yellow;
       border: 1px solid rgba(0,0,0,.1);
     }
   }

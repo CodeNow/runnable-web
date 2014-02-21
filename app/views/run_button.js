@@ -99,12 +99,15 @@ module.exports = EditorButtonView.extend({
     if (this.userImplementedSpec()) this.run();
   },
   onChangeUnsaved: function (bool) {
-    this.filesAreUnsaved = bool;
+    var self = this;
+    var greenText = self.$('span')[0];
+
+    self.filesAreUnsaved = bool;
     if (bool) {
-      this.$('span').eq(0).html('Save and Run');
+      greenText.innerHTML = 'Save and Run';
     }
     else {
-      this.$('span').eq(0).html('Run');
+      greenText.innerHTML = 'Run';
     }
   },
   setImplementLinkModel: function () {

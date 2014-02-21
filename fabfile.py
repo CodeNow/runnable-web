@@ -8,6 +8,15 @@ env.use_ssh_config = True
 """
 Environments
 """
+def staging():
+  """
+  Work on staging environment
+  """
+  env.settings = 'staging'
+  env.hosts = [
+    'web-rep_int',
+  ]
+
 def production():
   """
   Work on production environment
@@ -21,7 +30,7 @@ def production():
 
 def integration():
   """
-  Work on staging environment
+  Work on integration environment
   """
   env.settings = 'integration'
   env.hosts = [
@@ -58,11 +67,12 @@ def setup():
   """
   Install and start the server.
   """
-  require('settings', provided_by=[production, integration])
+  require('settings', provided_by=[production, integration, staging])
   require('branch', provided_by=[stable, master, branch])
 
   install_node()
   clone_repo()
+  track_deployment()
   # checkout_latest()
   install_requirements()
   bower()
@@ -86,26 +96,47 @@ def clone_repo():
   if run('[ -d runnable-web ] && echo true || echo false') == 'false':
     run('git clone https://github.com/CodeNow/runnable-web.git')
 
+def track_deployment():
+  """
+  Update deployments for tracking
+  """
+  run('echo Track Deployment:')
+  if run('[ -d deployments ] && echo true || echo false') == 'false':
+    run('git clone https://github.com/Runnable/deployments.git')
+  with cd('deployments'):
+    run('git fetch --all')
+    run('git reset --hard origin/master')
+  with cd('runnable-web'):
+    run('echo branch `git rev-parse --abbrev-ref HEAD` `git log origin/master | head -1` pushed on `date` on `pwd | sed "s/^.*ubuntu//"` by `cat ~/.name` >> ~/deployments/'+env.settings)
+  with cd('deployments'):
+    run('git add '+env.settings)
+    run('git commit -m "update file"')
+    run('git push origin master')
+
 def checkout_latest():
   """
   Pull the latest code on the specified branch.
   """
   with cd('runnable-web'):
+    run('git config credential.helper store')
     run('git fetch')
     run('git reset --hard')
     run('git checkout %(branch)s' % env)
     run('git pull origin %(branch)s' % env)
+    run('git config --unset credential.helper')
+    run('cat ~/.git-credentials | head -1 | grep -o "//.*:" > ~/.name')
+    run('rm ~/.git-credentials')
 
 def install_requirements():
   """
   Install the required packages using npm.
   """
-  sudo('npm install --registry http://npm.nodejs.org.au:5984/registry/_design/app/_rewrite pm2 grunt-cli bower -g')
+  sudo('npm install pm2 grunt-cli bower -g')
   sudo('apt-get install -y rubygems')
   sudo('gem install compass')
   sudo('rm -rf ~/tmp')
   with cd('runnable-web'):
-    run('npm install --registry http://npm.nodejs.org.au:5984/registry/_design/app/_rewrite')
+    run('npm install')
 
 def bower():
   with cd('runnable-web'):
@@ -131,10 +162,11 @@ def deploy():
   """
   Deploy the latest version of the site to the server.
   """
-  require('settings', provided_by=[production, integration])
+  require('settings', provided_by=[production, integration, staging])
   require('branch', provided_by=[stable, master, branch])
 
   checkout_latest()
+  track_deployment()
   install_requirements()
   bower()
   grunt()
@@ -157,7 +189,7 @@ def rollback(commit_id):
   There is NO guarantee we have committed a valid dataset for an arbitrary
   commit hash.
   """
-  require('settings', provided_by=[production, integration])
+  require('settings', provided_by=[production, integration, staging])
   require('branch', provided_by=[stable, master, branch])
 
   checkout_latest()

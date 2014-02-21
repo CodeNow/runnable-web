@@ -1,100 +1,16 @@
-.overlay-loader,
-#output-results-container {
-
-  .loader {
-    background: url(/images/loader-play.svg) no-repeat center center;
-    background-size: 25px 38px;
-    display: none;
-    height: 80px;
-    margin: -50px auto 0;
-    position: relative;
-      top: 50%;
-    width: 80px;
-
-    > div {
-      background-color: #999;
-      @include border-radius(50%);
-      height: 8px;
-      opacity: 0;
-      position: absolute;
-      width: 8px;
-
-      &:nth-child(1) {
-        @include animation(spin 1s linear -.875s infinite);
-        left: 50%;
-        margin: 0 0 -4px;
-        top: 0;
-      }
-
-      &:nth-child(2) {
-        @include animation(spin 1s linear -.75s infinite);
-        left: 20%;
-        margin: -4px 0 0 -4px;
-        top: 20%;
-      }
-
-      &:nth-child(3) {
-        @include animation(spin 1s linear -.625s infinite);
-        left: 0;
-        margin: -4px 0 0;
-        top: 50%;
-      }
-
-      &:nth-child(4) {
-        @include animation(spin 1s linear -.5s infinite);
-        left: 20%;
-        margin: -4px 0 0 -4px;
-        top: 82%;
-      }
-
-      &:nth-child(5) {
-        @include animation(spin 1s linear -.375s infinite);
-        left: 50%;
-        margin: -4px 0 0 -4px;
-        top: 95%;
-      }
-
-      &:nth-child(6) {
-        @include animation(spin 1s linear -.25s infinite);
-        left: 80%;
-        margin: -4px 0 0 -4px;
-        top: 82%;
-      }
-
-      &:nth-child(7) {
-        @include animation(spin 1s linear -.125s infinite);
-        left: 95%;
-        margin: -4px 0 0 -4px;
-        top: 50%;
-      }
-
-      &:nth-child(8) {
-        @include animation(spin 1s linear 0s infinite);
-        left: 80%;
-        margin: -4px 0 0 -4px;
-        top: 20%;
-      }
-    }
-  }
-
-  &.overlay-loader {
-    background: rgba(0,0,0,.6);
-    height: 100%;
-    opacity: 0;
-    position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: -10000000000;
-    @include transition(opacity .2s ease-in-out);
-    width: 100%;
-  }
-
-  &#output-results-container .loader {
-    display: block;
-    top: 35%;
-  }
+// spinner
+.overlay-loader {
+  background: rgba(0,0,0,.75);
+  height: 100%;
+  opacity: 0;
+  position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -10000000000;
+  @include transition(opacity .2s ease-in-out);
+  width: 100%;
 
   &.loading {
     opacity: 1;
@@ -103,6 +19,101 @@
     .loader {
       display: block;
     }
+  }
+}
+
+// spinner
+.loader {
+  background: url(/images/loader-play.svg) no-repeat center center;
+  background-size: 25px 38px;
+  display: none;
+  height: 80px;
+  margin: -50px auto 0;
+  position: relative;
+    top: 50%;
+  width: 80px;
+
+  > div {
+    background-color: #999;
+    @include border-radius(50%);
+    height: 8px;
+    opacity: 0;
+    position: absolute;
+    width: 8px;
+
+    &:nth-child(1) {
+      @include animation(spin 1s linear -.875s infinite);
+      left: 50%;
+      margin: 0 0 -4px;
+      top: 0;
+    }
+
+    &:nth-child(2) {
+      @include animation(spin 1s linear -.75s infinite);
+      left: 20%;
+      margin: -4px 0 0 -4px;
+      top: 20%;
+    }
+
+    &:nth-child(3) {
+      @include animation(spin 1s linear -.625s infinite);
+      left: 0;
+      margin: -4px 0 0;
+      top: 50%;
+    }
+
+    &:nth-child(4) {
+      @include animation(spin 1s linear -.5s infinite);
+      left: 20%;
+      margin: -4px 0 0 -4px;
+      top: 82%;
+    }
+
+    &:nth-child(5) {
+      @include animation(spin 1s linear -.375s infinite);
+      left: 50%;
+      margin: -4px 0 0 -4px;
+      top: 95%;
+    }
+
+    &:nth-child(6) {
+      @include animation(spin 1s linear -.25s infinite);
+      left: 80%;
+      margin: -4px 0 0 -4px;
+      top: 82%;
+    }
+
+    &:nth-child(7) {
+      @include animation(spin 1s linear -.125s infinite);
+      left: 95%;
+      margin: -4px 0 0 -4px;
+      top: 50%;
+    }
+
+    &:nth-child(8) {
+      @include animation(spin 1s linear 0s infinite);
+      left: 80%;
+      margin: -4px 0 0 -4px;
+      top: 20%;
+    }
+  }
+}
+
+// spinner on output
+#output-results-container {
+
+  .loader {
+    display: block;
+    top: 40%;
+  }
+
+  .loader-text {
+    margin-top: 40px;
+    top: 40%;
+  }
+
+  h1 {
+    text-shadow: none;
   }
 }
 
@@ -115,35 +126,36 @@
 
   > .loader-text {
     position: relative;
-    top: calc(30% + 80px);
+      top: calc(30% + 80px);
   }
 
   h1,
   a,
   p {
     text-align: center;
+    text-shadow: 0 0 20px #000;
   }
 
   h1 {
-    color: darken($grey,10%);
+    color: darken($gray,10%);
     margin-bottom: 20px;
   }
 
   a {
-    color: $grey-dark;
+    color: $gray-dark;
     cursor: pointer;
     display: table;
     font-size: 14px;
     margin: 0 auto;
 
     &:hover {
-      color: darken($grey,10%);
+      color: darken($gray,10%);
       text-decoration: none;
     }
   }
 
   p {
-    color: darken($grey,10%);
+    color: darken($gray,10%);
     display: block;
     font-size: 20px;
     margin: 0 auto;
@@ -151,7 +163,7 @@
 
   button {
     display: block;
-    margin: 20px auto 0;
+    margin: 20px auto;
   }
 
   // if there are steps
@@ -159,7 +171,7 @@
 
     h1,
     p {
-      color: darken($grey,10%);
+      color: darken($gray,10%);
       opacity: 0;
     }
 
@@ -195,106 +207,8 @@
   }
 }
 
-//loaders with text
-#publish-loader,
-#output-results-container {
-
-  > .loader {
-    top: 30%;
-  }
-
-  > #progress-steps {
-    position: relative;
-    top: calc(30% + 80px);
-
-    //cancel
-    > a {
-      display: block;
-      margin: 0 auto;
-      position: relative;
-        top: -20px;
-      text-align: center;
-      text-shadow: 0 1px 1px rgba(0,0,0,.75);
-      @include transition-transforms(.75s);
-      width: 60px;
-    }
-  }
-
-  h1,
-  a {
-    text-align: center;
-  }
-
-  h1 {
-    color: #bbb;
-    font-size: 24px;
-    opacity: 0;
-    position: absolute;
-      right: 0;
-      left: 0;
-    text-shadow: 0 1px 1px rgba(0,0,0,.75);
-    @include transform-3d(0,-150%,0);
-    @include transition(all 1.5s 50ms);
-
-    &.in {
-      opacity: 1;
-      @include transform-3d(0,0,0);
-    }
-
-    &.out {
-      opacity: 0;
-      @include transform-3d(0,150%,0);
-    }
-  }
-
-  a {
-    color: $grey-dark;
-    cursor: pointer;
-    text-shadow: 0 1px 1px rgba(0,0,0,.75);
-
-    &:hover {
-      color: #ddd;
-      text-decoration: none;
-    }
-  }
-
-  p {
-    @include animation(dropIn .5s forwards 1s ease-in-out);
-    display: block;
-    color: #bbb;
-    float: none;
-    font-size: 16px;
-    line-height: 2;
-    margin: 0 auto;
-    padding-bottom: 10px;
-    position: relative;
-      top: 70px;
-      z-index: 1;
-    opacity: 0;
-    text-align: center;
-    text-shadow: 0 1px 1px rgba(0,0,0,.75);
-    @include transform-3d(0,-100%,0);
-  }
-
-  button {
-    @include animation(dropIn .5s forwards 15s ease-in-out);
-    display: block;
-    margin: 70px auto 0;
-    opacity: 0;
-    @include transform-3d(0,-100%,-1px);
-    @include transition(none);
-
-    &:active {
-      color: #999;
-    }
-  }
-}
-
-#output-results-container {
-  h1 {
-    @include animation(loaderText .2s forwards);
-    color: #999;
-    margin: 0;
-    text-shadow: none;
-  }
+// build loader
+#output-results-container h1 {
+  color: $gray-dark;
+  margin: 0;
 }
