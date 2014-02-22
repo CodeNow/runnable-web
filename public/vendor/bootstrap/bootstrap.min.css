@@ -2739,9 +2739,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav-pills > li {
   float: left;
 }
-.nav-pills > li > a {
-  border-radius: 5px;
-}
 .nav-pills > li + li {
   margin-left: 2px;
 }
@@ -2858,11 +2855,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 .navbar:after {
   clear: both;
-}
-@media (min-width: 768px) {
-  .navbar {
-    border-radius: 4px;
-  }
 }
 .navbar-header:before,
 .navbar-header:after {

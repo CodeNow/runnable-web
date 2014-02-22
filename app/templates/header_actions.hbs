@@ -1,5 +1,3 @@
-<li><a href="/all">Browse All</a>
-
 <li>{{view "create_new_button" model=model}}
 
 {{#if_result model method="isRegistered"}}
@@ -7,7 +5,7 @@
   <a href="{{invoke model method='appURL'}}">
     {{#with model.attributes}}
     <img src="{{gravitar}}?s=64" alt="{{username}}" height="35" width="35">
-    <span class="username">{{username}}</span>
+    <span class="username">{{!--{{username}}--}}</span>
     {{#if name}}<span class="realname">{{name}}</span>{{/if}}
     {{/with}}
   </a>
