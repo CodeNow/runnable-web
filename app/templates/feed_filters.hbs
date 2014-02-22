@@ -1,0 +1,10 @@
+<h3>Filter<span>ing</span></h3>
+<ul>
+  {{#each collection.models}}
+  {{#with attributes}}
+  <li>
+    {{name}}
+    <span class="glyphicons circle-ok"></span>
+  {{/with}}
+  {{/each}}
+</ul>

@@ -1,0 +1,61 @@
+// filters
+#filters {
+  color: $gray-dark;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 10px;
+
+    span {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease-in-out;
+
+      &.in {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    cursor: pointer;
+    display: block;
+    padding: 8px 10px;
+    position: relative;
+
+    &:hover {
+      background: $gray;
+
+      span {
+        opacity: .5;
+      }
+    }
+
+    &:active span,
+    &.active span {
+      color: $orange;
+      opacity: 1;
+    }
+
+    &.active:active span {
+      color: $gray-dark;
+      opacity: .5;
+    }
+  }
+
+  // check icons
+  .glyphicons {
+    line-height: 36px;
+    opacity: 0;
+    position: absolute;
+      right: 10px;
+  }
+}

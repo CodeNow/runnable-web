@@ -52,56 +52,7 @@
 
 <section class="container">
   <div class="row">
-    <section id="filters" class="col-sm-3">
-      <h3>Filter<span>ing</span></h3>
-      <ul>
-        <li>
-          C++
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          CakePHP
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          CodeIgniter
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          Dart
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          Django
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          Express
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          Firebase
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          Java
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          jQuery
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          MySQL
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          .NET
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          Node.js
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          PHP
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          Pyhton
-          <span class="glyphicons circle-ok"></span>
-        <li>
-          Ruby on Rails
-          <span class="glyphicons circle-ok"></span>
-      </ul>
-    </section>
+    {{view "feed_filters" collection=channels}}
     <section class="col-sm-9">
       <nav class="btn-group">
         <button class="silver active">Trending</button>
