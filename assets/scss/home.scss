@@ -1,4 +1,4 @@
-// filters
+// feed_filters
 #filters {
   color: $gray-dark;
 
@@ -57,5 +57,73 @@
     opacity: 0;
     position: absolute;
       right: 10px;
+  }
+}
+
+// feed_toggles
+#feed {
+
+  nav,
+  form {
+    margin-top: 10px;
+  }
+
+  // toggle for trending & popular
+  nav {
+    background: $gray;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+
+    > button {
+      background: none;
+      border: 0;
+      box-shadow: none;
+      color: $gray-dark;
+      position: relative;
+        z-index: 2;
+      text-shadow: none;
+      width: 90px;
+
+      &.in {
+        cursor: default;
+      }
+
+      &.out:hover {
+        color: $gray-darker;
+      }
+    }
+
+    > div {
+      @extend .btn;
+      @extend .silver;
+      background: #fff;
+      border-top: 0;
+      border-bottom: 0;
+      pointer-events: none;
+      position: absolute;
+        top: 0px;
+        left: -1px;
+        z-index: 1;
+      transition: transform .2s ease-in-out;
+      width: 90px;
+    }
+
+    #trending.in ~ div {
+      transform: translate3d(0,0,0);
+    }
+
+    #popular.in ~ div {
+      transform: translate3d(96px,0,0);
+    }
+
+    #trending.out:hover ~ div {
+      transform: translate3d(92px,0,0);
+    }
+
+    #popular.out:hover ~ div {
+      transform: translate3d(4px,0,0);
+    }
   }
 }

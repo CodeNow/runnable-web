@@ -50,14 +50,11 @@
   </div>
 </section>
 
-<section class="container">
+<section class="container" id="feed">
   <div class="row">
     {{view "feed_filters" collection=channels}}
     <section class="col-sm-9">
-      <nav class="btn-group">
-        <button class="silver active">Trending</button>
-        <button class="silver">Popular</button>
-      </nav>
+      {{view "feed_toggles"}}
       <form>
         <input class="form-control" placeholder="search">
         <button class="silver">search</button>
