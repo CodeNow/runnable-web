@@ -1728,16 +1728,12 @@ div.terminal-view {
             padding: 0;
             width: 100%;
 
-            @include media(xs) {
-                max-width: 660px;
+            &:last-child {
+                margin-top: 20px;
             }
 
             @include media(sm) {
-                width: 720px;
-            }
-
-            @include media(lg) {
-                width: 1020px;
+                width: 760px;
             }
 
             li {
@@ -1748,10 +1744,6 @@ div.terminal-view {
 
                 @include media(sm) {
                     margin: 20px;
-                }
-
-                @include media(lg) {
-                    margin: 10px;
                 }
             }
 
