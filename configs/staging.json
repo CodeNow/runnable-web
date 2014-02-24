@@ -1,5 +1,4 @@
 {
-
   "port": 3000,
   "ipaddress": "localhost",
   "redis": {
@@ -20,7 +19,7 @@
     }
   },
   "rollbar": "bbbd8090514a4b40a0ec53fbed32d882",
-"api": {
+  "api": {
     "default": {
       "host": "api.runnable.pw",
       "protocol": "http"
@@ -30,7 +29,7 @@
     "env" : "production",
     "commitHash": "{COMMIT_HASH}",
     "mixpanel" : {
-      "key": "8790acfcca0cab43adebbc796f1d4f96"
+      "key": "de848319a0091fb3a5876184d81a40ec"
     },
     "googleAnalytics" : {
       "id": "UA-36631837-1"
@@ -41,5 +40,4 @@
     "pageSize" : 25,
     "domain": "runnable.pw"
   }
-
 }

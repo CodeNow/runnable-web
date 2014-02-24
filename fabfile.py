@@ -153,7 +153,8 @@ def boot():
   """
   Start process with pm2
   """
-  run('NODE_ENV=%(settings)s pm2 start runnable-web/index.js -i 40' % env)
+  with cd('runnable-web'):
+    run('NODE_ENV=%(settings)s pm2 start index.js -i 40 -n runnable-web' % env)
 
 """
 Commands - deployment
@@ -167,7 +168,7 @@ def deploy():
 
   checkout_latest()
   track_deployment()
-  install_requirements()
+  # install_requirements()
   bower()
   grunt()
   reboot()
