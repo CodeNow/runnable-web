@@ -82,9 +82,11 @@
       position: relative;
         z-index: 2;
       text-shadow: none;
+      transition: color .2s linear;
       width: 90px;
 
       &.in {
+        color: $orange;
         cursor: default;
       }
 
