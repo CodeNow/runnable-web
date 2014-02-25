@@ -50,102 +50,16 @@
   </div>
 </section>
 
-<section class="container" id="feed">
+<section class="container">
   <div class="row">
     {{view "feed_filters" collection=channels}}
     <section class="col-sm-9">
-      <nav class="row">
-      {{view "feed_toggles"}}
-      {{view "searchbar" divclass="feed-search" inputclass="form-control" placeholder="Search for code"}}
+      <nav id="feed-nav" class="row">
+        {{view "feed_toggles"}}
+        {{view "searchbar" divclass="feed-search" inputclass="form-control" placeholder="Search for code"}}
       </nav>
-      <ul>
-        <li class="row">
-          <h2 class="col-sm-12">Lunch ROI calculator</h2>
-          <div class="col-sm-12">
-            <ul>
-              <li class="tag">
-                <a>Python</a>
-              <li class="tag">
-                <a>Java</a>
-              <li class="tag">
-                <a>Bootstrap</a>
-            </ul>
-            <span>33s ago</span>
-          </div>
-          <div class="col-sm-12">
-            <span>300 views</span>
-            <span>by <a>Runnable</a></span>
-          </div>
-        <li class="row">
-          <h2 class="col-sm-12">SGGIPROFA</h2>
-          <div class="col-sm-12">
-            <ul>
-              <li class="tag">
-                <a>Python</a>
-              <li class="tag">
-                <a>Java</a>
-              <li class="tag">
-                <a>Bootstrap</a>
-            </ul>
-            <span>33s ago</span>
-          </div>
-          <div class="col-sm-12">
-            <span>300 views</span>
-            <span>by <a>Runnable</a></span>
-          </div>
-        <li class="row">
-          <h2 class="col-sm-12">crypto example</h2>
-          <div class="col-sm-12">
-            <ul>
-              <li class="tag">
-                <a>Python</a>
-              <li class="tag">
-                <a>Java</a>
-              <li class="tag">
-                <a>Bootstrap</a>
-            </ul>
-            <span>33s ago</span>
-          </div>
-          <div class="col-sm-12">
-            <span>300 views</span>
-            <span>by <a>Runnable</a></span>
-          </div>
-        <li class="row">
-          <h2 class="col-sm-12">Adam_TEST</h2>
-          <div class="col-sm-12">
-            <ul>
-              <li class="tag">
-                <a>Python</a>
-              <li class="tag">
-                <a>Java</a>
-              <li class="tag">
-                <a>Bootstrap</a>
-            </ul>
-            <span>33s ago</span>
-          </div>
-          <div class="col-sm-12">
-            <span>300 views</span>
-            <span>by <a>Runnable</a></span>
-          </div>
-        <li class="row">
-          <h2 class="col-sm-12">mikeal/request GH-816 request with defaults</h2>
-          <div class="col-sm-12">
-            <ul>
-              <li class="tag">
-                <a>Python</a>
-              <li class="tag">
-                <a>Java</a>
-              <li class="tag">
-                <a>Bootstrap</a>
-            </ul>
-            <span>33s ago</span>
-          </div>
-          <div class="col-sm-12">
-            <span>300 views</span>
-            <span>by <a>Runnable</a></span>
-          </div>
-      </ul>
 
+      {{view "runnable_feed"}}
     </section>
   </div>
 </section>

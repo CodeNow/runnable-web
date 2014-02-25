@@ -60,109 +60,111 @@
   }
 }
 
-// feed_toggles
-#feed {
+// feed nav
+#feed-nav {
+  margin-top: 10px;
+  margin-bottom: 10px;
 
-  nav {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  // toggle for trending & popular
+  > div {
+    background: $gray;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 3px;
+    display: inline-block;
+    float: left;
+    position: relative;
 
-    // toggle for trending & popular
+    > button {
+      background: none;
+      border: 0;
+      box-shadow: none;
+      color: $gray-dark;
+      position: relative;
+        z-index: 2;
+      text-shadow: none;
+      width: 90px;
+
+      &.in {
+        cursor: default;
+      }
+
+      &.out:hover {
+        color: $gray-darker;
+      }
+    }
+
     > div {
-      background: $gray;
-      border: 1px solid rgba(0,0,0,.1);
-      border-radius: 3px;
-      display: inline-block;
-      float: left;
-      position: relative;
-
-      > button {
-        background: none;
-        border: 0;
-        box-shadow: none;
-        color: $gray-dark;
-        position: relative;
-          z-index: 2;
-        text-shadow: none;
-        width: 90px;
-
-        &.in {
-          cursor: default;
-        }
-
-        &.out:hover {
-          color: $gray-darker;
-        }
-      }
-
-      > div {
-        @extend .btn;
-        @extend .silver;
-        background: #fff;
-        border-top: 0;
-        border-bottom: 0;
-        pointer-events: none;
-        position: absolute;
-          top: 0;
-          left: -1px;
-          z-index: 1;
-        transition: transform .2s cubic-bezier(.19,1,.22,1);
-        width: 90px;
-      }
-    }
-
-    // toggle and hover states
-    #trending.in ~ div {
-      transform: translate3d(0,0,0);
-    }
-
-    #popular.in ~ div {
-      transform: translate3d(96px,0,0);
-    }
-
-    #trending.out:hover ~ div {
-      transform: translate3d(92px,0,0);
-    }
-
-    #popular.out:hover ~ div {
-      transform: translate3d(4px,0,0);
-    }
-
-    // search
-    > form {
-      float: right;
-      position: relative;
-
-      .form-group {
-        margin-bottom: 0;
-      }
-
-      .twitter-typeahead {
-        background: #fff;
-      }
-
-      input {
-        height: 36px;
-        transition: width .4s cubic-bezier(.19,1,.22,1);
-        width: 110px;
-
-        &:focus {
-          width: 200px;
-        }
-      }
-
-      button {
-        background: #fff;
-        border: 0;
-        box-shadow: none;
-        color: $gray;
-        height: 34px;
-        position: absolute;
-          top: 1px;
-          right: 1px;
-          z-index: 2;
-        text-shadow: none;
-      }
+      @extend .btn;
+      @extend .silver;
+      background: #fff;
+      border-top: 0;
+      border-bottom: 0;
+      pointer-events: none;
+      position: absolute;
+        top: 0;
+        left: -1px;
+        z-index: 1;
+      transition: transform .2s cubic-bezier(.19,1,.22,1);
+      width: 90px;
     }
   }
+
+  // toggle and hover states
+  #trending.in ~ div {
+    transform: translate3d(0,0,0);
+  }
+
+  #popular.in ~ div {
+    transform: translate3d(96px,0,0);
+  }
+
+  #trending.out:hover ~ div {
+    transform: translate3d(92px,0,0);
+  }
+
+  #popular.out:hover ~ div {
+    transform: translate3d(4px,0,0);
+  }
+
+  // search
+  > form {
+    float: right;
+    position: relative;
+
+    .form-group {
+      margin-bottom: 0;
+    }
+
+    .twitter-typeahead {
+      background: #fff;
+    }
+
+    input {
+      height: 36px;
+      transition: width .4s cubic-bezier(.19,1,.22,1);
+      width: 110px;
+
+      &:focus {
+        width: 200px;
+      }
+    }
+
+    button {
+      background: #fff;
+      border: 0;
+      box-shadow: none;
+      color: $gray;
+      height: 34px;
+      position: absolute;
+        top: 1px;
+        right: 1px;
+        z-index: 2;
+      text-shadow: none;
+    }
+  }
+}
+
+// runnable-feed
+#runnable-feed {
+
 }
