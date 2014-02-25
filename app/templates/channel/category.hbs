@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="hero-content">
-          <img src="/images/runnable-logo.svg">
+          {{!-- <img src="/images/runnable-logo.svg"> --}}
         </div>
       </div>
     </div>
@@ -54,11 +54,10 @@
   <div class="row">
     {{view "feed_filters" collection=channels}}
     <section class="col-sm-9">
+      <nav class="row">
       {{view "feed_toggles"}}
-      <form>
-        <input class="form-control" placeholder="search">
-        <button class="silver">search</button>
-      </form>
+      {{view "searchbar" divclass="feed-search" inputclass="form-control" placeholder="Search for code"}}
+      </nav>
       <ul>
         <li class="row">
           <h2 class="col-sm-12">Lunch ROI calculator</h2>
@@ -146,6 +145,7 @@
             <span>by <a>Runnable</a></span>
           </div>
       </ul>
+
     </section>
   </div>
 </section>

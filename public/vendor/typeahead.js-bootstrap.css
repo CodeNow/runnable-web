@@ -22,7 +22,7 @@
 
 .twitter-typeahead .tt-query {
     z-index: 2;
-    border-radius: 4px !important;
+    border-radius: 3px;
 }
 
 .input-group-addon + .twitter-typeahead > .tt-query {
