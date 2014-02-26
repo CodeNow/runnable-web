@@ -194,13 +194,6 @@ button.btn-sm, .btn-xs {
   }
 }
 
-.terminal-view,
-#output-terminal-container{
-  iframe{
-    background: $terminal-color;
-  }
-}
-
 #output #primary .form-control {
   width: 600px;
 }

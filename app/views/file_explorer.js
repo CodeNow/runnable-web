@@ -28,10 +28,6 @@ module.exports = BaseView.extend({
   id: 'file-explorer',
   events: events,
   postRender: function () {
-    this.$('[rel="tooltip"]').tooltip({
-      // append to body to get around overflow: hidden on container
-      container: 'body'
-    });
     this.fileRoot = _.findWhere(this.childViews, {name:'file_tree'});
   },
   showFileMenu: function (evt) {

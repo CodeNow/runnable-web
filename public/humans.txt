@@ -1,0 +1,35 @@
+/* TEAM */
+  CEO: Yash Kumar
+  
+  Engineer: Tejesh Mehta
+
+  Product/Engineer: Sundip Patel
+
+  Engineer: Henry Allen-Tilford
+  Contact: henry@runnable.com
+  Twitter: @generalhenry
+  github: generalhenry
+  From: Portola Valley, CA, USA
+
+  Product/Engineer: Praful Rana
+
+  Designer: Tony Li
+
+  Engineer: Anand Patel
+
+  Engineer: Casey Flynn
+  Contact: casey [at] runnable.com
+  Twitter: @cflynn07
+  From: Boston, MA, USA
+
+/* THANKS */
+  <3 NPM
+
+/* SITE */
+  node.js
+  docker
+  rendr
+  redis
+  mongo
+  ace
+

@@ -3,9 +3,9 @@ var utils = require('../utils');
 
 module.exports = BaseView.extend({
   id: 'publish-loader',
-  className: 'overlay-loader',
+  className: 'overlay-loader with-text',
   events: {
-    'click button' : 'refresh'
+    'click a' : 'refresh'
   },
   postRender: function () {
     var i = 1, self = this, status = this.model.get('status');
@@ -37,7 +37,7 @@ module.exports = BaseView.extend({
       } else {
         this.$el.addClass('loading');
       }
-    };
+    }
   },
   stoppedVirtualMachine: function () {
     this.options.step2 = true;

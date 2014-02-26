@@ -8,8 +8,8 @@
 
   .modal-content {
     background: #f6f6f6;
+    border: 0;
     @include border-radius(3px);
-    border: none;
   }
 
   .modal-header {
@@ -49,17 +49,20 @@
   }
 
   .modal-body {
-    ::-webkit-input-placeholder { /* WebKit browsers */
-      color:    #666;
+    ::-webkit-input-placeholder { // WebKit browsers
+      color: #666;
     }
-    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        color:    #666;
+
+    :-moz-placeholder { // Mozilla Firefox 4 to 18
+      color: #666;
     }
-    ::-moz-placeholder { /* Mozilla Firefox 19+ */
-        color:    #666;
+
+    ::-moz-placeholder { // Mozilla Firefox 19+
+      color: #666;
     }
-    :-ms-input-placeholder { /* Internet Explorer 10+ */
-        color:    #666;
+
+    :-ms-input-placeholder { // Internet Explorer 10+
+      color: #666;
     }
 
     input,
@@ -100,7 +103,7 @@
   }
 }
 
-//publish request modal
+// publish request modal
 #publish-request-modal {
 
   a {
@@ -124,21 +127,22 @@
   margin-top: 20px;
 }
 
-.modal-dialog .modal-content .modal-body .input-group {
+.modal-dialog .input-group {
   margin-bottom: 20px;
-  input{
+
+  input {
     margin-bottom: 0;
   }
 }
 
-//wth modal is shifting whole page bc of margin
+// wth modal is shifting whole page bc of margin
 body.modal-open,
 .modal-open .navbar-fixed-top,
 .modal-open .navbar-fixed-bottom {
   margin-right: 0;
 }
 
-//.spec-modals
+// .spec-modals
 .modal .spec-modal {
   width: 50%;
 
@@ -148,46 +152,46 @@ body.modal-open,
     padding: 20px 20px 0;
     width: 100%;
 
-      label {
-        color: $grey-dark;
-        font-size: 14px;
-        font-weight: normal;
-      }
+    label {
+      color: $gray-dark;
+      font-size: 14px;
+      font-weight: normal;
+    }
 
-      p {
-        font-weight: bold;
-        text-align: left;
-      }
+    p {
+      font-weight: bold;
+      text-align: left;
+    }
 
-      a {
-        cursor: pointer;
-      }
+    a {
+      cursor: pointer;
+    }
 
-      hr {
-        border-top: 1px solid rgba(0,0,0,.1);
-        margin-right: -20px;
-        margin-left: -20px;
-      }
+    hr {
+      border-top: 1px solid rgba(0,0,0,.1);
+      margin-right: -20px;
+      margin-left: -20px;
+    }
 
-      .popover {
-        font-weight: normal;
-        max-width: 350px;
-      }
+    .popover {
+      font-weight: normal;
+      max-width: 350px;
+    }
 
-      input {
-        margin-bottom: 20px;
-      }
+    input {
+      margin-bottom: 20px;
+    }
   }
 
   .modal-footer {
-      margin-top: 0;
+    margin-top: 0;
 
-    //primary action
+    // primary action
     > button {
       float: right;
     }
 
-    //secondary action
+    // secondary action
     .back,
     .prev {
       color: $purple-light;
@@ -195,12 +199,12 @@ body.modal-open,
       float: left;
       font-size: 14px;
       font-weight: 700;
-      line-height: 36px; //match height of button
+      line-height: 36px; // match height of button
     }
   }
 }
 
-//#add-spec-modal
+// #add-spec-modal
 #add-spec-modal {
   width: 30%;
     min-width: 320px;
@@ -239,15 +243,15 @@ body.modal-open,
       }
     }
 
-    //icons
+    // icons
     img {
       height: auto;
       margin-right: 10px;
       width: 22px;
     }
 
-  //add new api link
-  > .new {
+  // add new api link
+    > .new {
       display: block;
       font-size: 14px;
       font-weight: 700;
@@ -257,7 +261,7 @@ body.modal-open,
   }
 }
 
-//#implement-modal
+// #implement-modal
 #implement-modal > .modal-dialog {
 
   .modal-body {
@@ -286,10 +290,11 @@ body.modal-open,
     }
 
     #implement-instructions-tab {
-      background: lightyellow;
+      background: $light-yellow;
       border: 1px solid rgba(0,0,0,.1);
-      border-bottom: none;
+      border-bottom: 0;
       height: 100%;
+      overflow: auto;
       padding: 20px;
       width: 100%;
     }
@@ -309,14 +314,14 @@ body.modal-open,
   }
 }
 
-//#review-spec-modal
+// #review-spec-modal
 #review-spec-modal {
 
   .modal-body {
 
-    //wrapping div
+    // wrapping div
     > div {
-      background: lightyellow;
+      background: $light-yellow;
       border: 1px solid rgba(0,0,0,.1);
       height: 100%;
       margin-bottom: 20px;
@@ -325,6 +330,10 @@ body.modal-open,
 
       a {
         font-weight: 700;
+      }
+
+      div > p {
+        overflow: auto;
       }
     }
   }
@@ -348,13 +357,13 @@ body.modal-open,
       margin: 0 0 0 15px;
 
       @include media(xs) {
-            display: inline;
-        }
+        display: inline;
+      }
     }
   }
 }
 
-//#create-spec-modal
+// #create-spec-modal
 #create-spec-modal {
 
   .modal-body {
@@ -368,24 +377,24 @@ body.modal-open,
 
   .step1 {
 
-    //api key inputs
+    // api key inputs
     .form-group {
       position: relative;
 
       button {
-        border: none;
-        border-left: 1px solid #ccc;
-        @include border-radius(0 2px 2px 0);
-        @include box-shadow(none);
-        height: 38px;
+        border: 0;
+        border-left: 1px solid #cdcdcd;
+        @include border-radius(0 3px 3px 0);
+        height: 34px;
+        line-height: 34px;
         position: absolute;
           top: 1px;
           right: 1px;
-        width: 38px;
+        width: 42px;
       }
     }
 
-    //.add-key
+    // .add-key
     .add-key {
       margin-bottom: 20px;
     }
@@ -399,17 +408,17 @@ body.modal-open,
 
     //markdown link
     .help-link {
-      color: $grey-dark;
+      color: $gray-dark;
       font-size: 12px;
       font-weight: 700;
 
       &.hover {
-        color: $grey-darker;
+        color: $gray-darker;
       }
     }
 
     .nav-tabs {
-      border-bottom: none;
+      border-bottom: 0;
 
       > li > a {
         border-bottom: 1px solid #ddd;
@@ -425,6 +434,7 @@ body.modal-open,
       height: 100%;
       margin-bottom: 20px;
       min-height: 200px;
+      overflow: auto;
       padding: 20px;
       width: 100%;
     }
@@ -437,13 +447,13 @@ body.modal-open,
     }
 
     #create-spec-preview {
-      background: lightyellow;
+      background: $light-yellow;
       border: 1px solid rgba(0,0,0,.1);
     }
   }
 }
 
-//bootstrap-dialogs
+// bootstrap-dialogs
 .bootstrap-dialog {
 
   .modal-content {
