@@ -38,7 +38,7 @@
     "domain": "cloudcosmos.com",
     "message" : {
       "status" : "warning",
-      "text" : "<span class=\"glyphicons tint\"></span> <b>Weather Alert:</b> TJ Drools"
+      "text" : "<span class=\"glyphicons cleaning\"></span> We'll be undergoing maintainence on March 1st at 12pm PST. The site will remain up with limited functionality."
     }
   }
 }

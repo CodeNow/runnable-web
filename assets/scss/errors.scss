@@ -15,6 +15,12 @@
     right: 0;
     left: 0;
   transform: scale3d(1,1,1);
+
+  .glyphicons {
+    font-size: 18px;
+    margin-right: 10px;
+    opacity: .75;
+  }
 }
 
 // errors
