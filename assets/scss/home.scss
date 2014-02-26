@@ -183,9 +183,11 @@
   // runnable title
   h2 {
     cursor: pointer;
+    display: inline-block;
     font-size: 24px;
     font-weight: 600;
     margin: 10px 0;
+    width: auto;
   }
 
   a:hover {
@@ -220,10 +222,11 @@
 
   // user image
   .user-img {
-    background: $orange;
     border-radius: 50%;
+    cursor: pointer;
     display: block;
     height: 26px;
+    overflow: hidden;
     position: absolute;
       top: 30px;
       right: 15px;
