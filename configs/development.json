@@ -35,6 +35,10 @@
       "id": "UA-36631837-2"
     },
     "pageSize" : 25,
-    "domain": "runnable.pw"
+    "domain": "runnable.pw",
+    "message" : {
+      "status" : "warning",
+      "text" : "<span class=\"glyphicons cleaning\"></span> We'll be undergoing maintainence on March 1st at 12pm PST. The site will remain up with limited functionality."
+    }
   }
 }

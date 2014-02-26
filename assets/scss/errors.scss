@@ -1,3 +1,29 @@
+// global alert
+.alert[data-view="global_message"] {
+  animation: none;
+  background-color: #fcf8e3;
+  border-radius: 0;
+  border-top: 0;
+  border-bottom: 1px solid darken(#e0d0b4,10%);
+  box-shadow: none;
+  color: $purple;
+  height: 54px;
+  line-height: 54px;
+  opacity: 1;
+  position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
+  transform: scale3d(1,1,1);
+
+  .glyphicons {
+    font-size: 18px;
+    margin-right: 10px;
+    opacity: .75;
+  }
+}
+
+// errors
 #error {
 
   #logo {
