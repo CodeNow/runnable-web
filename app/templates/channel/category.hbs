@@ -1,10 +1,11 @@
 {{view "app_user" model=user}}
-{{!-- {{view "header_view" model=user context=. nosearch=true}} --}}
+{{view "header_view" model=user context=. nosearch=true}}
 {{view "global_message"}}
 
 <section id="home-header" class="hero">
   <div class="bubbles-container">
     <div class="bubbles">
+    {{!--
       <img class="bubble small" src="/images/hero-logos/search.svg">
       <img class="bubble medium reverse" src="/images/hero-logos/thumbs-up.svg">
       <img class="bubble large" src="/images/hero-logos/lightbulb.svg">
@@ -37,13 +38,14 @@
       <img class="bubble medium reverse" src="/images/hero-logos/display.svg">
       <img class="bubble large" src="/images/hero-logos/expression-engine.svg">
       <img class="bubble small reverse" src="/images/hero-logos/heart.svg">
+    --}}
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
         <div class="hero-content">
-          {{!-- <img src="/images/runnable-logo.svg"> --}}
+          {{!-- <img src="/images/bear.png"> --}}
         </div>
       </div>
     </div>
@@ -52,15 +54,14 @@
 
 <section class="container">
   <div class="row">
+    <nav id="feed-nav" class="col-sm-10 col-sm-offset-2">
+      {{view "feed_toggles"}}
+      {{view "searchbar" divclass="feed-search" inputclass="form-control" placeholder="Search for code"}}
+    </nav>
+  </div>
+  <div class="row">
     {{view "feed_filters" collection=channels}}
-    <section class="col-sm-9">
-      <nav id="feed-nav" class="row">
-        {{view "feed_toggles"}}
-        {{view "searchbar" divclass="feed-search" inputclass="form-control" placeholder="Search for code"}}
-      </nav>
-
-      {{!-- {{view "runnable_feed"}} --}}
-    </section>
+    {{view "runnable_feed"}}
   </div>
 </section>
 

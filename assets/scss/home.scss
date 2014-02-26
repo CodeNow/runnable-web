@@ -1,6 +1,7 @@
 // feed_filters
 #filters {
   color: $gray-dark;
+  padding-top: 15px;
 
   h3 {
     font-size: 16px;
@@ -62,8 +63,9 @@
 
 // feed nav
 #feed-nav {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 0 15px;
 
   // toggle for trending & popular
   > div {
@@ -168,5 +170,63 @@
 
 // runnable-feed
 #runnable-feed {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 
+  > li {
+    border-bottom: 1px solid $gray;
+    padding: 20px 0;
+    position: relative;
+  }
+
+  // runnable title
+  h2 {
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 10px 0;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  // runs
+  data {
+    color: $gray-dark;
+    margin-right: 10px;
+  }
+
+  // tags
+  div {
+
+    > ul {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .tag {
+    margin-right: 10px;
+  }
+
+  // time
+  time {
+    color: darken($gray,10%);
+    float: right;
+  }
+
+  // user image
+  .user-img {
+    background: $orange;
+    border-radius: 50%;
+    display: block;
+    height: 26px;
+    position: absolute;
+      top: 30px;
+      right: 15px;
+    width: 26px;
+  }
 }

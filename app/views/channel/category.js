@@ -71,7 +71,12 @@ module.exports = BaseView.extend({
     if (typeof window !== 'undefined') window.tj = this;
     this.textEffect();
     this.searchSuggestions();
-    this.imageTile();
+    // this.imageTile();
+    $.stellar();
+
+    setTimeout(function () {
+      this.$('.bubbles img').css('position','absolute');
+    }, 100); // timeout for clientside hit, else doesnt work..
   },
   textEffect: function () {
     this.$('#home-header h1 div').textillate({
