@@ -38,6 +38,10 @@
       "app_id": "980118989fd561bd1dce4ba4c7f8cb32da859c16"
     },
     "pageSize" : 25,
-    "domain": "runnable.pw"
+    "domain": "runnable.pw",
+    "message" : {
+      "status" : "warning",
+      "text" : "<span class=\"glyphicons cleaning\"></span> We'll be undergoing maintainence on March 1st at 12pm PST. The site will remain up with limited functionality."
+    }
   }
 }

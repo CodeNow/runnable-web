@@ -12,11 +12,22 @@ module.exports = RendrView.extend({
   _postRender: function() {
     this.attachChildViews();
     this.postRender();
+    this.unbindTrackEvents();
     this.trackEvents(); // added track events
     this.trigger('postRender');
   },
   autoTrackEvents: true,
+  boundTrackEvents: [],
   actionNamesToIgnore: ['stop propagation'],
+  unbindTrackEvents: function () {
+    var self = this;
+    this.boundTrackEvents.forEach(function (trackEvent) {
+      var eventName = trackEvent.name;
+      var eventHandler = trackEvent.handler;
+      self.$el.off(eventName, eventHandler);
+    });
+    this.boundTrackEvents = [];
+  },
   trackEvents: function () {
     var autoTrackEvents = this.autoTrackEvents;
     if (!isServer && this.events && autoTrackEvents) {
@@ -30,14 +41,21 @@ module.exports = RendrView.extend({
         actionName = this.events[eventStr];
         eventName = eventSplit[0];
         $el  = eventSplit[1] ? this.$(eventSplit[1]) : this.$el;
-        $el.on(eventName, function (evt) {
+        var eventHandler = function (evt) {
           var properties = {}; //default
           if (eventName === 'submit') {
             properties = $(evt.currentTarget).serializeObject();
             delete properties.password;
           }
           this.trackEvent(actionName, properties);
-        }.bind(this));
+        }.bind(this);
+
+        this.boundTrackEvents.push({
+          name: eventName,
+          handler: eventHandler
+        });
+        $el.on(eventName, eventHandler);
+
       }, this);
     }
   },
