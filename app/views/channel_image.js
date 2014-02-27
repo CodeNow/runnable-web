@@ -13,16 +13,9 @@ module.exports = BaseView.extend({
       //no icon-lg for til all images are in
       var pre = (opts.large) ? 'icon-' : (opts.tag) ? 'icon-tag-' : 'icon-';
 
-      if (opts.retina) {
-        var src = '/images/provider-icons/:pre:lower@2x.png'
-          .replace(':pre', pre)
-          .replace(':lower', lower);
-      }
-      else {
-        var src = '/images/provider-icons/:pre:lower.png'
-          .replace(':pre', pre)
-          .replace(':lower', lower);
-      }
+      var src = '/images/provider-icons/:pre:lower.svg'
+        .replace(':pre', pre)
+        .replace(':lower', lower);
 
       this.attributes = {
         src: src,
