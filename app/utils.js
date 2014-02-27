@@ -433,14 +433,21 @@ var utils = module.exports = {
            s4() + '-' + s4() + s4() + s4();
   },
   addModelProperties: function (properties, model, prependKey) {
+    // currently this is only used for tracking purposes
+    // files is huge so we do not include it in our tracking events
+    var ignoreKeys = ['files'];
     prependKey = prependKey || '';
     var modelName = (model.constructor.id || model.constructor.name).toLowerCase();
     var json = model.toJSON();
+    var skip;
     for (var key in json) {
-      var value = json[key];
-      var type = typeof value;
-      if (type === 'object') value = value;
-      properties[prependKey+modelName+'.'+key] = value;
+      skip = ~ignoreKeys.indexOf(key);
+      if (!skip) {
+        var value = json[key];
+        var type = typeof value;
+        if (type === 'object') value = value;
+        properties[prependKey+modelName+'.'+key] = value;
+      }
     }
     return properties;
   },
