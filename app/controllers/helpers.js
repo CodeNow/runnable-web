@@ -277,7 +277,7 @@ function fetchOwnersFor (user, runnables, callback) {
     owners: {
       collection: 'Users',
       params    : {
-        ids: userIds
+        _id: userIds
       }
     }
   };
@@ -443,9 +443,8 @@ function fetchLeaderBadges (count, userId, channelIds, cb) {
     leaderBadges: {
       collection: 'Channels',
       params: {
-        channelIds : channelIds,
+        _ids : channelIds,
         userId : userId,
-        count  : count,
         badges : true
       }
     }
@@ -457,14 +456,17 @@ function fetchRelated (imageId, tags, cb) {
   var tagNames = tags.map(function (tag) {
     return tag.name;
   });
+  var params = { // TODO: how is render encoding different queries?
+    limit: 10,   // [], undefined, '', etc ???
+    sort: 'votes'
+  };
+  if (tagNames[0]) {
+    params.channel = tagNames[0];
+  }
   var spec = {
     related: {
       collection:'Images',
-      params: {
-        channel: tagNames[0],
-        limit: 10,
-        sort: 'votes'
-      }
+      params: params
     }
   };
   fetch.call(this, spec, function (err, results) {

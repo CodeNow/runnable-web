@@ -40,9 +40,12 @@ module.exports = BaseView.extend({
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
     // this.options.editmode = false; // assume success, change will rerender
-    if (formData.name === this.model.get('name')) this.render();
-    var options = utils.cbOpts(cb, this);
-    this.model.save(formData,  options);
+    if (formData.name === this.model.get('name')) {
+      return this.render();
+    }
+    var opts = utils.cbOpts(cb, this);
+    opts.patch = true;
+    this.model.save(formData,  opts);
 
     function cb (err) {
       if (err === 'a shared runnable by that name already exists') {
