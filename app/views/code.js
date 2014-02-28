@@ -27,13 +27,17 @@ module.exports = BaseView.extend({
     // setFile is what updates the editor.
     // this.setHeight(this.minHeight);
     var self = this;
+    
     this.editor = ace.edit(this.el);
     this.setTheme('dark');
     this.editor.setShowPrintMargin(false);
     this.editor.renderer.setShowPrintMargin(false);
     // this.editor.renderer.setScrollMargin(8, 8, 0, 0);
-    document.getElementById('project-editor').style.fontSize   = '12px';
-    document.getElementById('project-editor').style.lineHeight = '20px';
+
+    var projEditor = document.getElementById('project-editor');
+    projEditor.style.fontSize   = '12px';
+    projEditor.style.lineHeight = '20px';
+
     // you can attach events here since render only occurs once for this view
     var dispatch = this.app.dispatch;
     dispatch.on('change:theme', this.setTheme.bind(this));
@@ -130,6 +134,8 @@ module.exports = BaseView.extend({
     session.on('changeScrollTop',  this.onScrollTop.bind(this));
   },
   _detachSessionEvents: function (session) {
+    if(!session)
+      return;
     session.removeAllListeners('change');
     session.removeAllListeners('changeScrollLeft');
     session.removeAllListeners('changeScrollTop');
