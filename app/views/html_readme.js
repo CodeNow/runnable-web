@@ -15,12 +15,13 @@ module.exports = BaseView.extend({
     evt.preventDefault();
 
     //Don't allow repeat clicks
-    if(busy)
+    if (busy) {
       return;
+    }
     busy = true;
 
     var containerName = this.options.containername + "\n";
-    for(var i = 0, len=containerName.length-1; i < len; i++){
+    for (var i = 0, len=containerName.length-1; i < len; i++) {
       containerName += '='
     }
     containerName += "\n";
@@ -42,7 +43,7 @@ module.exports = BaseView.extend({
       else {
         // ASK TJ ABOUT STORE
         model.store(); // since this model created after page load.. and is used bind to a view in a (re)render..
-        
+
         this.model.contents.add(model);
         //Auto open after creating
         this.collection.add(model);
@@ -62,14 +63,16 @@ module.exports = BaseView.extend({
 
     this.app.dispatch.on('toggle:readme', this.toggle, this);
     this.model.contents.on('remove', function(model, collection, options){
-      if(model.get('name').toLowerCase() == 'readme.md')
+      if (model.get('name').toLowerCase() == 'readme.md') {
         _this.render();
+      }
     });
 
   },
   toggle: function (open) {
-    if(this.options.open === open)
+    if (this.options.open === open) {
       return;
+    }
     this.options.open = open;
     this.render();
   },
@@ -106,7 +109,7 @@ module.exports = BaseView.extend({
   },
   preRender: function () {
 
-    if(this.collection.length === 0){
+    if (this.collection.length === 0) {
       this.app.dispatch.trigger('toggle:readme', true);
     }
 
