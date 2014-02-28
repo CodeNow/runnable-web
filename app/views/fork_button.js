@@ -41,6 +41,7 @@ module.exports = EditorButtonView.extend({
       self.collection.saveAll.bind(self.collection),
       function (cb) {
         var opts = utils.cbOpts(cb);
+        opts.patch = true;
         self.model.save({ saved:true }, opts);
       }
     ],
