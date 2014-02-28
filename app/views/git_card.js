@@ -41,6 +41,7 @@ module.exports = BaseView.extend({
             self.gitLoader(false);
             self.resetSelect();
           } else {
+            self.gitLoader(false);
             self.app.router.navigate(container.appURL(), true);
           }
         });
