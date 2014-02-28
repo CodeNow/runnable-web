@@ -36,12 +36,11 @@ module.exports = BaseView.extend({
       } else {
         var container = new Container({}, { app:this.app });
         container.createFrom(image.id, function (err, container) {
+          self.gitLoader(false);
           if (err) {
             self.showError(err);
-            self.gitLoader(false);
             self.resetSelect();
           } else {
-            self.gitLoader(false);
             self.app.router.navigate(container.appURL(), true);
           }
         });
