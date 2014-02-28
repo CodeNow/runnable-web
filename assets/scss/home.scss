@@ -236,7 +236,7 @@
     width: auto;
 
     a {
-      color: $gray-darker;
+      color: darken($gray-darker,5%);
       cursor: pointer;
       display: block;
 
@@ -256,13 +256,13 @@
 
   // runs
   span {
-    color: $gray-dark;
+    color: $orange;
     font-size: 12px;
     margin-right: 4px;
   }
 
   data {
-    color: $gray-darker;
+    color: $gray-dark;
     margin-right: 10px;
   }
 
@@ -277,12 +277,11 @@
   }
 
   .tag {
-    border-bottom: 1px solid rgba(0,0,0,.1);
     cursor: pointer;
     margin-right: 10px;
+    transition: none;
 
     &:active {
-      border-bottom: 0;
       transform: translate3d(0,1px,0);
     }
   }
