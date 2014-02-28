@@ -6,7 +6,7 @@
 }
 
 .hero {
-  background: $purple-dark;
+  background: linear-gradient(to bottom, $purple, $purple-light);
   color: #fff;
   height: 300px;
   position: relative;

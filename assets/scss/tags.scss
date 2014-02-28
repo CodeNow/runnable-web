@@ -1,5 +1,5 @@
 .tag {
-  background: $purple-light;
+  background: rgba($purple-light,.7);
   border-radius: 3px;
   display: inline-block;
   font-size: 11px;
@@ -16,6 +16,7 @@
   }
 
   &:hover {
+    background: $purple-light;
     text-decoration: none;
   }
 

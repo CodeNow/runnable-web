@@ -3,7 +3,7 @@ var BaseView = require('./base_view');
 module.exports = BaseView.extend({
   tagName: 'section',
   id: 'filters',
-  className: 'col-sm-3',
+  className: 'col-sm-2',
   events: {
     'click li' : 'filterItem'
   },

@@ -149,38 +149,41 @@ $prefix-for-spec:      true !default; // required for keyframe mixin
 
 // inputs
 .form-control {
-        font-weight: bold;
-        @include box-shadow(none);
-        &:focus {
-            box-shadow: none;
-            border-color: $purple-light;
-        }
-        &.success {
-            border-color: #6CA52E;
-            background-image: url('../images/icon-success.png');
-            @include background-image-retina('../images/icon-success@2x.png');
-            background-size: 10px 8px;
-            padding-right: 40px;
-            background-repeat: no-repeat;
-            background-position: -moz-calc(100% - 15px) center;
-            background-position: -o-calc(100% - 15px) center;
-            background-position: -webkit-calc(100% - 15px) center;
-            background-position: calc(100% - 15px) center;
-        }
-        &.error {
-            border-color: #D73539;
-            padding-right: 40px;
-            background-image: url('../images/icon-error.png');
-            @include background-image-retina('../images/icon-error@2x.png');
-            color: #D73539;
-            background-size: 3px 11px;
-            background-repeat: no-repeat;
-            background-position: -moz-calc(100% - 19px) center;
-            background-position: -o-calc(100% - 19px) center;
-            background-position: -webkit-calc(100% - 19px) center;
-            background-position: calc(100% - 19px) center;
-        }
+    border: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 1px 0 #fff;
+    color: $gray-darker;
+    transition: border .1s cubic-bezier(.19,1,.22,1);
+    &:hover {
+        border-color: rgba(0,0,0,.15);
     }
+    &:focus {
+        box-shadow: 0 1px 0 #fff;
+        border-color: $orange;
+    }
+    &.success {
+        border-color: #6CA52E;
+        background-image: url('../images/icon-success.png');
+        @include background-image-retina('../images/icon-success@2x.png');
+        background-size: 10px 8px;
+        padding-right: 40px;
+        background-repeat: no-repeat;
+        background-position: calc(100% - 15px) center;
+    }
+    &.error {
+        border-color: #D73539;
+        padding-right: 40px;
+        background-image: url('../images/icon-error.png');
+        @include background-image-retina('../images/icon-error@2x.png');
+        color: #D73539;
+        background-size: 3px 11px;
+        background-repeat: no-repeat;
+        background-position: calc(100% - 19px) center;
+    }
+}
+
+.form-control::placeholder {
+    color: $gray-dark;
+}
 
 // UI KIT
 button,
@@ -192,7 +195,7 @@ button,
     cursor: pointer;
     display: inline-block;
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 400;
     height: 36px;
     line-height: 36px;
     padding: 0 18px 0 16px;
