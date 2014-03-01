@@ -263,8 +263,8 @@ var utils = module.exports = {
     return (new Buffer(hex.toString(), 'hex')).toString('base64').replace(plus,'-').replace(slash,'_');
   },
   isObjectId: function (str) {
-    str = str.toString && str.toString();
-    return Boolean(str.match(/^[a-fA-F0-9]{24}$/));
+    str = str && str.toString && str.toString();
+    return Boolean(str && str.match(/^[a-fA-F0-9]{24}$/));
   },
   isObjectId64: function (str) {
     str = str && str.toString && str.toString();
