@@ -7,6 +7,7 @@ module.exports = BaseView.extend({
   events: {
     'click #open-file-explorer': 'showFiles'
   },
+  className: 'in', // file browser open
   postHydrate: function () {
     var model = this.model;
     var canEdit = this.app.user.canEdit(model);
