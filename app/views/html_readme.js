@@ -58,20 +58,23 @@ module.exports = BaseView.extend({
   },
   postHydrate: function () {
 
-    var _this = this;
-
+    // this.app.dispatch.off('toggle:readme', this.toggle);
     this.app.dispatch.on('toggle:readme', this.toggle, this);
-    this.model.contents.on('remove', function(model, collection, options){
-      if(model.get('name').toLowerCase() == 'readme.md')
-        _this.render();
-    });
 
+    // this.model.contents.off('remove', this.onDeleteFile);
+    this.model.contents.on('remove', this.onDeleteFile, this);
+
+  },
+  onDeleteFile: function(model, collection, options) {
+    if(model.get('name').toLowerCase() == 'readme.md')
+      this.render();
   },
   toggle: function (open) {
     if(this.options.open === open)
       return;
     this.options.open = open;
-    this.render();
+    if(open)
+      this.render();
   },
   getTemplateData: function () {
     var opts = this.options;

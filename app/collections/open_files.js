@@ -24,7 +24,11 @@ module.exports = Base.extend({
       this.listenTo(dispatch, 'open:file', this.openFile.bind(this));
       this.listenTo(dispatch, 'save:files', this.saveAll.bind(this));
       this.listenTo(dispatch, 'sync:files', this.syncAllFiles.bind(this));
+      this.listenTo(dispatch, 'toggle:readme', this.selectNullFile.bind(this));
     }
+  },
+  selectNullFile: function (open) {
+    if (open) this.selectFileAt(-1);
   },
   _unsaved: false,
   _checkUnsaved: function () {
@@ -73,7 +77,7 @@ module.exports = Base.extend({
           file.set('selected', null);
         });
       var dispatch = this.app.dispatch;
-      if (dispatch) {
+      if (dispatch && selectedFile) {
         dispatch.trigger('toggle:readme', false);
       }
     }
@@ -110,6 +114,8 @@ module.exports = Base.extend({
       nextFile.set('selected', true);
     }
     else {
+      // TODO: this is kind of weird, but it is used when the last tab is closed,
+      // or the readme html is shown
       this.trigger('change:selected', null, true); // gets triggered even if null
     }
   },

@@ -49,6 +49,7 @@ module.exports = BaseView.extend({
     this.$('#project-editor').resize();
   },
   toggleReadme: function (open) {
+    console.log('toggleReadme');
     var $projectEditorContainer = this.$('#project-editor-container');
 
     if (open) {
