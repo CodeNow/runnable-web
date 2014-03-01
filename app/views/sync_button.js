@@ -25,7 +25,7 @@ module.exports = BaseView.extend({
   },
   onPostMessage: function (message) {
     if (message && message.data == 'completed:build') {
-      debugger;
+      //debugger;
 
       this.$el.click()
     }

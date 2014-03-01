@@ -5,11 +5,7 @@ var Image = require('../models/image');
 module.exports = BaseView.extend({
   id: 'code-editor',
   events: {
-    'click .open-file-explorer' : 'showFiles'
-  },
-  postRender: function () {
-    this.$showFilesButton = this.$('.btn-show-file-browser');
-    this.$fileBrowser = this.$('.file-browser');
+    'click #open-file-explorer': 'showFiles'
   },
   postHydrate: function () {
     var model = this.model;
@@ -17,6 +13,8 @@ module.exports = BaseView.extend({
 
     // if not canEdit(owner or admin) and Image page
     var dispatch = this.app.dispatch;
+    dispatch.on('toggle:readme', this.toggleReadme, this);
+
     if (!canEdit && model instanceof Image) {
       model.increment('views');
       dispatch.on('copy',  model.increment.bind(model, 'copies'));
@@ -50,9 +48,25 @@ module.exports = BaseView.extend({
     this.$el.toggleClass('in');
     this.$('#project-editor').resize();
   },
+  toggleReadme: function (open) {
+    console.log('toggleReadme');
+    var $projectEditorContainer = this.$('#project-editor-container');
+
+    if (open) {
+      $projectEditorContainer.addClass('show-readme');
+    }
+    else {
+      $projectEditorContainer.removeClass('show-readme');
+    }
+  },
   getTemplateData: function () {
     // only rendered once.. passes through context
-    return _.extend(this.options.context, this.options);
+    var opts = _.extend(this.options.context, this.options);
+    var readmeFile = opts.rootDir.contents.find(function(data){
+      return data.get('name') && data.get('name').toLowerCase() === 'readme.md';
+    });
+    opts.showReadme = (readmeFile) ? true : false;
+    return opts;
   }
 });
 

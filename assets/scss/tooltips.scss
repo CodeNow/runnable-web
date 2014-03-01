@@ -1,6 +1,10 @@
 // setup tooltips
 .tooltip {
   position: relative;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .tooltip::before,

@@ -25,6 +25,7 @@ module.exports = BaseView.extend({
   },
   click: function (evt) {
     evt.preventDefault();
+    this.$el.trigger('click-file-open');
     var model = this.model;
     if (model.isFile()) {
       this.app.dispatch.trigger('open:file', model);

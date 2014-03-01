@@ -349,9 +349,10 @@ function fetchFilesForContainer (containerId, callback) {
       }
     }
   };
+  var self = this;
   async.parallel([
     function (cb) {
-      var opts = utils.successErrorToCB(cb);
+      var opts = utils.cbOpts(cb);
       opts.data = rootDir.contents.params; // VERY IMPORTANT! - ask TJ.
       rootDir.contents.fetch(opts);
     },
@@ -380,17 +381,26 @@ function fetchFilesForContainer (containerId, callback) {
         }
       })(rootDir);
 
-      // Select first default file
-      var firstDefault = results.defaultFiles.at(0);
-      if (firstDefault) {
-        firstDefault.set('selected', true);
-        if (results['fsc:'+firstDefault.get('path')]) {
-          // if file exists elsewhere it's data should not conflict with another instance of itself..
-          if (results['fsc:'+firstDefault.get('path')].get(firstDefault.id)) {
-            results['fsc:'+firstDefault.get('path')].get(firstDefault.id).set('selected', true);
+      // Select first default file IF readme.md is not present
+      var readmeFile = rootDir.contents.find(function(data){
+        return data.get('name') && data.get('name').toLowerCase() === 'readme.md';
+      });
+
+      if (!readmeFile) {
+        var firstDefault = results.defaultFiles.at(0);
+        if (firstDefault) {
+          firstDefault.set('selected', true);
+          if (results['fsc:'+firstDefault.get('path')]) {
+            // if file exists elsewhere it's data should not conflict with another instance of itself..
+            if (results['fsc:'+firstDefault.get('path')].get(firstDefault.id)) {
+              results['fsc:'+firstDefault.get('path')].get(firstDefault.id).set('selected', true);
+            }
           }
         }
+      } else {
+        results.defaultFiles.unselectAllFiles();
       }
+
       callback(err, results);
     }
   });
