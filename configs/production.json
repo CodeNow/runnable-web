@@ -40,10 +40,6 @@
       "app_id": "980118989fd561bd1dce4ba4c7f8cb32da859c16"
     },
     "pageSize" : 25,
-    "domain": "runnable.com",
-    "message" : {
-      "status" : "warning",
-      "text" : "<span class=\"glyphicons cleaning\"></span> We'll be undergoing maintainence Today. The site will remain up with limited functionality."
-    }
+    "domain": "runnable.com"
   }
 }
