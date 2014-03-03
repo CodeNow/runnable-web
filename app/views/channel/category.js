@@ -53,9 +53,10 @@ module.exports = BaseView.extend({
         layoutMode   : 'masonry',
         // itemPositionDataEnabled : true,
         // transformsEnabled       : false
-        // onLayout : function(){
-        //   $bubbles.find('.bubble').addClass('hero-animate'); // commented out = no pattern spinning..
-        // }
+        onLayout : function(){
+          $bubbles.addClass('in');
+          // $bubbles.find('.bubble').addClass('hero-animate'); // commented out = no pattern spinning..
+        }
       });
     });
   },
