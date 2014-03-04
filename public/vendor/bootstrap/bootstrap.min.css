@@ -3343,6 +3343,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-inverse .navbar-link:hover {
   color: #ffffff;
 }
+/*
 .breadcrumb {
   padding: 8px 15px;
   margin-bottom: 20px;
@@ -3364,61 +3365,53 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .pagination {
   display: inline-block;
   padding-left: 0;
-  /*
   margin: 20px 0;
   border-radius: 4px;
-  */
 }
 .pagination > li {
   display: inline;
 }
 .pagination > li > a
-/*.pagination > li > span*/ {
+.pagination > li > span {
   position: relative;
-  /*
   float: left;
   padding: 6px 12px;
   line-height: 1.428571429;
-  */
   text-decoration: none;
   background-color: #ffffff;
   border: 1px solid #dddddd;
   margin-left: -1px;
 }
 .pagination > li:first-child > a
-/*.pagination > li:first-child > span*/ {
+.pagination > li:first-child > span {
   margin-left: 0;
-  /*
   border-bottom-left-radius: 4px;
   border-top-left-radius: 4px;
-  */
 }
-/*
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
   border-bottom-right-radius: 4px;
   border-top-right-radius: 4px;
 }
-*/
 .pagination > li > a:hover,
-/*.pagination > li > span:hover,*/
+.pagination > li > span:hover,
 .pagination > li > a:focus
-/*.pagination > li > span:focus*/ {
+.pagination > li > span:focus {
   background-color: #eeeeee;
 }
 .pagination > .active > a,
-/*.pagination > .active > span,*/
+.pagination > .active > span,
 .pagination > .active > a:hover,
-/*.pagination > .active > span:hover,*/
+.pagination > .active > span:hover,
 .pagination > .active > a:focus
-/*.pagination > .active > span:focus*/ {
+.pagination > .active > span:focus {
   z-index: 2;
   color: #ffffff;
   background-color: #6e3e8e;
   border-color: #6e3e8e;
   cursor: default;
 }
-/*.pagination > .disabled > span,*/
+.pagination > .disabled > span,
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
@@ -3466,10 +3459,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .pager:before,
 .pager:after {
   content: " ";
-  /* 1 */
 
   display: table;
-  /* 2 */
 
 }
 .pager:after {
@@ -3478,10 +3469,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .pager:before,
 .pager:after {
   content: " ";
-  /* 1 */
 
   display: table;
-  /* 2 */
 
 }
 .pager:after {
@@ -3519,6 +3508,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   background-color: #ffffff;
   cursor: not-allowed;
 }
+*/
 .label {
   display: inline;
   padding: .2em .6em .3em;
