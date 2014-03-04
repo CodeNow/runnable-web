@@ -23,18 +23,12 @@
   }
 }
 
-@keyframes bounceIn {
+@keyframes bubbleIn {
   0% {
     opacity: 0;
-    transform: scale3d(.1,.1,1) translate3d(0,200%,0);
-  }
-  80% {
-    opacity: 1;
-    transform: scale3d(1.1,1.1,1) translate3d(0,-200%,0);
   }
   100% {
-    opacity: 1;
-    transform: scale3d(1,1,1) translate3d(0,-200%,0);
+    opacity: .1;
   }
 }
 
@@ -258,6 +252,12 @@
   }
   100% {
     transform: scale3d(0,0,1);
+  }
+}
+
+@keyframes stackOut {
+  100% {
+    transform: translate3d(0,0,0);
   }
 }
 

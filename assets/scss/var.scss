@@ -21,6 +21,7 @@ $purple:         #5b3777;
 $purple-lighter: adjust-hue(saturate(lighten($purple, 60), 63), 1);
 $purple-light:   lighten($purple,14);
 $purple-dark:    darken($purple,14);
+$purple-darker:  darken($purple,17);
 
 $orange:         #fd7022;
 $orange-lighter: lighten($orange,10);

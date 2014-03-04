@@ -40,23 +40,13 @@ module.exports = BaseView.extend({
   postRender: function () {
     if (typeof window !== 'undefined') window.tj = this;
     this.imageTile();
-
-    // setTimeout(function () {
-    //   this.$('.bubbles img').css('position','absolute');
-    // }, 100); // timeout for clientside hit, else doesnt work..
   },
   imageTile: function () {
     var $bubbles = this.$('.bubbles');
     utils.allImagesLoaded($bubbles.find('img'), function () {
       $bubbles.isotope({
         itemSelector : 'img',
-        layoutMode   : 'masonry',
-        // itemPositionDataEnabled : true,
-        // transformsEnabled       : false
-        onLayout : function(){
-          $bubbles.addClass('in');
-          // $bubbles.find('.bubble').addClass('hero-animate'); // commented out = no pattern spinning..
-        }
+        layoutMode   : 'masonry'
       });
     });
   },
