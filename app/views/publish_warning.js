@@ -22,25 +22,27 @@ module.exports = BaseView.extend({
     this.$pubBack = $('#pubwarn-back-button');
   },
   publishNew: function () {
-
-    if(this.app.user.isRegistered()){
-      this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
-      this.publishLoader.initLoading('new', this.publishCallback.bind(this));
-    }else{
-      var self = this;
-      modalHelpers.signup.call(this, function(){
-        if(self.app.user.isRegistered()){
-          self.publishNew();
-        }
-      });
-    }
-
-    this.$pubNew.attr('disabled', 'disabled');
+    this.app.dispatch.trigger('save:files', function(err) {
+      if(this.app.user.isRegistered()){
+        this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
+        this.publishLoader.initLoading('new', this.publishCallback.bind(this));
+      } else {
+        var self = this;
+        modalHelpers.signup.call(this, function(){
+          if(self.app.user.isRegistered()){
+            self.publishNew();
+          }
+        });
+      }
+      this.$pubNew.attr('disabled', 'disabled');
+    }, this);
   },
   publishBack: function () {
-    this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
-    this.publishLoader.initLoading('back', this.publishCallback.bind(this));
-    this.$pubBack.attr('disabled', 'disabled');
+    this.app.dispatch.trigger('save:files', function(err) {
+      this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
+      this.publishLoader.initLoading('back', this.publishCallback.bind(this));
+      this.$pubBack.attr('disabled', 'disabled');
+    }, this);
   },
   publishCallback: function (err, image) {
     if (err) {
@@ -71,7 +73,7 @@ module.exports = BaseView.extend({
           .remove()
           .end()
           .append('<div class="alert alert-warning">'+message+'</div>');
-      }
+      };
 
       if ($form[0].checkValidity()) {
         var opts = utils.cbOpts(callback);
@@ -82,7 +84,7 @@ module.exports = BaseView.extend({
 
       function callback (err) {
         if (err === 'a shared runnable by that name already exists') {
-          return showError('<strong>That name is taken!</strong> Try something else.')
+          return showError('<strong>That name is taken!</strong> Try something else.');
         }
         else if (err) {
           return showError(err);
@@ -103,6 +105,11 @@ module.exports = BaseView.extend({
       actionLabel: 'Save and Publish',
       actionHandler: actionHandler
     });
+  },
+  saveAll :function () {
+    this.collection.saveAll(function (err) {
+      this.showIfError(err);
+    }, this);
   }
 });
 
