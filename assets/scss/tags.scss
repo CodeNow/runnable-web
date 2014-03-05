@@ -24,6 +24,14 @@
     text-decoration: none;
   }
 
+  &.active {
+    border-color: $orange;
+
+    > a {
+      color: $orange;
+    }
+  }
+
   &.can-edit {
     padding: 0 20px 0 4px;
 

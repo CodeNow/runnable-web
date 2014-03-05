@@ -9,16 +9,16 @@ module.exports = BaseView.extend({
   },
   filterItem: function (evt) {
     var self = this;
-    var $ing = self.$('h3 > span');
+    var $h3 = self.$('h3');
 
     // mark as active
     self.$(evt.currentTarget).toggleClass('active');
 
-    // add 'ing' to 'filter'
+    // add 'ing' to 'filter' and show clear
     if (self.$('li').hasClass('active')) {
-      $ing.addClass('in');
+      $h3.removeClass('out').addClass('in');
     } else {
-      $ing.removeClass();
+      $h3.addClass('out').removeClass('in');
     }
   }
 });

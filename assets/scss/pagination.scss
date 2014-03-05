@@ -7,7 +7,7 @@
   height: 38px;
   list-style-type: none;
   margin: 20px auto 0;
-  padding: 0px;
+  padding: 0;
   user-select: none;
 
   li {
@@ -55,10 +55,6 @@
 
       span {
         transition: transform .1s cubic-bezier(.19,1,.22,1);
-      }
-
-      &:hover span {
-        opacity: .5;
       }
 
       &:active span {
