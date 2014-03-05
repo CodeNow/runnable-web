@@ -20,11 +20,7 @@
   "rollbar": "bbbd8090514a4b40a0ec53fbed32d882",
   "api": {
     "default": {
-<<<<<<< HEAD
-      "host": "localhost:3030",
-=======
       "host": "api.runnable.com",
->>>>>>> 3fe33cbc573c254e56e4a6233a6c1e352ee2a845
       "protocol": "http"
     }
   },
@@ -33,7 +29,7 @@
     "env" : "development",
     "commitHash": "{COMMIT_HASH}",
     "mixpanel" : {
-      "key": "8790acfcca0cab43adebbc796f1d4f96"
+      "key": "de848319a0091fb3a5876184d81a40ec"
     },
     "googleAnalytics" : {
       "id": "UA-36631837-2"

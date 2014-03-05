@@ -111,10 +111,6 @@
     margin-top: 40px;
     top: 40%;
   }
-
-  h1 {
-    text-shadow: none;
-  }
 }
 
 // loaders with text
@@ -211,4 +207,5 @@
 #output-results-container h1 {
   color: $gray-dark;
   margin: 0;
+  text-shadow: none;
 }

@@ -2,7 +2,7 @@ var BaseView = require('./base_view');
 var Super = BaseView.prototype;
 var FilesSync = require('../models/files_sync');
 var utils = require('../utils');
-
+var didTermErr= false;
 
 module.exports = BaseView.extend({
   className: 'terminal-view relative loading',
@@ -41,6 +41,7 @@ module.exports = BaseView.extend({
     }
     else if (message.data === 'hide:loader') {
       this.loading(false);
+      didTermErr = false;
     }
     else if (message.data === 'term:dis') {
       this.loading(true);
@@ -102,13 +103,15 @@ module.exports = BaseView.extend({
     if (this.blockWarning) return;
     this.warningTimeout = setTimeout(function () {
       // If we got here that means dockworker did not finish loading on connect or reconnect.
-
       // data sent for error tracking
       var data = {model_id:self.model.id, user:self.app.user.id};
-      _rollbar.push({level: 'error', msg: "dockworker did not finish loading (hide:loader message not seen)", errMsg: data});
-      self.trackEvent('Error Encountered', {
-        errMsg: "dockworker did not finish loading"
-      });
+      if (!didTermErr) {
+        _rollbar.push({level: 'error', msg: "dockworker did not finish loading (hide:loader message not seen)", errMsg: data});
+        didTermErr = true;
+        self.trackEvent('Error Encountered', {
+          errMsg: "dockworker did not finish loading"
+        });
+      }
       // We want to check if the model is still available
       self.model.fetch({
         error: function (resp) {

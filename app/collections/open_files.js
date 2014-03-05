@@ -24,7 +24,11 @@ module.exports = Base.extend({
       this.listenTo(dispatch, 'open:file', this.openFile.bind(this));
       this.listenTo(dispatch, 'save:files', this.saveAll.bind(this));
       this.listenTo(dispatch, 'sync:files', this.syncAllFiles.bind(this));
+      this.listenTo(dispatch, 'toggle:readme', this.selectNullFile.bind(this));
     }
+  },
+  selectNullFile: function (open) {
+    if (open) this.selectFileAt(-1);
   },
   _unsaved: false,
   _checkUnsaved: function () {
@@ -73,6 +77,10 @@ module.exports = Base.extend({
         .forEach(function (file) {
           file.set('selected', null);
         });
+      var dispatch = this.app.dispatch;
+      if (dispatch && selectedFile) {
+        dispatch.trigger('toggle:readme', false);
+      }
     }
   },
   selectedFile: function () {
@@ -107,6 +115,8 @@ module.exports = Base.extend({
       nextFile.set('selected', true);
     }
     else {
+      // TODO: this is kind of weird, but it is used when the last tab is closed,
+      // or the readme html is shown
       this.trigger('change:selected', null, true); // gets triggered even if null
     }
   },
@@ -134,131 +144,13 @@ module.exports = Base.extend({
       file.fetch();
       // file.editorSession = undefined
     });
-
+  },
+  unselectAllFiles: function () {
+    var sf = this.selectedFile();
+    if(sf){
+      sf.set('selected', false);
+    }
   }
 });
-
-// module.exports = Base.extend({
-//   model: File,
-//   initialize: function (attrs, options) {
-//     Super.initialize.apply(this, arguments);
-//     this.project = options && options.project;
-//     // events
-//     this.listenTo(this, 'add', this.onAdd.bind(this));
-//     this.listenTo(this, 'add remove', this.onAddRemove.bind(this));
-//     // this.on('remove', this.onRemove, this);
-//     this.listenTo(this, 'change:content change:savedContent', this.onChangeContent.bind(this));
-//     this.listenToOnce(this, 'add', this.firstAdd.bind(this));
-//   },
-//   firstAdd: function (fileModel) {
-//     this.selectedFileModel = fileModel; // this is the default file basically.
-//   },
-//   onAddRemove: function () {
-//     if (this.hasUnsavedChanges()) {
-//       this.trigger('hasUnsavedChanges');
-//     }
-//     else {
-//       this.trigger('noUnsavedChanges');
-//     }
-//   },
-//   onChangeContent: function (model) {
-//     console.log("onChangeContent called in files.js");
-//     var unsavedChanges = model.hasUnsavedChanges();
-//     if (model.previouslyHadUnsavedChanges !== unsavedChanges) {
-//       if (!unsavedChanges) {
-//         this.trigger('noUnsavedChanges');
-//       }
-//       else { // (unsavedChanges)
-//         this.trigger('hasUnsavedChanges');
-//       }
-//     }
-//   },
-//   onAdd: function (model) {
-//     this.listenTo(model, 'destroy', this.onModelDestroyed.bind(this));
-//     if (this.length === 1) { // if first model added set as selected
-//       this.selectedFile(model);
-//     }
-//   },
-//   onModelDestroyed: function (model) {
-//     this.stopListening(model);
-//     this.remove(model);
-//   },
-//   setSelectedFile: function (fileModel, options) {
-//     options = options || {};
-//     if (typeof fileModel == 'string') {
-//       filePath = fileModel;
-//       fileModel = this.get(filePath);
-//       if (fileModel) {
-//         this.setSelectedFile(fileModel);
-//       }
-//       else {
-//         console.error(filePath+' not found.');
-//       }
-//     }
-//     else {
-//       if (this.selectedFileModel !== fileModel) {
-//         this.selectedFileModel = fileModel;
-//         if (!options.silent) {
-//           this.trigger('select:file', this.selectedFile());
-//         }
-//       }
-//     }
-//   },
-//   selectedFile: function (fileModel, options) {
-//     var filePath;
-//     if (utils.exists(fileModel)) {
-//       this.setSelectedFile(fileModel, options);
-//     }
-//     else {
-//       return this.selectedFileModel || this.at(0);
-//     }
-//   },
-//   remove: function (fileModel) {
-//     var currentIndex, nextIndex;
-//     if (this.selectedFile() === fileModel) {
-//       currentIndex = this.indexOf(this.selectedFile());
-//       nextIndex = currentIndex - 1;
-//       if (nextIndex < 0) {
-//         nextIndex = 0;
-//       }
-//     }
-//     // Always
-//     fileModel.loseUnsavedChanges();           // Reset unsavedChanges for file
-//     Super.remove.apply(this, arguments);     // remove The Model
-//     if (utils.exists(nextIndex)) {
-//       // AFTER it is removed, setSelectedFile bc it can accept undefined and still set the model.
-//       this.setSelectedFile(this.at(nextIndex));
-//     }
-//   },
-//   hasUnsavedChanges: function () {
-//     return this.some(function (file) {
-//       return file.hasUnsavedChanges();
-//     });
-//   },
-//   hasUnsavedNonClientSideChanges: function () {
-//     return this.some(function (file) {
-//       return file.hasUnsavedChanges() && !file.isClientSide();
-//     });
-//   },
-//   saveAll: function (projectId, callback) {
-//     var self = this;
-//     var anyHadUnsavedChanges = false;
-//     var anyNonClientSideFilesChanged = false;
-//     var fileModels = this.toArray();
-//     // move package.json ot the front
-//     fileModels.sort(function (a, b) {
-//       return (a.get("name") == "package.json") ? -1 : 0;
-//     });
-//     async.forEach(fileModels, function(fileModel, acb) {
-//       if (fileModel.hasUnsavedChanges()) {
-//         var options = utils.cbOpts(acb);
-//         fileModel.save({}, options);
-//       }
-//       else {
-//         acb();
-//       }
-//     }, callback);
-//   }
-// });
 
 module.exports.id = "OpenFiles";

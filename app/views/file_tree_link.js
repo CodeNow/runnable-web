@@ -29,6 +29,7 @@ module.exports = BaseView.extend({
   },
   click: function (evt) {
     evt.preventDefault();
+    this.$el.trigger('click-file-open');
     var model = this.model;
     if (evt.metaKey || evt.ctrlKey) {
       this.app.dispatch.trigger('highlight:file', model);

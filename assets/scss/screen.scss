@@ -1754,32 +1754,24 @@ div.terminal-view {
       padding: 0;
       width: 100%;
 
-      @include media(xs) {
-        max-width: 660px;
-      }
+            &:last-child {
+                margin-top: 20px;
+            }
 
-      @include media(sm) {
-        width: 720px;
-      }
+            @include media(sm) {
+                width: 760px;
+            }
 
-      @include media(lg) {
-        width: 1020px;
-      }
+            li {
+                display: inline-block;
+                list-style-type: none;
+                margin: 10px;
+                width: 150px;
 
-      li {
-        display: inline-block;
-        list-style-type: none;
-        margin: 10px;
-        width: 150px;
-
-        @include media(sm) {
-          margin: 20px;
-        }
-
-        @include media(lg) {
-          margin: 10px;
-        }
-      }
+                @include media(sm) {
+                    margin: 20px;
+                }
+            }
 
       h3 {
         font-size: 16px;

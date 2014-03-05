@@ -1,0 +1,55 @@
+#html-readme {
+  padding: 5px 10px;
+
+  h1 {
+    font-size: 26px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 22px;
+  }
+
+  h4 {
+    font-size: 20px;
+  }
+
+  h5 {
+    font-size: 18px;
+  }
+}
+
+.readme-help {
+  color: darken(desaturate($light-yellow, 90), 30);
+  margin: 100px auto 0;
+  text-align: center;
+  width: 100%;
+
+  h3 > a {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  a {
+    color: darken(desaturate($light-yellow, 90), 30);
+
+    &:hover {
+      color: darken(desaturate($light-yellow, 100), 40);
+    }
+  }
+
+  > a {
+    display: table;
+    font-size: 12px;
+    margin: 15px auto 0;
+  }
+}
+
+.in #html-readme h3 {
+  @include media(xxs) {
+    font-size: 18px;
+  }
+}

@@ -277,7 +277,7 @@ function fetchOwnersFor (user, runnables, callback) {
     owners: {
       collection: 'Users',
       params    : {
-        ids: userIds
+        _id: userIds
       }
     }
   };
@@ -346,9 +346,10 @@ function fetchFilesForContainer (containerId, callback) {
       }
     }
   };
+  var self = this;
   async.parallel([
     function (cb) {
-      var opts = utils.successErrorToCB(cb);
+      var opts = utils.cbOpts(cb);
       opts.data = rootDir.contents.params; // VERY IMPORTANT! - ask TJ.
       rootDir.contents.fetch(opts);
     },
@@ -377,17 +378,26 @@ function fetchFilesForContainer (containerId, callback) {
         }
       })(rootDir);
 
-      // Select first default file
-      var firstDefault = results.defaultFiles.at(0);
-      if (firstDefault) {
-        firstDefault.set('selected', true);
-        if (results['fsc:'+firstDefault.get('path')]) {
-          // if file exists elsewhere it's data should not conflict with another instance of itself..
-          if (results['fsc:'+firstDefault.get('path')].get(firstDefault.id)) {
-            results['fsc:'+firstDefault.get('path')].get(firstDefault.id).set('selected', true);
+      // Select first default file IF readme.md is not present
+      var readmeFile = rootDir.contents.find(function(data){
+        return data.get('name') && data.get('name').toLowerCase() === 'readme.md';
+      });
+
+      if (!readmeFile) {
+        var firstDefault = results.defaultFiles.at(0);
+        if (firstDefault) {
+          firstDefault.set('selected', true);
+          if (results['fsc:'+firstDefault.get('path')]) {
+            // if file exists elsewhere it's data should not conflict with another instance of itself..
+            if (results['fsc:'+firstDefault.get('path')].get(firstDefault.id)) {
+              results['fsc:'+firstDefault.get('path')].get(firstDefault.id).set('selected', true);
+            }
           }
         }
+      } else {
+        results.defaultFiles.unselectAllFiles();
       }
+
       callback(err, results);
     }
   });
@@ -430,9 +440,8 @@ function fetchLeaderBadges (count, userId, channelIds, cb) {
     leaderBadges: {
       collection: 'Channels',
       params: {
-        channelIds : channelIds,
+        _ids : channelIds,
         userId : userId,
-        count  : count,
         badges : true
       }
     }
@@ -444,14 +453,17 @@ function fetchRelated (imageId, tags, cb) {
   var tagNames = tags.map(function (tag) {
     return tag.name;
   });
+  var params = { // TODO: how is render encoding different queries?
+    limit: 10,   // [], undefined, '', etc ???
+    sort: 'votes'
+  };
+  if (tagNames[0]) {
+    params.channel = tagNames[0];
+  }
   var spec = {
     related: {
       collection:'Images',
-      params: {
-        channel: tagNames[0],
-        limit: 10,
-        sort: 'votes'
-      }
+      params: params
     }
   };
   fetch.call(this, spec, function (err, results) {

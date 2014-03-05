@@ -31,7 +31,7 @@ module.exports = Base.extend({
         tagStr = ' for ' + utils.tagsToString(tagsNotInName);
       }
     }
-    return name + tagStr
+    return name + tagStr;
   }
 });
 
