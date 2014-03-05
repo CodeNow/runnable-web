@@ -1,12 +1,10 @@
 {
-
   "port": 3000,
-  "ipaddress": "10.0.1.42",
+  "ipaddress": "127.0.0.1",
   "redis": {
     "port": 6379,
     "host": "127.0.0.1"
   },
-
   "cookieKey": "runnable.sid",
   "cookieSecret": "$up3r,$3<r3t",
   "cookieExpires": "1 year",
@@ -22,24 +20,25 @@
   "rollbar": "bbbd8090514a4b40a0ec53fbed32d882",
   "api": {
     "default": {
-      "host": "10.0.1.54:3000",
+      "host": "api.runnable.com",
       "protocol": "http"
     }
   },
 
   "rendrApp": {
-    "env" : "production",
+    "env" : "development",
     "commitHash": "{COMMIT_HASH}",
     "mixpanel" : {
-      "key": "8790acfcca0cab43adebbc796f1d4f96"
+      "key": "de848319a0091fb3a5876184d81a40ec"
     },
     "googleAnalytics" : {
-      "id": "UA-36631837-1"
-    },
-    "intercom" : {
-      "app_id": "980118989fd561bd1dce4ba4c7f8cb32da859c16"
+      "id": "UA-36631837-2"
     },
     "pageSize" : 25,
+<<<<<<< HEAD
     "domain": "runnable.com"
+=======
+    "domain": "runnable.pw"
+>>>>>>> 9896dd9e6ba41cfae4aa00beb909596c92e0c319
   }
 }

@@ -26,6 +26,6 @@ assets/bower
 
 *.rdb
 
-assets/scss/.scss-lint.yml
-
 scss-lint-0.17.1.gem
+
+assets/scss/.scss-lint.yml
