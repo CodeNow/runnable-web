@@ -7,7 +7,8 @@ var cycleTime = 2000;
 
 module.exports = BaseView.extend({
   events: {
-    'submit form'         : 'submitSearch'
+    'mouseover #channel-images li' : 'channelTextSwap',
+    'submit form'                  : 'submitSearch'
   },
   sortChannels: function () {
     var opts = this.options;
@@ -49,6 +50,13 @@ module.exports = BaseView.extend({
         layoutMode   : 'masonry'
       });
     });
+  },
+  channelTextSwap: function (evt) {
+    var $currentTarget = this.$(evt.currentTarget);
+    var currentPos = $currentTarget.index() + 1; // offset for initial "your"
+    var $channelText = this.$('#channel-text');
+
+    $channelText.prop('class','_' + currentPos);
   },
   submitSearch: function (evt) {
     if (!this.typed) {

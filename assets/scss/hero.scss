@@ -88,8 +88,6 @@
   height: 380px;
   overflow: hidden;
 
-  $channel-width: 70px;
-
   .bubbles {
     animation: bubbleIn 1 1s 1s linear forwards;
     opacity: 0;
@@ -99,6 +97,10 @@
     font-size: 40px;
     font-weight: bold;
     margin-top: 60px;
+
+    span {
+      visibility: hidden;
+    }
   }
 
   h2 {
@@ -107,21 +109,261 @@
     margin: 0;
   }
 
-  li {
-    background: linear-gradient(to bottom,$purple-light,rgba($purple-light,.75));
+  .glyphicons {
+    color: $purple-light;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 28px;
+    position: relative;
+      z-index: 0;
+    transform: rotate3d(0,0,1,90deg);
+    transition: color .2s;
+    user-select: none;
+
+    &:hover {
+      color: lighten($purple-light,5%);
+      text-decoration: none;
+    }
+  }
+}
+
+#channel-text {
+  display: inline-block;
+  height: 38px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  transition: width .2s ease-in-out;
+
+  > li {
+    display: inline;
+    opacity: 0;
+    position: absolute;
+      right: 0;
+      left: 0;
+    user-select: none;
+  }
+
+  &._0 {
+    width: 88px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(1) {
+      animation: alertIn .2s linear forwards;
+    }
+  }
+
+  // dart
+  &._1 {
+    width: 84px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(2) {
+      animation: alertIn .2s linear forwards;
+    }
+  }
+
+  // c++
+  &._2 {
+    width: 72px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(3) {
+      animation: alertIn .2s linear forwards;
+    }
+  }
+
+  // java
+  &._3 {
+    width: 78px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(4) {
+      animation: alertIn .2s linear forwards;
+    }
+  }
+
+  // rails
+  &._4 {
+    width: 94px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(5) {
+      animation: alertIn .2s linear forwards;
+    }
+  }
+
+  // node.js
+  &._5 {
+    width: 140px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(6) {
+      animation: alertIn .2s linear forwards;
+    }
+  }
+
+  // php
+  &._6 {
+    width: 78px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(7) {
+      animation: alertIn .2s linear forwards;
+    }
+  }
+
+  // jquery
+  &._7 {
+    width: 126px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(8) {
+      animation: alertIn .2s linear forwards;
+    }
+  }
+
+  // ruby
+  &._8 {
+    width: 98px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(9) {
+      animation: alertIn .2s linear forwards;
+    }
+  }
+
+  // django
+  &._9 {
+    width: 136px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(10) {
+      animation: alertIn .2s linear forwards;
+    }
+  }
+}
+
+#channel-images {
+
+  $channel-width: 70px;
+
+  height: 160px;
+  list-style-type: none;
+  margin: 40px auto 0;
+  padding: 0;
+  position: relative;
+    z-index: 1;
+  width: ($channel-width*6) + 45px;
+
+  > li {
+    animation: stackOut 1 1s .2s cubic-bezier(.19,1,.22,1) forwards;
+    background: linear-gradient(to bottom,lighten($purple-light,5%),rgba($purple-light,.75)) 0 100%;
+    background-size: 70px 140px;
     border-radius: 50%;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 2px 0 rgba(0,0,0,.5);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.3);
     cursor: pointer;
     height: $channel-width;
     position: absolute;
+    transition: background .2s;
     user-select: none;
     width: $channel-width;
 
-    img {
-      display: block;
-      height: $channel-width - 12px;
-      margin: 6px auto;
-      width: $channel-width - 12px;
+
+    &:nth-child(1) {
+      left: 5px;
+      top: $channel-width;
+      transform: translate3d($channel-width + 30px,100px,0);
+    }
+
+    &:nth-child(2) {
+      left: $channel-width;
+      top: 15px;
+      transform: translate3d($channel-width,30px+100px,0);
+    }
+
+    &:nth-child(3) {
+      left: $channel-width*2 + 15px;
+      top: 0;
+      transform: translate3d(15px,30px+100px,0);
+    }
+
+    &:nth-child(4) {
+      right: $channel-width*2 + 15px;
+      top: 0;
+      transform: translate3d(-15px,30px+100px,0);
+    }
+
+    &:nth-child(5) {
+      right: $channel-width;
+      top: 15px;
+      transform: translate3d(-$channel-width,30px+100px,0);
+    }
+
+    &:nth-child(6) {
+      right: 5px;
+      top: $channel-width;
+      transform: translate3d(-$channel-width - 30px,100px,0);
+    }
+
+    &:nth-child(7) {
+      left: $channel-width + 45px;
+      top: $channel-width + 15px;
+      transform: translate3d(30px,-15px+100px,0);
+    }
+
+    &:nth-child(8) {
+      left: 0;
+      margin: 0 auto;
+      right: 0;
+      top: $channel-width;
+      transform: translate3d(0,100px,0);
+    }
+
+    &:nth-child(9) {
+
+      right: $channel-width + 45px;
+      top: $channel-width + 15px;
+      transform: translate3d(-30px,-15px+100px,0);
+    }
+
+    &:hover {
+      background-position: 0 0;
+    }
+
+    &:active {
+      margin-top: 1px;
     }
 
     &:after {
@@ -138,103 +380,11 @@
       width: $channel-width - 12px;
     }
 
-    &:hover:after {
-      background: rgba(255,255,255,0);
-    }
-
-    &:active {
-      transform: translate3d(0,1px,0);
-    }
-  }
-
-  ul {
-    list-style-type: none;
-    height: 160px;
-    margin: 40px auto 0;
-    padding: 0;
-    position: relative;
-      z-index: 1;
-    width: ($channel-width*6) + 45px;
-
-    li {
-      animation: stackOut 1 1s .2s cubic-bezier(.19,1,.22,1) forwards;
-
-      &:nth-child(1) {
-        left: 0;
-        top: $channel-width;
-        transform: translate3d($channel-width + 30px,100px,0);
-      }
-
-      &:nth-child(2) {
-        left: $channel-width;
-        top: 15px;
-        transform: translate3d($channel-width,30px+100px,0);
-      }
-
-      &:nth-child(3) {
-        left:$channel-width*2 + 15px;
-        top: 0;
-        transform: translate3d(15px,30px+100px,0);
-      }
-
-      &:nth-child(4) {
-        right: $channel-width*2 + 15px;
-        top: 0;
-        transform: translate3d(-15px,30px+100px,0);
-      }
-
-      &:nth-child(5) {
-        right: $channel-width;
-        top: 15px;
-        transform: translate3d(-$channel-width,30px+100px,0);
-      }
-
-      &:nth-child(6) {
-        right: 0;
-        top: $channel-width;
-        transform: translate3d(-$channel-width - 30px,100px,0);
-      }
-
-      &:nth-child(7) {
-        left: $channel-width + 45px;
-        top: $channel-width + 15px;
-        transform: translate3d(30px,-15px+100px,0);
-      }
-
-      &:nth-child(8) {
-        left: 0;
-        margin: 0 auto;
-        right: 0;
-        top: $channel-width;
-        transform: translate3d(0,100px,0);
-      }
-
-      &:nth-child(9) {
-
-        right: $channel-width + 45px;
-        top: $channel-width + 15px;
-        transform: translate3d(-30px,-15px+100px,0);
-      }
-
-      &:active {
-        margin-top: 1px;
-      }
-    }
-  }
-
-  .glyphicons {
-    color: $purple-light;
-    cursor: pointer;
-    display: block;
-    font-size: 28px;
-    opacity: .5;
-    position: relative;
-      z-index: 0;
-    transform: rotate3d(0,0,1,90deg);
-
-    &:hover {
-      opacity: 1;
-      text-decoration: none;
+    img {
+      display: block;
+      height: $channel-width - 12px;
+      margin: 6px auto;
+      width: $channel-width - 12px;
     }
   }
 }
