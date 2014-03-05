@@ -40,20 +40,34 @@ var User = module.exports = Base.extend({
     cb = cb || function () {};
     var self = this;
     var cbOpts = utils.cbOpts(cb);
-    this.save({
-      email: email,
-      username: username,
-      password: password
-    }, {
-      wait: true,
-      method: 'PUT',
-      url   : '/users/me',
-      success: success,
-      error  : cbOpts.error
-    });
-    function success () {
-      cbOpts.success.apply(this, arguments);
-      self.trigger('auth');
+    if (!username) {
+      cb('Username is required');
+    }
+    else if (/\s/g.test(username)) {
+      cb('Whitespace is not allowed in the username.');
+    }
+    else if (!email) {
+      cb('Email is required');
+    }
+    else if (!password) {
+      cb('Password is required');
+    }
+    else {
+      this.save({
+        email: email,
+        username: username,
+        password: password
+      }, {
+        wait: true,
+        method: 'PUT',
+        url   : '/users/me',
+        success: success,
+        error  : cbOpts.error
+      });
+      function success () {
+        cbOpts.success.apply(this, arguments);
+        self.trigger('auth');
+      }
     }
   },
   login: function (emailUsername, password, cb) {
