@@ -25,14 +25,11 @@ module.exports = BaseView.extend({
         alt: name
       };
     }
-    // else if (!opts.tag) {
-    //   opts.firstletter = name[0];
-    //   this.tagName = 'div';
-    //   this.className = 'no-img btn purple';
-    // }
-    // else {
-    //   this.className = 'display-none';
-    // }
+    else {
+      opts.firstletter = name[0].toUpperCase();
+      this.tagName = 'div';
+      this.className = 'out';
+    }
   },
   postRender: function () {
     this.$el.error(this.loadError);

@@ -5,7 +5,9 @@
   <li>
     {{view 'channel_image' name=name alt=true}}
     {{name}}
-    <span class="glyphicons circle-ok"></span>
+    {{#if count}}
+      <span class="count">{{count}}</span>
+    {{/if}}
   {{/with}}
   {{/each}}
 </ul>

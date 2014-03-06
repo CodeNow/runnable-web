@@ -1191,56 +1191,31 @@ div.terminal-view {
 }
 
 #tags-main {
-    h1.page-title {
-        font-size: 30px;
-        span, select { vertical-align: middle }
-        span.icon-container {
-            display: inline-block;
-            background: #fff;
-            margin-right: 5px;
-            @include border-radius(50%);
-            height: 60px;
-            width: 62px;
-            text-align: center;
-            @include box-shadow(0 2px 3px rgba(0,0,0,0.3));
-            overflow: hidden;
-            img {
-                margin: 10px 0;
-            }
-        }
-        .bootstrap-select {
-            margin-left: 10px;
-            width: 115px;
-            display: inline-block;
-            background: none;
-            vertical-align: middle;
-            margin-top: 14px;
+    max-width: 1170px;
 
-            .btn {
-                background: none;
-                box-shadow: none;
-                border-color: #bbb;
-                color: #bbb;
-                font-size: 12px;
-                font-weight: bold;
-                .caret { border-top-color: #bbb }
-            }
-            &.open {
-                .btn {
-                    background: #ccc;
-                    color: #fff;
-                    text-shadow: none;
-                    border: solid 1px #999;
-                    .caret { border-top-color: #fff }
-                    &:focus {
-                        outline: none !important;
-                    }
-                }
-            }
-            .dropdown-menu > li > a { padding: 3px 14px }
-            .dropdown-menu li a:hover { background: $orange }
+    h1 {
+        color: darken($gray-darker,5%);
+        font-size: 34px;
+        font-weight: bold;
+        margin: 40px 0 20px;
+
+        > img {
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.3);
+            display: block;
+            float: left;
+            height: 70px - 12px;
+            margin-right: 15px;
+            user-select: none;
+            width: 70px - 12px;
+        }
+
+        > p {
+            font-size: 14px;
+            font-weight: 400;
+            margin: 6px 0 0;
         }
     }
+
     #tags-content {
         background: #fff;
         @include border-radius(5px);

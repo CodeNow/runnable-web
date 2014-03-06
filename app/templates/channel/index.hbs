@@ -1,41 +1,47 @@
 {{view "app_user" model=user}}
 {{view "header_view" model=user context=.}}
 {{view "global_message"}}
+
 <section id="tags-main" class="container">
   <div class="row">
-    <div class="col-sm-9{{#if channels.length}} col-sm-offset-3{{/if}}">
-      <h1 class="page-title">
+    <div class="col-sm-10 col-sm-offset-2">
+      <h1 class="clearfix">
       {{#with channel.attributes}}
-        <span class="icon-container">
-          {{view "channel_image" name=name large=true height="39" width="35"}}
-        </span>
-        <span>{{name}} code</span>
+        {{view "channel_image" name=name}}
+        <span>{{name}}</span>
+        {{#if description}}
+          <p>{{description}}
+        {{/if}}
       {{/with}}
       </h1>
     </div>
   </div>
+
+  <div class="row">
+    <nav id="feed-nav" class="col-sm-10 col-sm-offset-2">
+      {{view "feed_toggles"}}
+    </nav>
+  </div>
+{{!--
+  {{#each channels.models}}
+    {{#with attributes}}
+    <li><a href="/{{name}}">{{name}}<span> {{count}}</span></a></li>
+    {{/with}}
+  {{/each}}
+ --}}
   <div class="row">
     {{#if channels.length}}
-    <aside id="tags-sidebar" class="col-sm-3">
-      <ul>
-        <li><h3>Related Tags</h3></li>
-        {{#each channels.models}}
-        {{#with attributes}}
-        <li><a href="/{{name}}">{{name}}<span> {{count}}</span></a></li>
-        {{/with}}
-        {{/each}}
-      </ul>
-    </aside>
+      {{view "feed_filters" collection=channels count=true}}
     {{/if}}
+    {{view "runnable_feed"}}
+  </div>
+{{!--
+  <div class="row">
     <div id="tags-details" class="{{#if channels.length}}col-sm-9{{else}}col-sm-12{{/if}}">
-      {{#with channel.attributes}}
-      {{#if description}}
-      <p class="description">{{description}}<!--a class="more" href="#">&bull; &bull; &bull;</a--></p>
-      {{/if}}
-      {{/with}}
       {{view "runnable_list" collection=images className=""}}
     </div>
   </div>
-</section>
+ --}}
+ </section>
 
 {{view "footer_view" model=user context=.}}
