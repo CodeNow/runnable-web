@@ -7,8 +7,9 @@ var cycleTime = 2000;
 
 module.exports = BaseView.extend({
   events: {
-    'mouseover #channel-images li' : 'channelTextSwap',
-    'submit form'                  : 'submitSearch'
+    'mouseover #channel-images > li' : 'channelTextSwap',
+//    'mouseout #channel-images > li'  : 'channelTextSwap',
+    'submit form'                    : 'submitSearch'
   },
   sortChannels: function () {
     var opts = this.options;
@@ -36,6 +37,35 @@ module.exports = BaseView.extend({
       attribs = category.attributes;
       attribs.link = utils.exists(attribs.url) ? attribs.url : '/c/'+attribs.name;
     });
+    opts.channel_buttons = [{
+      title: 'Dart',
+      name: 'dart'
+    },{
+      title: 'C++',
+      name: 'c++'
+    },{
+      title: 'Java',
+      name: 'java'
+    },{
+      title: 'Rails',
+      name: 'ruby-on-rails'
+    },{
+      title: 'Node.js',
+      name: 'node.js'
+    },{
+      title: 'PHP',
+      name: 'php'
+    },{
+      title: 'jQuery',
+      name: 'jquery'
+    },{
+      title: 'Ruby',
+      name: 'ruby'
+    },{
+      title: 'Django',
+      name: 'django'
+    }];
+    console.log('opts', opts);
     return opts;
   },
   postRender: function () {
@@ -52,13 +82,25 @@ module.exports = BaseView.extend({
     });
   },
   channelTextSwap: function (evt) {
+    evt.stopPropagation();
     var $currentTarget = this.$(evt.currentTarget);
+    var $target = this.$(evt.target);
+    if(!$target.is('#channel-images > li'))
+      return;
+
     var currentPos = $currentTarget.index() + 1; // offset for initial "your"
     var $channelText = this.$('#channel-text');
     $channelText.prop('class','_' + currentPos);
-    $currentTarget.unbind('mouseout').bind('mouseout', function(evt){
+
+    var _this = this;
+    $currentTarget.one('mouseout', function(evt){
+      evt.stopPropagation();
+      var $target = _this.$(evt.target);
+      if(!$target.is('#channel-images > li'))
+        return;
       $channelText.prop('class', '_0');
     });
+
   },
   submitSearch: function (evt) {
     if (!this.typed) {
