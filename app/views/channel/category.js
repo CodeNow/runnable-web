@@ -8,7 +8,7 @@ var cycleTime = 2000;
 module.exports = BaseView.extend({
   events: {
     'mouseover #channel-images > li' : 'channelTextSwap',
-//    'mouseout #channel-images > li'  : 'channelTextSwap',
+    'mouseleave #channel-images'       : 'channelTextRevert',
     'submit form'                    : 'submitSearch'
   },
   sortChannels: function () {
@@ -81,26 +81,18 @@ module.exports = BaseView.extend({
       });
     });
   },
-  channelTextSwap: function (evt) {
+  channelTextRevert: function (evt) {
     evt.stopPropagation();
+    var $currentTarget = this.$(evt.currentTarget),
+        $target        = this.$(evt.target);
+    $channelText = this.$('#channel-text');
+    $channelText.prop('class', '_0');
+  },
+  channelTextSwap: function (evt) {
     var $currentTarget = this.$(evt.currentTarget);
-    var $target = this.$(evt.target);
-    if(!$target.is('#channel-images > li'))
-      return;
-
     var currentPos = $currentTarget.index() + 1; // offset for initial "your"
     var $channelText = this.$('#channel-text');
     $channelText.prop('class','_' + currentPos);
-
-    var _this = this;
-    $currentTarget.one('mouseout', function(evt){
-      evt.stopPropagation();
-      var $target = _this.$(evt.target);
-      if(!$target.is('#channel-images > li'))
-        return;
-      $channelText.prop('class', '_0');
-    });
-
   },
   submitSearch: function (evt) {
     if (!this.typed) {
