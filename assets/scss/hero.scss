@@ -88,6 +88,10 @@
   height: 380px;
   overflow: hidden;
 
+  &.in {
+    height: 600px;
+  }
+
   .bubbles {
     animation: bubbleIn 1 1s 1s linear forwards;
     opacity: 0;
@@ -370,6 +374,7 @@
       background: rgba(255,255,255,.2);
       border-radius: 50%;
       border-top: 2px solid rgba(0,0,0,.2);
+      box-shadow: 0 1px 0 rgba(255,255,255,.3);
       content: '';
       display: block;
       height: $channel-width - 12px;
