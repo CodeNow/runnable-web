@@ -1,11 +1,12 @@
 var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
+  className: 'btn-group',
   events: {
-    'click .out' : 'toggleFeed'
+    'click button' : 'toggleFeed'
   },
   toggleFeed: function () {
-    this.$('button').toggleClass('in out');
+    this.$('button').toggleClass('active');
   }
 });
 
