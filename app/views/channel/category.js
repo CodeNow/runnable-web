@@ -55,8 +55,10 @@ module.exports = BaseView.extend({
     var $currentTarget = this.$(evt.currentTarget);
     var currentPos = $currentTarget.index() + 1; // offset for initial "your"
     var $channelText = this.$('#channel-text');
-
     $channelText.prop('class','_' + currentPos);
+    $currentTarget.unbind('mouseout').bind('mouseout', function(evt){
+      $channelText.prop('class', '_0');
+    });
   },
   submitSearch: function (evt) {
     if (!this.typed) {
