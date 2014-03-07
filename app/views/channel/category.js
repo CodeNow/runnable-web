@@ -85,9 +85,12 @@ module.exports = BaseView.extend({
   },
   channelTextRevert: function (evt) {
     evt.stopPropagation();
-    var $currentTarget = this.$(evt.currentTarget);
+
     $channelText = this.$('#channel-text');
-    $channelText.prop('class', '_0');
+
+    if (!$channelText.hasClass('out')) {
+      $channelText.prop('class', '_0');
+    }
   },
   channelTextSwap: function (evt) {
     evt.stopPropagation()

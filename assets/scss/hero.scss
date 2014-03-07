@@ -144,12 +144,17 @@
     position: absolute;
       right: 0;
       left: 0;
-    visibility: hidden;
   }
 
-  &.out li:first-child {
-    opacity: 1;
-    visibility: visible;
+  &.out li {
+    animation: alertOut .2s linear forwards;
+    z-index: -1;
+
+    &:first-child {
+      animation: none;
+      opacity: 1;
+      z-index: 1;
+    }
   }
 
   &._0 {
