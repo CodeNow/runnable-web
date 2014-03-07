@@ -144,10 +144,12 @@
     position: absolute;
       right: 0;
       left: 0;
+    visibility: hidden;
+  }
 
-    &:first-child {
-      opacity: 1;
-    }
+  &.out li:first-child {
+    opacity: 1;
+    visibility: visible;
   }
 
   &._0 {
@@ -159,6 +161,7 @@
 
     > li:nth-child(1) {
       animation: alertIn .2s linear forwards;
+      visibility: visible;
     }
   }
 
@@ -172,6 +175,7 @@
 
     > li:nth-child(2) {
       animation: alertIn .2s linear forwards;
+      visibility: visible;
     }
   }
 
@@ -185,6 +189,7 @@
 
     > li:nth-child(3) {
       animation: alertIn .2s linear forwards;
+      visibility: visible;
     }
   }
 
@@ -198,6 +203,7 @@
 
     > li:nth-child(4) {
       animation: alertIn .2s linear forwards;
+      visibility: visible;
     }
   }
 
@@ -211,6 +217,7 @@
 
     > li:nth-child(5) {
       animation: alertIn .2s linear forwards;
+      visibility: visible;
     }
   }
 
@@ -224,6 +231,7 @@
 
     > li:nth-child(6) {
       animation: alertIn .2s linear forwards;
+      visibility: visible;
     }
   }
 
@@ -237,6 +245,7 @@
 
     > li:nth-child(7) {
       animation: alertIn .2s linear forwards;
+      visibility: visible;
     }
   }
 
@@ -250,6 +259,7 @@
 
     > li:nth-child(8) {
       animation: alertIn .2s linear forwards;
+      visibility: visible;
     }
   }
 
@@ -263,6 +273,7 @@
 
     > li:nth-child(9) {
       animation: alertIn .2s linear forwards;
+      visibility: visible;
     }
   }
 
@@ -276,6 +287,7 @@
 
     > li:nth-child(10) {
       animation: alertIn .2s linear forwards;
+      visibility: visible;
     }
   }
 }
