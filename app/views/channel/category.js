@@ -8,8 +8,9 @@ var cycleTime = 2000;
 module.exports = BaseView.extend({
   events: {
     'mouseover #channel-images > li' : 'channelTextSwap',
-    'mouseleave #channel-images'       : 'channelTextRevert',
-    'submit form'                    : 'submitSearch'
+    'mouseleave #channel-images'     : 'channelTextRevert',
+    'submit form'                    : 'submitSearch',
+    'click .chevron-right'           : 'toggleHero'
   },
   sortChannels: function () {
     var opts = this.options;
@@ -71,6 +72,7 @@ module.exports = BaseView.extend({
   postRender: function () {
     if (typeof window !== 'undefined') window.tj = this;
     this.imageTile();
+    this.$('#home-header').addClass('in');
   },
   imageTile: function () {
     var $bubbles = this.$('.bubbles');
@@ -83,8 +85,8 @@ module.exports = BaseView.extend({
   },
   channelTextRevert: function (evt) {
     evt.stopPropagation();
-    var $currentTarget = this.$(evt.currentTarget),
-        $target        = this.$(evt.target);
+    var $currentTarget = this.$(evt.currentTarget);
+    var $target = this.$(evt.target);
     $channelText = this.$('#channel-text');
     $channelText.prop('class', '_0');
   },
@@ -100,6 +102,9 @@ module.exports = BaseView.extend({
       this.app.set('loading', true);
       this.app.router.navigate('/'+ids[this.index], {trigger:true});
     }
+  },
+  toggleHero: function () {
+    this.$('#home-header').toggleClass('inner');
   }
 });
 
