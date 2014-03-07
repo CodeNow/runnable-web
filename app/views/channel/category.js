@@ -40,31 +40,31 @@ module.exports = BaseView.extend({
     });
     opts.channel_buttons = [{
       title: 'Dart',
-      name: 'dart'
+      name: 'Dart'
     },{
       title: 'C++',
-      name: 'c++'
+      name: 'C++'
     },{
       title: 'Java',
-      name: 'java'
+      name: 'Java'
     },{
       title: 'Rails',
-      name: 'ruby-on-rails'
+      name: 'Ruby-on-Rails'
     },{
       title: 'Node.js',
-      name: 'node.js'
+      name: 'Node.js'
     },{
       title: 'PHP',
-      name: 'php'
+      name: 'PHP'
     },{
       title: 'jQuery',
-      name: 'jquery'
+      name: 'jQuery'
     },{
       title: 'Ruby',
-      name: 'ruby'
+      name: 'Ruby'
     },{
       title: 'Django',
-      name: 'django'
+      name: 'Django'
     }];
     console.log('opts', opts);
     return opts;
@@ -86,11 +86,11 @@ module.exports = BaseView.extend({
   channelTextRevert: function (evt) {
     evt.stopPropagation();
     var $currentTarget = this.$(evt.currentTarget);
-    var $target = this.$(evt.target);
     $channelText = this.$('#channel-text');
     $channelText.prop('class', '_0');
   },
   channelTextSwap: function (evt) {
+    evt.stopPropagation()
     var $currentTarget = this.$(evt.currentTarget);
     var currentPos = $currentTarget.index() + 1; // offset for initial "your"
     var $channelText = this.$('#channel-text');

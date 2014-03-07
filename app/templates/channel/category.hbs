@@ -55,7 +55,7 @@
         <h2>Choose Your Stack to Get Started</h2>
         <ul id="channel-images">
           {{#each channel_buttons}}
-            <li><a>{{view 'channel_image' name=name}}</a>
+            <li><a href="/{{name}}">{{view 'channel_image' name=name}}</a>
           {{/each}}
         </ul>
         <a class="glyphicons chevron-right"></a>

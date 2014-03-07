@@ -87,7 +87,7 @@
   background: $purple-darker;
   height: 380px;
   overflow: hidden;
-  transition: height .4s ease-in-out;
+  transition: height .2s linear;
 
   &.inner {
     height: 600px;
@@ -309,7 +309,6 @@ $channel-container: ($channel-width*6) + 45px;
     background-size: 70px 140px;
     border-radius: 50%;
     box-shadow: inset 0 1px 0 rgba(255,255,255,.3);
-    cursor: pointer;
     height: $channel-width;
     position: absolute;
     transition: transform .75s .25s cubic-bezier(.19,1,.22,1);
@@ -453,10 +452,10 @@ $channel-container: ($channel-width*6) + 45px;
       content: '';
       display: block;
       height: $channel-width - 12px;
+      pointer-events: none;
       position: absolute;
         top: 6px;
         left: 6px;
-      transition: background .2s cubic-bezier(.19,1,.22,1);
       width: $channel-width - 12px;
     }
 
@@ -466,5 +465,9 @@ $channel-container: ($channel-width*6) + 45px;
       margin: 6px auto;
       width: $channel-width - 12px;
     }
+  }
+
+  a {
+    display: block;
   }
 }
