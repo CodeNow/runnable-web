@@ -89,10 +89,6 @@
   overflow: hidden;
   transition: height .2s linear;
 
-  &.inner {
-    height: 600px;
-  }
-
   .bubbles {
     animation: bubbleIn 1s 1s linear forwards;
     opacity: 0;
@@ -405,39 +401,39 @@ $channel-container: ($channel-width*6) + 45px;
 
     #home-header.inner & {
       &:nth-child(1) {
-        transform: translate3d(-100px,-170px,0);
+        transform: translate3d(-250px,-170px,0);
       }
 
       &:nth-child(2) {
-        transform: translate3d(-70px,-140px,0);
+        transform: translate3d(-150px,-140px,0);
       }
 
       &:nth-child(3) {
-        transform: translate3d(-25px,-130px,0);
+        transform: translate3d(-50px,-130px,0);
       }
 
       &:nth-child(4) {
-        transform: translate3d(25px,-130px,0);
+        transform: translate3d(50px,-130px,0);
       }
 
       &:nth-child(5) {
-        transform: translate3d(70px,-140px,0);
+        transform: translate3d(150px,-140px,0);
       }
 
       &:nth-child(6) {
-        transform: translate3d(100px,-170px,0);
+        transform: translate3d(250px,-170px,0);
       }
 
       &:nth-child(7) {
-        transform: translate3d(-30px,-85px,0);
+        transform: translate3d(-290px,-25px,0);
       }
 
       &:nth-child(8) {
-        transform: translate3d(0,-90px,0);
+        transform: translate3d(-210px,-15px,0);
       }
 
       &:nth-child(9) {
-        transform: translate3d(30px,-85px,0);
+        transform: translate3d(-125px,-25px,0);
       }
     }
 
@@ -474,5 +470,30 @@ $channel-container: ($channel-width*6) + 45px;
 
   a {
     display: block;
+
+    &:after {
+      border-radius: 18px;
+      color: $gray-lighter;
+      content: attr(data-title);
+      display: inline-block;
+      font-size: 14px;
+      height: 24px;
+      line-height: 24px;
+      margin-top: 10px;
+      opacity: 0;
+      padding: 0 10px;
+      pointer-events: none;
+      transition: opacity 1s;
+      white-space: nowrap;
+    }
+  }
+}
+
+#home-header.inner {
+  height: 600px;
+
+  a:after {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
