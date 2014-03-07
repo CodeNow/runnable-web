@@ -55,8 +55,15 @@
         <h2>Choose Your Stack to Get Started</h2>
         <ul id="channel-images">
           {{#each channel_buttons}}
-            <li><a href="/{{name}}" data-title="{{name}}">{{view 'channel_image' name=name}}</a>
+          <li><a href="/new/{{name}}" data-title="{{name}}">{{view 'channel_image' name=name}}</a>
           {{/each}}
+          <li><a href="/new/express" data-title="express">{{view 'channel_image' name='express'}}</a>
+          <li><a href="/new/Python" data-title="Python">{{view 'channel_image' name='python'}}</a>
+          <li><a href="/new/Codeigniter" data-title="Codeigniter">{{view 'channel_image' name='codeigniter'}}</a>
+          <li><a href="/new/.NET" data-title=".NET">{{view 'channel_image' name='.net'}}</a>
+          <li><a href="/new/Flask" data-title="Flask">{{view 'channel_image' name='flask'}}</a>
+          <li><a href="/new/CakePHP" data-title="CakePHP">{{view 'channel_image' name='cakephp'}}</a>
+          <li><a href="/new/Bash" data-title="Bash">{{view 'channel_image' name='bash'}}</a>
         </ul>
         <a class="glyphicons chevron-right"></a>
       </div>
