@@ -119,6 +119,7 @@
     opacity: .5;
     position: absolute;
       top: auto;
+      bottom: 240px;
     transition: opacity .2s, transform .4s .1s cubic-bezier(.19,1,.22,1);
     user-select: none;
     width: 36px;
@@ -141,7 +142,7 @@
 }
 
 #home-header.inner > .chevron-right {
-  transform: translate3d(0,240px,0);
+  transform: translate3d(0,230px,0);
 
   &:before {
     transform: rotate3d(0,0,1,-90deg);
@@ -151,8 +152,6 @@
 // sketchy footer for home
 #home-header ~ footer {
   margin-top: -230px;
-  // transform: translate3d(0,-230px,0);
-  // transition: transform .4s .2s cubic-bezier(.19,1,.22,1);
 
   .row {
     position: relative;
@@ -170,8 +169,8 @@
 
 #home-header.inner ~ footer {
   margin-top: 0;
-  // transform: translate3d(0,0,0);
 }
+// end sketchy footer
 
 #channel-text {
   display: inline-block;
@@ -340,6 +339,104 @@
       visibility: visible;
     }
   }
+
+  // express
+  &._10 {
+    width: 148px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(11) {
+      animation: alertIn .2s linear forwards;
+      visibility: visible;
+    }
+  }
+
+  // python
+  &._11 {
+    width: 134px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(12) {
+      animation: alertIn .2s linear forwards;
+      visibility: visible;
+    }
+  }
+
+  // codeigniter
+  &._12 {
+    width: 224px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(13) {
+      animation: alertIn .2s linear forwards;
+      visibility: visible;
+    }
+  }
+
+  // .net
+  &._13 {
+    width: 86px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(14) {
+      animation: alertIn .2s linear forwards;
+      visibility: visible;
+    }
+  }
+
+  // flask
+  &._14 {
+    width: 100px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(15) {
+      animation: alertIn .2s linear forwards;
+      visibility: visible;
+    }
+  }
+
+  // cakephp
+  &._15 {
+    width: 172px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(16) {
+      animation: alertIn .2s linear forwards;
+      visibility: visible;
+    }
+  }
+
+  // bash
+  &._16 {
+    width: 92px;
+
+    > li {
+      animation: alertOut .2s linear forwards;
+    }
+
+    > li:nth-child(17) {
+      animation: alertIn .2s linear forwards;
+      visibility: visible;
+    }
+  }
 }
 
 $channel-width: 70px;
@@ -353,6 +450,10 @@ $channel-container: ($channel-width*6) + 45px;
   position: relative;
     z-index: 1;
   width: $channel-container;
+
+  .inner & {
+    height: 380px;
+  }
 
   > li {
     background: linear-gradient(to bottom,lighten($purple-light,5%),rgba($purple-light,.75)) 0 100%;

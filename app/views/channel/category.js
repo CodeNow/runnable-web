@@ -40,31 +40,52 @@ module.exports = BaseView.extend({
     });
     opts.channel_buttons = [{
       title: 'Dart',
-      name: 'Dart'
+      name:  'Dart'
     },{
       title: 'C++',
-      name: 'C++'
+      name:  'C++'
     },{
       title: 'Java',
-      name: 'Java'
+      name:  'Java'
     },{
       title: 'Rails',
-      name: 'Ruby-on-Rails'
+      name:  'Ruby-on-Rails'
     },{
       title: 'Node.js',
-      name: 'Node.js'
+      name:  'Node.js'
     },{
       title: 'PHP',
-      name: 'PHP'
+      name:  'PHP'
     },{
       title: 'jQuery',
-      name: 'jQuery'
+      name:  'jQuery'
     },{
       title: 'Ruby',
-      name: 'Ruby'
+      name:  'Ruby'
     },{
       title: 'Django',
-      name: 'Django'
+      name:  'Django'
+    },{
+      title: 'express',
+      name:  'express'
+    },{
+      title: 'Python',
+      name:  'Python'
+    },{
+      title: 'Codeigniter',
+      name:  'Codeigniter'
+    },{
+      title: '.NET',
+      name:  '.NET'
+    },{
+      title: 'Flask',
+      name:  'Flask'
+    },{
+      title: 'CakePHP',
+      name:  'CakePHP'
+    },{
+      title: 'Bash',
+      name:  'Bash'
     }];
     console.log('opts', opts);
     return opts;
