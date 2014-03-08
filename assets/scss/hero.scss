@@ -85,9 +85,8 @@
 // home header
 #home-header {
   background: $purple-darker;
-  height: 380px;
+  height: 620px;
   overflow: hidden;
-  transition: height .75s .25s;
 
   .bubbles {
     animation: bubbleIn 1s 1s linear forwards;
@@ -106,22 +105,72 @@
     margin: 0;
   }
 
-  .glyphicons {
-    color: $purple-light;
+  > .chevron-right {
+    background: linear-gradient(to bottom,lighten($purple-light,5%),rgba($purple-light,.75)) 0 100%;
+    border-radius: 50%;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    color: rgba(0,0,0,.2);
     cursor: pointer;
     display: inline-block;
     font-size: 28px;
-    position: relative;
-      z-index: 0;
-    transform: rotate3d(0,0,1,90deg);
-    transition: color .2s;
+    height: 36px;
+    line-height: 36px;
+    margin-left: -18px;
+    opacity: .5;
+    position: absolute;
+      top: auto;
+    transition: opacity .2s, transform .4s .1s cubic-bezier(.19,1,.22,1);
     user-select: none;
+    width: 36px;
 
     &:hover {
-      color: lighten($purple-light,5%);
+      opacity: .9;
       text-decoration: none;
     }
+
+    &:active {
+      transform: translate3d(0,1px,0);
+    }
+
+    &:before {
+      display: block;
+      transition: transform .2s;
+      transform: rotate3d(0,0,1,90deg);
+    }
   }
+}
+
+#home-header.inner > .chevron-right {
+  transform: translate3d(0,240px,0);
+
+  &:before {
+    transform: rotate3d(0,0,1,-90deg);
+  }
+}
+
+// sketchy footer for home
+#home-header ~ footer {
+  margin-top: -230px;
+  // transform: translate3d(0,-230px,0);
+  // transition: transform .4s .2s cubic-bezier(.19,1,.22,1);
+
+  .row {
+    position: relative;
+  }
+
+  .col-sm-2,
+  .col-sm-10 {
+    position: absolute;
+  }
+
+  .col-sm-10 {
+    right: 0;
+  }
+}
+
+#home-header.inner ~ footer {
+  margin-top: 0;
+  // transform: translate3d(0,0,0);
 }
 
 #channel-text {
@@ -143,7 +192,7 @@
   }
 
   &.out li {
-    animation: alertOut .2s linear forwards;
+    animation: alertOut .2s .2s linear forwards;
     z-index: -1;
 
     &:first-child {
@@ -312,7 +361,7 @@ $channel-container: ($channel-width*6) + 45px;
     box-shadow: inset 0 1px 0 rgba(255,255,255,.3);
     height: $channel-width;
     position: absolute;
-    transition: transform .75s .25s cubic-bezier(.19,1,.22,1);
+    transition: opacity .2s, transform .4s .1s cubic-bezier(.19,1,.22,1);
     user-select: none;
     width: $channel-width;
 
@@ -363,8 +412,13 @@ $channel-container: ($channel-width*6) + 45px;
     &:nth-child(n+10) {
       left: 0;
       margin: 0 auto;
+      opacity: 0;
       right: 0;
-      transform: translate3d(0,300px,0);
+      transform: translate3d(0,240px,0);
+
+      .inner & {
+        opacity: 1;
+      }
     }
 
     #home-header.in & {
@@ -490,7 +544,7 @@ $channel-container: ($channel-width*6) + 45px;
       height: $channel-width - 12px;
       pointer-events: none;
       position: absolute;
-        top: 6px;
+        top: 5px;
         left: 6px;
       width: $channel-width - 12px;
     }
@@ -498,7 +552,7 @@ $channel-container: ($channel-width*6) + 45px;
     img {
       display: block;
       height: $channel-width - 12px;
-      margin: 6px auto;
+      margin: 5px auto;
       width: $channel-width - 12px;
     }
   }
@@ -508,7 +562,7 @@ $channel-container: ($channel-width*6) + 45px;
 
     &:after {
       border-radius: 18px;
-      color: $gray-lighter;
+      color: $gray-light;
       content: attr(data-title);
       display: inline-block;
       font-size: 14px;
@@ -521,16 +575,13 @@ $channel-container: ($channel-width*6) + 45px;
       position: absolute;
         right: 0;
         left: 0;
-      transition: opacity 1s;
+      transition: opacity .2s cubic-bezier(.19,1,.22,1);
       white-space: nowrap;
+
+      .inner & {
+        opacity: 1;
+        transition: opacity .2s .2s cubic-bezier(.19,1,.22,1);
+      }
     }
-  }
-}
-
-#home-header.inner {
-  height: 600px;
-
-  a:after {
-    opacity: 1;
   }
 }
