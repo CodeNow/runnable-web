@@ -22,6 +22,7 @@ module.exports = BaseView.extend({
     this.$pubBack = $('#pubwarn-back-button');
   },
   publishNew: function () {
+    var self = this;
     this.model.saveOpenFiles(function (err) {
       if (err) {
         this.showError(err);
@@ -31,7 +32,6 @@ module.exports = BaseView.extend({
         this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
         this.publishLoader.initLoading('new', this.publishCallback.bind(this));
       } else {
-        var self = this;
         modalHelpers.signup.call(this, function(){
           if(self.app.user.isRegistered()){
             self.publishNew();
@@ -39,9 +39,10 @@ module.exports = BaseView.extend({
         });
       }
       this.$pubNew.attr('disabled', 'disabled');
-    }, this);
+    }, self);
   },
   publishBack: function () {
+    var self = this;
     this.model.saveOpenFiles(function (err) {
       if (err) {
         this.showError(err);
@@ -50,7 +51,7 @@ module.exports = BaseView.extend({
       this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
       this.publishLoader.initLoading('back', this.publishCallback.bind(this));
       this.$pubBack.attr('disabled', 'disabled');
-    }, this);
+    }, self);
   },
   publishCallback: function (err, image) {
     if (err) {
@@ -113,11 +114,6 @@ module.exports = BaseView.extend({
       actionLabel: 'Save and Publish',
       actionHandler: actionHandler
     });
-  },
-  saveAll :function () {
-    this.collection.saveAll(function (err) {
-      this.showIfError(err);
-    }, this);
   }
 });
 
