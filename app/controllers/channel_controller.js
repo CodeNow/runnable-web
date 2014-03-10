@@ -95,12 +95,21 @@ module.exports = {
         categories: {
           collection: 'Categories'
         },
-        feed: {
+        feedTrending: {
           collection: 'FeedsImages',
           params: {
             page:  params.page,
             limit: 10,
             filter: params.filter
+          }
+        },
+        feedPopular: {
+          collection: 'images',
+          params: {
+            page: params.page,
+            limit: 10,
+            filter: params.filter,
+            sort: '-runs'
           }
         }
       };
@@ -129,8 +138,20 @@ module.exports = {
             });
             featured.set('url', '/');
 
-            fetchOwnersFor.call(self, results.user, results.feed, function(err, results2){
-              _.extend(results, results2);
+            async.parallel([
+              function(cb){
+                fetchOwnersFor.call(self, results.user, results.feedTrending, function(err, results2){
+                  _.extend(results, results2);
+                  cb();
+                });
+              },
+              function(cb){
+                fetchOwnersFor.call(self, results.user, results.feedPopular, function(err, results2){
+                  _.extend(results, results2);
+                  cb();
+                });
+            }], function(err){
+              if (err) console.log(err);
               callback(null, addSEO(results));
             });
 

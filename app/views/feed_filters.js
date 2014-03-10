@@ -1,4 +1,5 @@
 var BaseView = require('./base_view');
+var utils = require('../utils');
 
 module.exports = BaseView.extend({
   tagName: 'section',
@@ -20,6 +21,15 @@ module.exports = BaseView.extend({
     } else {
       $h3.addClass('out').removeClass('in');
     }
+
+  },
+  getTemplateData: function () {
+
+    var opts = this.options;
+    //var queryObj = utils.getCurrentUrlQueryString(this.app);
+    //console.log(queryObj);
+    return opts;
+
   }
 });
 
