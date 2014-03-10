@@ -4,6 +4,7 @@ var helpers = require('./helpers');
 var utils = require('../utils');
 var fetch = helpers.fetch;
 var Channel = require('../models/channel');
+var colors = require('colors');
 
 var fetchOwnersFor = helpers.fetchOwnersFor;
 var fetchUserAndChannel = helpers.fetchUserAndChannel;
@@ -59,7 +60,17 @@ module.exports = {
     var self = this;
     var app = this.app;
     var isHomepage = utils.isCurrentUrl(app, '');
+
     params.category = params.category || 'Featured';
+    params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter').split(',') : [];
+    params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 0;
+    if(isNaN(parseInt(params.page))){
+      self.redirectTo('');
+      return;
+    }
+    console.log('params'.bold.green, params);
+
+
     var isFeaturedCategory = (params.category.toLowerCase() == 'featured');
     // if (isServer && !this.app.req.cookies.pressauth) {
     //   this.redirectTo('/');
@@ -83,6 +94,14 @@ module.exports = {
         },
         categories: {
           collection: 'Categories'
+        },
+        feed: {
+          collection: 'FeedsImages',
+          params: {
+            page:  params.page,
+            limit: 10,
+            filter: params.filter
+          }
         }
       };
       fetch.call(this, spec, function (err, results) {
@@ -95,10 +114,10 @@ module.exports = {
             return category.get('name').toLowerCase() === results.selectedCategoryLower;
           });
           var catName = results.selectedCategory.get('name');
-          if (isFeaturedCategory && !isHomepage) {
+          if (false && isFeaturedCategory && !isHomepage) {
             self.redirectTo('');
           }
-          else if (catName !== params.category) {
+          else if (false && catName !== params.category) {
             self.redirectTo('/c/'+catName);
           }
           else {
@@ -109,7 +128,12 @@ module.exports = {
               name: 'Featured'
             });
             featured.set('url', '/');
-            callback(null, addSEO(results));
+
+            fetchOwnersFor.call(self, results.user, results.feed, function(err, results2){
+              _.extend(results, results2);
+              callback(null, addSEO(results));
+            });
+
           }
         }
       });

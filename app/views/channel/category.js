@@ -7,15 +7,30 @@ var cycleTime = 2000;
 
 module.exports = BaseView.extend({
   events: {
-    'mouseover #channel-images > li' : 'channelTextSwap',
-    'mouseleave #channel-images'     : 'channelTextRevert',
-    'submit form'                    : 'submitSearch',
-    'click .chevron-right'           : 'toggleHero'
+    'mouseover #channel-images > li': 'channelTextSwap',
+    'mouseleave #channel-images':     'channelTextRevert',
+    'submit form':                    'submitSearch',
+    'click .chevron-right':           'toggleHero'
   },
   sortChannels: function () {
     var opts = this.options;
     var category = opts.channels.params.category.toLowerCase();
-    var sortOrder = ["c++","cakephp","codeigniter","dart","django","express","firebase","java","jquery","mysql",".net","nodejs","php","python","ruby-on-rails","twilio"]; //"add your own"
+    var sortOrder = ['c++',
+                      'cakephp',
+                      'codeigniter',
+                      'dart',
+                      'django',
+                      'express',
+                      'firebase',
+                      'java',
+                      'jquery',
+                      'mysql',
+                      '.net',
+                      'nodejs',
+                      'php',
+                      'python',
+                      'ruby-on-rails',
+                      'twilio']; //'add your own'
     function getOrder (channel) {
       var sortIndex;
       channel.get('aliases').some(function (alias) {
@@ -87,11 +102,10 @@ module.exports = BaseView.extend({
       title: 'Bash',
       name:  'Bash'
     }];
-    console.log('opts', opts);
+    //console.log('opts', opts);
     return opts;
   },
   postRender: function () {
-    if (typeof window !== 'undefined') window.tj = this;
     this.imageTile();
     this.$('#home-header').addClass('in');
   },
@@ -99,8 +113,8 @@ module.exports = BaseView.extend({
     var $bubbles = this.$('.bubbles');
     utils.allImagesLoaded($bubbles.find('img'), function () {
       $bubbles.isotope({
-        itemSelector : 'img',
-        layoutMode   : 'masonry'
+        itemSelector: 'img',
+        layoutMode:   'masonry'
       });
     });
   },
@@ -116,7 +130,7 @@ module.exports = BaseView.extend({
   channelTextSwap: function (evt) {
     evt.stopPropagation()
     var $currentTarget = this.$(evt.currentTarget);
-    var currentPos = $currentTarget.index() + 1; // offset for initial "your"
+    var currentPos = $currentTarget.index() + 1; // offset for initial 'your'
     var $channelText = this.$('#channel-text');
     $channelText.prop('class','_' + currentPos);
   },
@@ -132,4 +146,4 @@ module.exports = BaseView.extend({
   }
 });
 
-module.exports.id = "channel/category";
+module.exports.id = 'channel/category';

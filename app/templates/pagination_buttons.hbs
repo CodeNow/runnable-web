@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-sm-10 col-sm-offset-2">
+    <ul class="pagination">
+
+      {{#if prevLink}}
+        <li class="prev"><a href="/?page={{previousPage}}"><span class="glyphicons chevron-left"></span>Previous</a>
+        <li><a href="/">1</a>
+
+        {{#if showLeftElipsis}}
+          <li class="ellipsis">• • •
+        {{/if}}
+
+      {{/if}}
+
+      <li class="active">{{ page }}
+
+      {{#if nextLink}}
+
+        {{#if showRightElipsis}}
+          <li class="ellipsis">• • •
+        {{/if}}
+
+        <li><a href="/?page={{ lastPageIndex }}">{{ lastPage }}</a>
+        <li class="next"><a href="/?page={{nextPage}}">Next <span class="glyphicons chevron-right"></span></a>
+      {{/if}}
+
+    </ul>
+  </div>
+</div>
