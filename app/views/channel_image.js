@@ -28,7 +28,7 @@ module.exports = BaseView.extend({
     else {
       opts.firstletter = name[0].toUpperCase();
       this.tagName = 'div';
-      this.className = 'out';
+      this.className = 'no-img';
     }
   },
   postRender: function () {
