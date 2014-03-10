@@ -50,6 +50,9 @@ module.exports = Runnable.extend({
   },
   appURL: function () {
     return '/'+this.id+'/'+utils.urlFriendly(this.nameWithTags());
+  },
+  saveOpenFiles: function (cb, ctx) {
+    this.app.dispatch.trigger('save:files', cb, ctx);
   }
 });
 
