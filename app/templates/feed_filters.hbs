@@ -1,13 +1,14 @@
 <h3>Filter<span>ing</span><button type="button">Show All</button></h3>
 <ul>
   {{#each collection.models}}
-  {{#with attributes}}
-  <li>
-    {{view 'channel_image' name=name alt=true}}
-    {{name}}
-    {{#if count}}
-      <span class="count">{{count}}</span>
-    {{/if}}
-  {{/with}}
+    {{#with attributes}}
+      <li>
+        {{view 'channel_image' name=name alt=true}}
+        {{name}}
+
+        {{#if count}}
+          <span class="count">{{count}}</span>
+        {{/if}}    
+    {{/with}}
   {{/each}}
 </ul>
