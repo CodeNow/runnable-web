@@ -106,7 +106,6 @@ module.exports = BaseView.extend({
     return opts;
   },
   postRender: function () {
-    if (typeof window !== 'undefined') window.tj = this;
     this.imageTile();
     this.$('#home-header').addClass('in');
   },
