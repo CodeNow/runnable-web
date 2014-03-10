@@ -22,7 +22,11 @@ module.exports = BaseView.extend({
     this.$pubBack = $('#pubwarn-back-button');
   },
   publishNew: function () {
-    this.app.dispatch.trigger('save:files', function(err) {
+    this.model.saveOpenFiles(function (err) {
+      if (err) {
+        this.showError(err);
+        return;
+      }
       if(this.app.user.isRegistered()){
         this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
         this.publishLoader.initLoading('new', this.publishCallback.bind(this));
@@ -38,7 +42,11 @@ module.exports = BaseView.extend({
     }, this);
   },
   publishBack: function () {
-    this.app.dispatch.trigger('save:files', function(err) {
+    this.model.saveOpenFiles(function (err) {
+      if (err) {
+        this.showError(err);
+        return;
+      }
       this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
       this.publishLoader.initLoading('back', this.publishCallback.bind(this));
       this.$pubBack.attr('disabled', 'disabled');
