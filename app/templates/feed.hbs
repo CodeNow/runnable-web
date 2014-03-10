@@ -8,7 +8,12 @@
 
   <div class="row">
     {{view "feed_filters" collection=channels}}
-    {{view "runnable_feed" collection=feedPopular}}
+    <div id="feed_trending_container">
+      {{view "runnable_feed" collection=feedTrending}}
+    </div>
+    <div id="feed_popular_container" style="display:none;">
+      {{view "runnable_feed" collection=feedPopular}}
+    </div>
   </div>
 
   {{view 'pagination_buttons' collection=feedPopular}}
