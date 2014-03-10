@@ -10,6 +10,7 @@ module.exports = BaseView.extend({
     'mouseover #channel-images > li': 'channelTextSwap',
     'mouseleave #channel-images':     'channelTextRevert',
     'submit form':                    'submitSearch'
+    'click .chevron-right':           'toggleHero'
   },
   sortChannels: function () {
     var opts = this.options;
@@ -54,31 +55,52 @@ module.exports = BaseView.extend({
     });
     opts.channel_buttons = [{
       title: 'Dart',
-      name: 'dart'
+      name:  'Dart'
     },{
       title: 'C++',
-      name: 'c++'
+      name:  'C++'
     },{
       title: 'Java',
-      name: 'java'
+      name:  'Java'
     },{
       title: 'Rails',
-      name: 'ruby-on-rails'
+      name:  'Ruby-on-Rails'
     },{
       title: 'Node.js',
-      name: 'node.js'
+      name:  'Node.js'
     },{
       title: 'PHP',
-      name: 'php'
+      name:  'PHP'
     },{
       title: 'jQuery',
-      name: 'jquery'
+      name:  'jQuery'
     },{
       title: 'Ruby',
-      name: 'ruby'
+      name:  'Ruby'
     },{
       title: 'Django',
-      name: 'django'
+      name:  'Django'
+    },{
+      title: 'express',
+      name:  'express'
+    },{
+      title: 'Python',
+      name:  'Python'
+    },{
+      title: 'Codeigniter',
+      name:  'Codeigniter'
+    },{
+      title: '.NET',
+      name:  '.NET'
+    },{
+      title: 'Flask',
+      name:  'Flask'
+    },{
+      title: 'CakePHP',
+      name:  'CakePHP'
+    },{
+      title: 'Bash',
+      name:  'Bash'
     }];
     //console.log('opts', opts);
     return opts;
@@ -86,6 +108,7 @@ module.exports = BaseView.extend({
   postRender: function () {
     if (typeof window !== 'undefined') window.tj = this;
     this.imageTile();
+    this.$('#home-header').addClass('in');
   },
   imageTile: function () {
     var $bubbles = this.$('.bubbles');
@@ -98,12 +121,15 @@ module.exports = BaseView.extend({
   },
   channelTextRevert: function (evt) {
     evt.stopPropagation();
-    var $currentTarget = this.$(evt.currentTarget),
-        $target        = this.$(evt.target);
+
     $channelText = this.$('#channel-text');
-    $channelText.prop('class', '_0');
+
+    if (!$channelText.hasClass('out')) {
+      $channelText.prop('class', '_0');
+    }
   },
   channelTextSwap: function (evt) {
+    evt.stopPropagation()
     var $currentTarget = this.$(evt.currentTarget);
     var currentPos = $currentTarget.index() + 1; // offset for initial 'your'
     var $channelText = this.$('#channel-text');
@@ -115,6 +141,9 @@ module.exports = BaseView.extend({
       this.app.set('loading', true);
       this.app.router.navigate('/'+ids[this.index], {trigger:true});
     }
+  },
+  toggleHero: function () {
+    this.$('#home-header').toggleClass('inner');
   }
 });
 

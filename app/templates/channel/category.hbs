@@ -44,10 +44,10 @@
       <div class="col-sm-12">
         <h1>
           Run
-          <ul id="channel-text" class="_0">
+          <ul id="channel-text" class="out">
             <li>Your
             {{#each channel_buttons}}
-              <li>{{title}}
+            <li>{{title}}
             {{/each}}
           </ul>
           Code Online
@@ -55,37 +55,39 @@
         <h2>Choose Your Stack to Get Started</h2>
         <ul id="channel-images">
           {{#each channel_buttons}}
-            <li><a>{{view 'channel_image' name=name}}</a>
+          <li><a href="/new/{{name}}" data-title="{{name}}">{{view 'channel_image' name=name}}</a>
           {{/each}}
         </ul>
-        <a class="glyphicons chevron-right"></a>
       </div>
     </div>
   </div>
+  <div class="glyphicons chevron-right"></div>
 </section>
 
-<section id="feed" class="container">
-  <div class="row">
-    <nav id="feed-nav" class="col-sm-10 col-sm-offset-2">
-      {{view "feed_toggles"}}
-      {{view "searchbar" divclass="feed-search" inputclass="form-control" placeholder="Search for code"}}
-    </nav>
-  </div>
-  <div class="row">
-    {{view "feed_filters" collection=channels}}
-    {{view "runnable_feed"}}
-  </div>
-  <div class="row">
-    <div class="col-sm-10 col-sm-offset-2">
-      <ul class="pagination">
-        <li class="prev"><a><span class="glyphicons chevron-left"></span>Previous</a>
-        <li><a>1</a>
-        <li class="ellipsis">• • •
-        <li class="active">3
-        <li class="ellipsis">• • •
-        <li><a>40</a>
-        <li class="next"><a>Next <span class="glyphicons chevron-right"></span></a>
-      </ul>
+<section id="feed">
+  <div class="container">
+    <div class="row">
+      <nav id="feed-nav" class="col-sm-10 col-sm-offset-2">
+        {{view "feed_toggles"}}
+        {{view "searchbar" divclass="feed-search" inputclass="form-control" placeholder="Search for code"}}
+      </nav>
+    </div>
+    <div class="row">
+      {{view "feed_filters" collection=channels}}
+      {{view "runnable_feed"}}
+    </div>
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-2">
+        <ul class="pagination">
+          <li class="prev"><a><span class="glyphicons chevron-left"></span>Previous</a>
+          <li><a>1</a>
+          <li class="ellipsis">• • •
+          <li class="active">3
+          <li class="ellipsis">• • •
+          <li><a>40</a>
+          <li class="next"><a>Next <span class="glyphicons chevron-right"></span></a>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
