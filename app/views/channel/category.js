@@ -9,7 +9,7 @@ module.exports = BaseView.extend({
   events: {
     'mouseover #channel-images > li': 'channelTextSwap',
     'mouseleave #channel-images':     'channelTextRevert',
-    'submit form':                    'submitSearch'
+    'submit form':                    'submitSearch',
     'click .chevron-right':           'toggleHero'
   },
   sortChannels: function () {
