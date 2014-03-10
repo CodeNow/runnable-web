@@ -64,36 +64,6 @@
   <div class="glyphicons chevron-right"></div>
 </section>
 
-<<<<<<< Updated upstream
-<section id="feed">
-  <div class="container">
-    <div class="row">
-      <nav id="feed-nav" class="col-sm-10 col-sm-offset-2">
-        {{view "feed_toggles"}}
-        {{view "searchbar" divclass="feed-search" inputclass="form-control" placeholder="Search for code"}}
-      </nav>
-    </div>
-    <div class="row">
-      {{view "feed_filters" collection=channels}}
-      {{view "runnable_feed"}}
-    </div>
-    <div class="row">
-      <div class="col-sm-10 col-sm-offset-2">
-        <ul class="pagination">
-          <li class="prev"><a><span class="glyphicons chevron-left"></span>Previous</a>
-          <li><a>1</a>
-          <li class="ellipsis">• • •
-          <li class="active">3
-          <li class="ellipsis">• • •
-          <li><a>40</a>
-          <li class="next"><a>Next <span class="glyphicons chevron-right"></span></a>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-=======
 {{view 'feed' channels=channels feed=feed}}
->>>>>>> Stashed changes
 
 {{view "footer_view" model=user context=.}}
