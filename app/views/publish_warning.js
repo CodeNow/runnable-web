@@ -25,32 +25,32 @@ module.exports = BaseView.extend({
     var self = this;
     this.model.saveOpenFiles(function (err) {
       if (err) {
-        this.showError(err);
+        self.showError(err);
         return;
       }
-      if(this.app.user.isRegistered()){
-        this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
-        this.publishLoader.initLoading('new', this.publishCallback.bind(this));
+      if(self.app.user.isRegistered()){
+        self.publishLoader = _.findWhere(self.childViews, {name:'publish_loader'});
+        self.publishLoader.initLoading('new', self.publishCallback.bind(self));
       } else {
-        modalHelpers.signup.call(this, function(){
+        modalHelpers.signup.call(self, function(){
           if(self.app.user.isRegistered()){
             self.publishNew();
           }
         });
       }
-      this.$pubNew.attr('disabled', 'disabled');
+      self.$pubNew.attr('disabled', 'disabled');
     }, self);
   },
   publishBack: function () {
     var self = this;
     this.model.saveOpenFiles(function (err) {
       if (err) {
-        this.showError(err);
+        self.showError(err);
         return;
       }
-      this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
-      this.publishLoader.initLoading('back', this.publishCallback.bind(this));
-      this.$pubBack.attr('disabled', 'disabled');
+      self.publishLoader = _.findWhere(self.childViews, {name:'publish_loader'});
+      self.publishLoader.initLoading('back', self.publishCallback.bind(self));
+      self.$pubBack.attr('disabled', 'disabled');
     }, self);
   },
   publishCallback: function (err, image) {
