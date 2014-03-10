@@ -86,7 +86,7 @@
 #home-header {
   background: $purple-darker;
   height: 620px;
-  overflow: hidden;
+  width: 100%;
 
   .bubbles {
     animation: bubbleIn 1s 1s linear forwards;
@@ -119,7 +119,7 @@
     opacity: .5;
     position: absolute;
       top: auto;
-      bottom: 240px;
+      bottom: 250px;
     transition: opacity .2s, transform .4s .1s cubic-bezier(.19,1,.22,1);
     user-select: none;
     width: 36px;
@@ -152,18 +152,12 @@
 // sketchy footer for home
 #home-header ~ footer {
   margin-top: -230px;
+  transition: margin 0s .2s;
 
-  .row {
-    position: relative;
-  }
-
-  .col-sm-2,
-  .col-sm-10 {
+  > .container {
     position: absolute;
-  }
-
-  .col-sm-10 {
-    right: 0;
+      right: 0;
+      left: 0;
   }
 }
 
