@@ -12,8 +12,11 @@
  *
 */
 
+// compass
 @import "compass/css3";
 @import "compass/layout/sticky-footer";
+
+// global
 @import "mixins";
 @import "ie";
 @import "print";
@@ -21,27 +24,33 @@
 @import "screen";
 @import "me";
 @import "globals";
+
+// components
+@import "header";
 @import "footer";
 @import "hero";
-@import "runnable";
-@import "terminal";
-@import "navtabs";
 @import "feed";
+@import "navtabs";
 @import "modals";
 @import "popovers";
 @import "select";
 @import "forms";
 @import "animations";
-@import "dashboard";
 @import "loader";
-@import "header";
+
 @import "tooltips";
 @import "pagination";
 @import "tags";
-@import "output";
 @import "images";
 @import "typeahead";
-@import "editor";
 @import "validation";
 @import "errors";
+
+// pages
+@import "runnable";
+@import "terminal";
+@import "dashboard";
+@import "output";
+@import "editor";
 @import "readme";
+@import "jobs";

@@ -1,13 +1,13 @@
 {{view "app_user" model=user}}
 {{view "header_view" model=user context=.}}
 {{view "global_message"}}
-<div id="jobs-header" class="jumbotron" data-stellar-background-ratio="0.5">
+<div id="jobs-header" class="jumbotron" data-stellar-background-ratio=".5">
   <div class="container">
     <div class="row">
-      <div class="col-sm-6 col-sm-offset-1">
+      <div class="col-sm-12">
         <h2>Jobs at Runnable</h2>
-        <p>We're looking for talented engineers and designers</p>
-        <p><button class="purple view-positions">View Open Positions</button>
+        <p>We're looking for talented engineers and designers.</p>
+        <button class="purple view-positions">View Open Positions</button>
       </div>
     </div>
   </div>
@@ -17,42 +17,42 @@
   <div class="container">
     <h2>The Perks</h2>
     <div class="row">
-      <div class="col-sm-2">
-        <img src="assets/images/jobs-icon-mdv.png" height="151" width="151" alt="Medical, Dental, and Vision" />
+      <div class="col-sm-4">
+        <img src="assets/images/jobs-icon-mdv.png" height="151" width="151" alt="Medical, Dental, and Vision">
         <h3>Medical, Dental, and Vision</h3>
       </div>
-      <div class="col-sm-2 col-sm-offset-1">
-        <img src="assets/images/jobs-icon-snacks.png" height="151" width="151" alt="Unlimited Snacks" />
+      <div class="col-sm-4">
+        <img src="assets/images/jobs-icon-snacks.png" height="151" width="151" alt="Unlimited Snacks">
         <h3>Healthy Snacks</h3>
       </div>
-      <div class="col-sm-2 col-sm-offset-1">
-        <img src="assets/images/jobs-icon-transportation.png" height="151" width="151" alt="Transportation" />
+      <div class="col-sm-4">
+        <img src="assets/images/jobs-icon-transportation.png" height="151" width="151" alt="Healthy Snacks">
         <h3>Caltrain Pass</h3>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-2">
-        <img src="assets/images/jobs-icon-tech.png" height="151" width="151" alt="Technology Budget" />
+      <div class="col-sm-4">
+        <img src="assets/images/jobs-icon-tech.png" height="151" width="151" alt="Technology Budget">
         <h3>$3,000 Tech Budget</h3>
       </div>
-      <div class="col-sm-2 col-sm-offset-1">
-        <img src="assets/images/jobs-icon-gameroom.png" height="151" width="151" alt="Game Room" />
+      <div class="col-sm-4">
+        <img src="assets/images/jobs-icon-gameroom.png" height="151" width="151" alt="Game Room">
         <h3>Game Room</h3>
       </div>
-      <div class="col-sm-2 col-sm-offset-1">
-        <img src="assets/images/jobs-icon-lunch.png" height="151" width="151" alt="Catered Lunch" />
+      <div class="col-sm-4">
+        <img src="assets/images/jobs-icon-lunch.png" height="151" width="151" alt="Catered Lunch">
         <h3>Lunch, twice a week</h3>
       </div>
     </div>
   </div>
 </div>
 
-<div id="jobs-you" class="jumbotron" data-stellar-background-ratio="0.8">
+<div id="jobs-you" class="jumbotron" data-stellar-background-ratio=".9">
   <div class="container">
     <div class="row">
-      <div class="col-sm-4 col-sm-offset-4">
+      <div class="col-sm-6 col-sm-offset-4">
         <h2>We're lean and agile</h2>
-        <p>We believe in small teams acomplishing big things. Everyone at Runnable is an individual contributor, and has a major impact on product and engineering</p>
+        <p>We believe in small teams acomplishing big things. Everyone at Runnable is an individual contributor, and has a major impact on product and engineering.
       </div>
     </div>
   </div>
@@ -61,56 +61,37 @@
 <div id="jobs-open-positions">
   <div class="container">
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-9">
         <h3>Open Positions</h3>
         <ul id="jobs-open-positions-list">
           <li class="row">
-            <h4 class="col-sm-4">Front-End Engineer</h4>
-            <p class="col-sm-4">Palo Alto, CA</p>
-          </li>
+            <h4>Front-End Engineer</h4>
+            <p>Palo Alto, CA
           <li class="row">
-            <h4 class="col-sm-4">Back-End Engineer</h4>
-            <p class="col-sm-4">Palo Alto, CA</p>
-          </li>
+            <h4>Back-End Engineer</h4>
+            <p>Palo Alto, CA
           <li class="row">
-            <h4 class="col-sm-4">Junior Full-Stack engineer</h4>
-            <p class="col-sm-4">Palo Alto, CA</p>
-          </li>
+            <h4>Junior Full-Stack engineer</h4>
+            <p>Palo Alto, CA
           <li class="row">
-            <h4 class="col-sm-4">DevOps Engineer</h4>
-            <p class="col-sm-4">Palo Alto, CA</p>
-          </li>
+            <h4>DevOps Engineer</h4>
+            <p>Palo Alto, CA
         </ul>
       </div>
-      <div id="jobs-about" class="col-sm-2">
+      <div id="jobs-about" class="col-sm-3">
         <h3>About Runnable</h3>
-        <p>We're on a mission to empower anyone to build amazing things with software.</p>
+        <p>We're on a mission to empower anyone to build amazing things with software.
         <ul id="jobs-contact-list">
           <li class="row">
-            <div class="col-sm-1">
-              <img src="assets/images/jobs-icon-mail.png" height="16" width="24" alt="Mail" />
-            </div>
-            <div class="col-sm-7">
-              <a href="mailto:support@runnable.com">support@runnable.com</a>
-            </div>
-          </li>
+            <span class="glyphicons send"></span>
+            <a href="mailto:support@runnable.com" target="_blank">support@runnable.com</a>
           <li class="row">
-            <div class="col-sm-1">
-              <img src="assets/images/jobs-icon-location.png" height="24" width="20" />
-            </div>
-            <div class="col-sm-7">
-              459 Hamilton Ave, Suite 304<br />
-              Palo Alto, CA 94301
-            </div>
-          </li>
+            <span class="glyphicons google-maps"></span>
+            459 Hamilton Ave, <wbr>Suite 304<br>
+            Palo Alto, CA 94301
           <li class="row">
-            <div class="col-sm-1">
-              <img src="assets/images/jobs-icon-phone.png" height="22" width="22" />
-            </div>
-            <div class="col-sm-7">
-              (866) 216-4762
-            </div>
-          </li>
+            <span class="glyphicons earphone"></span>
+            <a href="tel:8662164762">(866) 216-4762</a>
         </ul>
       </div>
     </div>
