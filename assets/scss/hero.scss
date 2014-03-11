@@ -115,11 +115,13 @@
     font-size: 28px;
     height: 36px;
     line-height: 36px;
-    margin-left: -18px;
+    margin: 0 auto;
     opacity: .5;
     position: absolute;
       top: auto;
+      right: 0;
       bottom: 250px;
+      left: 0;
     transition: opacity .2s, transform .4s .1s cubic-bezier(.19,1,.22,1);
     user-select: none;
     width: 36px;
