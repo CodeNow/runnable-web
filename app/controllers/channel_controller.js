@@ -4,7 +4,6 @@ var helpers = require('./helpers');
 var utils = require('../utils');
 var fetch = helpers.fetch;
 var Channel = require('../models/channel');
-var colors = require('colors');
 
 var fetchOwnersFor = helpers.fetchOwnersFor;
 var fetchUserAndChannel = helpers.fetchUserAndChannel;
@@ -68,8 +67,6 @@ module.exports = {
       self.redirectTo('');
       return;
     }
-    console.log('params'.bold.green, params);
-
 
     var isFeaturedCategory = (params.category.toLowerCase() == 'featured');
     // if (isServer && !this.app.req.cookies.pressauth) {
@@ -99,7 +96,7 @@ module.exports = {
           collection: 'FeedsImages',
           params: {
             page:  params.page,
-            limit: 10,
+            limit: 15,
             filter: params.filter
           }
         },
@@ -107,7 +104,7 @@ module.exports = {
           collection: 'images',
           params: {
             page: params.page,
-            limit: 10,
+            limit: 15,
             filter: params.filter,
             sort: '-runs'
           }
