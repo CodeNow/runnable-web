@@ -448,7 +448,6 @@ $channel-container: ($channel-width*6) + 45px;
 
   .inner & {
     height: 380px;
-    width: 665px;
   }
 
   > li {
@@ -558,34 +557,34 @@ $channel-container: ($channel-width*6) + 45px;
     }
 
     #home-header.inner & {
-      transition: opacity .2s, transform .4s ease-in-out;
+      transition: opacity .2s, transform .2s ease-in-out;
 
       &:nth-child(1) {
-        transform: translate3d(-95px,-170px,0);
+        transform: translate3d(-195px,-170px,0);
       }
 
       &:nth-child(2) {
-        transform: translate3d(-15px,-140px,0);
+        transform: translate3d(-115px,-140px,0);
       }
 
       &:nth-child(3) {
-        transform: translate3d(65px,-130px,0);
+        transform: translate3d(-35px,-130px,0);
       }
 
       &:nth-child(4) {
-        transform: translate3d(145px,-130px,0);
+        transform: translate3d(45px,-130px,0);
       }
 
       &:nth-child(5) {
-        transform: translate3d(225px,-140px,0);
+        transform: translate3d(125px,-140px,0);
       }
 
       &:nth-child(6) {
-        transform: translate3d(305px,-170px,0);
+        transform: translate3d(205px,-170px,0);
       }
 
       &:nth-child(7) {
-        transform: translate3d(-135px,-35px,0);
+        transform: translate3d(-235px,-35px,0);
       }
 
       &:nth-child(8) {
@@ -593,7 +592,7 @@ $channel-container: ($channel-width*6) + 45px;
       }
 
       &:nth-child(9) {
-        transform: translate3d(-210px,-35px,0);
+        transform: translate3d(-110px,-35px,0);
       }
 
       &:nth-child(10) {
