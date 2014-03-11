@@ -25,7 +25,7 @@ module.exports = BaseView.extend({
 
     var qs = queryString.parse(location.search);
     qs.orderBy = id;
-    window.history.pushState('', '', window.location.pathname + '?' + queryString.stringify(qs));
+    this.app.router.navigate(window.location.pathname + '?' + queryString.stringify(qs));
   }
 });
 
