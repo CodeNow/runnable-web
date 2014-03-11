@@ -183,7 +183,9 @@ def validateNote(input):
   ensures note is not empty
   """
   if(bool(not input or input.isspace())):
-    raise Exception('release node is REQUIRED. just jot down what is in this release alright')
+    raise Exception('release note is REQUIRED. just jot down what is in this release alright')
+  if ";" in input:
+    raise Exception('can not use ; in note')
   return input
 
 def addNote():
