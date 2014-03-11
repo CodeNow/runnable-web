@@ -235,7 +235,8 @@ module.exports = function(grunt) {
             marked: '../marked/lib/marked.js',
             'node-uuid': '../node-uuid/uuid.js',
             nprogress: '../nprogress/nprogress.js',
-            diff: '../diff/diff.js'
+            diff: '../diff/diff.js',
+            'query-string': '../query-string/query-string.js'
           },
           aliases: [
             {from: rendrDir + '/client', to: 'rendr/client'},
