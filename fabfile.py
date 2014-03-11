@@ -12,15 +12,27 @@ def staging():
   """
   Work on staging environment
   """
+  env.requireNote = False;
   env.settings = 'staging'
   env.hosts = [
     'web-rep_int',
+  ]
+
+def runnable3():
+  """
+  Work on staging environment
+  """
+  env.requireNote = False;
+  env.settings = 'runnable3'
+  env.hosts = [
+    'runnable3.net'
   ]
 
 def production():
   """
   Work on production environment
   """
+  env.requireNote = True;
   env.settings = 'production'
   env.hosts = [
     'web',
@@ -32,6 +44,7 @@ def integration():
   """
   Work on integration environment
   """
+  env.requireNote = False;
   env.settings = 'integration'
   env.hosts = [
     'web-int'
@@ -93,7 +106,7 @@ def clone_repo():
   """
   Do initial clone of the git repository.
   """
-  if run('[ -d runnable-web ] && echo true || echo false') == 'false':
+  if run('[ -d runnable-web ] && echo True || echo False') == 'False':
     run('git clone https://github.com/CodeNow/runnable-web.git')
 
 def track_deployment():
@@ -101,13 +114,22 @@ def track_deployment():
   Update deployments for tracking
   """
   run('echo Track Deployment:')
-  if run('[ -d deployments ] && echo true || echo false') == 'false':
+  if run('[ -d deployments ] && echo True || echo False') == 'False':
     run('git clone https://github.com/Runnable/deployments.git')
   with cd('deployments'):
     run('git fetch --all')
     run('git reset --hard origin/master')
   with cd('runnable-web'):
-    run('echo branch `git rev-parse --abbrev-ref HEAD` `git log origin/master | head -1` pushed on `date` on `pwd | sed "s/^.*ubuntu//"` by `cat ~/.name` >> ~/deployments/'+env.settings)
+    run(
+      'echo { branch: `git rev-parse --abbrev-ref HEAD`, ' \
+      'commit: `git log origin/master | head -1 | awk \'{print $2}\'`, ' \
+      'push_date: `date +%d-%m-%Y`, ' \
+      'push_time: `date +%H:%M:%S`, ' \
+      'project: runnable-web, ' \
+      'author: `cat ~/.name`, '\
+      'note: '+env.note+' } ' \
+      '> ~/.notetmp')
+    run('cat ~/.notetmp | sed \'s_, _\", \"_g\' | sed \'s_: _\": \"_g\' | sed \'s_{ _{ \"_g\' | sed \'s_ }_\" }_g\' >> ~/deployments/'+env.settings)
   with cd('deployments'):
     run('git add '+env.settings)
     run('git commit -m "update file"')
@@ -124,7 +146,7 @@ def checkout_latest():
     run('git checkout %(branch)s' % env)
     run('git pull origin %(branch)s' % env)
     run('git config --unset credential.helper')
-    run('cat ~/.git-credentials | head -1 | grep -o "//.*:" > ~/.name')
+    run('cat ~/.git-credentials | head -1 | grep -o //.*: | sed s_//__ | sed s_:__ > ~/.name')
     run('rm ~/.git-credentials')
 
 def install_requirements():
@@ -156,6 +178,21 @@ def boot():
   with cd('runnable-web'):
     run('NODE_ENV=%(settings)s pm2 start index.js -i 40 -n runnable-web' % env)
 
+def validateNote(input):
+  """
+  ensures note is not empty
+  """
+  if(bool(not input or input.isspace())):
+    raise Exception('release node is REQUIRED. just jot down what is in this release alright')
+  return input
+
+def addNote():
+  """
+  add note to deployment
+  """
+  if(env.requireNote):
+    prompt("add release note: ", "note", validate=validateNote)
+
 """
 Commands - deployment
 """
@@ -163,9 +200,10 @@ def deploy():
   """
   Deploy the latest version of the site to the server.
   """
-  require('settings', provided_by=[production, integration, staging])
+  require('settings', provided_by=[production, integration, staging, runnable3])
   require('branch', provided_by=[stable, master, branch])
 
+  addNote()
   checkout_latest()
   track_deployment()
   # install_requirements()
@@ -190,7 +228,7 @@ def rollback(commit_id):
   There is NO guarantee we have committed a valid dataset for an arbitrary
   commit hash.
   """
-  require('settings', provided_by=[production, integration, staging])
+  require('settings', provided_by=[production, integration, staging, runnable3])
   require('branch', provided_by=[stable, master, branch])
 
   checkout_latest()
