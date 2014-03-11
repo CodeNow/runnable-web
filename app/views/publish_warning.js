@@ -22,25 +22,36 @@ module.exports = BaseView.extend({
     this.$pubBack = $('#pubwarn-back-button');
   },
   publishNew: function () {
-
-    if(this.app.user.isRegistered()){
-      this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
-      this.publishLoader.initLoading('new', this.publishCallback.bind(this));
-    }else{
-      var self = this;
-      modalHelpers.signup.call(this, function(){
-        if(self.app.user.isRegistered()){
-          self.publishNew();
-        }
-      });
-    }
-
-    this.$pubNew.attr('disabled', 'disabled');
+    var self = this;
+    this.model.saveOpenFiles(function (err) {
+      if (err) {
+        self.showError(err);
+        return;
+      }
+      if(self.app.user.isRegistered()){
+        self.publishLoader = _.findWhere(self.childViews, {name:'publish_loader'});
+        self.publishLoader.initLoading('new', self.publishCallback.bind(self));
+      } else {
+        modalHelpers.signup.call(self, function(){
+          if(self.app.user.isRegistered()){
+            self.publishNew();
+          }
+        });
+      }
+      self.$pubNew.attr('disabled', 'disabled');
+    }, self);
   },
   publishBack: function () {
-    this.publishLoader = _.findWhere(this.childViews, {name:'publish_loader'});
-    this.publishLoader.initLoading('back', this.publishCallback.bind(this));
-    this.$pubBack.attr('disabled', 'disabled');
+    var self = this;
+    this.model.saveOpenFiles(function (err) {
+      if (err) {
+        self.showError(err);
+        return;
+      }
+      self.publishLoader = _.findWhere(self.childViews, {name:'publish_loader'});
+      self.publishLoader.initLoading('back', self.publishCallback.bind(self));
+      self.$pubBack.attr('disabled', 'disabled');
+    }, self);
   },
   publishCallback: function (err, image) {
     if (err) {
@@ -71,7 +82,7 @@ module.exports = BaseView.extend({
           .remove()
           .end()
           .append('<div class="alert alert-warning">'+message+'</div>');
-      }
+      };
 
       if ($form[0].checkValidity()) {
         var opts = utils.cbOpts(callback);
@@ -82,7 +93,7 @@ module.exports = BaseView.extend({
 
       function callback (err) {
         if (err === 'a shared runnable by that name already exists') {
-          return showError('<strong>That name is taken!</strong> Try something else.')
+          return showError('<strong>That name is taken!</strong> Try something else.');
         }
         else if (err) {
           return showError(err);
