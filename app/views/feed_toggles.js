@@ -5,8 +5,10 @@ module.exports = BaseView.extend({
   events: {
     'click button' : 'toggleFeed'
   },
-  toggleFeed: function () {
+  toggleFeed: function (evt) {
     this.$('button').toggleClass('active');
+    if(this.app.dispatch)
+      this.app.dispatch.trigger('toggle:toggleFeed', this.$(evt.currentTarget).attr('id'));
   }
 });
 
