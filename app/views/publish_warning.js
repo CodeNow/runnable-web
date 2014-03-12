@@ -100,9 +100,7 @@ module.exports = BaseView.extend({
         }
         else {
           dialogItself.close();
-          self.publishLoader.initLoading('new', function () {
-            self.app.router.navigate('/'+image.id, true);
-          });
+          self.publishLoader.initLoading('new', self.publishCallback.bind(self));
         }
       }
     };

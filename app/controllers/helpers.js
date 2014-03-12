@@ -65,7 +65,9 @@ function fetch (spec, options, callback) {
     });
   }
   var cb = function (err, results) {
-    if (err && err.status === 401) {
+    var accessTokenRequiredErr = err && err.status === 401;
+    var meNotFound = err && err.status === 404 && ~err.message.indexOf("/users/me");
+    if (accessTokenRequiredErr || meNotFound) {
       // "user not created" error, create user and try again.
       createUser(function (err) {
         if (err) { callback(err); } else {
