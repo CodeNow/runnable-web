@@ -1,5 +1,5 @@
 <h3>Filter<span>ing</span><button type="button">Show All</button></h3>
-<ul>
+<ul class="clearfix">
   {{#each collection.models}}
     {{#with attributes}}
       <li>
@@ -8,7 +8,7 @@
 
         {{#if count}}
           <span class="count">{{count}}</span>
-        {{/if}}    
+        {{/if}}
     {{/with}}
   {{/each}}
 </ul>
