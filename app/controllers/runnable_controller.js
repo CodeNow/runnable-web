@@ -69,7 +69,7 @@ module.exports = {
         },
         function nameInUrl (results, cb) {
           var imageURL = results.image.appURL();
-          if (!utils.isCurrentUrl(app, imageURL)|| params.channel) {
+          if (!(utils.isCurrentUrl(app, imageURL) || utils.isCurrentUrl(app, imageURL + '/embedded')) || params.channel) {
             self.redirectTo(imageURL);
           }
           else {
@@ -105,6 +105,7 @@ module.exports = {
         //   cb(null, results);
         // }
       ], function (err, results) {
+
         // DEBUG!
         if(err && err.status) {
           console.log(err.status);
@@ -112,7 +113,15 @@ module.exports = {
           console.log((new Error()).stack);
         }
         if (err) { callback(err); } else {
-          callback(null, addSEO(results, self.req));
+          //embedded
+          var imageURL = results.image.appURL();
+          if(utils.isCurrentUrl(app, imageURL + '/embedded')){
+            var data = addSEO(results, self.req);
+            console.log('iframe!');
+            callback(null, 'runnable/embed', data);
+          }else{
+            callback(null, addSEO(results, self.req));
+          }
         }
       });
     }
@@ -520,5 +529,4 @@ module.exports = {
       }
     });
   }
-,
 };
