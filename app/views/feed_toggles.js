@@ -8,10 +8,11 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     var opts = this.options;
-    if(opts.defaultActive == 'popular'){
+    if (opts.defaultActive == 'popular') {
       opts.activeTrending = false;
       opts.activePopular = true;
-    }else{
+    }
+    else {
       opts.activeTrending = true;
       opts.activePopular = false;
     }
@@ -20,8 +21,9 @@ module.exports = BaseView.extend({
   toggleFeed: function (evt) {
     this.$('button').toggleClass('active');
     var id = this.$(evt.currentTarget).attr('id');
-    if(this.app.dispatch)
+    if (this.app.dispatch) {
       this.app.dispatch.trigger('toggle:toggleFeed', id);
+    }
 
     var qs = queryString.parse(location.search);
     qs.orderBy = id;

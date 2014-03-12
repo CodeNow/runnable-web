@@ -3,8 +3,7 @@ var _ = require('underscore');
 var utils = require('../utils');
 
 module.exports = BaseView.extend({
-  getTemplateData: function(){
-
+  getTemplateData: function() {
     var currentUrl = utils.getCurrentUrlPath(this.app);
     var opts = this.options;
 
@@ -36,12 +35,12 @@ module.exports = BaseView.extend({
     }
 
     opts.showLeftElipsis = true;
-    if(opts.page == 2){
+    if (opts.page == 2) {
       opts.showLeftElipsis = false;
     }
 
     opts.showRightElipsis = true;
-    if(opts.page == (opts.lastPage - 1)){
+    if (opts.page == (opts.lastPage - 1)) {
       opts.showRightElipsis = false;
     }
 

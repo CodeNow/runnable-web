@@ -5,6 +5,7 @@
     <meta name="google-site-verification" content="x7aUQzI0MCl_SEwRhQ1TFHiNvYgGprRse3EL-FScpoU">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {{#with locals.page}}
     <title>{{title}}</title>
     <meta name="description" content="{{#if description}}{{description}}{{else}}{{title}}{{/if}}">
@@ -14,13 +15,8 @@
     {{/with}}
     <link href='http://fonts.googleapis.com/css?family=Oxygen:400,700|Source+Code+Pro:600|Anonymous+Pro' rel='stylesheet'>
     <link href="/styles/index.css" media="screen" rel="stylesheet">
-    <!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="assets/js/html5shiv.js"  ></script>
-      <script src="assets/js/respond.min.js"></script>
-    <![endif]-->
     <!-- console.log shim -->
-    <script type='text/javascript'>
+    <script>
       // usage: log('inside coolFunc',this,arguments);
       // http://paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
       window.log = function(){

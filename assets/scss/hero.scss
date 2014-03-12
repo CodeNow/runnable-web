@@ -96,6 +96,15 @@
     font-size: 40px;
     font-weight: bold;
     margin-top: 60px;
+
+    @media (max-width: 700px) {
+      margin-top: 30px;
+    }
+
+    @media (max-width: 500px) {
+      font-size: 26px;
+      margin-top: 40px;
+    }
   }
 
   h2 {
@@ -176,6 +185,11 @@
   position: relative;
   transition: width .2s ease-in-out;
   width: 88px;
+
+  @media (max-width: 500px) {
+    height: 24px;
+    width: 58px;
+  }
 
   > li {
     display: inline;
@@ -434,6 +448,7 @@
   }
 }
 
+// wrapper for icons
 $channel-width: 70px;
 $channel-container: ($channel-width*6) + 45px;
 
@@ -444,10 +459,30 @@ $channel-container: ($channel-width*6) + 45px;
   padding: 0;
   position: relative;
     z-index: 1;
-  width: $channel-container;
+  width: $channel-container; // 465px
+
+  @media (max-width: 700px) {
+    height: 200px;
+    margin-top: 20px;
+    overflow: hidden;
+  }
+
+  @media (max-width: 500px) {
+    height: 210px;
+    width: 100%;
+      max-width: 450px;
+  }
 
   .inner & {
     height: 380px;
+
+    @media (max-width: 700px) {
+      height: 100%;
+    }
+
+    @media (max-width: 500px) {
+      height: 430px;
+    }
   }
 
   > li {
@@ -470,13 +505,13 @@ $channel-container: ($channel-width*6) + 45px;
 
         // calculate y position
         @if $i == 1 or $i == 6 {
-          top: $channel-width + 100px;
+          top: $channel-width * 2 + 30px;
         }
         @else if $i == 2 or $i == 5 {
           top: $channel-width * 2;
         }
         @else if $i == 3 or $i == 4 {
-          top: 130px;
+          top: $channel-width * 2 - 10px;
         }
       }
     }
@@ -498,9 +533,9 @@ $channel-container: ($channel-width*6) + 45px;
 
         // calculate y position
         @if $i == 7 or $i == 9 {
-          top: $channel-width + 100px
+          top: $channel-width * 2 + 30px
         } @else if $i == 8 {
-          top: $channel-width + 90px;
+          top: $channel-width * 2 + 20px;
         }
       }
     }
@@ -515,6 +550,19 @@ $channel-container: ($channel-width*6) + 45px;
       .inner & {
         opacity: 1;
       }
+    }
+
+    // override for max-width: 700px
+    @media (max-width: 700px) {
+      display: inline-block;
+      margin: 0 10px 35px !important;
+      opacity: 1 !important;
+      position: relative;
+        top: auto !important;
+        right: auto !important;
+        left: auto !important;
+      transform: translate3d(0,0,0) !important;
+      transition: none;
     }
 
     #home-header.in & {
@@ -553,6 +601,44 @@ $channel-container: ($channel-width*6) + 45px;
 
       &:nth-child(9) {
         transform: translate3d(30px,-85px,0);
+      }
+
+      @media (max-width: 500px) {
+        &:nth-child(1) {
+          transform: translate3d(-80px,-100px,0);
+        }
+
+        &:nth-child(2) {
+          transform: translate3d(-60px,-125px,0);
+        }
+
+        &:nth-child(3) {
+          transform: translate3d(-15px,-130px,0);
+        }
+
+        &:nth-child(4) {
+          transform: translate3d(35px,-130px,0);
+        }
+
+        &:nth-child(5) {
+          transform: translate3d(80px,-125px,0);
+        }
+
+        &:nth-child(6) {
+          transform: translate3d(100px,-100px,0);
+        }
+
+        &:nth-child(7) {
+          transform: translate3d(-35px,-85px,0);
+        }
+
+        &:nth-child(8) {
+          transform: translate3d(0,-90px,0);
+        }
+
+        &:nth-child(9) {
+          transform: translate3d(30px,-85px,0);
+        }
       }
     }
 
@@ -679,6 +765,10 @@ $channel-container: ($channel-width*6) + 45px;
       .inner & {
         opacity: 1;
         transition: opacity .3s .1s ease-in-out;
+      }
+
+      @media (max-width: 700px) {
+        opacity: 1;
       }
     }
   }

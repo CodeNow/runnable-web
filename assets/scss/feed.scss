@@ -9,6 +9,15 @@
   > .container {
     max-width: 1170px;
   }
+
+  // show trending or popular
+  .sort {
+    overflow: hidden;
+  }
+  .sort-popular > [data-orderbyparam="trending"],
+  .sort-trending > [data-orderbyparam="popular"] {
+    display: none;
+  }
 }
 
 .inner ~ #feed {
@@ -250,7 +259,7 @@
 }
 
 // runnable-feed
-#runnable-feed {
+.runnable-feed {
   list-style-type: none;
   padding: 0;
 

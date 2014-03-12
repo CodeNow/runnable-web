@@ -119,20 +119,22 @@ module.exports = BaseView.extend({
     });
   },
   channelTextRevert: function (evt) {
-    evt.stopPropagation();
-
-    $channelText = this.$('#channel-text');
-
-    if (!$channelText.hasClass('out')) {
-      $channelText.prop('class', '_0');
+    if (!Modernizr.touch) {
+      evt.stopPropagation();
+      $channelText = this.$('#channel-text');
+      if (!$channelText.hasClass('out')) {
+        $channelText.prop('class', '_0');
+      }
     }
   },
   channelTextSwap: function (evt) {
-    evt.stopPropagation()
-    var $currentTarget = this.$(evt.currentTarget);
-    var currentPos = $currentTarget.index() + 1; // offset for initial 'your'
-    var $channelText = this.$('#channel-text');
-    $channelText.prop('class','_' + currentPos);
+    if (!Modernizr.touch) {
+      evt.stopPropagation();
+      var $currentTarget = this.$(evt.currentTarget);
+      var currentPos = $currentTarget.index() + 1; // offset for initial 'your'
+      var $channelText = this.$('#channel-text');
+      $channelText.prop('class','_' + currentPos);
+    }
   },
   submitSearch: function (evt) {
     if (!this.typed) {

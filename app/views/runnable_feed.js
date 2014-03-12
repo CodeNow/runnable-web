@@ -2,8 +2,7 @@ var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
   tagName: 'ul',
-  id: 'runnable-feed',
-  className: 'col-sm-10'
+  className: 'col-sm-10 runnable-feed'
 });
 
 module.exports.id = "RunnableFeed";
