@@ -4,7 +4,7 @@ var utils = require('../utils');
 module.exports = BaseView.extend({
   tagName: 'section',
   id: 'filters',
-  className: 'col-sm-2',
+  className: 'col-md-2 col-sm-3',
   events: {
     'click li' : 'filterItem'
   },

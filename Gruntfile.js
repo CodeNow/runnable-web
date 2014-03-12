@@ -54,7 +54,8 @@ var frontendScripts = [
   'public/vendor/bower/jquery.stellar/jquery.stellar.min.js',
   'public/vendor/bower/frontend-track/frontend-track.js',
   'public/vendor/bower/autocompletejs/js/autocomplete.js',
-  'public/vendor/bootstrap/bootstrap-dialog.js' // https://github.com/nakupanda/bootstrap3-dialog
+  'public/vendor/bootstrap/bootstrap-dialog.js', // https://github.com/nakupanda/bootstrap3-dialog
+  'public/vendor/bower/fastclick/lib/fastclick.js'
 ]
 .concat(aceScripts);
 

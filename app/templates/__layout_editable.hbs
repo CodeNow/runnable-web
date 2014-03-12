@@ -117,6 +117,10 @@
     <script src="http://cybertron.{{app.attributes.domain}}/primus/primus.js"></script>
     <script src="/mergedAssets.min.js"></script>
     <script>
+    $(function() {
+      FastClick.attach(document.body);
+    });
+
     (function() {
       var USER = window.USER;
       USER.referrer = document.referrer;

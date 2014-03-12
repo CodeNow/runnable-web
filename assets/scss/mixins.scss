@@ -106,7 +106,7 @@
     @media (max-width: 400px) { @content; }
   }
   @else if $point == xs {
-    @media (max-width: 768px) { @content; }
+    @media (max-width: 767px) { @content; }
   }
   // Small devices (tablets, 768px and up)
   @else if $point == sm {
