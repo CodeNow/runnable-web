@@ -8,6 +8,12 @@ footer {
     color: lighten($gray-dark,15%);
     float: left;
     font-size: 13px;
+
+    @include media(xs) {
+      clear: both;
+      text-align: center;
+      width: 100%;
+    }
   }
 
   ul {
@@ -15,6 +21,12 @@ footer {
     list-style-type: none;
     margin: 0;
     padding: 0;
+
+    @include media(xs) {
+      clear: both;
+      text-align: center;
+      width: 100%;
+    }
   }
 
   li {
@@ -32,6 +44,10 @@ footer {
     &:hover {
       color: $gray-dark;
       text-decoration: none;
+    }
+
+    @media (max-width: 1000px) {
+      padding: 0 10px;
     }
   }
 }
