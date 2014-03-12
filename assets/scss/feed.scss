@@ -29,6 +29,10 @@
   color: $gray-dark;
   padding-top: 15px;
 
+  @include media(xs) {
+
+  }
+
   h3 {
     font-size: 16px;
     font-weight: 400;
@@ -184,6 +188,11 @@
     border: 1px solid rgba(0,0,0,.1);
     border-radius: 3px;
     float: left;
+    width: 180px;
+
+    @media (max-width: 500px) {
+      width: 100%;
+    }
 
     > button {
       background: $gray-lighter;
@@ -195,7 +204,7 @@
         z-index: 2;
       text-shadow: none;
       transition: color .2s cubic-bezier(.19,1,.22,1);
-      width: 90px;
+      width: 50%;
 
       &:hover {
         background: #fff;
@@ -225,6 +234,12 @@
     float: right;
     position: relative;
 
+    @media (max-width: 500px) {
+      clear: both;
+      margin-top: 15px;
+      width: 100%;
+    }
+
     .form-group {
       margin-bottom: 0;
     }
@@ -234,12 +249,22 @@
     }
 
     input {
+      border-radius: 3px;
       height: 36px;
       transition: width .3s cubic-bezier(.19,1,.22,1);
+      -webkit-appearance: none;
       width: 105px;
 
       &:focus {
         width: 200px;
+      }
+
+      @media (max-width: 500px) {
+        width: 100%;
+
+        &:focus {
+          width: 100%;
+        }
       }
     }
 
@@ -325,6 +350,10 @@
       display: inline-block;
       margin: 0;
       padding: 0;
+
+      @media (max-width: 500px) {
+        float: left;
+      }
     }
   }
 
@@ -336,6 +365,14 @@
     &:active {
       transform: translate3d(0,1px,0);
     }
+
+    // @media (max-width: 500px) {
+    //   display: none;
+
+    //   &:first-child {
+    //     display: block;
+    //   }
+    // }
   }
 
   // time
