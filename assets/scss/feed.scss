@@ -302,6 +302,10 @@
     &:last-child {
       border-bottom: 0;
     }
+
+    @media (max-width: 500px) {
+      margin: 0;
+    }
   }
 
   // runnable title
@@ -341,6 +345,11 @@
   data {
     color: $gray-dark;
     margin-right: 10px;
+
+    @media (max-width: 500px) {
+      display: block;
+      margin-bottom: 5px;
+    }
   }
 
   // tags
@@ -352,7 +361,7 @@
       padding: 0;
 
       @media (max-width: 500px) {
-        float: left;
+        display: block;
       }
     }
   }
@@ -366,13 +375,11 @@
       transform: translate3d(0,1px,0);
     }
 
-    // @media (max-width: 500px) {
-    //   display: none;
-
-    //   &:first-child {
-    //     display: block;
-    //   }
-    // }
+    @media (max-width: 500px) {
+      &:nth-child(n+4) {
+        display: none;
+      }
+    }
   }
 
   // time
@@ -381,6 +388,13 @@
     float: right;
     font-size: 13px;
     margin-right: 28px;
+
+    @media (max-width: 500px) {
+      color: lighten($gray-dark,20%);
+      position: absolute;
+        top: 0;
+        right: 16px;
+    }
   }
 
   // user image
@@ -397,6 +411,10 @@
 
     &:active {
       transform: translate3d(0,1px,0);
+    }
+
+    @media (max-width: 500px) {
+      bottom: 46px;
     }
   }
 }
