@@ -41,7 +41,6 @@ module.exports = BaseView.extend({
     }
     else if (message.data === 'hide:loader') {
       this.loading(false);
-      didTermErr = false;
     }
     else if (message.data === 'term:dis') {
       this.loading(true);
