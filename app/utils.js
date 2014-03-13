@@ -12,6 +12,16 @@ var utils = module.exports = {
       }, arg);
     };
   },
+  sortBy: function (key) {
+    var inv = 1;
+    if (key.indexOf('-') === 0) {
+      key = key.slice(1);
+      inv = -1;
+    }
+    return function (a, b) {
+      return (a.get('count') - b.get('count')) * inv;
+    };
+   },
   add: function(prev, curr) { return prev+curr; },
   and: function(prev, curr) { return prev+curr; },
   addAll: function() {
