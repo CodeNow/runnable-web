@@ -1,3 +1,34 @@
+// global layout
+html {
+  height: 100%;
+}
+
+body {
+  background: #eee;
+}
+
+main {
+  margin-bottom: 60px;
+}
+
+#content {
+  background: #f9f9f9;
+}
+
+// utility
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.clearfix:after {
+  clear: both;
+}
+
 .right {
   float: right;
 }
@@ -32,17 +63,4 @@
 
 .center-text {
   text-align: center;
-}
-
-// global layout
-html {
-  height: 100%;
-}
-
-body {
-  background: #eee;
-}
-
-#content {
-  background: #f9f9f9;
 }
