@@ -1,5 +1,5 @@
 <h3>Filter<span>ing</span><button type="button">Show All</button></h3>
-<ul class="clearfix">
+<ol class="clearfix">
   {{#each collection.models}}
     {{#with attributes}}
       <li>
@@ -11,4 +11,9 @@
         {{/if}}
     {{/with}}
   {{/each}}
-</ul>
+  {{#if collection.params.channel}}
+    {{#if_gte collection.length compare="15"}}
+      <li class="show-more"><span></span>
+    {{/if_gte}}
+  {{/if}}
+</ol>
