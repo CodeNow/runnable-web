@@ -17,6 +17,9 @@ module.exports = BaseView.extend({
   postRender: function () {
     var qs = this.qs = queryString.parse(location.search);
     if(qs.filter){
+      if(!_.isArray(qs.filter)){
+        qs.filter = [qs.filter];
+      }
       this.activeFilters = (_.isArray(qs.filter)) ? qs.filter : [];
       this.updateActiveFilters();
     }
@@ -27,22 +30,19 @@ module.exports = BaseView.extend({
     this.updateActiveFilters();
   },
   updateRoute: function() {
-    this.app.router.navigate(window.location.pathname + '?' + queryString.stringify(this.qs));
+    this.app.router.navigate(window.location.pathname + '?' + queryString.stringify(this.qs), {trigger: true});
   },
   filterItem: function (evt) {
     var name = this.$(evt.currentTarget).attr('data-name');
-
     if(this.activeFilters.indexOf(name) === -1){
       this.activeFilters.push(name);
       this.activeFilters = _.uniq(this.activeFilters, false);
     } else {
       this.activeFilters.splice(this.activeFilters.indexOf(name), 1);
     }
-
     this.qs.filter = this.activeFilters;
     this.updateRoute();
     this.updateActiveFilters();
-
   },
   updateActiveFilters: function () {
     // add 'ing' to 'filter' and show clear
