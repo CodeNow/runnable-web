@@ -14,12 +14,8 @@ module.exports = BaseView.extend({
     utils.allImagesLoaded($bubbles.find('img'), function () {
       $bubbles.isotope({
         itemSelector : 'img',
-        layoutMode   : 'masonry',
-        itemPositionDataEnabled : true,
-        transformsEnabled       : false,
-        onLayout : function(){
-          $bubbles.find('.bubble').addClass('hero-animate');
-        }
+        layoutMode : 'masonry',
+        transformsEnabled : false
       });
     });
   },

@@ -8,7 +8,9 @@ module.exports = BaseView.extend({
   id: 'filters',
   className: 'col-md-2 col-sm-3',
   events: {
-    'click li' : 'filterItem'
+    'click li:not(.show-more)': 'filterItem',
+    'click .show-more': 'showMore',
+    'click [data-action="show-all"]': 'showAll'
   },
   activeFilters: [],
   qs: {},
@@ -18,6 +20,14 @@ module.exports = BaseView.extend({
       this.activeFilters = (_.isArray(qs.filter)) ? qs.filter : [];
       this.updateActiveFilters();
     }
+  },
+  showAll: function (evt) {
+    this.qs.filter = this.activeFilters = [];
+    this.updateRoute();
+    this.updateActiveFilters();
+  },
+  updateRoute: function() {
+    this.app.router.navigate(window.location.pathname + '?' + queryString.stringify(this.qs));
   },
   filterItem: function (evt) {
     var name = this.$(evt.currentTarget).attr('data-name');
@@ -30,8 +40,7 @@ module.exports = BaseView.extend({
     }
 
     this.qs.filter = this.activeFilters;
-    this.app.router.navigate(window.location.pathname + '?' + queryString.stringify(this.qs));
-
+    this.updateRoute();
     this.updateActiveFilters();
 
   },
@@ -49,12 +58,17 @@ module.exports = BaseView.extend({
     }, this);
   },
   getTemplateData: function () {
-
     var opts = this.options;
     //var queryObj = utils.getCurrentUrlQueryString(this.app);
     //console.log(queryObj);
     return opts;
+  },
+  showMore: function (evt) {
+    var $ol = this.$('ol');
 
+    if (!$ol.hasClass('in')) {
+      $ol.addClass('in');
+    }
   }
 });
 

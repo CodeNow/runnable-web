@@ -1,35 +1,29 @@
 {{#if modal}}
-  <input type="text" class="form-control" name="NAME" placeholder="Full Name" autofocus required />
-  <input type="email" class="form-control" name="EMAIL" placeholder="Email Address" required />
-  {{! <div class="input-group">
-    <span class="input-group-addon">runnable.com/</span>
-    <input type="text" name="PAGE" class="form-control" placeholder="Your Page (optional)">
-  </div> }}
+  <input class="form-control" name="NAME" placeholder="Full Name" autofocus required>
+  <input type="email" class="form-control" name="EMAIL" placeholder="Email Address" required>
   <textarea name="DETAILS" class="form-control" placeholder="About your code"></textarea>
-  <button type="submit" class="orange">Request Invite</button>
+  <button class="orange">Request Invite</button>
 {{else}}
 <div class="container">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
       <h2>Claim Your Code Channel</h2>
-      <p>Pick your branded channel and contact us to become a publisher.</p>
-      <div class="input-group">
-        <span class="input-group-addon">runnable.com/</span>
-        <input type="text" name="PAGE" class="form-control" placeholder="Your Page (optional)" />
+      <p>Pick your branded channel and contact us to become a publisher.
+      <div class="page-group">
+        <label for="page-name">runnable.com/</label>
+        <input id="page-name" name="PAGE" class="form-control" placeholder="Your Page (optional)">
       </div>
       <div id="form-columns">
         <div class="col-sm-6">
-          <label>Full Name</label>
-          <input class="form-control" type="text" name="NAME" required />
-          <label>Email Address</label>
-          <input class="form-control" type="email" name="EMAIL" required />
+          <label for="request-name">Full Name</label>
+          <input id="request-name" class="form-control" name="NAME" required>
+          <label for="request-email">Email Address</label>
+          <input id="request-email" class="form-control" type="email" name="EMAIL" required>
         </div>
         <div class="col-sm-6">
-          <label>Tell us about your code</label>
-          <textarea name="DETAILS" class="form-control"></textarea>
-          <div class="providers-register-submit">
-            <button type="submit" class="orange">Send Claim</button>
-          </div>
+          <label for="request-details">Tell us about your code</label>
+          <textarea id="request-details" name="DETAILS" class="form-control"></textarea>
+          <button class="orange">Claim Channel</button>
         </div>
       </div>
     </div>

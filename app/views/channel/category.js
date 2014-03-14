@@ -114,7 +114,7 @@ module.exports = BaseView.extend({
     utils.allImagesLoaded($bubbles.find('img'), function () {
       $bubbles.isotope({
         itemSelector: 'img',
-        layoutMode:   'masonry'
+        layoutMode: 'masonry'
       });
     });
   },

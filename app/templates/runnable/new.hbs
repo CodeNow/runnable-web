@@ -1,6 +1,8 @@
 {{view "app_user" model=user}}
 {{view "header_view" model=user context=.}}
-{{view "global_message"}}<div class="content">
+{{view "global_message"}}
+
+<main>
   <div class="container">
     <article>
       <h1>Create a New Runnable from:</h1>
@@ -11,5 +13,6 @@
       {{/if}}
     </article>
   </div>
-</div>
+</main>
+
 {{view "footer_view" model=user context=.}}

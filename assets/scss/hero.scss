@@ -1,7 +1,6 @@
 .hero {
-  background: $purple;
+  background: $purple-darker;
   color: #fff;
-  height: 430px;
   position: relative;
   text-align: center;
 
@@ -10,7 +9,7 @@
   }
 
   p {
-    color: #ac87c6;
+    color: rgba($purple-lighter,.5);
     font-size: 18px;
     margin: 15px 0 30px;
   }
@@ -20,7 +19,6 @@
   }
 }
 
-
 .bubbles-container {
   height: 100%;
   overflow: hidden;
@@ -28,12 +26,13 @@
   width: 100%;
 
   .bubbles {
+    animation: bubbleIn 1s 1s linear forwards;
     height: 100%;
+    opacity: 0;
     position: absolute;
 
     img {
       padding: 3px;
-      transition: opacity .5s;
 
       &.small {
         height: auto;
@@ -83,15 +82,9 @@
 
 // home header
 #home-header {
-  background: $purple-darker;
   height: 620px;
   overflow: hidden;
   width: 100%;
-
-  .bubbles {
-    animation: bubbleIn 1s 1s linear forwards;
-    opacity: 0;
-  }
 
   h1 {
     font-size: 40px;
