@@ -1,6 +1,6 @@
-var BaseView = require('./base_view'),
-    _        = require('underscore'),
-    lock     = require('../lock');
+var BaseView = require('./base_view');
+var _        = require('underscore');
+var lock     = require('../lock');
 
 var events = {
   'click .dark-theme':              'setDarkTheme',

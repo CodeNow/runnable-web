@@ -4,7 +4,8 @@ var queryString = require('query-string');
 module.exports = BaseView.extend({
   className: 'btn-group',
   events: {
-    'click button' : 'toggleFeed'
+    'click #popular'  : 'setPopular',
+    'click #trending' : 'setTrending'
   },
   getTemplateData: function () {
     var opts = this.options;
@@ -17,6 +18,12 @@ module.exports = BaseView.extend({
       opts.activePopular = false;
     }
     return opts;
+  },
+  setPopular: function (evt) {
+    this.toggleFeed(evt);
+  },
+  setTrending: function (evt) {
+    this.toggleFeed(evt);
   },
   toggleFeed: function (evt) {
     this.$('button').toggleClass('active');

@@ -2,17 +2,15 @@
 {{view "header_view" model=user context=.}}
 {{view "global_message"}}
 
-<main>
-  <div class="container">
-    <article>
-      <h1>Create a New Runnable from:</h1>
-      {{#if lock}}
-        {{view "channel_cards" collection=channels}}
-      {{else}}
-        {{view "channel_cards" collection=channels basehref="/new"}}
-      {{/if}}
-    </article>
+<main id="new" class="container">
+  <div class="row">
+    <h1 class="col-sm-12">Create a New Runnable</h1>
   </div>
+  {{#if lock}}
+    {{view "channel_cards" collection=channels}}
+  {{else}}
+    {{view "channel_cards" collection=channels basehref="/new"}}
+  {{/if}}
 </main>
 
 {{view "footer_view" model=user context=.}}

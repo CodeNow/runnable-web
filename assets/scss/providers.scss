@@ -1,5 +1,25 @@
 #providers {
 
+  h2 {
+    color: $gray-darker;
+    font-weight: 600;
+  }
+
+  p {
+    color: $gray-darker;
+  }
+
+  .hero {
+
+    h2 {
+      color: #fff;
+    }
+
+    p {
+      color: rgba($purple-lighter,.5);
+    }
+  }
+
   .providers-section {
     border-bottom: solid 1px $gray-light;
     padding: 80px 0 60px;
@@ -9,7 +29,6 @@
     }
 
     h2 {
-      font-weight: 600;
       margin-top: 40px;
     }
 
@@ -154,10 +173,6 @@
   margin-bottom: 0;
   padding-top: 40px;
   position: relative;
-
-  h2 {
-    font-weight: 600;
-  }
 
   .col-sm-8 {
 
