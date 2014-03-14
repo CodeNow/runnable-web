@@ -7,8 +7,9 @@ module.exports = BaseView.extend({
   currentUrl: '',
   preRender: function () {
     this.currentUrl = utils.getCurrentUrlPath(this.app);
-    if(this.currentUrl.splice('?').length){
-      var q = this.currentUrl.splice('?')[1];
+    console.log(this.currentUrl);
+    if(this.currentUrl.split('?').length){
+      var q = this.currentUrl.split('?')[1];
       this.qs = queryString.parse(q);
     } else {
       this.qs = {};
@@ -41,15 +42,15 @@ module.exports = BaseView.extend({
     
     opts.showPrevLink = false;
     opts.showNextLink = false;
-    opts.showLeftElipsis  = false;
-    opts.showRightElipsis = false;
+    opts.showLeftElipsis  = true;
+    opts.showRightElipsis = true;
 
     if (this.qs.page && this.qs.page > 1) {
       opts.showPrevLink = true;
       opts.prevQueryString.page--;
       opts.indexQueryString.page = 0;
     }
-    if (this.qs.page && this.qs.page < lastPage) {
+    if (this.qs.page && this.qs.page < collectionParams.lastPage) {
       opts.showNextLink = true;
       opts.nextQueryString.page++;
       opts.lastQueryString.page = collectionParams.lastPage;
@@ -61,10 +62,10 @@ module.exports = BaseView.extend({
       opts.showRightElipsis = false;
     }
 
-    ['Current', 'Previous', 'Next', 'Last'].foreach(function (val) {
-      var t = opts['human' + val + 'Page'];
-      t.orderByParam = opts.orderByParam;
-      t = queryString.stringify(t);
+    ['prev', 'next', 'index', 'last'].forEach(function (val) {
+      var t = opts[val + 'QueryString'];
+      t.orderBy = opts.orderByParam;
+      opts[val + 'QueryString'] = '/?' + queryString.stringify(t);
     }, this);
 
   }
