@@ -1,5 +1,7 @@
 var BaseView = require('./base_view');
 var utils = require('../utils');
+var _ = require('underscore');
+var queryString = require('query-string');
 
 module.exports = BaseView.extend({
   tagName: 'section',
@@ -8,20 +10,43 @@ module.exports = BaseView.extend({
   events: {
     'click li' : 'filterItem'
   },
+  activeFilters: [],
+  qs: {},
+  postRender: function () {
+    var qs = this.qs = queryString.parse(location.search);
+    if(qs.filter){
+      this.activeFilters = (_.isArray(qs.filter)) ? qs.filter : [];
+      this.updateActiveFilters();
+    }
+  },
   filterItem: function (evt) {
-    var self = this;
-    var $h3 = self.$('h3');
+    var name = this.$(evt.currentTarget).attr('data-name');
 
-    // mark as active
-    self.$(evt.currentTarget).toggleClass('active');
+    if(this.activeFilters.indexOf(name) === -1){
+      this.activeFilters.push(name);
+      this.activeFilters = _.uniq(this.activeFilters, false);
+    } else {
+      this.activeFilters.splice(this.activeFilters.indexOf(name), 1);
+    }
 
+    this.qs.filter = this.activeFilters;
+    this.app.router.navigate(window.location.pathname + '?' + queryString.stringify(this.qs));
+
+    this.updateActiveFilters();
+
+  },
+  updateActiveFilters: function () {
     // add 'ing' to 'filter' and show clear
-    if (self.$('li').hasClass('active')) {
+    var $h3 = this.$('h3');
+    if (this.activeFilters.length) {
       $h3.removeClass('out').addClass('in');
     } else {
       $h3.addClass('out').removeClass('in');
-    }
-
+    }   
+    this.$el.find('li.active').removeClass('active');
+    this.activeFilters.forEach(function(filterItem){
+      this.$el.find('[data-name="' + filterItem + '"]').addClass('active');
+    }, this);
   },
   getTemplateData: function () {
 
