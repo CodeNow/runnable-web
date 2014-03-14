@@ -6,7 +6,7 @@
       <ul>
         {{#each attributes.tags}}
         <li class="tag">
-          <a>{{this.name}}</a>
+          <a href="/{{this.name}}">{{this.name}}</a>
         {{/each}}
       </ul>
       <time>{{dateAgo attributes.created}}</time>
