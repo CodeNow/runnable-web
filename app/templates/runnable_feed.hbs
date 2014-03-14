@@ -11,7 +11,5 @@
       </ul>
       <time>{{dateAgo attributes.created}}</time>
     </div>
-    <a class="user-img">
-      {{view 'user_image' model=owner}}
-    </a>
+    {{view 'user_image' model=owner}}
 {{/each}}
