@@ -54,6 +54,16 @@ module.exports = BaseView.extend({
         terminal_cmd: message.data.replace('term:data','')
       });
     }
+
+    function cb (err) {
+      var self = this;
+      if (err) {
+        console.err(err);
+      }
+      else {
+        console.log('saved');
+      }
+    }
   },
   listenToPostMessages: function () {
     window.addEventListener('message', this.onPostMessage);
