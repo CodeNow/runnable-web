@@ -2,7 +2,7 @@
 <ul class="clearfix">
   {{#each collection.models}}
     {{#with attributes}}
-      <li>
+      <li data-name="{{name}}">
         {{view 'channel_image' name=name alt=true}}
         {{name}}
 
