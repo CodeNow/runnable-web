@@ -1,10 +1,21 @@
 var BaseView = require('./base_view');
 var _ = require('underscore');
 var utils = require('../utils');
+var queryString = require('query-string');
 
 module.exports = BaseView.extend({
+  currentUrl: '',
+  preRender: function () {
+    this.currentUrl = utils.getCurrentUrlPath(this.app);
+    if(this.currentUrl.splice('?').length){
+      var q = this.currentUrl.splice('?')[1];
+      this.qs = queryString.parse(q);
+    } else {
+      this.qs = {};
+    }
+  },
   getTemplateData: function() {
-    var currentUrl = utils.getCurrentUrlPath(this.app);
+    var currentUrl = this.currentUrl = utils.getCurrentUrlPath(this.app);
     var opts = this.options;
 
     // page links
@@ -13,36 +24,48 @@ module.exports = BaseView.extend({
     return opts;
   },
   pageLinks: function (currentUrl, opts) {
-    // messy :(
-    var collectionParams = this.collection.params || {};
-    collectionParams.page = parseInt(collectionParams.page);
+    
+    var collectionParams      = this.collection.params || {};
+    collectionParams.page     = parseInt(collectionParams.page);
     collectionParams.lastPage = parseInt(collectionParams.lastPage);
 
-    opts.page = collectionParams.page + 1;
+    opts.humanCurrentPage  = collectionParams.page + 1;
+    opts.humanPreviousPage = opts.humanCurrentPage - 1;
+    opts.humanNextPage     = opts.humanCurrentPage + 1;
+    opts.humanLastPage     = collectionParams.lastPage + 1;
 
-    var lastPage = opts.lastPage = collectionParams.lastPage + 1 || 1;
-    opts.lastPageIndex = lastPage - 1;
+    opts.prevQueryString  = _.extend({}, this.qs);
+    opts.nextQueryString  = _.extend({}, this.qs);
+    opts.indexQueryString = _.extend({}, this.qs);
+    opts.lastQueryString  = _.extend({}, this.qs);
+    
+    opts.showPrevLink = false;
+    opts.showNextLink = false;
+    opts.showLeftElipsis  = false;
+    opts.showRightElipsis = false;
 
-    opts.previousPage = collectionParams.page - 1;
-    opts.nextPage = collectionParams.page + 1;
-
-    // next and prev links
-    if (opts.page > 1) {
-      opts.prevLink = utils.addPageQuery(currentUrl, opts.page - 1);
+    if (this.qs.page && this.qs.page > 1) {
+      opts.showPrevLink = true;
+      opts.prevQueryString.page--;
+      opts.indexQueryString.page = 0;
     }
-    if (opts.page < lastPage) {
-      opts.nextLink = utils.addPageQuery(currentUrl, opts.page + 1);
+    if (this.qs.page && this.qs.page < lastPage) {
+      opts.showNextLink = true;
+      opts.nextQueryString.page++;
+      opts.lastQueryString.page = collectionParams.lastPage;
     }
-
-    opts.showLeftElipsis = true;
-    if (opts.page == 2) {
+    if (this.qs.page && this.qs.page == 2) {
       opts.showLeftElipsis = false;
     }
-
-    opts.showRightElipsis = true;
-    if (opts.page == (opts.lastPage - 1)) {
+    if (this.qs.page && this.qs.page === opts.lastQueryString.page) {
       opts.showRightElipsis = false;
     }
+
+    ['Current', 'Previous', 'Next', 'Last'].foreach(function (val) {
+      var t = opts['human' + val + 'Page'];
+      t.orderByParam = opts.orderByParam;
+      t = queryString.stringify(t);
+    }, this);
 
   }
 });

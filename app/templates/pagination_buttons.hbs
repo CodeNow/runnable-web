@@ -2,26 +2,29 @@
   <div class="col-md-10 col-sm-9 col-md-offset-2 col-sm-offset-3">
     <ul class="pagination">
 
-      {{#if prevLink}}
-        <li class="prev"><a href="/?orderBy={{orderByParam}}&page={{previousPage}}"><span class="glyphicons chevron-left"></span>Previous</a>
-        <li><a href="/?orderBy={{orderByParam}}">1</a>
-
+      {{#if showPrevLink}}
+        <li class="prev">
+          <a href="{{prevQueryString}}">
+            <span class="glyphicons chevron-left"></span>Previous
+          </a>
+          <li><a href="{{indexQueryString}}">1</a>
         {{#if showLeftElipsis}}
           <li class="ellipsis">• • •
         {{/if}}
-
       {{/if}}
 
-      <li class="active">{{ page }}
+      <li class="active">{{humanCurrentPage}}
 
-      {{#if nextLink}}
-
+      {{#if showNextLink}}
         {{#if showRightElipsis}}
           <li class="ellipsis">• • •
         {{/if}}
-
-        <li><a href="/?orderBy={{orderByParam}}&page={{ lastPageIndex }}">{{ lastPage }}</a>
-        <li class="next"><a href="/?orderBy={{orderByParam}}&page={{nextPage}}">Next <span class="glyphicons chevron-right"></span></a>
+        <li>
+          <a href="{{lastQueryString}}">{{humanLastPage}}</a>
+        <li class="next">
+          <a href="{{nextQueryString}}">
+            Next <span class="glyphicons chevron-right"></span>
+          </a>
       {{/if}}
 
     </ul>
