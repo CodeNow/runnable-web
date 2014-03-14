@@ -7,24 +7,26 @@ module.exports = BaseView.extend({
   currentUrl: '',
   preRender: function () {
     this.currentUrl = utils.getCurrentUrlPath(this.app);
-    console.log(this.currentUrl);
+    console.log(this.currentUrl); 
     if(this.currentUrl.split('?').length){
       var q = this.currentUrl.split('?')[1];
       this.qs = queryString.parse(q);
     } else {
       this.qs = {};
     }
+    if(_.isUndefined(this.qs.page))
+      this.qs.page = 0;
+    if(_.isString(this.qs.page)){
+      this.qs.page = parseInt(this.qs.page);
+      if(_.isNaN(this.qs.page))
+        this.qs.page = 0;
+    }
   },
   getTemplateData: function() {
-    var currentUrl = this.currentUrl = utils.getCurrentUrlPath(this.app);
-    var opts = this.options;
-
-    // page links
-    this.pageLinks(currentUrl, opts);
-
-    return opts;
+    this.pageLinks(this.options);
+    return this.options;
   },
-  pageLinks: function (currentUrl, opts) {
+  pageLinks: function (opts) {
     
     var collectionParams      = this.collection.params || {};
     collectionParams.page     = parseInt(collectionParams.page);
@@ -45,20 +47,20 @@ module.exports = BaseView.extend({
     opts.showLeftElipsis  = true;
     opts.showRightElipsis = true;
 
-    if (this.qs.page && this.qs.page > 1) {
+    if (this.qs.page > 0) {
       opts.showPrevLink = true;
       opts.prevQueryString.page--;
       opts.indexQueryString.page = 0;
     }
-    if (this.qs.page && this.qs.page < collectionParams.lastPage) {
+    if (this.qs.page < collectionParams.lastPage) {
       opts.showNextLink = true;
       opts.nextQueryString.page++;
       opts.lastQueryString.page = collectionParams.lastPage;
     }
-    if (this.qs.page && this.qs.page == 2) {
+    if (this.qs.page == 1) {
       opts.showLeftElipsis = false;
     }
-    if (this.qs.page && this.qs.page === opts.lastQueryString.page) {
+    if (this.qs.page === opts.lastQueryString.page - 1) {
       opts.showRightElipsis = false;
     }
 

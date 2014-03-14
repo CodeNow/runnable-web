@@ -30,6 +30,7 @@ module.exports = BaseView.extend({
     this.updateActiveFilters();
   },
   updateRoute: function() {
+    this.qs.page = 0;
     this.app.router.navigate(window.location.pathname + '?' + queryString.stringify(this.qs), {trigger: true});
   },
   filterItem: function (evt) {
