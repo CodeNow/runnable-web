@@ -61,7 +61,7 @@ module.exports = {
     var isHomepage = utils.isCurrentUrl(app, '');
 
     params.category = params.category || 'Featured';
-    params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter').split(',') : [];
+    params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
     params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 0;
     if(isNaN(parseInt(params.page))){
       self.redirectTo('');
@@ -97,7 +97,7 @@ module.exports = {
           params: {
             page:  params.page,
             limit: 15,
-            filter: params.filter
+            channel: params.filter
           }
         },
         feedPopular: {
@@ -105,7 +105,7 @@ module.exports = {
           params: {
             page: params.page,
             limit: 15,
-            filter: params.filter,
+            channel: params.filter,
             sort: '-runs'
           }
         }
