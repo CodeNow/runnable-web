@@ -1,4 +1,5 @@
 #feed {
+  @extend .clearfix;
   background: $gray-lighter;
   overflow: hidden;
   padding-bottom: 100px;
@@ -79,59 +80,6 @@
       &:first-child {
         border-left: 0;
       }
-    }
-  }
-
-  // search
-  > form {
-    float: right;
-    position: relative;
-
-    @media (max-width: 500px) {
-      clear: both;
-      margin-top: 15px;
-      width: 100%;
-    }
-
-    .form-group {
-      margin-bottom: 0;
-    }
-
-    .twitter-typeahead {
-      background: #fff;
-    }
-
-    input {
-      border-radius: 3px;
-      height: 36px;
-      transition: width .3s cubic-bezier(.19,1,.22,1);
-      -webkit-appearance: none;
-      width: 105px;
-
-      &:focus {
-        width: 200px;
-      }
-
-      @media (max-width: 500px) {
-        width: 100%;
-
-        &:focus {
-          width: 100%;
-        }
-      }
-    }
-
-    button {
-      background: #fff;
-      border: 0;
-      box-shadow: none;
-      color: $gray-dark;
-      height: 34px;
-      position: absolute;
-        top: 1px;
-        right: 1px;
-        z-index: 2;
-      text-shadow: none;
     }
   }
 }

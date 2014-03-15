@@ -25,3 +25,99 @@
     z-index: 1;
   }
 }
+
+// search
+#search {
+  position: relative;
+
+  @media (max-width: 500px) {
+    clear: both;
+    margin-top: 15px;
+    width: 100%;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  .twitter-typeahead {
+    background: #fff;
+    border-radius: 3px;
+  }
+
+  input {
+    border-radius: 3px;
+    height: 36px;
+    transition: width .3s cubic-bezier(.19,1,.22,1);
+    -webkit-appearance: none;
+  }
+
+  button {
+    background: #fff;
+    border: 0;
+    box-shadow: none;
+    color: $gray-dark;
+    height: 34px;
+    position: absolute;
+      top: 1px;
+      right: 1px;
+      z-index: 2;
+    text-shadow: none;
+  }
+}
+
+// header search
+header {
+
+  #search {
+    height: 36px;
+    line-height: 1;
+    margin: 9px auto;
+    // top: 54px;
+    // width: calc(100% - 30px);
+
+    input {
+      box-shadow: none;
+      width: 100%;
+
+      &:focus {
+        border-color: transparent;
+        width: 100%;
+      }
+    }
+
+    button {
+      right: 15px;
+    }
+
+    // @include media(sm) {
+    //   margin: 9px auto;
+    //   top: 0;
+    //   width: 20%;
+    // }
+  }
+}
+
+//feed search
+#feed-nav {
+
+  #search {
+    float: right;
+
+    input {
+      width: 105px;
+
+      &:focus {
+        width: 200px;
+      }
+
+      @media (max-width: 500px) {
+        width: 100%;
+
+        &:focus {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

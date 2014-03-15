@@ -8,6 +8,7 @@ function sortBySort(a, b) {
 
 module.exports = BaseView.extend({
   tagName:'form',
+  id: 'search',
   preRender: function () {
     this.className = 'searchbar'+ ( this.options.classname ? ' '+this.options.classname : '' );
     this.attributes = {
