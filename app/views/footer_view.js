@@ -11,11 +11,6 @@ module.exports = BaseView.extend({
     evt.preventDefault();
     var contactModal = new ContactModal({app:this.app});
     contactModal.open();
-  },
-  getTemplateData: function () {
-    var opts = this.options;
-    opts.domain = this.app.get('domain');
-    return opts;
   }
 });
 
