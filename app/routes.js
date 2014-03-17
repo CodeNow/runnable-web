@@ -33,7 +33,6 @@ module.exports = function(match) {
     match(':_id/imageoutput',     'runnable#imageoutput'); // for pingdom and monitoring, direct access to output page
     match(':_id/dockworker',      'runnable#dockworker'); // for pingdom and monitoring, direct access dockworker
     match(':_id/:name',           'runnable#index');
-    match(':_id/:name/zip',       'runnable#download_zip');
   }
   match(':channel',             'channel#index');
   match(':channel/page/:page',  'channel#index');
