@@ -6,73 +6,10 @@
   .container {
     position: relative;
   }
-
-  nav > ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 1;
-
-    @include media(xs) {
-      padding: 0;
-      position: static;
-        top: auto;
-        right: auto;
-    }
-
-    > li {
-      display: block;
-      height: 54px;
-      line-height: 54px;
-      margin: 0 10px;
-      position: absolute;
-
-      &:first-child {
-        right: 0;
-      }
-
-      &:last-child {
-        right: 54px;
-      }
-
-      @include media(xs) {
-        &:first-child {
-          position: absolute;
-            top: 0;
-            right: 30px;
-        }
-
-        &:last-child {
-          position: static;
-          margin: 0 15px;
-
-          > a {
-            width: 100%;
-          }
-        }
-      }
-    }
-  }
-
-  a,
-  a:hover {
-    color: #fff;
-    font-size: 13px;
-    text-decoration: none;
-  }
-
-  .btn {
-    margin-top: 10px;
-  }
 }
 
 #logo {
   height: 54px;
-  // position: absolute;
-  // width: 100%;
 
   > a {
     background-image: url(../images/sprite-runnable-logo-2.png);
@@ -80,7 +17,7 @@
     background-repeat: no-repeat;
     display: inline-block;
     height: 22px;
-    margin: 15px 0 0 15px;
+    margin: 15px 0 0;
     padding: 0;
     width: 140px;
 
@@ -108,125 +45,64 @@
   }
 }
 
-//user profile link
-#user-info {
-  cursor: pointer;
-  transition: min-width .2s ease-in-out .1s;
+#header-actions {
+  float: right;
+
+  > a,
+  > span {
+    color: #fff;
+    float: right;
+  }
 
   > a {
-    display: block;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-  }
-
-  img {
-    border-radius: 50%;
-    margin: 10px 0;
-    position: relative;
-      z-index: 4;
-    transition: all .2s ease-in-out;
-  }
-
-  .username {
-    margin-left: 15px;
-    max-width: 100px;
-    opacity: 0;
-    overflow: hidden;
-    pointer-events: none;
-    position: absolute;
-      z-index: 1;
-    text-overflow: ellipsis;
-    transition: all .2s ease-in-out;
-    white-space: nowrap;
-  }
-
-  .realname {
-    color: #bbb;
-    display: block;
-    margin-top: -36px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .1s ease-in-out;
+    font-size: 13px;
 
     &:hover {
       text-decoration: none;
     }
   }
 
-  .user-expanded {
-    background: #fff;
-    border-radius: 0 0 3px 3px;
-    box-shadow: 0 2px 3px rgba(0,0,0,.15);
-    height: 0;
-    opacity: 0;
-    overflow: hidden;
-    padding-top: 70px;
-    position: absolute;
-      top: 0;
-      right: 15px;
-    width: 0;
+  .btn {
+    margin: 10px 15px 0 0;
 
-    ul {
-      border-top: 1px solid #efefef;
-      padding: 0;
-    }
-
-    li {
-      border-top: 1px solid rgba(0,0,0,.1);
-      height: 36px;
-      line-height: 36px;
-      margin: 0;
-
-      &:first-child {
-        border-top: 0;
-      }
-
-      a {
-        color: #333;
-        display: block;
-        font-size: 14px;
-        height: 100%;
-        padding: 0 20px;
-        width: 100%;
-
-        &:hover {
-          background: $orange;
-          color: #fff;
-          text-decoration: none;
-        }
-      }
+    @include media(xs) {
+      margin: 5px 0 15px;
+      width: 100%;
     }
   }
 
-  &:hover {
-    height: 150px;
-    min-width: 220px;
-    padding: 0;
-    z-index: 3;
+  @include media(xs) {
+    position: static;
+    width: 100%;
+  }
+}
 
-    img {
-      height: 52px;
-      margin-left: 10px;
-      transition: all .2s ease-in-out .1s;
-      width: 52px;
-    }
+#user,
+#header-signup-link {
+  cursor: pointer;
+  display: inline-block;
 
-    .username,
-    .realname {
-      opacity: 1;
-      pointer-events: auto;
-      transition-delay: .1s;
-    }
+  img {
+    border-radius: 50%;
+  }
 
-    .username {
-      color: $gray-darker;
-      font-size: 16px;
-      text-decoration: none;
-    }
+  .menu {
+    display: block;
+  }
 
-    .user-expanded {
-      animation: dropdownIn .4s ease-in-out forwards .1s;
-    }
+  .exit:hover:before {
+    content: '☹';
+    font-size: 19px;
+    line-height: 0;
+  }
+
+  @include media(xs) {
+    position: absolute;
+      top: 0;
+      right: 15px;
+  }
+
+  &#header-signup-link {
+    padding-right: 5px;
   }
 }

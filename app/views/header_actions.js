@@ -4,7 +4,7 @@ var SignupModal = require('./signup_modal');
 var PublishRequestModal = require('./publish_request_modal');
 
 module.exports = BaseView.extend({
-  tagName: 'ul',
+  id: 'header-actions',
   className: 'col-sm-4',
   events: {
     'click #header-login-link'  : 'openLogin',
