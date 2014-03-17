@@ -38,4 +38,5 @@ module.exports = function(match) {
   match(':channel/page/:page',  'channel#index');
   match(':channel/:_id',        'channel#runnable'); // note! - hits ':id/:name'
   match(':channel/:_id/:name',  'channel#runnable');
+  match(':channel/:_id/:name/zip',  'channel#runnable_download');
 };
