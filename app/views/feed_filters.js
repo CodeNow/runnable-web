@@ -8,8 +8,8 @@ module.exports = BaseView.extend({
   id: 'filters',
   className: 'col-md-2 col-sm-3',
   events: {
-    'click li:not(.show-more)': 'filterItem',
-    'click .show-more': 'showMore',
+    'click li:not(.show-more)':       'filterItem',
+    'click .show-more':               'showMore',
     'click [data-action="show-all"]': 'showAll'
   },
   activeFilters: [],
@@ -42,6 +42,11 @@ module.exports = BaseView.extend({
       this.activeFilters.splice(this.activeFilters.indexOf(name), 1);
     }
     this.qs.filter = this.activeFilters;
+    if(this.activeFilters.length === 0){
+      delete this.qs.filter;
+      delete this.activeFilters;
+    }
+
     this.updateRoute();
     this.updateActiveFilters();
   },
