@@ -1,0 +1,34 @@
+<div class="container">
+<<<<<<< HEAD
+  <ul>
+    <li><a href="/publish">API Providers</a>
+    <li><a href="/about">About Us</a>
+    <li><a href="//twitter.com/getrunnable">Twitter</a>
+    <li><a href="/jobs">Jobs</a>
+    <li><a href="//status.{{domain}}" target="_blank">Status</a>
+    <li><a href="//support.{{domain}}">Support</a>
+    <li><a class="contact">Contact Us</a>
+    <li><a href="/privacy">Privacy</a>
+  </ul>
+  <small>&copy; 2014 Runnable</small>
+=======
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="navbar-header">
+        <p class="navbar-brand">&copy; 2014 Runnable</p>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/publish">API Providers</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="//twitter.com/getrunnable">Twitter</a></li>
+        <li><a href="/jobs">Jobs</a></li>
+        <li><a href="//status.runnable.com" target="_blank">Status</a></li>
+        <li><a href="//support.runnable.com">Support</a></li>
+        <li><a class="contact" href="javascript:void(0);">Contact Us</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+      </ul>
+    </div>
+  </div>
+>>>>>>> 11b0f0561043dbc0932dce507b764c9e723409d0
+</div>
+{{view "page_loader"}}
