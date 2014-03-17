@@ -7,7 +7,6 @@ module.exports = BaseView.extend({
   currentUrl: '',
   preRender: function () {
     this.currentUrl = utils.getCurrentUrlPath(this.app);
-    console.log(this.currentUrl); 
     if(this.currentUrl.split('?').length){
       var q = this.currentUrl.split('?')[1];
       this.qs = queryString.parse(q);
