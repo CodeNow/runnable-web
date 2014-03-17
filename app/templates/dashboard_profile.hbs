@@ -19,13 +19,19 @@
   <div class="edit-inline">
     <span class="glyphicons envelope"></span>
     <input value="{{email}}" placeholder="Email" disabled>
-    <div class="permission">
-      <span class="glyphicons {{#if show_email}}unlock{{else}}lock{{/if}}" data-toggle="dropdown"></span>
-      <ul class="dropdown-menu">
+    <div class="menu">
+      <a class="glyphicons {{#if show_email}}unlock{{else}}lock{{/if}}" data-toggle="dropdown"></a>
+      <ul>
         <li>
-          <a tabindex="-1" class="public"><span class="glyphicons unlock"></span> Publicly Viewable</a>
+          <a class="public">
+            <span class="glyphicons unlock"></span>
+            Publicly Viewable
+          </a>
         <li>
-          <a tabindex="-1" class="private"><span class="glyphicons lock"></span> Only Me</a>
+          <a class="private">
+            <span class="glyphicons lock"></span>
+            Only Me
+          </a>
       </ul>
     </div>
   </div>

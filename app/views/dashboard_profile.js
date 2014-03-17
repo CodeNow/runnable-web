@@ -7,7 +7,7 @@ module.exports = BaseView.extend({
   className: 'col-sm-3',
   events: {
     'click .edit-inline'      : 'editInline',
-    'click .permission a'     : 'permissionToggle',
+    'click .menu a'     : 'permissionToggle',
     'change input'            : 'updateAttr'
   },
   preRender: function () {
@@ -20,7 +20,7 @@ module.exports = BaseView.extend({
   },
   permissionToggle: function (evt) {
     var $menuItem = this.$(evt.currentTarget);
-    var $menuStatus = this.$('.permission > .glyphicons');
+    var $menuStatus = this.$('.menu > .glyphicons');
     if ($menuItem.hasClass('public')) {
       $menuStatus.prop('class','glyphicons unlock');
       this.save('show_email', true);
