@@ -1,45 +1,44 @@
 //if no channel image
 .no-img {
+  background: $purple;
   border-radius: 50%;
+  color: #fff;
+  font-size: 24px;
   font-weight: bold;
   line-height: 1.5;
   margin: 0 auto;
   padding: 0;
+  text-align: center;
   text-transform: uppercase;
 }
 
 //home and create new pages
-#cards .no-img {
-  float: left;
-  font-size: 20px;
-  height: 30px;
-  width: 31px;
-    max-width: 12.5%;
+// #cards .no-img {
+//   float: left;
+//   font-size: 20px;
+//   height: 30px;
+//   width: 31px;
+//     max-width: 12.5%;
 
-  @include media(sm) {
-    height: 24px;
-    line-height: 1;
-    width: 25px;
-  }
+//   @include media(sm) {
+//     height: 24px;
+//     line-height: 1;
+//     width: 25px;
+//   }
 
-  @include media(md) {
-    height: 30px;
-    line-height: 1.4;
-    width: 31px;
-  }
-}
+//   @include media(md) {
+//     height: 30px;
+//     line-height: 1.4;
+//     width: 31px;
+//   }
+// }
 
 //on channel page
 #tags-main h1 .no-img {
-  background: $purple;
-  border-radius: 50%;
-  color: #fff;
   float: left;
-  font-size: 24px;
   height: 58px;
   line-height: 58px;
   margin-right: 15px;
-  text-align: center;
   width: 58px;
 
   & ~ span {
@@ -49,14 +48,13 @@
 
 //on profile page
 #reputation .no-img {
-  float: left;
   font-size: 24px;
-  height: 40px;
+  height: 36px;
   overflow: hidden;
   position: absolute;
-    top: 10px;
+    top: 9px;
     right: 0;
     left: 0;
     z-index: 1;
-  width: 42px;
+  width: 36px;
 }

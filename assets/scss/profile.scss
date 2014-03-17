@@ -472,25 +472,25 @@ li {
 
     // author link & img
     > a {
-      background: #fff;
-      @include border-radius(50%);
-      @include box-shadow(0 2px 3px rgba(0,0,0,.3));
+      background: $gray-light;
+      border: 1px solid rgba(0,0,0,.2);
+      border-radius: 50%;
       display: block;
-      height: 60px;
+      height: 54px;
       margin: 0 auto;
       position: relative;
       text-decoration: none;
-      width: 62px;
+      width: 54px;
 
       > img {
         border: 10px solid transparent;
-        @include border-radius(50%);
+        border-radius: 50%;
         float: left;
-        height: 60px;
+        height: 54px;
         overflow: hidden;
         position: absolute;
           z-index: 1;
-        width: 62px;
+        width: 54px;
       }
 
       &:before {
@@ -518,25 +518,25 @@ li {
   }
 
   figure {
-    @include animation(closeWrapper 0s .5s 1 forwards linear);
-    @include border-radius(50%);
-    clip: rect(0,62px,60px,31px);
-    height: 60px;
+    animation: closeWrapper 0s .5s 1 forwards linear;
+    border-radius: 50%;
+    clip: rect(0,54px,54px,27px);
+    height: 54px;
     pointer-events: none;
-    width: 62px;
+    width: 54px;
 
     div {
-      border: 10px solid $purple-lighter;
-      @include border-radius(50%);
-      clip: rect(0px,31px,60px,0px);
-      height: 60px;
+      border: 9px solid darken($purple-lighter,5%);
+      border-radius: 50%;
+      clip: rect(0,27px,54px,0);
+      height: 54px;
       position: absolute;
-      width: 62px;
+      width: 54px;
     }
 
     &[class^='_1'], &[class^='_2'], &[class^='_3'], &[class^='_4'], &[class^='_5'] {
       > div:first-child {
-        border-color: #fff;
+        border-color: $gray-light;
         z-index: 1;
       }
     }
@@ -587,7 +587,7 @@ li {
     &[class^='_10'] {
 
       > div:first-child {
-        border-color: $purple-lighter;
+        border-color: darken($purple-lighter,5%);
         @include animation(leftSpan100 1s 1 forwards linear);
       }
     }
