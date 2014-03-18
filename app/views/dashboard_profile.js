@@ -4,14 +4,14 @@ var utils = require('../utils');
 module.exports = BaseView.extend({
   tagName: 'section',
   id: 'profile',
-  className: 'col-md-2 col-sm-3',
+  className: 'col-md-3 col-sm-4',
   events: {
     'click .edit-inline'      : 'editInline',
     'click .menu a'     : 'permissionToggle',
     'change input'            : 'updateAttr'
   },
   preRender: function () {
-    if (this.options.editmode) this.className = 'editmode col-md-2 col-sm-3';
+    if (this.options.editmode) this.className = 'editmode col-md-3 col-sm-4';
   },
   editInline: function (evt) {
     this.$(evt.currentTarget)

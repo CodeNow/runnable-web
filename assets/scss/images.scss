@@ -12,27 +12,6 @@
   text-transform: uppercase;
 }
 
-//home and create new pages
-// #cards .no-img {
-//   float: left;
-//   font-size: 20px;
-//   height: 30px;
-//   width: 31px;
-//     max-width: 12.5%;
-
-//   @include media(sm) {
-//     height: 24px;
-//     line-height: 1;
-//     width: 25px;
-//   }
-
-//   @include media(md) {
-//     height: 30px;
-//     line-height: 1.4;
-//     width: 31px;
-//   }
-// }
-
 //on channel page
 #tags-main h1 .no-img {
   float: left;
@@ -53,8 +32,8 @@
   overflow: hidden;
   position: absolute;
     top: 9px;
-    right: 0;
-    left: 0;
+    right: -1px;
+    left: -1px;
     z-index: 1;
   width: 36px;
 }

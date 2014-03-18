@@ -1,92 +1,15 @@
 // profile
 #profile {
-  @include media(sm) {
-    padding-bottom: 60px;
-  }
+  background: $gray-lighter;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 3px;
+  margin-top: 40px;
+  padding: 0 0 60px;
 
   // email privacy menu
   .dropdown-menu {
     left: -170px;
     top: 30px;
-  }
-
-  > .gravitar {
-    display: inline-block;
-    margin-top: 40px;
-    position: relative;
-
-    @include media(xs) {
-      display: block;
-      margin: 40px auto 20px;
-      max-width: 128px;
-    }
-
-    .reputation {
-      color: #fff;
-      font-size: 14px;
-      height: 36px;
-      line-height: 36px;
-      position: absolute;
-        top: -3px;
-        right: -9px;
-      width: 36px;
-
-      &:hover,
-      &:active {
-        background-color: #9a58ba;
-        background-image: linear-gradient(rgba(107,64,155,0),#6b409b);
-        box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.1);
-        cursor: pointer;
-      }
-
-      // tooltip positions
-      &:before {
-        top: 42px;
-      }
-
-      &:after {
-        left: 12px;
-        top: 36px;
-      }
-    }
-
-    > img {
-      border-radius: 50%;
-      display: block;
-      width: 100%;
-    }
-
-    > a {
-      background: rgba(0,0,0,.75);
-      border-radius: 50%;
-      color: $gray-lighter;
-      display: block;
-      font-size: 100%;
-      height: 100%;
-      line-height: 128px;
-      opacity: 0;
-      position: absolute;
-        top: 0;
-      text-align: center;
-      text-decoration: none;
-      transition: opacity .4s ease-in-out;
-      width: 100%;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-  }
-
-  > h1 {
-    font-size: 30px;
-    white-space: normal;
-    word-break: break-all;
-
-    @include media(xs) {
-      margin-top: 10px;
-      text-align: center;
-    }
   }
 
   > hr {
@@ -211,6 +134,106 @@
 
   #full-name {
     font-weight: bold;
+  }
+}
+
+#gravitar {
+  @extend .clearfix;
+
+  > div {
+    border-radius: 50%;
+    float: none;
+    margin: 30px auto 15px;
+    padding: 0;
+    position: relative;
+
+    &:hover > a {
+      opacity: .75;
+      transform: scale3d(1,1,1);
+    }
+
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+        top: 0;
+    }
+
+    &::after {
+      border-top: 1px solid rgba(255,255,255,.3);
+    }
+
+    &::before {
+      background: rgba(255,255,255,.1);
+      border-top: 4px solid rgba(0,0,0,.2);
+      margin: 6px 0;
+    }
+
+    > img,
+    > a,
+    &::after,
+    &::before {
+      border-radius: 50%;
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+
+    > img {
+      border: 6px solid $purple-light;
+      box-shadow: 0 2px 0 rgba(0,0,0,.2);
+    }
+
+    > a {
+      color: #fff;
+      font-size: 36px;
+      line-height: 158px;
+      opacity: 0;
+      position: absolute;
+        z-index: 1;
+      text-align: center;
+      text-shadow: 0 0 5px #000;
+      transform: scale3d(0,0,1);
+      transition: opacity .2s ease-in-out, transform .1s ease-in-out;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  // reputation
+  .reputation {
+    background: $purple-light;
+    border-top: 1px solid rgba(255,255,255,.3);
+    box-shadow: -1px 1px 0 rgba(0,0,0,.2);
+    color: #fff;
+    font-size: 14px;
+    height: 36px;
+    line-height: 36px;
+    right: 6px;
+    text-align: center;
+    top: 6px;
+    width: 36px;
+
+    // tooltip positions
+    &:before {
+      top: 42px;
+    }
+
+    &:after {
+      left: 12px;
+      top: 36px;
+    }
+  }
+
+  > h1,
+  > p {
+    color: $gray-darker;
+    margin-bottom: 0;
+    text-align: center;
+    white-space: normal;
+    word-break: break-all;
   }
 }
 

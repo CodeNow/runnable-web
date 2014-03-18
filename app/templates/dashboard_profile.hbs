@@ -1,19 +1,26 @@
 {{#with model.attributes}}
 {{#if ../editmode}}
-  <div class="gravitar">
-    <img src="{{gravitar}}?s=128" alt="{{username}}">
-    <a href="https://en.gravatar.com/site/login" target="_blank">Change Gravitar
-      <span class="glyphicons new-window"></span>
-    </a>
-    <span class="btn purple reputation tooltip" data-title="{{taggedImagesCount}} published Runnables">{{taggedImagesCount}}</span>
+  <div id="gravitar">
+    <div class="col-sm-8">
+      <img src="{{gravitar}}?s=128" alt="{{username}}">
+      <a href="https://en.gravatar.com/site/login" target="_blank" class="glyphicons edit"></a>
+      <span class="reputation tooltip" data-title="{{taggedImagesCount}} published Runnables">{{taggedImagesCount}}</span>
+    </div>
+    <h1>{{username}}</h1>
+    <p>Running for {{dateAgo created true}}.</p>
   </div>
-  <h1>{{username}}</h1>
-  <div class="edit-inline">
+{{!--
+  {{#if leaderBadges.length}}
+  <ul id="reputation">
+    {{#each leaderBadges.models}}
+    <li class="col-sm-4">{{view "tag_score" model=.}}
+    {{/each}}
+  </ul>
+  {{/if}}
+ --}}
+{{!--   <div class="edit-inline">
     <input value="{{name}}" placeholder="Full Name" name="name">
     <span class="glyphicons pencil"></span>
-  </div>
-  <div>
-    <input value="{{dateAgo created true}} running" disabled>
   </div>
   <hr>
   <div class="edit-inline">
@@ -69,5 +76,5 @@
     <input value="{{company}}" placeholder="Company" disabled>
   </div>
   {{/if}}
-{{/if}}
+ --}}{{/if}}
 {{/with}}
