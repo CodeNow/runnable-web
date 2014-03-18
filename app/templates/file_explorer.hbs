@@ -5,7 +5,9 @@
     <span></span>
   <li class="open-context-menu pull-right tooltip" data-title="Add">
     <span class="glyphicons plus"></span>
-  <li class="glyphicons disk-save pull-right" rel="tooltip" title="Download ZIP">
+  <li data-action="download" class="pull-right tooltip" data-title="Download ZIP">
+    <span class="glyphicons disk-save"></span>
+  </li>
   {{#unless lock}}
     {{view "sync_button" model=container}}
   {{/unless}}

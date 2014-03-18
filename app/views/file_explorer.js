@@ -4,11 +4,11 @@ var BaseView     = require('./base_view'),
     modalHelpers = require('../helpers/modals');
 
 var events = {
-  'click .dark-theme':              'setDarkTheme',
-  'click .light-theme':             'setLightTheme',
-  'click .open-context-menu':       'showFileMenu',
-  'contextmenu .open-context-menu': 'showFileMenu',
-  'click li.disk-save':             'showDownloadDialog'
+  'click .dark-theme':                'setDarkTheme',
+  'click .light-theme':               'setLightTheme',
+  'click .open-context-menu':         'showFileMenu',
+  'contextmenu .open-context-menu':   'showFileMenu',
+  'click li[data-action="download"]': 'showDownloadDialog'
 };
 
 
