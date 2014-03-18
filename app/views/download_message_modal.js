@@ -15,8 +15,8 @@ module.exports = ModalView.extend({
     Super.postRender.apply(this, arguments);
   },
   remove: function () {
-		if (this.onClose)
-		  this.onClose();    
+    if (this.onClose)
+      this.onClose();
     Super.remove.apply(this, arguments);
   }
 });

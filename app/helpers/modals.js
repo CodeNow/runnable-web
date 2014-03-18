@@ -16,7 +16,7 @@ module.exports = {
 
   },
   saveProjectMessage: function (cb) {
-  	cb = (cb) ? cb : function () {};
+    cb = (cb) ? cb : function () {};
     var user = this.app.user;
     var downloadModal = new DownloadMsgModal({
     	app: this.app,
