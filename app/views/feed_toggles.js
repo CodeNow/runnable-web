@@ -2,7 +2,7 @@ var BaseView = require('./base_view');
 var queryString = require('query-string');
 
 module.exports = BaseView.extend({
-  className: 'btn-group',
+  className: 'btn-group toggles',
   events: {
     'click #popular'  : 'setPopular',
     'click #trending' : 'setTrending'

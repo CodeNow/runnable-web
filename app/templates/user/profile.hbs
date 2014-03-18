@@ -15,10 +15,22 @@
   {{/if}}
 
     {{#if editmode}}
-    <ul class="nav nav-tabs">
-      <li {{#if publishedActive}}class="active"{{/if}}><a href="#published"><span>{{published.length}}</span> Published</a>
-      <li {{#if draftsActive}}class="active"{{/if}}><a href="#drafts"><span>{{drafts.length}}</span> Drafts</a>
-    </ul>
+
+    <div class="btn-group toggles">
+      <button {{#if publishedActive}}class="active"{{/if}}>
+        <a href="#published">
+          Published
+          <span class="count">{{published.length}}</span>
+        </a>
+      </button>
+      <button {{#if draftsActive}}class="active"{{/if}}>
+        <a href="#drafts">
+          Drafts
+          <span class="count">{{drafts.length}}</span>
+        </a>
+      </button>
+    </div>
+
     <div class="tab-content">
       <div id="published" class="tab-pane{{#if publishedActive}} active in{{/if}}">
         {{view "dashboard_runnables" classname="dashboard-runnables" collection=published editmode=editmode}}
@@ -28,7 +40,7 @@
       </div>
     </div>
     {{else}}
-    {{view "dashboard_runnables" classname="dashboard-runnables" collection=published}}
+      {{view "dashboard_runnables" classname="dashboard-runnables" collection=published}}
     {{/if}}
   </section>
 </main>

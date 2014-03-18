@@ -222,64 +222,12 @@
     padding-top: 40px;
   }
 
-  .nav-tabs + .tab-content .dashboard-runnables {
-    @include border-radius(0 5px 5px 5px);
-  }
-
   #drafts .dashboard-runnables {
-    @include border-radius(5px);
+    border-radius: 3px;
   }
 
-  // tabs
-  .nav-tabs {
-    border-bottom: 0;
-    position: relative;
-      z-index: 1;
-
-    li {
-      margin-bottom: -2px;
-
-      &.active {
-
-        a {
-          background: #fff;
-          border: 1px solid transparent;
-          @include box-shadow(0 2px 5px rgba(0,0,0,.1));
-        }
-
-        span {
-          border: 1px solid $gray-darker;
-          color: #333;
-        }
-      }
-
-      &:hover {
-        span {
-          border: 1px solid #452759;
-          color: #452759;
-        }
-      }
-
-      a {
-        height: 42px;
-        line-height: 42px;
-        padding: 0 15px;
-      }
-
-      span {
-        border: 1px solid #6e3e8e;
-        @include border-radius(50%);
-        color: #6e3e8e;
-        display: inline-block;
-        font-size: 10px;
-        height: 16px;
-        line-height: 0;
-        margin-right: 6px;
-        padding: 7px 0 5px;
-        text-align: center;
-        width: 16px;
-      }
-    }
+  .toggles {
+    margin-bottom: 15px;
   }
 
   // select
@@ -431,7 +379,7 @@ li {
 // #reputation
 #reputation {
   height: 100px;
-  margin: 0 0 30px;
+  margin: 0 0 15px;
   padding: 0;
 
   @include media(xs) {
