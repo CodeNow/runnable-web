@@ -3,18 +3,20 @@ var utils = require('../../utils');
 
 module.exports = BaseView.extend({
   events: {
-    'click .toggles a'   : 'clickTab',
+    'click .toggles button'   : 'clickTab',
     'click .delete-published' : 'deletePublished',
     'click .delete-drafts'    : 'deleteDrafts',
     // 'change select'           : 'changeSort'
   },
   clickTab: function (evt) {
     evt.preventDefault();
-    var $a = this.$(evt.currentTarget);
+    // var $a = this.$(evt.currentTarget);
     // var page = $a.attr('href').replace('#', '/');
     // this.app.router.navigate('/me'+page);
-    $a.tab('show');
+    // $a.tab('show');
+
     this.$('.toggles > button').toggleClass('active');
+    this.$('.runnable-feed').toggleClass('in');
   },
   getTemplateData: function () {
     var opts = this.options;

@@ -1,4 +1,4 @@
-<h3>
+{{!-- <h3>
   <a href="{{invoke model method='appURL'}}">{{model.attributes.name}}</a>
 </h3>
 <p class="runnable-stats">
@@ -19,4 +19,17 @@
   <button class="delete" type="button">x</button>
   {{/if}}
   {{/with}}
-</p>
+</p> --}}
+
+
+<h2 class="col-sm-12"><a href="{{model.attributes.appUrl}}">{{model.attributes.name}}</a></h2>
+<div class="col-sm-12 clearfix">
+  <data><span class="glyphicons play-button"></span><b>{{model.attributes.runs}}</b> Runs</data>
+  <ul>
+    {{#each model.attributes.tags}}
+    <li class="tag">
+      <a href="/{{this.name}}">{{this.name}}</a>
+    {{/each}}
+  </ul>
+  <time>{{dateAgo model.attributes.created}}</time>
+</div>

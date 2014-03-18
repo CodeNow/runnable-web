@@ -222,12 +222,8 @@
     padding-top: 40px;
   }
 
-  #drafts .dashboard-runnables {
-    border-radius: 3px;
-  }
-
   .toggles {
-    margin-bottom: 15px;
+    margin: 0 0 15px 15px;
   }
 
   // select
@@ -274,92 +270,100 @@
       z-index: 2;
     width: 100%;
   }
-}
 
-.dashboard-runnables {
-  background: #fff;
-  @include border-radius(5px);
-  @include box-shadow(0 2px 5px rgba(0,0,0,.1));
-  overflow: visible;
-  padding: 0;
-  position: relative;
-    z-index: 2;
-  width: 100%;
+  .runnable-feed {
+    display: none;
 
-  li {
-    border-bottom: solid 1px #eee;
-    list-style: none;
-    margin: 0;
-    padding: 0 25px 25px;
-    position: relative;
-    @include transition(background .2s ease-in-out);
-
-    &:hover {
-      background: #fcf7ff;
-    }
-
-    &:first-child {
-      border-top: 1px solid transparent;
-
-      &:hover {
-        border-top: 1px solid #eee;
-      }
-    }
-
-    .active {
-      border-top: 1px solid rgba(0,0,0,.2);
-    }
-
-    button {
-      background: none;
-      border: 0;
-      @include box-shadow(none);
-      color: rgba(0,0,0,.2);
-      font-size: 14px;
-      font-weight: bold;
-      outline: none;
-      position: absolute;
-        top: 7px;
-        right: 10px;
-      text-shadow: 0 1px 0 rgba(255,255,255,.2);
-      @include transition(all .2s ease-in-out);
-
-      &:hover {
-        color: rgba(0,0,0,.6);
-        text-shadow: 0 1px 0 rgba(255,255,255,.6);
-      }
-    }
-  }
-
-  h3 {
-    margin: 0;
-
-    a {
-      color: $gray-darker;
+    &.in {
       display: block;
-      font-size: 20px;
-      font-weight: bold;
-      padding: 25px 0 0;
-    }
-  }
-
-  p {
-    color: #bbb;
-    font-size: 12px;
-    font-weight: bold;
-    margin: 8px 0 0;
-  }
-}
-
-li {
-  .tags {
-    margin-right: 5px;
-
-    img {
-      margin-right: 4px;
     }
   }
 }
+
+// .dashboard-runnables {
+//   background: #fff;
+//   @include border-radius(5px);
+//   @include box-shadow(0 2px 5px rgba(0,0,0,.1));
+//   overflow: visible;
+//   padding: 0;
+//   position: relative;
+//     z-index: 2;
+//   width: 100%;
+
+//   li {
+//     border-bottom: solid 1px #eee;
+//     list-style: none;
+//     margin: 0;
+//     padding: 0 25px 25px;
+//     position: relative;
+//     @include transition(background .2s ease-in-out);
+
+//     &:hover {
+//       background: #fcf7ff;
+//     }
+
+//     &:first-child {
+//       border-top: 1px solid transparent;
+
+//       &:hover {
+//         border-top: 1px solid #eee;
+//       }
+//     }
+
+//     .active {
+//       border-top: 1px solid rgba(0,0,0,.2);
+//     }
+
+//     button {
+//       background: none;
+//       border: 0;
+//       @include box-shadow(none);
+//       color: rgba(0,0,0,.2);
+//       font-size: 14px;
+//       font-weight: bold;
+//       outline: none;
+//       position: absolute;
+//         top: 7px;
+//         right: 10px;
+//       text-shadow: 0 1px 0 rgba(255,255,255,.2);
+//       @include transition(all .2s ease-in-out);
+
+//       &:hover {
+//         color: rgba(0,0,0,.6);
+//         text-shadow: 0 1px 0 rgba(255,255,255,.6);
+//       }
+//     }
+//   }
+
+//   h3 {
+//     margin: 0;
+
+//     a {
+//       color: $gray-darker;
+//       display: block;
+//       font-size: 20px;
+//       font-weight: bold;
+//       padding: 25px 0 0;
+//     }
+//   }
+
+//   p {
+//     color: #bbb;
+//     font-size: 12px;
+//     font-weight: bold;
+//     margin: 8px 0 0;
+//   }
+// }
+
+// li {
+//   .tags {
+//     margin-right: 5px;
+
+//     img {
+//       margin-right: 4px;
+//     }
+//   }
+// }
 
 // .reputation
 .reputation {
@@ -379,7 +383,7 @@ li {
 // #reputation
 #reputation {
   height: 100px;
-  margin: 0 0 15px;
+  margin: 0 0 30px;
   padding: 0;
 
   @include media(xs) {
@@ -431,12 +435,14 @@ li {
       width: 54px;
 
       > img {
-        border: 10px solid transparent;
+        border: 9px solid transparent;
         border-radius: 50%;
         float: left;
         height: 54px;
         overflow: hidden;
         position: absolute;
+          top: -1px;
+          left: -1px;
           z-index: 1;
         width: 54px;
       }
