@@ -1,57 +1,9 @@
 
 <main class="container">
-  <section id="project-details" class="row">
-    <div class="col-sm-9">
-      <div class="page-title clearfix">
-        {{!-- {{view "vote_button" model=image}} --}}
-        {{view "runnable_title" model=image}}
-        {{view "runnable_stats" model=image title=true}}
-      </div>
-      {{view "runnable_description" model=image}}
-      <div class="main-controls clearfix">
-        {{!view "dropdown_run_button" context=.}}
-        {{!-- {{view "run_button" model=container collection=specifications context=.}} --}}
-        {{view "dropdown_run_button" context=. editmode=true}}
-        {{view "improve_button"}}
-        {{view "fork_button" collection=defaultFiles model=container}}
-      </div>
-    </div>
-    {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created image=image context=.}}
-  </section>
   <div class="row">
-    <section class="col-sm-9">
+    <section class="col-sm-12">
       {{view "code_editor" context=. editmode=false model=image}}
       {{view "terminal" model=container}}
     </section>
-    <ul id="sidebar" class="col-sm-3">
-      {{#if image.attributes.specification}}
-      <li class="services">
-      <h3 class="widget-title">API Keys</h3>
-        {{view "runnable_specifications" model=container collection=specifications context=. editmode=false}}
-      </li>
-      {{/if}}
-      {{#if image.attributes.tags}}{{#if image.attributes.tags.length}}
-      <li class="tags">
-        <h3 class="widget-title">Tags</h3>
-        <ul class="clearfix">
-          {{#each image.attributes.tags}}
-          <li>
-          {{view "tag_link" name=name}}
-          </li>
-          {{/each}}
-        </ul>
-      </li>
-      {{/if}}{{/if}}
-      {{#if related.length}}
-      <li class="related-code">
-        <h3 class="widget-title">Related Code</h3>
-        <ul>
-          {{#each related.models}}
-          {{view "runnable_item_small" model=.}}
-          {{/each}}
-        </ul>
-      </li>
-      {{/if}}
-    </ul>
   </div>
 </main>
