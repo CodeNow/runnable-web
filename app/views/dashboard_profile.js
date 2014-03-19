@@ -4,7 +4,7 @@ var utils = require('../utils');
 module.exports = BaseView.extend({
   tagName: 'section',
   id: 'profile',
-  className: 'col-xl-2 col-md-3 col-sm-4',
+  className: 'col-xl-2 col-sm-3',
   events: {
     'click .menu a' : 'permissionToggle',
     'change input'  : 'updateAttr',

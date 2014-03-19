@@ -91,8 +91,8 @@
     font-size: 14px;
     height: 36px;
     line-height: 36px;
-    right: 6px;
-    top: 6px;
+    right: 0;
+    top: 0;
     width: 36px;
 
     // tooltip positions
@@ -104,25 +104,47 @@
       left: 12px;
       top: 36px;
     }
+
+    @include media(md) {
+      right: 6px;
+      top: 6px;
+    }
   }
 
   > h1,
   > p {
     color: $gray-darker;
     margin-bottom: 0;
+    padding: 0 10px;
     text-align: center;
     white-space: normal;
     word-break: break-all;
+  }
+
+  > h1 {
+    @include media(sm) {
+      font-size: 30px;
+    }
+
+    @include media(md) {
+      font-size: 36px;
+    }
+  }
+
+  > p {
+    @include media(sm) {
+      font-size: 12px;
+    }
+
+    @include media(md) {
+      font-size: 14px;
+    }
   }
 }
 
 // dashboard
 #dashboard {
-  padding-top: 20px;
-
-  @include media(md) {
-    padding-top: 40px;
-  }
+  margin-top: 40px;
 
   .toggles {
     margin: 0 0 15px 15px;
@@ -169,6 +191,16 @@
   list-style-type: none;
   margin: 0;
   padding: 15px 0;
+
+  li {
+    @include media(sm) {
+      padding: 0 10px;
+    }
+
+    @include media(md) {
+      padding: 0 15px;
+    }
+  }
 
   a {
     border-radius: 50%;
@@ -225,15 +257,27 @@
   .no-img {
     border: 3px solid #804ea8;
     height: 0;
+    line-height: 1;
     padding: calc(20% - 3px) 0 calc(80% - 3px);
+
+    @include media(md) {
+      line-height: 1.5;
+    }
   }
 
   .reputation {
-    height: 24px;
-    line-height: 24px;
-    right: 8px;
+    height: 20px;
+    line-height: 20px;
+    right: 4px;
     top: -4px;
-    width: 24px;
+    width: 20px;
+
+    @include media(md) {
+      height: 24px;
+      line-height: 24px;
+      right: 8px;
+      width: 24px;
+    }
 
     // tooltip positions
     &::before {
