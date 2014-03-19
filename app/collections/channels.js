@@ -1,6 +1,7 @@
 var Channel = require('../models/channel'),
     Base = require('./base');
 var _ = require('underscore');
+var utils = require('../utils');
 function lowercase (a) {
   return a.toLowerCase();
 }
@@ -8,6 +9,8 @@ function lowercase (a) {
 module.exports = Base.extend({
   model: Channel,
   url: '/channels',
+  comparator: utils.sortBy('-count')
+  /*
   comparator: function (a, b) {
     return 0;
     if (this.params.category.toLowerCase() !== 'featured') return 0;
@@ -36,6 +39,7 @@ module.exports = Base.extend({
     console.log(orderA, orderB)
     return orderA === orderB ? 0 : (orderA < orderB ? -1 : 1);
   }
+  */
 });
 
 module.exports.id = 'Channels';

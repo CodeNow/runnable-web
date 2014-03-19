@@ -1,12 +1,14 @@
-var BaseView = require('./base_view'),
-    _        = require('underscore'),
-    lock     = require('../lock');
+var BaseView     = require('./base_view'),
+    _            = require('underscore'),
+    lock         = require('../lock'),
+    modalHelpers = require('../helpers/modals');
 
 var events = {
-  'click .dark-theme':              'setDarkTheme',
-  'click .light-theme':             'setLightTheme',
-  'click .open-context-menu':       'showFileMenu',
-  'contextmenu .open-context-menu': 'showFileMenu'
+  'click .dark-theme':                'setDarkTheme',
+  'click .light-theme':               'setLightTheme',
+  'click .open-context-menu':         'showFileMenu',
+  'contextmenu .open-context-menu':   'showFileMenu',
+  'click li[data-action="download"]': 'showDownloadDialog'
 };
 
 
@@ -21,6 +23,11 @@ module.exports = BaseView.extend({
   tagName: 'aside',
   id: 'file-explorer',
   events: events,
+  showDownloadDialog: function () {
+    modalHelpers.saveProjectMessage.call(this, function () {
+      
+    });
+  },
   postRender: function () {
     this.fileRoot = _.findWhere(this.childViews, {name:'file_tree'});
   },
