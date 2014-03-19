@@ -18,13 +18,15 @@
     border-radius: 50%;
     float: none;
     margin: 30px auto 15px;
-    padding: 0;
+    padding: 66.66666666666666% 0 0;
     position: relative;
 
     > img,
     &::before {
       border-radius: 50%;
       display: block;
+      position: absolute;
+        top: 0;
     }
 
     &::before {
@@ -36,6 +38,7 @@
         top: 5px;
         right: 5px;
         left: 5px;
+        z-index: 1;
       width: calc(100% - 10px);
     }
 
@@ -165,8 +168,10 @@
     width: 100%;
 
     &:hover {
+      text-decoration: none;
 
-      > img {
+      > img,
+      > .no-img {
         border-color: lighten($purple-light,10%);
       }
 
@@ -183,9 +188,10 @@
     }
 
     &::before {
+      background: rgba(255,255,255,.1);
       border-radius: 50%;
       border-top: 2px solid rgba(0,0,0,.2);
-      box-shadow: 0 1px 0 rgba(255,255,255,.15);
+      box-shadow: 0 1px 0 rgba(255,255,255,.2);
       content: '';
       display: block;
       height: calc(100% - 6px);
@@ -204,6 +210,12 @@
     box-shadow: inset 0 0 1px $purple, 0 1px 0 rgba(0,0,0,.2);
     display: block;
     user-select: none;
+  }
+
+  .no-img {
+    border: 3px solid #804ea8;
+    height: 0;
+    padding: calc(20% - 3px) 0 calc(80% - 3px);
   }
 
   .reputation {

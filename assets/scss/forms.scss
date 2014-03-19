@@ -153,6 +153,7 @@ form.inline {
     &[disabled],
     &[disabled]:hover {
       background: transparent;
+      cursor: text;
     }
   }
 
