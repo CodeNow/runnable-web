@@ -21,6 +21,12 @@
     padding: 66.66666666666666% 0 0;
     position: relative;
 
+    @include media(xs) {
+      height: 50%;
+      padding-top: 50%;
+      width: 50%;
+    }
+
     > img,
     &::before {
       border-radius: 50%;
