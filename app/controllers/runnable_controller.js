@@ -116,8 +116,8 @@ module.exports = {
           //embedded
           var imageURL = results.image.appURL();
           if(utils.isCurrentUrl(app, imageURL + '/embedded')){
+            //iframe nested website
             var data = addSEO(results, self.req);
-            console.log('iframe!');
             callback(null, 'runnable/embed', data);
           }else{
             callback(null, addSEO(results, self.req));
