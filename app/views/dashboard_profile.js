@@ -6,17 +6,9 @@ module.exports = BaseView.extend({
   id: 'profile',
   className: 'col-md-3 col-sm-4',
   events: {
-    'click .edit-inline'      : 'editInline',
-    'click .menu a'     : 'permissionToggle',
-    'change input'            : 'updateAttr'
-  },
-  preRender: function () {
-    if (this.options.editmode) this.className = 'editmode col-md-3 col-sm-4';
-  },
-  editInline: function (evt) {
-    this.$(evt.currentTarget)
-      .children('input')
-      .focus();
+    'click .menu a' : 'permissionToggle',
+    'change input'  : 'updateAttr',
+    'submit form'   : 'preventDefault'
   },
   permissionToggle: function (evt) {
     var $menuItem = this.$(evt.currentTarget);
@@ -41,6 +33,10 @@ module.exports = BaseView.extend({
     var opts = utils.cbOpts(this.showIfError, this);
     opts.patch = true;
     this.model.save(data, opts);
+  },
+  preventDefault: function (evt) {
+    evt.preventDefault();
+    return false;
   }
 });
 

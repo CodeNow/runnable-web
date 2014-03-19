@@ -4,143 +4,14 @@
   border: 1px solid rgba(0,0,0,.1);
   border-radius: 3px;
   margin-top: 40px;
-  padding: 0 0 60px;
-
-  // email privacy menu
-  .dropdown-menu {
-    left: -170px;
-    top: 30px;
-  }
-
-  > hr {
-    border-top-color: rgba(0,0,0,.1);
-    margin: 11px auto;
-
-    @include media(xs) {
-      max-width: 300px;
-    }
-
-    @include media(md) {
-      margin: 22px 40px 22px 0;
-    }
-  }
-
-  .inline,
-  .edit-inline {
-    margin: 4px 0;
-    min-height: 24px;
-    position: relative;
-
-    &.edit-inline {
-      cursor: pointer;
-    }
-
-    @include media(xs) {
-      margin: 4px auto;
-      max-width: 320px;
-      padding-left: 20px;
-    }
-
-    .glyphicons {
-      color: $gray-dark;
-      line-height: 20px;
-      position: absolute;
-
-      &:first-child {
-        left: -22px;
-        width: 22px;
-      }
-
-      &.pencil {
-        opacity: 0;
-        right: -8px;
-        width: 20px;
-      }
-
-      &.lock,
-      &.unlock {
-        right: 0;
-        width: 20px;
-
-        &:hover {
-          color: $gray-dark;
-        }
-      }
-    }
-
-    &:hover > .pencil {
-      opacity: 1;
-    }
-
-    .menu {
-      float: right;
-      top: -23px;
-      white-space: nowrap;
-
-      > a {
-        padding: 4px 8px;
-        width: 30px;
-      }
-
-      ul {
-        min-width: 190px;
-        right: -11px;
-        top: 34px;
-
-        .glyphicons {
-          color: $gray-dark;
-          font-size: 11px;
-          position: relative;
-            left: 0;
-        }
-      }
-    }
-  }
-
-  input {
-    background: none;
-    border: none;
-    color: $gray-dark;
-    display: block;
-    font-size: 15px;
-    overflow: hidden;
-    position: relative;
-    text-overflow: ellipsis;
-    width: 200px;
-    width: calc(100% - 20px);
-    white-space: nowrap;
-
-    @include media(xs) {
-      text-align: center;
-    }
-
-    &:focus {
-      border-bottom: 1px dashed $purple-light;
-      color: $gray-darker;
-      cursor: text;
-      outline: none;
-    }
-
-    &:focus ~ .pencil {
-      color: $purple-light;
-      opacity: 1;
-    }
-
-    &[disabled] {
-      cursor: text;
-      -webkit-text-fill-color: $gray-dark;
-    }
-  }
-
-  #full-name {
-    font-weight: bold;
-  }
+  margin-bottom: 90px;
+  padding: 0;
 }
 
 #gravitar {
   @extend .clearfix;
   border-bottom: 1px solid rgba(0,0,0,.1);
-  box-shadow: 0 1px 0 #fff;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 0 #fff;
   padding-bottom: 15px;
 
   > div {
@@ -306,7 +177,6 @@
 .reputation {
   background: $purple-light;
   border-radius: 50%;
-  border-top: 1px solid rgba(255,255,255,.3);
   box-shadow: -1px 1px 0 rgba(0,0,0,.2);
   color: #fff;
   display: block;

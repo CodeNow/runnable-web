@@ -121,3 +121,59 @@ header {
     }
   }
 }
+
+// inline editing
+form.inline {
+  margin-bottom: 1px;
+  position: relative;
+
+  input {
+    -webkit-appearance: none;
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 0 rgba(0,0,0,.1), 0 2px 0 #fff;
+    color: $gray-dark;
+    height: 36px;
+    line-height: 36px;
+    outline: none;
+    padding: 0 15px;
+    width: 100%;
+
+    &:hover {
+      background: #fff;
+      cursor: pointer;
+    }
+
+    &:focus {
+      background: #fff;
+      border-color: $orange;
+      cursor: text;
+    }
+
+    &[disabled],
+    &[disabled]:hover {
+      background: transparent;
+    }
+  }
+
+  .menu {
+    position: absolute;
+      top: 0;
+      right: 0;
+
+    > a {
+      color: $gray-dark;
+      padding: 11px;
+    }
+
+    > ul {
+      margin-top: 0;
+      min-width: 190px;
+
+      .glyphicons {
+        font-size: 10px;
+        top: 12px;
+      }
+    }
+  }
+}
