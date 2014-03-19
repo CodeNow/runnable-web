@@ -3,16 +3,16 @@
 {{view "global_message"}}
 
 <main class="container">
-  {{view "dashboard_profile" model=profileuser editmode=editmode}}
+  {{view "dashboard_profile" model=profileuser editmode=editmode leaderBadges=leaderBadges}}
 
   <section id="dashboard" class="col-md-9 col-sm-8">
 {{!--
   {{#if leaderBadges.length}}
-    <ul id="reputation">
+    <ol id="reputation">
       {{#each leaderBadges.models}}
       <li>{{view "tag_score" model=.}}
       {{/each}}
-    </ul>
+    </ol>
   {{/if}}
  --}}
   {{#if editmode}}
@@ -29,7 +29,7 @@
     {{view "dashboard_runnables" isactive=publishedActive collection=published editmode=editmode}}
     {{view "dashboard_runnables" isactive=draftsActive collection=drafts editmode=editmode}}
   {{else}}
-      {{view "dashboard_runnables" classname="dashboard-runnables" collection=published}}
+      {{view "dashboard_runnables" isactive="true" classname="dashboard-runnables" collection=published}}
   {{/if}}
   </section>
 </main>

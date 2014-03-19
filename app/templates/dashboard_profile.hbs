@@ -1,80 +1,110 @@
-{{#with model.attributes}}
-{{#if ../editmode}}
-  <div id="gravitar">
-    <div class="col-sm-8">
-      <img src="{{gravitar}}?s=128" alt="{{username}}">
-      <a href="https://en.gravatar.com/site/login" target="_blank" class="glyphicons edit"></a>
-      <span class="reputation tooltip" data-title="{{taggedImagesCount}} published Runnables">{{taggedImagesCount}}</span>
+{{#if editmode}}
+  {{#with model.attributes}}
+    <div id="gravitar">
+      <div class="col-sm-8">
+        <img src="{{gravitar}}?s=255" alt="{{username}}">
+        <a href="https://en.gravatar.com/site/login" target="_blank" class="glyphicons edit"></a>
+        <span class="reputation tooltip" data-title="{{taggedImagesCount}} published Runnables">{{taggedImagesCount}}</span>
+      </div>
+      <h1>{{username}}</h1>
+      <p>Running for {{dateAgo created true}}.</p>
     </div>
-    <h1>{{username}}</h1>
-    <p>Running for {{dateAgo created true}}.</p>
-  </div>
-{{!--
+  {{/with}}
+
   {{#if leaderBadges.length}}
-  <ul id="reputation">
+  <ol id="reputation">
     {{#each leaderBadges.models}}
-    <li class="col-sm-4">{{view "tag_score" model=.}}
+    <li class="col-sm-4">
+      <a href="/{{attributes.name}}">
+        {{view "channel_image" name=attributes.name}}
+      </a>
+      <span class="reputation tooltip" data-title="{{attributes.userImagesCount}} {{attributes.name}} Runnables">{{attributes.userImagesCount}}</span>
     {{/each}}
-  </ul>
+  </ol>
   {{/if}}
- --}}
-{{!--   <div class="edit-inline">
-    <input value="{{name}}" placeholder="Full Name" name="name">
-    <span class="glyphicons pencil"></span>
-  </div>
-  <hr>
-  <div class="edit-inline">
-    <span class="glyphicons envelope"></span>
-    <input value="{{email}}" placeholder="Email" disabled>
-    <div class="menu">
-      <a class="glyphicons {{#if show_email}}unlock{{else}}lock{{/if}}" data-toggle="dropdown"></a>
-      <ul>
-        <li>
-          <a class="public">
-            <span class="glyphicons unlock"></span>
-            Publicly Viewable
-          </a>
-        <li>
-          <a class="private">
-            <span class="glyphicons lock"></span>
-            Only Me
-          </a>
-      </ul>
+
+  {{#with model.attributes}}
+  {{!--   <div class="edit-inline">
+      <input value="{{name}}" placeholder="Full Name" name="name">
+      <span class="glyphicons pencil"></span>
     </div>
-  </div>
-  <div class="edit-inline">
-    <span class="glyphicons briefcase"></span>
-    <input name="company" value="{{company}}" placeholder="Company">
-    <span class="glyphicons pencil"></span>
-  </div>
+    <hr>
+    <div class="edit-inline">
+      <span class="glyphicons envelope"></span>
+      <input value="{{email}}" placeholder="Email" disabled>
+      <div class="menu">
+        <a class="glyphicons {{#if show_email}}unlock{{else}}lock{{/if}}" data-toggle="dropdown"></a>
+        <ul>
+          <li>
+            <a class="public">
+              <span class="glyphicons unlock"></span>
+              Publicly Viewable
+            </a>
+          <li>
+            <a class="private">
+              <span class="glyphicons lock"></span>
+              Only Me
+            </a>
+        </ul>
+      </div>
+    </div>
+    <div class="edit-inline">
+      <span class="glyphicons briefcase"></span>
+      <input name="company" value="{{company}}" placeholder="Company">
+      <span class="glyphicons pencil"></span>
+    </div>
+    --}}
+  {{/with}}
 {{else}}
-  <div class="gravitar">
-    <img src="{{gravitar}}?s=128" alt="{{username}}">
-    <span class="btn purple reputation tooltip" data-title="{{taggedImagesCount}} published Runnables">{{taggedImagesCount}}</span>
-  </div>
-  <h1>{{username}}</h1>
-  {{#if name}}
-  <div class="inline">
-    <input value="{{name}}" placeholder="Full Name" name="name" disabled>
-  </div>
+  {{#with model.attributes}}
+    <div id="gravitar">
+      <div class="col-sm-8">
+        <img src="{{gravitar}}?s=255" alt="{{username}}">
+        <span class="reputation tooltip" data-title="{{taggedImagesCount}} published Runnables">{{taggedImagesCount}}</span>
+      </div>
+      <h1>{{username}}</h1>
+      <p>Running for {{dateAgo created true}}.</p>
+    </div>
+  {{/with}}
+
+    {{#if leaderBadges.length}}
+  <ol id="reputation">
+    {{#each leaderBadges.models}}
+    <li class="col-sm-4">
+      <a href="/{{attributes.name}}">
+        {{view "channel_image" name=attributes.name}}
+      </a>
+      <span class="reputation tooltip" data-title="{{attributes.userImagesCount}} {{attributes.name}} Runnables">{{attributes.userImagesCount}}</span>
+    {{/each}}
+  </ol>
   {{/if}}
-  <div class="inline">
-    <input value="{{dateAgo created true}} running" disabled>
-  </div>
-  {{#if show_email}}<hr>
-  {{else}}{{#if company}}<hr>{{/if}}
-  {{/if}}
-  {{#if show_email}}
-  <div class="inline">
-    <span class="glyphicons envelope"></span>
-    <input value="{{email}}" placeholder="Email" disabled>
-  </div>
-  {{/if}}
-  {{#if company}}
-  <div class="inline">
-    <span class="glyphicons briefcase"></span>
-    <input value="{{company}}" placeholder="Company" disabled>
-  </div>
-  {{/if}}
- --}}{{/if}}
-{{/with}}
+
+  {{#with model.attributes}}
+
+  {{!--
+    {{#if name}}
+    <div class="inline">
+      <input value="{{name}}" placeholder="Full Name" name="name" disabled>
+    </div>
+    {{/if}}
+    <div class="inline">
+      <input value="{{dateAgo created true}} running" disabled>
+    </div>
+    {{#if show_email}}<hr>
+    {{else}}{{#if company}}<hr>{{/if}}
+    {{/if}}
+    {{#if show_email}}
+    <div class="inline">
+      <span class="glyphicons envelope"></span>
+      <input value="{{email}}" placeholder="Email" disabled>
+    </div>
+    {{/if}}
+    {{#if company}}
+    <div class="inline">
+      <span class="glyphicons briefcase"></span>
+      <input value="{{company}}" placeholder="Company" disabled>
+    </div>
+    {{/if}}
+    --}}
+  {{/with}}
+{{/if}}
