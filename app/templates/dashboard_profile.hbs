@@ -1,6 +1,6 @@
 {{#if editmode}}
   {{#with model.attributes}}
-    <div id="gravitar">
+    <div id="gravatar">
       <div class="col-sm-8">
         <img src="{{gravitar}}?s=255" alt="{{username}}">
         <a href="https://en.gravatar.com/site/login" target="_blank" class="glyphicons edit"></a>
@@ -53,7 +53,7 @@
 {{else}}
 
   {{#with model.attributes}}
-    <div id="gravitar">
+    <div id="gravatar">
       <div class="col-sm-8">
         <img src="{{gravitar}}?s=255" alt="{{username}}">
         <span class="reputation tooltip" data-title="{{taggedImagesCount}} published Runnables">{{taggedImagesCount}}</span>
