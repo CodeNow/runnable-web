@@ -21,6 +21,10 @@
   width: 58px;
 
   & ~ span {
-    line-height: 50px;
+    line-height: 34px;
+
+    @include media(xs) {
+      line-height: 58px;
+    }
   }
 }

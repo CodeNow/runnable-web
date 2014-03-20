@@ -1073,10 +1073,15 @@ div.terminal-view {
     max-width: 1170px;
 
     h1 {
-        color: darken($gray-darker,5%);
+        @extend .clearfix;
+        color: $gray-darker;
         font-size: 34px;
         font-weight: bold;
-        margin: 0 0 20px;
+        margin: 0 0 15px;
+
+        @include media(xs) {
+            margin: 0;
+        }
 
         > img {
             display: block;
@@ -1090,7 +1095,12 @@ div.terminal-view {
         > p {
             font-size: 14px;
             font-weight: 400;
+            line-height: 1.4;
             margin: 6px 0 0;
+
+            @include media(xs) {
+                margin-top: 15px;
+            }
         }
     }
 
