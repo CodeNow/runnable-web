@@ -3,26 +3,27 @@
 {{view "global_message"}}
 
 <main class="container">
-  {{view "dashboard_profile" model=profileuser editmode=editmode leaderBadges=leaderBadges}}
-
-  <section id="dashboard" class="col-xl-8 col-sm-9">
-  {{#if editmode}}
-    <div class="btn-group toggles">
-      <button {{#if publishedActive}}class="active"{{/if}}>
-        Published
-        <span class="count">{{published.length}}</span>
-      </button>
-      <button {{#if draftsActive}}class="active"{{/if}}>
-        Drafts
-        <span class="count">{{drafts.length}}</span>
-      </button>
-    </div>
-    {{view "dashboard_runnables" isactive=publishedActive collection=published editmode=editmode}}
-    {{view "dashboard_runnables" isactive=draftsActive collection=drafts editmode=editmode}}
-  {{else}}
-    {{view "dashboard_runnables" isactive="true" classname="dashboard-runnables" collection=published}}
-  {{/if}}
-  </section>
+  <div class="row">
+    {{view "dashboard_profile" model=profileuser editmode=editmode leaderBadges=leaderBadges}}
+    <section id="dashboard" class="col-xl-8 col-sm-9">
+    {{#if editmode}}
+      <div class="btn-group toggles">
+        <button {{#if publishedActive}}class="active"{{/if}}>
+          Published
+          <span class="count">{{published.length}}</span>
+        </button>
+        <button {{#if draftsActive}}class="active"{{/if}}>
+          Drafts
+          <span class="count">{{drafts.length}}</span>
+        </button>
+      </div>
+      {{view "dashboard_runnables" isactive=publishedActive collection=published editmode=editmode}}
+      {{view "dashboard_runnables" isactive=draftsActive collection=drafts editmode=editmode}}
+    {{else}}
+      {{view "dashboard_runnables" isactive="true" classname="dashboard-runnables" collection=published}}
+    {{/if}}
+    </section>
+  </div>
 </main>
 
 {{view "footer_view" model=user context=.}}

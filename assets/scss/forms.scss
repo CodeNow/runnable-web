@@ -1,3 +1,9 @@
+// defaults
+input,
+textarea {
+  -webkit-appearance: none;
+}
+
 .form-group {
   position: relative;
 }
@@ -73,8 +79,6 @@ header {
     height: 36px;
     line-height: 1;
     margin: 9px auto;
-    // top: 54px;
-    // width: calc(100% - 30px);
 
     input {
       box-shadow: none;
@@ -89,12 +93,6 @@ header {
     button {
       right: 15px;
     }
-
-    // @include media(sm) {
-    //   margin: 9px auto;
-    //   top: 0;
-    //   width: 20%;
-    // }
   }
 }
 
