@@ -25,12 +25,15 @@
 
   {{#with model.attributes}}
   <form class="inline">
+    <span class="glyphicons nameplate"></span>
     <input value="{{name}}" placeholder="Full Name" name="name">
   </form>
   <form class="inline">
+    <span class="glyphicons tie"></span>
     <input value="{{company}}" placeholder="Company" name="company">
   </form>
   <form class="inline">
+    <span class="glyphicons send"></span>
     <input value="{{email}}" placeholder="Email" disabled>
     <div class="menu">
       <a class="glyphicons {{#if show_email}}unlock{{else}}lock{{/if}}" data-toggle="dropdown"></a>
@@ -78,16 +81,19 @@
   {{#with model.attributes}}
     {{#if name}}
     <form class="inline">
+      <span class="glyphicons nameplate"></span>
       <input value="{{name}}" placeholder="Full Name" name="name" disabled>
     </form>
     {{/if}}
     {{#if show_email}}
     <form class="inline">
+      <span class="glyphicons tie"></span>
       <input value="{{email}}" placeholder="Email" disabled>
     </form>
     {{/if}}
     {{#if company}}
     <form class="inline">
+      <span class="glyphicons send"></span>
       <input value="{{company}}" placeholder="Company" disabled>
     </form>
     {{/if}}

@@ -127,7 +127,15 @@ form.inline {
   margin-bottom: 1px;
   position: relative;
 
-  input {
+  > span {
+    color: $gray-dark;
+    font-size: 16px;
+    line-height: 34px;
+    position: absolute;
+      left: 10px;
+  }
+
+  > input {
     -webkit-appearance: none;
     background: transparent;
     border: 1px solid transparent;
@@ -137,7 +145,7 @@ form.inline {
     height: 36px;
     line-height: 36px;
     outline: none;
-    padding: 0 15px;
+    padding: 0 15px 0 35px;
     width: 100%;
 
     &:hover {

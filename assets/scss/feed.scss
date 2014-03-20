@@ -78,12 +78,12 @@
     width: auto;
 
     a {
-      color: darken($gray-darker,5%);
+      color: $gray-darker;
       cursor: pointer;
       display: block;
 
       &:hover {
-        color: darken($gray-darker,10%);
+        color: $gray-darkest;
       }
 
       &:active {
