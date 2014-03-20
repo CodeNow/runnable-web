@@ -26,10 +26,9 @@ module.exports = BaseView.extend({
       opts.publishedActive = !opts.draftsActive;
     }
     return this.options;
-  },
+  }
   // changeSort: function () {
   //   _.find(this.childViews, {name:'dashboard_runnables'});
-
   // }
 });
 
