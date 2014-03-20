@@ -69,8 +69,15 @@
 }
 
 #providers-text {
-  padding-top: 80px;
-  text-align: left;
+  padding-top: 30px;
+
+  @include media(sm) {
+    padding-top: 80px;
+  }
+
+  @include media(sm) {
+    text-align: left;
+  }
 
   h2 {
     position: relative;
@@ -101,7 +108,7 @@
 
   button {
     @include media(xs) {
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
   }
 }
