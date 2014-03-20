@@ -35,19 +35,14 @@
   &.can-edit {
     padding: 0 20px 0 4px;
 
-    &:hover {
-      color: $purple;
-    }
-
     > span {
-      color: darken($purple-lighter,10);
       cursor: pointer;
       line-height: 18px;
       position: absolute;
         right: 4px;
 
       &:hover {
-        color: $purple;
+        color: $gray-dark;
         font-size: 14px;
         right: 2px;
 
@@ -57,7 +52,7 @@
       }
 
       &:active {
-        color: darken($purple,10);
+        color: $gray-darker;
       }
     }
   }

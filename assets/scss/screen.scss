@@ -1358,7 +1358,7 @@ div.terminal-view {
     height: 54px;
     line-height: 54px;
 
-    @include media(xs) {
+    @include media(xxs) {
         .row {
             margin: 0;
         }
@@ -1374,7 +1374,7 @@ div.terminal-view {
         display: inline;
         margin: 0 0 0 15px;
 
-        @include media(xs) {
+        @include media(xxs) {
             display: none;
         }
 
@@ -1393,7 +1393,7 @@ div.terminal-view {
             @extend .purple;
             margin-left: 15px;
 
-            @include media(xs) {
+            @include media(xxs) {
                 margin: 0;
                 width: calc(50% - 7.5px);
 
