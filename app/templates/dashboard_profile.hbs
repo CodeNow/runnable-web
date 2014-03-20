@@ -15,10 +15,10 @@
   <ol id="reputation">
     {{#each leaderBadges.models}}
     <li class="col-sm-6 col-md-4">
-      <a href="/{{attributes.name}}">
+      <a href="/{{attributes.name}}" class="tooltip" data-title="{{attributes.userImagesCount}} {{attributes.name}} Runnables">
         {{view "channel_image" name=attributes.name}}
       </a>
-      <span class="reputation tooltip" data-title="{{attributes.userImagesCount}} {{attributes.name}} Runnables">{{attributes.userImagesCount}}</span>
+      <span class="reputation">{{attributes.userImagesCount}}</span>
     {{/each}}
   </ol>
   {{/if}}
@@ -70,10 +70,10 @@
   <ol id="reputation">
     {{#each leaderBadges.models}}
     <li class="col-sm-6 col-md-4">
-      <a href="/{{attributes.name}}">
+      <a href="/{{attributes.name}}" class="tooltip" data-title="{{attributes.userImagesCount}} {{attributes.name}} Runnables">
         {{view "channel_image" name=attributes.name}}
       </a>
-      <span class="reputation tooltip" data-title="{{attributes.userImagesCount}} {{attributes.name}} Runnables">{{attributes.userImagesCount}}</span>
+      <span class="reputation">{{attributes.userImagesCount}}</span>
     {{/each}}
   </ol>
   {{/if}}
