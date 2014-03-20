@@ -1,0 +1,35 @@
+<a class="card">
+  <img src="/images/icon-git.svg" height="30" width="31" alt="Github">
+  <div class="description">
+    <h2>
+      Import from GitHub
+      <form class="clearfix">
+        <input placeholder="Git Url" class="form-control" required>
+        <div class="dropdown">
+          <select disabled required>
+            <option value="" selected disabled>Select Language
+            {{!--
+            <option value=".Net">.Net
+            <option value="bash">bash
+            <option value="C++">C++
+            <option value="CakePHP">CakePHP
+            <option value="Codeigniter">Codeigniter
+            <option value="Dart">Dart
+            <option value="Django">Django
+            <option value="express">express
+            <option value="Flask">Flask
+            <option value="Java">Java
+            --}}
+            <option value="node">Node.js
+            <option value="php">PHP
+            <option value="python">Python
+            <option value="rails">Rails
+            <option value="web">Web
+          </select>
+          <button type="button">Language</button>
+        </div>
+      </form>
+    </h2>
+  </div>
+</a>
+{{view 'git_loader'}}

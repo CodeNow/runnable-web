@@ -319,12 +319,9 @@ function fetchImage (imageId, callback) {
   });
 }
 
-function createContainerFrom (imageIdOrChannelName, callback) {
-  var app = this.app;
-  var container = new Container({}, { app:app });
-  var options = utils.successErrorToCB(callback);
-  options.url = _.result(container, 'url') + '?from=' + encodeURIComponent(imageIdOrChannelName);
-  container.save({}, options);
+function createContainerFrom (imageIdOrChannelName, cb) {
+  var container = new Container({}, { app:this.app });
+  container.createFrom(imageIdOrChannelName, cb);
 }
 
 function fetchFilesForContainer (containerId, callback) {
