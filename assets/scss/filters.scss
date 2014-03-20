@@ -143,6 +143,10 @@
       &.show-more {
         width: 100%;
       }
+
+      &:nth-child(-n+3) {
+        border-top: 1px solid rgba(0,0,0,.1);
+      }
     }
 
     @media (max-width: 500px) {
@@ -192,8 +196,9 @@
     padding: 0;
 
     @include media(xs) {
-      border-right: 0;
       border-bottom: 0;
+      border-right: 0;
+      border-top: 0;
     }
 
     &.in {

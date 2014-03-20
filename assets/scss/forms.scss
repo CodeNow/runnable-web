@@ -183,6 +183,10 @@ form.inline {
       .glyphicons {
         font-size: 10px;
         top: 12px;
+
+        @include media(xs) {
+          top: 20px;
+        }
       }
     }
   }
