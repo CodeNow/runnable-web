@@ -5,7 +5,7 @@
 <main class="container">
   {{view "dashboard_profile" model=profileuser editmode=editmode leaderBadges=leaderBadges}}
 
-  <section id="dashboard" class="col-xl-10 col-sm-9">
+  <section id="dashboard" class="col-xl-8 col-sm-9">
   {{#if editmode}}
     <div class="btn-group toggles">
       <button {{#if publishedActive}}class="active"{{/if}}>

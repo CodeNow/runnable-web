@@ -40,11 +40,6 @@
   // toggle for trending & popular
   > div {
     float: left;
-    width: 180px;
-
-    > button {
-      width: 50%;
-    }
   }
 }
 
@@ -129,6 +124,7 @@
       @include media(xs) {
         display: block;
         overflow-x: auto;
+        overflow-y: hidden;
         white-space: nowrap;
       }
     }
@@ -206,6 +202,11 @@
     transition: all .25s cubic-bezier(.19,1,.22,1);
     width: 22px;
     white-space: nowrap;
+
+    @include media(xs) {
+      top: auto;
+      bottom: 20px;
+    }
 
     &:hover {
       background: $orange;

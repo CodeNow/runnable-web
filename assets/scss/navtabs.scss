@@ -102,6 +102,10 @@
     &:first-child {
       border-left: 0;
     }
+
+    @media (max-width: 500px) {
+      width: 50%;
+    }
   }
 
   .count {

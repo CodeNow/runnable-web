@@ -10,7 +10,12 @@ body {
 main {
   clear: both;
   margin-bottom: 60px;
+  margin-top: 45px;
   overflow: hidden;
+
+  @include media(xs) {
+    margin-top: 30px;
+  }
 }
 
 #content {
