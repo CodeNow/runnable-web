@@ -133,7 +133,7 @@ form.inline {
     border: 1px solid transparent;
     border-radius: 0;
     box-shadow: 0 1px 0 rgba(0,0,0,.1), 0 2px 0 #fff;
-    color: $gray-dark;
+    color: $gray-darker;
     height: 36px;
     line-height: 36px;
     outline: none;
@@ -155,6 +155,8 @@ form.inline {
     &[disabled]:hover {
       background: transparent;
       cursor: text;
+      opacity: 1;
+      -webkit-text-fill-color: $gray-darker;
     }
   }
 
