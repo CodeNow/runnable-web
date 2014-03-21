@@ -13,6 +13,7 @@ module.exports = BaseView.extend({
     'click .chevron-right':           'toggleHero'
   },
   sortChannels: function () {
+
     var opts = this.options;
     var category = opts.channels.params.category.toLowerCase();
     var sortOrder = ['c++',
@@ -33,6 +34,8 @@ module.exports = BaseView.extend({
                       'twilio']; //'add your own'
     function getOrder (channel) {
       var sortIndex;
+      //if(!channel.get('aliases'))
+      //  debugger;
       channel.get('aliases').some(function (alias) {
         sortIndex = sortOrder.indexOf(alias);
         return ~sortIndex;
@@ -45,10 +48,11 @@ module.exports = BaseView.extend({
         return getOrder(a) < getOrder(b) ? -1 : 1;
       });
     }
+
   },
   getTemplateData: function () {
     var opts = this.options;
-    this.sortChannels();
+    //this.sortChannels();
     opts.categories.models.forEach(function (category) {
       attribs = category.attributes;
       attribs.link = utils.exists(attribs.url) ? attribs.url : '/c/'+attribs.name;

@@ -14,6 +14,12 @@ module.exports = BaseView.extend({
   },
   activeFilters: [],
   qs: {},
+  getTemplateData: function () {
+    var opts = this.options;
+    //var urlString = utils.getCurrentUrlPath(this.app, false);
+    //console.log('urlString', urlString);
+    return opts;
+  },
   postRender: function () {
     var qs = this.qs = queryString.parse(location.search);
     if(qs.filter){
@@ -25,7 +31,8 @@ module.exports = BaseView.extend({
     }
   },
   showAll: function (evt) {
-    this.qs.filter = this.activeFilters = [];
+    this.activeFilters = [];
+    delete this.qs.filter;
     this.updateRoute();
     this.updateActiveFilters();
   },
@@ -46,7 +53,6 @@ module.exports = BaseView.extend({
       delete this.qs.filter;
       delete this.activeFilters;
     }
-
     this.updateRoute();
     this.updateActiveFilters();
   },
@@ -57,7 +63,7 @@ module.exports = BaseView.extend({
       $h3.removeClass('out').addClass('in');
     } else {
       $h3.addClass('out').removeClass('in');
-    }   
+    }
     this.$el.find('li.active').removeClass('active');
     this.activeFilters.forEach(function(filterItem){
       this.$el.find('[data-name="' + filterItem + '"]').addClass('active');

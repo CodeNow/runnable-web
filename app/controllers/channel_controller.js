@@ -13,12 +13,82 @@ var formatTitle = helpers.formatTitle;
 
 module.exports = {
   index: function (params, callback) {
-    params.page = utils.getQueryParam(this.app, 'page');
-    params.sort = utils.getQueryParam(this.app, 'sort');
+    //params.page = utils.getQueryParam(this.app, 'page');
+    //params.sort = utils.getQueryParam(this.app, 'sort');
+
+    params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
+    params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 0;
+
     var self = this;
     var app = this.app;
     async.waterfall([
+
       fetchUserAndChannel.bind(this, params.channel),
+
+
+      function fetchFeeds (channelResult, callback) {
+        var spec = {
+          user: {
+            model: 'User',
+            params: {
+              _id: 'me'
+            }
+          },
+          channels: {
+            collection: 'Channels',
+            params: {
+              category: 'Featured'
+            }
+          },
+          feedTrending: {
+            collection: 'FeedsImages',
+            params: {
+              page: params.page,
+              limit: 15,
+              channel: params.filter
+            }
+          },
+          feedPopular: {
+            collection: 'images',
+            params: {
+              page: params.page,
+              limit: 15,
+              channel: params.filter,
+              sort: '-runs'
+            }
+          }
+        };
+
+        fetch.call(self, spec, function (err, results) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          _.extend(channelResult, results);
+
+          async.parallel([
+            function(cb){
+              fetchOwnersFor.call(self, results.user, results.feedTrending, function(err, results2){
+                _.extend(results, results2);
+                cb();
+              });
+            },
+            function(cb){
+              fetchOwnersFor.call(self, results.user, results.feedPopular, function(err, results2){
+                _.extend(results, results2);
+                cb();
+              });
+          }], function(err){
+            if (err) console.log(err);
+            callback(null, channelResult);
+          });
+        });
+
+      },
+
+
+
       function redirectCheck (channelResult, cb) {
         var channel = channelResult.channel;
         if (channel.get('name') !== params.channel)
@@ -115,6 +185,7 @@ module.exports = {
           callback(err);
         }
         else {
+          //results.relatedImageTags = results.feedTrending.relatedChannels;
           results.selectedCategoryLower = params.category.toLowerCase();
           results.selectedCategory = _.find(results.categories.models, function (category) {
             return category.get('name').toLowerCase() === results.selectedCategoryLower;

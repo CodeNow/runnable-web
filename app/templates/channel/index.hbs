@@ -17,11 +17,6 @@
     </div>
   </div>
 
-  <div class="row">
-    <nav id="feed-nav" class="col-md-10 col-sm-9 col-md-offset-2 col-sm-offset-3">
-      {{view "feed_toggles"}}
-    </nav>
-  </div>
 {{!--
   {{#each channels.models}}
     {{#with attributes}}
@@ -30,10 +25,11 @@
   {{/each}}
  --}}
   <div class="row">
-    {{#if channels.length}}
-      {{view "feed_filters" collection=channels count=true}}
-    {{/if}}
-    {{view "runnable_feed"}}
+
+    
+    
+    {{view 'feed' channels=channels feedTrending=feedTrending feedPopular=feedPopular}}
+
   </div>
 {{!--
   <div class="row">
