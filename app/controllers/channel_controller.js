@@ -19,21 +19,26 @@ module.exports = {
     params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
     params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 0;
 
+    if(!_.isArray(params.filter))
+      params.filter = [params.filter]
+
+    params.filter.push(params.channel);
+    params.filter = _.uniq(params.filter);
+
     var self = this;
     var app = this.app;
     async.waterfall([
-
       fetchUserAndChannel.bind(this, params.channel),
-
-
       function fetchFeeds (channelResult, callback) {
         var spec = {
+          /*
           user: {
             model: 'User',
             params: {
               _id: 'me'
             }
           },
+          */
           channels: {
             collection: 'Channels',
             params: {
@@ -41,6 +46,7 @@ module.exports = {
             }
           },
           feedTrending: {
+
             collection: 'FeedsImages',
             params: {
               page: params.page,
@@ -65,7 +71,7 @@ module.exports = {
             return;
           }
 
-          _.extend(channelResult, results);
+          _.extend(results, channelResult);
 
           async.parallel([
             function(cb){
@@ -80,6 +86,21 @@ module.exports = {
                 cb();
               });
           }], function(err){
+
+            results.relatedChannels = results.feedTrending.relatedChannels;
+            results.filteringChannels = results.relatedChannels;
+
+            // Don't display the current channel as an option in filters
+            results.filteringChannels.each(function(item, i){
+              if(item.get('name') == results.channel.get('name')){
+                item.attributes.display = false;
+              } else {
+                item.attributes.display = true;
+              }
+            });
+
+            _.extend(channelResult, results);
+
             if (err) console.log(err);
             callback(null, channelResult);
           });
@@ -185,7 +206,19 @@ module.exports = {
           callback(err);
         }
         else {
-          //results.relatedImageTags = results.feedTrending.relatedChannels;
+
+          results.relatedChannels = results.feedTrending.relatedChannels;
+
+          if (results.relatedChannels.length) {
+            results.filteringChannels = results.relatedChannels;
+          } else {
+            results.filteringChannels = results.channels;
+          }
+
+          results.filteringChannels.each(function(item, i){
+            item.attributes.display = true;
+          });
+
           results.selectedCategoryLower = params.category.toLowerCase();
           results.selectedCategory = _.find(results.categories.models, function (category) {
             return category.get('name').toLowerCase() === results.selectedCategoryLower;

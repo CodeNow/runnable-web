@@ -7,7 +7,12 @@
   </div>
 
   <div class="row {{#if orderByPopular}}sort-popular{{/if}} {{#if orderByTrending}}sort-trending{{/if}} sort">
-    {{view "feed_filters" collection=channels}}
+    {{view "feed_filters"
+      collection = filteringChannels
+      filterMode = filterMode
+      channel    = channel
+    }}
+
     {{view "runnable_feed" collection=feedTrending orderByParam="trending"}}
     {{view 'pagination_buttons' collection=feedPopular orderByParam="trending"}}
     {{view "runnable_feed" collection=feedPopular orderByParam="popular"}}

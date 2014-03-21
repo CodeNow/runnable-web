@@ -5,6 +5,7 @@
 <ol>
   {{#each collection.models}}
     {{#with attributes}}
+    {{#if display}}
       <li data-name="{{name}}">
         {{view 'channel_image' name=name alt=true}}
         {{name}}
@@ -12,6 +13,7 @@
         {{#if count}}
           <span class="count">{{count}}</span>
         {{/if}}
+    {{/if}}
     {{/with}}
   {{/each}}
   {{#if collection.params.channel}}

@@ -31,7 +31,6 @@ module.exports = BaseView.extend({
     if (this.app.dispatch) {
       this.app.dispatch.trigger('toggle:toggleFeed', id);
     }
-
     var qs = queryString.parse(location.search);
     qs.orderBy = id;
     this.app.router.navigate(window.location.pathname + '?' + queryString.stringify(qs));

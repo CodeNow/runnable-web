@@ -64,6 +64,12 @@
   <div class="glyphicons chevron-right"></div>
 </section>
 
-{{view 'feed' channels=channels feedTrending=feedTrending feedPopular=feedPopular}}
+{{view 'feed'
+  channels          = channels
+  feedTrending      = feedTrending
+  feedPopular       = feedPopular
+  filteringChannels = filteringChannels
+  filterMode        = "home"
+}}
 
 {{view "footer_view" model=user context=. domain=user.app.attributes.domain}}

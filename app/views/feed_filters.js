@@ -16,6 +16,13 @@ module.exports = BaseView.extend({
   qs: {},
   getTemplateData: function () {
     var opts = this.options;
+
+    if (opts.filterMode == 'channel') {
+      opts.collection.each(function (item, i) {
+        if(item.get('name') == opts.channel){}
+      });
+    }
+
     //var urlString = utils.getCurrentUrlPath(this.app, false);
     //console.log('urlString', urlString);
     return opts;
@@ -26,15 +33,17 @@ module.exports = BaseView.extend({
       if(!_.isArray(qs.filter)){
         qs.filter = [qs.filter];
       }
-      this.activeFilters = (_.isArray(qs.filter)) ? qs.filter : [];
-      this.updateActiveFilters();
+      this.activeFilters = qs.filter;
+    } else {
+      this.activeFilters = [];
     }
+    this.updateActiveFilters();
   },
   showAll: function (evt) {
     this.activeFilters = [];
     delete this.qs.filter;
-    this.updateRoute();
     this.updateActiveFilters();
+    this.updateRoute();
   },
   updateRoute: function() {
     this.qs.page = 0;
@@ -68,12 +77,6 @@ module.exports = BaseView.extend({
     this.activeFilters.forEach(function(filterItem){
       this.$el.find('[data-name="' + filterItem + '"]').addClass('active');
     }, this);
-  },
-  getTemplateData: function () {
-    var opts = this.options;
-    //var queryObj = utils.getCurrentUrlQueryString(this.app);
-    //console.log(queryObj);
-    return opts;
   },
   showMore: function (evt) {
     var $ol = this.$('ol');

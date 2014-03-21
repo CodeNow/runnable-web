@@ -18,7 +18,12 @@
   </div>
 
   <div class="row">
-    {{view 'feed' channels=channels feedTrending=feedTrending feedPopular=feedPopular}}
+    {{view 'feed'
+      feedTrending      = feedTrending
+      feedPopular       = feedPopular
+      filteringChannels = filteringChannels
+      filterMode        = "channel"
+    }}
   </div>
 
  </main>
