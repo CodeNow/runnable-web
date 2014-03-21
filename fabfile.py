@@ -209,7 +209,7 @@ def deploy():
   addNote()
   checkout_latest()
   track_deployment()
-  # install_requirements()
+  install_requirements()
   bower()
   grunt()
   reboot()

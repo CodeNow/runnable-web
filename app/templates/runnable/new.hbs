@@ -6,11 +6,7 @@
   <div class="row">
     <h1 class="col-sm-12">Create a New Runnable</h1>
   </div>
-  {{#if lock}}
-    {{view "channel_cards" collection=channels}}
-  {{else}}
-    {{view "channel_cards" collection=channels basehref="/new"}}
-  {{/if}}
+  {{view "channel_cards" collection=channels basehref="/new"}}
 </main>
 
 {{view "footer_view" model=user context=.}}

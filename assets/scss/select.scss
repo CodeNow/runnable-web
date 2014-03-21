@@ -40,13 +40,14 @@
 
     ~ button {
       background: transparent;
+      border-color: darken($gray,10%);
       opacity: .5;
     }
   }
 
   button {
     background: transparent;
-    border: 0;
+    border: 1px solid darken($gray,20%);
     @include box-shadow(none);
     color: $gray-dark;
     font-size: 14px;
