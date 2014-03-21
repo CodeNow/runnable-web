@@ -161,6 +161,10 @@
           top: 19px;
         }
       }
+
+      &:nth-child(3) {
+        border-top: 0;
+      }
     }
 
     img,
