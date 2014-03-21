@@ -1,7 +1,8 @@
 // feed_filters
 #filters {
+  @extend .clearfix;
   color: $gray-dark;
-  padding-top: 15px;
+  padding: 15px;
 
   h3 {
     font-size: 16px;
@@ -142,6 +143,10 @@
       &.show-more {
         width: 100%;
       }
+
+      &:nth-child(-n+3) {
+        border-top: 1px solid rgba(0,0,0,.1);
+      }
     }
 
     @media (max-width: 500px) {
@@ -155,6 +160,10 @@
         > span {
           top: 19px;
         }
+      }
+
+      &:nth-child(3) {
+        border-top: 0;
       }
     }
 
@@ -172,6 +181,7 @@
       background: $gray-light;
       border: 1px solid rgba(0,0,0,.1);
       border-radius: 50%;
+      color: $gray-dark;
       display: inline-block;
       font-size: 9px;
       font-weight: 600;
@@ -181,6 +191,7 @@
   }
 
   ol {
+    @extend .clearfix;
     border: 1px solid rgba(0,0,0,.1);
     border-bottom: 0;
     border-radius: 3px;
@@ -189,8 +200,9 @@
     padding: 0;
 
     @include media(xs) {
-      border-right: 0;
       border-bottom: 0;
+      border-right: 0;
+      border-top: 0;
     }
 
     &.in {

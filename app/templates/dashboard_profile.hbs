@@ -1,6 +1,6 @@
 {{#if editmode}}
   {{#with model.attributes}}
-    <div id="gravitar">
+    <div id="gravatar">
       <div class="col-sm-8">
         <img src="{{gravitar}}?s=255" alt="{{username}}">
         <a href="https://en.gravatar.com/site/login" target="_blank" class="glyphicons edit"></a>
@@ -14,23 +14,26 @@
   {{#if leaderBadges.length}}
   <ol id="reputation">
     {{#each leaderBadges.models}}
-    <li class="col-sm-4">
-      <a href="/{{attributes.name}}">
+    <li class="col-sm-6 col-md-4">
+      <a href="/{{attributes.name}}" class="tooltip" data-title="{{attributes.userImagesCount}} {{attributes.name}} Runnables">
         {{view "channel_image" name=attributes.name}}
       </a>
-      <span class="reputation tooltip" data-title="{{attributes.userImagesCount}} {{attributes.name}} Runnables">{{attributes.userImagesCount}}</span>
+      <span class="reputation">{{attributes.userImagesCount}}</span>
     {{/each}}
   </ol>
   {{/if}}
 
   {{#with model.attributes}}
   <form class="inline">
+    <span class="glyphicons nameplate"></span>
     <input value="{{name}}" placeholder="Full Name" name="name">
   </form>
   <form class="inline">
+    <span class="glyphicons tie"></span>
     <input value="{{company}}" placeholder="Company" name="company">
   </form>
   <form class="inline">
+    <span class="glyphicons send"></span>
     <input value="{{email}}" placeholder="Email" disabled>
     <div class="menu">
       <a class="glyphicons {{#if show_email}}unlock{{else}}lock{{/if}}" data-toggle="dropdown"></a>
@@ -53,7 +56,7 @@
 {{else}}
 
   {{#with model.attributes}}
-    <div id="gravitar">
+    <div id="gravatar">
       <div class="col-sm-8">
         <img src="{{gravitar}}?s=255" alt="{{username}}">
         <span class="reputation tooltip" data-title="{{taggedImagesCount}} published Runnables">{{taggedImagesCount}}</span>
@@ -66,11 +69,11 @@
   {{#if leaderBadges.length}}
   <ol id="reputation">
     {{#each leaderBadges.models}}
-    <li class="col-sm-4">
-      <a href="/{{attributes.name}}">
+    <li class="col-sm-6 col-md-4">
+      <a href="/{{attributes.name}}" class="tooltip" data-title="{{attributes.userImagesCount}} {{attributes.name}} Runnables">
         {{view "channel_image" name=attributes.name}}
       </a>
-      <span class="reputation tooltip" data-title="{{attributes.userImagesCount}} {{attributes.name}} Runnables">{{attributes.userImagesCount}}</span>
+      <span class="reputation">{{attributes.userImagesCount}}</span>
     {{/each}}
   </ol>
   {{/if}}
@@ -78,16 +81,19 @@
   {{#with model.attributes}}
     {{#if name}}
     <form class="inline">
+      <span class="glyphicons nameplate"></span>
       <input value="{{name}}" placeholder="Full Name" name="name" disabled>
     </form>
     {{/if}}
     {{#if show_email}}
     <form class="inline">
+      <span class="glyphicons tie"></span>
       <input value="{{email}}" placeholder="Email" disabled>
     </form>
     {{/if}}
     {{#if company}}
     <form class="inline">
+      <span class="glyphicons send"></span>
       <input value="{{company}}" placeholder="Company" disabled>
     </form>
     {{/if}}

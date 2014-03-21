@@ -68,6 +68,7 @@ module.exports = Base.extend({
   onChangeSelected: function (selectedFile, selected) {
     // unselect other files when new file selected
     if (selected) {
+      this.app.dispatch.trigger('highlight:file', selectedFile, true);
       this
         .where({ selected:true })
         .filter(function (file) {

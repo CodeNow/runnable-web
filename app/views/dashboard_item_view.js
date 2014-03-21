@@ -14,13 +14,13 @@ module.exports = BaseView.extend({
       self.model.destroy(opts);
 
       //set new count for images and containers
-      var oldCount = $('li.active').find('span')[0];
+      var oldCount = $('.toggles > .active').find('span')[0];
       var newCount = oldCount.innerHTML - 1;
       oldCount.innerHTML = newCount;
 
       //if image, update reputation count as well
       if (self.options.isimage) {
-        $('.gravitar').children('span')[0].innerHTML = newCount;
+        $('#gravatar').find('span')[0].innerHTML = newCount;
       }
       dialogItself.close();
     };
