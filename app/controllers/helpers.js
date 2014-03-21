@@ -248,7 +248,7 @@ function fetchUserAndChannel (channelName, callback) {
 
 function fetchChannelContents (params, callback) {
   var channel = params.channel;
-  var page = params.page || 1;
+  var page = params.page || 0;
   var sort = params.sort ? '-'+params.sort : '-created';
   var spec = {
     images: {
@@ -256,8 +256,8 @@ function fetchChannelContents (params, callback) {
       params     : {
         sort: sort,
         channel: channel,
-        limit: 50,
-        page: page-1 // api page starts at 0
+        limit: 15,
+        page: page // api page starts at 0
       }
     },
     channels: {

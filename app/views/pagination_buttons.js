@@ -9,6 +9,7 @@ module.exports = BaseView.extend({
     this.currentUrl = utils.getCurrentUrlPath(this.app);
     if(this.currentUrl.split('?').length){
       var q = this.currentUrl.split('?')[1];
+      this.currentUrl = this.currentUrl.split('?')[0];
       this.qs = queryString.parse(q);
     } else {
       this.qs = {};
@@ -26,7 +27,7 @@ module.exports = BaseView.extend({
     return this.options;
   },
   pageLinks: function (opts) {
-    
+
     var collectionParams      = this.collection.params || {};
     collectionParams.page     = parseInt(collectionParams.page);
     collectionParams.lastPage = parseInt(collectionParams.lastPage);
@@ -36,11 +37,17 @@ module.exports = BaseView.extend({
     opts.humanNextPage     = opts.humanCurrentPage + 1;
     opts.humanLastPage     = collectionParams.lastPage + 1;
 
+    if(collectionParams.lastPage === 0){
+      opts.displayPagination = false;
+    } else {
+      opts.displayPagination = true;
+    }
+
     opts.prevQueryString  = _.extend({}, this.qs);
     opts.nextQueryString  = _.extend({}, this.qs);
     opts.indexQueryString = _.extend({}, this.qs);
     opts.lastQueryString  = _.extend({}, this.qs);
-    
+
     opts.showPrevLink = false;
     opts.showNextLink = false;
     opts.showLeftElipsis  = true;
@@ -66,7 +73,8 @@ module.exports = BaseView.extend({
     ['prev', 'next', 'index', 'last'].forEach(function (val) {
       var t = opts[val + 'QueryString'];
       t.orderBy = opts.orderByParam;
-      opts[val + 'QueryString'] = '/?' + queryString.stringify(t);
+      opts[val + 'QueryString'] = this.currentUrl;
+      opts[val + 'QueryString'] += '?' + queryString.stringify(t);
     }, this);
 
   }

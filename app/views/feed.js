@@ -10,7 +10,6 @@ module.exports = BaseView.extend({
     if (!opts.orderBy) {
       opts.orderBy = 'trending'; //default
     }
-
     if (opts.orderBy == 'trending') {
       opts.orderByTrending = true;
       opts.orderByPopular = false;
