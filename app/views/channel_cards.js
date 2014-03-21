@@ -2,7 +2,6 @@ var BaseView = require('./base_view');
 var Channel = require('../models/channel');
 
 module.exports = BaseView.extend({
-  tagName: 'main',
   id: 'cards',
   getTemplateData: function () {
     if (this.options.basehref == '/new') {

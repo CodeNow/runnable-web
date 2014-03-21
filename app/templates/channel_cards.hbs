@@ -11,10 +11,10 @@
     {{#if attributes.url}}
     <a href="{{attributes.url}}" data-name="{{attributes.name}}">
     {{else}}
-    <a href="{{../../../basehref}}{{invoke . method='appUrl'}}" class="card" data-name="{{attributes.name}}">
+    <a href="{{../../../basehref}}{{invoke . method='appUrl'}}" data-name="{{attributes.name}}">
     {{/if}}
       {{#with attributes}}
-      {{view 'channel_image' name=name height="24" width="22"}}
+      {{view 'channel_image' name=name}}
       <div class="description">
         <h2>{{name}}</h2>
         {{#if description}}
