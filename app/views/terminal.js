@@ -41,15 +41,28 @@ module.exports = BaseView.extend({
     }
     else if (message.data === 'hide:loader') {
       this.loading(false);
-      didTermErr = false;
     }
     else if (message.data === 'term:dis') {
       this.loading(true);
     }
     else if (message.data && (message.data.indexOf('term:data') === 0)) {
+      // when command is entered update container last_write
+      var opts = utils.cbOpts(cb);
+      opts.patch = true;
+      this.model.save({ last_write: true }, opts);
       this.trackEvent('Entered Command', {
         terminal_cmd: message.data.replace('term:data','')
       });
+    }
+
+    function cb (err) {
+      var self = this;
+      if (err) {
+        console.err(err);
+      }
+      else {
+        console.log('saved');
+      }
     }
   },
   listenToPostMessages: function () {

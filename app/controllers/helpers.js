@@ -65,7 +65,9 @@ function fetch (spec, options, callback) {
     });
   }
   var cb = function (err, results) {
-    if (err && err.status === 401) {
+    var accessTokenRequiredErr = err && err.status === 401;
+    var meNotFound = err && err.status === 404 && ~err.message.indexOf("/users/me");
+    if (accessTokenRequiredErr || meNotFound) {
       // "user not created" error, create user and try again.
       createUser(function (err) {
         if (err) { callback(err); } else {
@@ -317,12 +319,9 @@ function fetchImage (imageId, callback) {
   });
 }
 
-function createContainerFrom (imageIdOrChannelName, callback) {
-  var app = this.app;
-  var container = new Container({}, { app:app });
-  var options = utils.successErrorToCB(callback);
-  options.url = _.result(container, 'url') + '?from=' + encodeURIComponent(imageIdOrChannelName);
-  container.save({}, options);
+function createContainerFrom (imageIdOrChannelName, cb) {
+  var container = new Container({}, { app:this.app });
+  container.createFrom(imageIdOrChannelName, cb);
 }
 
 function fetchFilesForContainer (containerId, callback) {

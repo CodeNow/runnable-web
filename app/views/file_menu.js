@@ -7,6 +7,7 @@ module.exports = BaseView.extend({
   className: 'dropdown-menu in',
   events: {
     'click .rename'      : 'rename',
+    'click .delete-all'  : 'delAll',
     'click .delete'      : 'del',
     'click .default'     : 'default',
     'click .undefault'   : 'undefault',
@@ -35,6 +36,9 @@ module.exports = BaseView.extend({
   },
   del: function () {
     this.trigger('delete');
+  },
+  delAll: function () {
+    this.trigger('deleteAll');
   },
   default: function () {
     this.trigger('default');

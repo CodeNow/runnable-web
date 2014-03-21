@@ -42,8 +42,8 @@
     "pageSize" : 25,
     "domain": "runnable.com",
     "message" : {
-       "status" : "warning",
-       "text" : "<span class=\"glyphicons cleaning\"></span> We'll be undergoing maintenance starting Wednesday, March 12. The site will remain up with limited functionality."
+       "status" : "error",
+       "text" : "<span class=\"glyphicons cleaning\"></span> The site is currently undergoing maintenance. The site will remain up with limited functionality."
     }
   }
 }
