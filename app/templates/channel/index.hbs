@@ -17,27 +17,10 @@
     </div>
   </div>
 
-{{!--
-  {{#each channels.models}}
-    {{#with attributes}}
-    <li><a href="/{{name}}">{{name}}<span> {{count}}</span></a></li>
-    {{/with}}
-  {{/each}}
- --}}
   <div class="row">
-
-    
-    
     {{view 'feed' channels=channels feedTrending=feedTrending feedPopular=feedPopular}}
+  </div>
 
-  </div>
-{{!--
-  <div class="row">
-    <div id="tags-details" class="{{#if channels.length}}col-sm-9{{else}}col-sm-12{{/if}}">
-      {{view "runnable_list" collection=images className=""}}
-    </div>
-  </div>
- --}}
  </main>
 
 {{view "footer_view" model=user context=.}}
