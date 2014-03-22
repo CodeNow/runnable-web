@@ -4,10 +4,13 @@ var Container = require('../models/container');
 
 module.exports = BaseView.extend({
   id: 'git-card',
-  className: 'col-sm-4',
   events: {
-    'input input'   : 'enableSelect',
-    'change select' : 'changeLanguage'
+    'input input'    : 'enableSelect',
+    'keydown select' : 'preventDefault',
+    'change select'  : 'changeLanguage'
+  },
+  preventDefault: function (evt) {
+    evt.preventDefault();
   },
   enableSelect: function (evt) {
     var select = this.$('select');
