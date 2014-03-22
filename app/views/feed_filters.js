@@ -66,6 +66,7 @@ module.exports = BaseView.extend({
     } else {
       $h3.addClass('out').removeClass('in');
     }
+    return;
     this.$el.find('li.active').removeClass('active');
     this.activeFilters.forEach(function(filterItem){
       this.$el.find('[data-name="' + filterItem + '"]').addClass('active');

@@ -90,13 +90,7 @@ module.exports = {
               } else {
                 item.attributes.display = true;
               }
-
-              if(params.filter.indexOf(item.get('name')) === -1) {
-                item.attributes.active = false;
-              } else {
-                item.attributes.active = true;
-              }
-
+              item.attributes.isActiveFilter = (params.filter.indexOf(item.get('name')) === -1) ? false : true;
             });
 
             _.extend(channelResult, results);
@@ -217,6 +211,8 @@ module.exports = {
 
           results.filteringChannels.each(function(item, i){
             item.attributes.display = true;
+            item.attributes.isActiveFilter = (params.filter.indexOf(item.get('name')) === -1) ? false : true;
+
           });
 
           results.selectedCategoryLower = params.category.toLowerCase();

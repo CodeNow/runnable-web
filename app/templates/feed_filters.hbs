@@ -6,9 +6,9 @@
 
   {{#each collection.models}}
     {{#with attributes}}
-      {{#if active}}
+      {{#if isActiveFilter}}
         {{#if display}}
-          <li data-name="{{name}}">
+          <li data-name="{{name}}" class="active">
             {{view 'channel_image' name=name alt=true}}
             {{name}}
             <button type="button" class="glyphicons circle-remove"></button>
@@ -19,7 +19,7 @@
 
   {{#each collection.models}}
     {{#with attributes}}
-      {{#unless active}}
+      {{#unless isActiveFilter}}
         {{#if display}}
           <li data-name="{{name}}">
             {{view 'channel_image' name=name alt=true}}
@@ -31,9 +31,11 @@
       {{/unless}}
     {{/with}}
   {{/each}}
+
   {{#if collection.params.channel}}
     {{#if_gte collection.length compare="15"}}
       <li class="show-more"><span></span>
     {{/if_gte}}
   {{/if}}
+
 </ol>
