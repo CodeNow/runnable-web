@@ -5,7 +5,19 @@
 {{/if_modulo}}
 
 {{#if_eq attributes.name compare="runnableid"}}
-  {{view 'git_card'}}
+  {{!-- {{view 'git_card'}} --}}
+  <div class="col-sm-4">
+    <a class="card">
+      <div class="description">
+        <h2>
+          <form>
+            <input name='id' placeholder="Runnable Id" class="form-control">
+          </form>
+        </h2>
+        <p>Find an existing code example to start with (RunnableId is in the url).</p>
+      </div>
+    </a>
+  </div>
 {{else}}
   <div class="col-sm-4">
     {{#if attributes.url}}
