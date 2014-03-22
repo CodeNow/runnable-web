@@ -8,6 +8,7 @@
     {{#with attributes}}
       {{#if active}}
         {{#if display}}
+          <button type="button" class="glyphicons circle-remove"></button>
           <li data-name="{{name}}">
             {{view 'channel_image' name=name alt=true}}
             {{name}}
@@ -24,6 +25,7 @@
     {{#with attributes}}
       {{#unless active}}
         {{#if display}}
+          <button type="button" class="glyphicons circle-remove"></button>
           <li data-name="{{name}}">
             {{view 'channel_image' name=name alt=true}}
             {{name}}

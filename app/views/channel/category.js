@@ -7,13 +7,12 @@ var cycleTime = 2000;
 
 module.exports = BaseView.extend({
   events: {
-    'mouseover #channel-images > li': 'channelTextSwap',
-    'mouseleave #channel-images':     'channelTextRevert',
-    'submit form':                    'submitSearch',
-    'click .chevron-right':           'toggleHero'
+    'mouseover #channel-images > li'    : 'channelTextSwap',
+    'mouseleave #channel-images'        : 'channelTextRevert',
+    'submit form'                       : 'submitSearch',
+    'click #home-header .chevron-right' : 'toggleHero'
   },
   sortChannels: function () {
-
     var opts = this.options;
     var category = opts.channels.params.category.toLowerCase();
     var sortOrder = ['c++',
@@ -31,7 +30,7 @@ module.exports = BaseView.extend({
                       'php',
                       'python',
                       'ruby-on-rails',
-                      'twilio']; //'add your own'
+                      'twilio'];
     function getOrder (channel) {
       var sortIndex;
       //if(!channel.get('aliases'))
@@ -91,8 +90,8 @@ module.exports = BaseView.extend({
       title: 'Python',
       name:  'Python'
     },{
-      title: 'Codeigniter',
-      name:  'Codeigniter'
+      title: 'CodeIgniter',
+      name:  'CodeIgniter'
     },{
       title: '.NET',
       name:  '.NET'

@@ -82,18 +82,24 @@
     &.active {
       background: #fff;
 
-      .count {
+      > .count {
         border-color: $orange;
         color: $orange;
       }
     }
 
-    &.active:active {
-      background: transparent;
+    &.active {
 
-      .count {
-        border-color: rgba(0,0,0,.1);
-        color: $gray-dark;
+      &:active > button {
+        color: $orange;
+      }
+
+      > button {
+        display: block;
+      }
+
+      > .count {
+        display: none;
       }
     }
 
@@ -212,6 +218,27 @@
 
       li.show-more {
         display: none;
+      }
+    }
+
+    button {
+      background: none;
+      border: 0;
+      box-shadow: none;
+      color: darken($gray,20%);
+      display: none;
+      height: 45px;
+      padding: 10px;
+      position: absolute;
+        right: 0;
+      text-shadow: none;
+
+      &:hover {
+        color: darken($gray,30%);
+      }
+
+      &:active {
+        color: $orange;
       }
     }
   }

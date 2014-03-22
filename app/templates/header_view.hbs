@@ -1,8 +1,10 @@
 <div class="container">
   <nav class="row">
-    <div id="logo" class="col-sm-4">
-      <a href="/"></a>
-      <sup>&lt;beta&gt;</sup>
+    <div class="col-sm-4">
+      <a id="logo" href="/">
+        <span></span>
+        <sup>&lt;beta&gt;</sup>
+      </a>
     </div>
     {{#unless nosearch}}
     {{view "searchbar" classname="col-sm-4" inputclass="form-control" placeholder="Search for code"}}
