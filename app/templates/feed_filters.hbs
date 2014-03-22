@@ -12,10 +12,6 @@
           <li data-name="{{name}}">
             {{view 'channel_image' name=name alt=true}}
             {{name}}
-
-            {{#if count}}
-              <span class="count">{{count}}</span>
-            {{/if}}
         {{/if}}
       {{/if}}
     {{/with}}
@@ -25,11 +21,9 @@
     {{#with attributes}}
       {{#unless active}}
         {{#if display}}
-          <button type="button" class="glyphicons circle-remove"></button>
           <li data-name="{{name}}">
             {{view 'channel_image' name=name alt=true}}
             {{name}}
-
             {{#if count}}
               <span class="count">{{count}}</span>
             {{/if}}
