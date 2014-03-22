@@ -55,6 +55,7 @@
 .toggles {
   border: 1px solid rgba(0,0,0,.1);
   border-radius: 3px;
+  max-height: 38px;
 
   @media (max-width: 500px) {
     width: 100%;

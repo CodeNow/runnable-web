@@ -7,10 +7,10 @@ var cycleTime = 2000;
 
 module.exports = BaseView.extend({
   events: {
-    'mouseover #channel-images > li': 'channelTextSwap',
-    'mouseleave #channel-images':     'channelTextRevert',
-    'submit form':                    'submitSearch',
-    'click .chevron-right':           'toggleHero'
+    'mouseover #channel-images > li'    : 'channelTextSwap',
+    'mouseleave #channel-images'        : 'channelTextRevert',
+    'submit form'                       : 'submitSearch',
+    'click #home-header .chevron-right' : 'toggleHero'
   },
   sortChannels: function () {
 
