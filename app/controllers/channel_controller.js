@@ -30,15 +30,8 @@ module.exports = {
     async.waterfall([
       fetchUserAndChannel.bind(this, params.channel),
       function fetchFeeds (channelResult, callback) {
+
         var spec = {
-          /*
-          user: {
-            model: 'User',
-            params: {
-              _id: 'me'
-            }
-          },
-          */
           channels: {
             collection: 'Channels',
             params: {
@@ -46,7 +39,6 @@ module.exports = {
             }
           },
           feedTrending: {
-
             collection: 'FeedsImages',
             params: {
               page: params.page,
@@ -66,6 +58,7 @@ module.exports = {
         };
 
         fetch.call(self, spec, function (err, results) {
+
           if (err) {
             callback(err);
             return;
@@ -97,6 +90,13 @@ module.exports = {
               } else {
                 item.attributes.display = true;
               }
+
+              if(params.filter.indexOf(item.get('name')) === -1) {
+                item.attributes.active = false;
+              } else {
+                item.attributes.active = true;
+              }
+
             });
 
             _.extend(channelResult, results);

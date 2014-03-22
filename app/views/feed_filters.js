@@ -16,13 +16,6 @@ module.exports = BaseView.extend({
   qs: {},
   getTemplateData: function () {
     var opts = this.options;
-
-    if (opts.filterMode == 'channel') {
-      opts.collection.each(function (item, i) {
-        if(item.get('name') == opts.channel){}
-      });
-    }
-
     //var urlString = utils.getCurrentUrlPath(this.app, false);
     //console.log('urlString', urlString);
     return opts;

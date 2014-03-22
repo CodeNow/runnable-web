@@ -3,17 +3,36 @@
   <button data-action="show-all" type="button">Show All</button>
 </h3>
 <ol>
+
   {{#each collection.models}}
     {{#with attributes}}
-    {{#if display}}
-      <li data-name="{{name}}">
-        {{view 'channel_image' name=name alt=true}}
-        {{name}}
+      {{#if active}}
+        {{#if display}}
+          <li data-name="{{name}}">
+            {{view 'channel_image' name=name alt=true}}
+            {{name}}
 
-        {{#if count}}
-          <span class="count">{{count}}</span>
+            {{#if count}}
+              <span class="count">{{count}}</span>
+            {{/if}}
         {{/if}}
-    {{/if}}
+      {{/if}}
+    {{/with}}
+  {{/each}}
+
+  {{#each collection.models}}
+    {{#with attributes}}
+      {{#unless active}}
+        {{#if display}}
+          <li data-name="{{name}}">
+            {{view 'channel_image' name=name alt=true}}
+            {{name}}
+
+            {{#if count}}
+              <span class="count">{{count}}</span>
+            {{/if}}
+        {{/if}}
+      {{/unless}}
     {{/with}}
   {{/each}}
   {{#if collection.params.channel}}
