@@ -38,10 +38,6 @@
       "app_id": "980118989fd561bd1dce4ba4c7f8cb32da859c16"
     },
     "pageSize" : 25,
-    "domain": "runnable.pw",
-     "message" : {
-       "status" : "error",
-       "text" : "<span class=\"glyphicons cleaning\"></span> The site is currently undergoing maintenance. The site will remain up with limited functionality."
-    }
+    "domain": "runnable.pw"
   }
 }
