@@ -140,10 +140,12 @@ module.exports = BaseView.extend({
     }
   },
   submitSearch: function (evt) {
+
+    var searchString = this.$el.find('input[type="search"][name="q"]').val();
     if (!this.typed) {
       evt.preventDefault();
       this.app.set('loading', true);
-      this.app.router.navigate('/'+ids[this.index], {trigger:true});
+      this.app.router.navigate('/search?q=' + searchString.replace(/ /g, '+'), {trigger:true});
     }
   },
   toggleHero: function () {
