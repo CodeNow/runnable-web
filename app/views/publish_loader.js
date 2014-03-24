@@ -35,7 +35,12 @@ module.exports = BaseView.extend({
       if (err) {
         cb(err);
       } else {
-        this.$el.addClass('loading');
+        if (model.get('status') === 'Finished') { // meta publish occurred
+          this.progress('Finished');
+        }
+        else {
+          this.$el.addClass('loading');
+        }
       }
     }
   },
