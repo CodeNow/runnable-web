@@ -6,8 +6,14 @@ module.exports = BaseView.extend({
   id: 'git-card',
   className: 'col-sm-4',
   events: {
-    'input input'   : 'enableSelect',
-    'change select' : 'changeLanguage'
+    'input input'    : 'enableSelect',
+    'keydown select' : 'preventTyping',
+    'change select'  : 'changeLanguage'
+  },
+  preventTyping: function (evt) {
+    if (code !== 40 || code !== 38) {
+      evt.preventDefault();
+    }
   },
   enableSelect: function (evt) {
     var select = this.$('select');
