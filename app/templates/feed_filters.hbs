@@ -1,6 +1,10 @@
-<h3>
+<h3
+  {{#if filteringActive}}class="in"{{/if}}
+  {{#unless filteringActive}}class="out"{{/unless}}>
+
   Filter<span>ing</span>
   <button data-action="show-all" type="button">Show All</button>
+
 </h3>
 <ol>
 

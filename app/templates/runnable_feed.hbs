@@ -5,7 +5,7 @@
       <data><span class="glyphicons play-button"></span><b>{{attributes.runs}}</b> Runs</data>
       <ul>
         {{#each attributes.tags}}
-        <li class="tag">
+        <li class="tag {{#if this.isActiveFilter}}active{{/if}}">
           <a href="/{{this.name}}">{{this.name}}</a>
         {{/each}}
       </ul>

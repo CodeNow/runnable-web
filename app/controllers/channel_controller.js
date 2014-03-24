@@ -83,15 +83,30 @@ module.exports = {
             results.relatedChannels = results.feedTrending.relatedChannels;
             results.filteringChannels = results.relatedChannels;
 
+
+
+
             // Don't display the current channel as an option in filters
             results.filteringChannels.each(function(item, i){
-              if(item.get('name') == results.channel.get('name')){
-                item.attributes.display = false;
-              } else {
-                item.attributes.display = true;
-              }
+              item.attributes.display = (item.get('name') !== results.channel.get('name'))
               item.attributes.isActiveFilter = (params.filter.indexOf(item.get('name')) === -1) ? false : true;
             });
+
+            var setIfActive = function (item, i){
+              var channel = new Channel(item);
+              item.isActiveFilter = channel.hasAlias(params.filter);
+            };
+            results.feedTrending.each(function(item, i){
+              item.get('tags').forEach(setIfActive);
+              item.sortChannels()
+            });
+            results.feedPopular.each(function(item, i){
+              item.get('tags').forEach(setIfActive);
+              item.sortChannels();
+            });
+
+
+
 
             _.extend(channelResult, results);
 
@@ -153,6 +168,9 @@ module.exports = {
       return;
     }
 
+    if(!_.isArray(params.filter))
+      params.filter = [params.filter];
+
     var isFeaturedCategory = (params.category.toLowerCase() == 'featured');
     // if (isServer && !this.app.req.cookies.pressauth) {
     //   this.redirectTo('/');
@@ -200,7 +218,6 @@ module.exports = {
           callback(err);
         }
         else {
-
           results.relatedChannels = results.feedTrending.relatedChannels;
 
           if (results.relatedChannels.length) {
@@ -209,11 +226,33 @@ module.exports = {
             results.filteringChannels = results.channels;
           }
 
+
+
+
+
+
           results.filteringChannels.each(function(item, i){
             item.attributes.display = true;
             item.attributes.isActiveFilter = (params.filter.indexOf(item.get('name')) === -1) ? false : true;
-
           });
+
+          var setIfActive = function (item, i){
+            var channel = new Channel(item);
+            item.isActiveFilter = channel.hasAlias(params.filter);
+          };
+          results.feedTrending.each(function(item, i){
+            item.get('tags').forEach(setIfActive);
+            item.sortChannels()
+          });
+          results.feedPopular.each(function(item, i){
+            item.get('tags').forEach(setIfActive);
+            item.sortChannels();
+          });
+
+
+
+
+
 
           results.selectedCategoryLower = params.category.toLowerCase();
           results.selectedCategory = _.find(results.categories.models, function (category) {

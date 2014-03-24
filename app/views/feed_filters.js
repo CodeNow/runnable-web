@@ -16,8 +16,16 @@ module.exports = BaseView.extend({
   qs: {},
   getTemplateData: function () {
     var opts = this.options;
-    //var urlString = utils.getCurrentUrlPath(this.app, false);
-    //console.log('urlString', urlString);
+
+    var activeFilterCategories = this.collection.where({
+      "isActiveFilter": true
+    });
+
+    if(opts.filterMode == 'channel')
+      opts.filteringActive = (activeFilterCategories.length > 1);
+    else
+      opts.filteringActive = (activeFilterCategories.length > 0);
+
     return opts;
   },
   postRender: function () {
@@ -59,6 +67,8 @@ module.exports = BaseView.extend({
     this.updateActiveFilters();
   },
   updateActiveFilters: function () {
+    return;
+
     // add 'ing' to 'filter' and show clear
     var $h3 = this.$('h3');
     if (this.activeFilters.length) {
@@ -66,11 +76,12 @@ module.exports = BaseView.extend({
     } else {
       $h3.addClass('out').removeClass('in');
     }
-    return;
+    /*
     this.$el.find('li.active').removeClass('active');
     this.activeFilters.forEach(function(filterItem){
       this.$el.find('[data-name="' + filterItem + '"]').addClass('active');
     }, this);
+    */
   },
   showMore: function (evt) {
     var $ol = this.$('ol');
