@@ -1,11 +1,16 @@
 // global layout
 html {
+  background: $gray-light;
   height: 100%;
 }
 
 body {
   background: $gray-lighter;
   -webkit-font-smoothing: subpixel-antialiased;
+}
+
+#content {
+  background: $gray-lighter;
 }
 
 main {

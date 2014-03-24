@@ -1,13 +1,14 @@
 {{#each collection.models}}
 
+{{!--
 {{#if_modulo @index 3}}
 <div class="row">
 {{/if_modulo}}
-{{!--
 {{#if_eq attributes.name compare="runnableid"}}
   {{view 'git_card'}}
 {{else}}
  --}}
+
  {{#with attributes}}
   <div class="col-sm-4">
     {{#if attributes.url}}
@@ -25,10 +26,11 @@
     </a>
   </div>
 {{/with}}
-{{!-- {{/if_eq}} --}}
 
+{{!-- {{/if_eq}}
 {{#if_modulo @index 3 1 notzero=true}}
 </div>
 {{/if_modulo}}
+--}}
 
 {{/each}}
