@@ -21,6 +21,7 @@ nav > div {
 #logo {
   display: inline-block;
   height: 54px;
+  user-select: none;
 
   &:hover {
     text-decoration: none;
@@ -112,8 +113,8 @@ nav > div {
       top: 0;
       right: 15px;
   }
+}
 
-  &#header-signup-link {
-    padding-right: 5px;
-  }
+#header-signup-link {
+  padding-right: 5px;
 }
