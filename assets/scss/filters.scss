@@ -26,6 +26,7 @@
       float: right;
       height: 20px;
       line-height: 19px;
+      margin-right: 10px;
       opacity: 0;
       padding: 0 6px;
       pointer-events: none;
@@ -81,11 +82,7 @@
     &:active,
     &.active {
       background: #fff;
-
-      > .count {
-        border-color: $orange;
-        color: $orange;
-      }
+      color: $orange;
     }
 
     &.active {
