@@ -19,6 +19,7 @@
     {{view 'pagination_buttons' collection=feedTrending orderByParam="popular"}}
   </div>
 
+  {{#if callout}}
   <div id="callout" class="row">
     <a href="/publish">
       <label>New!</label>
@@ -26,4 +27,5 @@
       <span>Use your API, service, or project on Runnable.</span>
     </a>
   </div>
+  {{/if}}
 </div>
