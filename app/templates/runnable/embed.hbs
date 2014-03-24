@@ -1,8 +1,5 @@
 <main id="embed">
-  <div class="row">
-    <section class="col-sm-12">
-      {{view "code_editor" context=. editmode=false model=image embed="true"}}
-      {{view "terminal" model=container}}
-    </section>
-  </div>
+  {{view "run_button" model=container collection=specifications context=.}}
+  {{view "code_editor" context=. editmode=false model=image embed="true"}}
+  {{view "terminal" model=container}}
 </main>
