@@ -8,6 +8,11 @@ module.exports = BaseView.extend({
     'click #open-file-explorer': 'showFiles'
   },
   className: 'in', // file browser open
+  preRender: function () {
+    if (this.options.embed) {
+      this.className = '';
+    }
+  },
   postHydrate: function () {
     var model = this.model;
     var canEdit = this.app.user.canEdit(model);

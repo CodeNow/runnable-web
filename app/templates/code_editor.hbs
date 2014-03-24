@@ -8,7 +8,7 @@
   {{view "file_select" collection=defaultFiles}}
 </div>
 {{view "file_explorer" container=container rootDir=rootDir editmode=editmode lock=lock}}
-<div id="project-editor-container" {{#if showReadme}}class="show-readme"{{/if}}>
+<div id="project-editor-container">
   <!--googleoff: anchor-->
   {{view "code" collection=defaultFiles}}
   <!--googleon: anchor-->
