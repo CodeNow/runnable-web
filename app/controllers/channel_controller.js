@@ -95,6 +95,12 @@ module.exports = {
             var setIfActive = function (item, i){
               var channel = new Channel(item);
               item.isActiveFilter = channel.hasAlias(params.filter);
+              item.display = true;
+              if(item.isActiveFilter){
+                if(channel.get('aliases').indexOf(params.channel.toLowerCase()) !== -1){
+                  item.display = false;
+                }
+              }
             };
             results.feedTrending.each(function(item, i){
               item.get('tags').forEach(setIfActive);
@@ -239,6 +245,7 @@ module.exports = {
           var setIfActive = function (item, i){
             var channel = new Channel(item);
             item.isActiveFilter = channel.hasAlias(params.filter);
+            item.display = true;
           };
           results.feedTrending.each(function(item, i){
             item.get('tags').forEach(setIfActive);

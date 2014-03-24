@@ -5,8 +5,10 @@
       <data><span class="glyphicons play-button"></span><b>{{attributes.runs}}</b> Runs</data>
       <ul>
         {{#each attributes.tags}}
-        <li class="tag {{#if this.isActiveFilter}}active{{/if}}">
-          <a href="/{{this.name}}">{{this.name}}</a>
+          {{#if this.display}}
+            <li class="tag {{#if this.isActiveFilter}}active{{/if}}">
+              <a href="/{{this.name}}">{{this.name}}</a>
+          {{/if}}
         {{/each}}
       </ul>
       <time>{{dateAgo attributes.created}}</time>
