@@ -1,36 +1,71 @@
 #embed {
   border: 1px solid rgba(0,0,0,.1);
-  margin: 100px; // delete this
+  height: 100%;
+  margin: 0;
   position: relative;
+  width: 100%;
+    min-width: 240px;
 
   // run button
   > button {
-    background: $green;
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
+    height: 24px;
+    line-height: 22px;
+    padding: 0 8px;
     position: absolute;
-      top: 0;
-      right: 0;
+      top: 6px;
+      right: 6px;
       z-index: 3;
-    width: 80px;
+
+    > img {
+      margin: -4px 3px 0 0
+    }
   }
 
   // code editor
   #code-editor {
     border: 0;
-  }
 
-  #project-editor-tabs-wrapper {
-    width: calc(100% - 116px);
-  }
+    #open-file-explorer {
+      height: 37px;
+      transition: height 0s .1s;
+    }
 
-  #project-select-tabs {
-    right: 80px;
-  }
+    &.in {
 
-  #project-editor-tabs > li {
-    border-top: 0;
+      #open-file-explorer {
+        height: 36px;
+      }
+
+      #project-editor-tabs-wrapper {
+        transform: translate3d(204px,0,0);
+        width: calc(100% - 330px);
+      }
+    }
+
+    &:after {
+      display: none;
+    }
+
+    #project-editor-tabs-wrapper {
+      border-bottom: 0;
+      width: calc(100% - 126px);
+    }
+
+    #project-select-tabs {
+      border-left: 1px solid rgba(0,0,0,.1);
+      border-right: 1px solid rgba(0,0,0,.1);
+      position: absolute;
+        top: -1px;
+        right: 68px;
+    }
+
+    #project-editor-tabs > li {
+      border-top: 0;
+    }
+
+    #project-editor-container {
+      border-top: 1px solid rgba(0,0,0,.1);
+    }
   }
 
   // terminal
@@ -44,18 +79,22 @@
 
   // footer
   footer {
-    background: $purple;
-    border: 0;
+    background: $gray-light;
+    border-top: 1px solid rgba(0,0,0,.1);
     box-shadow: none;
     height: 36px;
     line-height: 36px;
 
     > a {
-      color: #fff;
+      color: $gray-dark;
       float: left;
       font-size: 13px;
 
-      &:first-child:active {
+      &:hover {
+        color: $gray-darker;
+      }
+
+      &:active {
         transform: translate3d(0,1px,0);
       }
     }
@@ -64,10 +103,13 @@
   #logo {
     float: right;
     height: 36px;
+    margin-right: 6px;
+    padding: 0;
+    width: 36px;
 
-    > span {
-      margin: 7px 0 0;
-      width: 28px;
+    > svg {
+      height: 36px;
+      width: 36px;
     }
   }
 }
