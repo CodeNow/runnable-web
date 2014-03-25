@@ -1,0 +1,55 @@
+#embed {
+  border: 1px solid rgba(0,0,0,.1);
+  margin: 100px; // delete this
+  position: relative;
+
+  // run button
+  .run-button {
+    border-radius: 0;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 3;
+    width: 80px;
+  }
+
+  // code editor
+  #code-editor {
+    border: 0;
+  }
+
+  #project-editor-tabs-wrapper {
+    width: calc(100% - 116px);
+  }
+
+  #project-select-tabs {
+    right: 80px;
+  }
+
+  #project-editor-tabs > li {
+    border-top: 0;
+  }
+
+  // terminal
+  .terminal-title {
+    display: none;
+  }
+
+  // footer
+  footer {
+    background: $purple;
+    height: 36px;
+    line-height: 36px;
+
+    > a {
+      color: #fff;
+      float: left;
+      font-size: 13px;
+    }
+  }
+
+  > #logo {
+    float: right;
+  }
+}
