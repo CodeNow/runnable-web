@@ -1,13 +1,12 @@
 <main id="embed">
-  {{view "run_button" model=container collection=specifications context=.}}
+  {{!-- {{view "run_button" model=container collection=specifications context=.}} --}}
+  <button type="button"><span class="glyphicons play"></span> Run</button>
   {{view "code_editor" context=. editmode=false model=image embed="true"}}
-  {{view "terminal" model=container}}
+  {{!-- {{view "terminal" model=container}} --}}
   <footer>
-    <a href="google.com">PROJECT TITLE</a>
-
-    <div id="logo">
-      <a href="/"></a>
-      <sup>&lt;beta&gt;</sup>
-    </div>
+    <a href="google.com" target="_blank">HTML5 Drag and Drop File Upload</a>
+    <a id="logo" href="/" target="_blank">
+      <span></span>
+    </a>
   </footer>
 </main>
