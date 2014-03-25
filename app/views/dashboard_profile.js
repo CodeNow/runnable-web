@@ -4,23 +4,15 @@ var utils = require('../utils');
 module.exports = BaseView.extend({
   tagName: 'section',
   id: 'profile',
-  className: 'col-sm-3',
+  className: 'col-xl-offset-1 col-xl-2 col-sm-3',
   events: {
-    'click .edit-inline'      : 'editInline',
-    'click .permission a'     : 'permissionToggle',
-    'change input'            : 'updateAttr'
-  },
-  preRender: function () {
-    if (this.options.editmode) this.className = 'editmode col-sm-3';
-  },
-  editInline: function (evt) {
-    this.$(evt.currentTarget)
-      .children('input')
-      .focus();
+    'click .menu a' : 'permissionToggle',
+    'change input'  : 'updateAttr',
+    'submit form'   : 'preventDefault'
   },
   permissionToggle: function (evt) {
     var $menuItem = this.$(evt.currentTarget);
-    var $menuStatus = this.$('.permission > .glyphicons');
+    var $menuStatus = this.$('.menu > .glyphicons');
     if ($menuItem.hasClass('public')) {
       $menuStatus.prop('class','glyphicons unlock');
       this.save('show_email', true);
@@ -41,6 +33,10 @@ module.exports = BaseView.extend({
     var opts = utils.cbOpts(this.showIfError, this);
     opts.patch = true;
     this.model.save(data, opts);
+  },
+  preventDefault: function (evt) {
+    evt.preventDefault();
+    return false;
   }
 });
 

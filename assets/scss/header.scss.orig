@@ -1,0 +1,239 @@
+#primary {
+  @extend .clearfix;
+  background: $purple;
+  line-height: 54px;
+
+  @include media(sm) {
+    height: 54px;
+  }
+
+  .container {
+    position: relative;
+  }
+}
+
+<<<<<<< HEAD
+  .nav {
+    margin: 0;
+
+    @include media(sm) {
+      position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    > li {
+      height: 54px;
+      line-height: 54px;
+      margin-left: 20px;
+
+      @include media(xs) {
+        &:nth-child(2) {
+          float: right;
+          margin-right: 15px;
+        }
+
+        &:last-child {
+          position: absolute;
+            top: 0;
+            right: 20px;
+        }
+      }
+    }
+
+    a {
+      color: #fff;
+      font-size: 12px;
+      padding: 0;
+    }
+
+    .btn {
+      font-weight: normal;
+      margin-top: 10px;
+      padding: 0 18px 0 16px;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &.signed-in {
+
+      > .dropdown a {
+        padding: 0;
+
+        @include breakpoint(screen-xs) {
+          margin-top: 4px;
+          margin-left: 8px;
+        }
+      }
+
+      .caret {
+        border-top-color: #b48bd1;
+        border-bottom-color: #b48bd1;
+        border-top-width: 6px;
+        border-left-width: 5px;
+        border-right-width: 5px;
+        margin-left: 12px;
+
+        @include breakpoint(screen-xs) {
+          margin-left: 4px;
+        }
+      }
+
+      .dropdown-menu {
+        box-shadow: 0 2px 3px rgba(0,0,0,.3);
+        left: 0;
+        margin: 0;
+        padding: 0;
+        top: 170%;
+        width: 100%;
+
+        li {
+          overflow: hidden;
+
+          &:first-child {
+            border-radius: 3px 3px 0 0;
+
+            a:before {
+              border-right: 5px solid transparent;
+              border-bottom: 6px solid #fff;
+              border-left: 5px solid transparent;
+              content: '';
+              height: 0;
+              position: absolute;
+                top: -6px;
+                right: 22px;
+                z-index: 100;
+              transition: all .2s ease-in-out;
+              width: 0;
+            }
+
+            a:after {
+              border-right: 6px solid transparent;
+              border-bottom: 7px solid #c6c6c6;
+              border-left: 6px solid transparent;
+              content: '';
+              height: 0;
+              position: absolute;
+                top: -7px;
+                right: 21px;
+              width: 0;
+            }
+
+            a:hover:before {
+              border-bottom: 6px solid $orange;
+            }
+          }
+
+          &:last-child  {
+            border-radius: 0 0 3px 3px;
+          }
+=======
+nav > div {
+  @include media(sm) {
+    height: 54px;
+  }
+}
+
+#logo {
+  display: inline-block;
+  height: 54px;
+  user-select: none;
+>>>>>>> f7a84ee18f618b408d0293c0c1ea13d0289211fc
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:hover > span,
+  &:active > span {
+    background-position: 0 100%;
+  }
+
+  > span {
+    background: url(../images/sprite-runnable-logo-2.png) no-repeat;
+    display: inline-block;
+    height: 22px;
+    margin: 16px 0 0;
+    padding: 0;
+    width: 140px;
+
+    @include retina() {
+      background: url(../images/sprite-runnable-logo-2@2x.png) no-repeat;
+      background-size: 100%;
+    }
+  }
+
+  > sup {
+    color: lighten($purple-light,20%);
+    line-height: 54px;
+    position: relative;
+      top: -12px;
+      left: -4px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+    user-select: none;
+  }
+}
+
+#header-actions {
+  float: right;
+
+  > a,
+  > span {
+    color: #fff;
+    float: right;
+  }
+
+  > a {
+    font-size: 13px;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .btn {
+    margin: 10px 15px 0 0;
+
+    @include media(xs) {
+      margin: 5px 0 15px;
+      width: 100%;
+    }
+  }
+
+  @include media(xs) {
+    position: static;
+    width: 100%;
+  }
+}
+
+#user,
+#header-signup-link {
+  cursor: pointer;
+  display: inline-block;
+
+  img {
+    border-radius: 50%;
+  }
+
+  .menu {
+    display: block;
+  }
+
+  .exit:hover:before {
+    content: '☹';
+    font-size: 19px;
+    line-height: 0;
+  }
+
+  @include media(xs) {
+    position: absolute;
+      top: 0;
+      right: 15px;
+  }
+}
+
+#header-signup-link {
+  padding-right: 5px;
+}

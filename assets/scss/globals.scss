@@ -1,3 +1,41 @@
+// global layout
+html {
+  background: $gray-light;
+  height: 100%;
+}
+
+body {
+  background: $gray-lighter;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+#content {
+  background: $gray-lighter;
+}
+
+main {
+  margin: 30px 0 60px;
+  overflow: hidden;
+
+  @include media(xs) {
+    margin-top: 15px;
+  }
+}
+
+// utility
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.clearfix:after {
+  clear: both;
+}
+
 .right {
   float: right;
 }
@@ -32,17 +70,4 @@
 
 .center-text {
   text-align: center;
-}
-
-// global layout
-html {
-  height: 100%;
-}
-
-body {
-  background: #eee;
-}
-
-#content {
-  background: #f6f6f6;
 }

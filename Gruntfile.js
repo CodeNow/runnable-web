@@ -35,7 +35,7 @@ var aceScripts = [
 var frontendScripts = [
   'public/vendor/bower/jquery/jquery.js',
   'public/vendor/jquery-ui-custom/js/jquery-ui-1.10.3.custom.min.js',
-  'public/vendor/modernizr/modernizr.custom.61873.js',
+  'public/vendor/modernizr/modernizr.custom.64268.js',
   'public/vendor/*.js', //include jquery plugins, must be after jquery
   'public/vendor/bower/sockjs/sockjs.js',
   'public/vendor/bower/es5-shim/es5-shim.js',
@@ -54,7 +54,8 @@ var frontendScripts = [
   'public/vendor/bower/jquery.stellar/jquery.stellar.min.js',
   'public/vendor/bower/frontend-track/frontend-track.js',
   'public/vendor/bower/autocompletejs/js/autocomplete.js',
-  'public/vendor/bootstrap/bootstrap-dialog.js' // https://github.com/nakupanda/bootstrap3-dialog
+  'public/vendor/bootstrap/bootstrap-dialog.js', // https://github.com/nakupanda/bootstrap3-dialog
+  'public/vendor/bower/fastclick/lib/fastclick.js'
 ]
 .concat(aceScripts);
 
@@ -235,7 +236,8 @@ module.exports = function(grunt) {
             marked: '../marked/lib/marked.js',
             'node-uuid': '../node-uuid/uuid.js',
             nprogress: '../nprogress/nprogress.js',
-            diff: '../diff/diff.js'
+            diff: '../diff/diff.js',
+            'query-string': '../query-string/query-string.js'
           },
           aliases: [
             {from: rendrDir + '/client', to: 'rendr/client'},

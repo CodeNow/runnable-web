@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var queryString = require('query-string');
 
 var utils = module.exports = {
   capitalize: function (str) {
@@ -341,10 +342,8 @@ var utils = module.exports = {
       return app.req.query[key];
     }
     else {
-      var re = new RegExp('[?&]'+key+'=([^&]*)');
-      var qs = window.location.search;
-      var match = re.exec(qs);
-      return match && match[1];
+      var q = queryString.parse(window.location.search);
+      return q[key];
     }
   },
   getCurrentUrl: function (app) {

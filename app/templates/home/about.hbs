@@ -2,13 +2,12 @@
 {{view "header_view" model=user context=.}}
 {{view "global_message"}}
 
-
-<section id="about-header" class="jumbotron" data-stellar-background-ratio="0.5">
+<section id="about-header" class="jumbotron" data-stellar-background-ratio=".8">
   <div class="container">
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-8">
         <h2>We're bringing the world's code to life</h2>
-        <p>Discovering, collaborating and working with code should be simple. We're on a mission to empower anyone to build amazing things with software.</p>
+        <p>Discovering, collaborating and working with code should be simple. We're on a mission to empower anyone to build amazing things with software.
       </div>
     </div><!--/.row-->
   </div><!--/.container-->
@@ -27,11 +26,13 @@
       <a href="http://pandodaily.com/2013/10/30/runnable-raises-2m-to-centralize-all-the-worlds-open-source-code/" class="logo pandodaily" target="_blank"></a>
     </div><!--/.row-->
     <div class="row">
-      <div class="col-sm-6 col-sm-offset-1">
+      <div class="col-sm-8 col-sm-offset-2">
         <blockquote>
-          <p>Runnable appears to have stumbled on a much needed solution to a very real problem. The timing couldn’t be better, in terms of the shift in the way developers work and the availability of the underlying infrastructure required to run such a platform.</p>
+          <p>Runnable appears to have stumbled on a much needed solution to a very real problem. The timing couldn’t be better, in terms of the shift in the way developers work and the availability of the underlying infrastructure required to run such a platform.
         </blockquote>
-        <h3 class="read-the-article"><a href="http://pandodaily.com/2013/10/30/runnable-raises-2m-to-centralize-all-the-worlds-open-source-code/" target="_blank">Read The Article</a></h3>
+        <h3 class="read-the-article">
+          <a href="http://pandodaily.com/2013/10/30/runnable-raises-2m-to-centralize-all-the-worlds-open-source-code/" target="_blank">Read The Article</a>
+        </h3>
       </div>
     </div><!--/.row-->
   </div><!--/.container-->
@@ -39,18 +40,14 @@
 
 <section id="about-stack" class="jumbotron">
   <div class="container">
-    <img class="amazon" data-stellar-ratio="2.5" data-stellar-horizontal-offset="200" src="assets/images/stack-amazon.png" />
-
-    <img class="node" data-stellar-ratio="1.5" data-stellar-horizontal-offset="200" src="assets/images/stack-node.png" />
-
-    <img class="codeigniter" data-stellar-ratio="2" data-stellar-horizontal-offset="200" src="assets/images/stack-codeigniter.png" />
-
-    <img class="diamond" data-stellar-ratio="3" data-stellar-horizontal-offset="200" src="assets/images/stack-diamond.png" />
-
+    <img class="amazon" data-stellar-ratio="2.5" data-stellar-horizontal-offset="200" src="assets/images/stack-amazon.png">
+    <img class="node" data-stellar-ratio="1.5" data-stellar-horizontal-offset="200" src="assets/images/stack-node.png">
+    <img class="codeigniter" data-stellar-ratio="2" data-stellar-horizontal-offset="200" src="assets/images/stack-codeigniter.png">
+    <img class="diamond" data-stellar-ratio="3" data-stellar-horizontal-offset="200" src="assets/images/stack-diamond.png">
     <div class="row">
-      <div class="col-sm-5 col-sm-offset-3">
+      <div class="col-sm-8 col-sm-offset-4">
         <h2>Node.JS, Docker and CoffeeScript</h2>
-        <p>We think Javascript is the new x86, Docker the DevOps platform of the future and AWS the basic building blocks for the web.</p>
+        <p>We think Javascript is the new x86, Docker the DevOps platform of the future and AWS the basic building blocks for the web.
       </div>
     </div><!--/.row-->
   </div><!--/.container-->
@@ -60,7 +57,7 @@
   <div class="container">
     <div class="row">
       <h2>Located in the Heart of Silicon Valley.</h2>
-      <p>We're in Palo Alto, one block away from University Ave.</p>
+      <p>We're in Palo Alto, one block away from University Ave.
     </div><!--/.row-->
   </div><!--/.container-->
 </section>
@@ -72,35 +69,35 @@
       <li>
         <img src="assets/images/team-yash.png" height="120" width="120">
         <h3>Yash Kumar</h3>
-        <p>CEO/Engineer</p>
+        <p>CEO/Engineer
       <li>
         <img src="assets/images/team-tejesh.png" height="120" width="120">
         <h3>Tejesh Mehta</h3>
-        <p>Engineer</p>
+        <p>Engineer
       <li>
         <img src="assets/images/team-sundip.png" height="120" width="120">
         <h3>Sundip Patel</h3>
-        <p>Product/Engineer</p>
+        <p>Product/Engineer
       <li>
         <img src="assets/images/team-henry.png" height="120" width="120">
         <h3>Henry Allen-Tilford</h3>
-        <p>Engineer</p>
+        <p>Engineer
       <li>
         <img src="assets/images/team-praful.png" height="120" width="120">
         <h3>Praful Rana</h3>
-        <p>Product/Engineer</p>
+        <p>Product/Engineer
       <li>
         <img src="assets/images/team-tony.png" height="120" width="120">
         <h3>Tony Li</h3>
-        <p>Designer</p>
+        <p>Designer
       <li>
         <img src="assets/images/team-anand.png" height="120" width="120">
         <h3>Anand Patel</h3>
-        <p>Engineer</p>
+        <p>Engineer
       <li>
         <img src="assets/images/team-casey.png" height="120" width="120">
         <h3>Casey Flynn</h3>
-        <p>Engineer</p>
+        <p>Engineer
     </ul>
   </div><!--/.container-->
 </section>
@@ -108,7 +105,7 @@
 <section id="about-contact">
   <div class="container">
     <address>
-      <strong>Runnable Headquarters <wbr>(InitMe, Inc)</strong>
+      <strong>Runnable Headquarters <wbr>(InitMe, Inc.)</strong>
       <br>
       459 Hamilton Ave, Suite 304
       <br>
@@ -118,12 +115,13 @@
     </address>
     <form id="about-contact-body" method="post" action="" class="row">
       {{view "contact_form"}}
-      <h4>Having trouble with something? <a href="http://support.runnable.com/runnable/questions/popular">Don’t forget the FAQ</a>.</h4>
-      <p>If you’re having trouble figuring something out, check out the FAQ Section to see if your question has already been answered. There are plenty of other developers that are sharing information on the FAQ boards. Other than that, feel free to give us a shout!</p>
+      <h4>
+        Having trouble with something?
+        <a href="http://support.runnable.com/runnable/questions/popular">Don’t forget the FAQ</a>.
+      </h4>
+      <p>If you’re having trouble figuring something out, check out the FAQ Section to see if your question has already been answered. There are plenty of other developers that are sharing information on the FAQ boards. Other than that, feel free to give us a shout!
     </form>
   </div><!--/.container-->
 </section>
-
-
 
 {{view "footer_view" model=user context=.}}

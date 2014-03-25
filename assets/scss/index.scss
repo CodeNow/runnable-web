@@ -1,5 +1,22 @@
+/*
+ *                                                     __        __
+ *                                                     88        88
+ *                                                     88        88
+ *  88,dPPY 88      88 88,dPYba,  88,dPYba,  :aPPYYba, 88,dPYba  88  ,adPYba
+ *  88PPY'  88      88 88P'  `"8a 88P'  `"8a '     `Y8 88'   "8a 88 a8P____88
+ *  88      88      88 88      88 88      88 ,adPPPP88 88     d8 88 8PP88888J
+ *  88      "8a,  ,a88 88      88 88      88 88,   ,88 88,. ,a8" 88 "8b,  ,a
+ *  88       `"YbdP'88 88      88 88      88 `"8bbd"Y8,8Y"Ybb8"  88  `"Ybd8"'
+ *
+ *  California Style Sheets
+ *
+*/
+
+// compass
 @import "compass/css3";
 @import "compass/layout/sticky-footer";
+
+// global
 @import "mixins";
 @import "ie";
 @import "print";
@@ -7,26 +24,41 @@
 @import "screen";
 @import "me";
 @import "globals";
+
+// components
+@import "header";
 @import "logo";
-@import "runnable";
-@import "terminal";
+@import "footer";
+@import "hero";
+@import "feed";
+@import "filters";
+@import "cards";
 @import "navtabs";
 @import "modals";
 @import "popovers";
 @import "select";
 @import "forms";
 @import "animations";
-@import "dashboard";
 @import "loader";
-@import "header";
 @import "tooltips";
 @import "pagination";
 @import "tags";
-@import "output";
 @import "images";
 @import "typeahead";
-@import "editor";
 @import "validation";
 @import "errors";
-@import "readme";
+@import "messages";
+@import "menu";
+
+// pages
+@import "runnable";
+@import "terminal";
+@import "profile";
+@import "output";
+@import "editor";
 @import "embed";
+@import "readme";
+@import "new";
+@import "providers";
+@import "about";
+@import "jobs";
