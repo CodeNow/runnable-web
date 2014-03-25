@@ -17,7 +17,13 @@ module.exports = {
     //params.sort = utils.getQueryParam(this.app, 'sort');
 
     params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
-    params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 0;
+    params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 1;
+    params.page = parseInt(params.page);
+    if(isNaN(parseInt(params.page))){
+      self.redirectTo('');
+      return;
+    }
+    params.page--;
 
     if(!_.isArray(params.filter))
       params.filter = [params.filter]
@@ -168,11 +174,13 @@ module.exports = {
 
     params.category = params.category || 'Featured';
     params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
-    params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 0;
+    params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 1;
+    params.page = parseInt(params.page);
     if(isNaN(parseInt(params.page))){
       self.redirectTo('');
       return;
     }
+    params.page--;
 
     if(!_.isArray(params.filter))
       params.filter = [params.filter];

@@ -15,11 +15,11 @@ module.exports = BaseView.extend({
       this.qs = {};
     }
     if(_.isUndefined(this.qs.page))
-      this.qs.page = 0;
+      this.qs.page = 1;
     if(_.isString(this.qs.page)){
       this.qs.page = parseInt(this.qs.page);
       if(_.isNaN(this.qs.page))
-        this.qs.page = 0;
+        this.qs.page = 1;
     }
   },
   getTemplateData: function() {
@@ -53,20 +53,20 @@ module.exports = BaseView.extend({
     opts.showLeftElipsis  = true;
     opts.showRightElipsis = true;
 
-    if (this.qs.page > 0) {
+    if (this.qs.page > 1) {
       opts.showPrevLink = true;
       opts.prevQueryString.page--;
-      opts.indexQueryString.page = 0;
+      opts.indexQueryString.page = 1;
     }
     if (this.qs.page < collectionParams.lastPage) {
       opts.showNextLink = true;
       opts.nextQueryString.page++;
-      opts.lastQueryString.page = collectionParams.lastPage;
+      opts.lastQueryString.page = collectionParams.lastPage + 1;
     }
-    if (this.qs.page == 1) {
+    if (this.qs.page === 2) {
       opts.showLeftElipsis = false;
     }
-    if (this.qs.page === opts.lastQueryString.page - 1) {
+    if (this.qs.page === opts.lastQueryString.page) {
       opts.showRightElipsis = false;
     }
 
