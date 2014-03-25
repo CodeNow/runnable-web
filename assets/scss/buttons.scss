@@ -1,8 +1,8 @@
 button,
 .btn {
   border: 1px solid;
-  @include border-radius(3px);
-  @include box-shadow(inset 0 1px 0 rgba(255,255,255,.4), 0 1px 0 rgba(0,0,0,.1));
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.1);
   color: #fff;
   cursor: pointer;
   display: inline-block;
@@ -12,14 +12,17 @@ button,
   line-height: 36px;
   padding: 0 18px 0 16px;
   text-align: center;
-  text-shadow: 0 -1px 0 rgba(0,0,0,.4);
-  @include transition(all .2s ease-in-out);
-  @include user-select(none);
+  text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+  transition: all .2s ease-in-out;
+  user-select: none;
   white-space: nowrap;
 
   &:active,
   &.active {
-    @include box-shadow(inset 0 1px 0 rgba(255,255,255,.25), 0 1px 0 rgba(0,0,0,.1),inset 0 3px 6px rgba(0, 0, 0, .1));
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.25),
+      0 1px 0 rgba(0,0,0,.1),
+      inset 0 1px 6px rgba(0,0,0,.1);
   }
 
   &:focus {
@@ -27,12 +30,12 @@ button,
   }
 
   &[disabled] {
-    @include box-shadow(none);
+    box-shadow: none;
     cursor: not-allowed;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+    text-shadow: none;
 
     img {
-      opacity: 0.75;
+      opacity: .75;
     }
   }
 
@@ -48,25 +51,24 @@ button,
 
 .green {
   @extend .btn;
-  background-color: $green;
-  @include background-image(linear-gradient(rgba(88,148,39,0),#589427));
+  background-color: $green-light;
+  background-image: linear-gradient(rgba($green,0),$green);
   border-color: $green-darker;
 
   &:hover {
-    background-color: #8ec542;
-    @include background-image(linear-gradient(rgba(88,148,39,0),#589427));
+    background-color: $green-lighter;
+    background-image: linear-gradient(rgba($green,0),$green);
     border-color: $green-darker;
   }
 
   &:active,
   &.active {
     background-color: $green-dark;
-    @include background-image(linear-gradient($green-dark,$green-dark));
     border-color: $green-darker;
   }
 
   &[disabled] {
-    background: desaturate($green-lighter,20);
+    background: rgba($green-lighter,.75);
     border-color: desaturate($green,30);
     color: lighten($green-lighter,30);
   }
@@ -74,15 +76,16 @@ button,
 
 .silver {
   @extend .btn;
-  background-color: $silver;
-  @include background-image(linear-gradient($silver-light,$silver));
-  border-color: $silver-dark;
+  background-color: $silver-light;
+  background-image: linear-gradient(rgba($silver,0),$silver);
+  border-color: $silver-darker;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.01);
   color: $gray-dark;
-  text-shadow: 0 -1px 0 rgba(255,255,255,.65);
+  text-shadow: 0 -1px 0 rgba(255,255,255,.3);
 
   &:hover {
-    background-color: $silver;
-    @include background-image(linear-gradient($silver-lighter, $silver));
+    background-color: $silver-lighter;
+    background-image: linear-gradient(rgba($silver,0), $silver);
     border-color: $silver-darker;
     color: $gray-dark;
   }
@@ -90,68 +93,71 @@ button,
   &:active,
   &.active {
     background-color: $silver-dark;
-    @include background-image(linear-gradient($silver,$silver-dark));
+    background-image: linear-gradient($silver,$silver);
     border-color: $silver-darker;
-    color: $gray-dark;
-    text-shadow: 0 -1px 0 rgba(255,255,255,.3);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.5),
+      0 1px 0 rgba(0,0,0,.01),
+      inset 0 1px 6px rgba(0,0,0,.1);
   }
 
   &[disabled] {
-    background: desaturate($silver,20);
+    background: rgba($silver-lighter,.75);
     border-color: desaturate($silver-dark,30);
-    color: lighten($gray-dark,10);
-    text-shadow: 0 -1px 0 rgba(255,255,255,.3);
+    color: lighten($gray-dark,20);
   }
 }
 
 .orange {
   @extend .btn;
-  border-color: #C3531E;
-  background-color: #FD8524;
-  @include background-image(linear-gradient(rgba(252,91,32,0),#FC5B20));
-  text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+  background-color: adjust-hue($orange-light,3);
+  background-image: linear-gradient(rgba($orange-dark,0),$orange-dark);
+  border-color: $orange-darker;
 
   &:hover {
-    background-color: #FD9F28;
-    border-color: $orange-dark;
+    background-color: adjust-hue(lighten($orange-light,3),6);
+    background-image: linear-gradient(rgba($orange-dark,0),$orange-dark);
+    border-color: $orange-darker;
   }
 
   &:active,
   &.active {
-    background-color: $orange;
-    @include background-image(linear-gradient($orange,$orange-dark));
-    border-color: $orange-dark;
+    background-color: $orange-light;
+    background-image: linear-gradient(rgba($orange-dark,.4),$orange-dark);
+    border-color: $orange-darker;
   }
 
   &[disabled] {
-    background: lighten(desaturate(#FD8524,35),25);
-    border-color: desaturate($orange-lighter,50);
-    color: lighten(desaturate(#FD8524,35),47);
+    background: rgba($orange-light,.4);
+    border-color: rgba($orange-darker,.6);
+    color: lighten($orange-light,38);
   }
 }
 
 .purple {
   @extend .btn;
-  border-color: $purple;
-  background-color: #9A58BA;
-  @include background-image(linear-gradient(rgba(107,64,155,0),#6B409B));
+  background-color: #9a58ba;
+  background-image: linear-gradient(rgba(#6b409b,0),#6b409b);
+  border-color: #5b3777;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 1px 0 rgba(0,0,0,.1);
 
   &:hover {
-    background-color: #AC67C6;
-    border-color: darken($purple,3);
+    background-color: #ac67c6;
+    background-image: linear-gradient(rgba(#6b409b,0),#6b409b);
+    border-color: #5b3777;
   }
 
   &:active,
   &.active {
-    background-color: $purple-light;
-    @include background-image(linear-gradient($purple-light,$purple-light));
-    border-color: darken($purple,3);
+    background-color: #ac67c6;
+    background-image: linear-gradient(rgba(#6b409b,.4),#6b409b);
+    border-color: #5b3777;
   }
 
   &[disabled] {
-    background: desaturate(lighten($purple,40),20);
-    border-color: desaturate(lighten($purple,20),40);
-    color: lighten(#AC67C6,40);
+    background: rgba(#9a58ba,.4);
+    border-color: rgba(#5b3777,.6);
+    color: lighten(#ac67c6,38);
   }
 }
 
