@@ -25,11 +25,6 @@
   #code-editor {
     border: 0;
 
-    #open-file-explorer {
-      height: 37px;
-      transition: height 0s .1s;
-    }
-
     &.in {
 
       #open-file-explorer {
@@ -45,27 +40,32 @@
     &:after {
       display: none;
     }
+  }
 
-    #project-editor-tabs-wrapper {
-      border-bottom: 0;
-      width: calc(100% - 126px);
-    }
+  #open-file-explorer {
+    height: 37px;
+    transition: height 0s .1s;
+  }
 
-    #project-select-tabs {
-      border-left: 1px solid rgba(0,0,0,.1);
-      border-right: 1px solid rgba(0,0,0,.1);
-      position: absolute;
-        top: -1px;
-        right: 68px;
-    }
+  #project-editor-tabs-wrapper {
+    border-bottom: 0;
+    width: calc(100% - 126px);
+  }
 
-    #project-editor-tabs > li {
-      border-top: 0;
-    }
+  #project-select-tabs {
+    border-left: 1px solid rgba(0,0,0,.1);
+    border-right: 1px solid rgba(0,0,0,.1);
+    position: absolute;
+      top: -1px;
+      right: 68px;
+  }
 
-    #project-editor-container {
-      border-top: 1px solid rgba(0,0,0,.1);
-    }
+  #project-editor-tabs > li {
+    border-top: 0;
+  }
+
+  #project-editor-container {
+    border-top: 1px solid rgba(0,0,0,.1);
   }
 
   // terminal
@@ -74,7 +74,16 @@
   }
 
   .terminal-view {
-    height: 150px;
+    height: 90px;
+    transition: height .2s cubic-bezier(.19,1,.22,1);
+
+    &.in {
+      height: 250px;
+    }
+  }
+
+  .terminal-loader {
+    display: none;
   }
 
   // footer

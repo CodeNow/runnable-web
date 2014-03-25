@@ -2,14 +2,14 @@ var BaseView = require('./base_view');
 var Super = BaseView.prototype;
 var FilesSync = require('../models/files_sync');
 var utils = require('../utils');
-var didTermErr= false;
+var didTermErr = false;
 
 module.exports = BaseView.extend({
   className: 'terminal-view relative loading',
   events: {
-    'click .file-sync'    : 'syncFiles',
-    'click .message-us'   : 'popIntercom',
-    'click iframe' : 'terminalTimeout'
+    'click .file-sync'  : 'syncFiles',
+    'click .message-us' : 'popIntercom',
+    'click iframe'      : 'terminalTimeout'
   },
   postHydrate: function () {
     this.onPostMessage = this.onPostMessage.bind(this);
