@@ -21,7 +21,6 @@ var minCSS = [
   'public/vendor/bootstrap/bootstrap-theme.min.css', // custom
   'public/vendor/bower/bootstrap-select/bootstrap-select.min.css',
   'public/vendor/typeahead.js-bootstrap.css',
-  'public/vendor/bower/textillate/assets/animate.css',
   'public/vendor/bower/autocompletejs/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
   'public/vendor/glyphicons.css',
@@ -49,8 +48,6 @@ var frontendScripts = [
   'public/vendor/bower/bootstrap/js/transition.js',
   'public/vendor/bower/typeahead.js/dist/typeahead.min.js',
   'public/vendor/bower/bootstrap-select/bootstrap-select.min.js',
-  'public/vendor/bower/textillate/assets/jquery.lettering.js',
-  'public/vendor/bower/textillate/jquery.textillate.js',
   'public/vendor/bower/jquery.stellar/jquery.stellar.min.js',
   'public/vendor/bower/frontend-track/frontend-track.js',
   'public/vendor/bower/autocompletejs/js/autocomplete.js',
