@@ -47,7 +47,7 @@ module.exports = BaseView.extend({
     this.updateRoute();
   },
   updateRoute: function() {
-    this.qs.page = 0;
+    this.qs.page = 1;
     this.app.router.navigate(window.location.pathname + '?' + queryString.stringify(this.qs), {trigger: true});
   },
   filterItem: function (evt) {
