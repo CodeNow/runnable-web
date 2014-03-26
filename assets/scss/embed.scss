@@ -6,6 +6,30 @@
   width: 100%;
     min-width: 240px;
 
+  &.with-terminal {
+
+    #code-editor {
+      height: calc(100% - 81px);
+    }
+
+    .terminal-view {
+      display: block;
+      height: 45px;
+      transition: height .2s cubic-bezier(.19,1,.22,1);
+    }
+  }
+
+  &.in {
+
+    #code-editor {
+      height: calc(100% - 286px);
+    }
+
+    .terminal-view {
+      height: 250px;
+    }
+  }
+
   // run button
   > button {
     height: 24px;
@@ -22,6 +46,11 @@
   }
 
   // code editor
+  #code-editor,
+  #project-editor-container {
+    height: calc(100% - 36px);
+  }
+
   #code-editor {
     border: 0;
 
@@ -66,6 +95,8 @@
 
   #project-editor-container {
     border-top: 1px solid rgba(0,0,0,.1);
+    min-height: 0;
+    overflow: auto;
   }
 
   // terminal
@@ -74,12 +105,7 @@
   }
 
   .terminal-view {
-    height: 90px;
-    transition: height .2s cubic-bezier(.19,1,.22,1);
-
-    &.in {
-      height: 250px;
-    }
+    display: none;
   }
 
   .terminal-loader {
