@@ -1,39 +1,51 @@
 .tag {
-  background: $purple-lighter;
-  border: 1px solid lighten($purple,40);
-  @include border-radius(3px);
+  background: $gray-lighter;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 #fff;
+  color: $gray-dark;
   display: inline-block;
   font-size: 11px;
-  font-weight: bold;
-  height: 21px;
-  line-height: 21px;
-  padding: 0 4px;
+  font-weight: 400;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 6px;
   position: relative;
-  @include transition(all .2s ease-in-out);
+  transition: all .2s ease-in-out;
+
+  > a {
+    color: $gray-dark;
+    display: block;
+    height: 100%;
+    text-transform: uppercase;
+    width: 100%;
+  }
 
   &:hover {
-    border-color: darken($purple,10);
-    color: darken($purple,10);
+    background: #fff;
+    color: $gray-darker;
     text-decoration: none;
+  }
+
+  &.active {
+    border-color: $orange;
+
+    > a {
+      color: $orange;
+    }
   }
 
   &.can-edit {
     padding: 0 20px 0 4px;
 
-    &:hover {
-      border-color: lighten($purple,40);
-      color: $purple;
-    }
-
     > span {
-      color: darken($purple-lighter,10);
       cursor: pointer;
       line-height: 18px;
       position: absolute;
         right: 4px;
 
       &:hover {
-        color: $purple;
+        color: $gray-dark;
         font-size: 14px;
         right: 2px;
 
@@ -43,7 +55,7 @@
       }
 
       &:active {
-        color: darken($purple,10);
+        color: $gray-darker;
       }
     }
   }

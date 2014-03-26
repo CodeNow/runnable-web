@@ -1,11 +1,13 @@
 <div class="container">
   <nav class="row">
-    <div id="logo" class="navbar-header">
-      <a class="navbar-brand" href="/"></a>
-      <sup>&lt;beta&gt;</sup>
+    <div class="col-sm-4">
+      <a id="logo" href="/">
+        <span></span>
+        <sup>&lt;beta&gt;</sup>
+      </a>
     </div>
     {{#unless nosearch}}
-    {{view "searchbar" classname="navbar-form navbar-left" divclass="form-group" inputclass="form-control" placeholder="Search for code"}}
+    {{view "searchbar" classname="col-sm-4" inputclass="form-control" placeholder="Search for code"}}
     {{/unless}}
     {{#unless noactions}}
     {{view "header_actions" model=model}}

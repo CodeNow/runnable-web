@@ -4,6 +4,7 @@ $gray-lighter:   #f6f6f6;
 $gray-light:     #eee;
 $gray-dark:      #888;
 $gray-darker:    #555;
+$gray-darkest:   #333;
 
 $green:          #81b638;
 $green-lighter:  lighten($green,14);
@@ -20,6 +21,8 @@ $silver-darker:  darken($silver,25);
 $purple:         #5b3777;
 $purple-lighter: adjust-hue(saturate(lighten($purple, 60), 63), 1);
 $purple-light:   lighten($purple,14);
+$purple-dark:    darken($purple,14);
+$purple-darker:  darken($purple,17);
 
 $orange:         #fd7022;
 $orange-lighter: lighten($orange,10);

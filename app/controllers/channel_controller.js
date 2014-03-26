@@ -13,12 +13,124 @@ var formatTitle = helpers.formatTitle;
 
 module.exports = {
   index: function (params, callback) {
-    params.page = utils.getQueryParam(this.app, 'page');
-    params.sort = utils.getQueryParam(this.app, 'sort');
+    //params.page = utils.getQueryParam(this.app, 'page');
+    //params.sort = utils.getQueryParam(this.app, 'sort');
+
+    params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
+    params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 1;
+    params.page = parseInt(params.page);
+    if(isNaN(parseInt(params.page))){
+      self.redirectTo('');
+      return;
+    }
+    params.page--;
+
+    if(!_.isArray(params.filter))
+      params.filter = [params.filter]
+
+    params.filter.push(params.channel);
+    params.filter = _.uniq(params.filter);
+
     var self = this;
     var app = this.app;
     async.waterfall([
       fetchUserAndChannel.bind(this, params.channel),
+      function fetchFeeds (channelResult, callback) {
+
+        var spec = {
+          channels: {
+            collection: 'Channels',
+            params: {
+              category: 'Featured'
+            }
+          },
+          feedTrending: {
+            collection: 'FeedsImages',
+            params: {
+              page: params.page,
+              limit: 15,
+              channel: params.filter
+            }
+          },
+          feedPopular: {
+            collection: 'images',
+            params: {
+              page: params.page,
+              limit: 15,
+              channel: params.filter,
+              sort: '-runs'
+            }
+          }
+        };
+
+        fetch.call(self, spec, function (err, results) {
+
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          _.extend(results, channelResult);
+
+          async.parallel([
+            function(cb){
+              fetchOwnersFor.call(self, results.user, results.feedTrending, function(err, results2){
+                _.extend(results, results2);
+                cb();
+              });
+            },
+            function(cb){
+              fetchOwnersFor.call(self, results.user, results.feedPopular, function(err, results2){
+                _.extend(results, results2);
+                cb();
+              });
+          }], function(err){
+
+            results.relatedChannels = results.feedTrending.relatedChannels;
+            results.filteringChannels = results.relatedChannels;
+
+
+
+
+            // Don't display the current channel as an option in filters
+            results.filteringChannels.each(function(item, i){
+              item.attributes.display = (item.get('name') !== results.channel.get('name'))
+              item.attributes.isActiveFilter = (params.filter.indexOf(item.get('name')) === -1) ? false : true;
+            });
+
+            var setIfActive = function (item, i){
+              var channel = new Channel(item);
+              item.isActiveFilter = channel.hasAlias(params.filter);
+              item.display = true;
+              if(item.isActiveFilter){
+                if(channel.get('aliases').indexOf(params.channel.toLowerCase()) !== -1){
+                  item.display = false;
+                }
+              }
+            };
+            results.feedTrending.each(function(item, i){
+              item.get('tags').forEach(setIfActive);
+              item.sortChannels()
+            });
+            results.feedPopular.each(function(item, i){
+              item.get('tags').forEach(setIfActive);
+              item.sortChannels();
+            });
+
+
+
+
+            _.extend(channelResult, results);
+
+            if (err) console.log(err);
+            callback(null, channelResult);
+          });
+        });
+
+      },
+
+
+
       function redirectCheck (channelResult, cb) {
         var channel = channelResult.channel;
         if (channel.get('name') !== params.channel)
@@ -59,7 +171,20 @@ module.exports = {
     var self = this;
     var app = this.app;
     var isHomepage = utils.isCurrentUrl(app, '');
+
     params.category = params.category || 'Featured';
+    params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
+    params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 1;
+    params.page = parseInt(params.page);
+    if(isNaN(parseInt(params.page))){
+      self.redirectTo('');
+      return;
+    }
+    params.page--;
+
+    if(!_.isArray(params.filter))
+      params.filter = [params.filter];
+
     var isFeaturedCategory = (params.category.toLowerCase() == 'featured');
     // if (isServer && !this.app.req.cookies.pressauth) {
     //   this.redirectTo('/');
@@ -83,6 +208,23 @@ module.exports = {
         },
         categories: {
           collection: 'Categories'
+        },
+        feedTrending: {
+          collection: 'FeedsImages',
+          params: {
+            page:  params.page,
+            limit: 15,
+            channel: params.filter
+          }
+        },
+        feedPopular: {
+          collection: 'images',
+          params: {
+            page: params.page,
+            limit: 15,
+            channel: params.filter,
+            sort: '-runs'
+          }
         }
       };
       fetch.call(this, spec, function (err, results) {
@@ -90,27 +232,71 @@ module.exports = {
           callback(err);
         }
         else {
+          results.relatedChannels = results.feedTrending.relatedChannels;
+
+          if (results.relatedChannels.length) {
+            results.filteringChannels = results.relatedChannels;
+          } else {
+            results.filteringChannels = results.channels;
+          }
+
+
+
+
+
+
+          results.filteringChannels.each(function(item, i){
+            item.attributes.display = true;
+            item.attributes.isActiveFilter = (params.filter.indexOf(item.get('name')) === -1) ? false : true;
+          });
+
+          var setIfActive = function (item, i){
+            var channel = new Channel(item);
+            item.isActiveFilter = channel.hasAlias(params.filter);
+            item.display = true;
+          };
+          results.feedTrending.each(function(item, i){
+            item.get('tags').forEach(setIfActive);
+            item.sortChannels()
+          });
+          results.feedPopular.each(function(item, i){
+            item.get('tags').forEach(setIfActive);
+            item.sortChannels();
+          });
+
+
+
+
+
+
           results.selectedCategoryLower = params.category.toLowerCase();
           results.selectedCategory = _.find(results.categories.models, function (category) {
             return category.get('name').toLowerCase() === results.selectedCategoryLower;
           });
           var catName = results.selectedCategory.get('name');
-          if (isFeaturedCategory && !isHomepage) {
-            self.redirectTo('');
-          }
-          else if (catName !== params.category) {
-            self.redirectTo('/c/'+catName);
-          }
-          else {
-            // if (isFeaturedCategory) {
-            //   // results.channels.insert(2, utils.customChannel(app));
-            // }
-            var featured = results.categories.findWhere({
-              name: 'Featured'
-            });
-            featured.set('url', '/');
+
+          var featured = results.categories.findWhere({
+            name: 'Featured'
+          });
+          featured.set('url', '/');
+
+          async.parallel([
+            function(cb){
+              fetchOwnersFor.call(self, results.user, results.feedTrending, function(err, results2){
+                _.extend(results, results2);
+                cb();
+              });
+            },
+            function(cb){
+              fetchOwnersFor.call(self, results.user, results.feedPopular, function(err, results2){
+                _.extend(results, results2);
+                cb();
+              });
+          }], function(err){
+            if (err) console.log(err);
             callback(null, addSEO(results));
-          }
+          });
+
         }
       });
       function addSEO (results) {

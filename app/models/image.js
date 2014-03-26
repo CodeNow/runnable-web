@@ -53,6 +53,23 @@ module.exports = Runnable.extend({
   },
   saveOpenFiles: function (cb, ctx) {
     this.app.dispatch.trigger('save:files', cb, ctx);
+  },
+  /**
+   * Arrange the 'tags' array in a spec order
+   */
+  sortChannels: function () {
+    var active   = [],
+        inactive = [];
+    this.attributes.tags.forEach(function(item, i){
+      (item.isActiveFilter) ? active.push(item) : inactive.push(item);
+      return item;
+    });
+    var lowerCaseCompare = function(a, b){
+      return a.name.toLowerCase() < b.name.toLowerCase();
+    };
+    active.sort(lowerCaseCompare);
+    inactive.sort(lowerCaseCompare);
+    this.attributes.tags = active.concat(inactive);
   }
 });
 

@@ -1,93 +1,76 @@
 {{view "app_user" model=user}}
 {{view "header_view" model=user context=. nosearch=true}}
 {{view "global_message"}}
+
 <section id="home-header" class="hero">
   <div class="bubbles-container">
     <div class="bubbles">
-      <img class="bubble small"     src="/images/hero-logos/search.svg">
+      <img class="bubble small" src="/images/hero-logos/search.svg">
       <img class="bubble medium reverse" src="/images/hero-logos/thumbs-up.svg">
-      <img class="bubble large"     src="/images/hero-logos/lightbulb.svg">
-      <img class="bubble small reverse"  src="/images/hero-logos/cog.svg">
-      <img class="bubble medium"    src="/images/hero-logos/chat-cutout.svg">
-      <img class="bubble large reverse"  src="/images/hero-logos/globe.svg">
-      <img class="bubble small"     src="/images/hero-logos/world.svg">
+      <img class="bubble large" src="/images/hero-logos/lightbulb.svg">
+      <img class="bubble small reverse" src="/images/hero-logos/cog.svg">
+      <img class="bubble medium" src="/images/hero-logos/chat-cutout.svg">
+      <img class="bubble large reverse" src="/images/hero-logos/globe.svg">
+      <img class="bubble small" src="/images/hero-logos/world.svg">
       <img class="bubble medium reverse" src="/images/hero-logos/jquery.svg">
-      <img class="bubble large"     src="/images/hero-logos/cog.svg">
-      <img class="bubble small reverse"  src="/images/hero-logos/codeigniter.svg">
-      <img class="bubble medium"    src="/images/hero-logos/arrow.svg">
-      <img class="bubble large reverse"  src="/images/hero-logos/chat-bubble.svg">
-      <img class="bubble small"     src="/images/hero-logos/connection.svg">
+      <img class="bubble large" src="/images/hero-logos/cog.svg">
+      <img class="bubble small reverse" src="/images/hero-logos/codeigniter.svg">
+      <img class="bubble medium" src="/images/hero-logos/arrow.svg">
+      <img class="bubble large reverse" src="/images/hero-logos/chat-bubble.svg">
+      <img class="bubble small" src="/images/hero-logos/connection.svg">
       <img class="bubble medium reverse" src="/images/hero-logos/display.svg">
-      <img class="bubble large"     src="/images/hero-logos/expression-engine.svg">
-      <img class="bubble small reverse"  src="/images/hero-logos/heart.svg">
-      <img class="bubble small"     src="/images/hero-logos/search.svg">
+      <img class="bubble large" src="/images/hero-logos/expression-engine.svg">
+      <img class="bubble small reverse" src="/images/hero-logos/heart.svg">
+      <img class="bubble small" src="/images/hero-logos/search.svg">
       <img class="bubble medium reverse" src="/images/hero-logos/thumbs-up.svg">
-      <img class="bubble large"     src="/images/hero-logos/lightbulb.svg">
-      <img class="bubble small reverse"  src="/images/hero-logos/cog.svg">
-      <img class="bubble medium"    src="/images/hero-logos/chat-cutout.svg">
-      <img class="bubble large reverse"  src="/images/hero-logos/globe.svg">
-      <img class="bubble small"     src="/images/hero-logos/world.svg">
+      <img class="bubble large" src="/images/hero-logos/lightbulb.svg">
+      <img class="bubble small reverse" src="/images/hero-logos/cog.svg">
+      <img class="bubble medium" src="/images/hero-logos/chat-cutout.svg">
+      <img class="bubble large reverse" src="/images/hero-logos/globe.svg">
+      <img class="bubble small" src="/images/hero-logos/world.svg">
       <img class="bubble medium reverse" src="/images/hero-logos/jquery.svg">
-      <img class="bubble large"     src="/images/hero-logos/cog.svg">
-      <img class="bubble small reverse"  src="/images/hero-logos/codeigniter.svg">
-      <img class="bubble medium"    src="/images/hero-logos/arrow.svg">
-      <img class="bubble large reverse"  src="/images/hero-logos/chat-bubble.svg">
-      <img class="bubble small"     src="/images/hero-logos/connection.svg">
+      <img class="bubble large" src="/images/hero-logos/cog.svg">
+      <img class="bubble small reverse" src="/images/hero-logos/codeigniter.svg">
+      <img class="bubble medium" src="/images/hero-logos/arrow.svg">
+      <img class="bubble large reverse" src="/images/hero-logos/chat-bubble.svg">
+      <img class="bubble small" src="/images/hero-logos/connection.svg">
       <img class="bubble medium reverse" src="/images/hero-logos/display.svg">
-      <img class="bubble large"     src="/images/hero-logos/expression-engine.svg">
-      <img class="bubble small reverse"  src="/images/hero-logos/heart.svg">
+      <img class="bubble large" src="/images/hero-logos/expression-engine.svg">
+      <img class="bubble small reverse" src="/images/hero-logos/heart.svg">
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <div class="hero-content">
-          <h1>Discover <div>
-            <ul class="texts" style="display: none;">
-              {{#each keywords}}<li>{{.}}</li>{{/each}}
-            </ul>
-          </div> through code</h1>
-          <p>Full-stack code anyone can run from their browser</p>
-          {{view "searchbar" id="searchbox" divclass="input-group" inputclass="form-control" placeholder="Search for code" hasbutton=true}}
-        </div>
+        <h1>
+          Run
+          <ul id="channel-text" class="out">
+            <li>Your
+            {{#each channel_buttons}}
+            <li>{{title}}
+            {{/each}}
+          </ul>
+          Code Online
+        </h1>
+        <h2>Choose Your Stack to Get Started</h2>
+        <ul id="channel-images">
+          {{#each channel_buttons}}
+          <li><a href="/new/{{name}}" data-title="{{name}}">{{view 'channel_image' name=name}}</a>
+          {{/each}}
+        </ul>
       </div>
     </div>
   </div>
+  <div class="glyphicons chevron-right"></div>
 </section>
 
-<nav id="framework-filters" class="navbar navbar-default" role="navigation">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand visible-xs" href="#">Select a Framework</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav">
-        {{#each categories.models}}
-        {{#with attributes}}
-        {{view 'item_link' href=link text=name}}
-        {{/with}}
-        {{/each}}
-      </ul>
-    </div>
-  </div>
-</nav>
-
-{{view "channel_cards" collection=channels}}
-
-<section id="callout-message" class="container">
-  <a href="/publish" class="clearfix">
-    <label>New!</label>
-    <p><strong>Add your own Code Channel.</strong> <span>Use your API, service, or project on Runnable.</span></p>
-  </a>
-</section>
+{{view 'feed'
+  callout           = "true"
+  channels          = channels
+  feedTrending      = feedTrending
+  feedPopular       = feedPopular
+  filteringChannels = filteringChannels
+  filterMode        = "home"
+}}
 
 {{view "footer_view" model=user context=. domain=user.app.attributes.domain}}

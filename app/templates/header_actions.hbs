@@ -1,23 +1,23 @@
-<li><a href="/all">Browse All</a>
-
-<li>{{view "create_new_button" model=model}}
-
 {{#if_result model method="isRegistered"}}
-<li id="user-info">
-  <a href="{{invoke model method='appURL'}}">
-    {{#with model.attributes}}
-    <img src="{{gravitar}}?s=64" alt="{{username}}" height="35" width="35">
-    <span class="username">{{username}}</span>
-    {{#if name}}<span class="realname">{{name}}</span>{{/if}}
-    {{/with}}
-  </a>
-  <div class="user-expanded">
-    <ul>
-      <li><a href="{{invoke model method='appURL'}}">Profile</a>
-      <li><a href="/logout">Log Out</a>
-    </ul>
-  </div>
-
+<span id="user" class="menu">
+  {{#with model.attributes}}
+  <a><img src="{{gravitar}}?s=64" alt="{{username}}" height="36" width="36"></a>
+  <ul>
+    <li>
+      <a href="/u/{{username}}">
+        Profile
+        <img src="{{gravitar}}?s=64" alt="{{username}}" height="18" width="18">
+      </a>
+    <li>
+      <a href="/logout">
+        Log Out
+        <span class="glyphicons exit"></span>
+      </a>
+  </ul>
+  {{/with}}
+</span>
 {{else}}
-<li><a id="header-signup-link" href="#">Sign Up</a>
+<a id="header-signup-link">Sign Up</a>
 {{/if_result}}
+
+{{view "create_new_button" model=model}}

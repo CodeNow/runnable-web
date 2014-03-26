@@ -1,0 +1,45 @@
+<h3
+  {{#if filteringActive}}class="in"{{/if}}
+  {{#unless filteringActive}}class="out"{{/unless}}>
+
+  Filter<span>ing</span>
+  <button data-action="show-all" type="button">Show All</button>
+
+</h3>
+<ol>
+
+  {{#each collection.models}}
+    {{#with attributes}}
+      {{#if isActiveFilter}}
+        {{#if display}}
+          <li data-name="{{name}}" class="active">
+            {{view 'channel_image' name=name alt=true}}
+            {{name}}
+            <button type="button" class="glyphicons circle-remove"></button>
+        {{/if}}
+      {{/if}}
+    {{/with}}
+  {{/each}}
+
+  {{#each collection.models}}
+    {{#with attributes}}
+      {{#unless isActiveFilter}}
+        {{#if display}}
+          <li data-name="{{name}}">
+            {{view 'channel_image' name=name alt=true}}
+            {{name}}
+            {{#if count}}
+              <span class="count">{{count}}</span>
+            {{/if}}
+        {{/if}}
+      {{/unless}}
+    {{/with}}
+  {{/each}}
+
+  {{#if collection.params.channel}}
+    {{#if_gte collection.length compare="15"}}
+      <li class="show-more"><span></span>
+    {{/if_gte}}
+  {{/if}}
+
+</ol>

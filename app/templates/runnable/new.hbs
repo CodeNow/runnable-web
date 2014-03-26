@@ -1,8 +1,12 @@
 {{view "app_user" model=user}}
 {{view "header_view" model=user context=.}}
 {{view "global_message"}}
-<div class="container">
-  <h1 class="col-sm-12">Create a new example</h1>
+
+<main id="new" class="container">
+  <div class="row">
+    <h1 class="col-sm-12">Create a New Runnable</h1>
+  </div>
   {{view "channel_cards" collection=channels basehref="/new"}}
-</div>
+</main>
+
 {{view "footer_view" model=user context=.}}

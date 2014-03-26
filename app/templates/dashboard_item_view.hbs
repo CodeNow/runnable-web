@@ -1,22 +1,17 @@
-<h3>
-  <a href="{{invoke model method='appURL'}}">{{model.attributes.name}}</a>
-</h3>
-<p class="runnable-stats">
-  {{#with model.attributes}}
-  {{#if ../isimage}}
-  {{view "runnable_stats" runs=runs views=views copies=copies}}
-  &bull;
-  <span>Published {{dateAgo created}}</span>&bull;
-  {{else}}
-  <span>Created {{dateAgo created}}</span>&bull;
-  {{/if}}
-  <span class="tags">
-    {{#each tags}}
-    {{view "tag_link" name=name}}
+<h2 class="col-sm-12"><a href="{{model.attributes.appUrl}}">{{model.attributes.name}}</a></h2>
+<div class="col-sm-12 clearfix">
+  <data><span class="glyphicons play-button"></span><b>{{model.attributes.runs}}</b> Runs</data>
+  <ul>
+    {{#each model.attributes.tags}}
+    <li class="tag">
+      <a href="/{{this.name}}">{{this.name}}</a>
     {{/each}}
-  </span>
-  {{#if ../editmode}}
-  <button class="delete" type="button">x</button>
-  {{/if}}
-  {{/with}}
-</p>
+  </ul>
+  <time>{{dateAgo model.attributes.created}}</time>
+</div>
+{{#if editmode}}
+<button class="delete" type="button">
+  <span>Delete</span>
+  <span class="glyphicons circle-remove"></span>
+</button>
+{{/if}}

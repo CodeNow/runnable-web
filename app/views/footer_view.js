@@ -3,7 +3,6 @@ var ContactModal = require('./contact_modal');
 
 module.exports = BaseView.extend({
   tagName: 'footer',
-  id: 'site-credits',
   events: {
     'click .contact' : 'openContactModal'
   },

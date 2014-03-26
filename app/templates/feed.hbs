@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <nav id="feed-nav" class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 clearfix">
+      {{view "feed_toggles" defaultActive=orderBy}}
+      {{view "searchbar"  inputclass="form-control" placeholder="Search for code"}}
+    </nav>
+  </div>
+
+  <div class="row {{#if orderByPopular}}sort-popular{{/if}} {{#if orderByTrending}}sort-trending{{/if}} sort">
+    {{view "feed_filters"
+      collection = filteringChannels
+      filterMode = filterMode
+      channel    = channel
+    }}
+
+    {{view "runnable_feed" collection=feedTrending orderByParam="trending"}}
+    {{view 'pagination_buttons' collection=feedPopular orderByParam="trending"}}
+    {{view "runnable_feed" collection=feedPopular orderByParam="popular"}}
+    {{view 'pagination_buttons' collection=feedTrending orderByParam="popular"}}
+  </div>
+
+  {{#if callout}}
+  <div id="callout" class="row">
+    <a href="/publish">
+      <label>New!</label>
+      <strong>Add your own Code Channel. </strong>
+      <span>Use your API, service, or project on Runnable.</span>
+    </a>
+  </div>
+  {{/if}}
+</div>
