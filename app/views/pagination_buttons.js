@@ -58,7 +58,7 @@ module.exports = BaseView.extend({
       opts.prevQueryString.page--;
       opts.indexQueryString.page = 1;
     }
-    if (this.qs.page < collectionParams.lastPage) {
+    if (this.qs.page < collectionParams.lastPage + 1) {
       opts.showNextLink = true;
       opts.nextQueryString.page++;
       opts.lastQueryString.page = collectionParams.lastPage + 1;
