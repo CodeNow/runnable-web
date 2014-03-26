@@ -274,39 +274,29 @@ module.exports = {
             return category.get('name').toLowerCase() === results.selectedCategoryLower;
           });
           var catName = results.selectedCategory.get('name');
-          if (false && isFeaturedCategory && !isHomepage) {
-            self.redirectTo('');
-          }
-          else if (false && catName !== params.category) {
-            self.redirectTo('/c/'+catName);
-          }
-          else {
-            // if (isFeaturedCategory) {
-            //   // results.channels.insert(2, utils.customChannel(app));
-            // }
-            var featured = results.categories.findWhere({
-              name: 'Featured'
-            });
-            featured.set('url', '/');
 
-            async.parallel([
-              function(cb){
-                fetchOwnersFor.call(self, results.user, results.feedTrending, function(err, results2){
-                  _.extend(results, results2);
-                  cb();
-                });
-              },
-              function(cb){
-                fetchOwnersFor.call(self, results.user, results.feedPopular, function(err, results2){
-                  _.extend(results, results2);
-                  cb();
-                });
-            }], function(err){
-              if (err) console.log(err);
-              callback(null, addSEO(results));
-            });
+          var featured = results.categories.findWhere({
+            name: 'Featured'
+          });
+          featured.set('url', '/');
 
-          }
+          async.parallel([
+            function(cb){
+              fetchOwnersFor.call(self, results.user, results.feedTrending, function(err, results2){
+                _.extend(results, results2);
+                cb();
+              });
+            },
+            function(cb){
+              fetchOwnersFor.call(self, results.user, results.feedPopular, function(err, results2){
+                _.extend(results, results2);
+                cb();
+              });
+          }], function(err){
+            if (err) console.log(err);
+            callback(null, addSEO(results));
+          });
+
         }
       });
       function addSEO (results) {
