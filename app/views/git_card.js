@@ -4,6 +4,7 @@ var Container = require('../models/container');
 
 module.exports = BaseView.extend({
   id: 'git-card',
+  className: 'col-sm-4',
   events: {
     'input input'    : 'enableSelect',
     'keydown select' : 'preventTyping',
