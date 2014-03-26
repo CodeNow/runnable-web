@@ -38,16 +38,14 @@ module.exports = BaseView.extend({
     } else {
       this.activeFilters = [];
     }
-    this.updateActiveFilters();
   },
   showAll: function (evt) {
     this.activeFilters = [];
     delete this.qs.filter;
-    this.updateActiveFilters();
     this.updateRoute();
   },
   updateRoute: function() {
-    this.qs.page = 0;
+    this.qs.page = 1;
     this.app.router.navigate(window.location.pathname + '?' + queryString.stringify(this.qs), {trigger: true});
   },
   filterItem: function (evt) {
@@ -64,24 +62,6 @@ module.exports = BaseView.extend({
       delete this.activeFilters;
     }
     this.updateRoute();
-    this.updateActiveFilters();
-  },
-  updateActiveFilters: function () {
-    return;
-
-    // add 'ing' to 'filter' and show clear
-    var $h3 = this.$('h3');
-    if (this.activeFilters.length) {
-      $h3.removeClass('out').addClass('in');
-    } else {
-      $h3.addClass('out').removeClass('in');
-    }
-    /*
-    this.$el.find('li.active').removeClass('active');
-    this.activeFilters.forEach(function(filterItem){
-      this.$el.find('[data-name="' + filterItem + '"]').addClass('active');
-    }, this);
-    */
   },
   showMore: function (evt) {
     var $ol = this.$('ol');
