@@ -3,7 +3,7 @@ var _ = require('underscore');
 var Image = require('../models/image');
 
 module.exports = BaseView.extend({
-  id: 'code-editor',
+  id: 'code-editor-embed',
   events: {
     'click #open-file-explorer': 'showFiles'
   },
@@ -50,7 +50,6 @@ module.exports = BaseView.extend({
     this.$('#project-editor').resize();
   },
   toggleReadme: function (open) {
-    console.log('toggleReadme');
     var $projectEditorContainer = this.$('#project-editor-container');
 
     if (open) {
@@ -71,4 +70,4 @@ module.exports = BaseView.extend({
   }
 });
 
-module.exports.id = "CodeEditor";
+module.exports.id = "CodeEditorEmbed";
