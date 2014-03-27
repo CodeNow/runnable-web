@@ -47,6 +47,31 @@
   > div {
     float: left;
   }
+
+  // search
+  #search {
+    float: right;
+
+    input {
+      width: 105px;
+
+      &:focus {
+        width: 240px;
+
+        @include media(sm) {
+          width: 300px;
+        }
+      }
+
+      @media (max-width: 500px) {
+        width: 100%;
+
+        &:focus {
+          width: 100%;
+        }
+      }
+    }
+  }
 }
 
 // runnable-feed

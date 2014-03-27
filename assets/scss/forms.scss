@@ -56,6 +56,12 @@ textarea {
     border-radius: 3px;
     height: 36px;
     transition: width .3s cubic-bezier(.19,1,.22,1);
+
+    @include retina() {
+      @media (max-width: 500px) {
+        font-size: 16px;
+      }
+    }
   }
 
   button {
@@ -92,34 +98,6 @@ header {
 
     button {
       right: 15px;
-    }
-  }
-}
-
-//feed search
-#feed-nav {
-
-  #search {
-    float: right;
-
-    input {
-      width: 105px;
-
-      &:focus {
-        width: 240px;
-
-        @include media(sm) {
-          width: 300px;
-        }
-      }
-
-      @media (max-width: 500px) {
-        width: 100%;
-
-        &:focus {
-          width: 100%;
-        }
-      }
     }
   }
 }
