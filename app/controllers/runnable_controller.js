@@ -4,6 +4,7 @@ var utils = require('../utils');
 var channelController = require('./channel_controller');
 var helpers = require('./helpers');
 var HighlightedFiles = require('../collections/highlighted_files');
+var openFilesCollection = require('../collections/open_files');
 var fetch = helpers.fetch;
 var fetchUser = helpers.fetchUser;
 var fetchImplementation = helpers.fetchImplementation;
@@ -25,6 +26,7 @@ var fetchLeaderBadges = helpers.fetchLeaderBadges;
 
 module.exports = {
   index: function(params, callback) {
+    params.files = helpers.forceParamToArray(params.files);
     var self = this;
     if (!utils.isObjectId64(params._id)) {
       var channelParams;
@@ -69,6 +71,11 @@ module.exports = {
         },
         function nameInUrl (results, cb) {
           var imageURL = results.image.appURL();
+
+          //TEMP
+          cb(null, results);
+          return;
+
           if (!(utils.isCurrentUrl(app, imageURL) || utils.isCurrentUrl(app, imageURL + '/embedded')) || params.channel) {
             self.redirectTo(imageURL);
           }
@@ -116,9 +123,21 @@ module.exports = {
         if (err) { callback(err); } else {
           //embedded
           var imageURL = results.image.appURL();
-          if(utils.isCurrentUrl(app, imageURL + '/embedded')){
+          if(utils.isCurrentUrl(app, imageURL + '/embedded', true)){
             //iframe nested website
             var data = addSEO(results, self.req);
+
+            var lowerCaseParamsFiles = params.files.map(function(item){return item.toLowerCase();});
+            //Get the files specified from the URL query string
+            var queryStringFilesArray = data.image.get('files').filter(function(item){
+              return (_.isString(item.name) && (lowerCaseParamsFiles.indexOf(item.name.toLowerCase()) !== -1));
+            });
+            data.queryFiles = new openFilesCollection(queryStringFilesArray, {
+              app:         app,
+              containerId: data.container.get('id')
+            });
+
+
             callback(null, 'runnable/embed', data);
           }else{
             callback(null, addSEO(results, self.req));
