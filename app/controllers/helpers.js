@@ -28,10 +28,18 @@ module.exports = {
   'canonical':              canonical,
   'formatTitle':            formatTitle,
   'fetchLeaderBadges':      fetchLeaderBadges,
-  'fetchPopUserAffectedChannels':      fetchPopUserAffectedChannels
+  'fetchPopUserAffectedChannels':      fetchPopUserAffectedChannels,
+  'forceParamToArray':      forceParamToArray
 };
-
-
+function forceParamToArray (param) {
+  if(_.isString(param))
+    return param.split(',');
+  if(_.isNumber(param))
+    return [param];
+  if(_.isArray(param))
+    return param;
+  return []; //undefined, NaN, null, objects, aliens, etc
+}
 function formatTitle () {
   var args = Array.prototype.slice.call(arguments);
   args.push('Runnable');
