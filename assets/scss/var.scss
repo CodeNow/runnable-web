@@ -6,38 +6,33 @@ $gray-dark:      #888;
 $gray-darker:    #555;
 $gray-darkest:   #333;
 
-$green:          #81b638;
-$green-lighter:  lighten($green,14);
-$green-light:    lighten($green,5);
-$green-dark:     darken($green,9);
-$green-darker:   darken($green,14);
+$green:          #4ca844;
+$green-dark:     darken($green,3);
+$green-darker:   darken($green,7);
+
+$green-light:    #85bd4c;
+$green-lighter:  lighten($green-light,7);
 
 $silver:         #e4e4e4;
 $silver-lighter: lighten($silver,8);
-$silver-light:   lighten($silver,7);
+$silver-light:   lighten($silver,5);
 $silver-dark:    darken($silver,9);
-$silver-darker:  darken($silver,25);
+$silver-darker:  darken($silver,12);
 
 $purple:         #5b3777;
-$purple-lighter: adjust-hue(saturate(lighten($purple, 60), 63), 1);
+$purple-lighter: saturate(lighten($purple, 60), 63);
 $purple-light:   lighten($purple,14);
 $purple-dark:    darken($purple,14);
 $purple-darker:  darken($purple,17);
 
 $orange:         #fd7022;
-$orange-lighter: lighten($orange,10);
+$orange-lighter: lighten($orange,13);
 $orange-light:   lighten($orange,5);
-$orange-dark:    darken($orange,12);
-$orange-darker:  darken($orange,17);
+$orange-dark:    darken($orange,5);
+$orange-darker:  darken($orange,13);
 
 $light-yellow:   #ffffe0;
 
-
-$br: 2px;
-$primary-color: #198dd2;
-// grey toolbar top of code and web output
-$toolbar-height: 30px;
-$border-color: #e5e5e5;
-
+// z-indexes
 $zpopover: 9998;
 $ztooltip: 9999;
