@@ -3,7 +3,14 @@
     <div class="container">
       <div class="row">
         {{view "edit_button" containerid=containerid}}
-        <p><b>You own this project!</b><span> Feel free to edit it.</span></p>
+
+        <p>
+          {{#if_result user method="isModerator" a0=model}}
+          <b>You're a moderator!</b><span> You can edit this project.</span>
+          {{else}}
+          <b>You own this project!</b><span> Feel free to edit it.</span>
+          {{/if_result}}
+        </p>
       </div><!--/.row-->
     </div><!--/.container-->
   </section>
