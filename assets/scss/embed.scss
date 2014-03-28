@@ -8,7 +8,7 @@
 
   &.with-terminal {
 
-    #code-editor {
+    #code-editor-embed {
       height: calc(100% - 81px);
     }
 
@@ -21,7 +21,7 @@
 
   &.in {
 
-    #code-editor {
+    #code-editor-embed {
       height: calc(100% - 286px);
     }
 
@@ -46,12 +46,12 @@
   }
 
   // code editor
-  #code-editor,
+  #code-editor-embed,
   #project-editor-container {
     height: calc(100% - 36px);
   }
 
-  #code-editor {
+  #code-editor-embed {
     border: 0;
 
     &.in {

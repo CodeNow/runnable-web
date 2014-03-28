@@ -1,4 +1,5 @@
-#code-editor {
+#code-editor,
+#code-editor-embed {
   border: 1px solid rgba(0,0,0,.1);
   border-top: 0;
   border-right: 0;
@@ -567,7 +568,8 @@
 }
 
 // when file explorer is open
-#code-editor.in {
+#code-editor.in,
+#code-editor-embed.in {
 
   // file explorer icon
   #open-file-explorer {
