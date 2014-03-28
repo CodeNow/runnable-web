@@ -1,5 +1,4 @@
 var BaseView = require('./base_view');
-var Image = require('../models/image');
 var Container = require('../models/container');
 
 module.exports = BaseView.extend({
@@ -30,32 +29,23 @@ module.exports = BaseView.extend({
     var self = this;
     self.gitLoader(true);
     this.$('button').text(langVal);
-    var image = new Image({}, {app:this.app});
-    image.githubImport({
+    var container = new Container({}, {app:this.app});
+    container.githubImport({
       githubUrl: this.$('input').val(),
       stack: langVal
-    }, function (err, image) {
+    }, function (err, container) {
       if (err) {
         self.showError(err);
         self.gitLoader(false);
         self.resetSelect();
       } else {
-        var container = new Container({}, { app:this.app });
-        container.createFrom(image.id, function (err, container) {
-          self.gitLoader(false);
-          if (err) {
-            self.showError(err);
-            self.resetSelect();
-          } else {
-            self.app.router.navigate(container.appURL(), true);
-          }
-        });
+        self.app.router.navigate(container.appURL(), true);
       }
     });
   },
   gitLoader: function (bool) {
     var $body = $('body');
-    var $gitLoader = this.$('.overlay-loader')
+    var $gitLoader = this.$('.overlay-loader');
 
     if (bool) {
       $body.addClass('modal-open');
