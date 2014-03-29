@@ -10,7 +10,7 @@ module.exports = BaseView.extend({
     'change select'  : 'changeLanguage'
   },
   preventTyping: function (evt) {
-    if (code !== 40 || code !== 38) {
+    if (evt.keyCode !== 40 || evt.keyCode !== 38) {
       evt.preventDefault();
     }
   },
@@ -21,7 +21,7 @@ module.exports = BaseView.extend({
       select.prop('disabled',false);
     } else {
       select.prop('disabled',true);
-      resetSelect();
+      this.resetSelect();
     }
   },
   changeLanguage: function () {
