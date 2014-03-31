@@ -4,7 +4,6 @@
 
   Filter<span>ing</span>
   <button data-action="show-all" type="button">Show All</button>
-
 </h3>
 <ol>
 
@@ -13,9 +12,11 @@
       {{#if isActiveFilter}}
         {{#if display}}
           <li data-name="{{name}}" class="active">
-            {{view 'channel_image' name=name alt=true}}
-            {{name}}
-            <button type="button" class="glyphicons circle-remove"></button>
+            <a href="#">
+              {{view 'channel_image' name=name alt=true}}
+              {{name}}
+              <button type="button" class="glyphicons circle-remove"></button>
+            </a>
         {{/if}}
       {{/if}}
     {{/with}}
@@ -26,11 +27,13 @@
       {{#unless isActiveFilter}}
         {{#if display}}
           <li data-name="{{name}}">
-            {{view 'channel_image' name=name alt=true}}
-            {{name}}
-            {{#if count}}
-              <span class="count">{{count}}</span>
-            {{/if}}
+              <a href="#">
+              {{view 'channel_image' name=name alt=true}}
+              {{name}}
+              {{#if count}}
+                <span class="count">{{count}}</span>
+              {{/if}}
+            </a>
         {{/if}}
       {{/unless}}
     {{/with}}

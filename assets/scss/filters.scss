@@ -82,20 +82,23 @@
     &:active,
     &.active {
       background: #fff;
-      color: $orange;
+
+      > a {
+        color: $orange;
+      }
     }
 
     &.active {
 
-      &:active > button {
+      &:active button {
         color: $orange;
       }
 
-      > button {
+      button {
         display: block;
       }
 
-      > .count {
+      .count {
         display: none;
       }
     }
@@ -137,6 +140,14 @@
       }
     }
 
+    > a {
+      color: $gray-dark;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
     @include media(xs) {
       border-right: 1px solid rgba(0,0,0,.1);
       float: left;
@@ -160,7 +171,7 @@
         line-height: 45px;
         width: 50%;
 
-        > span {
+        span {
           top: 19px;
         }
       }
