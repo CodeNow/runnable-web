@@ -12,7 +12,7 @@
       {{#if isActiveFilter}}
         {{#if display}}
           <li data-name="{{name}}" class="active">
-            <a href="#">
+            <a href="/?{{filterLink}}">
               {{view 'channel_image' name=name alt=true}}
               {{name}}
               <button type="button" class="glyphicons circle-remove"></button>
@@ -27,7 +27,7 @@
       {{#unless isActiveFilter}}
         {{#if display}}
           <li data-name="{{name}}">
-              <a href="#">
+            <a href="/?{{filterLink}}">
               {{view 'channel_image' name=name alt=true}}
               {{name}}
               {{#if count}}

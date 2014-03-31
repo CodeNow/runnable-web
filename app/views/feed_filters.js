@@ -8,7 +8,6 @@ module.exports = BaseView.extend({
   id: 'filters',
   className: 'col-md-2 col-sm-3',
   events: {
-    'click li:not(.show-more)':       'filterItem',
     'click .show-more':               'showMore',
     'click [data-action="show-all"]': 'showAll'
   },
@@ -26,10 +25,34 @@ module.exports = BaseView.extend({
     else
       opts.filteringActive = (activeFilterCategories.length > 0);
 
+    // SEO link generation
+    var self = this;
+    this.collection.each(function(filterModel){
+      var qs_copy = JSON.parse(JSON.stringify(self.qs));
+
+      if(!filterModel.get('isActiveFilter')){
+        if (qs_copy.filter && qs_copy.filter.length) {
+          qs_copy.filter.push(filterModel.get('name'));
+        } else {
+          qs_copy.filter = [filterModel.get('name')];
+        }
+      } else {
+        if (qs_copy.filter) {
+          qs_copy.filter.splice(qs_copy.filter.indexOf(filterModel.get('name')), 1);
+        }
+      }
+
+      qs_copy.page = 1;
+      qs_copy.filter = _.uniq(qs_copy.filter);
+      if(qs_copy.filter.length === 0)
+        delete qs_copy.filter;
+      filterModel.attributes.filterLink = queryString.stringify(qs_copy);
+    });
+
     return opts;
   },
-  postRender: function () {
-    var qs = this.qs = queryString.parse(location.search);
+  preRender: function () {
+    var qs = this.qs = queryString.parse(utils.getCurrentUrlPath(this.app, false).split('?')[1]);
     if(qs.filter){
       if(!_.isArray(qs.filter)){
         qs.filter = [qs.filter];
@@ -38,6 +61,7 @@ module.exports = BaseView.extend({
     } else {
       this.activeFilters = [];
     }
+    console.log('qs', qs);
   },
   showAll: function (evt) {
     this.activeFilters = [];
@@ -47,21 +71,6 @@ module.exports = BaseView.extend({
   updateRoute: function() {
     this.qs.page = 1;
     this.app.router.navigate(window.location.pathname + '?' + queryString.stringify(this.qs), {trigger: true});
-  },
-  filterItem: function (evt) {
-    var name = this.$(evt.currentTarget).attr('data-name');
-    if(this.activeFilters.indexOf(name) === -1){
-      this.activeFilters.push(name);
-      this.activeFilters = _.uniq(this.activeFilters, false);
-    } else {
-      this.activeFilters.splice(this.activeFilters.indexOf(name), 1);
-    }
-    this.qs.filter = this.activeFilters;
-    if(this.activeFilters.length === 0){
-      delete this.qs.filter;
-      delete this.activeFilters;
-    }
-    this.updateRoute();
   },
   showMore: function (evt) {
     var $ol = this.$('ol');
