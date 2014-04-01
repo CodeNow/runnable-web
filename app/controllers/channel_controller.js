@@ -89,9 +89,6 @@ module.exports = {
             results.relatedChannels = results.feedTrending.relatedChannels;
             results.filteringChannels = results.relatedChannels;
 
-
-
-
             // Don't display the current channel as an option in filters
             results.filteringChannels.each(function(item, i){
               item.attributes.display = (item.get('name') !== results.channel.get('name'))
@@ -117,9 +114,6 @@ module.exports = {
               item.sortChannels();
             });
 
-
-
-
             _.extend(channelResult, results);
 
             if (err) console.log(err);
@@ -128,30 +122,11 @@ module.exports = {
         });
 
       },
-
-
-
       function redirectCheck (channelResult, cb) {
         var channel = channelResult.channel;
         if (channel.get('name') !== params.channel)
           return self.redirectTo(channel.appUrl(params));
         cb(null, channelResult);
-      },
-      function (results, cb) {
-        // default values AFTER redirect check
-        fetchChannelContents.call(self, params, function (err, channelResults) {
-          if (err) return cb(err);
-          cb(null, _.extend(results, channelResults, {page:params.page}));
-        });
-      },
-      function (results, cb) {
-        results.channels.reset(results.channels.filter(function (channel) {
-          return channel.get('count') !== 0;
-        }));
-        fetchOwnersFor.call(self, results.user, results.images, function (err, ownerResults) {
-          if (err) return cb(err);
-          cb(null, _.extend(results, ownerResults));
-        });
       },
       function addSEO (results, cb) {
         var pageText = (params.page>1) ? " Page "+params.page : "";
@@ -160,6 +135,7 @@ module.exports = {
           title: formatTitle(utils.sortLabel(sort)+' '+results.channel.get('name')+" code"+pageText),
           canonical: canonical.call(self)
         };
+
         cb(null, results);
       }
     ], callback);
@@ -186,140 +162,126 @@ module.exports = {
       params.filter = [params.filter];
 
     var isFeaturedCategory = (params.category.toLowerCase() == 'featured');
-    // if (isServer && !this.app.req.cookies.pressauth) {
-    //   this.redirectTo('/');
-    // }
-    // else if (!isServer && !utils.clientGetCookie('pressauth')) {
-    //   this.redirectTo('/');
-    // }
-    // else {
-      var spec = {
-        user: {
-          model: 'User',
-          params: {
-            _id: 'me'
-          }
-        },
-        channels: {
-          collection: 'Channels',
-          params: {
-            category: params.category
-          }
-        },
-        categories: {
-          collection: 'Categories'
-        },
-        feedTrending: {
-          collection: 'FeedsImages',
-          params: {
-            page:  params.page,
-            limit: 15,
-            channel: params.filter
-          }
-        },
-        feedPopular: {
-          collection: 'images',
-          params: {
-            page: params.page,
-            limit: 15,
-            channel: params.filter,
-            sort: '-runs'
-          }
+
+    var spec = {
+      user: {
+        model: 'User',
+        params: {
+          _id: 'me'
         }
-      };
-      fetch.call(this, spec, function (err, results) {
-        if (err) {
-          callback(err);
+      },
+      channels: {
+        collection: 'Channels',
+        params: {
+          category: params.category
         }
-        else {
-          results.relatedChannels = results.feedTrending.relatedChannels;
-
-          if (results.relatedChannels.length) {
-            results.filteringChannels = results.relatedChannels;
-          } else {
-            results.filteringChannels = results.channels;
-          }
-
-
-
-
-
-
-          results.filteringChannels.each(function(item, i){
-            item.attributes.display = true;
-            item.attributes.isActiveFilter = (params.filter.indexOf(item.get('name')) === -1) ? false : true;
-          });
-
-          var setIfActive = function (item, i){
-            var channel = new Channel(item);
-            item.isActiveFilter = channel.hasAlias(params.filter);
-            item.display = true;
-          };
-          results.feedTrending.each(function(item, i){
-            item.get('tags').forEach(setIfActive);
-            item.sortChannels()
-          });
-          results.feedPopular.each(function(item, i){
-            item.get('tags').forEach(setIfActive);
-            item.sortChannels();
-          });
-
-
-
-
-
-
-          results.selectedCategoryLower = params.category.toLowerCase();
-          results.selectedCategory = _.find(results.categories.models, function (category) {
-            return category.get('name').toLowerCase() === results.selectedCategoryLower;
-          });
-          var catName = results.selectedCategory.get('name');
-
-          var featured = results.categories.findWhere({
-            name: 'Featured'
-          });
-          featured.set('url', '/');
-
-          async.parallel([
-            function(cb){
-              fetchOwnersFor.call(self, results.user, results.feedTrending, function(err, results2){
-                _.extend(results, results2);
-                cb();
-              });
-            },
-            function(cb){
-              fetchOwnersFor.call(self, results.user, results.feedPopular, function(err, results2){
-                _.extend(results, results2);
-                cb();
-              });
-          }], function(err){
-            if (err) console.log(err);
-            callback(null, addSEO(results));
-          });
-
+      },
+      categories: {
+        collection: 'Categories'
+      },
+      feedTrending: {
+        collection: 'FeedsImages',
+        params: {
+          page:  params.page,
+          limit: 15,
+          channel: params.filter
         }
-      });
-      function addSEO (results) {
-        var channel = params.channel;
-        var category = params.category;
-        var channelAndOrCategory = channel? channel+' in '+category : category;
-
-        if (params.category.toLowerCase() == 'featured') {
-          results.page = {
-            title : 'Discover Everything through Code',
-            canonical : 'http://runnable.com'
-          };
+      },
+      feedPopular: {
+        collection: 'images',
+        params: {
+          page: params.page,
+          limit: 15,
+          channel: params.filter,
+          sort: '-runs'
         }
-        else {
-          results.page = {
-            title : formatTitle(channelAndOrCategory+" Related Tags"),
-            canonical : canonical.call(self)
-          };
-        }
-
-        return results;
       }
-    // }
+    };
+    fetch.call(this, spec, function (err, results) {
+      if (err) {
+        callback(err);
+      }
+      else {
+        results.relatedChannels = results.feedTrending.relatedChannels;
+
+        if (results.relatedChannels.length) {
+          results.filteringChannels = results.relatedChannels;
+        } else {
+          results.filteringChannels = results.channels;
+        }
+
+        results.filteringChannels.each(function(item, i){
+          item.attributes.display = true;
+          item.attributes.isActiveFilter = (params.filter.indexOf(item.get('name')) === -1) ? false : true;
+        });
+
+        var setIfActive = function (item, i){
+          var channel = new Channel(item);
+          item.isActiveFilter = channel.hasAlias(params.filter);
+          item.display = true;
+        };
+        results.feedTrending.each(function(item, i){
+          item.get('tags').forEach(setIfActive);
+          item.sortChannels();
+          console.log(item.get('tags'));
+        });
+        results.feedPopular.each(function(item, i){
+          item.get('tags').forEach(setIfActive);
+          item.sortChannels();
+          console.log(item.get('tags'));
+        });
+
+        results.selectedCategoryLower = params.category.toLowerCase();
+        results.selectedCategory = _.find(results.categories.models, function (category) {
+          return category.get('name').toLowerCase() === results.selectedCategoryLower;
+        });
+        var catName = results.selectedCategory.get('name');
+
+        var featured = results.categories.findWhere({
+          name: 'Featured'
+        });
+        featured.set('url', '/');
+
+        async.parallel([
+          function(cb){
+            fetchOwnersFor.call(self, results.user, results.feedTrending, function(err, results2){
+              _.extend(results, results2);
+              cb();
+            });
+          },
+          function(cb){
+            fetchOwnersFor.call(self, results.user, results.feedPopular, function(err, results2){
+              _.extend(results, results2);
+              cb();
+            });
+        }], function(err){
+          if (err) console.log(err);
+          callback(null, addSEO(results));
+        });
+
+      }
+    });
+    function addSEO (results) {
+      var channel = params.channel;
+      var category = params.category;
+      var channelAndOrCategory = channel? channel+' in '+category : category;
+
+      if (params.category.toLowerCase() == 'featured') {
+        results.page = {
+          title : 'Discover Everything through Code',
+          canonical : 'http://runnable.com'
+        };
+      }
+      else {
+        results.page = {
+          title : formatTitle(channelAndOrCategory+" Related Tags"),
+          canonical : canonical.call(self)
+        };
+      }
+
+      return results;
+    }
+
   },
   all: function(params, callback) {
     params.page = utils.getQueryParam(this.app, 'page');
