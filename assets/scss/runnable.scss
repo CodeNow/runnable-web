@@ -1,5 +1,3 @@
-@import "compass/css3/opacity";
-
 #output {
   visibility: hidden;
 
@@ -19,78 +17,15 @@
     display: inline-block;
 
     > a {
+      opacity: .8;
       padding: 10px 2px;
-      @include opacity(.8);
 
       &.hover {
-        @include opacity(1)
+        opacity: 1;
       }
     }
   }
 }
-
-// vote button
-// .page-title {
-//   position: relative;
-
-//   .vote {
-//     @include border-radius(50%);
-//     color: $gray-dark;
-//     float: left;
-//     color: $gray-dark;
-//     font-size: 14px;
-//     height: 50px;
-//     margin: 5px 0;
-//     outline: none;
-//     padding: 0;
-//     position: relative;
-//     @include transition(.2s ease-in-out);
-//     width: 50px;
-
-//     &:hover {
-//       color: $purple-light;
-
-//       .glyphicons {
-//         color: $purple-light;
-//       }
-//     }
-
-//     &.voted,
-//     &:active,
-//     &[disabled] {
-//       background-color: rgba(0,0,0,.075);
-//       background-image: none;
-//       border: 1px solid;
-//       border-color: rgba(0, 0, 0, .3) rgba(0, 0, 0, .2) rgba(0, 0, 0, .1);
-//       @include box-shadow(inset 0 2px 6px rgba(0, 0, 0, .1), 1px 0px rgba(255,255,255,1));
-//       color: $purple-light;
-
-//       .glyphicons {
-//         @include animation(liked 1s ease-in-out);
-//         color: $purple-light;
-//       }
-//     }
-
-//     &.voted,
-//     &[disabled] {
-//       cursor: default;
-//     }
-
-//     &[disabled] {
-//       @include box-shadow(inset 0 2px 6px rgba(0, 0, 0, .1), 1px 0px rgba(255,255,255,1) !important);
-//       opacity: 1;
-//     }
-
-//     .glyphicons {
-//       color: $gray-dark;
-//       display: block;
-//       font-size: 32px;
-//       margin: -6px 0;
-//       @include scale-3d(.5,.5,1);
-//       @include transition(.2s ease-in-out);
-//     }
-//   }
-// }
 
 // image/container title
 #project-details {
@@ -103,16 +38,6 @@
       margin: 0;
       min-height: 35px;
     }
-
-    // > div {
-    //   border-left: 1px solid $gray;
-    //   margin-left: 70px;
-    //   padding-left: 20px;
-
-    //   span {
-    //     margin-bottom: 0;
-    //   }
-    // }
   }
 }
 
@@ -160,39 +85,6 @@
       }
     }
 
-    // &.vote-up {
-    //   margin-left: 0;
-
-    //   a {
-    //     color: #bbb;
-    //     text-decoration: none;
-    //     position: relative;
-    //     display: inline-block;
-    //     padding-left: 15px;
-
-    //     &:before {
-    //       content: "";
-    //       position: absolute;
-    //       width: 0;
-    //       height: 0;
-    //       top: 32%;
-    //       left: 0;
-    //       border-left: 5px solid transparent;
-    //       border-right: 5px solid transparent;
-    //       border-bottom: 7px solid #bbb;
-    //       @include transition(transform .25s linear);
-    //     }
-
-    //     &:hover {
-    //       color: #777;
-
-    //       &:before {
-    //         border-bottom: 7px solid #777;
-    //       }
-    //     }
-    //   }
-    // }
-
     &.tags {
 
       img {
@@ -200,8 +92,8 @@
       }
 
       a {
-        margin-top: 5px;
         margin-right: 5px;
+        margin-top: 5px;
       }
     }
 
@@ -219,14 +111,14 @@
     font-size: 16px;
 
     &+button {
-      @include border-radius(0 3px 3px 0);
+      border-radius: 0 3px 3px 0;
     }
   }
 
   .thumbs-up {
 
     &:hover {
-      color: transparentize($green,.2);
+      color: rgba($green,.8);
     }
 
     &:active,
@@ -238,7 +130,7 @@
   .thumbs-down {
 
     &:hover {
-      color: transparentize($orange,.2);
+      color: rgba($orange,.8);
     }
 
     &:active,
