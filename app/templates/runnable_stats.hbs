@@ -1,5 +1,16 @@
+<h2>
+  Forked from <a href="#">Create a horizontal navigation menu bar using jQuery</a>.
+</h2>
 {{#with model.attributes}}
-<span data-title="{{runs}} runs" class="tooltip"><span class="glyphicons play"></span> {{runs}}</span>
-<span data-title="{{views}} views" class="tooltip"><span class="glyphicons eye-open"></span> {{views}}</span>
-<span data-title="{{copies}} copies to clipboard" class="tooltip"><span class="glyphicons notes-2"></span> {{copies}}</span>
+<data>
+  <span class="tooltip" data-title="{{runs}} runs">
+    <span class="glyphicons play-button"></span><b>{{runs}}</b> Runs
+  </span>
+  <span class="tooltip" data-title="{{views}} views">
+    <span class="glyphicons riflescope"></span><b>{{views}}</b> Views
+  </span>
+  <span class="tooltip" data-title="{{copies}} copies">
+    <span class="glyphicons notes-2"></span><b>{{copies}}</b> Copies
+  </span>
+</data>
 {{/with}}
