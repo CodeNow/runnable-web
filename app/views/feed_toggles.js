@@ -34,6 +34,7 @@ module.exports = BaseView.extend({
     var qs = queryString.parse(location.search);
     qs.orderBy = id;
     this.app.router.navigate(window.location.pathname + '?' + queryString.stringify(qs));
+    this.collection.trigger('change:filteringUrl');
   }
 });
 

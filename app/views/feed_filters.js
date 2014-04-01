@@ -13,6 +13,9 @@ module.exports = BaseView.extend({
   },
   activeFilters: [],
   qs: {},
+  postHydrate: function () {
+    this.listenTo(this.collection, 'change:filteringUrl', this.render.bind(this));
+  },
   getTemplateData: function () {
     var opts = this.options;
 
@@ -25,7 +28,7 @@ module.exports = BaseView.extend({
     else
       opts.filteringActive = (activeFilterCategories.length > 0);
 
-    // SEO link generation
+    // SEO link generationw
     var self = this;
     this.collection.each(function(filterModel){
       var qs_copy = JSON.parse(JSON.stringify(self.qs));
