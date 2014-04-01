@@ -7,9 +7,9 @@ var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName:'h1',
   events: {
-    'click .edit-title' : 'clickEdit',
-    'submit form'       : 'submitName',
-    'click .btn-cancel' : 'escEditMode'
+    'click .edit'   : 'clickEdit',
+    'submit form'   : 'submitName',
+    'click .cancel' : 'escEditMode'
   },
   postRender: function () {
     this.listenTo(this.model, 'change:name change:tags', this.render.bind(this));

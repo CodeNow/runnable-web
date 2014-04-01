@@ -71,3 +71,21 @@ main {
 .center-text {
   text-align: center;
 }
+
+// typography
+a {
+  color: $gray-dark;
+  display: inline-block;
+
+  &:hover {
+    color: $gray-darker;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  &:active {
+    color: $gray-darkest;
+    text-decoration: none;
+    transform: translate(0,1px,0);
+  }
+}
