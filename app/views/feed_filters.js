@@ -64,7 +64,6 @@ module.exports = BaseView.extend({
     } else {
       this.activeFilters = [];
     }
-    console.log('qs', qs);
   },
   showAll: function (evt) {
     this.activeFilters = [];
