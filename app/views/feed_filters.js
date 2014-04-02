@@ -59,7 +59,8 @@ module.exports = BaseView.extend({
       else {              // this link add the channel to the filter set
         cloneQs.filter.push(channel.get('name'));
       }
-
+      //always redirect to page 1 when applying new filter set
+      cloneQs.page = 1;
       channel.set('filterLink', queryString.stringify(cloneQs));
     });
 
