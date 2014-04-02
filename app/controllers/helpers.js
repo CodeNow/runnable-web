@@ -34,6 +34,7 @@ module.exports = {
 
 function formatTitle () {
   var args = Array.prototype.slice.call(arguments);
+  args = args.filter(function(item){ return item; });
   args.push('Runnable');
   return args.join(' - ');
 }
