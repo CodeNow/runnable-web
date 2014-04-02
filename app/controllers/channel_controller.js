@@ -179,8 +179,9 @@ module.exports = {
 
     var canonicalFilter = JSON.parse(JSON.stringify(params.filter));
 
-    if(!orderBy || !orderBy.toLowerCase || (orderBy.toLowerCase() != 'trending' && orderBy.toLowerCase() != 'popular'))
+    if(_.result(orderBy, 'toLowerCase') != 'popular'){
       orderBy = 'trending';
+    }
     orderBy = orderBy.toLowerCase();
 
     var spec = {
