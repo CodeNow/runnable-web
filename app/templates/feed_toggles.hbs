@@ -1,2 +1,6 @@
-<button id="trending" {{#if activeTrending}}class="active"{{/if}}>Trending</button>
-<button id="popular" {{#if activePopular}}class="active"{{/if}}>Popular</button>
+<button id="trending" {{#if activeTrending}}class="active"{{/if}}>
+	<a href="?{{trendingLink}}">Trending</a>
+</button>
+<button id="popular" {{#if activePopular}}class="active"{{/if}}>
+	<a href="?{{popularLink}}">Popular</a>
+</button>
