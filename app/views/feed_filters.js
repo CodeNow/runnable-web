@@ -45,13 +45,22 @@ module.exports = BaseView.extend({
     var qs = clone(self.qs);
     collection.each(function (channel) {
       var cloneQs = clone(qs);
-      // cloneQs.filter is currently applied filter names (channel names)
-      if (cloneQs.filter) {
-        cloneQs.filter = cloneQs.filter.filter(function (name) {
-          return channel.get('isActiveFilter');
-        });
+
+      cloneQs.filter = cloneQs.filter || [];
+      // qs can be string or array, force array
+      cloneQs.filter = Array.isArray(cloneQs.filter) ?
+        cloneQs.filter :
+        [cloneQs.filter];
+
+      var activeIndex = cloneQs.filter.indexOf(channel.get('name'));
+      if (~activeIndex) { // this link removes itself from the filter (toggle filter off)
+        cloneQs.filter.splice(activeIndex, 1);
       }
-      channel.set('filterLink', queryString.stringify(qs));
+      else {              // this link add the channel to the filter set
+        cloneQs.filter.push(channel.get('name'));
+      }
+
+      channel.set('filterLink', queryString.stringify(cloneQs));
     });
 
     return opts;
