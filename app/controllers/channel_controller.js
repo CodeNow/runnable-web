@@ -286,7 +286,7 @@ module.exports = {
       if (params.category.toLowerCase() == 'featured') {
         results.page = {
           title : 'Discover Everything through Code',
-          canonical : 'http://runnable.com' + '/' + qs2
+          canonical : 'http://runnable.com/' + qs2
         };
       }
       else {
