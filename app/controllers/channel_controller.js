@@ -12,13 +12,11 @@ var canonical = helpers.canonical;
 var formatTitle = helpers.formatTitle;
 
 module.exports = {
+  // channel page
   index: function (params, callback) {
-    //params.page = utils.getQueryParam(this.app, 'page');
-    //params.sort = utils.getQueryParam(this.app, 'sort');
-
     params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
-    params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 1;
-    params.page = parseInt(params.page);
+    params.page   = (utils.getQueryParam(this.app, 'page'))   ? utils.getQueryParam(this.app, 'page')   : 1;
+    params.page   = parseInt(params.page);
     if(isNaN(parseInt(params.page))){
       self.redirectTo('');
       return;
@@ -30,6 +28,11 @@ module.exports = {
 
     params.filter.push(params.channel);
     params.filter = _.uniq(params.filter);
+
+    var orderBy = utils.getQueryParam(this.app, 'orderBy');
+    if(!orderBy || !orderBy.toLowerCase || (orderBy.toLowerCase() != 'trending' && orderBy.toLowerCase() != 'popular'))
+      orderBy = 'trending';
+    orderBy = orderBy.toLowerCase();
 
     var self = this;
     var app = this.app;
@@ -43,16 +46,20 @@ module.exports = {
             params: {
               category: 'Featured'
             }
-          },
-          feedTrending: {
+          }
+        };
+
+        if(orderBy === 'trending'){
+          spec.feed = {
             collection: 'FeedsImages',
             params: {
               page: params.page,
               limit: 15,
               channel: params.filter
             }
-          },
-          feedPopular: {
+          };
+        } else {
+          spec.feed = {
             collection: 'images',
             params: {
               page: params.page,
@@ -60,33 +67,19 @@ module.exports = {
               channel: params.filter,
               sort: '-runs'
             }
-          }
-        };
+          };
+        }
 
         fetch.call(self, spec, function (err, results) {
+          if (err) console.log(err);
 
-          if (err) {
-            callback(err);
-            return;
-          }
-
+          // results.user for fetchOwnersFor
           _.extend(results, channelResult);
 
-          async.parallel([
-            function(cb){
-              fetchOwnersFor.call(self, results.user, results.feedTrending, function(err, results2){
-                _.extend(results, results2);
-                cb();
-              });
-            },
-            function(cb){
-              fetchOwnersFor.call(self, results.user, results.feedPopular, function(err, results2){
-                _.extend(results, results2);
-                cb();
-              });
-          }], function(err){
+          fetchOwnersFor.call(self, results.user, results.feed, function(err, results2){
+            if (err) console.log(err);
 
-            results.relatedChannels = results.feedTrending.relatedChannels;
+            results.relatedChannels = results.feed.relatedChannels;
             results.filteringChannels = results.relatedChannels;
 
             // Don't display the current channel as an option in filters
@@ -105,22 +98,16 @@ module.exports = {
                 }
               }
             };
-            results.feedTrending.each(function(item, i){
+            results.feed.each(function(item, i){
               item.get('tags').forEach(setIfActive);
               item.sortChannels()
             });
-            results.feedPopular.each(function(item, i){
-              item.get('tags').forEach(setIfActive);
-              item.sortChannels();
-            });
 
+            _.extend(results, results2);
             _.extend(channelResult, results);
-
-            if (err) console.log(err);
             callback(null, channelResult);
           });
         });
-
       },
       function redirectCheck (channelResult, cb) {
         var channel = channelResult.channel;
@@ -129,13 +116,13 @@ module.exports = {
         cb(null, channelResult);
       },
       function addSEO (results, cb) {
-        var pageText = (params.page>1) ? " Page "+params.page : "";
-        var sort = (params.sort) || 'created';
+        var pageText         = (params.page > 1) ? " Page "+params.page : "";
+        var sort             = (params.sort) || 'created';
+        results.orderByParam = orderBy;
         results.page = {
           title: formatTitle(utils.sortLabel(sort)+' '+results.channel.get('name')+" code"+pageText),
-          canonical: canonical.call(self)
+          canonical: ''  //canonical.call(self, '/?testing123')
         };
-
         cb(null, results);
       }
     ], callback);
@@ -143,15 +130,18 @@ module.exports = {
   runnable: function (params) {
     this.redirectTo(params._id +'/'+ params.name);
   },
+  //index/home page
   category: function (params, callback) {
-    var self = this;
-    var app = this.app;
-    var isHomepage = utils.isCurrentUrl(app, '');
+    var self               = this;
+    var app                = this.app;
+    var isHomepage         = utils.isCurrentUrl(app, '');
+    var orderBy            = utils.getQueryParam(this.app, 'orderBy');
+    params.category        = params.category || 'Featured';
+    var isFeaturedCategory = (params.category.toLowerCase() == 'featured');
+    params.filter          = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
+    params.page            = (utils.getQueryParam(this.app, 'page'))   ? utils.getQueryParam(this.app, 'page')   : 1;
+    params.page            = parseInt(params.page);
 
-    params.category = params.category || 'Featured';
-    params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
-    params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 1;
-    params.page = parseInt(params.page);
     if(isNaN(parseInt(params.page))){
       self.redirectTo('');
       return;
@@ -161,7 +151,9 @@ module.exports = {
     if(!_.isArray(params.filter))
       params.filter = [params.filter];
 
-    var isFeaturedCategory = (params.category.toLowerCase() == 'featured');
+    if(!orderBy || !orderBy.toLowerCase || (orderBy.toLowerCase() != 'trending' && orderBy.toLowerCase() != 'popular'))
+      orderBy = 'trending';
+    orderBy = orderBy.toLowerCase();
 
     var spec = {
       user: {
@@ -178,16 +170,20 @@ module.exports = {
       },
       categories: {
         collection: 'Categories'
-      },
-      feedTrending: {
+      }
+    };
+
+    if (orderBy === 'trending') {
+      spec.feed = {
         collection: 'FeedsImages',
         params: {
-          page:  params.page,
+          page: params.page,
           limit: 15,
           channel: params.filter
         }
-      },
-      feedPopular: {
+      };
+    } else {
+      spec.feed = {
         collection: 'images',
         params: {
           page: params.page,
@@ -195,14 +191,15 @@ module.exports = {
           channel: params.filter,
           sort: '-runs'
         }
-      }
-    };
+      };
+    }
+
     fetch.call(this, spec, function (err, results) {
       if (err) {
         callback(err);
       }
       else {
-        results.relatedChannels = results.feedTrending.relatedChannels;
+        results.relatedChannels = results.feed.relatedChannels;
 
         if (results.relatedChannels.length) {
           results.filteringChannels = results.relatedChannels;
@@ -220,15 +217,9 @@ module.exports = {
           item.isActiveFilter = channel.hasAlias(params.filter);
           item.display = true;
         };
-        results.feedTrending.each(function(item, i){
+        results.feed.each(function(item, i){
           item.get('tags').forEach(setIfActive);
           item.sortChannels();
-          console.log(item.get('tags'));
-        });
-        results.feedPopular.each(function(item, i){
-          item.get('tags').forEach(setIfActive);
-          item.sortChannels();
-          console.log(item.get('tags'));
         });
 
         results.selectedCategoryLower = params.category.toLowerCase();
@@ -242,20 +233,9 @@ module.exports = {
         });
         featured.set('url', '/');
 
-        async.parallel([
-          function(cb){
-            fetchOwnersFor.call(self, results.user, results.feedTrending, function(err, results2){
-              _.extend(results, results2);
-              cb();
-            });
-          },
-          function(cb){
-            fetchOwnersFor.call(self, results.user, results.feedPopular, function(err, results2){
-              _.extend(results, results2);
-              cb();
-            });
-        }], function(err){
+        fetchOwnersFor.call(self, results.user, results.feed, function(err, results2){
           if (err) console.log(err);
+          _.extend(results, results2);
           callback(null, addSEO(results));
         });
 
@@ -265,6 +245,8 @@ module.exports = {
       var channel = params.channel;
       var category = params.category;
       var channelAndOrCategory = channel? channel+' in '+category : category;
+
+      results.orderByParam = orderBy;
 
       if (params.category.toLowerCase() == 'featured') {
         results.page = {
