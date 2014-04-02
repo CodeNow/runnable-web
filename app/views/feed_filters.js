@@ -8,9 +8,9 @@ module.exports = BaseView.extend({
   id: 'filters',
   className: 'col-md-2 col-sm-3',
   events: {
-    'click .show-more':               'showMore',
-    'click [data-action="show-all"]': 'showAll',
-    'click ol li':                  'activateLoadingOverlay'
+    'click .show-more' : 'showMore',
+    'click h3 > button': 'showAll',
+    'click li'         : 'activateLoadingOverlay'
   },
   activateLoadingOverlay: function (evt) {
     this.app.set({loading: true});
@@ -24,26 +24,30 @@ module.exports = BaseView.extend({
     var opts = this.options;
 
     var activeFilterCategories = this.collection.where({
-      "isActiveFilter": true
+      "isActiveFilter": true;
     });
 
-    if(opts.filterMode == 'channel')
+    if (opts.filterMode == 'channel') {
       opts.filteringActive = (activeFilterCategories.length > 1);
-    else
+    }
+    else {
       opts.filteringActive = (activeFilterCategories.length > 0);
+    }
 
     // SEO link generationw
     var self = this;
     this.collection.each(function(filterModel){
       var qs_copy = JSON.parse(JSON.stringify(self.qs));
 
-      if(!filterModel.get('isActiveFilter')){
+      if (!filterModel.get('isActiveFilter')) {
         if (qs_copy.filter && qs_copy.filter.length) {
           qs_copy.filter.push(filterModel.get('name'));
-        } else {
+        }
+        else {
           qs_copy.filter = [filterModel.get('name')];
         }
-      } else {
+      }
+      else {
         if (qs_copy.filter) {
           qs_copy.filter.splice(qs_copy.filter.indexOf(filterModel.get('name')), 1);
         }
@@ -51,8 +55,9 @@ module.exports = BaseView.extend({
 
       qs_copy.page = 1;
       qs_copy.filter = _.uniq(qs_copy.filter);
-      if(qs_copy.filter.length === 0)
+      if (qs_copy.filter.length === 0) {
         delete qs_copy.filter;
+      }
       filterModel.attributes.filterLink = queryString.stringify(qs_copy);
     });
 
@@ -60,12 +65,13 @@ module.exports = BaseView.extend({
   },
   preRender: function () {
     var qs = this.qs = queryString.parse(utils.getCurrentUrlPath(this.app, false).split('?')[1]);
-    if(qs.filter){
-      if(!_.isArray(qs.filter)){
+    if (qs.filter) {
+      if (!_.isArray(qs.filter)) {
         qs.filter = [qs.filter];
       }
       this.activeFilters = qs.filter;
-    } else {
+    }
+    else {
       this.activeFilters = [];
     }
   },
