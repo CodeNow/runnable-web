@@ -238,7 +238,7 @@ module.exports = {
 
         results.filteringChannels.each(function(item, i){
           item.set('display', true);
-          item.set('isActiveFilter', (params.filter.indexOf(item.get('name')) === -1));
+          item.set('isActiveFilter', (params.filter.indexOf(item.get('name')) !== -1));
         });
 
         var setIfActive = function (item, i){
@@ -285,7 +285,7 @@ module.exports = {
 
       if (params.category.toLowerCase() == 'featured') {
         results.page = {
-          title : 'Discover Everything through Code',
+          title : ((params.filter.length) ? params.filter.join(' & ') + ' - ' : '') +  'Discover Everything through Code',
           canonical : 'http://runnable.com/' + qs2
         };
       }
