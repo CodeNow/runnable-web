@@ -25,7 +25,7 @@ module.exports = BaseView.extend({
 
   },
   initLoading: function (type, cb) {
-    var opts = utils.cbOpts(callback, this);
+    var opts = utils.cbOptsRaw(callback, this);
     opts.patch = true;
     var data = {
       status: 'Committing ' + type

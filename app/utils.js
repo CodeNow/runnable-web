@@ -202,6 +202,24 @@ var utils = module.exports = {
       }
     };
   },
+  errorToCBRaw : function (cb) {
+    return function (model, xhr, options) {
+      if (!isServer) {
+        Track.backboneRequestError(model, xhr, options);
+      }
+      if (xhr.message) {
+        cb(xhr.message);
+      }
+      else {
+        utils.parseJSON(xhr.responseText, function (err, json) {
+          var defaultMessage = 'Error, please try again.';
+          if (err) { cb(defaultMessage); } else {
+            cb(json || defaultMessage);
+          }
+        });
+      }
+    };
+  },
   successErrorToCB: function (cb, context) {
     if (context) { cb = cb.bind(context); }
     return {
@@ -214,6 +232,13 @@ var utils = module.exports = {
     return {
       success: utils.successToCB(cb),
       error  : utils.errorToCB(cb)
+    };
+  },
+  cbOptsRaw: function (cb, context) {
+    if (context) { cb = cb.bind(context); }
+    return {
+      success: utils.successToCB(cb),
+      error  : utils.errorToCBRaw(cb)
     };
   },
   urlFriendly: function (str) {
