@@ -15,15 +15,6 @@
               {{name}}
               <button type="button" class="glyphicons circle-remove"></button>
             </a>
-        {{else}}
-          <li data-name="{{name}}">
-            <a href="?{{filterLink}}">
-              {{view 'channel_image' name=name alt=true}}
-              {{name}}
-              {{#if count}}
-                <span class="count">{{count}}</span>
-              {{/if}}
-            </a>
         {{/if}}
       {{/if}}
     {{/with}}
@@ -31,8 +22,8 @@
 
   {{#each collection.models}}
     {{#with attributes}}
-      {{#unless isActiveFilter}}
-        {{#if display}}
+      {{#if display}}
+        {{#unless isActiveFilter}}
           <li data-name="{{name}}">
             <a href="?{{filterLink}}">
               {{view 'channel_image' name=name alt=true}}
@@ -41,8 +32,8 @@
                 <span class="count">{{count}}</span>
               {{/if}}
             </a>
-        {{/if}}
-      {{/unless}}
+        {{/unless}}
+      {{/if}}
     {{/with}}
   {{/each}}
 
