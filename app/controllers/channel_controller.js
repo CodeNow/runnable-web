@@ -4,6 +4,7 @@ var helpers = require('./helpers');
 var utils = require('../utils');
 var fetch = helpers.fetch;
 var Channel = require('../models/channel');
+var queryString = require('query-string');
 
 var fetchOwnersFor = helpers.fetchOwnersFor;
 var fetchUserAndChannel = helpers.fetchUserAndChannel;
@@ -11,12 +12,29 @@ var fetchChannelContents = helpers.fetchChannelContents;
 var canonical = helpers.canonical;
 var formatTitle = helpers.formatTitle;
 
+function safeQueryStringCanonical (opts) {
+  var response = {
+    orderBy: opts.orderBy
+  };
+  if (_.isArray(opts.filter) && opts.filter.length > 0) {
+    response.filter = opts.filter
+  }
+  opts.page = parseInt(opts.page);
+  console.log('opts.page', opts.page);
+  if (_.isNumber(opts.page) && !_.isNaN(opts.page) && opts.page > 0) {
+    response.page = opts.page;
+  }
+  return '?' + queryString.stringify(response);
+}
+
 module.exports = {
   // channel page
   index: function (params, callback) {
     params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
     params.page   = (utils.getQueryParam(this.app, 'page'))   ? utils.getQueryParam(this.app, 'page')   : 1;
     params.page   = parseInt(params.page);
+    var canonicalPage   = params.page;
+
     if(isNaN(parseInt(params.page))){
       self.redirectTo('');
       return;
@@ -26,6 +44,7 @@ module.exports = {
     if(!_.isArray(params.filter))
       params.filter = [params.filter]
 
+    var canonicalFilter = JSON.parse(JSON.stringify(params.filter));
     params.filter.push(params.channel);
     params.filter = _.uniq(params.filter);
 
@@ -119,9 +138,16 @@ module.exports = {
         var pageText         = (params.page > 1) ? " Page "+params.page : "";
         var sort             = (params.sort) || 'created';
         results.orderByParam = orderBy;
+
+        var qs2 = safeQueryStringCanonical({
+          orderBy: orderBy,
+          filter:  canonicalFilter,
+          page:    canonicalPage
+        });
+
         results.page = {
           title: formatTitle(utils.sortLabel(sort)+' '+results.channel.get('name')+" code"+pageText),
-          canonical: ''  //canonical.call(self, '/?testing123')
+          canonical: canonical.call(self, '/' + params.channel + '/' + qs2)
         };
         cb(null, results);
       }
@@ -141,6 +167,7 @@ module.exports = {
     params.filter          = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
     params.page            = (utils.getQueryParam(this.app, 'page'))   ? utils.getQueryParam(this.app, 'page')   : 1;
     params.page            = parseInt(params.page);
+    var canonicalPage      = params.page;
 
     if(isNaN(parseInt(params.page))){
       self.redirectTo('');
@@ -150,6 +177,8 @@ module.exports = {
 
     if(!_.isArray(params.filter))
       params.filter = [params.filter];
+
+    var canonicalFilter = JSON.parse(JSON.stringify(params.filter));
 
     if(!orderBy || !orderBy.toLowerCase || (orderBy.toLowerCase() != 'trending' && orderBy.toLowerCase() != 'popular'))
       orderBy = 'trending';
@@ -248,22 +277,26 @@ module.exports = {
 
       results.orderByParam = orderBy;
 
+      var qs2 = safeQueryStringCanonical({
+        orderBy: orderBy,
+        filter:  canonicalFilter,
+        page:    canonicalPage
+      });
+
       if (params.category.toLowerCase() == 'featured') {
         results.page = {
           title : 'Discover Everything through Code',
-          canonical : 'http://runnable.com'
+          canonical : 'http://runnable.com' + '/' + qs2
         };
       }
       else {
         results.page = {
           title : formatTitle(channelAndOrCategory+" Related Tags"),
-          canonical : canonical.call(self)
+          canonical : canonical.call(self, '/' + qs2)
         };
       }
-
       return results;
     }
-
   },
   all: function(params, callback) {
     params.page = utils.getQueryParam(this.app, 'page');
