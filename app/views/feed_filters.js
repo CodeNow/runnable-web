@@ -9,7 +9,11 @@ module.exports = BaseView.extend({
   className: 'col-md-2 col-sm-3',
   events: {
     'click .show-more':               'showMore',
-    'click [data-action="show-all"]': 'showAll'
+    'click [data-action="show-all"]': 'showAll',
+    'click ol li':                  'activateLoadingOverlay'
+  },
+  activateLoadingOverlay: function (evt) {
+    this.app.set({loading: true});
   },
   activeFilters: [],
   qs: {},

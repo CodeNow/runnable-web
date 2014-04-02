@@ -4,7 +4,11 @@ var utils = require('../utils');
 
 module.exports = BaseView.extend({
   className: 'btn-group toggles',
-  events: {
+   events: {
+    'click a.btn': 'activateLoadingOverlay'
+  },
+  activateLoadingOverlay: function (evt) {
+    this.app.set({loading: true});
   },
   getTemplateData: function () {
     var opts = this.options;
