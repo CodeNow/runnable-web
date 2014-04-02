@@ -1,11 +1,10 @@
 var BaseView = require('./base_view');
 var queryString = require('query-string');
+var utils = require('../utils');
 
 module.exports = BaseView.extend({
   className: 'btn-group toggles',
   events: {
-    'click #popular'  : 'setPopular',
-    'click #trending' : 'setTrending'
   },
   getTemplateData: function () {
     var opts = this.options;
@@ -17,24 +16,18 @@ module.exports = BaseView.extend({
       opts.activeTrending = true;
       opts.activePopular = false;
     }
+
+    var qs = queryString.parse(utils.getCurrentUrlPath(this.app, false).split('?')[1]);
+    var qsTrending = JSON.parse(JSON.stringify(qs));
+    var qsPopular  = JSON.parse(JSON.stringify(qs));
+
+    qsTrending.orderBy = 'trending';
+    qsPopular.orderBy  = 'popular';
+
+    opts.trendingLink = queryString.stringify(qsTrending);
+    opts.popularLink  = queryString.stringify(qsPopular);
+
     return opts;
-  },
-  setPopular: function (evt) {
-    this.toggleFeed(evt);
-  },
-  setTrending: function (evt) {
-    this.toggleFeed(evt);
-  },
-  toggleFeed: function (evt) {
-    this.$('button').toggleClass('active');
-    var id = this.$(evt.currentTarget).attr('id');
-    if (this.app.dispatch) {
-      this.app.dispatch.trigger('toggle:toggleFeed', id);
-    }
-    var qs = queryString.parse(location.search);
-    qs.orderBy = id;
-    this.app.router.navigate(window.location.pathname + '?' + queryString.stringify(qs));
-    this.collection.trigger('change:filteringUrl');
   }
 });
 

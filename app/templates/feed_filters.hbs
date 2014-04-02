@@ -1,6 +1,4 @@
-<h3
-  {{#if filteringActive}}class="in"{{/if}}
-  {{#unless filteringActive}}class="out"{{/unless}}>
+<h3 class="{{#if filteringActive}}in{{/if}}">
 
   Filter<span>ing</span>
   <button data-action="show-all" type="button">Show All</button>
@@ -12,7 +10,7 @@
       {{#if isActiveFilter}}
         {{#if display}}
           <li data-name="{{name}}" class="active">
-            <a href="/?{{filterLink}}">
+            <a href="?{{filterLink}}">
               {{view 'channel_image' name=name alt=true}}
               {{name}}
               <button type="button" class="glyphicons circle-remove"></button>
@@ -27,7 +25,7 @@
       {{#unless isActiveFilter}}
         {{#if display}}
           <li data-name="{{name}}">
-            <a href="/?{{filterLink}}">
+            <a href="?{{filterLink}}">
               {{view 'channel_image' name=name alt=true}}
               {{name}}
               {{#if count}}
