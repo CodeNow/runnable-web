@@ -110,7 +110,6 @@ module.exports = BaseView.extend({
   },
   postRender: function () {
     this.imageTile();
-    // this.$('#home-header').addClass('in');
   },
   imageTile: function () {
     var $bubbles = this.$('.bubbles');
