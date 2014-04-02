@@ -237,8 +237,8 @@ module.exports = {
         }
 
         results.filteringChannels.each(function(item, i){
-          item.attributes.display = true;
-          item.attributes.isActiveFilter = (params.filter.indexOf(item.get('name')) === -1) ? false : true;
+          item.set('display', true);
+          item.set('isActiveFilter', (params.filter.indexOf(item.get('name')) === -1));
         });
 
         var setIfActive = function (item, i){
