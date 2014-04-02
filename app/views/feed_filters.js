@@ -3,6 +3,10 @@ var utils = require('../utils');
 var _ = require('underscore');
 var queryString = require('query-string');
 
+var clone = function (o) {
+  return JSON.parse(JSON.stringify(o));
+};
+
 module.exports = BaseView.extend({
   tagName: 'section',
   id: 'filters',
@@ -36,29 +40,18 @@ module.exports = BaseView.extend({
 
     // SEO link generationw
     var self = this;
-    this.collection.each(function(filterModel){
-      var qs_copy = JSON.parse(JSON.stringify(self.qs));
+    var collection = this.collection;
 
-      if (!filterModel.get('isActiveFilter')) {
-        if (qs_copy.filter && qs_copy.filter.length) {
-          qs_copy.filter.push(filterModel.get('name'));
-        }
-        else {
-          qs_copy.filter = [filterModel.get('name')];
-        }
+    var qs = clone(self.qs);
+    collection.each(function (channel) {
+      var cloneQs = clone(qs);
+      // cloneQs.filter is currently applied filter names (channel names)
+      if (cloneQs.filter) {
+        cloneQs.filter = cloneQs.filter.filter(function (name) {
+          return channel.get('isActiveFilter');
+        });
       }
-      else {
-        if (qs_copy.filter) {
-          qs_copy.filter.splice(qs_copy.filter.indexOf(filterModel.get('name')), 1);
-        }
-      }
-
-      qs_copy.page = 1;
-      qs_copy.filter = _.uniq(qs_copy.filter);
-      if (qs_copy.filter.length === 0) {
-        delete qs_copy.filter;
-      }
-      filterModel.attributes.filterLink = queryString.stringify(qs_copy);
+      channel.set('filterLink', queryString.stringify(qs));
     });
 
     return opts;
