@@ -49,14 +49,14 @@
         pointer-events: auto;
       }
 
-      button {
-        animation: alertIn forwards 1 .3s ease-in-out;
-      }
+      // button {
+      //   animation: alertIn forwards 1 .3s ease-in-out;
+      // }
     }
 
-    &.out button {
-      animation: fadeIn reverse 1 .2s linear;
-    }
+    // &.out button {
+    //   animation: fadeIn reverse 1 .2s linear;
+    // }
   }
 
   li {
