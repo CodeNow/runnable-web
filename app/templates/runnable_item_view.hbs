@@ -1,24 +1,12 @@
-<h3>
-  <a href="{{invoke model method='appURL'}}">
-    {{model.attributes.name}}
-  </a>
-</h3>
+<h2><a href="{{invoke model method='appURL'}}">{{model.attributes.name}}</a></h2>
 {{#with model.attributes}}
-<p class="runnable-stats">
-
-  {{view "runnable_stats" runs=runs views=views copies=copies}}
-  &bull;
-  {{view "runnable_item_owner" model=../model.owner model_id=owner model_name='user' created=created}}
-  {{#if tags.length}}
-  &bull;
-  <span class="tags">
+<div class="col-sm-12 clearfix">
+  <data><span class="glyphicons play-button"></span><b>{{runs}}</b> Runs</data>
+  <ul>
     {{#each tags}}
-    {{view "tag_link" name=name}}
+    <li class="tag"><a href="/{{name}}">{{name}}</a>
     {{/each}}
-  </span>
-  {{#if_result ../../user method="isModerator"}}
-  <button class="delete" type="button">x</button>
-  {{/if_result}}
-  {{/if}}
-</p>
+  </ul>
+</div>
 {{/with}}
+{{view 'user_image' model=owner}}
