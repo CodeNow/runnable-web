@@ -20,7 +20,6 @@ function safeQueryStringCanonical (opts) {
     response.filter = opts.filter
   }
   opts.page = parseInt(opts.page);
-  console.log('opts.page', opts.page);
   if (_.isNumber(opts.page) && !_.isNaN(opts.page) && opts.page > 0) {
     response.page = opts.page;
   }
