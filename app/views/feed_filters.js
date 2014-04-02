@@ -24,7 +24,7 @@ module.exports = BaseView.extend({
     var opts = this.options;
 
     var activeFilterCategories = this.collection.where({
-      "isActiveFilter": true;
+      "isActiveFilter": true
     });
 
     if (opts.filterMode == 'channel') {
