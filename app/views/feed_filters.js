@@ -55,6 +55,9 @@ module.exports = BaseView.extend({
       var activeIndex = cloneQs.filter.indexOf(channel.get('name'));
       if (~activeIndex) { // this link removes itself from the filter (toggle filter off)
         cloneQs.filter.splice(activeIndex, 1);
+        if(cloneQs.filter.length === 0){
+          delete cloneQs.filter;
+        }
       }
       else {              // this link add the channel to the filter set
         cloneQs.filter.push(channel.get('name'));
