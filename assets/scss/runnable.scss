@@ -99,6 +99,11 @@
 
 .runnable-description {
   margin-top: 5px;
+
+  > p {
+    color: $gray-dark;
+    margin: 15px 0;
+  }
 }
 
 // edit title and description
