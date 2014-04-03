@@ -1,9 +1,14 @@
 {{#if model.attributes.gravitar}}
 <a href="{{invoke model method='appURL'}}" class="col-lg-4">
+  <img src="{{model.attributes.gravitar}}?s=150" alt="{{model.attributes.username}}">
+  <span class="reputation tooltip" data-title="{{model.attributes.taggedImagesCount}} published Runnables">{{model.attributes.taggedImagesCount}}</span>
+</a>
+{{!--
+<a href="{{invoke model method='appURL'}}" class="col-lg-4">
   <img class="project-author-icon" src="{{model.attributes.gravitar}}" alt="{{model.attributes.username}}">
   <span class="btn purple reputation tooltip" data-title="{{model.attributes.taggedImagesCount}} published Runnables">{{model.attributes.taggedImagesCount}}</span>
 </a>
-
+ --}}
 <h4 class="col-lg-8">
   {{#if model.attributes.username}}
   <a href="{{invoke model method='appURL'}}">{{model.attributes.username}}</a>
