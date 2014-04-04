@@ -79,6 +79,7 @@
     border: 0;
     border-bottom: 1px solid rgba(0,0,0,.1);
     float: right;
+    overflow: hidden;
     transition: transform .2s ease-in-out;
     width: 24px;
 
@@ -95,6 +96,7 @@
 
     > button {
       border: 0;
+      box-shadow: none;
       padding: 0;
       position: relative;
     }
