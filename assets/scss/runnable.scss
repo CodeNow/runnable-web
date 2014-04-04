@@ -216,7 +216,7 @@
       display: block;
       float: left;
       margin: 0 10px 0 0;
-      width: 108px;
+      width: 81px;
     }
 
     @include media(md) {
@@ -312,6 +312,18 @@
     &:hover,
     &:focus {
       color: #fff;
+    }
+  }
+
+  .run-button {
+    @include media(xxs) {
+      > img {
+        margin: -4px 0 0 4px;
+      }
+
+      > span {
+        display: none;
+      }
     }
   }
 
