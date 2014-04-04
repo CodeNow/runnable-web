@@ -120,6 +120,8 @@
   }
 
   > h1 {
+    font-weight: 700;
+
     @include media(sm) {
       font-size: 30px;
     }

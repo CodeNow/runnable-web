@@ -48,14 +48,36 @@ module.exports = BaseView.extend({
   },
   publishBack: function () {
     var self = this;
-    this.model.saveOpenFiles(function (err) {
-      if (err) {
-        self.showError(err);
-        return;
-      }
+    var user = self.app.user;
+    var publishBack = function () {
       self.publishLoader = _.findWhere(self.childViews, {name:'publish_loader'});
       self.publishLoader.initLoading('back', self.publishCallback.bind(self));
       self.$pubBack.attr('disabled', 'disabled');
+    };
+
+    self.model.saveOpenFiles(function (err) {
+      // if any error
+      if (err) {
+        self.showError(err);
+      }
+      // overwrite protection
+      else if (!user.isOwnerOf(self.model)) {
+        var actionHandler = function (dialogItself) {
+          publishBack();
+          dialogItself.close();
+        };
+
+        self.showPrompt({
+          message:
+            '<h3>Overwriting Project</h3><p>You\'re not the owner of this project; continue publishing to overwrite it?',
+          actionLabel: 'Overwrite and Publish',
+          actionHandler: actionHandler
+        });
+      }
+      // publish
+      else {
+        publishBack();
+      }
     }, self);
   },
   publishCallback: function (err) {
