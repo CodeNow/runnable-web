@@ -1,7 +1,12 @@
-<h2>
-  <span class="glyphicons share"></span>Forked from <a href="#">Create a horizontal navigation menu bar using jQuery</a>.
-</h2>
 {{#with model.attributes}}
+
+{{#if parent.length}}
+{{#if_eq _id compare=parent}}
+{{else}}
+{{view "runnable_parent" parent=parent parentName=parentName}}
+{{/if_eq}}
+{{/if}}
+
 <data>
   <span class="glyphicons play-button"></span><b>{{runs}}</b> Runs
   <span class="glyphicons eye-open"></span><b>{{views}}</b> Views

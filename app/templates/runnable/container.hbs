@@ -8,6 +8,13 @@
     <section id="project-details" class="col-sm-9">
       <div class="page-title clearfix">
         {{view "runnable_title" model=container}}
+
+        {{#if parent.length}}
+        {{#if_eq _id compare=parent}}
+        {{else}}
+        {{view "runnable_parent" parent=parent parentName=parentName}}
+        {{/if_eq}}
+        {{/if}}
       </div>
       {{view "runnable_description" model=container}}
       <div class="main-controls clearfix">
