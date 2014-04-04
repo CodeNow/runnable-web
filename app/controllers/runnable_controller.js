@@ -126,19 +126,13 @@ module.exports = {
           if(utils.isCurrentUrl(app, imageURL + '/embedded', true)){
             //iframe nested website
             var data = addSEO(results, self.req);
-
-            var lowerCaseParamsFiles = params.files.map(function(item){return item.toLowerCase();});
-            //Get the files specified from the URL query string
-            var queryStringFilesArray = data.image.get('files').filter(function(item){
-              return (_.isString(item.name) && (lowerCaseParamsFiles.indexOf(item.name.toLowerCase()) !== -1));
-            });
-            data.queryFiles = new openFilesCollection(queryStringFilesArray, {
+            var arrFiles = data.image.getFiles(params.files);
+            data.queryFiles = new openFilesCollection(arrFiles, {
               app:         app,
               containerId: data.container.get('id')
             });
-
-
             callback(null, 'runnable/embed', data);
+
           }else{
             callback(null, addSEO(results, self.req));
           }
