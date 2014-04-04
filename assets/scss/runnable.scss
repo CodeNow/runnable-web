@@ -35,16 +35,28 @@
     color: $gray-darker;
     font-size: 24px;
     font-weight: 700;
-    line-height: 1.6;
-    margin: 0;
+    line-height: 1;
+    margin: 0 0 5px;
+
+    @include media(xxs) {
+      font-size: 20px;
+    }
+
+    @include media(sm) {
+      line-height: 1.6;
+      margin: 0;
+    }
 
     > span {
       display: block;
       float: left;
       max-width: calc(100% - 34px);
-      overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
+
+      @include media(sm) {
+        overflow: hidden;
+        white-space: nowrap;
+      }
     }
 
     form {
@@ -66,11 +78,20 @@
     > a {
       font-weight: 700;
     }
+
+    @include media(xxs) {
+      font-size: 12px;
+      margin-top: 15px;
+    }
   }
 
   data {
     color: $gray-dark;
     margin-right: 10px;
+
+    @include media(xxs) {
+      font-size: 12px;
+    }
   }
 
   .tooltip {
@@ -90,6 +111,10 @@
     &.eye-open {
       font-size: 13px;
     }
+
+    @include media(xxs) {
+      margin-left: 2px;
+    }
   }
 
   .share {
@@ -108,7 +133,9 @@
 
 // edit title and description
 #project-details {
-  margin-right: -14px; // boostrap glitch?
+  @include media(sm) {
+    margin-right: -14px; // boostrap glitch?
+  }
 
   input {
     margin-bottom: 5px;
@@ -136,7 +163,6 @@
 
 // improve-btn
 #improve-btn {
-  margin-left: 10px;
 
   > button {
     font-size: 16px;
@@ -174,9 +200,12 @@
 // runnable owner
 #project-author {
 
+  @include media(xs) {
+    display: none;
+  }
+
   > div > a {
     border-radius: 50%;
-    float: none;
     margin-bottom: 5px;
 
     @include media(md) {
@@ -245,6 +274,75 @@
   }
 }
 
+// main-controls
+.main-controls {
+  @extend .clearfix;
+  margin: 30px 0;
+
+  > .btn-group,
+  > button {
+    float: left;
+  }
+
+  > .green {
+
+    &:hover,
+    &:focus {
+      color: #fff;
+    }
+  }
+
+  > .silver,
+  > #improve-btn {
+    margin-left: 10px;
+  }
+
+  > .silver {
+
+    @include media(xxs) {
+      padding: 0 16px;
+
+      > span:last-child {
+        display: none;
+      }
+    }
+  }
+
+  //if run options
+  .btn-group {
+    display: block;
+
+    > .run-button {
+      border-radius: 3px 0 0 3px;
+      float: left;
+    }
+
+    > .run-options {
+      border-radius: 0 3px 3px 0 !important;
+      margin-left: -1px;
+      padding: 0 9px 0 8px;
+
+      &:before {
+        top: 38px;
+        left: 0;
+      }
+
+      &:after {
+        top: 32px;
+        left: 9px;
+      }
+    }
+
+    .caret {
+      border-top-color: #fff;
+    }
+
+    @include media(xxs) {
+      margin-left: 0;
+    }
+  }
+}
+
 // ??
 #project-details, #tags-details {
 
@@ -265,189 +363,4 @@
       }
     }
   }
-  .main-controls {
-    margin: 30px 0 35px 0;
-
-    > .btn-group,
-    > button {
-      float: left;
-    }
-
-    > .silver {
-      margin-left: 10px;
-
-      @include media(xxs) {
-        float: right;
-        width: 60%;
-      }
-    }
-
-    > .green {
-
-      &:hover,
-      &:focus {
-        color: #fff;
-      }
-
-      @include media(xxs) {
-        margin-bottom: 10px;
-        width: 100%;
-      }
-    }
-
-    //if run options
-    .btn-group {
-      display: block;
-
-      > .run-button {
-        @include border-radius(3px 0 0 3px);
-        float: left;
-      }
-
-      > .run-options {
-        @include border-radius(0 3px 3px 0);
-        margin-left: -1px;
-        padding: 0 9px 0 8px;
-
-        &:before {
-          top: 38px;
-          left: 0;
-        }
-
-        &:after {
-          top: 32px;
-          left: 9px;
-        }
-      }
-
-      .caret {
-        border-top-color: #fff;
-      }
-
-      @include media(xxs) {
-        clear: both;
-        margin-bottom: 10px;
-        margin-left: 0;
-
-        > button {
-          margin-left: 0;
-        }
-      }
-    }
-  }
 }
-
-// author
-// #project-author {
-//   margin: 30px 0 0 0;
-//   padding-left: 0;
-
-//   @include media(xs) {
-//     margin: 30px 0;
-//   }
-
-//   @include media(xl) {
-//     padding-left: 15px;
-//   }
-
-//   > [class^='col'] {
-
-//     @include media(sm) {
-//       padding-left: 0;
-//     }
-
-//     @include media(xl) {
-//       padding-left: 15px;
-
-//       &.col-lg-8 {
-//         padding-left: 0;
-//       }
-//     }
-//   }
-
-//   > a {
-//     display: inline-block;
-//     height: 73px;
-//     position: relative;
-
-//     @include media(xs) {
-//       float: left;
-//       height: 120px;
-//       margin-right: 20px;
-//     }
-
-//     > span {
-//       position: absolute;
-//         top: -8px;
-//         right: 0;
-
-//       @include media(lg) {
-//         right: 4px;
-//       }
-
-//       @include media(xl) {
-//         right: 16px;
-//       }
-
-//       &:before {
-//         top: 38px;
-//         left: 0;
-//       }
-
-//       &:after {
-//         top: 32px;
-//       }
-//     }
-
-//     //project author icon
-//     > img {
-//       border: 10px solid #fff;
-//       @include border-radius(50%);
-//       @include box-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
-//       float: left;
-//       overflow: hidden;
-//       width: 73px;
-//     }
-  // }
-
-//   //author title
-//   h4 {
-
-//     a {
-//       font-size: 15px;
-//       font-weight: bold;
-//       color: #333;
-//       text-decoration: none;
-
-//       &:hover {
-//         text-decoration: underline;
-//       }
-//     }
-
-//     span {
-//       color: #bcbcbc;
-//       display: block;
-//       font-size: 13px;
-//       margin: 5px 0 0 0;
-//       padding: 0;
-//       white-space: nowrap;
-//     }
-//   }
-
-//   ul {
-
-//     > li {
-//       color: #bbb;
-//       font-size: 12px;
-//       list-style-type: none;
-//       margin-bottom: 8px;
-//     }
-//   }
-
-//   h4,
-//   ul {
-//     @include media(lg) {
-//       padding-left: 25px;
-//     }
-//   }
-// }
