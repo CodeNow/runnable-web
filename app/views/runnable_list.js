@@ -3,6 +3,8 @@ var _ = require('underscore');
 var utils = require('../utils');
 
 module.exports = BaseView.extend({
+  tagName: 'ul',
+  className: 'col-sm-12 runnable-feed',
   postHydrate: function () {
     this.listenTo(this.app.user, 'auth', this.render.bind(this));
     this.listenTo(this.collection, 'remove', this.render.bind(this));

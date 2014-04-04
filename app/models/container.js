@@ -22,9 +22,13 @@ var Container = module.exports = Runnable.extend({
     var opts = utils.cbOpts(cb);
     opts.url = _.result(container, 'url') + '?from=' + encodeURIComponent(imageIdOrChannelName);
     container.save({}, opts);
+  },
+  githubImport: function (query, cb) {
+    var opts = utils.cbOpts(cb);
+    opts.url = utils.pathJoin('/api/-', this.urlRoot, 'import/github') +
+      utils.toQueryString(query);
+    this.save({}, opts);
   }
 });
-
-if (global.window) global.window.dd = module.exports.destroyById;
 
 module.exports.id = "Container";

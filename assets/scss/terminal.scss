@@ -1,3 +1,8 @@
+// terminal-view (wrapper)
+.terminal-view {
+  position: relative;
+}
+
 // terminal
 .terminal-title {
   color: $gray-dark;
@@ -67,6 +72,7 @@
 
   iframe {
     background: $terminal-color;
+    min-height: 250px;
     position: relative;
   }
 }

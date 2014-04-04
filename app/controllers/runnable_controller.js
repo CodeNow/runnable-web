@@ -399,16 +399,24 @@ module.exports = {
       //   cb(null, results);
       // },
       function parentAndFiles (results, cb) {
+        var container = results.container;
+        var parentId  = container.get('parent');
         async.parallel([
-          fetchImage.bind(self, results.container.get('parent')),
-          fetchFilesForContainer.bind(self, results.container.id)
+          function (cb) {
+            if (!parentId) {
+              cb(); // imported images dont have parents
+            }
+            else {
+              fetchImage.call(self, parentId, cb);
+            }
+          },
+          fetchFilesForContainer.bind(self, container.id)
         ],
         function (err, data) {
-          var container = results.container;
-          cb(err, _.extend(results, { image:data[0] }, data[1], {
+          cb(err, _.extend(results, {image:data[0]}, data[1], {
             highlightedFiles: new HighlightedFiles([], {app:self.app, containerId:container.id}),
             page: {
-              title: formatTitle('Unpublished: '+results.container.nameWithTags()),
+              title: formatTitle('Unpublished: '+container.nameWithTags()),
               description: 'Unpublished Runnable Example:' + container.get('name'),
               canonical: canonical.call(self)
             }

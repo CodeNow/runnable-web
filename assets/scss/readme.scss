@@ -23,7 +23,7 @@
 }
 
 .readme-help {
-  color: darken(desaturate($light-yellow, 90), 30);
+  color: $gray-dark;
   margin: 100px auto 0;
   text-align: center;
   width: 100%;
@@ -34,10 +34,10 @@
   }
 
   a {
-    color: darken(desaturate($light-yellow, 90), 30);
+    color: $gray-dark;
 
     &:hover {
-      color: darken(desaturate($light-yellow, 100), 40);
+      color: $gray-dark;
     }
   }
 

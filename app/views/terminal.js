@@ -5,7 +5,7 @@ var utils = require('../utils');
 var didTermErr = false;
 
 module.exports = BaseView.extend({
-  className: 'terminal-view relative loading',
+  className: 'terminal-view loading',
   events: {
     'click .file-sync'  : 'syncFiles',
     'click .message-us' : 'popIntercom',

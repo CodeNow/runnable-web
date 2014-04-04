@@ -1,6 +1,6 @@
 var BaseView = require('../base_view');
 var feedbackThanks = require('../modals/feedback_thanks');
-
+var queryString = require('query-string');
 module.exports = BaseView.extend({
   id:'about',
   events: {
@@ -8,9 +8,13 @@ module.exports = BaseView.extend({
   },
   submit: function (evt) {
     evt.preventDefault();
+    var data = this.$(evt.currentTarget).serialize();
     this.$(evt.currentTarget)[0].reset();
-    debugger;
-    this.$.post('/api/-', this.$(evt.currentTarget)[0].stingify(), function () { /* we don't care */ });
+
+    $.post(
+      '/api/-/emails',
+      queryString.parse(data),
+      function () { /* we don't care */ });
     var FeedbackThanksModal = new feedbackThanks({ app:this.app });
     FeedbackThanksModal.open();
   },
