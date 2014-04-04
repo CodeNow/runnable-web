@@ -1,7 +1,7 @@
 {{view "app_user" model=user}}
 {{view "header_view" model=user context=.}}
 {{view "global_message"}}
-{{view "publish_warning" model=image containerid=container.id}}
+{{view "publish_warning" model=container parentid=image.attributes._id parentowner=image.attributes.owner}}
 
 <main class="container">
   <div class="row">

@@ -20,7 +20,11 @@
   "rollbar": "bbbd8090514a4b40a0ec53fbed32d882",
   "api": {
     "default": {
-      "host": "api.runnable.com",
+<<<<<<< HEAD
+      "host": "runnable2.net:3030",
+=======
+      "host": "runnable3.net:3030",
+>>>>>>> cd0a942128abacd02e5aacdd3505ccd8ec45a826
       "protocol": "http"
     }
   },
@@ -36,9 +40,9 @@
     },
     "pageSize" : 25,
 <<<<<<< HEAD
-    "domain": "runnable.com"
+    "domain": "runnable2.net"
 =======
-    "domain": "runnable.pw"
->>>>>>> 9896dd9e6ba41cfae4aa00beb909596c92e0c319
+    "domain": "runnable3.net"
+>>>>>>> cd0a942128abacd02e5aacdd3505ccd8ec45a826
   }
 }
