@@ -17,6 +17,10 @@
 
   > .arrow {
     left: 92px;
+
+    @include media(xs) {
+      left: 65px
+    }
   }
 
   > .arrow:after {
