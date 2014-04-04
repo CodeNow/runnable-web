@@ -34,13 +34,14 @@ module.exports = {
 
 function formatTitle () {
   var args = Array.prototype.slice.call(arguments);
+  args = args.filter(function(item){ return item; });
   args.push('Runnable');
   return args.join(' - ');
 }
 // CONTEXT must be controller
-function canonical () {
+function canonical (url) {
   if (isServer) {
-    return 'http://runnable.com' + ((this.app && this.app.req && this.app.req.url) || '');
+    return 'http://runnable.com' + ((url || (this.app && this.app.req && this.app.req.url)) || '');
   }
   else {
     return 'http://runnable.com/' + Backbone.history.fragment;

@@ -4,6 +4,7 @@ var helpers = require('./helpers');
 var utils = require('../utils');
 var fetch = helpers.fetch;
 var Channel = require('../models/channel');
+var queryString = require('query-string');
 
 var fetchOwnersFor = helpers.fetchOwnersFor;
 var fetchUserAndChannel = helpers.fetchUserAndChannel;
@@ -11,14 +12,28 @@ var fetchChannelContents = helpers.fetchChannelContents;
 var canonical = helpers.canonical;
 var formatTitle = helpers.formatTitle;
 
-module.exports = {
-  index: function (params, callback) {
-    //params.page = utils.getQueryParam(this.app, 'page');
-    //params.sort = utils.getQueryParam(this.app, 'sort');
+function safeQueryStringCanonical (opts) {
+  var response = {
+    orderBy: opts.orderBy
+  };
+  if (_.isArray(opts.filter) && opts.filter.length > 0) {
+    response.filter = opts.filter
+  }
+  opts.page = parseInt(opts.page);
+  if (_.isNumber(opts.page) && !_.isNaN(opts.page) && opts.page > 0) {
+    response.page = opts.page;
+  }
+  return '?' + queryString.stringify(response);
+}
 
+module.exports = {
+  // channel page
+  index: function (params, callback) {
     params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
-    params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 1;
-    params.page = parseInt(params.page);
+    params.page   = (utils.getQueryParam(this.app, 'page'))   ? utils.getQueryParam(this.app, 'page')   : 1;
+    params.page   = parseInt(params.page);
+    var canonicalPage   = params.page;
+
     if(isNaN(parseInt(params.page))){
       self.redirectTo('');
       return;
@@ -28,8 +43,14 @@ module.exports = {
     if(!_.isArray(params.filter))
       params.filter = [params.filter]
 
+    var canonicalFilter = JSON.parse(JSON.stringify(params.filter));
     params.filter.push(params.channel);
     params.filter = _.uniq(params.filter);
+
+    var orderBy = utils.getQueryParam(this.app, 'orderBy');
+    if(!orderBy || !orderBy.toLowerCase || (orderBy.toLowerCase() != 'trending' && orderBy.toLowerCase() != 'popular'))
+      orderBy = 'trending';
+    orderBy = orderBy.toLowerCase();
 
     var self = this;
     var app = this.app;
@@ -43,16 +64,20 @@ module.exports = {
             params: {
               category: 'Featured'
             }
-          },
-          feedTrending: {
+          }
+        };
+
+        if(orderBy === 'trending'){
+          spec.feed = {
             collection: 'FeedsImages',
             params: {
               page: params.page,
               limit: 15,
               channel: params.filter
             }
-          },
-          feedPopular: {
+          };
+        } else {
+          spec.feed = {
             collection: 'images',
             params: {
               page: params.page,
@@ -60,37 +85,20 @@ module.exports = {
               channel: params.filter,
               sort: '-runs'
             }
-          }
-        };
+          };
+        }
 
         fetch.call(self, spec, function (err, results) {
+          if (err) console.log(err);
 
-          if (err) {
-            callback(err);
-            return;
-          }
-
+          // results.user for fetchOwnersFor
           _.extend(results, channelResult);
 
-          async.parallel([
-            function(cb){
-              fetchOwnersFor.call(self, results.user, results.feedTrending, function(err, results2){
-                _.extend(results, results2);
-                cb();
-              });
-            },
-            function(cb){
-              fetchOwnersFor.call(self, results.user, results.feedPopular, function(err, results2){
-                _.extend(results, results2);
-                cb();
-              });
-          }], function(err){
+          fetchOwnersFor.call(self, results.user, results.feed, function(err, results2){
+            if (err) console.log(err);
 
-            results.relatedChannels = results.feedTrending.relatedChannels;
+            results.relatedChannels = results.feed.relatedChannels;
             results.filteringChannels = results.relatedChannels;
-
-
-
 
             // Don't display the current channel as an option in filters
             results.filteringChannels.each(function(item, i){
@@ -108,57 +116,37 @@ module.exports = {
                 }
               }
             };
-            results.feedTrending.each(function(item, i){
+            results.feed.each(function(item, i){
               item.get('tags').forEach(setIfActive);
               item.sortChannels()
             });
-            results.feedPopular.each(function(item, i){
-              item.get('tags').forEach(setIfActive);
-              item.sortChannels();
-            });
 
-
-
-
+            _.extend(results, results2);
             _.extend(channelResult, results);
-
-            if (err) console.log(err);
             callback(null, channelResult);
           });
         });
-
       },
-
-
-
       function redirectCheck (channelResult, cb) {
         var channel = channelResult.channel;
         if (channel.get('name') !== params.channel)
           return self.redirectTo(channel.appUrl(params));
         cb(null, channelResult);
       },
-      function (results, cb) {
-        // default values AFTER redirect check
-        fetchChannelContents.call(self, params, function (err, channelResults) {
-          if (err) return cb(err);
-          cb(null, _.extend(results, channelResults, {page:params.page}));
-        });
-      },
-      function (results, cb) {
-        results.channels.reset(results.channels.filter(function (channel) {
-          return channel.get('count') !== 0;
-        }));
-        fetchOwnersFor.call(self, results.user, results.images, function (err, ownerResults) {
-          if (err) return cb(err);
-          cb(null, _.extend(results, ownerResults));
-        });
-      },
       function addSEO (results, cb) {
-        var pageText = (params.page>1) ? " Page "+params.page : "";
-        var sort = (params.sort) || 'created';
+        var pageText         = (params.page > 1) ? " Page "+params.page : "";
+        var sort             = (params.sort) || 'created';
+        results.orderByParam = orderBy;
+
+        var qs2 = safeQueryStringCanonical({
+          orderBy: orderBy,
+          filter:  canonicalFilter,
+          page:    canonicalPage
+        });
+
         results.page = {
           title: formatTitle(utils.sortLabel(sort)+' '+results.channel.get('name')+" code"+pageText),
-          canonical: canonical.call(self)
+          canonical: canonical.call(self, '/' + params.channel + '/' + qs2)
         };
         cb(null, results);
       }
@@ -167,15 +155,19 @@ module.exports = {
   runnable: function (params) {
     this.redirectTo(params._id +'/'+ params.name);
   },
+  //index/home page
   category: function (params, callback) {
-    var self = this;
-    var app = this.app;
-    var isHomepage = utils.isCurrentUrl(app, '');
+    var self               = this;
+    var app                = this.app;
+    var isHomepage         = utils.isCurrentUrl(app, '');
+    var orderBy            = utils.getQueryParam(this.app, 'orderBy');
+    params.category        = params.category || 'Featured';
+    var isFeaturedCategory = (params.category.toLowerCase() == 'featured');
+    params.filter          = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
+    params.page            = (utils.getQueryParam(this.app, 'page'))   ? utils.getQueryParam(this.app, 'page')   : 1;
+    params.page            = parseInt(params.page);
+    var canonicalPage      = params.page;
 
-    params.category = params.category || 'Featured';
-    params.filter = (utils.getQueryParam(this.app, 'filter')) ? utils.getQueryParam(this.app, 'filter') : [];
-    params.page = (utils.getQueryParam(this.app, 'page')) ? utils.getQueryParam(this.app, 'page') : 1;
-    params.page = parseInt(params.page);
     if(isNaN(parseInt(params.page))){
       self.redirectTo('');
       return;
@@ -185,141 +177,126 @@ module.exports = {
     if(!_.isArray(params.filter))
       params.filter = [params.filter];
 
-    var isFeaturedCategory = (params.category.toLowerCase() == 'featured');
-    // if (isServer && !this.app.req.cookies.pressauth) {
-    //   this.redirectTo('/');
-    // }
-    // else if (!isServer && !utils.clientGetCookie('pressauth')) {
-    //   this.redirectTo('/');
-    // }
-    // else {
-      var spec = {
-        user: {
-          model: 'User',
-          params: {
-            _id: 'me'
-          }
-        },
-        channels: {
-          collection: 'Channels',
-          params: {
-            category: params.category
-          }
-        },
-        categories: {
-          collection: 'Categories'
-        },
-        feedTrending: {
-          collection: 'FeedsImages',
-          params: {
-            page:  params.page,
-            limit: 15,
-            channel: params.filter
-          }
-        },
-        feedPopular: {
-          collection: 'images',
-          params: {
-            page: params.page,
-            limit: 15,
-            channel: params.filter,
-            sort: '-runs'
-          }
+    var canonicalFilter = JSON.parse(JSON.stringify(params.filter));
+
+    if(_.result(orderBy, 'toLowerCase') != 'popular'){
+      orderBy = 'trending';
+    }
+    orderBy = orderBy.toLowerCase();
+
+    var spec = {
+      user: {
+        model: 'User',
+        params: {
+          _id: 'me'
+        }
+      },
+      channels: {
+        collection: 'Channels',
+        params: {
+          category: params.category
+        }
+      },
+      categories: {
+        collection: 'Categories'
+      }
+    };
+
+    if (orderBy === 'trending') {
+      spec.feed = {
+        collection: 'FeedsImages',
+        params: {
+          page: params.page,
+          limit: 15,
+          channel: params.filter
         }
       };
-      fetch.call(this, spec, function (err, results) {
-        if (err) {
-          callback(err);
+    } else {
+      spec.feed = {
+        collection: 'images',
+        params: {
+          page: params.page,
+          limit: 15,
+          channel: params.filter,
+          sort: '-runs'
         }
-        else {
-          results.relatedChannels = results.feedTrending.relatedChannels;
+      };
+    }
 
-          if (results.relatedChannels.length) {
-            results.filteringChannels = results.relatedChannels;
-          } else {
-            results.filteringChannels = results.channels;
-          }
-
-
-
-
-
-
-          results.filteringChannels.each(function(item, i){
-            item.attributes.display = true;
-            item.attributes.isActiveFilter = (params.filter.indexOf(item.get('name')) === -1) ? false : true;
-          });
-
-          var setIfActive = function (item, i){
-            var channel = new Channel(item);
-            item.isActiveFilter = channel.hasAlias(params.filter);
-            item.display = true;
-          };
-          results.feedTrending.each(function(item, i){
-            item.get('tags').forEach(setIfActive);
-            item.sortChannels()
-          });
-          results.feedPopular.each(function(item, i){
-            item.get('tags').forEach(setIfActive);
-            item.sortChannels();
-          });
-
-
-
-
-
-
-          results.selectedCategoryLower = params.category.toLowerCase();
-          results.selectedCategory = _.find(results.categories.models, function (category) {
-            return category.get('name').toLowerCase() === results.selectedCategoryLower;
-          });
-          var catName = results.selectedCategory.get('name');
-
-          var featured = results.categories.findWhere({
-            name: 'Featured'
-          });
-          featured.set('url', '/');
-
-          async.parallel([
-            function(cb){
-              fetchOwnersFor.call(self, results.user, results.feedTrending, function(err, results2){
-                _.extend(results, results2);
-                cb();
-              });
-            },
-            function(cb){
-              fetchOwnersFor.call(self, results.user, results.feedPopular, function(err, results2){
-                _.extend(results, results2);
-                cb();
-              });
-          }], function(err){
-            if (err) console.log(err);
-            callback(null, addSEO(results));
-          });
-
-        }
-      });
-      function addSEO (results) {
-        var channel = params.channel;
-        var category = params.category;
-        var channelAndOrCategory = channel? channel+' in '+category : category;
-
-        if (params.category.toLowerCase() == 'featured') {
-          results.page = {
-            title : 'Discover Everything through Code',
-            canonical : 'http://runnable.com'
-          };
-        }
-        else {
-          results.page = {
-            title : formatTitle(channelAndOrCategory+" Related Tags"),
-            canonical : canonical.call(self)
-          };
-        }
-
-        return results;
+    fetch.call(this, spec, function (err, results) {
+      if (err) {
+        callback(err);
       }
-    // }
+      else {
+        results.relatedChannels = results.feed.relatedChannels;
+
+        if (results.relatedChannels.length) {
+          results.filteringChannels = results.relatedChannels;
+        } else {
+          results.filteringChannels = results.channels;
+        }
+
+        results.filteringChannels.each(function(item, i){
+          item.set('display', true);
+          item.set('isActiveFilter', (params.filter.indexOf(item.get('name')) !== -1));
+        });
+
+        var setIfActive = function (item, i){
+          var channel = new Channel(item);
+          item.isActiveFilter = channel.hasAlias(params.filter);
+          item.display = true;
+        };
+        results.feed.each(function(item, i){
+          item.get('tags').forEach(setIfActive);
+          item.sortChannels();
+        });
+
+        results.selectedCategoryLower = params.category.toLowerCase();
+        results.selectedCategory = _.find(results.categories.models, function (category) {
+          return category.get('name').toLowerCase() === results.selectedCategoryLower;
+        });
+        var catName = results.selectedCategory.get('name');
+
+        var featured = results.categories.findWhere({
+          name: 'Featured'
+        });
+        featured.set('url', '/');
+
+        fetchOwnersFor.call(self, results.user, results.feed, function(err, results2){
+          if (err) console.log(err);
+          _.extend(results, results2);
+          callback(null, addSEO(results));
+        });
+
+      }
+    });
+    function addSEO (results) {
+      var channel = params.channel;
+      var category = params.category;
+      var channelAndOrCategory = channel? channel+' in '+category : category;
+
+      results.orderByParam = orderBy;
+
+      var qs2 = safeQueryStringCanonical({
+        orderBy: orderBy,
+        filter:  canonicalFilter,
+        page:    canonicalPage
+      });
+
+      if (params.category.toLowerCase() == 'featured') {
+        results.page = {
+          title:     ((params.filter.length) ? (utils.tagsToString(params.filter) + ' - ') : '') + 'Runnable - Discover Everything through Code',
+          canonical: 'http://runnable.com/' + qs2
+        };
+      }
+      else {
+        results.page = {
+          title : formatTitle(channelAndOrCategory+" Related Tags"),
+          canonical : canonical.call(self, '/' + qs2)
+        };
+      }
+      return results;
+    }
   },
   all: function(params, callback) {
     params.page = utils.getQueryParam(this.app, 'page');
