@@ -122,7 +122,7 @@ module.exports = {
         }
         if (err) { callback(err); } else {
           //embedded
-          var imageURL = results.image.appURL();
+          var imageURL = results.image.appURL({noTags:true});
           if(utils.isCurrentUrl(app, imageURL + '/embedded', true)){
             //iframe nested website
             var data = addSEO(results, self.req);
