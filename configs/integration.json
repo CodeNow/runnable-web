@@ -26,7 +26,10 @@
       "protocol": "http"
     }
   },
-
+  "newrelic": {
+    "name": "api-integration",
+    "key": "338516e0826451c297d44dc60aeaf0a0ca4bfead"
+  },
   "rendrApp": {
     "env" : "integration",
     "commitHash": "{COMMIT_HASH}",
