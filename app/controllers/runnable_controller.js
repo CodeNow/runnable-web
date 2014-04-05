@@ -131,6 +131,25 @@ module.exports = {
               app:         app,
               containerId: data.container.get('id')
             });
+
+            var tabs;
+            var defaultTabs = ['filebrowser', 'info', 'terminal'];
+            console.log(params.tabs);
+            if(typeof params.tabs === 'undefined'){
+              tabs = defaultTabs;
+            } else if (_.isString(params.tabs)) {
+              tabs = params.tabs.split(',').map(function(i){return i.toLowerCase()});
+            } else if (_.isArray(params.tabs)) {
+              tabs = params.tabs.map(function(item){return item.toLowerCase();});
+            } else {
+              tabs = defaultTabs;
+            }
+            data.showFileBrowser = (tabs.indexOf('filebrowser') !== -1);
+            data.showInfo        = (tabs.indexOf('info') !== -1);
+            data.showTerminal    = (tabs.indexOf('terminal') !== -1);
+
+            console.log('data.showFileBrowser', data.showFileBrowser);
+
             callback(null, 'runnable/embed', data);
 
           }else{
