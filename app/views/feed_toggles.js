@@ -11,6 +11,8 @@ module.exports = BaseView.extend({
     this.app.set({loading: true});
   },
   getTemplateData: function () {
+    var currentUrlPath = utils.getCurrentUrlPath(this.app, true);
+
     var opts = this.options;
     if (opts.defaultActive == 'popular') {
       opts.activeTrending = false;
@@ -28,8 +30,8 @@ module.exports = BaseView.extend({
     qsTrending.orderBy = 'trending';
     qsPopular.orderBy  = 'popular';
 
-    opts.trendingLink = queryString.stringify(qsTrending);
-    opts.popularLink  = queryString.stringify(qsPopular);
+    opts.trendingLink = currentUrlPath + '?' + queryString.stringify(qsTrending);
+    opts.popularLink  = currentUrlPath + '?' + queryString.stringify(qsPopular);
 
     return opts;
   }
