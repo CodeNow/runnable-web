@@ -1,4 +1,4 @@
-var configs = require('./configs');
+var config = require('./server/lib/env').current;
 
 /**
  * New Relic agent configuration.
