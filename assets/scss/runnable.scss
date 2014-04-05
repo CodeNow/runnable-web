@@ -35,11 +35,11 @@
     color: $gray-darker;
     font-size: 24px;
     font-weight: 700;
-    line-height: 1;
-    margin: 0 0 5px;
+    line-height: 1.2;
+    margin: 0 0 10px;
 
-    @include media(xxs) {
-      font-size: 20px;
+    @include media(xs) {
+      margin-bottom: 2px;
     }
 
     @include media(sm) {
@@ -73,7 +73,7 @@
   > h2 {
     clear: both;
     font-size: 14px;
-    margin: 0 0 15px;
+    margin: 0 0 2px;
 
     > a {
       font-weight: 700;
@@ -81,7 +81,11 @@
 
     @include media(xxs) {
       font-size: 12px;
-      margin-top: 15px;
+      margin: 15px 0 2px 14px;
+
+      > .share {
+        margin-left: -16px !important;
+      }
     }
   }
 
@@ -247,6 +251,10 @@
       width: calc(50% - 42px);
     }
 
+    @include media(xxs) {
+      width: auto;
+    }
+
     @include media(md) {
       padding-left: 0;
     }
@@ -274,6 +282,10 @@
       @include media(xs) {
         display: inline;
       }
+
+      @include media(xxs) {
+        display: block;
+      }
     }
 
 
@@ -294,6 +306,10 @@
       float: none;
     }
 
+    @include media(xxs) {
+      display: none
+    }
+
     @include media(md) {
       display: block;
     }
@@ -310,12 +326,18 @@
   margin: 30px 0;
 
   @include media(xs) {
-    margin: 15px 0;
+    margin: 10px 0;
   }
 
   > .btn-group,
   > button {
     float: left;
+  }
+
+  > .btn-group:first-child {
+    @include media(xxs) {
+      width: calc(100% - 172px);
+    }
   }
 
   > .green {
@@ -327,14 +349,18 @@
   }
 
   .run-button {
-    @include media(xxs) {
-      > img {
-        margin: -4px 0 0 4px;
-      }
-
+    @media (max-width: 360px) {
       > span {
         display: none;
       }
+
+      > img {
+        margin: -4px 0 0 4px;
+      }
+    }
+
+    @include media(xxs) {
+      width: calc(100% - 32px);
     }
   }
 
