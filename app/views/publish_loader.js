@@ -35,8 +35,9 @@ module.exports = BaseView.extend({
     function callback (err, model) {
       // error has info on message param
       if (err) {
-        cb(err.message);
-      } else {
+          this.showError(err.data.stderr,'build-error');
+      }
+      else {
         if (model.get('status') === 'Finished') { // meta publish occurred
           this.progress('Finished');
         }

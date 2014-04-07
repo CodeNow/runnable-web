@@ -97,10 +97,11 @@ module.exports = RendrView.extend({
       }]
     });
   },
-  showError: function (err) {
+  showError: function (err,className) {
     if (err) {
       BootstrapDialog.show({
         message: '<p>'+err,
+        cssClass: className,
         buttons: [{
           label: 'Okay',
           cssClass: 'silver col-sm-12',
@@ -114,7 +115,8 @@ module.exports = RendrView.extend({
   showIfError: function (err) {
     if (err === 'cannot move folder to itself') {
       // no feedback
-    } else if (err) {
+    }
+    else if (err) {
       this.showError(err);
     }
   },
