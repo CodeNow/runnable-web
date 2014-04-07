@@ -33,9 +33,24 @@ module.exports = BaseView.extend({
     };
     this.model.save(data, opts);
     function callback (err, model) {
-      // error has info on message param
-      if (err) {
-          this.showError(err.data.stderr,'build-error');
+      if (err.message === 'Build Error') {
+        BootstrapDialog.show({
+          message:
+            '<h3>Build Error</h3>'+
+            '<p>You\'ll have to resolve build errors before publishing.'+
+            '<p class="error-text">'+err.data.stderr,
+          cssClass: 'build-error',
+          buttons: [{
+            label: 'Okay',
+            cssClass: 'silver col-sm-12',
+            action: function(dialogItself){
+              dialogItself.close();
+            }
+          }]
+        });
+      }
+      else if (err) {
+        cb(err.message);
       }
       else {
         if (model.get('status') === 'Finished') { // meta publish occurred

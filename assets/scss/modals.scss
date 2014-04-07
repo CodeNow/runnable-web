@@ -496,3 +496,21 @@ body.modal-open,
     margin: 10px 0;
   }
 }
+
+// build-error modal
+.build-error {
+
+  .modal-dialog {
+    width: auto;
+  }
+
+  .error-text {
+    background: $terminal;
+    border-radius: 3px;
+    color: #fff;
+    font-family: monospace;
+    font-size: 11px;
+    padding: 5px 10px;
+    text-align: left !important;
+  }
+}
