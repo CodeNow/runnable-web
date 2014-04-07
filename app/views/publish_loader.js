@@ -25,15 +25,17 @@ module.exports = BaseView.extend({
 
   },
   initLoading: function (type, cb) {
-    var opts = utils.cbOpts(callback, this);
+    // this callback will return an object
+    var opts = utils.cbOptsRaw(callback, this);
     opts.patch = true;
     var data = {
       status: 'Committing ' + type
     };
     this.model.save(data, opts);
     function callback (err, model) {
+      // error has info on message param
       if (err) {
-        cb(err);
+        cb(err.message);
       } else {
         if (model.get('status') === 'Finished') { // meta publish occurred
           this.progress('Finished');
