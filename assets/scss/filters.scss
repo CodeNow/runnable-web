@@ -49,14 +49,14 @@
         pointer-events: auto;
       }
 
-      button {
-        animation: alertIn forwards 1 .3s ease-in-out;
-      }
+      // button {
+      //   animation: alertIn forwards 1 .3s ease-in-out;
+      // }
     }
 
-    &.out button {
-      animation: fadeIn reverse 1 .2s linear;
-    }
+    // &.out button {
+    //   animation: fadeIn reverse 1 .2s linear;
+    // }
   }
 
   li {
@@ -67,13 +67,9 @@
     display: block;
     height: 45px;
     line-height: 45px;
-    overflow: hidden;
-    padding: 0 30px 0 5px;
     position: relative;
-    text-overflow: ellipsis;
     transition: background .15s cubic-bezier(.19,1,.22,1);
     user-select: none;
-    white-space: nowrap;
 
     &:hover {
       background: #fff;
@@ -82,20 +78,23 @@
     &:active,
     &.active {
       background: #fff;
-      color: $orange;
+
+      > a {
+        color: $orange;
+      }
     }
 
     &.active {
 
-      &:active > button {
+      &:active button {
         color: $orange;
       }
 
-      > button {
+      button {
         display: block;
       }
 
-      > .count {
+      .count {
         display: none;
       }
     }
@@ -137,6 +136,22 @@
       }
     }
 
+    > a {
+      color: $gray-dark;
+      display: block;
+      height: 100%;
+      overflow: hidden;
+      padding: 0 42px 0 5px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+
+      &:hover,
+      &:active {
+        text-decoration: none;
+      }
+    }
+
     @include media(xs) {
       border-right: 1px solid rgba(0,0,0,.1);
       float: left;
@@ -160,7 +175,7 @@
         line-height: 45px;
         width: 50%;
 
-        > span {
+        span {
           top: 19px;
         }
       }

@@ -14,7 +14,12 @@ module.exports = BaseView.extend({
     this.listenTo(this.app.user, 'change:permission_level', this.render.bind(this));
   },
   getTemplateData: function () {
-    this.options.user = this.app.user;
+    var opts = this.options;
+    var user = this.app.user;
+    var parentOwner = opts.parentowner;
+    var parentId = opts.parentid; // used to check parent existance
+
+    opts.canPublishBack = parentId && user.canEdit({owner: parentOwner}) ;
     return this.options;
   },
   postRender: function () {
@@ -75,7 +80,7 @@ module.exports = BaseView.extend({
       }
     }, self);
   },
-  publishCallback: function (err, image) {
+  publishCallback: function (err) {
     if (err) {
       var self = this;
 
@@ -89,9 +94,7 @@ module.exports = BaseView.extend({
         self.showError(err);
       }
     }
-    else {
-      this.app.router.navigate('/'+image.id, true);
-    }
+    // success handles redirect within publishLoader
   },
   showRenameModal: function () {
     var self = this;

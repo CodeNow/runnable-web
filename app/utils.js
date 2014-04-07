@@ -282,12 +282,13 @@ var utils = module.exports = {
     return Boolean(str && str.length === 16 && utils.isObjectId(utils.base64ToHex(str)));
   },
   tagsToString: function (tags, prelastword) {
+    var tagsAreNames = typeof tags[0] === 'string';
     prelastword = prelastword || 'and';
     if (tags.length === 0) {
       return '';
     }
     else if (tags.length === 1) {
-      return tags[0].name;
+      return tagsAreNames ? tags[0] : tags[0].name;
     }
     else {
       var maxLength = 14;
@@ -296,7 +297,9 @@ var utils = module.exports = {
         tags = tags.slice(0, maxLength);
         last = 'more';
       }
-      tags = tags.map(utils.pluck('name'));
+      tags = tagsAreNames ?
+        tags :
+        tags.map(utils.pluck('name'));
       last = last || tags.pop();
       tags = tags.join(', ');
       tags += ' ' + prelastword + ' ' +last;

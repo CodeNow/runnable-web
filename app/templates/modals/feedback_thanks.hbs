@@ -1,0 +1,19 @@
+{{#if fullpage}}
+  {{view 'header_view' nosearch=true noactions=true}}
+  <div class="modal-page">
+{{/if}}
+  <form class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{{header}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{messageBody}}</p>
+      </div>
+    </div><!-- /.modal-content -->
+  </form><!-- /.modal-dialog -->
+{{#if fullpage}}
+  </div>
+  {{view 'footer_view'}}
+{{/if}}

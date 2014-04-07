@@ -14,12 +14,6 @@ module.exports = Runnable.extend({
   //   return _.extend(virtuals, {
   //   });
   // },
-  githubImport: function (query, cb) {
-    var opts = utils.cbOpts(cb);
-    opts.url = utils.pathJoin('/api/-', this.urlRoot, 'import/github') + 
-      utils.toQueryString(query);
-    this.save({}, opts);
-  },
   incVote: function () {
     var votes = this.get('votes') + 1;
     this.set('votes', votes);
@@ -50,9 +44,6 @@ module.exports = Runnable.extend({
   },
   appURL: function () {
     return '/'+this.id+'/'+utils.urlFriendly(this.nameWithTags());
-  },
-  saveOpenFiles: function (cb, ctx) {
-    this.app.dispatch.trigger('save:files', cb, ctx);
   },
   /**
    * Arrange the 'tags' array in a spec order
