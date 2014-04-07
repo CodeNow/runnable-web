@@ -2,7 +2,9 @@
 require('console-trace')({ always:true });
 var config = require('./server/lib/env').current;
 var server = require('./server/server');
-
+if (config.newrelic) {
+  require('newrelic');
+}
 var port = config.port;
 
 server.init({}, function(err) {

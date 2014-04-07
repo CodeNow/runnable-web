@@ -14,16 +14,9 @@ module.exports = BaseView.extend({
   events: {
     'click .show-more' : 'showMore',
     'click h3 > button': 'showAll',
-    'click li'         : 'activateLoadingOverlay'
-  },
-  activateLoadingOverlay: function (evt) {
-    this.app.set({loading: true});
   },
   activeFilters: [],
   qs: {},
-  postHydrate: function () {
-    this.listenTo(this.collection, 'change:filteringUrl', this.render.bind(this));
-  },
   getTemplateData: function () {
     var opts = this.options;
 
@@ -41,6 +34,7 @@ module.exports = BaseView.extend({
     // SEO link generationw
     var self = this;
     var collection = this.collection;
+    var currentUrlPath = utils.getCurrentUrlPath(this.app, true);
 
     var qs = clone(self.qs);
     collection.each(function (channel) {
@@ -64,7 +58,7 @@ module.exports = BaseView.extend({
       }
       //always redirect to page 1 when applying new filter set
       cloneQs.page = 1;
-      channel.set('filterLink', queryString.stringify(cloneQs));
+      channel.set('filterLink', currentUrlPath + '?' + queryString.stringify(cloneQs));
     });
 
     return opts;
