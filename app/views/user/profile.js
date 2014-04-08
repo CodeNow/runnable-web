@@ -5,16 +5,10 @@ module.exports = BaseView.extend({
   events: {
     'click .toggles button'   : 'clickTab',
     'click .delete-published' : 'deletePublished',
-    'click .delete-drafts'    : 'deleteDrafts',
-    // 'change select'           : 'changeSort'
+    'click .delete-drafts'    : 'deleteDrafts'
   },
   clickTab: function (evt) {
     evt.preventDefault();
-    // var $a = this.$(evt.currentTarget);
-    // var page = $a.attr('href').replace('#', '/');
-    // this.app.router.navigate('/me'+page);
-    // $a.tab('show');
-
     this.$('.toggles > button').toggleClass('active');
     this.$('.runnable-feed').toggleClass('in');
   },
@@ -27,9 +21,6 @@ module.exports = BaseView.extend({
     }
     return this.options;
   }
-  // changeSort: function () {
-  //   _.find(this.childViews, {name:'dashboard_runnables'});
-  // }
 });
 
 module.exports.id = "user/profile";
