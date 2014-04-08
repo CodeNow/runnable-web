@@ -2,7 +2,6 @@ var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
   tagName: 'a',
-  className: 'tag',
   preRender: function () {
     var self = this;
     var opts = self.options;
@@ -10,7 +9,7 @@ module.exports = BaseView.extend({
     var editMode = opts.editmode;
 
     if (editMode) {
-      self.className =  'tag can-edit';
+      self.className =  'can-edit';
     }
     else {
       self.attributes= {
