@@ -25,14 +25,17 @@
     <ul id="sidebar" class="col-sm-12 col-md-3">
       {{#if isVerified}}
       <li class="services">
-        <h3 class="widget-title">API Keys</h3>
+        <h3>API Keys</h3>
           {{view "runnable_specifications" model=container collection=specifications context=. editmode=isVerified}}
       {{/if}}
       <li class="tags">
-        <h3 class="widget-title">Tags</h3>
+        <h3>Tags</h3>
         {{view "runnable_tags" model=container editmode=isVerified}}
         {{#if isVerified}}
         {{view "runnable_new_tag_form" model=container}}
+        <aside>
+          Projects without tags will be not be publicly listed on Runnable.
+        </aside>
         {{/if}}
     </ul>
   </div>
