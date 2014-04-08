@@ -6,15 +6,12 @@
 <main class="container">
   <section id="project-details" class="row">
     <div class="col-sm-9">
-      <div class="page-title clearfix">
-        {{!-- {{view "vote_button" model=image}} --}}
+      <div class="page-title">
         {{view "runnable_title" model=image}}
-        {{view "runnable_stats" model=image title=true}}
+        {{view "runnable_stats" model=image}}
       </div>
       {{view "runnable_description" model=image}}
-      <div class="main-controls clearfix">
-        {{!view "dropdown_run_button" context=.}}
-        {{!-- {{view "run_button" model=container collection=specifications context=.}} --}}
+      <div class="main-controls">
         {{view "dropdown_run_button" context=. editmode=true}}
         {{view "improve_button"}}
         {{view "fork_button" collection=defaultFiles model=container}}

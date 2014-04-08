@@ -1,19 +1,17 @@
 {{#if editMode}}
-<form action="javascript:void(0);">
-  <div class="item">
-    <input type="text" class="title-input form-control" name="description" autofocus placeholder="Give your code example a description" value="{{model.attributes.description}}" />
-  </div>
-  <button class="silver" type="submit">Save</button>
-  <button class="silver btn-cancel" type="button">Cancel</button>
+<form>
+  <textarea class="form-control title-input" name="description" placeholder="Give your code example a description" value="{{model.attributes.description}}" autofocus required></textarea>
+  <button class="silver" type="submit">Save Description</button>
+  <a class="cancel">Cancel</a>
 </form>
 {{else}}
   {{#if canEdit}}
   <p class="description">
     {{model.attributes.description}}<!--a class="more" href="#">&bull; &bull; &bull;</a-->
       {{#if model.attributes.description}}
-      <a href="javascript:void(0);" class="edit-link edit-image"></a>
+      <a class="glyphicons edit"></a>
       {{else}}
-      <a href="javascript:void(0)" class="edit-link">Add description</a>
+      <a class="edit">Add Description</a>
     {{/if}}
   </p>
   {{else}}{{#if model.attributes.description}}

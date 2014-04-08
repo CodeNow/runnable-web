@@ -4,7 +4,7 @@
       <div class="col-sm-8">
         <img src="{{gravitar}}?s=255" alt="{{username}}">
         <a href="https://en.gravatar.com/site/login" target="_blank" class="glyphicons edit"></a>
-        <span class="reputation tooltip" data-title="{{taggedImagesCount}} published Runnables">{{taggedImagesCount}}</span>
+        <span class="reputation reputation-lg tooltip" data-title="{{taggedImagesCount}} published Runnables">{{taggedImagesCount}}</span>
       </div>
       <h1>{{username}}</h1>
       <p>Started running {{dateAgo created}}.</p>
@@ -18,7 +18,7 @@
       <a href="/{{attributes.name}}" class="tooltip" data-title="{{attributes.userImagesCount}} {{attributes.name}} Runnables">
         {{view "channel_image" name=attributes.name}}
       </a>
-      <span class="reputation">{{attributes.userImagesCount}}</span>
+      <span class="reputation reputation-sm">{{attributes.userImagesCount}}</span>
     {{/each}}
   </ol>
   {{/if}}
@@ -59,7 +59,7 @@
     <div id="gravatar">
       <div class="col-sm-8">
         <img src="{{gravitar}}?s=255" alt="{{username}}">
-        <span class="reputation tooltip" data-title="{{taggedImagesCount}} published Runnables">{{taggedImagesCount}}</span>
+        <span class="reputation reputation-lg tooltip" data-title="{{taggedImagesCount}} published Runnables">{{taggedImagesCount}}</span>
       </div>
       <h1>{{username}}</h1>
       <p>Running for {{dateAgo created true}}.</p>
@@ -73,7 +73,7 @@
       <a href="/{{attributes.name}}" class="tooltip" data-title="{{attributes.userImagesCount}} {{attributes.name}} Runnables">
         {{view "channel_image" name=attributes.name}}
       </a>
-      <span class="reputation">{{attributes.userImagesCount}}</span>
+      <span class="reputation reputation-sm">{{attributes.userImagesCount}}</span>
     {{/each}}
   </ol>
   {{/if}}
