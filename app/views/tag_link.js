@@ -7,6 +7,7 @@ module.exports = BaseView.extend({
     var opts = self.options;
     var name = opts.name;
     var editMode = opts.editmode;
+    var className = opts.className;
 
     if (editMode) {
       self.className =  'can-edit';
@@ -15,6 +16,10 @@ module.exports = BaseView.extend({
       self.attributes= {
         href: '/'+name
       };
+    }
+
+    if (className) {
+      self.className = 'tag';
     }
   }
 });

@@ -18,11 +18,11 @@
   </div>
 
   <div class="row">
-    <section class="col-sm-9">
+    <section class="col-sm-12 col-md-9">
       {{view "code_editor" context=. editmode=true model=container}}
       {{view "terminal" model=container}}
     </section>
-    <ul id="sidebar" class="col-sm-3">
+    <ul id="sidebar" class="col-sm-12 col-md-3">
       {{#if isVerified}}
       <li class="services">
         <h3 class="widget-title">API Keys</h3>
