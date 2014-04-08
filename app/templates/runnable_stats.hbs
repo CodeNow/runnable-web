@@ -1,13 +1,12 @@
 {{#with model.attributes}}
-{{#if parent.length}}
-{{#if_eq _id compare=parent}}
-{{else}}
-{{view "runnable_parent" parent=parent parentName=parentName}}
-{{/if_eq}}
-{{/if}}
+  {{#if parentName}}
+    {{#if_eq _id compare=parent}}
+    {{else}}
+      {{view "runnable_parent" parent=parent parentName=parentName}}
+    {{/if_eq}}
+  {{/if}}
 {{/with}}
 
-{{#unless nostats}}
 {{#with model.attributes}}
 <data>
   <span class="glyphicons play-button"></span><b>{{runs}}</b> Runs
@@ -15,4 +14,3 @@
   <span class="glyphicons notes-2"></span><b>{{copies}}</b> Copies
 </data>
 {{/with}}
-{{/unless}}
