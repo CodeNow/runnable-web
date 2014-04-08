@@ -1,7 +1,46 @@
 // defaults
 input,
-textarea {
+textarea,
+.form-control {
   -webkit-appearance: none;
+  border: 1px solid rgba(0,0,0,.1);
+  box-shadow: 0 1px 0 #fff;
+  color: $gray-darkest;
+  transition: border .1s cubic-bezier(.19,1,.22,1);
+
+  &:hover {
+    border-color: rgba(0,0,0,.15);
+  }
+
+  &:focus {
+    box-shadow: 0 1px 0 #fff;
+    border-color: $orange;
+  }
+
+  &.success {
+    border-color: #6CA52E;
+    background-image: url('../images/icon-success.png');
+    @include background-image-retina('../images/icon-success@2x.png');
+    background-size: 10px 8px;
+    padding-right: 40px;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 15px) center;
+  }
+
+  &.error {
+    border-color: #D73539;
+    padding-right: 40px;
+    background-image: url('../images/icon-error.png');
+    @include background-image-retina('../images/icon-error@2x.png');
+    color: #D73539;
+    background-size: 3px 11px;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 19px) center;
+  }
+}
+
+.form-control::placeholder {
+  color: $gray-dark;
 }
 
 .form-group {
@@ -56,6 +95,10 @@ textarea {
     border-radius: 3px;
     height: 36px;
     transition: width .3s cubic-bezier(.19,1,.22,1);
+
+    @include retina() {
+      font-size: 16px;
+    }
   }
 
   button {

@@ -5,9 +5,9 @@ var utils = require('../utils');
 module.exports = BaseView.extend({
   className: 'runnable-description',
   events: {
-    'click .edit-link': 'clickEdit',
-    'submit form'     : 'submitDescription',
-    'click .btn-cancel': 'escEditMode'
+    'click .edit'   : 'clickEdit',
+    'submit form'   : 'submitDescription',
+    'click .cancel' : 'escEditMode'
   },
   postRender: function () {
     this.listenTo(this.model, 'change:description', this.render.bind(this));

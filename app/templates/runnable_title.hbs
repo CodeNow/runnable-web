@@ -1,14 +1,12 @@
 {{#if editmode}}
-<form action="javascript:void(0);">
-  <div class="item">
-    <input type="text" class="form-control" name="name" autofocus placeholder="Give your code example a title" value="{{model.attributes.name}}" maxlength="2000" required>
-  </div>
-  <button class="silver">Save</button>
-  <button class="silver btn-cancel" type="button">Cancel</button>
-</form>
+  <form>
+    <input class="form-control" name="name" placeholder="Give your code example a title" value="{{model.attributes.name}}" maxlength="2000" autofocus required>
+    <button class="silver">Save Title</button>
+    <a class="cancel">Cancel</a>
+  </form>
 {{else}}
-{{model.virtual.nameWithTags}}
-{{#if canedit}}
-<a href="javascript:void(0);" class="edit-title"></a>
-{{/if}}
+  <span>{{model.virtual.nameWithTags}}</span>
+  {{#if canedit}}
+  <a class="glyphicons edit"></a>
+  {{/if}}
 {{/if}}

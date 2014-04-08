@@ -216,41 +216,12 @@ $searchbox-height:50px;
   border-bottom: 8px solid #fff;
 }
 
-#project-details{
-  .runnable-description{
-    .edit-image{
-      display: inline-block;
-      width: 16px;
-      height: 17px;
-      background-size: 16px auto;
-      background-image: url(../images/sprite-edit-title.png);
-      margin-left: 8px;
-      background-repeat: no-repeat;
-      vertical-align: middle;
-      @include background-image-retina('../images/sprite-edit-title@2x.png');
-      &:hover, &.active {
-          background-position: 0 -18px;
-      }
-      &.active {
-          margin-left: 14px;
-          margin-bottom: -3px;
-      }
-    }
-  }
-}
-
 #project-details h2.page-title form{
   margin-bottom: 5px;
 }
 
 #project-details h2.page-title input.form-control{
   margin: 0 0 5px 0px;
-}
-
-.runnable-description{
-  input{
-    margin: 15px 0;
-  }
 }
 
 #hundo{
