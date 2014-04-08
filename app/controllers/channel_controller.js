@@ -111,8 +111,8 @@ module.exports = {
               item.isActiveFilter = channel.hasAlias(params.filter);
               item.display = true;
               if(item.isActiveFilter){
-                if(channel.get('aliases').indexOf(params.channel.toLowerCase()) !== -1){
-                  item.display = false;
+                if(channel.get('aliases').indexOf(params.channel.toLowerCase()) !== -1) {
+                  item.isActiveFilter = false;
                 }
               }
             };
