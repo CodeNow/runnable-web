@@ -26,7 +26,7 @@ var fetchLeaderBadges = helpers.fetchLeaderBadges;
 
 module.exports = {
   index: function(params, callback) {
-    params.files = helpers.forceParamToArray(params.files);
+    params.file = helpers.forceParamToArray(params.file);
     var self = this;
     if (!utils.isObjectId64(params._id)) {
       var channelParams;
@@ -93,7 +93,10 @@ module.exports = {
         function filesOwnerRelated (results, cb) {
           var channelIds = results.container.get('tags').map(utils.pluck('channel'));
           async.parallel([
-            fetchFilesForContainer.bind(self, results.container.id),
+            fetchFilesForContainer.bind(self, {
+              containerId: results.container.id,
+              files:       params.file
+            }),
             fetchOwnerOf.bind(self, results.user, results.image), //image owner
             fetchRelated.bind(self, results.image.id, results.container.attributes.tags),
             fetchLeaderBadges.bind(self, 2, results.image.get('owner'), channelIds)
@@ -121,20 +124,24 @@ module.exports = {
           console.log((new Error()).stack);
         }
         if (err) { callback(err); } else {
-          //embedded
+
           var imageURL = results.image.appURL({noTags:true});
           if(utils.isCurrentUrl(app, imageURL + '/embedded', true)){
             //iframe nested website
             var data = addSEO(results, self.req);
-            var arrFiles = data.image.getFiles(params.files);
+            //var arrFiles = data.image.getFiles(params.file);
+
+            /*
             data.queryFiles = new openFilesCollection(arrFiles, {
               app:         app,
               containerId: data.container.get('id')
             });
+            */
+
+            data.queryFiles = data.defaultFiles;
 
             var tabs;
             var defaultTabs = ['filebrowser', 'info', 'terminal'];
-            console.log(params.tabs);
             if(typeof params.tabs === 'undefined'){
               tabs = defaultTabs;
             } else if (_.isString(params.tabs)) {
@@ -147,8 +154,6 @@ module.exports = {
             data.showFileBrowser = (tabs.indexOf('filebrowser') !== -1);
             data.showInfo        = (tabs.indexOf('info') !== -1);
             data.showTerminal    = (tabs.indexOf('terminal') !== -1);
-
-            console.log('data.showFileBrowser', data.showFileBrowser);
 
             callback(null, 'runnable/embed', data);
 
@@ -423,7 +428,7 @@ module.exports = {
               fetchImage.call(self, parentId, cb);
             }
           },
-          fetchFilesForContainer.bind(self, container.id)
+          fetchFilesForContainer.bind(self, {containerId: container.id})
         ],
         function (err, data) {
           cb(err, _.extend(results, {image:data[0]}, data[1], {
@@ -509,7 +514,7 @@ module.exports = {
         },
         function filesOwnerRelated (results, cb) {
           async.parallel([
-            fetchFilesForContainer.bind(self, results.container.id),
+            fetchFilesForContainer.bind(self, {containerId: results.container.id}),
             fetchOwnerOf.bind(self, results.user, results.image), //image owner
             fetchRelated.bind(self, results.image.id, results.container.attributes.tags)
           ],

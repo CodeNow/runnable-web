@@ -333,8 +333,10 @@ function createContainerFrom (imageIdOrChannelName, cb) {
   container.createFrom(imageIdOrChannelName, cb);
 }
 
-function fetchFilesForContainer (containerId, callback) {
-  var app = this.app;
+function fetchFilesForContainer (opts, callback) {
+  var containerId = opts.containerId;
+  var files       = opts.files;
+  var app         = this.app;
   // rootDir needs an id else rendr wont store it in model_store,
   // also id cannot conflict with any other dir in rendr model_store
   var rootDir = new Dir({
@@ -348,25 +350,41 @@ function fetchFilesForContainer (containerId, callback) {
     app: app
   });
 
-  var spec = {
-    defaultFiles: {
-      collection: 'OpenFiles',
-      params: {
-        containerId: containerId,
-        'default'  : true
-      }
-    }
-  };
   var self = this;
-  async.parallel([
+  var tasks = [
     function (cb) {
       var opts = utils.cbOpts(cb);
       opts.data = rootDir.contents.params; // VERY IMPORTANT! - ask TJ.
       rootDir.contents.fetch(opts);
-    },
-    fetch.bind(this, spec)
-  ],
-  function (err, data) {
+    }
+  ];
+  var spec;
+  if (files) {
+    spec = {
+      defaultFiles: {
+        collection: 'OpenFiles',
+        params: {
+          containerId: containerId,
+          filepaths:   files
+        }
+      }
+    }
+  }
+  else {
+    spec = {
+      defaultFiles: {
+        collection: 'OpenFiles',
+        params: {
+          containerId: containerId,
+          'default'  : true
+        }
+      }
+    };
+  }
+
+  tasks.push(fetch.bind(this, spec));
+  async.parallel(tasks, function (err, data) {
+
     if (err) { callback(err); } else {
       // so now you have the root dir it's contents
       // and defaultFiles

@@ -68,7 +68,11 @@ module.exports = Runnable.extend({
   getFiles: function (fileStringsArr) {
     var lowerCaseFileNamesArr = fileStringsArr.map(function(f){return f.toLowerCase();});
     return this.get('files').filter(function(file){
-      return (_.isString(file.name) && (lowerCaseFileNamesArr.indexOf(file.name.toLowerCase()) !== -1));
+      return (
+        _.isString(file.name) &&
+        _.isString(file.path) &&
+        !file.dir             &&
+        (lowerCaseFileNamesArr.indexOf(file.path.toLowerCase() + file.name.toLowerCase()) !== -1));
     });
   }
 });
