@@ -288,6 +288,7 @@
   ul {
     color: $gray-dark;
     font-size: 12px;
+    white-space: nowrap;
 
     @include media(xs) {
       display: table;
