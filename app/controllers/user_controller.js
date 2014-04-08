@@ -34,7 +34,8 @@ function fetchRunnablesFor (userId, cb) {
       collection: 'Images',
       params: {
         owner: userId,
-        limit: 200 // default limit is 25
+        limit: 200, // default limit is 25
+        all: true
       }
     },
     drafts: {
