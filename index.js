@@ -46,7 +46,7 @@ function startMonitoring () {
 function memoryLeakPatch () {
   // memory leak patch! - start restart timeout
   var numWorkers = os.cpus().length * 2;
-  var restartTime  = 10*1000;
+  var restartTime  = 4 * 60 * 60 *1000;
   var maxDrainTime = 30 * 1000;
   setInterval(killAndStartNewWorker, restartTime/numWorkers);
   function killAndStartNewWorker (message) {
