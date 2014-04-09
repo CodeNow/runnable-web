@@ -162,7 +162,6 @@ module.exports = {
               var m;
               for(var i=0,len=data.defaultFiles.models.length; i < len; i++){
                 m = data.defaultFiles.models[i];
-                console.log('test', utils.pathJoin(m.path, m.name));
                 if (utils.pathJoin(m.get('path'), m.get('name')) === filename){
                   m.set('selected', true);
                   break;
