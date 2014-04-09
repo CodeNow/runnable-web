@@ -84,31 +84,6 @@
     }
   }
 
-  // reputation
-  .reputation {
-    font-size: 14px;
-    height: 36px;
-    line-height: 36px;
-    right: 0;
-    top: 0;
-    width: 36px;
-
-    // tooltip positions
-    &:before {
-      top: 42px;
-    }
-
-    &:after {
-      left: 12px;
-      top: 36px;
-    }
-
-    @include media(md) {
-      right: 8px;
-      top: 8px;
-    }
-  }
-
   > h1,
   > p {
     color: $gray-darker;
@@ -138,6 +113,21 @@
 
     @include media(md) {
       font-size: 14px;
+    }
+  }
+
+  .reputation {
+    right: 0;
+    top: 0;
+
+    @include media(xxs) {
+      right: 10px;
+      top: 10px;
+    }
+
+    @include media(md) {
+      right: 8px;
+      top: 8px;
     }
   }
 }
@@ -183,25 +173,6 @@
       right: 15px;
     }
   }
-}
-
-// .reputation
-.reputation {
-  background: $purple-light;
-  border-radius: 50%;
-  color: #fff;
-  display: block;
-  font-size: 11px;
-  height: 32px;
-  line-height: 32px;
-  margin: 0 auto;
-  padding: 0;
-  position: absolute;
-    top: 0;
-    z-index: 1;
-  text-align: center;
-  user-select: none;
-  width: 32px;
 }
 
 // #reputation
@@ -326,7 +297,9 @@
     border-radius: 50%;
     box-shadow: inset 0 0 1px $purple, 0 1px 0 rgba(0,0,0,.2);
     display: block;
+
     user-select: none;
+    width: 100%;
   }
 
   .no-img {
@@ -336,28 +309,7 @@
   }
 
   .reputation {
-
-    @include media(xs) {
-      height: 24px;
-      line-height: 24px;
-      right: 8px;
-      width: 24px;
-    }
-
-    @include media(sm) {
-      height: 20px;
-      line-height: 20px;
-      right: 10px;
-      top: 0;
-      width: 20px;
-    }
-
-    @include media(md) {
-      height: 24px;
-      line-height: 24px;
-      right: 8px;
-      top: -4px;
-      width: 24px;
-    }
+    right: 10px;
+    top: -2px;
   }
 }

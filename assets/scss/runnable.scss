@@ -1,5 +1,3 @@
-@import "compass/css3/opacity";
-
 #output {
   visibility: hidden;
 
@@ -19,214 +17,166 @@
     display: inline-block;
 
     > a {
+      opacity: .8;
       padding: 10px 2px;
-      @include opacity(.8);
 
       &.hover {
-        @include opacity(1)
+        opacity: 1;
       }
     }
   }
 }
 
-// vote button
-// .page-title {
-//   position: relative;
-
-//   .vote {
-//     @include border-radius(50%);
-//     color: $gray-dark;
-//     float: left;
-//     color: $gray-dark;
-//     font-size: 14px;
-//     height: 50px;
-//     margin: 5px 0;
-//     outline: none;
-//     padding: 0;
-//     position: relative;
-//     @include transition(.2s ease-in-out);
-//     width: 50px;
-
-//     &:hover {
-//       color: $purple-light;
-
-//       .glyphicons {
-//         color: $purple-light;
-//       }
-//     }
-
-//     &.voted,
-//     &:active,
-//     &[disabled] {
-//       background-color: rgba(0,0,0,.075);
-//       background-image: none;
-//       border: 1px solid;
-//       border-color: rgba(0, 0, 0, .3) rgba(0, 0, 0, .2) rgba(0, 0, 0, .1);
-//       @include box-shadow(inset 0 2px 6px rgba(0, 0, 0, .1), 1px 0px rgba(255,255,255,1));
-//       color: $purple-light;
-
-//       .glyphicons {
-//         @include animation(liked 1s ease-in-out);
-//         color: $purple-light;
-//       }
-//     }
-
-//     &.voted,
-//     &[disabled] {
-//       cursor: default;
-//     }
-
-//     &[disabled] {
-//       @include box-shadow(inset 0 2px 6px rgba(0, 0, 0, .1), 1px 0px rgba(255,255,255,1) !important);
-//       opacity: 1;
-//     }
-
-//     .glyphicons {
-//       color: $gray-dark;
-//       display: block;
-//       font-size: 32px;
-//       margin: -6px 0;
-//       @include scale-3d(.5,.5,1);
-//       @include transition(.2s ease-in-out);
-//     }
-//   }
-// }
-
 // image/container title
-#project-details {
+.page-title {
 
-  .page-title {
+  h1 {
+    @extend .clearfix;
+    color: $gray-darker;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 10px;
 
-    h1 {
-      display: block;
-      line-height: 1;
-      margin: 0;
-      min-height: 35px;
+    @include media(xs) {
+      margin-bottom: 2px;
     }
 
-    // > div {
-    //   border-left: 1px solid $gray;
-    //   margin-left: 70px;
-    //   padding-left: 20px;
+    @include media(sm) {
+      line-height: 1.6;
+      margin: 0;
+    }
 
-    //   span {
-    //     margin-bottom: 0;
-    //   }
-    // }
+    > span {
+      display: block;
+      float: left;
+      max-width: calc(100% - 34px);
+      text-overflow: ellipsis;
+
+      @include media(sm) {
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+
+    form {
+      margin-bottom: 10px;
+    }
   }
 }
 
 .runnable-stats {
-  color: #bbb;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 8px 0 0;
+  color: $gray-dark;
+  font-size: 14px;
+  margin: 0;
 
-  &.title {
-    font-size: 14px;
-    font-weight: normal;
-    margin: 8px 0 0;
+  > h2 {
+    clear: both;
+    font-size: 12px;
+    margin: 0 0 5px;
 
-    > span {
-      margin-right: 10px;
+    > a {
+      font-weight: 700;
     }
-  }
 
-  .runnable-stats-wrapper {
-    > span {
-      margin-left: 10px;
+    @include media(xxs) {
+      font-size: 12px;
+      margin: 15px 0 2px 14px;
 
-      &:first-child {
-        margin-left: 0;
+      > .share {
+        margin-left: -16px !important;
       }
     }
   }
 
-  a {
+  data {
+    color: $gray-dark;
+    margin-right: 10px;
 
-    &:hover img {
-      text-decoration: none;
+    @include media(xxs) {
+      font-size: 12px;
     }
   }
 
-  > span {
-    margin: 0 5px 5px;
+  .tooltip {
+    margin-right: 6px;
+  }
+
+  .glyphicons {
+    color: $orange;
+    font-size: 12px;
+    margin-left: 8px;
+    margin-right: 4px;
 
     &:first-child {
       margin-left: 0;
-
-      > .glyphicons {
-        margin-left: 0;
-      }
     }
 
-    // &.vote-up {
-    //   margin-left: 0;
-
-    //   a {
-    //     color: #bbb;
-    //     text-decoration: none;
-    //     position: relative;
-    //     display: inline-block;
-    //     padding-left: 15px;
-
-    //     &:before {
-    //       content: "";
-    //       position: absolute;
-    //       width: 0;
-    //       height: 0;
-    //       top: 32%;
-    //       left: 0;
-    //       border-left: 5px solid transparent;
-    //       border-right: 5px solid transparent;
-    //       border-bottom: 7px solid #bbb;
-    //       @include transition(transform .25s linear);
-    //     }
-
-    //     &:hover {
-    //       color: #777;
-
-    //       &:before {
-    //         border-bottom: 7px solid #777;
-    //       }
-    //     }
-    //   }
-    // }
-
-    &.tags {
-
-      img {
-        margin-right: 4px;
-      }
-
-      a {
-        margin-top: 5px;
-        margin-right: 5px;
-      }
+    &.eye-open {
+      font-size: 13px;
     }
 
-    .glyphicons {
-      padding: 0 2px;
+    @include media(xxs) {
+      margin-left: 2px;
     }
+  }
+
+  .share {
+    transform: rotate3d(1,0,0,180deg);
+  }
+}
+
+.runnable-description {
+  margin-top: 5px;
+
+  > p {
+    color: $gray-dark;
+    margin: 15px 0;
+  }
+}
+
+// edit title and description
+#project-details {
+
+  input {
+    margin-bottom: 5px;
+  }
+
+  textarea {
+    height: 72px;
+    margin-bottom: 6px;
+    max-height: 144px;
+    resize: vertical;
+  }
+
+  .cancel {
+    font-size: 13px;
+    font-weight: 400;
+    padding: 0 8px;
+  }
+
+  .glyphicons.edit {
+    font-size: 18px;
+    line-height: 0;
+    padding: 0 8px;
   }
 }
 
 // improve-btn
 #improve-btn {
-  margin-left: 10px;
 
   > button {
     font-size: 16px;
 
     &+button {
-      @include border-radius(0 3px 3px 0);
+      border-radius: 0 3px 3px 0;
     }
   }
 
   .thumbs-up {
 
     &:hover {
-      color: transparentize($green,.2);
+      color: rgba($green,.8);
     }
 
     &:active,
@@ -238,12 +188,293 @@
   .thumbs-down {
 
     &:hover {
-      color: transparentize($orange,.2);
+      color: rgba($orange,.8);
     }
 
     &:active,
     &.active {
       color: $orange;
+    }
+  }
+}
+
+// runnable owner
+#project-author {
+
+  @include media(xs) {
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 3px;
+    box-shadow: inset 0 1px 0 #fff;
+    margin: 0 15px 15px;
+    padding: 15px;
+  }
+
+  > div > a {
+    border-radius: 50%;
+    float: left;
+    margin-bottom: 5px;
+
+    @include media(xs) {
+      display: block;
+      margin: 0;
+      width: 81px;
+    }
+  }
+
+  img {
+    border: 3px solid $purple-light;
+    border-radius: 50%;
+    height: 100%;
+    user-select: none;
+    width: 100%;
+  }
+
+  .reputation {
+    right: 6px;
+
+    @include media(xs) {
+      right: 10px;
+    }
+
+    @include media(md) {
+      right: 12px;
+    }
+
+    @include media(lg) {
+      right: 18px;
+    }
+  }
+
+  h4,
+  ul {
+    @include media(xs) {
+      float: left;
+      width: calc(50% - 42px);
+    }
+
+    @include media(xxs) {
+      width: auto;
+    }
+
+    @include media(sm) {
+      padding-left: 0;
+    }
+  }
+
+  h4 {
+    margin: 0 0 10px;
+
+    > a {
+      color: $gray-darker;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    > div {
+      color: $gray-dark;
+      font-size: 12px;
+      margin-top: 2px;
+
+      @include media(xs) {
+        display: inline;
+      }
+
+      @include media(xxs) {
+        display: block;
+      }
+    }
+  }
+
+  ul {
+    color: $gray-dark;
+    font-size: 12px;
+    white-space: nowrap;
+
+    @include media(xs) {
+      display: table;
+      float: none;
+    }
+
+    @include media(xxs) {
+      display: none
+    }
+
+    @include media(md) {
+      display: block;
+    }
+  }
+
+  li {
+    margin-bottom: 6px;
+  }
+
+  a.tag {
+    padding: 0 6px;
+  }
+}
+
+// main-controls
+.main-controls {
+  @extend .clearfix;
+  margin: 30px 0;
+
+  @include media(xs) {
+    margin: 10px 0;
+  }
+
+  > .btn-group,
+  > button {
+    float: left;
+  }
+
+  > .btn-group:first-child {
+    @include media(xxs) {
+      width: calc(100% - 172px);
+    }
+  }
+
+  > .green {
+
+    &:hover,
+    &:focus {
+      color: #fff;
+    }
+  }
+
+  .run-button {
+    @media (max-width: 360px) {
+      > span {
+        display: none;
+      }
+
+      > img {
+        margin: -4px 0 0 4px;
+      }
+    }
+
+    @include media(xxs) {
+      width: calc(100% - 32px);
+    }
+  }
+
+  > .silver,
+  > #improve-btn {
+    margin-left: 10px;
+  }
+
+  > .silver {
+
+    @include media(xxs) {
+      padding: 0 16px;
+
+      > span:last-child {
+        display: none;
+      }
+    }
+  }
+
+  //if run options
+  .btn-group {
+    display: block;
+
+    > .run-button {
+      border-radius: 3px 0 0 3px;
+      float: left;
+    }
+
+    > .run-options {
+      border-radius: 0 3px 3px 0 !important;
+      margin-left: -1px;
+      padding: 0 9px 0 8px;
+
+      &:before {
+        top: 38px;
+        left: 0;
+      }
+
+      &:after {
+        top: 32px;
+        left: 9px;
+      }
+    }
+
+    .caret {
+      border-top-color: #fff;
+    }
+
+    @include media(xxs) {
+      margin-left: 0;
+    }
+  }
+}
+
+// sidebar
+#sidebar {
+  padding-top: 36px;
+
+  @include media(xs) {
+    padding: 36px 15px 0;
+  }
+
+  > li {
+    list-style: none;
+    margin-bottom: 36px;
+
+    h3 {
+      border-bottom: 1px solid rgba(0,0,0,.1);
+      box-shadow: 0 1px 0 #fff;
+      color: $gray-dark;
+      font-size: 14px;
+      font-weight: 400;
+      margin: 0 0 8px;
+      padding: 0 0 4px;
+    }
+
+    &.related-code {
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        padding: 4px 0;
+      }
+
+      a {
+        display: inline-block;
+        font-size: 12px;
+        line-height: 1.2;
+      }
+    }
+  }
+
+  aside {
+    color: $gray-dark;
+    font-size: 12px;
+    margin: 10px 0;
+  }
+}
+
+// ??
+#project-details, #tags-details {
+
+  p.description {
+
+    a.more {
+      display: inline-block;
+      color: #fff;
+      background: #ccc;
+      padding: 0 5px;
+      line-height: 1.2em;
+      margin-left: 5px;
+      @include border-radius(3px);
+      @include transition(all 0.25s ease-in-out);
+      &:hover {
+        text-decoration: none;
+        background: #999;
+      }
     }
   }
 }

@@ -6,10 +6,9 @@
 <main class="container">
   <section id="project-details" class="row">
     <div class="col-sm-9">
-      <div class="page-title clearfix">
-        {{!-- {{view "vote_button" model=image}} --}}
+      <div class="page-title">
         {{view "runnable_title" model=image}}
-        {{view "runnable_stats" model=image title=true}}
+        {{view "runnable_stats" model=image}}
       </div>
       {{view "runnable_description" model=image}}
       <div class="main-controls clearfix">
@@ -22,23 +21,23 @@
     {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created image=image context=.}}
   </section>
   <div class="row">
-    <section class="col-sm-9">
+    <section class="col-sm-12 col-md-9">
       {{view "code_editor" context=. editmode=false model=image}}
       {{view "terminal" model=container}}
     </section>
-    <ul id="sidebar" class="col-sm-3">
+    <ul id="sidebar" class="col-sm-12 col-md-3">
       {{#if image.attributes.specification}}
       <li class="services">
-      <h3 class="widget-title">API Keys</h3>
+      <h3>API Keys</h3>
         {{view "runnable_specifications" model=container collection=specifications context=. editmode=false}}
       </li>
       {{/if}}
       {{#if image.attributes.tags}}{{#if image.attributes.tags.length}}
       <li class="tags">
-        <h3 class="widget-title">Tags</h3>
+        <h3>Tags</h3>
         <ul class="clearfix">
           {{#each image.attributes.tags}}
-          <li>
+          <li class="tag">
           {{view "tag_link" name=name}}
           </li>
           {{/each}}
@@ -47,7 +46,7 @@
       {{/if}}{{/if}}
       {{#if related.length}}
       <li class="related-code">
-        <h3 class="widget-title">Related Code</h3>
+        <h3>Related Code</h3>
         <ul>
           {{#each related.models}}
           {{view "runnable_item_small" model=.}}

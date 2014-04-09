@@ -1,6 +1,10 @@
 // terminal-view (wrapper)
 .terminal-view {
   position: relative;
+
+  @include media(xxs) {
+    margin: 0 -15px;
+  }
 }
 
 // terminal
@@ -8,6 +12,11 @@
   color: $gray-dark;
   font-size: 14px;
   margin-top: 25px;
+
+  @include media(xxs) {
+    margin-top: 10px;
+    padding: 0 15px;
+  }
 
   .glyphicons {
     color: $gray-dark;

@@ -1,11 +1,16 @@
-{{#if title}}
-  {{#with model.attributes}}
-  <span data-title="{{runs}} runs" class="tooltip"><span class="glyphicons play"></span> {{runs}}</span>
-  <span data-title="{{views}} views" class="tooltip"><span class="glyphicons eye-open"></span> {{views}}</span>
-  <span data-title="{{copies}} copies to clipboard" class="tooltip"><span class="glyphicons notes-2"></span> {{copies}}</span>
-  {{/with}}
-{{else}}
-  <span data-title="{{../runs}} runs" class="tooltip"><span class="glyphicons play"></span> {{../runs}}</span>
-  <span data-title="{{../views}} views" class="tooltip"><span class="glyphicons eye-open"></span> {{../views}}</span>
-  <span data-title="{{../copies}} copies to clipboard" class="tooltip"><span class="glyphicons notes-2"></span> {{../copies}}</span>
-{{/if}}
+{{#with model.attributes}}
+  {{#if parentName}}
+    {{#if_eq _id compare=parent}}
+    {{else}}
+      {{view "runnable_parent" parent=parent parentName=parentName}}
+    {{/if_eq}}
+  {{/if}}
+{{/with}}
+
+{{#with model.attributes}}
+<data>
+  <span class="glyphicons play-button"></span><b>{{runs}}</b> Runs
+  <span class="glyphicons eye-open"></span><b>{{views}}</b> Views
+  <span class="glyphicons notes-2"></span><b>{{copies}}</b> Copies
+</data>
+{{/with}}
