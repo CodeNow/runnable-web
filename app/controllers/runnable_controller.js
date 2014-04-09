@@ -24,6 +24,7 @@ var fetchUserAndSearch = helpers.fetchUserAndSearch;
 var fetchOwnersFor = helpers.fetchOwnersFor;
 var fetchLeaderBadges = helpers.fetchLeaderBadges;
 var keypather = require('keypather')();
+var path = require('path');
 
 module.exports = {
   index: function(params, callback) {
@@ -157,19 +158,13 @@ module.exports = {
             data.showTerminal    = (tabs.indexOf('terminal') !== -1);
 
             //Set the first file in the files param array to be the selected file
-            if(keypather.get(params, 'file.length') && keypather.get(data, 'defaultsFiles.models.length')){
-              var filename = params.file[0];
-              var m;
-              for(var i=0,len=data.defaultFiles.models.length; i < len; i++){
-                m = data.defaultFiles.models[i];
-                if (utils.pathJoin(m.get('path'), m.get('name')) === filename){
-                  m.set('selected', true);
-                  break;
-                }
-              }
-              delete i; // let would be nice
-              delete m;
-              delete filename;
+            if(keypather.get(params, 'file.length') && keypather.get(data, 'defaultFiles.length')){
+              data.defaultFiles.comparator = function (m) {
+                return params.file.indexOf(path.join(m.get('path'), m.get('name')));
+              };
+              data.defaultFiles.sort();
+              data.defaultFiles.at(0).set('selected', true);
+              delete data.defaultFiles.comparator;
             }
 
             callback(null, 'runnable/embed', data);
