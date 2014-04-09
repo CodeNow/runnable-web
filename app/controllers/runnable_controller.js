@@ -159,7 +159,6 @@ module.exports = {
             //Set the first file in the files param array to be the selected file
             if(keypather.get(params, 'file.length') && keypather.get(data, 'defaultsFiles.models.length')){
               var filename = params.file[0];
-              console.log('filename', filename);
               var m;
               for(var i=0,len=data.defaultFiles.models.length; i < len; i++){
                 m = data.defaultFiles.models[i];
