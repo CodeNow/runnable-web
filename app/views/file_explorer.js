@@ -25,7 +25,6 @@ module.exports = BaseView.extend({
   events: events,
   showDownloadDialog: function () {
     modalHelpers.saveProjectMessage.call(this, function () {
-      
     });
   },
   postRender: function () {

@@ -5,7 +5,7 @@ module.exports = BaseView.extend({
   id: 'embed',
   preRender: function () {
   	this.className = (this.options.showTerminal) ? 'with-terminal' : '';
-  }
+  },
 });
 
 module.exports.id = "runnable/embed";

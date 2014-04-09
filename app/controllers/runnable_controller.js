@@ -23,10 +23,16 @@ var formatTitle = helpers.formatTitle;
 var fetchUserAndSearch = helpers.fetchUserAndSearch;
 var fetchOwnersFor = helpers.fetchOwnersFor;
 var fetchLeaderBadges = helpers.fetchLeaderBadges;
+var keypather = require('keypather')();
 
 module.exports = {
   index: function(params, callback) {
-    params.file = helpers.forceParamToArray(params.file);
+    // Force arguments absolute paths
+    params.file = helpers.forceParamToArray(params.file).map(function (item) {
+      if(item.indexOf('/') !== 0) return '/' + item;
+      return item;
+    });
+
     var self = this;
     if (!utils.isObjectId64(params._id)) {
       var channelParams;
@@ -92,11 +98,15 @@ module.exports = {
         },
         function filesOwnerRelated (results, cb) {
           var channelIds = results.container.get('tags').map(utils.pluck('channel'));
+
+          var containerFetchOpts = {
+            containerId: results.container.id
+          };
+          if (params.file.length) {
+            containerFetchOpts.files = params.file;
+          }
           async.parallel([
-            fetchFilesForContainer.bind(self, {
-              containerId: results.container.id,
-              files:       params.file
-            }),
+            fetchFilesForContainer.bind(self, containerFetchOpts),
             fetchOwnerOf.bind(self, results.user, results.image), //image owner
             fetchRelated.bind(self, results.image.id, results.container.attributes.tags),
             fetchLeaderBadges.bind(self, 2, results.image.get('owner'), channelIds)
@@ -131,15 +141,6 @@ module.exports = {
             var data = addSEO(results, self.req);
             //var arrFiles = data.image.getFiles(params.file);
 
-            /*
-            data.queryFiles = new openFilesCollection(arrFiles, {
-              app:         app,
-              containerId: data.container.get('id')
-            });
-            */
-
-            data.queryFiles = data.defaultFiles;
-
             var tabs;
             var defaultTabs = ['filebrowser', 'info', 'terminal'];
             if(typeof params.tabs === 'undefined'){
@@ -154,6 +155,24 @@ module.exports = {
             data.showFileBrowser = (tabs.indexOf('filebrowser') !== -1);
             data.showInfo        = (tabs.indexOf('info') !== -1);
             data.showTerminal    = (tabs.indexOf('terminal') !== -1);
+
+            //Set the first file in the files param array to be the selected file
+            if(keypather.get(params, 'file.length') && keypather.get(data, 'defaultsFiles.models.length')){
+              var filename = params.file[0];
+              console.log('filename', filename);
+              var m;
+              for(var i=0,len=data.defaultFiles.models.length; i < len; i++){
+                m = data.defaultFiles.models[i];
+                console.log('test', utils.pathJoin(m.path, m.name));
+                if (utils.pathJoin(m.get('path'), m.get('name')) === filename){
+                  m.set('selected', true);
+                  break;
+                }
+              }
+              delete i; // let would be nice
+              delete m;
+              delete filename;
+            }
 
             callback(null, 'runnable/embed', data);
 

@@ -13,8 +13,6 @@ module.exports = BaseView.extend({
   },
   postHydrate: function () {
 
-    console.log('options', this.options);
-
     var model = this.model;
     var canEdit = this.app.user.canEdit(model);
 
