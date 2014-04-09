@@ -144,18 +144,18 @@ module.exports = {
 
             var tabs;
             var defaultTabs = ['filebrowser', 'info', 'terminal'];
-            if(typeof params.tabs === 'undefined'){
+            if(typeof params.tab === 'undefined'){
               tabs = defaultTabs;
-            } else if (_.isString(params.tabs)) {
-              tabs = params.tabs.split(',').map(function(i){return i.toLowerCase()});
-            } else if (_.isArray(params.tabs)) {
-              tabs = params.tabs.map(function(item){return item.toLowerCase();});
+            } else if (_.isString(params.tab)) {
+              tabs = params.tab.split(',').map(function(i){return i.toLowerCase()});
+            } else if (_.isArray(params.tab)) {
+              tabs = params.tab.map(function(item){return item.toLowerCase();});
             } else {
               tabs = defaultTabs;
             }
             data.showFileBrowser = (tabs.indexOf('filebrowser') !== -1);
-            data.showInfo        = (tabs.indexOf('info') !== -1);
-            data.showTerminal    = (tabs.indexOf('terminal') !== -1);
+            data.showInfo        = (tabs.indexOf('info')        !== -1);
+            data.showTerminal    = (tabs.indexOf('terminal')    !== -1);
 
             //Set the first file in the files param array to be the selected file
             if(keypather.get(params, 'file.length') && keypather.get(data, 'defaultFiles.length')){
