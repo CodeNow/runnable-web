@@ -3,6 +3,7 @@ var utils = require('../utils');
 var ContactRequestModel = require('../models/base').extend({
   urlRoot: '/campaigns/contact'
 });
+var queryString = require('query-string');
 
 module.exports = BaseView.extend({
   tagName:'form',
@@ -11,25 +12,17 @@ module.exports = BaseView.extend({
   },
   submit: function (evt) {
     evt.preventDefault();
+    var data = $(evt.currentTarget).serialize();
+    var self = this;
+    $.post(
+      '/api/-/emails',
+      queryString.parse(data),
+      function () {
+        self.trigger('submitted');
+        self.$('input, textarea').val('');
+        self.showMessage("Thanks we'll get back to you soon!")
+      });
 
-    var contactRequest = new ContactRequestModel({}, {
-      app: this.app
-    });
-    var data = $(evt.currentTarget).serializeObject();
-    var opts = utils.cbOpts(callback, this);
-
-    contactRequest.save(data, opts);
-    function callback (err) {
-      if (err && !~err.indexOf('already subscribed')) {
-        this.trigger('submitted', err);
-        this.showError(err);
-      }
-      else {
-        this.trigger('submitted');
-        this.$('input, textarea').val('');
-        this.showMessage("Thanks we'll get back to you soon!")
-      }
-    }
   }
 });
 
