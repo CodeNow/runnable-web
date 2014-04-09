@@ -1,1 +1,3 @@
-<a href="/{{model.id}}/{{urlFriendly model.attributes.name}}"><span>{{model.attributes.votes}}</span>{{model.attributes.name}}</a>
+<a href="{{invoke model method='appURL'}}">
+  {{model.attributes.name}}
+</a>
