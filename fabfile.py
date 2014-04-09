@@ -177,7 +177,7 @@ def boot():
   Start process with pm2
   """
   with cd('runnable-web'):
-    run('NODE_ENV=%(settings)s pm2 start index.js -i 40 -n runnable-web' % env)
+    run('NODE_ENV=%(settings)s pm2 start index.js -n runnable-web' % env)
 
 def validateNote(input):
   """
