@@ -10,7 +10,7 @@ module.exports = BaseView.extend({
     var className = opts.className;
 
     if (editMode) {
-      self.className =  'can-edit';
+      self.className = 'can-edit';
     }
     else {
       self.attributes= {
