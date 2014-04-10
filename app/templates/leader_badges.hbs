@@ -1,4 +1,4 @@
-{{#each collection.models}}
+{{#each_upto collection.models 2}}
   <li>
     #{{attributes.leaderPosition}} in {{view "tag_link" name=attributes.name className="tag"}}
-{{/each}}
+{{/each_upto}}
