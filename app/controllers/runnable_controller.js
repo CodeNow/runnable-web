@@ -166,7 +166,7 @@ module.exports = {
               data.defaultFiles.at(0).set('selected', true);
               delete data.defaultFiles.comparator;
             }
-
+            data.collection = data.defaultFiles;
             callback(null, 'runnable/embed', data);
 
           }else{

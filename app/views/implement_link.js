@@ -19,6 +19,7 @@ module.exports = BaseView.extend({
     return this.collection.hasCompleteImplementationFor(specification);
   },
   openImplementModal: function (evt, options) {
+    debugger;
     if (evt) evt.preventDefault();
     var opts = _.clone(this.options);
     opts = _.extend(opts, options || {});

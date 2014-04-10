@@ -1,13 +1,14 @@
 <div id="project-toolbar">
 
-{{#if showFileBrowser}}
-  <a id="open-file-explorer" class="glyphicons folder-closed"></a>
-{{/if}}
+  {{#if showFileBrowser}}
+    <a id="open-file-explorer" class="glyphicons folder-closed"></a>
+  {{/if}}
 
   <div id="project-editor-tabs-wrapper">
     {{view "file_tabs" collection=defaultFiles}}
   </div>
   {{view "file_select" collection=defaultFiles}}
+
 </div>
 
 {{#if showFileBrowser}}
@@ -18,6 +19,6 @@
   <!--googleoff: anchor-->
   {{view "code" collection=defaultFiles}}
   <!--googleon: anchor-->
-  {{view "page_loader"}}
   <div id="run-output"></div>
+  {{view "page_loader"}}
 </div>
