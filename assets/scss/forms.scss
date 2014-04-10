@@ -240,3 +240,54 @@ form.inline {
     }
   }
 }
+
+// contact modal
+#contact-modal {
+
+  .modal-body {
+    overflow: hidden;
+  }
+
+  form,
+  .confirmation {
+    transition: transform .6s ease-in-out, opacity .5s ease-in-out;
+  }
+
+  form.in,
+  form.in ~ .confirmation {
+    transform: translate3d(0,-325px,0);
+  }
+
+  form.in {
+    opacity: 0;
+  }
+
+  form.in ~ .confirmation {
+    opacity: 1;
+  }
+
+  .confirmation {
+    color: $gray-darker;
+    height: 100%;
+    opacity: 0;
+    padding: 0 30px;
+    position: absolute;
+      left: 0;
+    text-align: center;
+    width: 100%;
+
+    h2 {
+      font-weight: 700;
+      margin: 105px 0 15px;
+    }
+
+    button {
+      margin: 0 auto;
+      position: absolute;
+        right: 0;
+        bottom: 20px;
+        left: 0;
+      width: calc(100% - 40px);
+    }
+  }
+}

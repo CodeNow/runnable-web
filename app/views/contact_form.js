@@ -18,11 +18,11 @@ module.exports = BaseView.extend({
       '/api/-/emails',
       queryString.parse(data),
       function () {
-        self.trigger('submitted');
-        self.$('input, textarea').val('');
-        self.showMessage("Thanks we'll get back to you soon!")
-      });
+        // self.trigger('submitted');
+        // self.showMessage('Thanks we\'ll get back to you soon!')
+    });
 
+    this.$el.addClass('in');
   }
 });
 
