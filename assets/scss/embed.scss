@@ -140,6 +140,10 @@
       min-height: 0;
       width: 100%;
     }
+
+    .overlay-loader {
+      display: none;
+    }
   }
 
   .terminal-loader {
@@ -148,14 +152,11 @@
 
   // output
   #run-output {
+    display: none;
 
     iframe {
       border: 0;
     }
-  }
-
-  .overlay-loader {
-    display: none;
   }
 
   // footer
