@@ -12,10 +12,14 @@
       height: calc(100% - 81px);
     }
 
+    #project-editor-container {
+      height: calc(100% - 36px);
+    }
+
     .terminal-view {
       display: block;
       height: 45px;
-      transition: height .2s cubic-bezier(.19,1,.22,1);
+      transition: height .15s ease-in-out;
     }
   }
 
@@ -32,23 +36,30 @@
 
   // run button
   > button {
-    height: 24px;
-    line-height: 22px;
-    padding: 0 8px;
+    background: $green-light;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    height: 37px;
+    line-height: 37px;
     position: absolute;
-      top: 6px;
-      right: 6px;
+      top: 0;
+      right: 0;
       z-index: 3;
-
-    > img {
-      margin: -4px 3px 0 0
-    }
   }
 
   // code editor
-  #code-editor-embed,
+  #code-editor-embed {
+    height: calc(100% - 36px);
+    transition: height .15s ease-in-out;
+  }
+
   #project-editor-container {
     height: calc(100% - 36px);
+  }
+
+  #project-editor {
+    min-height: 100%;
   }
 
   #code-editor-embed {
@@ -82,11 +93,12 @@
   }
 
   #project-select-tabs {
+    border: 0;
     border-left: 1px solid rgba(0,0,0,.1);
-    border-right: 1px solid rgba(0,0,0,.1);
+    border-radius: 0;
     position: absolute;
-      top: -1px;
-      right: 68px;
+      top: 0;
+      right: 73px;
   }
 
   #project-editor-tabs > li {
@@ -106,9 +118,31 @@
 
   .terminal-view {
     display: none;
+    position: absolute;
+      bottom: 36px;
+      z-index: 10;
+    width: 100%;
+
+    iframe {
+      height: 100%;
+      min-height: 0;
+      width: 100%;
+    }
   }
 
   .terminal-loader {
+    display: none;
+  }
+
+  // output
+  #run-output {
+
+    iframe {
+      border: 0;
+    }
+  }
+
+  .overlay-loader {
     display: none;
   }
 
@@ -119,19 +153,13 @@
     box-shadow: none;
     height: 36px;
     line-height: 36px;
+    position: absolute;
+      bottom: 0;
+      z-index: 10;
+    width: 100%;
 
     > a {
-      color: $gray-dark;
       float: left;
-      font-size: 13px;
-
-      &:hover {
-        color: $gray-darker;
-      }
-
-      &:active {
-        transform: translate3d(0,1px,0);
-      }
     }
   }
 
