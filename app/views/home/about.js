@@ -11,10 +11,10 @@ module.exports = BaseView.extend({
     evt.preventDefault();
     var data = this.$(evt.currentTarget).serialize();
 
-    // $.post(
-    //   '/api/-/emails',
-    //   queryString.parse(data),
-    //   function () { /* we don't care */ });
+    $.post(
+      '/api/-/emails',
+      queryString.parse(data),
+      function () { /* we don't care */ });
 
     this.$('form').addClass('in');
   },
