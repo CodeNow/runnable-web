@@ -343,6 +343,10 @@
       text-align: center;
       width: 100%;
 
+      @include media(xs) {
+        margin-top: 45px;
+      }
+
       @include media(sm) {
         margin-top: 105px;
       }
