@@ -97,6 +97,10 @@
     @media (max-width: 500px) {
       margin: 0;
     }
+
+    @include media(sm) {
+      padding-bottom: 14px;
+    }
   }
 
   // runnable title
