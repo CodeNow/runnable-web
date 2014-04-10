@@ -56,6 +56,17 @@
 
   #project-editor-container {
     height: calc(100% - 36px);
+
+    &.with-output {
+
+      > pre {
+        display: none;
+      }
+
+      > #run-output {
+        display: block;
+      }
+    }
   }
 
   #project-editor {
