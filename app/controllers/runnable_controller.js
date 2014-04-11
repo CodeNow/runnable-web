@@ -140,24 +140,10 @@ module.exports = {
           if(utils.isCurrentUrl(app, imageURL + '/embedded', true)){
             //iframe nested website
             var data = addSEO(results, self.req);
-            //var arrFiles = data.image.getFiles(params.file);
 
-            var tabs;
-            var defaultTabs = ['filebrowser', 'info', 'terminal'];
-            if(typeof params.tab === 'undefined'){
-              tabs = defaultTabs;
-            } else if (_.isString(params.tab)) {
-              tabs = params.tab.split(',').map(function(i){return i.toLowerCase()});
-            } else if (_.isArray(params.tab)) {
-              tabs = params.tab.map(function(item){return item.toLowerCase();});
-            } else {
-              tabs = defaultTabs;
-            }
             data.showFileBrowser = true; //= (tabs.indexOf('filebrowser') !== -1);
             data.showInfo        = false; //(tabs.indexOf('info')        !== -1);
-            //data.showTerminal    = (tabs.indexOf('terminal')    !== -1);
-
-            data.showTerminal = (params.terminal && params.terminal.toLowerCase() === 'false') ? false : true;
+            data.showTerminal    = !(params.terminal && params.terminal.toLowerCase() === 'false');
 
             //Set the first file in the files param array to be the selected file
             if(keypather.get(params, 'file.length') && keypather.get(data, 'defaultFiles.length')){
@@ -170,6 +156,7 @@ module.exports = {
             data.defaultFiles.unselectAllFiles();
             data.defaultFiles.at(0).set('selected', true);
 
+            // hydrating base view
             data.collection = data.defaultFiles;
             callback(null, 'runnable/embed', data);
 
