@@ -24,6 +24,7 @@ module.exports = BaseView.extend({
   },
   postRender: function () {
     $('body,#content').css('height', '100%');
+    this.childViewContainer = _.findWhere(this.childViews, {name: 'terminal'}).model;
 
     this.collection.on('change', function(){
       this.embed_stop();
@@ -38,23 +39,21 @@ module.exports = BaseView.extend({
   },
   embed_run: function (evt) {
     evt.stopPropagation();
+    var self = this;
     this.collection.unselectAllFiles();
 
-    $('#page-loader').show().addClass('loading');
-
-    var container = _.findWhere(this.childViews, {name: 'terminal'}).model;
-
-    var url = '/'+container.id+'/output';
-    var height = this.$el.find('#project-editor').height();
-
-    this.$el.removeClass('with-terminal').removeClass('in');
-    this.$el.find('#project-editor-container').addClass('with-output');
-    var iframe = document.createElement('iframe');
+    var container = this.childViewContainer;
+    var url       = '/'+container.id+'/output';
+    var height    = this.$el.find('#project-editor').height();
+    var iframe    = document.createElement('iframe');
+    iframe.src = url;
     iframe.onload = function () {
-      $('#page-loader').hide().removeClass('loading');
+      self.$el.find('#page-loader').hide().removeClass('loading');
     };
 
-    iframe.src = url;
+    this.$el.removeClass('with-terminal').removeClass('in');
+    this.$el.find('#page-loader').show().addClass('loading');
+    this.$el.find('#project-editor-container').addClass('with-output');
     this.$el.find('#run-output').css('height', height + 'px').html(iframe);
 
   },
