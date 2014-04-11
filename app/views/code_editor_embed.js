@@ -9,7 +9,7 @@ module.exports = BaseView.extend({
   },
   className: 'out', // file browser open
   preRender: function () {
-    this.className = (this.options.showFileBrowser) ? 'in' : 'out';
+    //this.className = (this.options.showFileBrowser) ? 'in' : 'out';
   },
   postHydrate: function () {
 
