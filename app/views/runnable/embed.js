@@ -36,6 +36,7 @@ module.exports = BaseView.extend({
     }
     this.$el.find('#project-editor-container').removeClass('with-output');
     this.$el.find('#run-output').html('');
+    this.$el.find('pre#project-editor').trigger('resize');
   },
   embed_run: function (evt) {
     evt.stopPropagation();
