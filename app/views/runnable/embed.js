@@ -5,7 +5,15 @@ module.exports = BaseView.extend({
   tagName: 'main',
   id: 'embed',
   events: {
-  	'click button#embed-run': 'embed_run'
+  	'click button#embed-run': 'embed_run',
+    'terminal-focus': 'terminal_focus',
+    'terminal-blur': 'terminal_blur'
+  },
+  terminal_focus: function () {
+    this.$el.addClass('in');
+  },
+  terminal_blur: function () {
+    this.$el.removeClass('in');
   },
   postRender: function () {
     $('body,#content').css('height', '100%');
