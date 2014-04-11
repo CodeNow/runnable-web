@@ -4,7 +4,6 @@ var utils = require('../utils');
 var channelController = require('./channel_controller');
 var helpers = require('./helpers');
 var HighlightedFiles = require('../collections/highlighted_files');
-var openFilesCollection = require('../collections/open_files');
 var fetch = helpers.fetch;
 var fetchUser = helpers.fetchUser;
 var fetchImplementation = helpers.fetchImplementation;
@@ -79,9 +78,10 @@ module.exports = {
         function nameInUrl (results, cb) {
           var imageURL = results.image.appURL();
 
-          //TEMP
-          cb(null, results);
-          return;
+          if(utils.isCurrentUrl(app, imageURL + '/embedded', true)){
+            cb(null, results);
+            return;
+          }
 
           if (!(utils.isCurrentUrl(app, imageURL) || utils.isCurrentUrl(app, imageURL + '/embedded')) || params.channel) {
             self.redirectTo(imageURL);
@@ -141,8 +141,6 @@ module.exports = {
             //iframe nested website
             var data = addSEO(results, self.req);
 
-            data.showFileBrowser = true; //= (tabs.indexOf('filebrowser') !== -1);
-            data.showInfo        = false; //(tabs.indexOf('info')        !== -1);
             data.showTerminal    = !(params.terminal && params.terminal.toLowerCase() === 'false');
 
             //Set the first file in the files param array to be the selected file
