@@ -36,7 +36,8 @@ module.exports = BaseView.extend({
     }
     this.$el.find('#project-editor-container').removeClass('with-output');
     this.$el.find('#run-output').html('');
-    this.$el.find('pre#project-editor').trigger('resize');
+    this.$el.find('#page-loader').hide().removeClass('loading');
+    jQuery('#project-editor').get(0).style.height = "";
   },
   embed_run: function (evt) {
     evt.stopPropagation();
