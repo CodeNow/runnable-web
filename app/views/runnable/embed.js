@@ -22,7 +22,7 @@ module.exports = BaseView.extend({
   },
   embed_run: function (evt) {
     evt.stopPropagation();
-    this.collection.findWhere({selected: true}).set('selected', false);
+    this.collection.unselectAllFiles();
 
     $('#page-loader').show().addClass('loading');
 
