@@ -358,28 +358,18 @@ function fetchFilesForContainer (opts, callback) {
       rootDir.contents.fetch(opts);
     }
   ];
-  var spec;
-  if (files) {
-    spec = {
-      defaultFiles: {
-        collection: 'OpenFiles',
-        params: {
-          containerId: containerId,
-          filepaths:   files
-        }
+  var spec = {
+    defaultFiles: {
+      collection: 'OpenFiles',
+      params: {
+        containerId: containerId
       }
     }
-  }
-  else {
-    spec = {
-      defaultFiles: {
-        collection: 'OpenFiles',
-        params: {
-          containerId: containerId,
-          'default'  : true
-        }
-      }
-    };
+  };
+  if (files) {
+    spec.defaultFiles.params.filepaths = files;
+  } else {
+    spec.defaultFiles.params.default = true;
   }
 
   tasks.push(fetch.bind(this, spec));
