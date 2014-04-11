@@ -7,7 +7,12 @@ module.exports = BaseView.extend({
   events: {
   	'click button#embed-run': 'embed_run',
     'terminal-focus': 'terminal_focus',
-    'terminal-blur': 'terminal_blur'
+    'terminal-blur': 'terminal_blur',
+    'click a[data-bypass="true"]': 'popup'
+  },
+  popup: function (evt) {
+    evt.preventDefault();
+    window.open(window.location.origin + this.model.appURL());
   },
   terminal_focus: function () {
     this.$el.addClass('in');
