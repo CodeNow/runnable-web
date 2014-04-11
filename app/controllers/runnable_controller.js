@@ -137,11 +137,11 @@ module.exports = {
         if (err) { callback(err); } else {
 
           var imageURL = results.image.appURL({noTags:true});
-          if(utils.isCurrentUrl(app, imageURL + '/embedded', true)){
+          if(utils.getCurrentUrlPath(app, true).lastIndexOf('/embedded') === (utils.getCurrentUrlPath(app, true).length - "/embedded".length)){
             //iframe nested website
             var data = addSEO(results, self.req);
 
-            data.showTerminal    = !(params.terminal && params.terminal.toLowerCase() === 'false');
+            data.showTerminal = !(params.terminal && params.terminal.toLowerCase() === 'false');
 
             //Set the first file in the files param array to be the selected file
             if(keypather.get(params, 'file.length') && keypather.get(data, 'defaultFiles.length')){
