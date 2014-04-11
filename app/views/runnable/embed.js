@@ -55,10 +55,6 @@ module.exports = BaseView.extend({
     };
 
     iframe.src = url;
-    _.extend(iframe.style, {
-      width: '100%',
-      height: '100%'
-    });
     this.$el.find('#run-output').css('height', height + 'px').html(iframe);
 
   },
