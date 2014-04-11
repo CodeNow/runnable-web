@@ -12,7 +12,9 @@ module.exports = BaseView.extend({
   },
   popup: function (evt) {
     evt.preventDefault();
+    evt.stopPropagation();
     window.open(window.location.origin + this.model.appURL());
+    return false;
   },
   terminal_focus: function () {
     this.$el.addClass('in');

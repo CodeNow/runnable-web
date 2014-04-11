@@ -143,7 +143,7 @@ module.exports = {
             //var arrFiles = data.image.getFiles(params.file);
 
             var tabs;
-            var defaultTabs = ['filebrowser', 'info', 'terminal'];
+            var defaultTabs = [];
             if(typeof params.tab === 'undefined'){
               tabs = defaultTabs;
             } else if (_.isString(params.tab)) {
