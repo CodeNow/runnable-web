@@ -11,8 +11,7 @@
         {{view "runnable_stats" model=image}}
       </div>
       {{view "runnable_description" model=image}}
-      <div class="main-controls clearfix">
-        {{!-- {{view "run_button" model=container collection=specifications context=.}} --}}
+      <div class="main-controls">
         {{view "dropdown_run_button" context=. editmode=true}}
         {{view "improve_button"}}
         {{view "fork_button" collection=defaultFiles model=container}}
