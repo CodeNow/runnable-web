@@ -64,16 +64,6 @@ module.exports = Runnable.extend({
     active.sort(lowerCaseCompare);
     inactive.sort(lowerCaseCompare);
     this.attributes.tags = active.concat(inactive);
-  },
-  getFiles: function (fileStringsArr) {
-    var lowerCaseFileNamesArr = fileStringsArr.map(function(f){return f.toLowerCase();});
-    return this.get('files').filter(function(file){
-      return (
-        _.isString(file.name) &&
-        _.isString(file.path) &&
-        !file.dir             &&
-        (lowerCaseFileNamesArr.indexOf(file.path.toLowerCase() + file.name.toLowerCase()) !== -1));
-    });
   }
 });
 
