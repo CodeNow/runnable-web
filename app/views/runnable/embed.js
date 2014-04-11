@@ -8,7 +8,8 @@ module.exports = BaseView.extend({
   	'click button#embed-run': 'embed_run'
   },
   postRender: function () {
-    $('html,#content').css('height', '100%');
+    $('body,#content').css('height', '100%');
+
     this.collection.on('change', function(){
       this.embed_stop();
     }.bind(this));
