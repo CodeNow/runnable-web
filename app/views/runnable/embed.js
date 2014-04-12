@@ -31,7 +31,7 @@ module.exports = BaseView.extend({
     }.bind(this));
   },
   embedStop: function () {
-    if(this.options.showTerminal) {
+    if(this.options.showterminal) {
       this.$el.addClass('with-terminal');
     }
     this.$el.find('#project-editor-container').removeClass('with-output');
