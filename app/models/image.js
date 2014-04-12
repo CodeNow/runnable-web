@@ -42,8 +42,14 @@ module.exports = Runnable.extend({
       }
     }
   },
-  appURL: function () {
+  appUrl: function () {
     return '/'+this.id+'/'+utils.urlFriendly(this.nameWithTags());
+  },
+  appURL: function () { // kill this method! - be careful it is in use around the app
+    return this.appUrl();
+  },
+  embeddedUrl: function () {
+    return '/'+this.id+'/'+utils.urlFriendly(this.nameWithTags())+'/embedded';
   },
   /**
    * Arrange the 'tags' array in a spec order

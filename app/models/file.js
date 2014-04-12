@@ -100,6 +100,9 @@ module.exports = Base.extend({
   },
   selected: function () {
     return this.get('selected');
+  },
+  getFullPath: function () {
+    return utils.pathJoin(this.get('path'), this.get('name'));
   }
 });
 

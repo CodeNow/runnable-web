@@ -148,7 +148,10 @@ var User = module.exports = Base.extend({
     owner = (model.toJSON) ? model.get('owner') : model.owner;
     return this.id === owner;
   },
-  appURL: function () {
+  appURL: function () { // kill this method! - be careful it is used aroudn teh app
+    return this.appUrl();
+  },
+  appUrl: function () {
     return '/u/'+this.get('username');
   }
 });

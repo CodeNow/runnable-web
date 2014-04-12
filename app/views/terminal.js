@@ -2,7 +2,7 @@ var BaseView = require('./base_view');
 var Super = BaseView.prototype;
 var FilesSync = require('../models/files_sync');
 var utils = require('../utils');
-var didTermErr= false;
+var didTermErr = false;
 
 module.exports = BaseView.extend({
   className: 'terminal-view loading',
@@ -82,17 +82,19 @@ module.exports = BaseView.extend({
       if(iframeFocused !== self.iframeFocused) {
         self.iframeFocused = iframeFocused;
         if (iframeFocused) {
+          self.$el.trigger('terminal-focus');
           terminalHelp.addClass('in');
           self.trackEvent('Focus');
         }
         else {
+          self.$el.trigger('terminal-blur');
           terminalHelp.removeClass();
           self.trackEvent('Blur');
         }
       }
     }
 
-    this.iframeFocusInterval = window.setInterval(checkFocus, 1000);
+    this.iframeFocusInterval = window.setInterval(checkFocus, 100);
   },
   stopWatchingIframeFocus: function () {
     window.clearInterval(this.iframeFocusInterval);

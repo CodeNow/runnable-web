@@ -1,4 +1,5 @@
-#code-editor {
+#code-editor,
+#code-editor-embed {
   border: 1px solid rgba(0,0,0,.1);
   border-top: 0;
   border-right: 0;
@@ -46,6 +47,7 @@
   #open-file-explorer {
     background: $purple-light;
     color: $gray-light;
+    user-select: none;
 
     &:hover {
       background: lighten($purple-light,5%);
@@ -137,6 +139,7 @@
     top: -36px;
     left: 36px;
     z-index: 1;
+  user-select: none;
   width: 204px;
 
   li {
@@ -151,6 +154,7 @@
     margin: 0;
     top: 0;
     text-align: center;
+    user-select: none;
     width: 36px;
 
     &:before {
@@ -575,11 +579,11 @@
 }
 
 // when file explorer is open
-#code-editor.in {
+#code-editor.in,
+#code-editor-embed.in {
 
   // file explorer icon
   #open-file-explorer {
-    background: $purple-light;
 
     &:before {
       content: '\E145';

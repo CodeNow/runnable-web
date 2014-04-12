@@ -1,0 +1,20 @@
+<div id="project-toolbar">
+
+  <a id="open-file-explorer" class="glyphicons folder-closed"></a>
+
+  <div id="project-editor-tabs-wrapper">
+    {{view "file_tabs" collection=defaultFiles}}
+  </div>
+  {{view "file_select" collection=defaultFiles}}
+
+</div>
+
+  {{view "file_explorer" container=container rootDir=rootDir editmode=editmode lock=lock}}
+
+<div id="project-editor-container">
+  <!--googleoff: anchor-->
+  {{view "code" collection=defaultFiles}}
+  <!--googleon: anchor-->
+  <div id="run-output"></div>
+  {{view "page_loader"}}
+</div>

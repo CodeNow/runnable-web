@@ -1,7 +1,6 @@
 var BaseView = require('../base_view');
 var feedbackThanks = require('../modals/feedback_thanks');
 var queryString = require('query-string');
-
 module.exports = BaseView.extend({
   id:'about',
   events: {

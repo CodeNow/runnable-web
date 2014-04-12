@@ -1,0 +1,17 @@
+<button id="embed-run" type="button" class="green">
+  <img src="/images/button-run.png" height="11" width="8">
+  <span> Run</span>
+</button>
+
+{{view "code_editor_embed" context=. editmode=false model=image}}
+
+{{view "terminal" model=container}}
+
+<footer>
+  <a data-bypass="true" href="/{{model.attributes.appUrl}}" target="_blank">
+    {{model.attributes.name}}
+  </a>
+  <a data-bypass="true" id="logo" href="/{{model.attributes.appUrl}}" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="12 12 36 36" enable-background="new 12 12 36 36"><path fill="#CBCCCC" d="M42.4 41.5l-24.2 1.3c-1.8.1-3.2-1.2-3.2-2.8v-17.8l30 .9v15.6c0 1.5-1.2 2.7-2.6 2.8zm-7.9-10.8l-4-3.8c-.6-.6-1.5-.6-2.1 0-.6.5-.6 1.4 0 1.9l3.1 2.8-3.1 2.9c-.6.6-.6 1.4 0 1.9s1.5.5 2.1-.1l4-3.8c.6-.5.6-1.3 0-1.8zm-19.5-10.7c0-1.6 1.4-2.8 3.2-2.7l24.2 1.3c1.4.1 2.6 1.3 2.6 2.7v1l-30-1.1v-1.2zm8.2-.1c0 .2.2.4.4.4l.9.1c.3 0 .4-.2.4-.4v-.8c0-.2-.2-.4-.4-.4l-.9-.1c-.3 0-.4.2-.4.4v.8zm-3-.1c0 .2.2.4.4.4l.9.1c.3 0 .4-.2.4-.4v-.8c0-.2-.2-.4-.4-.4l-.9-.1c-.3 0-.4.2-.4.4v.8zm-3.3-.2c0 .2.2.4.5.4l.9.1c.3 0 .5-.2.5-.4v-.9c0-.2-.2-.4-.5-.4h-.9c-.3-.1-.5.2-.5.4v.8z"/></svg>
+  </a>
+</footer>

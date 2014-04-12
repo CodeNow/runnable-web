@@ -22,10 +22,20 @@ var formatTitle = helpers.formatTitle;
 var fetchUserAndSearch = helpers.fetchUserAndSearch;
 var fetchOwnersFor = helpers.fetchOwnersFor;
 var fetchLeaderBadges = helpers.fetchLeaderBadges;
+var keypather = require('keypather')();
+var path = require('path');
 
 module.exports = {
   index: function(params, callback) {
+    // Force arguments absolute paths
+    params.file = helpers.forceParamToArray(params.file).map(function (item) {
+      if(item.indexOf('/') !== 0) return '/' + item;
+      return item;
+    });
+
     var self = this;
+    var currentUrl = utils.getCurrentUrlPath(this.app, true);
+    var isEmbedded = (currentUrl.split('/').pop().toLowerCase() || '') === 'embedded';
     if (!utils.isObjectId64(params._id)) {
       var channelParams;
       if (utils.isObjectId64(params.name)) {
@@ -68,9 +78,15 @@ module.exports = {
           fetch.call(self, spec, cb);
         },
         function nameInUrl (results, cb) {
-          var imageURL = results.image.appURL();
-          if (!utils.isCurrentUrl(app, imageURL)|| params.channel) {
-            self.redirectTo(imageURL);
+          var image = results.image;
+
+          var embeddedUrl = image.embeddedUrl();
+          var appUrl = image.appUrl();
+          if (isEmbedded && currentUrl !== embeddedUrl) {
+            self.redirectTo(embeddedUrl);
+          }
+          else if (!isEmbedded && currentUrl !== appUrl) {
+            self.redirectTo(appUrl);
           }
           else {
             cb(null, results);
@@ -85,8 +101,15 @@ module.exports = {
         },
         function filesOwnerRelated (results, cb) {
           var channelIds = results.container.get('tags').map(utils.pluck('channel'));
+
+          var containerFetchOpts = {
+            containerId: results.container.id
+          };
+          if (params.file.length) {
+            containerFetchOpts.files = params.file;
+          }
           async.parallel([
-            fetchFilesForContainer.bind(self, results.container.id),
+            fetchFilesForContainer.bind(self, containerFetchOpts),
             fetchOwnerOf.bind(self, results.user, results.image), //image owner
             fetchRelated.bind(self, results.image.id, results.container.attributes.tags),
             fetchLeaderBadges.bind(self, 2, results.image.get('owner'), channelIds)
@@ -97,23 +120,33 @@ module.exports = {
             _.extend(results, { highlightedFiles: new HighlightedFiles([], {app:self.app, containerId:results.container.id}) });
             cb(null, results);
           });
-        },
-        // function anonCheck (results, cb) {
-        //   // remove implementations for anon users
-        //   if (!results.user.isRegistered()) {
-        //     results.implementations.reset([]);
-        //   }
-        //   cb(null, results);
-        // }
-      ], function (err, results) {
-        // DEBUG!
-        if(err && err.status) {
-          console.log(err.status);
-          console.log((new Error()).message);
-          console.log((new Error()).stack);
         }
+      ], function (err, results) {
         if (err) { callback(err); } else {
-          callback(null, addSEO(results, self.req));
+          if (isEmbedded){
+            //iframe nested website
+            var data = addSEO(results, self.req);
+
+            data.showTerminal = _.result(params.terminal, 'toLowerCase') !== 'false';
+
+            //Set the first file in the files param array to be the selected file
+            if (keypather.get(params, 'file.length') && keypather.get(data, 'defaultFiles.length')){
+              data.defaultFiles.comparator = function (m) {
+                return params.file.indexOf(m.getFullPath());
+              };
+              data.defaultFiles.sort();
+              delete data.defaultFiles.comparator;
+            }
+            data.defaultFiles.unselectAllFiles();
+            data.defaultFiles.at(0).set('selected', true);
+
+            // hydrating base view
+            data.collection = data.defaultFiles;
+            callback(null, 'runnable/embed', data);
+
+          } else{
+            callback(null, addSEO(results, self.req));
+          }
         }
       });
     }
@@ -382,7 +415,7 @@ module.exports = {
               fetchImage.call(self, parentId, cb);
             }
           },
-          fetchFilesForContainer.bind(self, container.id)
+          fetchFilesForContainer.bind(self, {containerId: container.id})
         ],
         function (err, data) {
           cb(err, _.extend(results, {image:data[0]}, data[1], {
@@ -451,9 +484,9 @@ module.exports = {
           }
         },
         function nameInUrl (results, cb) {
-          var imageURL = results.image.appURL();
-          if (!utils.isCurrentUrl(app, imageURL)|| params.channel) {
-            self.redirectTo(imageURL);
+          var imageUrl = results.image.appUrl();
+          if (!utils.isCurrentUrl(app, imageUrl)|| params.channel) {
+            self.redirectTo(imageUrl);
           }
           else {
             cb(null, results);
@@ -468,7 +501,7 @@ module.exports = {
         },
         function filesOwnerRelated (results, cb) {
           async.parallel([
-            fetchFilesForContainer.bind(self, results.container.id),
+            fetchFilesForContainer.bind(self, {containerId: results.container.id}),
             fetchOwnerOf.bind(self, results.user, results.image), //image owner
             fetchRelated.bind(self, results.image.id, results.container.attributes.tags)
           ],
@@ -499,12 +532,6 @@ module.exports = {
           });
         }
       ], function (err, results) {
-        // DEBUG!
-        if(err && err.status) {
-          console.log(err.status);
-          console.log((new Error()).message);
-          console.log((new Error()).stack);
-        }
         if (err) { callback(err); } else {
           callback(null, addSEO(results, self.req));
         }
@@ -530,5 +557,4 @@ module.exports = {
       }
     });
   }
-,
 };

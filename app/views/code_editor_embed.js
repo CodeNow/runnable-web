@@ -3,17 +3,16 @@ var _ = require('underscore');
 var Image = require('../models/image');
 
 module.exports = BaseView.extend({
-  id: 'code-editor',
+  id: 'code-editor-embed',
   events: {
     'click #open-file-explorer': 'showFiles'
   },
-  className: 'in', // file browser open
+  className: 'out', // file browser open
   preRender: function () {
-    if (this.options.embed) {
-      this.className = '';
-    }
+    //this.className = (this.options.showFileBrowser) ? 'in' : 'out';
   },
   postHydrate: function () {
+
     var model = this.model;
     var canEdit = this.app.user.canEdit(model);
 
@@ -55,7 +54,6 @@ module.exports = BaseView.extend({
     this.$('#project-editor').resize();
   },
   toggleReadme: function (open) {
-    console.log('toggleReadme');
     var $projectEditorContainer = this.$('#project-editor-container');
 
     if (open) {
@@ -76,4 +74,4 @@ module.exports = BaseView.extend({
   }
 });
 
-module.exports.id = "CodeEditor";
+module.exports.id = "CodeEditorEmbed";
