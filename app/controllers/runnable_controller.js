@@ -23,7 +23,6 @@ var fetchUserAndSearch = helpers.fetchUserAndSearch;
 var fetchOwnersFor = helpers.fetchOwnersFor;
 var fetchLeaderBadges = helpers.fetchLeaderBadges;
 var keypather = require('keypather')();
-var path = require('path');
 
 module.exports = {
   index: function(params, callback) {
