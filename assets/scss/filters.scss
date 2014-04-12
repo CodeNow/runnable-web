@@ -150,6 +150,10 @@
       &:active {
         text-decoration: none;
       }
+
+      @include media(xs) {
+        padding: 0 0 0 5px;
+      }
     }
 
     @include media(xs) {
