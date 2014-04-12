@@ -38,13 +38,13 @@ module.exports = BaseView.extend({
     this.$el.find('#run-output').html('');
     this.$el.find('#page-loader').hide().removeClass('loading');
     jQuery('#project-editor').get(0).style.height = "";
-    // hacky shit to get ACE editor to redraw
-    setTimeout(function () {
-      jQuery('body').css('height', '');
-      setTimeout(function () {
-        jQuery('body').css('height', '100%');
-      }, 0);
-    }, 0);
+    // // hacky shit to get ACE editor to redraw
+    // setTimeout(function () {
+    //   jQuery('body').css('height', '');
+    //   setTimeout(function () {
+    //     jQuery('body').css('height', '100%');
+    //   }, 0);
+    // }, 0);
   },
   embed_run: function (evt) {
     evt.stopPropagation();
