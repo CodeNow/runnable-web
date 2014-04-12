@@ -70,8 +70,11 @@
       margin-bottom: 20px;
     }
 
-    button {
+    [type='button'] {
       margin-bottom: 20px;
+    }
+
+    button {
       width: 100%;
     }
 
@@ -93,7 +96,7 @@
     }
   }
 
-  button[type=submit] {
+  .orange {
     margin-bottom: 0;
   }
 

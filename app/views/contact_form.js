@@ -17,12 +17,9 @@ module.exports = BaseView.extend({
     $.post(
       '/api/-/emails',
       queryString.parse(data),
-      function () {
-        self.trigger('submitted');
-        self.$('input, textarea').val('');
-        self.showMessage("Thanks we'll get back to you soon!")
-      });
+      function () {});
 
+    this.$el.addClass('in');
   }
 });
 
