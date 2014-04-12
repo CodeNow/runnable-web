@@ -37,8 +37,8 @@ module.exports = BaseView.extend({
     this.$el.find('#project-editor-container').removeClass('with-output');
     this.$el.find('#run-output').html('');
     this.$el.find('#page-loader').hide().removeClass('loading');
-    jQuery('#project-editor').get(0).style.height = "";
     // // hacky shit to get ACE editor to redraw
+    // jQuery('#project-editor').get(0).style.height = "";
     // setTimeout(function () {
     //   jQuery('body').css('height', '');
     //   setTimeout(function () {
