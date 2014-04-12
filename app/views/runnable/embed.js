@@ -27,11 +27,11 @@ module.exports = BaseView.extend({
     this.childViewContainer = _.findWhere(this.childViews, {name: 'terminal'}).model;
 
     this.collection.on('change', function(){
-      this.embed_stop();
+      this.embedStop();
     }.bind(this));
   },
-  embed_stop: function () {
-    if(this.options.showterminal) {
+  embedStop: function () {
+    if(this.options.showTerminal) {
       this.$el.addClass('with-terminal');
     }
     this.$el.find('#project-editor-container').removeClass('with-output');
@@ -39,6 +39,7 @@ module.exports = BaseView.extend({
     this.$el.find('#page-loader').hide().removeClass('loading');
   },
   embedRun: function (evt) {
+    this.embedStop();
     evt.stopPropagation();
     var self = this;
     this.collection.unselectAllFiles();
