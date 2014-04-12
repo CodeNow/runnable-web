@@ -34,6 +34,8 @@ module.exports = {
     });
 
     var self = this;
+    var currentUrl = utils.getCurrentUrlPath(this.app, true);
+    var isEmbedded = (currentUrl.split('/').pop().toLowerCase() || '') === 'embedded';
     if (!utils.isObjectId64(params._id)) {
       var channelParams;
       if (utils.isObjectId64(params.name)) {
@@ -76,15 +78,15 @@ module.exports = {
           fetch.call(self, spec, cb);
         },
         function nameInUrl (results, cb) {
-          var imageURL = results.image.appURL();
+          var image = results.image;
 
-          if(utils.isCurrentUrl(app, imageURL + '/embedded', true)){
-            cb(null, results);
-            return;
+          var embeddedUrl = image.embeddedUrl();
+          var appUrl = image.appUrl();
+          if (isEmbedded && currentUrl !== embeddedUrl) {
+            self.redirectTo(embeddedUrl);
           }
-
-          if (!(utils.isCurrentUrl(app, imageURL) || utils.isCurrentUrl(app, imageURL + '/embedded')) || params.channel) {
-            self.redirectTo(imageURL);
+          else if (!isEmbedded && currentUrl !== appUrl) {
+            self.redirectTo(appUrl);
           }
           else {
             cb(null, results);
@@ -118,33 +120,17 @@ module.exports = {
             _.extend(results, { highlightedFiles: new HighlightedFiles([], {app:self.app, containerId:results.container.id}) });
             cb(null, results);
           });
-        },
-        // function anonCheck (results, cb) {
-        //   // remove implementations for anon users
-        //   if (!results.user.isRegistered()) {
-        //     results.implementations.reset([]);
-        //   }
-        //   cb(null, results);
-        // }
-      ], function (err, results) {
-
-        // DEBUG!
-        if(err && err.status) {
-          console.log(err.status);
-          console.log((new Error()).message);
-          console.log((new Error()).stack);
         }
+      ], function (err, results) {
         if (err) { callback(err); } else {
-
-          var imageURL = results.image.appURL({noTags:true});
-          if(utils.getCurrentUrlPath(app, true).lastIndexOf('/embedded') === (utils.getCurrentUrlPath(app, true).length - "/embedded".length)){
+          if (isEmbedded){
             //iframe nested website
             var data = addSEO(results, self.req);
 
-            data.showTerminal = !(params.terminal && params.terminal.toLowerCase() === 'false');
+            data.showTerminal = _.result(params.terminal, 'toLowerCase') !== 'false';
 
             //Set the first file in the files param array to be the selected file
-            if(keypather.get(params, 'file.length') && keypather.get(data, 'defaultFiles.length')){
+            if (keypather.get(params, 'file.length') && keypather.get(data, 'defaultFiles.length')){
               data.defaultFiles.comparator = function (m) {
                 return params.file.indexOf(path.join(m.get('path'), m.get('name')));
               };
@@ -158,7 +144,7 @@ module.exports = {
             data.collection = data.defaultFiles;
             callback(null, 'runnable/embed', data);
 
-          }else{
+          } else{
             callback(null, addSEO(results, self.req));
           }
         }
@@ -498,9 +484,9 @@ module.exports = {
           }
         },
         function nameInUrl (results, cb) {
-          var imageURL = results.image.appURL();
-          if (!utils.isCurrentUrl(app, imageURL)|| params.channel) {
-            self.redirectTo(imageURL);
+          var imageUrl = results.image.appUrl();
+          if (!utils.isCurrentUrl(app, imageUrl)|| params.channel) {
+            self.redirectTo(imageUrl);
           }
           else {
             cb(null, results);
@@ -546,12 +532,6 @@ module.exports = {
           });
         }
       ], function (err, results) {
-        // DEBUG!
-        if(err && err.status) {
-          console.log(err.status);
-          console.log((new Error()).message);
-          console.log((new Error()).stack);
-        }
         if (err) { callback(err); } else {
           callback(null, addSEO(results, self.req));
         }
