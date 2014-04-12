@@ -5,7 +5,7 @@ module.exports = BaseView.extend({
   tagName: 'main',
   id: 'embed',
   events: {
-  	'click button#embed-run': 'embed_run',
+    'click button#embed-run': 'embed_run',
     'terminal-focus': 'terminal_focus',
     'terminal-blur': 'terminal_blur',
     'click a[data-bypass="true"]': 'popup'
@@ -67,7 +67,7 @@ module.exports = BaseView.extend({
 
   },
   preRender: function () {
-  	this.className = (this.options.showTerminal) ? 'with-terminal' : '';
+    this.className = (this.options.showTerminal) ? 'with-terminal' : '';
   }
 });
 
