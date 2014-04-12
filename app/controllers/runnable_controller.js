@@ -132,7 +132,7 @@ module.exports = {
             //Set the first file in the files param array to be the selected file
             if (keypather.get(params, 'file.length') && keypather.get(data, 'defaultFiles.length')){
               data.defaultFiles.comparator = function (m) {
-                return params.file.indexOf(path.join(m.get('path'), m.get('name')));
+                return params.file.indexOf(m.getFullPath()));
               };
               data.defaultFiles.sort();
               delete data.defaultFiles.comparator;
