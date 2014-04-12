@@ -237,7 +237,8 @@ module.exports = function(grunt) {
             'node-uuid': '../node-uuid/uuid.js',
             nprogress: '../nprogress/nprogress.js',
             diff: '../diff/diff.js',
-            'query-string': '../query-string/query-string.js'
+            'query-string': '../query-string/query-string.js',
+            keypather: '../keypather/index.js'
           },
           aliases: [
             {from: rendrDir + '/client', to: 'rendr/client'},
