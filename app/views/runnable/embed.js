@@ -5,10 +5,10 @@ module.exports = BaseView.extend({
   tagName: 'main',
   id: 'embed',
   events: {
-    'click button#embed-run': 'embed_run',
-    'terminal-focus': 'terminal_focus',
-    'terminal-blur': 'terminal_blur',
-    'click a[data-bypass="true"]': 'popup'
+    'click #embed-run'            : 'embedRun',
+    'terminal-focus'              : 'terminalFocus',
+    'terminal-blur'               : 'terminalBlur',
+    'click a[data-bypass="true"]' : 'popup'
   },
   popup: function (evt) {
     evt.preventDefault();
@@ -16,10 +16,10 @@ module.exports = BaseView.extend({
     window.open(window.location.origin + this.model.appURL());
     return false;
   },
-  terminal_focus: function () {
+  terminalFocus: function () {
     this.$el.addClass('in');
   },
-  terminal_blur: function () {
+  terminalBlur: function () {
     this.$el.removeClass('in');
   },
   postRender: function () {
@@ -38,7 +38,7 @@ module.exports = BaseView.extend({
     this.$el.find('#run-output').html('');
     this.$el.find('#page-loader').hide().removeClass('loading');
   },
-  embed_run: function (evt) {
+  embedRun: function (evt) {
     evt.stopPropagation();
     var self = this;
     this.collection.unselectAllFiles();
