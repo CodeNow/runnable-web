@@ -39,6 +39,7 @@ function createWorker () {
 
 function killWorker (w) {
   if (!w) return;
+  var maxDrainTime = 30 * 1000;
   console.log('Kill old worker', w.id);
   setTimeout(w.kill.bind(w), maxDrainTime);
   w.disconnect();
@@ -58,7 +59,6 @@ function memoryLeakPatch () {
   // memory leak patch! - start restart timeout
   var numWorkers = os.cpus().length * 2;
   var restartTime  = 4 * 60 * 60 *1000;
-  var maxDrainTime = 30 * 1000;
   setInterval(killAndStartNewWorker, restartTime/numWorkers);
   function killAndStartNewWorker (message) {
     var w = workers.shift();
