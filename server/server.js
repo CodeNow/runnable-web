@@ -187,18 +187,3 @@ function buildRendrRoutes(app) {
     app.get(path, fnChain);
   });
 }
-
-
-process.on('uncaughtException', function (err) {
-  console.log(err);
-  if (err.message) console.log(err.message);
-  if (err.stack) {
-    console.log(err.stack);
-  }
-  else {
-    var e = new Error('debug');
-    console.log('no error stack - debug stack');
-    console.log(e.stack);
-  }
-  process.exit();
-})
