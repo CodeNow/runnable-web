@@ -6,12 +6,14 @@ var pluck = require('map-utils').pluck;
 var cluster = require('cluster');
 
 var workers;
+var numWorkers = config.numWorkers || 2;
 if (cluster.isMaster) {
   workers = [];
   startMonitoring();
   os.cpus().forEach(function () {
-    createWorker(); // create 2 workers per core..
-    createWorker();
+    for(var i=0; i<numWorkers; i++){ // create (config.numWorkers || 2) workers per core..
+      createWorker();
+    }
   });
   memoryLeakPatch();
   handleWorkerExits();
