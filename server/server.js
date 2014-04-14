@@ -115,9 +115,9 @@ function initMiddleware() {
   });
   // start stats here so we dont get static routes
   if (config.statsd) {
-    app.use(statsd);
+    app.use(statsd.middleware);
   }
-  
+
   app.use(app.router);
   app.use(mw.errorHandler());
 }
