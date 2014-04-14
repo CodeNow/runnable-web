@@ -246,8 +246,7 @@
     white-space: nowrap;
 
     @include media(xs) {
-      top: auto;
-      bottom: 20px;
+      top: 24px;
     }
 
     &:hover {

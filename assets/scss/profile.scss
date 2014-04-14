@@ -167,11 +167,8 @@
   }
 
   time {
-    margin-right: 0;
-
-    @include media(xs) {
-      right: 15px;
-    }
+    bottom: 8px;
+    right: 18px;
   }
 }
 
