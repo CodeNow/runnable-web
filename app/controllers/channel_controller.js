@@ -17,7 +17,7 @@ function safeQueryStringCanonical (opts) {
     orderBy: opts.orderBy
   };
   if (_.isArray(opts.filter) && opts.filter.length > 0) {
-    response.filter = opts.filter
+    response.filter = opts.filter;
   }
   opts.page = parseInt(opts.page);
   if (_.isNumber(opts.page) && !_.isNaN(opts.page) && opts.page > 0) {
@@ -41,7 +41,7 @@ module.exports = {
     params.page--;
 
     if(!_.isArray(params.filter))
-      params.filter = [params.filter]
+      params.filter = [params.filter];
 
     var canonicalFilter = JSON.parse(JSON.stringify(params.filter));
     params.filter.push(params.channel);
@@ -67,7 +67,7 @@ module.exports = {
           }
         };
 
-        if(orderBy === 'trending'){
+        if (orderBy === 'trending'){
           spec.feed = {
             collection: 'FeedsImages',
             params: {
@@ -89,7 +89,9 @@ module.exports = {
         }
 
         fetch.call(self, spec, function (err, results) {
-          if (err) console.log(err);
+          if (err) {
+            return callback(err);
+          }
 
           // results.user for fetchOwnersFor
           _.extend(results, channelResult);
@@ -102,7 +104,7 @@ module.exports = {
 
             // Don't display the current channel as an option in filters
             results.filteringChannels.each(function(item, i){
-              item.attributes.display = (item.get('name') !== results.channel.get('name'))
+              item.attributes.display = (item.get('name') !== results.channel.get('name'));
               item.attributes.isActiveFilter = (params.filter.indexOf(item.get('name')) === -1) ? false : true;
             });
 
@@ -118,7 +120,7 @@ module.exports = {
             };
             results.feed.each(function(item, i){
               item.get('tags').forEach(setIfActive);
-              item.sortChannels()
+              item.sortChannels();
             });
 
             _.extend(results, results2);

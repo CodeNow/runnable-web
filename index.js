@@ -37,6 +37,13 @@ function createWorker () {
   return worker;
 }
 
+function killWorker (w) {
+  if (!w) return;
+  console.log('Kill old worker', w.id);
+  setTimeout(w.kill.bind(w), maxDrainTime);
+  w.disconnect();
+}
+
 function startMonitoring () {
   if (process.env.NODE_ENV === 'production' && config.nodetime) {
     var nodetime = require('nodetime');
@@ -56,10 +63,7 @@ function memoryLeakPatch () {
   function killAndStartNewWorker (message) {
     var w = workers.shift();
     createWorker();
-
-    console.log('Kill old worker', w.id);
-    setTimeout(w.kill.bind(w), maxDrainTime);
-    w.disconnect();
+    killWorker(w);
   }
 }
 
@@ -68,7 +72,8 @@ function handleWorkerExits () {
     console.error('Worker exited', worker.id, 'with code:', code);
     workers.map(pluck('id')).some(function (workerId, i) {
       if (workerId === worker.id) {
-        workers.splice(i, 1); // remove worker from workers
+        var exited = workers.splice(i, 1); // remove worker from workers
+        killWorker(exited[0]);
         return true;
       }
     });
