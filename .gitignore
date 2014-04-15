@@ -6,6 +6,7 @@ npm-debug.log
 .rendr-commit
 .tern-port
 *.pyc
+*.log
 configs/local.json
 configs/commitHash.js
 configs/prevCommitHash.js
