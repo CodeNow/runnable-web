@@ -18,6 +18,10 @@ var config = require('./lib/env').current;
 var hbs = require('hbs');
 var statsd = require('./statsd.js');
 
+if (config.newrelic) {
+  require('newrelic');
+}
+  
 function envIs (envs) {
   if (!Array.isArray(envs)) envs = [envs];
   return envs.some(function (env) {

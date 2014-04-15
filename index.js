@@ -52,9 +52,6 @@ function startMonitoring () {
     var nodetime = require('nodetime');
     nodetime.profile(config.nodetime);
   }
-  if (config.newrelic) {
-    require('newrelic');
-  }
 }
 
 function memoryLeakPatch () {
