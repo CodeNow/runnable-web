@@ -17,6 +17,10 @@ var path = require('path');
 var config = require('./lib/env').current;
 var hbs = require('hbs');
 
+if (config.newrelic) {
+  require('newrelic');
+}
+  
 function envIs (envs) {
   if (!Array.isArray(envs)) envs = [envs];
   return envs.some(function (env) {
