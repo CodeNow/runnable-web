@@ -3,8 +3,15 @@ var Super = Base.prototype;
 var utils = require('../utils');
 var _ = require('underscore');
 var JSDiff = require('diff');
+var keypather = require('keypather')();
 
 module.exports = Base.extend({
+  parse: function (response, options) {
+    if (this._unsaved && response.content) {
+      delete response.content;
+    }
+    return Super.parse.apply(this, arguments);
+  },
   defaults: {
     type: 'file'
   },
@@ -29,7 +36,9 @@ module.exports = Base.extend({
   _checkUnsaved: function () {
     return this.savedContent != this.get('content');
   },
-  updateSaved: function () {
+  updateSaved: function (collection, model, changes) {
+    if(!keypather.get(changes, 'attrs.content'))
+      return;
     this.savedContent = this.get('content');
     this.unsaved(false);
   },
