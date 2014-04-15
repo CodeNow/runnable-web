@@ -38,7 +38,7 @@ function middleware (req, res, next) {
     // Get rid of : in route names, remove first and last /,
     // and replace rest with . (meaning dir)
     routeName = routeName.replace(/:/g, "").replace(/^\/|\/$/g, "").replace(/\//g, ".");
-    client.timing('requests.' + routeName + ".timeing", duration);
+    client.timing('requests.' + routeName, duration);
     client.increment("requests." + routeName);
     client.increment('requests.' + routeName + "." + res.statusCode);
   });
