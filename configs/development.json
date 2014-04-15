@@ -17,7 +17,7 @@
       "pathPrefix": ""
     }
   },
-  "rollbar": "bbbd8090514a4b40a0ec53fbed32d882",
+  "rollbar": "b0588f56be9845c0911078fd66bed8f0",
   "api": {
     "default": {
       "host": "api.runnable.pw",
