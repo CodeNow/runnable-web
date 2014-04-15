@@ -13,7 +13,9 @@ module.exports = RendrBase.extend({
     }
     // this.initVirtuals();
   },
-  parse: function (response) {
+  parse: function (response, options) {
+    if(options.patch)
+      return;
     if (this.debugParse) {
       console.log(response);
     }
