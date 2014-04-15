@@ -29,6 +29,10 @@
     "name": "web-staging",
     "key": "338516e0826451c297d44dc60aeaf0a0ca4bfead"
   },
+  "statsd": {
+    "name": "web.staging.",
+    "host": "ec2-54-241-57-94.us-west-1.compute.amazonaws.com"
+  },
   "rendrApp": {
     "env" : "production",
     "commitHash": "{COMMIT_HASH}",

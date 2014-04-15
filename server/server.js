@@ -16,6 +16,7 @@ var express = require('express'),
 var path = require('path');
 var config = require('./lib/env').current;
 var hbs = require('hbs');
+var statsd = require('./statsd.js');
 
 function envIs (envs) {
   if (!Array.isArray(envs)) envs = [envs];
@@ -112,10 +113,10 @@ function initMiddleware() {
       express.bodyParser()(req, res, next);
     }
   });
-
-  // app.configure('development', function() {
-  //   app.use(require('./middleware/liveReload')({port:process.env.LIVERELOAD_PORT}));
-  // });
+  // start stats here so we dont get static routes
+  if (config.statsd) {
+    app.use(statsd.middleware);
+  }
 
   app.use(app.router);
   app.use(mw.errorHandler());

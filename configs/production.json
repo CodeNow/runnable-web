@@ -1,5 +1,4 @@
 {
-
   "port": 3000,
   "ipaddress": "10.0.1.42",
   "redis": {
@@ -29,6 +28,10 @@
   "newrelic": {
     "name": "web-production",
     "key": "338516e0826451c297d44dc60aeaf0a0ca4bfead"
+  },
+  "statsd": {
+    "name": "web.production.",
+    "host": "ec2-54-241-57-94.us-west-1.compute.amazonaws.com"
   },
   "rendrApp": {
     "env" : "production",
