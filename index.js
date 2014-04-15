@@ -1,9 +1,13 @@
 /*jshint strict:false */
-require('console-trace')({ always:true });
+require('console-trace')({ always:true, right:true });
 var os = require('os');
 var config = require('./server/lib/env').current;
 var pluck = require('map-utils').pluck;
 var cluster = require('cluster');
+var exists = require('exists');
+var config = require('./server/lib/env').current;
+var rollbar = require("rollbar");
+rollbar.init(config.rollbar);
 
 var workers;
 var numWorkers = config.numWorkers || 2;
@@ -39,12 +43,14 @@ function createWorker () {
   return worker;
 }
 
-function killWorker (w) {
+function killWorker (w, code) {
   if (!w) return;
+  code = exists(code) ? code : 0;
   var maxDrainTime = 30 * 1000;
   console.log('Kill old worker', w.id);
-  setTimeout(w.kill.bind(w), maxDrainTime);
+  setTimeout(w.kill.bind(w, code), maxDrainTime);
   w.disconnect();
+  w.on('error', console.error.bind(console));
 }
 
 function startMonitoring () {
@@ -56,7 +62,6 @@ function startMonitoring () {
 
 function memoryLeakPatch () {
   // memory leak patch! - start restart timeout
-  var numWorkers = os.cpus().length * 2;
   var restartTime  = 4 * 60 * 60 *1000;
   setInterval(killAndStartNewWorker, restartTime/numWorkers);
   function killAndStartNewWorker (message) {
@@ -72,7 +77,7 @@ function handleWorkerExits () {
     workers.map(pluck('id')).some(function (workerId, i) {
       if (workerId === worker.id) {
         var exited = workers.splice(i, 1); // remove worker from workers
-        killWorker(exited[0]);
+        // no need to kill worker.. it is already dieing.
         return true;
       }
     });
@@ -84,15 +89,18 @@ function handleWorkerExits () {
 
 function handleUncaughtExceptions () {
   process.on('uncaughtException', function (err) {
-    if (err.message) console.log(err.message);
+    if (err.message) {
+      console.error(err.message);
+    }
     if (err.stack) {
-      console.log(err.stack);
+      console.error(err.stack);
     }
     else {
       var e = new Error('debug');
-      console.log('no error stack - debug stack');
-      console.log(e.stack);
+      console.error('no error stack - debug stack');
+      console.error(e.stack);
     }
+    rollbar.handleError(err);
     process.exit(1);
   });
 }

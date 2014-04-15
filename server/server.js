@@ -21,7 +21,7 @@ var statsd = require('./statsd.js');
 if (config.newrelic) {
   require('newrelic');
 }
-  
+
 function envIs (envs) {
   if (!Array.isArray(envs)) envs = [envs];
   return envs.some(function (env) {
@@ -123,6 +123,7 @@ function initMiddleware() {
   }
 
   app.use(app.router);
+  app.use(rollbar.errorHandler());
   app.use(mw.errorHandler());
 }
 
