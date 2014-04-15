@@ -45,6 +45,10 @@ textarea,
   }
 }
 
+input[type=radio] {
+  -webkit-appearance: radio;
+}
+
 .form-control::placeholder {
   color: $gray-dark;
 }
