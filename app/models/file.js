@@ -6,12 +6,6 @@ var JSDiff = require('diff');
 var keypather = require('keypather')();
 
 module.exports = Base.extend({
-  parse: function (response, options) {
-    if (this._unsaved && response.content) {
-      delete response.content;
-    }
-    return Super.parse.apply(this, arguments);
-  },
   defaults: {
     type: 'file'
   },
@@ -23,8 +17,20 @@ module.exports = Base.extend({
   initialize: function (attrs, options) {
     Super.initialize.apply(this, arguments);
     this.listenTo(this, 'change:content', this.onChangeContent.bind(this));
-    this.listenTo(this, 'sync', this.updateSaved.bind(this)); // on sync set unsaved to false
-    this.updateSaved();
+    this.unsaved(false);
+  },
+  parse: function (response, options) {
+    // if the file is unsaved and the response has content
+    // check to see what was sent.
+    if (this.unsaved() && _.isString(response.content)) {
+      if (_.isString(options.attrs.content)) {
+        this.unsaved(false);
+      }
+      else {
+        delete response.content;
+      }
+    }
+    return Super.parse.apply(this, arguments);
   },
   loseUnsavedChanges: function () {
     if (this.unsaved()) {
@@ -35,12 +41,6 @@ module.exports = Base.extend({
   },
   _checkUnsaved: function () {
     return this.savedContent != this.get('content');
-  },
-  updateSaved: function (collection, model, changes) {
-    if(!keypather.get(changes, 'attrs.content'))
-      return;
-    this.savedContent = this.get('content');
-    this.unsaved(false);
   },
   save: function (attrs, opts) {
     Super.save.apply(this, arguments);
