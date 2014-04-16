@@ -27,7 +27,7 @@ module.exports = BaseView.extend({
     // setFile is what updates the editor.
     // this.setHeight(this.minHeight);
     var self = this;
-    
+
     this.editor = ace.edit(this.el);
     this.setTheme('dark');
     this.editor.setShowPrintMargin(false);

@@ -13,7 +13,7 @@ module.exports = RendrBase.extend({
     }
     // this.initVirtuals();
   },
-  parse: function (response) {
+  parse: function (response, options) {
     if (this.debugParse) {
       console.log(response);
     }

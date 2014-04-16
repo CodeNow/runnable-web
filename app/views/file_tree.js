@@ -6,19 +6,15 @@ var utils = require('../utils');
 var async = require('async');
 var lock = require('../lock');
 
-var events;
-if (lock) {
-  events = {
-    'contextmenu'          : 'contextMenu'
-  };
-}
-else {
-  events = {
-    'contextmenu'          : 'contextMenu',
-    'drop'                 : 'uploadFiles',
-    'dragover'             : 'over', //necessary else drop wont work
-    'dragleave'            : 'leave'
-  };
+var events = {
+  'contextmenu': 'contextMenu'
+};
+if (!lock) {
+  _.extend(events, {
+    'drop':      'uploadFiles',
+    'dragover':  'over',
+    'dragleave': 'leave'
+  });
 }
 
 module.exports = BaseView.extend({
