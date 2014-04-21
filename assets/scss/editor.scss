@@ -630,14 +630,41 @@
     display: none;
   }
 
-  &.show-readme {
+  > #output-view {
+    display: none;
+  }
 
+  &.show-readme {
     > #project-editor {
       display: none;
     }
-
+    > #output-view {
+      display: none;
+    }
     > #html-readme {
       display: block;
     }
   }
+
+  &.show-output-view {
+    > #project-editor {
+      display: none;
+    }
+    > #html-readme {
+      display: none;
+    }
+    > #output-view {
+      display: block;
+    }
+  }
 }
+
+// Tony feel free to reorg all of this
+#project-editor-container #output-view > iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+}
+
+
+
