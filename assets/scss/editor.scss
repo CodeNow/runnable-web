@@ -1,8 +1,5 @@
 #code-editor,
 #code-editor-embed {
-  border: 1px solid rgba(0,0,0,.1);
-  border-top: 0;
-  border-right: 0;
   overflow: hidden;
   position: relative;
 
@@ -33,7 +30,6 @@
 
   // #open-file-explorer & #open-readme
   > a {
-    border-top: 1px solid rgba(0,0,0,.1);
     cursor: pointer;
     display: block;
     float: left;
@@ -130,7 +126,6 @@
 // controls
 #controls {
   background: $purple-light;
-  border-top: 1px solid rgba(0,0,0,.2);
   height: 36px;
   margin: 0;
   padding: 0;
@@ -218,6 +213,7 @@
   li {
     border: 1px solid rgba(0,0,0,.1);
     border-bottom: 0;
+    border-top: 0;
     display: inline-block;
     float: none;
     margin-left: -5px;
