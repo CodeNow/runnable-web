@@ -1,0 +1,26 @@
+<div class="arrow"></div>
+<div class="popover-content">
+  <ul class="popover-body">
+    <li>Shortcut 1 {{#if owner}}delete{{/if}}
+    <li>Shortcut 2 {{#if owner}}delete{{/if}}
+    <li>Shortcut 3 {{#if owner}}delete{{/if}}
+    <li>Shortcut 4 {{#if owner}}delete{{/if}}
+  </ul>
+  {{#if noShortcuts}}
+  <form class="form-group form-horizontal clearfix">
+    <label for="start_cmd">Run cmd</label>
+    <input class="form-control" name="start_cmd" value="{{model.attributes.start_cmd}}" disabled>
+    <div class="saved">Saved</div>
+  </form>
+  <hr>
+  <form class="form-group form-horizontal clearfix">
+    <label for="build_cmd">Build cmd</label>
+    <input class="form-control" name="build_cmd" value="{{model.attributes.build_cmd}}" disabled>
+    <div class="saved">Saved</div>
+  </form>
+  <button>Open</button>
+  {{/if}}
+</div>
+<div class="popover-footer">
+  <button type="button" class="silver">New Shortcut</button>
+</div>
