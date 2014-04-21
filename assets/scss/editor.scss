@@ -81,13 +81,32 @@
   #add-tab {
     border: 0;
     float: right;
-    overflow: hidden;
     transition: transform .2s ease-in-out;
     width: 36px;
   }
 
+  #project-select-tabs {
+    overflow: hidden;
+  }
+
+  #add-tab {
+    color: $gray-dark;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+      color: $gray-darker;
+    }
+
+    &.active,
+    &:active {
+      color: $gray-darkest;
+    }
+  }
+
   // select menu tabs
   #project-select-tabs {
+    overflow: hidden;
 
     button {
       &:before,
@@ -124,11 +143,6 @@
     height: 36px;
     line-height: 36px;
     text-align: center;
-  }
-
-  // reset glyphicons top
-  .glyphicons {
-    top: 0;
   }
 
   .tooltip {
