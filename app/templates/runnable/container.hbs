@@ -3,42 +3,49 @@
 {{view "global_message"}}
 {{view "publish_warning" model=container parentid=image.attributes._id parentowner=image.attributes.owner}}
 
-<main class="container">
-  <div class="row">
-    <section id="project-details" class="col-sm-9">
-      <div class="page-title clearfix">
-        {{view "runnable_title" model=container}}
+<main>
+  <section id="project-details" class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="page-title">
+          {{view "runnable_title" model=container}}
+        </div>
+        {{view "runnable_description" model=container}}
+        <div class="main-controls">
+          {{view "dropdown_run_button" context=. editmode=true}}
+          {{view "save_button" collection=defaultFiles}}
+        </div>
       </div>
-      {{view "runnable_description" model=container}}
-      <div class="main-controls clearfix">
-        {{view "dropdown_run_button" context=. editmode=true}}
-        {{view "save_button" collection=defaultFiles}}
-      </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
-  <div class="row">
-    <section class="col-sm-12">
+  <section class="row">
+    <div class="col-sm-12">
       {{view "code_editor" context=. editmode=true model=container}}
-      {{view "terminal" model=container}}
-    </section>
-    <ul id="sidebar" class="col-sm-12">
-      {{#if isVerified}}
-      <li class="services">
-        <h3>API Keys</h3>
-          {{view "runnable_specifications" model=container collection=specifications context=. editmode=isVerified}}
-      {{/if}}
-      <li class="tags">
-        <h3>Tags</h3>
-        {{view "runnable_tags" model=container editmode=isVerified}}
+      {{!-- {{view "terminal" model=container}} --}}
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="row">
+      <ul id="sidebar" class="col-sm-12">
         {{#if isVerified}}
-        {{view "runnable_new_tag_form" model=container}}
-        <aside>
-          Projects without tags will not be publicly listed on Runnable.
-        </aside>
+        <li class="services">
+          <h3>API Keys</h3>
+            {{view "runnable_specifications" model=container collection=specifications context=. editmode=isVerified}}
         {{/if}}
-    </ul>
-  </div>
+        <li class="tags">
+          <h3>Tags</h3>
+          {{view "runnable_tags" model=container editmode=isVerified}}
+          {{#if isVerified}}
+          {{view "runnable_new_tag_form" model=container}}
+          <aside>
+            Projects without tags will not be publicly listed on Runnable.
+          </aside>
+          {{/if}}
+      </ul>
+    </div>
+  </section>
 </main>
 
 {{view "footer_view" model=user context=.}}
