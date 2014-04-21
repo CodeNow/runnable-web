@@ -22,6 +22,7 @@
 
 // toolbar
 #project-toolbar {
+  border-bottom: 1px solid rgba(0,0,0,.1);
   height: 36px;
   overflow: visible;
   position: absolute;
@@ -34,32 +35,31 @@
     display: block;
     float: left;
     font-size: 18px;
-    height: 36px;
+    height: 35px;
     line-height: 36px;
     text-align: center;
     width: 36px;
   }
 
   #open-file-explorer {
-    background: $purple-light;
-    color: $gray-light;
+    border-right: 1px solid rgba(0,0,0,.1);
+    color: $gray-dark;
+    height: 36px;
     user-select: none;
 
     &:hover {
-      background: lighten($purple-light,5%);
-      color: $gray-light;
+      color: $gray-darker;
       text-decoration: none;
     }
 
     &:active {
-      background: darken($purple-light,5%);
+      color: $gray-darkest;
     }
   }
 
   #open-readme {
     background: $gray-light;
     border-right: 1px solid rgba(0,0,0,.1);
-    border-bottom: 1px solid rgba(0,0,0,.1);
     color: $gray-dark;
     line-height: 38px;
     transition: transform .2s ease-in-out;
@@ -77,14 +77,25 @@
     }
   }
 
-  // select menu tabs
-  #project-select-tabs {
+  // right side tabs
+  #project-select-tabs,
+  #add-tab {
     border: 0;
-    border-bottom: 1px solid rgba(0,0,0,.1);
     float: right;
     overflow: hidden;
     transition: transform .2s ease-in-out;
-    width: 24px;
+    width: 36px;
+  }
+
+  // select menu tabs
+  #project-select-tabs {
+
+    button {
+      &:before,
+      &:after {
+        right: 16px;
+      }
+    }
 
     &:hover > button {
 
@@ -100,9 +111,20 @@
     > button {
       border: 0;
       box-shadow: none;
+      height: 35px;
       padding: 0;
       position: relative;
     }
+  }
+
+  // add tab
+  #add-tab {
+    border-left: 1px solid rgba(0,0,0,.1);
+    border-right: 1px solid rgba(0,0,0,.1);
+    color: $gray-dark;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
   }
 
   // reset glyphicons top
@@ -125,7 +147,8 @@
 
 // controls
 #controls {
-  background: $purple-light;
+  // background: $purple-light;
+  border-right: 1px solid rgba(0,0,0,.1);
   height: 36px;
   margin: 0;
   padding: 0;
@@ -138,7 +161,7 @@
   width: 204px;
 
   li {
-    color: $gray-lighter;
+    color: $gray-dark;
     cursor: pointer;
     display: block;
     float: left;
@@ -165,7 +188,7 @@
     &.light-theme {
 
       > span {
-        border: 1px solid transparent;
+        border: 1px solid $gray-dark;
         border-radius: 50%;
         content: '';
         display: block;
@@ -195,12 +218,11 @@
 
 // default tabs
 #project-editor-tabs-wrapper {
-  border-bottom: 1px solid rgba(0,0,0,.1);
   float: left;
   height: 36px;
   overflow: hidden;
   transition: all .2s ease-in-out;
-  width: calc(100% - 96px);
+  width: calc(100% - 144px);
 }
 
 #project-editor-tabs {
@@ -237,7 +259,7 @@
       border-radius: 0;
       color: $gray-dark;
       font-size: 12px;
-      height: 36px;
+      height: 35px;
       line-height: 36px;
       margin: 0;
       padding: 0 40px 0 10px;
@@ -584,14 +606,6 @@
     &:before {
       content: '\E145';
     }
-
-    &:hover {
-      background: lighten($purple-light, 5%);
-    }
-
-    &:active {
-      background: darken($purple-light,5%);
-    }
   }
 
   // readme icon
@@ -608,7 +622,7 @@
   // tabs
   #project-editor-tabs-wrapper {
     transform: translate3d(204px,0,0);
-    width: calc(100% - 298px);
+    width: calc(100% - 348px);
   }
 
   // ace editor
