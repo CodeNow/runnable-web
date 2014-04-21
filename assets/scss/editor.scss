@@ -29,7 +29,6 @@
     z-index: 2;
   width: 100%;
 
-  // #open-file-explorer & #open-readme
   > a {
     cursor: pointer;
     display: block;
@@ -57,23 +56,23 @@
     }
   }
 
-  #open-readme {
-    background: $gray-light;
+  #show-readme,
+  #show-terminal {
     border-right: 1px solid rgba(0,0,0,.1);
     color: $gray-dark;
     line-height: 38px;
     transition: transform .2s ease-in-out;
 
     &:hover {
-      background: $gray-lighter;
+      color: $gray-darker;
     }
 
-    &:active,
+    &:active {
+      color: $gray-darkest;
+    }
+
     &.active {
-      background-color: $gray-lighter;
-      color: $gray-darker;
       cursor: default;
-      font-weight: bold;
     }
   }
 
@@ -222,7 +221,7 @@
   height: 36px;
   overflow: hidden;
   transition: all .2s ease-in-out;
-  width: calc(100% - 144px);
+  width: calc(100% - 180px);
 }
 
 #project-editor-tabs {
@@ -608,8 +607,13 @@
     }
   }
 
+  // terminal icon
+  #show-terminal {
+    transform: translate3d(204px,0,0);
+  }
+
   // readme icon
-  #open-readme {
+  #show-readme {
     transform: translate3d(204px,0,0);
   }
 
@@ -622,7 +626,7 @@
   // tabs
   #project-editor-tabs-wrapper {
     transform: translate3d(204px,0,0);
-    width: calc(100% - 348px);
+    width: calc(100% - 384px);
   }
 
   // ace editor
