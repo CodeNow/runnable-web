@@ -19,11 +19,8 @@
     </div>
   </section>
 
-  <section id="project" class="row">
-    <div class="col-sm-12">
-      {{view "code_editor" context=. editmode=true model=container}}
-      {{!-- {{view "terminal" model=container}} --}}
-    </div>
+  <section id="project">
+    {{view "code_editor" context=. editmode=true model=container}}
   </section>
 
   <section class="container">

@@ -56,8 +56,7 @@
     }
   }
 
-  #show-readme,
-  #show-terminal {
+  #show-readme {
     border-right: 1px solid rgba(0,0,0,.1);
     color: $gray-dark;
     line-height: 38px;
@@ -235,7 +234,7 @@
   height: 36px;
   overflow: hidden;
   transition: all .2s ease-in-out;
-  width: calc(100% - 180px);
+  width: calc(100% - 144px);
 }
 
 #project-editor-tabs {
@@ -621,11 +620,6 @@
     }
   }
 
-  // terminal icon
-  #show-terminal {
-    transform: translate3d(204px,0,0);
-  }
-
   // readme icon
   #show-readme {
     transform: translate3d(204px,0,0);
@@ -640,7 +634,7 @@
   // tabs
   #project-editor-tabs-wrapper {
     transform: translate3d(204px,0,0);
-    width: calc(100% - 384px);
+    width: calc(100% - 348px);
   }
 
   // ace editor

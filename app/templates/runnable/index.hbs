@@ -22,11 +22,8 @@
     </div>
   </section>
 
-  <section id="project" class="row">
-    <div class="col-sm-12">
-      {{view "code_editor" context=. editmode=false model=image}}
-      {{!-- {{view "terminal" model=container}} --}}
-    </div>
+  <section id="project">
+    {{view "code_editor" context=. editmode=false model=image}}
   </section>
 
   <section class="container">
