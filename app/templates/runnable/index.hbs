@@ -20,11 +20,11 @@
     {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created image=image context=.}}
   </section>
   <div class="row">
-    <section class="col-sm-12 col-md-9">
+    <section class="col-sm-12">
       {{view "code_editor" context=. editmode=false model=image}}
       {{view "terminal" model=container}}
     </section>
-    <ul id="sidebar" class="col-sm-12 col-md-3">
+    <ul id="sidebar" class="col-sm-12">
       {{#if image.attributes.specification}}
       <li class="services">
       <h3>API Keys</h3>
