@@ -1,0 +1,45 @@
+<div class="arrow"></div>
+<div class="popover-content">
+  <div id="add-tab-options">
+    <ul class="popover-body">
+      <li>
+        <a>
+          <span class="glyphicons print"></span>
+          Terminal
+        </a>
+      <li>
+        <a>
+          <span class="glyphicons redo"></span>
+          Shortcut
+        </a>
+    </ul>
+  </div>
+
+  <div id="shortcuts">
+    <ul class="popover-body">
+      <li>
+        Shortcut 1
+        {{!-- {{#if isOwner}} --}}
+          <button class="delete" type="button">
+            <span>Delete</span>
+            <span class="glyphicons circle-remove"></span>
+          </button>
+        {{!-- {{/if}} --}}
+      <li>
+        Shortcut 2
+        {{!-- {{#if isOwner}} --}}
+        <button class="delete" type="button">
+          <span>Delete</span>
+          <span class="glyphicons circle-remove"></span>
+        </button>
+      {{!-- {{/if}} --}}
+    </ul>
+    <button class="silver" type="button">New Shortcut</button>
+  </div>
+
+  <form id="new-shortcut">
+    <input class="form-control" placeholder="Shortcut Name" required>
+    <input class="form-control" placeholder="Shortcut CMD" required>
+    <button class="orange">Create New Shortcut</button>
+  </form>
+</div>

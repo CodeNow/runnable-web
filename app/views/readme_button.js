@@ -3,7 +3,7 @@ var _ = require('underscore');
 
 module.exports = BaseView.extend({
   tagName: 'a',
-  id: 'open-readme',
+  id: 'show-readme',
   className: 'tooltip',
   attributes: {
     'data-title': 'README'

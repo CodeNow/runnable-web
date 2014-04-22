@@ -4,7 +4,6 @@ var utils = require('../utils');
 var _ = require('underscore');
 
 module.exports = BaseView.extend({
-  tagName: 'div',
   className: 'popover fade bottom',
   events: {
     'click' : 'stopPropagation',
