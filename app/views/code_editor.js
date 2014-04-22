@@ -38,6 +38,7 @@ module.exports = BaseView.extend({
     }
   },
   changeSelectedTab: function (model, selected) {
+    return;
     if(!selected)
       return;
     if(_.isString(model.get('content'))){
