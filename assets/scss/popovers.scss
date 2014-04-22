@@ -173,7 +173,6 @@
       background: url(/images/sprite-icons-output.svg) no-repeat;
       background-size: 90px 30px;
       border: 1px solid;
-      border-right: 2px solid;
       border-color: rgba(0,0,0,.15) rgba(0,0,0,.15) rgba(0,0,0,.2);
       float: left;
       height: 30px;
@@ -242,6 +241,7 @@
   right: -6px;
   top: 32px;
   transform-origin: 180px 0;
+  transition: opacity .2s, transform .15s, width .2s ease-in-out;
   width: 200px;
 
   .arrow {
@@ -317,5 +317,99 @@
 
   .redo {
     transform: rotate3d(0,0,1,-25deg);
+  }
+
+  // #shortcuts
+  #shortcuts {
+    display: none;
+  }
+
+  &.show-shortcuts {
+    width: 320px;
+
+    .popover-body {
+      display: none;
+    }
+
+    #shortcuts {
+      display: block;
+    }
+
+    li {
+      border: 0;
+      border-bottom: 1px solid rgba(0,0,0,.1);
+      color: $gray-darker;
+      float: none;
+      height: 36px;
+      padding-left: 9px;
+      position: relative;
+      text-align: left;
+      width: 100%;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      // delete
+      .delete {
+        background: transparent;
+        border: 1px solid transparent;
+        box-shadow: none;
+        color: rgba($gray-dark,.5);
+        height: 20px;
+        line-height: 19px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+          top: 8px;
+          right: 4px;
+        text-shadow: none;
+        transition: all .25s cubic-bezier(.19,1,.22,1);
+        width: 22px;
+        white-space: nowrap;
+
+        @include media(xs) {
+          top: 24px;
+        }
+
+        &:hover {
+          background: $orange;
+          border: 1px solid rgba(0,0,0,.1);
+          box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+          color: #fff;
+          width: 72px;
+
+          > span:first-child {
+            opacity: 1;
+          }
+
+          > span:last-child {
+            transform: rotate3d(0,0,1,90deg);
+          }
+        }
+
+        &:active {
+          box-shadow: none;
+          transform: translate3d(0,1px,0);
+        }
+
+        > span {
+          position: absolute;
+
+          &:first-child {
+            left: 6px;
+            opacity: 0;
+            top: 0;
+            transition: opacity .25s cubic-bezier(.19,1,.22,1);
+          }
+
+          &:last-child {
+            right: 6px;
+            top: 3px;
+            transition: transform .25s ease-in-out;
+          }
+        }
+      }
+    }
   }
 }

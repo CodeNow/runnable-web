@@ -1,6 +1,6 @@
 <div class="arrow"></div>
 <div class="popover-content">
-  <ul>
+  <ul id="add-tab-options" class="popover-body">
     <li>
       <a>
         <span class="glyphicons print"></span>
@@ -13,12 +13,30 @@
       </a>
   </ul>
 
+  {{#if editmode}}
+<button class="delete" type="button">
+  <span>Delete</span>
+  <span class="glyphicons circle-remove"></span>
+</button>
+{{/if}}
 
-{{!--   <ul class="popover-body">
-    <li>Shortcut 1 {{#if owner}}delete{{/if}}
-    <li>Shortcut 2 {{#if owner}}delete{{/if}}
-    <li>Shortcut 3 {{#if owner}}delete{{/if}}
-    <li>Shortcut 4 {{#if owner}}delete{{/if}}
+  <ul id="shortcuts" class="popover-body">
+    <li>
+      Shortcut 1
+      {{!-- {{#if isOwner}} --}}
+        <button class="delete" type="button">
+          <span>Delete</span>
+          <span class="glyphicons circle-remove"></span>
+        </button>
+      {{!-- {{/if}} --}}
+    <li>
+      Shortcut 2
+      {{!-- {{#if isOwner}} --}}
+        <button class="delete" type="button">
+          <span>Delete</span>
+          <span class="glyphicons circle-remove"></span>
+        </button>
+      {{!-- {{/if}} --}}
   </ul>
   {{#if noShortcuts}}
   <form class="form-group form-horizontal clearfix">
@@ -33,7 +51,7 @@
     <div class="saved">Saved</div>
   </form>
   <button>Open</button>
-  {{/if}} --}}
+  {{/if}}
 
 </div>
 {{!-- <div class="popover-footer">
