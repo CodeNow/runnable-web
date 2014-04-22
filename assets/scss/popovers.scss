@@ -319,17 +319,27 @@
     transform: rotate3d(0,0,1,-25deg);
   }
 
-  // #shortcuts
-  #shortcuts {
+  // shortcuts
+  #shortcuts,
+  #new-shortcut {
     display: none;
   }
 
-  &.show-shortcuts {
+  &.show-shortcuts,
+  &.show-new-shortcut {
     width: 320px;
 
-    .popover-body {
+    #add-tab-options {
       display: none;
     }
+
+    button {
+      margin: 10px 0 0;
+      width: 100%;
+    }
+  }
+
+  &.show-shortcuts {
 
     #shortcuts {
       display: block;
@@ -358,6 +368,7 @@
         color: rgba($gray-dark,.5);
         height: 20px;
         line-height: 19px;
+        margin: 0;
         overflow: hidden;
         padding: 0;
         position: absolute;
@@ -410,6 +421,17 @@
           }
         }
       }
+    }
+  }
+
+  &.show-new-shortcut {
+
+    #new-shortcut {
+      display: block;
+    }
+
+    input:first-child {
+      margin-bottom: 10px;
     }
   }
 }

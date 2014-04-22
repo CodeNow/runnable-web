@@ -12,7 +12,7 @@ module.exports = BaseView.extend({
 
     if ($self.hasClass('active')) {
       $self.removeClass('active');
-      $popover.removeClass('in show-shortcuts');
+      $popover.removeClass('in show-shortcuts show-new-shortcut');
     }
     else {
       $self.addClass('active');

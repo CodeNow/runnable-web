@@ -1,59 +1,45 @@
 <div class="arrow"></div>
 <div class="popover-content">
-  <ul id="add-tab-options" class="popover-body">
-    <li>
-      <a>
-        <span class="glyphicons print"></span>
-        Terminal
-      </a>
-    <li>
-      <a>
-        <span class="glyphicons redo"></span>
-        Shortcut
-      </a>
-  </ul>
+  <div id="add-tab-options">
+    <ul class="popover-body">
+      <li>
+        <a>
+          <span class="glyphicons print"></span>
+          Terminal
+        </a>
+      <li>
+        <a>
+          <span class="glyphicons redo"></span>
+          Shortcut
+        </a>
+    </ul>
+  </div>
 
-  {{#if editmode}}
-<button class="delete" type="button">
-  <span>Delete</span>
-  <span class="glyphicons circle-remove"></span>
-</button>
-{{/if}}
-
-  <ul id="shortcuts" class="popover-body">
-    <li>
-      Shortcut 1
-      {{!-- {{#if isOwner}} --}}
+  <div id="shortcuts">
+    <ul class="popover-body">
+      <li>
+        Shortcut 1
+        {{!-- {{#if isOwner}} --}}
+          <button class="delete" type="button">
+            <span>Delete</span>
+            <span class="glyphicons circle-remove"></span>
+          </button>
+        {{!-- {{/if}} --}}
+      <li>
+        Shortcut 2
+        {{!-- {{#if isOwner}} --}}
         <button class="delete" type="button">
           <span>Delete</span>
           <span class="glyphicons circle-remove"></span>
         </button>
       {{!-- {{/if}} --}}
-    <li>
-      Shortcut 2
-      {{!-- {{#if isOwner}} --}}
-        <button class="delete" type="button">
-          <span>Delete</span>
-          <span class="glyphicons circle-remove"></span>
-        </button>
-      {{!-- {{/if}} --}}
-  </ul>
-  {{#if noShortcuts}}
-  <form class="form-group form-horizontal clearfix">
-    <label for="start_cmd">Run cmd</label>
-    <input class="form-control" name="start_cmd" value="{{model.attributes.start_cmd}}" disabled>
-    <div class="saved">Saved</div>
-  </form>
-  <hr>
-  <form class="form-group form-horizontal clearfix">
-    <label for="build_cmd">Build cmd</label>
-    <input class="form-control" name="build_cmd" value="{{model.attributes.build_cmd}}" disabled>
-    <div class="saved">Saved</div>
-  </form>
-  <button>Open</button>
-  {{/if}}
+    </ul>
+    <button class="silver" type="button">New Shortcut</button>
+  </div>
 
+  <form id="new-shortcut">
+    <input class="form-control" placeholder="Shortcut Name" required>
+    <input class="form-control" placeholder="Shortcut CMD" required>
+    <button class="orange">Create New Shortcut</button>
+  </form>
 </div>
-{{!-- <div class="popover-footer">
-  <button type="button" class="silver">New Shortcut</button>
-</div> --}}
