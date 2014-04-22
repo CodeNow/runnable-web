@@ -423,12 +423,12 @@
   }
 
   &.show-output-view {
-    > #project-editor {
-      display: none;
-    }
+
+    > #project-editor,
     > #html-readme {
       display: none;
     }
+
     > #output-view {
       display: block;
     }
