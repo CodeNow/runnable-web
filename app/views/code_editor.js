@@ -13,7 +13,12 @@ module.exports = BaseView.extend({
       this.className = '';
     }
   },
+  postRender: function () {
+    this.projectEditorContainer = this.$el.find('#project-editor-container');
+  },
   postHydrate: function () {
+    var collection = this.collection;
+    collection.on('change:selected', this.changeSelectedTab.bind(this));
     var model = this.model;
     var canEdit = this.app.user.canEdit(model);
 
@@ -30,6 +35,16 @@ module.exports = BaseView.extend({
     }
     else {
       this.track('View');
+    }
+  },
+  changeSelectedTab: function (model, selected) {
+    if(!selected)
+      return;
+    if(_.isString(model.get('content'))){
+      //FILE
+      this.projectEditorContainer.removeClass('show-readme').addClass('show-output-view');
+    } else {
+
     }
   },
   increment: function (statName) {
@@ -72,6 +87,7 @@ module.exports = BaseView.extend({
       return data.get('name') && data.get('name').toLowerCase() === 'readme.md';
     });
     opts.showReadme = (readmeFile) ? true : false;
+    opts.showOutputView = false;
     return opts;
   }
 });

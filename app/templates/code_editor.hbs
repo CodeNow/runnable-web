@@ -8,9 +8,15 @@
   {{view "add_tab"}}
 </div>
 {{view "file_explorer" container=container rootDir=rootDir editmode=editmode lock=lock}}
-<div id="project-editor-container" {{#if showReadme}}class="show-readme"{{/if}}>
+
+<div
+  id="project-editor-container"
+  {{#if showReadme}}
+    class="show-readme"
+  {{/if}}
   <!--googleoff: anchor-->
   {{view "code" collection=defaultFiles}}
   <!--googleon: anchor-->
   {{view "html_readme" collection=defaultFiles model=rootDir editmode=true containername=container.attributes.name}}
+  {{view "output_view" model=container}}
 </div>
