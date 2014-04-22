@@ -1,0 +1,245 @@
+#file-explorer {
+  background: $gray-light;
+  border-right: 1px solid rgba(0,0,0,.1);
+  float: left;
+  // height: calc(100% - 36px);
+  position: absolute;
+    top: 36px;
+  transform: translate3d(-240px,0,0);
+  transition: transform .2s ease-in-out, width 0s ease-in-out;
+  width: 240px;
+
+  // file tree
+  .nav {
+    font-size: 12px;
+    height: calc(100% - 54px);
+    overflow: auto;
+    padding: 1px 0 0;
+
+    ul {
+      padding: 0;
+    }
+
+    > li {
+      height: 100%;
+    }
+
+    .fs-list li {
+      cursor: pointer;
+    }
+
+    // style folders and files
+    li {
+      list-style-type: none;
+
+      &.active > div > a {
+        font-weight: bold;
+
+        &.arrow:before {
+          border-top: 6px solid #fff !important;
+        }
+      }
+
+      &.ui-draggable-hover {
+        background: rgba(0,0,0,.05);
+        border-color: rgba(0,0,0,.1);
+      }
+
+      &.folder {
+
+        .arrow:before {
+          border-top: 6px solid #bbb;
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          content: '';
+          float: left;
+          margin: 6px 5% 0 0;
+          transition: transform .1s linear;
+        }
+
+        .collapsed:before {
+          transform: rotate3d(0,0,1,-90deg);
+        }
+      }
+
+      &.empty {
+        cursor: default;
+
+        span {
+          color: #aaa;
+        }
+      }
+
+      [title='empty'] {
+        color: #aaa;
+        pointer-events: none;
+      }
+    }
+
+    a,
+    img,
+    span {
+      color: $gray-darker;
+      display: block;
+      padding: 6px 5%;
+      white-space: nowrap;
+
+      &:hover {
+        text-decoration: none;
+      }
+
+      &:before {
+        border-top: 6px solid transparent;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+        content: '';
+        float: left;
+        margin: 6px 10px 0 0;
+
+      }
+    }
+  }
+
+  // file tree item
+  .ui-draggable:hover {
+    background: $gray-lighter;
+    @include box-shadow(inset 0 -1px 0 rgba(0,0,0,.05), inset 0 1px 0 rgba(0,0,0,.05));
+  }
+}
+
+// nested folders
+#file-explorer .nav {
+
+  li {
+
+    img {
+      @include box-sizing(content-box);
+      box-sizing: content-box;
+    }
+
+    ul {
+      padding-left: 0;
+
+      li {
+
+        a,
+        img,
+        input,
+        span {
+          // padding-left: 0;
+        }
+
+        li {
+          a, img, input, span, form {
+            padding-left: 13%;
+          }
+        }
+
+        li li {
+          a, img, input, span, form {
+            padding-left: 21%;
+          }
+        }
+
+        li li li {
+          a, img, input, span, form {
+            padding-left: 29%;
+          }
+        }
+
+        li li li li {
+          a, img, input, span, form {
+            padding-left: 37%;
+          }
+        }
+
+        li li li li li {
+          a, img, input, span, form {
+            padding-left: 45%;
+          }
+        }
+
+        li li li li li li {
+          a, img, input, span, form {
+            padding-left: 53%;
+          }
+        }
+
+        li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 61%;
+          }
+        }
+
+        li li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 69%;
+          }
+        }
+
+        li li li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 77%;
+          }
+        }
+
+        li li li li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 85%;
+          }
+        }
+        li li li li li li li li li li li {
+          a, img, input, span, form {
+            padding-left: 93%;
+          }
+        }
+      }
+    }
+  }
+
+  .name-input {
+    border-radius: 0;
+    height: 29px;
+    min-height: 0;
+    padding: 6px 14px;
+    width: 100%;
+  }
+}
+
+// upload
+#drop-to-add {
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(0,0,0,.1);
+  color: $gray-dark;
+  display: block;
+  height: 54px;
+  line-height: 58px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  user-select: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  > div {
+    position: absolute;
+    transition: transform .2 ease-in-out;
+    width: 100%;
+
+    &:last-child {
+      transform: translate3d(0,-100%,0);
+    }
+  }
+
+  &.in > div {
+    &:first-child {
+      transform: translate3d(0,100%,0);
+    }
+
+    &:last-child {
+      transform: translate3d(0,0,0);
+    }
+  }
+}

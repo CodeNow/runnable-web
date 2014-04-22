@@ -20,6 +20,28 @@
 </a>
 {{/unless}}
 
-<ul class="nav nav-pills nav-stacked">
-  {{view "file_tree" model=rootDir editmode=editmode}}
-</ul>
+<div class="file-header">
+  <div class="arrow-right"></div>
+  Dockerfiles
+  <ul class="nav nav-pills nav-stacked">
+    <li class="folder open ui-droppable">
+      <ul class="fs-list nav-collapse in">
+        <li>
+          <div>
+            <a title="Dockerfile" class="ui-draggable">Dockerfile</a>
+          </div>
+        <li>
+          <div>
+            <a title="this.config" class="ui-draggable">this.config</a>
+          </div>
+      </ul>
+  </ul>
+</div>
+
+<div class="file-header">
+  <div class="arrow-right"></div>
+  Container
+  <ul class="nav nav-pills nav-stacked">
+    {{view "file_tree" model=rootDir editmode=editmode}}
+  </ul>
+</div>

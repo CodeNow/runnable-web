@@ -1,0 +1,13 @@
+.arrow-down,
+.arrow-left,
+.arrow-right,
+.arrow-up {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 6px solid rgba(0,0,0,.1);
+  color: rgba(0,0,0,.1);
+  display: block;
+  position: absolute;
+    bottom: 9px;
+    right: 8px;
+ }
