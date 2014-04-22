@@ -61,7 +61,12 @@ module.exports = BaseView.extend({
     }
   },
   changeSelected: function (model, selected) {
-    if (selected) {
+    /* Need to test if this model is of type 'file' or type 'view'
+       - if it is a view, don't do anything. The editor is about to be hidden.
+       - Assume models that have a 'content' property are files. Models without a
+       'content' property are 'views'
+     */
+    if (selected && _.isString(model.get('content'))) {
       this.setFile(model);
     }
   },
