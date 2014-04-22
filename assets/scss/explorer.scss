@@ -243,3 +243,36 @@
     }
   }
 }
+
+
+// .file-header
+.file-header {
+  position: relative;
+
+  > a {
+    display: block;
+    height: 33px;
+    position: absolute;
+    width: 20px;
+
+    &::after {
+      @extend .arrow-down;
+      border-top-color: rgba(0,0,0,.2);
+      content: '';
+      cursor: pointer;
+      left: 9px;
+      top: 13px;
+      transition: transform .2s ease-in-out;
+    }
+  }
+
+  &.in a::after {
+    transform: rotate3d(0,0,1,-90deg);
+  }
+
+  > h6 {
+    color: $gray-darker;
+    margin: 0;
+    padding: 10px 0 10px 24px;
+  }
+}
