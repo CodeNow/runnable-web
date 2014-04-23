@@ -1,16 +1,29 @@
 var File = require('../models/file');
+var View = require('../models/view');
 var Base = require('./base');
 var Super = Base.prototype;
 var utils = require('../utils');
 var async = require('async');
+var _ = require('underscore');
 
 module.exports = Base.extend({
-  model: File,
+  //model: File,
   url  : function () {
     return '/users/me/runnables/:containerId/files'
       .replace(':containerId', this.containerId);
   },
   initialize: function (models, options) {
+
+    var self = this;
+    this.model = function (attrs, opts) {
+      opts = opts || {};
+      opts.app = self.app;
+      console.log('test ', _.isString(attrs.content));
+      return (_.isString(attrs.content)) ?
+        new File(attrs, opts) :
+        new View(attrs, opts);
+    };
+
     Super.initialize.apply(this, arguments);
     this.containerId = options.containerId;
 
@@ -87,6 +100,8 @@ module.exports = Base.extend({
     return this.findWhere({ selected:true });
   },
   beforeRemove: function (fileRemoved) {
+    if (fileRemoved instanceof View)
+      return;
     fileRemoved.loseUnsavedChanges();
     // update selected file
     if (fileRemoved.get('selected')) {

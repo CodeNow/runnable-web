@@ -1,29 +1,21 @@
 var BaseView     = require('./base_view'),
     _            = require('underscore'),
-    lock         = require('../lock'),
     modalHelpers = require('../helpers/modals');
-
-var events = {
-  'click .dark-theme':               'setDarkTheme',
-  'click .light-theme':              'setLightTheme',
-  'click .open-context-menu':        'showFileMenu',
-  'contextmenu .open-context-menu' : 'showFileMenu',
-  'click [data-action="download"]' : 'showDownloadDialog',
-  'click #rebuild'                 : 'rebuild'
-};
-
-
-if (!lock) {
-  events['drop #drop-to-add']      = 'uploadToRoot';
-  events['dragover #drop-to-add']  = 'dragOver';
-  events['dragleave #drop-to-add'] = 'dragLeave';
-}
-
 
 module.exports = BaseView.extend({
   tagName: 'aside',
   id: 'file-explorer',
-  events: events,
+  events: {
+    'click .dark-theme'		     : 'setDarkTheme',
+    'click .light-theme'	     : 'setLightTheme',
+    'click .open-context-menu'	     : 'showFileMenu',
+    'contextmenu .open-context-menu' : 'showFileMenu',
+    'click [data-action="download"]' : 'showDownloadDialog',
+    'drop #drop-to-add'              : 'uploadToRoot',
+    'dragover #drop-to-add' 	     : 'dragOver',
+    'dragleave #drop-to-add' 	     : 'dragLeave',
+    'click #rebuild'         	     : 'rebuild'
+  },
   showDownloadDialog: function () {
     modalHelpers.saveProjectMessage.call(this, function () {
     });
@@ -68,7 +60,6 @@ module.exports = BaseView.extend({
     evt.preventDefault();
   },
   getTemplateData: function () {
-    this.options.lock = lock;
     return this.options;
   }
 });
