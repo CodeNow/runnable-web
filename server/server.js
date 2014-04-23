@@ -12,6 +12,7 @@ var express = require('express'),
     Handlebars = viewEngine.Handlebars,
     rollbar = require("rollbar"),
     sitemap = require('./lib/sitemap'),
+    Dogstatsyware = require('dogstatsyware'),
     app;
 var path = require('path');
 var config = require('./lib/env').current;
@@ -85,6 +86,9 @@ function initMiddleware() {
     app.use(express.staticCache());
     maxAge = 1000*60*60*24;
   }
+  app.use(Dogstatsyware({
+    service: 'runnable-web'
+  }));
   app.use(require('./middleware/disallowRobotsIfNotProduction'));
   app.use(express.static(__dirname + '/../public', { maxAge:maxAge }));
   app.use(require('./middleware/cannon')()); // no canon for static
