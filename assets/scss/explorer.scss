@@ -1,5 +1,5 @@
 #file-explorer {
-  background: $gray-light;
+  background: $gray-lighter;
   border-right: 1px solid rgba(0,0,0,.1);
   float: left;
   height: calc(100% - 36px);
@@ -33,7 +33,7 @@
       list-style-type: none;
 
       &.active > div > a {
-        font-weight: bold;
+        font-weight: 700;
 
         &.arrow:before {
           border-top: 6px solid #fff !important;
@@ -41,8 +41,8 @@
       }
 
       &.ui-draggable-hover {
-        background: rgba(0,0,0,.05);
-        border-color: rgba(0,0,0,.1);
+        background: #fff;
+        box-shadow: inset 0 -1px 0 rgba(0,0,0,.1), inset 0 1px 0 rgba(0,0,0,.1);
       }
 
       &.folder {
@@ -102,8 +102,8 @@
 
   // file tree item
   .ui-draggable:hover {
-    background: $gray-lighter;
-    @include box-shadow(inset 0 -1px 0 rgba(0,0,0,.05), inset 0 1px 0 rgba(0,0,0,.05));
+    background: #fff;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.05), inset 0 1px 0 rgba(0,0,0,.05);
   }
 }
 
@@ -277,5 +277,11 @@
     margin: 0;
     padding: 10px 0 5px 24px;
     text-transform: uppercase;
+
+    > button {
+      position: absolute;
+        top: 6px;
+        right: 6px;
+    }
   }
 }

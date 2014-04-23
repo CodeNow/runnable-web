@@ -52,6 +52,14 @@ button,
   img {
     margin: -4px 4px 0 0;
   }
+
+  &.btn-sm {
+    font-weight: 400;
+    height: 20px;
+    line-height: 19px;
+    padding: 0 6px;
+    text-shadow: none;
+  }
 }
 
 .green {
