@@ -17,7 +17,6 @@ var express = require('express'),
 var path = require('path');
 var config = require('./lib/env').current;
 var hbs = require('hbs');
-var statsd = require('./statsd.js');
 
 if (config.newrelic) {
   require('newrelic');
