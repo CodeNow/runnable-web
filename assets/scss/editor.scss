@@ -411,12 +411,12 @@
   }
 
   &.show-readme {
-    > #project-editor {
-      display: none;
-    }
+
+    > #project-editor,
     > #output-view {
       display: none;
     }
+
     > #html-readme {
       display: block;
     }
