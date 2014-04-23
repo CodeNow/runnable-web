@@ -24,77 +24,29 @@
 
 // spinner
 .loader {
-  background: url(/images/loader-play.svg) no-repeat center center;
-  background-size: 25px 38px;
+  animation: rotate 2s infinite linear;
   display: none;
-  height: 80px;
-  margin: -50px auto 0;
+  height: 108px;
+  margin: -108px auto 0;
   position: relative;
     top: 50%;
-  width: 80px;
+  width: 108px;
+
 
   > div {
-    background-color: #999;
-    @include border-radius(50%);
-    height: 8px;
-    opacity: 0;
+    animation: spin 2s infinite ease-in;
+    background-color: $gray;
+    border-radius: 50%;
+    display: inline-block;
+    height: 60%;
     position: absolute;
-    width: 8px;
-
-    &:nth-child(1) {
-      @include animation(spin 1s linear -.875s infinite);
-      left: 50%;
-      margin: 0 0 -4px;
-      top: 0;
-    }
+    top: 0;
+    width: 60%;
 
     &:nth-child(2) {
-      @include animation(spin 1s linear -.75s infinite);
-      left: 20%;
-      margin: -4px 0 0 -4px;
-      top: 20%;
-    }
-
-    &:nth-child(3) {
-      @include animation(spin 1s linear -.625s infinite);
-      left: 0;
-      margin: -4px 0 0;
-      top: 50%;
-    }
-
-    &:nth-child(4) {
-      @include animation(spin 1s linear -.5s infinite);
-      left: 20%;
-      margin: -4px 0 0 -4px;
-      top: 82%;
-    }
-
-    &:nth-child(5) {
-      @include animation(spin 1s linear -.375s infinite);
-      left: 50%;
-      margin: -4px 0 0 -4px;
-      top: 95%;
-    }
-
-    &:nth-child(6) {
-      @include animation(spin 1s linear -.25s infinite);
-      left: 80%;
-      margin: -4px 0 0 -4px;
-      top: 82%;
-    }
-
-    &:nth-child(7) {
-      @include animation(spin 1s linear -.125s infinite);
-      left: 95%;
-      margin: -4px 0 0 -4px;
-      top: 50%;
-    }
-
-    &:nth-child(8) {
-      @include animation(spin 1s linear 0s infinite);
-      left: 80%;
-      margin: -4px 0 0 -4px;
-      top: 20%;
+      animation-delay: -1s;
+      bottom: 0;
+      top: auto;
     }
   }
 }
@@ -225,5 +177,13 @@
   #project.out & {
     opacity: 1;
     z-index: $z-show;
+
+    .loader {
+      display: block;
+
+      > div {
+        background: $gray;
+      }
+    }
   }
 }
