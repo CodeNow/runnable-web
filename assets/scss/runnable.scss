@@ -139,6 +139,7 @@
 #project-details {
 
   input {
+    color: $gray-darker;
     margin-bottom: 5px;
   }
 
@@ -482,6 +483,12 @@
 #project {
   border-bottom: 1px solid rgba(0,0,0,.1);
   border-top: 1px solid rgba(0,0,0,.1);
+}
+
+// #project-url
+#project-url > small {
+  color: $gray-dark;
+  margin-left: 12px;
 }
 
 // ??

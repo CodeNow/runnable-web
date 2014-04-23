@@ -45,8 +45,20 @@ textarea,
   }
 }
 
-input[type=radio] {
-  -webkit-appearance: radio;
+input {
+
+  &[type=radio] {
+    -webkit-appearance: radio;
+  }
+
+  &[disabled],
+  &[readonly] {
+    background: $gray-light;
+  }
+
+  &[readonly] {
+    cursor: pointer;
+  }
 }
 
 .form-control::placeholder {
