@@ -18,7 +18,7 @@ textarea,
   }
 
   &.success {
-    border-color: #6CA52E;
+    border-color: #6ca52e;
     background-image: url('../images/icon-success.png');
     @include background-image-retina('../images/icon-success@2x.png');
     background-size: 10px 8px;
@@ -28,7 +28,7 @@ textarea,
   }
 
   &.error {
-    border-color: #D73539;
+    border-color: #d73539;
     padding-right: 40px;
     background-image: url('../images/icon-error.png');
     @include background-image-retina('../images/icon-error@2x.png');

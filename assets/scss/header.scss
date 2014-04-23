@@ -10,11 +10,11 @@
   .container {
     position: relative;
   }
-}
 
-nav > div {
-  @include media(sm) {
-    height: 54px;
+  nav > div {
+    @include media(sm) {
+      height: 54px;
+    }
   }
 }
 
