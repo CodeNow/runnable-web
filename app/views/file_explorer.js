@@ -56,7 +56,6 @@ module.exports = BaseView.extend({
     evt.preventDefault();
   },
   getTemplateData: function () {
-    this.options.lock = lock;
     return this.options;
   }
 });
