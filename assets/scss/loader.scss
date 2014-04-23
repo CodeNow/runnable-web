@@ -8,13 +8,13 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: -10000000000;
-  @include transition(opacity .2s ease-in-out);
+    z-index: $z-hide;
+  transition: opacity .2s ease-in-out;
   width: 100%;
 
   &.loading {
     opacity: 1;
-    z-index: 10000000000;
+    z-index: $z-show;
 
     .loader {
       display: block;
@@ -208,4 +208,22 @@
   color: $gray-dark;
   margin: 0;
   text-shadow: none;
+}
+
+// rebuild-loader
+#rebuild-loader {
+  background: rgba(255,255,255,.75);
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+    left: 0;
+    top: 0;
+    z-index: $z-hide;
+  transition: opacity .2s ease-in-out;
+  width: 100%;
+
+  #project.out & {
+    opacity: 1;
+    z-index: $z-show;
+  }
 }

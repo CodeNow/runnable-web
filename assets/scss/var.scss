@@ -34,5 +34,8 @@ $orange-darker:  darken($orange,13);
 $light-yellow:   #ffffe0;
 
 // z-indexes
+$z-hide: -10000;
+$z-show: 10000;
+
 $zpopover: 9998;
 $ztooltip: 9999;

@@ -18,6 +18,10 @@
     border-left: 0;
     margin: 0 -15px;
   }
+
+  #project.out & {
+    filter: blur(2px);
+  }
 }
 
 // toolbar

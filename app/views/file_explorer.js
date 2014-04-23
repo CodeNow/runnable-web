@@ -4,11 +4,12 @@ var BaseView     = require('./base_view'),
     modalHelpers = require('../helpers/modals');
 
 var events = {
-  'click .dark-theme':                'setDarkTheme',
-  'click .light-theme':               'setLightTheme',
-  'click .open-context-menu':         'showFileMenu',
-  'contextmenu .open-context-menu':   'showFileMenu',
-  'click li[data-action="download"]': 'showDownloadDialog'
+  'click .dark-theme':               'setDarkTheme',
+  'click .light-theme':              'setLightTheme',
+  'click .open-context-menu':        'showFileMenu',
+  'contextmenu .open-context-menu' : 'showFileMenu',
+  'click [data-action="download"]' : 'showDownloadDialog',
+  'click #rebuild'                 : 'rebuild'
 };
 
 
@@ -58,6 +59,9 @@ module.exports = BaseView.extend({
   dragLeave: function (evt) {
     this.stopPropagation(evt);
     this.$('#drop-to-add').removeClass('in');
+  },
+  rebuild: function () {
+    $('#project').addClass('out');
   },
   stopPropagation: function (evt) {
     evt.stopPropagation();
