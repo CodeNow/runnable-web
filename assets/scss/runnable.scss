@@ -407,6 +407,26 @@
       margin-left: 0;
     }
   }
+
+  // .toggles
+  .toggles > button {
+
+    > .glyphicons {
+      display: none;
+    }
+
+    &.active {
+
+      > .glyphicons {
+        display: inline-block;
+        margin-right: 6px;
+      }
+
+      > span {
+        display: none;
+      }
+    }
+  }
 }
 
 // sidebar
