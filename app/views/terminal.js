@@ -148,7 +148,7 @@ module.exports = BaseView.extend({
           }
         }
       });
-    }, 10000);
+    }, 20000);
   },
   stopWarningTimeout: function () {
     clearTimeout(this.warningTimeout);
