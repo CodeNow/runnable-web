@@ -1,16 +1,28 @@
 var File = require('../models/file');
+var View = require('../models/view');
 var Base = require('./base');
 var Super = Base.prototype;
 var utils = require('../utils');
 var async = require('async');
 
-module.exports = Base.extend({
-  model: File,
+module.exports = Base.exetend({
+  //model: File,
   url  : function () {
     return '/users/me/runnables/:containerId/files'
       .replace(':containerId', this.containerId);
   },
   initialize: function (models, options) {
+
+    var self = this;
+    this.model = function (attrs, opts) {
+      opts = opts || {};
+      opts.app = self.app;
+      return (attrs.type === 'file') ?
+        new File(attrs, opts) :
+        new View(attrs, opts);
+    };
+
+
     Super.initialize.apply(this, arguments);
     this.containerId = options.containerId;
 
