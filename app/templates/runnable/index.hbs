@@ -3,7 +3,7 @@
 {{view "global_message"}}
 {{view "owner_warning" model=image containerid=container.id}}
 
-<main>
+<main class="project-container">
   <section id="project-details" class="container">
     <div class="row">
       <div class="col-sm-9">
@@ -27,6 +27,7 @@
     {{view "rebuild_loader"}}
   </section>
 
+  {{!--
   <section class="container">
     <div class="row">
       <ul id="sidebar" class="col-sm-12">
@@ -61,6 +62,7 @@
       </ul>
     </div>
   </section>
+  --}}
 
 </main>
 {{view "footer_view" model=user context=.}}

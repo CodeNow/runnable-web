@@ -3,7 +3,7 @@
 {{view "global_message"}}
 {{view "publish_warning" model=container parentid=image.attributes._id parentowner=image.attributes.owner}}
 
-<main>
+<main class="project-container">
   <section id="project-details" class="container">
     <div class="row">
       <div class="col-sm-9">
@@ -26,6 +26,7 @@
     {{view "rebuild_loader"}}
   </section>
 
+  {{!--
   <section class="container">
     <div class="row">
       <ul id="sidebar" class="col-sm-12">
@@ -46,6 +47,7 @@
       </ul>
     </div>
   </section>
+  --}}
 </main>
 
 {{view "footer_view" model=user context=.}}

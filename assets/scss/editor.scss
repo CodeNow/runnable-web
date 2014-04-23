@@ -1,5 +1,6 @@
 #code-editor,
 #code-editor-embed {
+  height: 100%;
   overflow: hidden;
   position: relative;
 
@@ -348,6 +349,7 @@
 
 #project-editor-container {
   background: #fff;
+  height: 100%;
   margin-top: 36px;
   transform: translate3d(0,0,0);
   transition: transform .2s ease-in-out, width 0s ease-in-out;
@@ -437,6 +439,11 @@
       display: block;
     }
   }
+}
+
+// pre
+#project-editor {
+  height: 100% !important;
 }
 
 // Tony feel free to reorg all of this
