@@ -1,5 +1,6 @@
 // global layout
-html {
+html,
+#content {
   background: $gray-light;
 }
 
@@ -8,14 +9,13 @@ body {
 }
 
 body,
-#content {
+#content > div {
   background: $gray-lighter;
 }
 
 html,
 body,
-#content,
-#content > div {
+#content {
   height: 100%;
 }
 
