@@ -59,6 +59,11 @@ button,
     line-height: 19px;
     padding: 0 6px;
     text-shadow: none;
+
+    &.glyphicons {
+      color: #999;
+      line-height: 1;
+    }
   }
 }
 

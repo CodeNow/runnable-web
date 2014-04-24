@@ -278,10 +278,11 @@
     padding: 10px 0 5px 24px;
     text-transform: uppercase;
 
+    > .btn-group,
     > button {
       position: absolute;
-        top: 6px;
-        right: 6px;
+        top: 5px;
+        right: 5px;
     }
   }
 }

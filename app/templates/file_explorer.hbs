@@ -3,8 +3,10 @@
     <span></span>
   <li class="light-theme theme tooltip" data-title="Light Theme">
     <span></span>
+  {{!--
   <li class="open-context-menu pull-right tooltip" data-title="Add">
     <span class="glyphicons plus"></span>
+  --}}
   <li data-action="download" class="pull-right tooltip" data-title="Download">
     <span class="glyphicons disk-save"></span>
   </li>
@@ -22,7 +24,10 @@
   <a></a>
   <h6>
     BUILD FILES
-    <button id="rebuild" type="button" class="silver btn-sm">Rebuild</button>
+    <div class="btn-group">
+      <button id="rebuild" type="button" class="silver btn-sm">Rebuild</button>
+      <button type="button" class="silver btn-sm glyphicons plus"></button>
+    </div>
   </h6>
   <ul class="nav nav-pills nav-stacked">
     <li class="folder open ui-droppable">
@@ -41,7 +46,10 @@
 
 <div class="file-header in">
   <a></a>
-  <h6>CONTAINER</h6>
+  <h6>
+    CONTAINER
+    <button type="button" class="silver btn-sm glyphicons plus"></button>
+  </h6>
   <ul class="nav nav-pills nav-stacked">
     {{view "file_tree" model=rootDir editmode=editmode}}
   </ul>
