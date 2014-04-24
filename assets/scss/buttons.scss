@@ -53,6 +53,10 @@ button,
     margin: -4px 4px 0 0;
   }
 
+  .glyphicons {
+    margin-right: 4px;
+  }
+
   &.btn-sm {
     font-weight: 400;
     height: 20px;
@@ -72,6 +76,7 @@ button,
   background-color: $green-light;
   background-image: linear-gradient(rgba($green,0),$green);
   border-color: $green-darker;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.2);
 
   &:hover {
     background-color: $green-lighter;
@@ -85,9 +90,11 @@ button,
     border-color: $green-darker;
   }
 
-  &[disabled] {
-    background: rgba($green-lighter,.75);
-    border-color: desaturate($green,30);
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:active {
+    background: rgba($green-lighter,.5);
+    border-color: rgba(desaturate($green,30),.25);
     color: lighten($green-lighter,30);
   }
 }
@@ -119,7 +126,9 @@ button,
       inset 0 1px 6px rgba(0,0,0,.125);
   }
 
-  &[disabled] {
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:active {
     background: rgba($silver-lighter,.75);
     border-color: rgba(0,0,0,.1);
     color: lighten($gray-dark,20);
@@ -145,7 +154,9 @@ button,
     border-color: $orange-darker;
   }
 
-  &[disabled] {
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:active {
     background: rgba($orange-light,.4);
     border-color: rgba($orange-darker,.6);
     color: lighten($orange-light,38);
@@ -172,7 +183,9 @@ button,
     border-color: #5b3777;
   }
 
-  &[disabled] {
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:active {
     background: rgba(#9a58ba,.4);
     border-color: rgba(#5b3777,.6);
     color: lighten(#ac67c6,38);

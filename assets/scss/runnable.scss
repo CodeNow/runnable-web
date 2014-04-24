@@ -340,14 +340,6 @@
     }
   }
 
-  > .green {
-
-    &:hover,
-    &:focus {
-      color: #fff;
-    }
-  }
-
   .run-button {
     @media (max-width: 360px) {
       > span {

@@ -13,9 +13,9 @@
         </div>
         {{!-- {{view "runnable_description" model=image}} --}}
         <div class="main-controls">
-          {{view "dropdown_run_button" context=. editmode=true}}
-          {{view "improve_button"}}
+          {{!-- {{view "dropdown_run_button" context=. editmode=true}} --}}
           {{view "fork_button" collection=defaultFiles model=container}}
+          {{view "improve_button"}}
         </div>
       </div>
       {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created image=image context=.}}
