@@ -188,22 +188,20 @@
     > a {
       color: $gray-dark;
       display: block;
-      padding: 15px 14px 4px; // 81px
+      font-size: 13px;
+      line-height: 2;
+      padding: 12px 0 2px;
+      user-select: none;
 
       .glyphicons {
-        color: $gray-dark;
+        color: $purple;
         display: block;
-        font-size: 26px;
-      }
-
-      &:hover,
-      &:hover .glyphicons {
-        color: $gray-darker;
+        font-size: 32px;
+        height: 30px;
       }
 
       &:active,
       &:active .glyphicons {
-        color: $gray-darkest;
         transform: translate3d(0,1px,0);
       }
 
@@ -349,6 +347,7 @@
     background: #fff;
     cursor: pointer;
     display: block;
+    font-weight: 400;
     height: 50px;
     line-height: 50px;
     margin: 0;
@@ -396,6 +395,7 @@
     }
 
     &.active {
+      font-weight: 700;
 
       .sprite-icons-output::after {
         animation: blinker 1s infinite;
