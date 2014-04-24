@@ -53,10 +53,6 @@ button,
     margin: -4px 4px 0 0;
   }
 
-  .glyphicons {
-    margin-right: 4px;
-  }
-
   &.btn-sm {
     font-weight: 400;
     height: 20px;
@@ -68,6 +64,16 @@ button,
       color: #999;
       line-height: 1;
     }
+  }
+}
+
+.green,
+.silver,
+.orange,
+.purple {
+
+  .glyphicons {
+    margin-right: 4px;
   }
 }
 
