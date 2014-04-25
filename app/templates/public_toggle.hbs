@@ -1,9 +1,9 @@
-<button>
+<button data-action data-value="false" {{#unless model.attributes.private}}class="active"{{/unless}}>
   <span class="glyphicons unlock"></span>
   <span>Make</span> Public
 </button>
 
-<button class="active">
+<button data-action data-value="true" {{#if model.attributes.private}}class="active"{{/if}}>
   <span class="glyphicons lock"></span>
   <span>Make</span> Private
 </button>
