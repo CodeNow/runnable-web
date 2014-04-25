@@ -187,4 +187,12 @@
       }
     }
   }
+
+  > pre {
+    background: transparent;
+    margin: -54px auto 0;
+    max-height: 50%;
+    max-width: 75%;
+    overflow-y: scroll;
+  }
 }
