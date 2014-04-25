@@ -10,14 +10,15 @@
         <div class="page-title">
           {{view "runnable_title" model=container}}
         </div>
-        {{view "runnable_description" model=container}}
+        {{!-- {{view "runnable_description" model=container}} --}}
         <div class="main-controls">
-          {{view "dropdown_run_button" context=. editmode=true}}
+          {{!-- {{view "dropdown_run_button" context=. editmode=true}} --}}
+          {{view "preview_button"}}
           {{view "save_button" collection=defaultFiles}}
           {{view "public_toggle"}}
         </div>
       </div>
-      {{view "project_url"}}
+    {{view "project_url"}}
     </div>
   </section>
 

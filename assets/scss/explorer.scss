@@ -48,12 +48,12 @@
       &.folder {
 
         .arrow:before {
-          border-top: 6px solid #bbb;
+          border-top: 6px solid rgba(0,0,0,.2);
           border-left: 4px solid transparent;
           border-right: 4px solid transparent;
           content: '';
           float: left;
-          margin: 6px 5% 0 0;
+          margin: 6px 8px 0 0;
           transition: transform .1s linear;
         }
 
@@ -81,7 +81,7 @@
     span {
       color: $gray-darker;
       display: block;
-      padding: 6px 5%;
+      padding: 6px 0 6px 24px;
       white-space: nowrap;
 
       &:hover {
@@ -131,66 +131,66 @@
 
         li {
           a, img, input, span, form {
-            padding-left: 13%;
+            padding-left: 40px;
           }
         }
 
         li li {
           a, img, input, span, form {
-            padding-left: 21%;
+            padding-left: 56px;
           }
         }
 
         li li li {
           a, img, input, span, form {
-            padding-left: 29%;
+            padding-left: 72px;
           }
         }
 
         li li li li {
           a, img, input, span, form {
-            padding-left: 37%;
+            padding-left: 88px;
           }
         }
 
         li li li li li {
           a, img, input, span, form {
-            padding-left: 45%;
+            padding-left: 104px;
           }
         }
 
         li li li li li li {
           a, img, input, span, form {
-            padding-left: 53%;
+            padding-left: 120px;
           }
         }
 
         li li li li li li li {
           a, img, input, span, form {
-            padding-left: 61%;
+            padding-left: 136px;
           }
         }
 
         li li li li li li li li {
           a, img, input, span, form {
-            padding-left: 69%;
+            padding-left: 152px;
           }
         }
 
         li li li li li li li li li {
           a, img, input, span, form {
-            padding-left: 77%;
+            padding-left: 168px;
           }
         }
 
         li li li li li li li li li li {
           a, img, input, span, form {
-            padding-left: 85%;
+            padding-left: 184px;
           }
         }
         li li li li li li li li li li li {
           a, img, input, span, form {
-            padding-left: 93%;
+            padding-left: 200px;
           }
         }
       }

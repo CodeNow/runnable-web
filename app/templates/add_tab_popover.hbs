@@ -4,7 +4,7 @@
     <ul class="popover-body">
       <li>
         <a>
-          <span class="glyphicons print"></span>
+          <object class="iconnables" data="/images/icons/icons-terminal.svg" type="image/svg+xml"></object>
           Terminal
         </a>
       <li>
@@ -40,6 +40,25 @@
   <form id="new-shortcut">
     <input class="form-control" placeholder="Shortcut Name" required>
     <input class="form-control" placeholder="Shortcut CMD" required>
+    {{!-- {{#if model=container}} --}}
+    <div class="form-group toggle-group">
+      <label{{#unless model.attributes.output_format}} class="active"{{/unless}}>
+        <div class="sprite-icons-output"></div>
+        Web &amp; Terminal
+        <input type="radio" name="output_format" value=""{{#unless model.attributes.output_format}} checked{{/unless}}>
+      </label>
+      <label{{#if_eq model.attributes.output_format compare="web"}} class="active"{{/if_eq}}>
+        <div class="sprite-icons-output"></div>
+        Only Web
+        <input type="radio" name="output_format" value="web"{{#if_eq model.attributes.output_format compare="web"}} checked{{/if_eq}}>
+      </label>
+      <label{{#if_eq model.attributes.output_format compare="terminal"}} class="active"{{/if_eq}}>
+        <div class="sprite-icons-output"></div>
+        Only Terminal
+        <input type="radio" name="output_format" value="terminal"{{#if_eq model.attributes.output_format compare="terminal"}} checked{{/if_eq}}>
+      </label>
+    </div>
+    {{!-- {{/if}} --}}
     <button class="orange">Create New Shortcut</button>
   </form>
 </div>

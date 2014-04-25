@@ -3,27 +3,32 @@ var BaseView = require('./base_view');
 module.exports = BaseView.extend({
   className: 'popover fade bottom',
   events: {
+    'click'               : 'stopPropagation',
     'click li:last-child' : 'openShortcuts',
     'click .silver'       : 'openNewShortcut',
+    'click label'         : 'toggleOutputViews',
     'submit form'         : 'createNewShortcut'
   },
   openShortcuts: function (evt) {
-    this.preventDefault(evt);
+    this.stopPropagation(evt);
     this.$el
       .removeClass('show-new-shortcut')
       .addClass('show-shortcuts');
   },
   openNewShortcut: function (evt) {
-    this.preventDefault(evt);
+    this.stopPropagation(evt);
     this.$el
       .removeClass('show-shortcuts')
       .addClass('show-new-shortcut');
   },
   createNewShortcut: function (evt) {
-    this.preventDefault(evt);
+    this.stopPropagation(evt);
   },
-  preventDefault: function (evt) {
-    evt.preventDefault();
+  toggleOutputViews: function (evt) {
+    this.$('label').removeClass('active');
+    $(evt.currentTarget).addClass('active');
+  },
+  stopPropagation: function (evt) {
     evt.stopPropagation();
   }
 });

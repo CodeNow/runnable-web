@@ -95,104 +95,6 @@
     }
   }
 
-  // set default view
-  .toggle-group {
-    border: 1px solid rgba(0,0,0,.1);
-    border-radius: 3px;
-    box-shadow: 0 1px 0 #fff;
-    margin: 0;
-
-    > label {
-      background: #fff;
-      cursor: pointer;
-      display: block;
-      height: 50px;
-      line-height: 50px;
-      margin: 0;
-      padding: 0 10px;
-      width: 100%;
-
-      &:nth-child(n+2) {
-        border-top: 1px solid rgba(0,0,0,.1);
-      }
-
-      &:first-child  {
-        border-radius: 3px 3px 0 0;
-
-        .sprite-icons-output {
-          background-position: -61px -1px;
-
-          &::after {
-            height: 12px;
-          }
-        }
-      }
-
-      &:nth-child(2) {
-        .sprite-icons-output {
-          background-position: 0px -1px;
-        }
-      }
-
-      &:nth-child(3) {
-        .sprite-icons-output {
-          background-position: -31px -1px;
-
-          &::after {
-            height: 22px;
-          }
-        }
-      }
-
-      &:last-child {
-        border-radius: 0 0 3px 3px;
-      }
-
-      &:hover {
-        background: $gray-lighter;
-      }
-
-      &.active {
-
-        .sprite-icons-output::after {
-          animation: blinker 1s infinite;
-        }
-      }
-    }
-
-    input[type="radio"] {
-      float: right;
-      margin: 19px 10px 0 0;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    .sprite-icons-output {
-      background: url(/images/sprite-icons-output.svg) no-repeat;
-      background-size: 90px 30px;
-      border: 1px solid;
-      border-color: rgba(0,0,0,.15) rgba(0,0,0,.15) rgba(0,0,0,.2);
-      float: left;
-      height: 30px;
-      margin: 10px 10px 0 0;
-      overflow: hidden;
-      position: relative;
-      width: 30px;
-
-      &::after {
-        background: #383734;
-        content: '';
-        display: block;
-        opacity: 0;
-        position: absolute;
-          bottom: 0;
-        width: 100%;
-      }
-    }
-  }
-
   .modal-footer {
     padding-bottom: 0;
   }
@@ -286,22 +188,20 @@
     > a {
       color: $gray-dark;
       display: block;
-      padding: 15px 14px 4px; // 81px
+      font-size: 13px;
+      line-height: 2;
+      padding: 12px 0 2px;
+      user-select: none;
 
       .glyphicons {
-        color: $gray-dark;
+        color: $purple;
         display: block;
-        font-size: 26px;
-      }
-
-      &:hover,
-      &:hover .glyphicons {
-        color: $gray-darker;
+        font-size: 32px;
+        height: 30px;
       }
 
       &:active,
       &:active .glyphicons {
-        color: $gray-darkest;
         transform: translate3d(0,1px,0);
       }
 
@@ -432,6 +332,107 @@
 
     input:first-child {
       margin-bottom: 10px;
+    }
+  }
+}
+
+// toggle view
+.toggle-group {
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 #fff;
+  margin: 10px 0 0;
+
+  > label {
+    background: #fff;
+    cursor: pointer;
+    display: block;
+    font-weight: 400;
+    height: 50px;
+    line-height: 50px;
+    margin: 0;
+    padding: 0 10px;
+    width: 100%;
+
+    &:nth-child(n+2) {
+      border-top: 1px solid rgba(0,0,0,.1);
+    }
+
+    &:first-child  {
+      border-radius: 3px 3px 0 0;
+
+      .sprite-icons-output {
+        background-position: -61px -1px;
+
+        &::after {
+          height: 12px;
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      .sprite-icons-output {
+        background-position: 0px -1px;
+      }
+    }
+
+    &:nth-child(3) {
+      .sprite-icons-output {
+        background-position: -31px -1px;
+
+        &::after {
+          height: 22px;
+        }
+      }
+    }
+
+    &:last-child {
+      border-radius: 0 0 3px 3px;
+    }
+
+    &:hover {
+      background: $gray-lighter;
+    }
+
+    &.active {
+      font-weight: 700;
+
+      .sprite-icons-output::after {
+        animation: blinker 1s infinite;
+      }
+    }
+  }
+
+  input[type="radio"] {
+    float: right;
+    margin: 19px 10px 0 0;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .sprite-icons-output {
+    background: url(/images/sprite-icons-output.svg) no-repeat;
+    background-size: 90px 30px;
+    border: 1px solid;
+    border-radius: 3px;
+    border-color: rgba(0,0,0,.15) rgba(0,0,0,.15) rgba(0,0,0,.2);
+    float: left;
+    height: 30px;
+    margin: 10px 10px 0 0;
+    overflow: hidden;
+    position: relative;
+    width: 30px;
+
+    &::after {
+      background: #383734;
+      content: '';
+      display: block;
+      opacity: 0;
+      position: absolute;
+        bottom: 0;
+      width: 100%;
     }
   }
 }

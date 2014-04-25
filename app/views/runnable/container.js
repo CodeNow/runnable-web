@@ -2,6 +2,7 @@ var BaseView = require('../base_view');
 var _ = require('underscore');
 
 module.exports = BaseView.extend({
+  id: 'runnable',
   postHydrate: function () {
     this.listenTo(this.app.user, 'change:_id', this.render.bind(this));
   },

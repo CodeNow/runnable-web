@@ -1,0 +1,9 @@
+small {
+  color: $gray-dark;
+  font-size: 12px; // percentage was unreliable
+  font-weight: 400; // reset if within header tags
+}
+
+input ~ small {
+  margin-left: 12px; // match input padding
+}

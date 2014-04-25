@@ -1,7 +1,6 @@
 var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
-  tagName: 'div',
   id: 'add-tab',
   events: {
     'click' : 'togglePopover'
