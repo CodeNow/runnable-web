@@ -1,6 +1,6 @@
 // spinner
 .overlay-loader {
-  background: rgba(0,0,0,.75);
+  background: rgba(0,0,0,.85);
   height: 100%;
   opacity: 0;
   position: fixed;
@@ -70,24 +70,24 @@
 .with-text {
 
   > .loader {
-    top: 30%;
+    top: 25%;
   }
 
   > .loader-text {
     position: relative;
-      top: calc(30% + 80px);
+      top: calc(25% + 108px);
   }
 
   h1,
   a,
   p {
     text-align: center;
-    text-shadow: 0 0 20px #000;
   }
 
   h1 {
     color: darken($gray,10%);
     margin-bottom: 20px;
+    transform: translate3d(0, -175%, 0);
   }
 
   a {
@@ -128,30 +128,30 @@
       position: absolute;
         right: 0;
         left: 0;
-      @include transform-3d(0,-300%,0);
-      @include transition(all 1.5s 50ms);
+      transform: translate3d(0,-300%,0);
+      transition: all 1.5s 50ms;
 
       &.in {
         opacity: 1;
-        @include transform-3d(0,-175%,0);
+        transform: translate3d(0,-175%,0);
       }
 
       &.out {
         opacity: 0;
-        @include transform-3d(0,0%,0);
+        transform: translate3d(0,0,0);
       }
     }
 
     p {
-      @include animation(dropIn .5s forwards 1s ease-in-out);
-      @include transform-3d(0,-100%,0);
+      animation: dropIn .5s forwards 1s ease-in-out;
+      transform: translate3d(0,-100%,0);
     }
 
     a {
-      @include animation(dropIn .5s forwards 15s ease-in-out);
+      animation: dropIn .5s forwards 15s ease-in-out;
       opacity: 0;
-      @include transform-3d(0,-100%,-1px);
-      @include transition(none);
+      transform: translate3d(0,-100%,-1px);
+      transition: none;
     }
   }
 }
