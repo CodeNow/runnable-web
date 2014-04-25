@@ -1,12 +1,15 @@
 <section class="status-bar">
   <div class="container">
     <div class="row">
+      {{!--
       {{#if canPublishBack}}
         <button id="pubwarn-back-button">Publish</button>
       {{/if}}
       <button id="pubwarn-new-button">Publish as a New Project</button>
+      --}}
+      {{view "preview_button"}}
 
-      <p><strong>You're in <b>Draft Mode</b>!</strong><span> Publish it when you're ready to show it off to the world.</span></p>
+      <p><strong>You're in <b>Edit Mode</b>!</strong><span> Preview it to see what the public sees.</span></p>
     </div><!--/.row-->
   </div><!--/.container-->
   {{view "publish_loader" model=model}}
