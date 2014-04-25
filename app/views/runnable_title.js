@@ -7,7 +7,7 @@ var Super = BaseView.prototype;
 module.exports = BaseView.extend({
   tagName:'h1',
   events: {
-    'click .edit'   : 'clickEdit',
+    // 'click .edit'   : 'clickEdit',
     'submit form'   : 'submitName',
     'click .cancel' : 'escEditMode'
   },
@@ -20,17 +20,17 @@ module.exports = BaseView.extend({
       this.app.user.canEdit(this.model);
     return this.options;
   },
-  clickEdit: function (evt) {
-    evt.preventDefault();
-    this.setEditMode(true);
-  },
-  escEditMode: function () {
-    this.setEditMode(false);
-  },
-  setEditMode: function (bool) {
-    this.options.editmode = bool;
-    this.render();
-  },
+  // clickEdit: function (evt) {
+  //   evt.preventDefault();
+  //   this.setEditMode(true);
+  // },
+  // escEditMode: function () {
+  //   this.setEditMode(false);
+  // },
+  // setEditMode: function (bool) {
+  //   this.options.editmode = bool;
+  //   this.render();
+  // },
   submitName: function (evt) {
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();

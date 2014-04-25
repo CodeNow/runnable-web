@@ -51,6 +51,7 @@
     color: $gray-dark;
     height: 36px;
     line-height: 34px;
+    top: 0;
     user-select: none;
 
     &:hover {
@@ -64,21 +65,24 @@
   }
 
   #show-readme {
-    box-shadow: inset 0 1px 0 #fff;
+    background: $gray-light;
     border-right: 1px solid rgba(0,0,0,.1);
     color: $gray-dark;
     line-height: 38px;
     transition: transform .2s ease-in-out;
 
     &:hover {
-      color: $gray-darker;
+      background: $gray-lighter;
     }
 
     &:active {
-      color: $gray-darkest;
+      color: $gray-darker;
     }
 
     &.active {
+      background: $gray-lighter;
+      box-shadow: inset 0 1px 0 #fff;
+      color: $gray-darker;
       cursor: default;
     }
   }
@@ -245,6 +249,8 @@
 
 // default tabs
 #project-editor-tabs-wrapper {
+  background: $gray-light;
+  border-bottom: 1px solid rgba(0,0,0,.1);
   float: left;
   height: 36px;
   overflow: hidden;
@@ -293,6 +299,10 @@
 
       &:hover {
         background: $gray-lighter;
+      }
+
+      &:active {
+        color: $gray-darker;
       }
     }
 
