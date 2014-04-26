@@ -6,7 +6,7 @@ var global = this;
 
 module.exports = BaseView.extend({
   tagName: 'ul',
-  className: 'clearfix',
+  className: 'tags',
   events: {
     'click .remove-2' : 'removeTag',
   },

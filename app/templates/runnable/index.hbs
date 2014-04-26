@@ -10,6 +10,9 @@
         <div class="page-title">
           {{view "runnable_title" model=image}}
           {{view "runnable_stats" model=image}}
+          {{#if image.attributes.tags.length}}
+          {{view "runnable_tags" model=container editmode=isVerified}}
+          {{/if}}
         </div>
         <div class="main-controls">
           {{view "fork_button" collection=defaultFiles model=container}}
@@ -29,24 +32,6 @@
   <section class="container">
     <div class="row">
       <ul id="sidebar" class="col-sm-12">
-        {{#if image.attributes.specification}}
-        <li class="services">
-        <h3>API Keys</h3>
-          {{view "runnable_specifications" model=container collection=specifications context=. editmode=false}}
-        </li>
-        {{/if}}
-        {{#if image.attributes.tags}}{{#if image.attributes.tags.length}}
-        <li class="tags">
-          <h3>Tags</h3>
-          <ul class="clearfix">
-            {{#each image.attributes.tags}}
-            <li class="tag">
-            {{view "tag_link" name=name}}
-            </li>
-            {{/each}}
-          </ul>
-        </li>
-        {{/if}}{{/if}}
         {{#if related.length}}
         <li class="related-code">
           <h3>Related Code</h3>

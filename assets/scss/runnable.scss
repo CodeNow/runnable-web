@@ -32,7 +32,7 @@
 }
 
 .project-container {
-  height: calc(100% - 213px);
+  height: calc(100% - 192px);
   margin: 30px 0 0;
 }
 
@@ -70,6 +70,15 @@
 
     form {
       margin-bottom: 10px;
+    }
+  }
+
+  .tags {
+    margin-top: 5px;
+
+    > .plus {
+      cursor: pointer;
+      padding: 0 5px;
     }
   }
 }
@@ -483,7 +492,7 @@
 // #project
 #project {
   border-top: 1px solid rgba(0,0,0,.1);
-  height: calc(100% - 140px);
+  height: calc(100% - 159px);
   position: relative;
 }
 
