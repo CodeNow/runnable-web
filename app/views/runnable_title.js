@@ -15,7 +15,9 @@ module.exports = BaseView.extend({
   },
   titleChange: function () {
     var $el = this.$el.find('form input[name="name"]');
-    this.app.dispatch.trigger('trigger:titleChange', ($el.val() !== this.model.get('name')));
+    if ($el.val() === this.model.get('name'))
+      return;
+    this.app.dispatch.trigger('trigger:titleChange', true);
   },
   postRender: function () {
     this.listenTo(this.model, 'change:name change:tags', this.render.bind(this));
@@ -57,7 +59,7 @@ module.exports = BaseView.extend({
       } else if (err) {
         this.showError(err);
       } else {
-        this.titleChange();
+        this.app.dispatch.trigger('trigger:titleChange', false);
       }
     }
   }
