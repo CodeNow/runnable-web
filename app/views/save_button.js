@@ -21,6 +21,7 @@ module.exports = EditorButtonView.extend({
   },
   saveAll :function () {
     this.disable(true);
+    this.app.dispatch.trigger('trigger:saveAll');
     this.collection.saveAll(function (err) {
       this.disable(false);
       this.showIfError(err);
