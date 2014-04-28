@@ -11,7 +11,7 @@
           {{view "runnable_title" model=container}}
           <ul class="tags">
             {{#each image.attributes.tags}}
-              <li>{{view "tag_link" name=name}}
+              <li>{{view "tag_link" name=name editmode=true}}
             {{/each}}
             {{#if isVerified}}
               <li class="glyphicons plus">

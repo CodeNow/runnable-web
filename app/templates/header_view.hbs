@@ -6,11 +6,9 @@
         <sup>&lt;beta&gt;</sup>
       </a>
     </div>
-    {{#unless nosearch}}
-    {{view "searchbar" classname="col-sm-4" inputclass="form-control" placeholder="Search for code"}}
-    {{/unless}}
     {{#unless noactions}}
     {{view "header_actions" model=model}}
     {{/unless}}
+    {{view "searchbar" classname="col-sm-4" inputclass="form-control" placeholder="Search for code"}}
   </nav>
 </div>
