@@ -9,11 +9,24 @@
       <div class="col-sm-9">
         <div class="page-title">
           {{view "runnable_title" model=container}}
+          <ul class="tags">
+            {{#each image.attributes.tags}}
+              <li>{{view "tag_link" name=name}}
+            {{/each}}
+            {{#if isVerified}}
+              <li class="glyphicons plus">
+            {{/if}}
+          </ul>
+          {{!--
+          {{#if isVerified}}
+          {{view "runnable_new_tag_form" model=container}}
+          <aside>
+            Projects without tags will not be publicly listed on Runnable.
+          </aside>
+          {{/if}}
+          --}}
         </div>
-        {{!-- {{view "runnable_description" model=container}} --}}
         <div class="main-controls">
-          {{!-- {{view "dropdown_run_button" context=. editmode=true}} --}}
-          {{view "preview_button"}}
           {{view "save_button" collection=defaultFiles}}
           {{view "public_toggle" model=container}}
         </div>
@@ -31,11 +44,6 @@
   <section class="container">
     <div class="row">
       <ul id="sidebar" class="col-sm-12">
-        {{#if isVerified}}
-        <li class="services">
-          <h3>API Keys</h3>
-            {{view "runnable_specifications" model=container collection=specifications context=. editmode=isVerified}}
-        {{/if}}
         <li class="tags">
           <h3>Tags</h3>
           {{view "runnable_tags" model=container editmode=isVerified}}

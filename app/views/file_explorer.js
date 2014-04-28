@@ -6,15 +6,15 @@ module.exports = BaseView.extend({
   tagName: 'aside',
   id: 'file-explorer',
   events: {
-    'click .dark-theme'		     : 'setDarkTheme',
-    'click .light-theme'	     : 'setLightTheme',
-    'click .open-context-menu'	     : 'showFileMenu',
+    'click .dark-theme'              : 'setDarkTheme',
+    'click .light-theme'             : 'setLightTheme',
+    'click .open-context-menu'       : 'showFileMenu',
     'contextmenu .open-context-menu' : 'showFileMenu',
     'click [data-action="download"]' : 'showDownloadDialog',
     'drop #drop-to-add'              : 'uploadToRoot',
-    'dragover #drop-to-add' 	     : 'dragOver',
-    'dragleave #drop-to-add' 	     : 'dragLeave',
-    'click #rebuild'         	     : 'rebuild'
+    'dragover #drop-to-add'          : 'dragOver',
+    'dragleave #drop-to-add'         : 'dragLeave',
+    'click #rebuild'                 : 'rebuild'
   },
   showDownloadDialog: function () {
     modalHelpers.saveProjectMessage.call(this, function () {

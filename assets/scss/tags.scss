@@ -1,3 +1,12 @@
+.tags {
+  display: inline-block;
+
+  li {
+    @extend .tag;
+    margin-right: 5px;
+  }
+}
+
 .tag {
   background: $gray-lighter;
   border: 1px solid rgba(0,0,0,.1);
@@ -11,10 +20,10 @@
   line-height: 20px;
   position: relative;
   text-transform: uppercase;
-  transition: all .2s ease-in-out;
 
   > a {
     color: $gray-dark;
+    cursor: pointer;
     display: block;
     height: 100%;
     padding: 0 6px;
@@ -30,6 +39,7 @@
   &.active {
     border-color: $orange;
     color: $orange;
+    transform: translate3d(0,1px,0);
 
     > a {
       color: $orange;

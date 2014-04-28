@@ -156,9 +156,6 @@
   div {
 
     > ul {
-      display: inline-block;
-      margin: 0;
-      padding: 0;
 
       @include media(xs) {
         display: block;
@@ -175,16 +172,6 @@
 
     li {
       margin-bottom: 6px;
-    }
-  }
-
-  .tag {
-    cursor: pointer;
-    margin-right: 10px;
-    transition: none;
-
-    &:active {
-      transform: translate3d(0,1px,0);
     }
   }
 

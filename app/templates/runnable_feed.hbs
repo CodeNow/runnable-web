@@ -3,10 +3,10 @@
     <h2 class="col-sm-12"><a href="{{attributes.appUrl}}">{{attributes.name}}</a></h2>
     <div class="col-sm-12 clearfix">
       <data><span class="glyphicons play-button"></span><b>{{attributes.runs}}</b> Runs</data>
-      <ul>
+      <ul class="tags">
         {{#each attributes.tags}}
           {{#if this.display}}
-            <li class="tag {{#if this.isActiveFilter}}active{{/if}}">
+            <li{{#if this.isActiveFilter}} class="active"{{/if}}>
               <a href="/{{this.name}}">{{this.name}}</a>
           {{/if}}
         {{/each}}
