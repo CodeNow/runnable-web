@@ -16,6 +16,7 @@ module.exports = EditorButtonView.extend({
   },
   postRender: function () {
     this.listenTo(this.collection, "unsaved", this.onChangeUnsaved.bind(this));
+    this.app.dispatch.on('trigger:titleChange', this.onChangeUnsaved, this);
     this.onChangeUnsaved(this.collection.unsaved());
   },
   saveAll :function () {
