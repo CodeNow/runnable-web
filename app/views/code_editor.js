@@ -17,8 +17,8 @@ module.exports = BaseView.extend({
     this.projectEditorContainer = this.$el.find('#project-editor-container');
   },
   postHydrate: function () {
-    var collection = this.collection;
-    collection.on('change:selected', this.changeSelectedTab.bind(this));
+    //var collection = this.collection;
+    //collection.on('change:selected', this.changeSelectedTab.bind(this));
     var model = this.model;
     var canEdit = this.app.user.canEdit(model);
 

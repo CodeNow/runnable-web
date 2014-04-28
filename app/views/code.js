@@ -66,7 +66,7 @@ module.exports = BaseView.extend({
        - Assume models that have a 'content' property are files. Models without a
        'content' property are 'views'
      */
-    if (selected && _.isString(model.get('content'))) {
+    if (selected && model && _.isString(model.get('content'))) {
       this.setFile(model);
     }
   },
