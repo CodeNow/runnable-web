@@ -51,13 +51,13 @@
     padding: 0 20px 0 4px;
 
     > span {
+      color: darken($gray,10%);
       cursor: pointer;
       line-height: 18px;
       position: absolute;
         right: 4px;
 
       &:hover {
-        color: $gray-dark;
         font-size: 14px;
         right: 2px;
 
@@ -67,7 +67,7 @@
       }
 
       &:active {
-        color: $gray-darker;
+        color: $gray-dark;
       }
     }
   }
