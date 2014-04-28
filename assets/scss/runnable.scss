@@ -162,7 +162,8 @@
 
 // edit title and description
 #project-details {
-  height: 164px;
+  height: 180px;
+  overflow: hidden;
 
   input {
     color: $gray-darker;
@@ -343,7 +344,7 @@
 // main-controls
 .main-controls {
   @extend .clearfix;
-  margin: 15px 0 30px;
+  margin: 15px 0 0;
 
   @include media(xs) {
     margin: 10px 0;
@@ -499,7 +500,7 @@
 // #project
 #project {
   border-top: 1px solid rgba(0,0,0,.1);
-  height: calc(100% - 164px);
+  height: calc(100% - 180px);
   position: relative;
 }
 
