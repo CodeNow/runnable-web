@@ -10,6 +10,7 @@ module.exports = BaseView.extend({
   toggle: function (evt) {
     var $el = $(evt.currentTarget);
     var value = ($el.attr('data-value') === 'true');
+    this.$el.find('button').attr('disabled', 'disabled');
     var cb = function () {
       this.render();
     };

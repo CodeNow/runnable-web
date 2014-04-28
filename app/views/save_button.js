@@ -16,7 +16,7 @@ module.exports = EditorButtonView.extend({
   },
   postRender: function () {
     this.listenTo(this.collection, "unsaved", this.onChangeUnsaved.bind(this));
-    this.app.dispatch.on('trigger:titleChange', this.onChangeUnsaved, this);
+    this.app.dispatch.on('trigger:titleChange', this.onChangeUnsaved.bind(this));
     this.onChangeUnsaved(this.collection.unsaved());
   },
   saveAll :function () {
@@ -24,6 +24,7 @@ module.exports = EditorButtonView.extend({
     this.collection.saveAll(function (err) {
       this.disable(false);
       this.showIfError(err);
+      this.app.dispatch.trigger('trigger:saveAll');
     }, this);
   },
   onChangeUnsaved: function (bool) {

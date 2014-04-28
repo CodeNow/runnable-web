@@ -2,6 +2,7 @@ var BaseView = require('./base_view');
 var utils = require('../utils');
 var Image = require('../models/image');
 var _ = require('underscore');
+var keypather = require('keypather')();
 
 var Super = BaseView.prototype;
 module.exports = BaseView.extend({
@@ -12,12 +13,15 @@ module.exports = BaseView.extend({
     'submit form'                   : 'submitName',
     'click .cancel'                 : 'escEditMode'
   },
-  titleChange: function (evt) {
-    var $el = $(evt.currentTarget);
-    this.app.dispatch.trigger('trigger:titleChange', ($el.val() !== this.model.get('name')));
+  titleChange: function () {
+    var $el = this.$el.find('form input[name="name"]');
+    if ($el.val() === this.model.get('name'))
+      return;
+    this.app.dispatch.trigger('trigger:titleChange', true);
   },
   postRender: function () {
     this.listenTo(this.model, 'change:name change:tags', this.render.bind(this));
+    this.app.dispatch.on('trigger:saveAll', this.submitName, this);
   },
   getTemplateData: function () {
     this.model.virtual.nameWithTags = this.model.nameWithTags(true);
@@ -37,8 +41,10 @@ module.exports = BaseView.extend({
   //   this.render();
   // },
   submitName: function (evt) {
-    evt.preventDefault();
-    var formData = $(evt.currentTarget).serializeObject();
+    if (_.isFunction(keypather.get(evt, 'preventDefault')))
+      evt.preventDefault();
+    var $form = this.$el.find('form');
+    var formData = $form.serializeObject();
     // this.options.editmode = false; // assume success, change will rerender
     if (formData.name === this.model.get('name')) {
       return this.render();
@@ -53,7 +59,7 @@ module.exports = BaseView.extend({
       } else if (err) {
         this.showError(err);
       } else {
-        this.setEditMode(false);
+        this.app.dispatch.trigger('trigger:titleChange', false);
       }
     }
   }
