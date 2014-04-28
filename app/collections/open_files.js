@@ -18,10 +18,11 @@ module.exports = Base.extend({
     this.model = function (attrs, opts) {
       opts = opts || {};
       opts.app = self.app;
-      console.log('test ', _.isString(attrs.content));
-      return (_.isString(attrs.content)) ?
-        new File(attrs, opts) :
+      opts.containerId = this.containerId;
+      var model = (_.isString(attrs.content)) ?
+        new File(attrs, opts):
         new View(attrs, opts);
+      return model;
     };
 
     Super.initialize.apply(this, arguments);
@@ -142,7 +143,7 @@ module.exports = Base.extend({
     if (ctx) cb = cb.bind(ctx);
     if (this.unsaved()) {
       var unsavedFiles = this.toArray().filter(function (file) {
-        return file.unsaved();
+        return file.unsaved() && (file.get('type') === 'file');
       });
       async.forEach(unsavedFiles, function (file, acb) {
         var options = utils.cbOpts(acb);

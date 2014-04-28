@@ -8,8 +8,13 @@ module.exports = BaseView.extend({
   tagName:'h1',
   events: {
     // 'click .edit'   : 'clickEdit',
-    'submit form'   : 'submitName',
-    'click .cancel' : 'escEditMode'
+    'keyup form input[name="name"]' : 'titleChange',
+    'submit form'                   : 'submitName',
+    'click .cancel'                 : 'escEditMode'
+  },
+  titleChange: function (evt) {
+    var $el = $(evt.currentTarget);
+    this.app.dispatch.trigger('trigger:titleChange', ($el.val() !== this.model.get('name')));
   },
   postRender: function () {
     this.listenTo(this.model, 'change:name change:tags', this.render.bind(this));
