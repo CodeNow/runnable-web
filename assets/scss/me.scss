@@ -109,19 +109,6 @@ button.btn-sm, .btn-xs {
   width: 100%;
 }
 
-#runnable-tags-edit {
-
-  .form-control {
-    display:inline-block;
-    width: calc(100% - 95px);
-  }
-
-  button {
-    float: right;
-    min-width: 85px;
-  }
-}
-
 #output #primary .form-control {
   width: 600px;
 }

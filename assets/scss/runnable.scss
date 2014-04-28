@@ -79,14 +79,32 @@
 
   .tags {
     margin-top: 5px;
+  }
+}
 
-    > .plus {
-      background: none;
-      border: 0;
-      box-shadow: none;
-      cursor: pointer;
-      padding: 0 5px;
-    }
+#new-tag {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  cursor: pointer;
+  padding: 0 5px;
+  top: 0;
+
+  > .popover {
+    cursor: default;
+    left: -10px;
+    top: 14px;
+    transform-origin: 0 0;
+    width: 240px;
+    z-index: $zpopover;
+  }
+
+  .arrow {
+    left: 19px;
+  }
+
+  button {
+    width: 100%;
   }
 }
 

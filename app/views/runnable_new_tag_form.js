@@ -5,8 +5,8 @@ var utils = require('../utils');
 
 
 module.exports = BaseView.extend({
-  tagName: 'form',
   id: 'runnable-tags-edit',
+  className: 'popover fade bottom',
   events: {
     'submit' : 'addNewTag'
   },

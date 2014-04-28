@@ -14,17 +14,9 @@
               <li>{{view "tag_link" name=name editmode=true}}
             {{/each}}
             {{#if isVerified}}
-              <li class="glyphicons plus">
+              {{view "runnable_new_tag" model=container}}
             {{/if}}
           </ul>
-          {{!--
-          {{#if isVerified}}
-          {{view "runnable_new_tag_form" model=container}}
-          <aside>
-            Projects without tags will not be publicly listed on Runnable.
-          </aside>
-          {{/if}}
-          --}}
         </div>
         <div class="main-controls">
           {{view "save_button" collection=defaultFiles}}
@@ -39,24 +31,6 @@
     {{view "code_editor" context=. editmode=true model=container}}
     {{view "rebuild_loader"}}
   </section>
-
-  {{!--
-  <section class="container">
-    <div class="row">
-      <ul id="sidebar" class="col-sm-12">
-        <li class="tags">
-          <h3>Tags</h3>
-          {{view "runnable_tags" model=container editmode=isVerified}}
-          {{#if isVerified}}
-          {{view "runnable_new_tag_form" model=container}}
-          <aside>
-            Projects without tags will not be publicly listed on Runnable.
-          </aside>
-          {{/if}}
-      </ul>
-    </div>
-  </section>
-  --}}
 </main>
 
 {{view "footer_view" model=user context=.}}
