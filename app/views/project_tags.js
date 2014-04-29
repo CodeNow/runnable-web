@@ -17,7 +17,11 @@ module.exports = BaseView.extend({
       app: this.app,
       url: '/users/me/runnables/'+this.model.id+'/tags'
     });
-    this.listenTo(this.model, 'change:tags', this.render.bind(this));
+    this.listenTo(this.model, 'change:tags', this.onChange.bind(this));
+  },
+  onChange: function () {
+    this.collection.reset(this.model.get('tags'));
+    this.render();
   },
   getTemplateData: function () {
     var opts = this.options;
