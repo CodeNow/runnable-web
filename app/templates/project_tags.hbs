@@ -1,5 +1,5 @@
   {{#each model.attributes.tags}}
-    <li>{{view "tag_link" name=name editmode=true}}
+    <li>{{view "tag_link" name=name editmode=true model=../model}}
   {{/each}}
   {{#if isVerified}}
     {{view "runnable_new_tag" model=model}}

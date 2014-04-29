@@ -11,7 +11,7 @@ module.exports = BaseView.extend({
     'submit form' : 'addNewTag'
   },
   postHydrate: function () {
-    this.collection = new Tags(this.model.get('tags'), { app: this.app, runnableId:this.model.id  });
+    this.collection = new Tags(this.model.get('tags'), { app: this.app, runnableId:this.model.id });
     this.listenTo(this.collection, 'add remove change', this.collectionChange.bind(this));
     this.listenTo(this.model, 'change:tags', this.onChange.bind(this));
   },

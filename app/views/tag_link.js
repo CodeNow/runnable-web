@@ -2,6 +2,12 @@ var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
   tagName: 'a',
+  events: {
+    'click .remove-2': 'remove'
+  },
+  remove: function () {
+
+  },
   preRender: function () {
     var self = this;
     var opts = self.options;
