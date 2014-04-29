@@ -11,7 +11,7 @@
           {{view "runnable_title" model=image}}
           {{view "runnable_stats" model=image}}
           {{#if image.attributes.tags.length}}
-          {{view "runnable_tags" model=container editmode=isVerified}}
+          {{view "project_tags" model=container}}
           {{/if}}
         </div>
         <div class="main-controls">
