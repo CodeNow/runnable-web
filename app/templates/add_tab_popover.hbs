@@ -2,6 +2,11 @@
 <div class="popover-content">
   <div id="add-tab-options">
     <ul class="popover-body">
+      <li id="shortcut">
+        <a>
+          <object class="iconnables" data="/images/icons/icons-shortcut.svg" type="image/svg+xml"></object>
+          Shortcut
+        </a>
       <li>
         <a>
           <object class="iconnables" data="/images/icons/icons-terminal.svg" type="image/svg+xml"></object>
@@ -9,8 +14,8 @@
         </a>
       <li>
         <a>
-          <span class="glyphicons redo"></span>
-          Shortcut
+          <object class="iconnables" data="/images/icons/icons-logs.svg" type="image/svg+xml"></object>
+          Run Log
         </a>
     </ul>
   </div>
@@ -34,7 +39,7 @@
         </button>
       {{!-- {{/if}} --}}
     </ul>
-    <button class="silver" type="button">New Shortcut</button>
+    <button id="new-shortcut-button" class="orange" type="button">New Shortcut</button>
   </div>
 
   <form id="new-shortcut">

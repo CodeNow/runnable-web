@@ -146,10 +146,19 @@ header {
     float: right;
     height: 36px;
     line-height: 1;
-    margin: 9px auto;
+    margin: 0 0 9px;
+
+    @include media(xs) {
+      width: 100%;
+    }
+
+    @include media(sm) {
+      margin: 11px auto 0;
+    }
 
     input {
       box-shadow: none;
+      height: 34px;
       width: 100%;
 
       &:focus {
@@ -159,6 +168,8 @@ header {
     }
 
     button {
+      background: transparent;
+      height: 32px;
       right: 15px;
     }
   }
