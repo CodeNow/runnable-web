@@ -144,7 +144,7 @@
   top: 32px;
   transform-origin: 180px 0;
   transition: opacity .2s, transform .15s, width .2s ease-in-out;
-  width: 200px;
+  width: 300px;
 
   .arrow {
     left: auto;
@@ -180,10 +180,11 @@
   }
 
   li {
+    border-left: 1px solid rgba(0,0,0,.1);
     cursor: pointer;
     float: left;
     text-align: center;
-    width: 50%;
+    width: calc(100% / 3);
 
     > a {
       color: $gray-dark;
@@ -211,7 +212,7 @@
     }
 
     &:first-child {
-      border-right: 1px solid rgba(0,0,0,.1);
+      border-left: 0;
     }
   }
 
