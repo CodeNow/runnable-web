@@ -45,6 +45,7 @@
   }
 
   @include media(xs) {
+    padding: 0 15px;
     position: static;
     width: 100%;
   }
