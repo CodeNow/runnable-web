@@ -9,12 +9,17 @@
       <div class="col-sm-9">
         <div class="page-title">
           {{view "runnable_title" model=container}}
+          {{view "project_tags" model=container}}
+          <!--
           <ul class="tags">
-            {{view "project_tags" model=container}}
+            {{#each container.attributes.tags}}
+              <li>{{view "tag_link" name=name editmode=true}}
+            {{/each}}
             {{#if isVerified}}
               {{view "runnable_new_tag" model=container}}
             {{/if}}
           </ul>
+          -->
         </div>
         <div class="main-controls">
           {{view "save_button" collection=defaultFiles}}
