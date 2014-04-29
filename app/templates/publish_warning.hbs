@@ -1,15 +1,17 @@
 <section class="status-bar">
   <div class="container">
     <div class="row">
-      {{!--
-      {{#if canPublishBack}}
-        <button id="pubwarn-back-button">Publish</button>
+      {{#if previewmode}}
+        <button class="purple" type="button">Update Dockerfiles</button>
+        <button class="silver" type="button">Exit Preview</button>
+        <p>
+          You've made changes to your container that need to be updated in your dockerfile. Your changes will appear once you update your dockerfile.
+      {{else}}
+        {{view "preview_button"}}
+        <p>
+          <strong>You're in <b>Edit Mode</b>!</strong>
+          <span> Preview it to see what the public sees.</span>
       {{/if}}
-      <button id="pubwarn-new-button">Publish as a New Project</button>
-      --}}
-      {{view "preview_button"}}
-
-      <p><strong>You're in <b>Edit Mode</b>!</strong><span> Preview it to see what the public sees.</span></p>
     </div><!--/.row-->
   </div><!--/.container-->
   {{view "publish_loader" model=model}}

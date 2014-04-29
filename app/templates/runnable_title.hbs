@@ -1,6 +1,6 @@
 {{#if canedit}}
   <form>
-    <input class="form-control" name="name" placeholder="Give your code example a title" value="{{model.attributes.name}}" maxlength="2000" autofocus required>
+    <input class="form-control" name="name" placeholder="Give your code example a title" value="{{model.attributes.name}}" maxlength="2000" required>
   </form>
 {{else}}
   <span>{{model.virtual.nameWithTags}}</span>
