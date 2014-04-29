@@ -8,7 +8,7 @@ module.exports = BaseView.extend({
   id: 'runnable-tags-edit',
   className: 'popover fade bottom',
   events: {
-    'submit' : 'addNewTag'
+    'submit form' : 'addNewTag'
   },
   postHydrate: function () {
     this.collection = new Tags(this.model.get('tags'), { app: this.app, runnableId:this.model.id  });

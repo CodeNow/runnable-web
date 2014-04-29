@@ -10,9 +10,7 @@
         <div class="page-title">
           {{view "runnable_title" model=container}}
           <ul class="tags">
-            {{#each image.attributes.tags}}
-              <li>{{view "tag_link" name=name editmode=true}}
-            {{/each}}
+            {{view "project_tags" model=container}}
             {{#if isVerified}}
               {{view "runnable_new_tag" model=container}}
             {{/if}}
