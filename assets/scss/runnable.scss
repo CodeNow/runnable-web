@@ -32,12 +32,12 @@
 }
 
 .project-container {
-  height: calc(100% - 138px);
-  margin: 30px 0 0;
+  height: calc(100% - 123px);
+  margin: 15px 0 0;
 }
 
 .status-bar ~ .project-container {
-  height: calc(100% - 192px);
+  height: calc(100% - 177px);
 }
 
 // image/container title
@@ -180,8 +180,13 @@
 
 // edit title and description
 #project-details {
-  height: 158px;
+  height: 173px;
   overflow: visible;
+
+  > .row,
+  > .row > .col-sm-9 {
+    height: 100%;
+  }
 
   input {
     color: $gray-darker;
@@ -205,6 +210,14 @@
     font-size: 18px;
     line-height: 0;
     padding: 0 8px;
+  }
+
+  data {
+    font-size: 12px;
+  }
+
+  h2 {
+    margin: 0;
   }
 }
 
@@ -362,7 +375,8 @@
 // main-controls
 .main-controls {
   @extend .clearfix;
-  margin: 10px 0 0;
+  position: absolute;
+    bottom: 30px;
 
   > .btn-group,
   > button {
@@ -514,7 +528,7 @@
 // #project
 #project {
   border-top: 1px solid rgba(0,0,0,.1);
-  height: calc(100% - 158px);
+  height: calc(100% - 173px);
   position: relative;
 }
 
