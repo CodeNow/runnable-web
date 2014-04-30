@@ -165,7 +165,7 @@
 
 // rebuild-loader
 #rebuild-loader {
-  background: rgba(255,255,255,.85);
+  background: rgba(0,0,0,.85);
   height: 100%;
   opacity: 0;
   position: absolute;
@@ -181,20 +181,17 @@
 
     .loader {
       display: block;
-
-      > div {
-        background: rgba(0,0,0,.2);
-      }
     }
   }
 
   > pre {
     background: transparent;
+    color: #fff;
     margin: 0 auto;
     max-height: calc(100% - 129px);
     max-width: 80%;
-    top: 45px;
     overflow-y: scroll;
+    top: 45px;
 
     @include media(xs) {
       margin: 0 15px;
