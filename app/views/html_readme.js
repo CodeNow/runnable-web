@@ -87,7 +87,7 @@ module.exports = BaseView.extend({
     if (!readmeFile) {
       if (this.options.editmode) { // container page
         opts.html = '<div class="readme-help">'
-                    + '<h3>You should <a id="create-readme">create a README.md</a>.</h3>'
+                    + '<h3><a id="create-readme">Create a README.md</a>.</h3>'
                     + '<a href="http://daringfireball.net/projects/markdown/" target="_blank">Markdown Help</a>'
                     + '</div>';
       }
