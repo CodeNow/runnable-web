@@ -190,9 +190,22 @@
 
   > pre {
     background: transparent;
-    margin: -54px auto 0;
-    max-height: 50%;
-    max-width: 75%;
+    margin: 0 auto;
+    max-height: calc(100% - 129px);
+    max-width: 80%;
+    top: 45px;
     overflow-y: scroll;
+
+    @include media(xs) {
+      margin: 0 15px;
+      max-width: 100%;
+    }
+  }
+
+  > .loader {
+    height: 54px;
+    margin-top: 0;
+    top: 30px;
+    width: 54px;
   }
 }
