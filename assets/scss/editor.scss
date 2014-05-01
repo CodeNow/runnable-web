@@ -370,10 +370,6 @@
     overflow: hidden;
   }
 
-  .ace_scroller {
-    // bottom: -20px;
-  }
-
   .ace_text-input {
     font-size: 16px;
   }
@@ -459,8 +455,4 @@
 // pre
 #project-editor {
   height: 100% !important;
-}
-
-.ace_text-layer {
-  height: calc(100% - 36px) !important;
 }

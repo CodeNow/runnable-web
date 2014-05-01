@@ -12,9 +12,9 @@ module.exports = BaseView.extend({
     'click .plus'                    : 'showFileMenu',
     'contextmenu .open-context-menu' : 'showFileMenu',
     'click [data-action="download"]' : 'showDownloadDialog',
-    'drop #drop-to-add'              : 'uploadToRoot',
-    'dragover #drop-to-add'          : 'dragOver',
-    'dragleave #drop-to-add'         : 'dragLeave',
+    // 'drop #drop-to-add'              : 'uploadToRoot',
+    // 'dragover #drop-to-add'          : 'dragOver',
+    // 'dragleave #drop-to-add'         : 'dragLeave',
     'click #rebuild'                 : 'rebuild'
   },
   showDownloadDialog: function () {
@@ -28,14 +28,12 @@ module.exports = BaseView.extend({
   adjustTreeHeight: function () {
     var thisHeight = this.$el.height();
     var buildHeight = this.$('#build-files').height();
-    var $subTree = this.$('.sub-tree');
 
     if (buildHeight > thisHeight/2) {
-      $subTree.css('max-height','50%');
+      this.$('.sub-tree').css('max-height','50%');
     }
     else {
-      var containerHeight = thisHeight - buildHeight;
-      this.$('#container-files').height(containerHeight);
+      this.$('#container-files').height(thisHeight - buildHeight);
     }
   },
   showFileMenu: function (evt) {
