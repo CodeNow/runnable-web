@@ -23,6 +23,20 @@ module.exports = BaseView.extend({
   },
   postRender: function () {
     this.fileRoot = _.findWhere(this.childViews, {name:'file_tree'});
+    this.adjustTreeHeight();
+  },
+  adjustTreeHeight: function () {
+    var thisHeight = this.$el.height();
+    var buildHeight = this.$('#build-files').height();
+    var $subTree = this.$('.sub-tree');
+
+    if (buildHeight > thisHeight/2) {
+      $subTree.css('max-height','50%');
+    }
+    else {
+      var containerHeight = thisHeight - buildHeight;
+      this.$('#container-files').height(containerHeight);
+    }
   },
   showFileMenu: function (evt) {
     evt.preventDefault();
@@ -62,6 +76,12 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     return this.options;
+  },
+  postHydrate: function () {
+    $(window).resize(this.adjustTreeHeight.bind(this));
+  },
+  remove: function () {
+    $(window).unbind('resize', this.adjustTreeHeight);
   }
 });
 

@@ -12,7 +12,7 @@
   // file tree
   .nav {
     font-size: 12px;
-    height: calc(100% - 54px);
+    height: calc(100% - 28px);
     overflow: auto;
     padding: 1px 0 0;
 
@@ -244,10 +244,11 @@
 }
 
 
-// .file-header
-.file-header {
+// .sub-tree
+.sub-tree {
   border-bottom: 1px solid rgba(0,0,0,.1);
   box-shadow: inset 0 1px 0 #fff;
+  overflow-y: scroll;
   position: relative;
 
   &:last-child {

@@ -4,7 +4,7 @@ module.exports = BaseView.extend({
   tagName: 'li',
   id: 'new-tag',
   events: {
-    'click .plus' : 'togglePopover'
+    'click' : 'togglePopover'
   },
   togglePopover: function () {
     this.$('.popover').toggleClass('in');
