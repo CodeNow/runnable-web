@@ -32,6 +32,7 @@ $orange-dark:    darken($orange,5);
 $orange-darker:  darken($orange,13);
 
 $light-yellow:   #ffffe0;
+$dark-yellow:    darken(desaturate($light-yellow,65),45);
 
 // z-indexes
 $z-hide: -10000;
