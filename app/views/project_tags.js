@@ -26,7 +26,7 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     var opts = this.options;
     return _.extend(opts, {
-      isVerified: this.app.user.isVerified()
+      canEditTags: (opts.edit && this.app.user.isVerified())
     });
   },
   removeTag: function (evt) {
