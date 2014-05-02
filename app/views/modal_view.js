@@ -2,7 +2,7 @@ var BaseView = require('./base_view');
 var Super = BaseView.prototype;
 
 module.exports = BaseView.extend({
-  className: 'modal fade',
+  className: 'modal',
   modalOptions: {},
   preRender: function () {
     if (this.modalIsInBody()) {

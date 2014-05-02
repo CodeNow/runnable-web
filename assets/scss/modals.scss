@@ -1,4 +1,10 @@
 .modal {
+  opacity: 0;
+  transform: scale3d(.7,.7,1);
+
+  &.in {
+    animation: modalIn .2s forwards;
+  }
 
   .modal-dialog {
     width: 30%;
@@ -103,6 +109,16 @@
   .popover {
     font-weight: normal;
     z-index: 1050;
+  }
+}
+
+.modal-backdrop {
+  background: rgba(0,0,0,.85);
+  opacity: 0;
+
+  &.in {
+    animation: fadeIn .2s forwards;
+    opacity: 1;
   }
 }
 
