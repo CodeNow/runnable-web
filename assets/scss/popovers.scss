@@ -139,11 +139,16 @@
 #add-tab .popover {
   cursor: default;
   display: block;
+  height: 90px;
   left: auto;
   right: -6px;
   top: 32px;
-  transform-origin: 180px 0;
-  transition: opacity .2s, transform .15s, width .2s ease-in-out;
+  transform-origin: 250px -15px;
+  transition:
+    height .2s,
+    opacity .2s,
+    transform .15s,
+    width .2s ease-in-out;
   width: 300px;
 
   .arrow {
@@ -161,7 +166,10 @@
   }
 
   .popover-content {
+    height: 86px;
+    overflow: hidden;
     padding: 7px;
+    transition: height .2s;
   }
 
   .popover-footer {
@@ -233,6 +241,11 @@
   }
 
   &.show-shortcuts {
+    height: 139px;
+
+    .popover-content {
+      height: 135px;
+    }
 
     #shortcuts {
       display: block;
@@ -318,6 +331,11 @@
   }
 
   &.show-new-shortcut {
+    height: 309px;
+
+    .popover-content {
+      height: 305px;
+    }
 
     #new-shortcut {
       display: block;
