@@ -385,6 +385,12 @@
     }
   }
 
+  .flash {
+    font-size: 16px;
+    margin-left: -6px;
+    top: 3px;
+  }
+
   .run-button {
     @media (max-width: 360px) {
       > span {
@@ -402,7 +408,8 @@
   }
 
   > #improve-btn,
-  > .toggles {
+  > .toggles,
+  > .silver {
     margin-left: 10px;
   }
 
