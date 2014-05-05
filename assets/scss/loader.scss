@@ -184,25 +184,66 @@
     }
   }
 
+  > div {
+    cursor: pointer;
+    height: 54px;
+    margin: 0 auto;
+    position: absolute;
+      right: 0;
+      bottom: 45px;
+      left: 0;
+    width: 54px;
+
+    > .loader {
+      height: 54px;
+      margin-top: -27px;
+      transition: opacity .2s;
+      width: 54px;
+
+      > div {
+        background: #fff;
+      }
+    }
+
+    > a {
+      background: #fff;
+      border-radius: 50%;
+      color: #000;
+      cursor: pointer;
+      display: block;
+      font-weight: 700;
+      height: 70px;
+      line-height: 70px;
+      margin: -35px 0 0 -9px;
+      transform: scale3d(0,0,1);
+      transition: transform .25s .1s;
+      width: 70px;
+    }
+
+    &:hover {
+
+      > .loader {
+        opacity: 0;
+      }
+
+      a {
+        transform: scale3d(1,1,1);
+      }
+    }
+  }
+
   > pre {
     background: transparent;
     color: #fff;
     margin: 0 auto;
-    max-height: calc(100% - 129px);
+    max-height: calc(100% - 171px);
     max-width: 80%;
     overflow-y: scroll;
-    top: 45px;
+    top: 30px;
 
     @include media(xs) {
       margin: 0 15px;
       max-width: 100%;
     }
-  }
-
-  > .loader {
-    height: 54px;
-    margin-top: 0;
-    top: 30px;
-    width: 54px;
   }
 }
