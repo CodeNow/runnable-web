@@ -4,9 +4,12 @@ var utils = require('../utils');
 var modalHelpers = require('../helpers/modals');
 
 module.exports = BaseView.extend({
+  previewmode: false,
   events: {
-    'click #pubwarn-new-button' : 'publishNew',
-    'click #pubwarn-back-button': 'publishBack'
+    'click button[data-view="preview_button"]': 'click_preview',
+    'click button[data-action="exit"]':         'click_preview',
+    'click #pubwarn-new-button' :               'publishNew',
+    'click #pubwarn-back-button':               'publishBack'
   },
   className: 'status-bar',
   postHydrate: function () {
@@ -18,6 +21,7 @@ module.exports = BaseView.extend({
     var user = this.app.user;
     var parentOwner = opts.parentowner;
     var parentId = opts.parentid; // used to check parent existance
+    opts.previewmode = this.previewmode;
 
     opts.canPublishBack = parentId && user.canEdit({owner: parentOwner}) ;
     return this.options;
@@ -25,6 +29,10 @@ module.exports = BaseView.extend({
   postRender: function () {
     this.$pubNew = $('#pubwarn-new-button');
     this.$pubBack = $('#pubwarn-back-button');
+  },
+  click_preview: function (evt) {
+    this.previewmode = !this.previewmode;
+    this.render();
   },
   publishNew: function () {
     var self = this;
