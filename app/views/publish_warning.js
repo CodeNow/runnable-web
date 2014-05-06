@@ -32,7 +32,9 @@ module.exports = BaseView.extend({
   },
   click_preview: function (evt) {
     this.previewmode = !this.previewmode;
-    this.render();
+    this.app.dispatch.trigger('toggle:preview', this.previewmode);
+
+    //this.render();
   },
   publishNew: function () {
     var self = this;

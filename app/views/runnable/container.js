@@ -5,6 +5,16 @@ module.exports = BaseView.extend({
   id: 'runnable',
   postHydrate: function () {
     this.listenTo(this.app.user, 'change:_id', this.render.bind(this));
+    this.app.dispatch.on('toggle:preview', this.toggle_preview.bind(this));
+  },
+  toggle_preview: function (previewBool) {
+    if (previewBool) {
+      this.$el.find('#project-details-edit').hide();
+      this.$el.find('#project-details-preview').show();
+    } else {
+      this.$el.find('#project-details-edit').show();
+      this.$el.find('#project-details-preview').hide();
+    }
   },
   getTemplateData: function () {
     var opts = this.options;
