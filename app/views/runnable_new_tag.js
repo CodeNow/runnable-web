@@ -8,6 +8,7 @@ module.exports = BaseView.extend({
   },
   togglePopover: function () {
     this.$('.popover').toggleClass('in');
+    this.$('.popover input[name="name"]').focus();
   }
 });
 
