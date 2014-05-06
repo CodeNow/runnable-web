@@ -5,9 +5,9 @@
 
 <main class="project-container">
   <section id="project-details" class="container">
- 
 
-    <div id="project-details-edit" class="row">
+
+    <div style="display:none;" id="project-details-preview" class="row">
       <div class="col-sm-9">
         <div class="page-title">
           {{view "runnable_title" model=image}}
@@ -26,7 +26,7 @@
     </div>
 
 
-    <div style="display:none;" id="project-details-preview" class="row">
+    <div id="project-details-edit" class="row">
       <div class="col-sm-9">
         <div class="page-title">
           {{view "runnable_title" model=container}}
