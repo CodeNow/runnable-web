@@ -7,9 +7,6 @@ module.exports = BaseView.extend({
     'click' : 'enterPreview'
   },
   enterPreview: function () {
-    // changes status bar text
-    $('#runnable').addClass('preview');
-
     // preview needs to be rebuilt, show loader
     $('#project').addClass('out');
   }
