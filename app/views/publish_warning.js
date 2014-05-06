@@ -34,6 +34,9 @@ module.exports = BaseView.extend({
     this.previewmode = !this.previewmode;
     this.app.dispatch.trigger('toggle:preview', this.previewmode);
 
+    // changes status bar text
+    $('#runnable').toggleClass('preview');
+
     //this.render();
   },
   publishNew: function () {
