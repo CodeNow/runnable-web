@@ -1,7 +1,6 @@
 var BaseView = require('./base_view');
 
 module.exports = BaseView.extend({
-  tagName: 'div',
   thumbsDirection: 'none',
   className: 'popover fade bottom',
   events: {
@@ -46,10 +45,10 @@ module.exports = BaseView.extend({
   submitFeedback: function (evt) {
     evt.preventDefault();
     var self = this;
-    var description = "Feedback: " + $(".feedback-description")[0].value + "\n\n\n" + 
+    var description = "Feedback: " + $(".feedback-description")[0].value + "\n\n\n" +
 
-                      "User: " + this.app.user.get("username") + "\n\n\n" + 
-                      "User_id: " + this.app.user.id + "\n\n\n" + 
+                      "User: " + this.app.user.get("username") + "\n\n\n" +
+                      "User_id: " + this.app.user.id + "\n\n\n" +
                       "thumbsDirection: " + this.app.thumbsDirection;
 
 
@@ -59,7 +58,7 @@ module.exports = BaseView.extend({
     $.ajax({
       type: "POST",
       url: "/api/-/request/improve",
-      data: { 
+      data: {
         url: "http://runnable.com" + window.location.pathname,
         description : description
       },

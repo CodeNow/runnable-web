@@ -15,7 +15,8 @@ module.exports = BaseView.extend({
     // 'drop #drop-to-add'              : 'uploadToRoot',
     // 'dragover #drop-to-add'          : 'dragOver',
     // 'dragleave #drop-to-add'         : 'dragLeave',
-    'click #rebuild'                 : 'rebuild'
+    'click #rebuild'                 : 'rebuild',
+    'click #tip'                     : 'showPreviewPopover'
   },
   showDownloadDialog: function () {
     modalHelpers.saveProjectMessage.call(this, function () {
@@ -67,6 +68,9 @@ module.exports = BaseView.extend({
   },
   rebuild: function () {
     $('#project').addClass('out');
+  },
+  showPreviewPopover: function () {
+    this.$('#preview-popover').toggleClass('in');
   },
   stopPropagation: function (evt) {
     evt.stopPropagation();

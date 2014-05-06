@@ -7,10 +7,10 @@
   <li data-action="download" class="pull-right tooltip" data-title="Download">
     <span class="glyphicons disk-save"></span>
   </li>
-  --}}
   {{#unless lock}}
     {{view "sync_button" model=container}}
   {{/unless}}
+  --}}
 </ul>
 
 {{!--
@@ -60,7 +60,9 @@
     {{#if editmode}}
     <div class="btn-group">
       <button id="rebuild" type="button" class="silver btn-sm">Rebuild</button>
+      <button id="tip" type="button" class="silver btn-sm glyphicons warning-sign"></button>
       <button type="button" class="silver btn-sm glyphicons plus"></button>
+      {{view "preview_popover"}}
     </div>
     {{else}}
     <button type="button" class="silver btn-sm glyphicons plus"></button>
