@@ -63,3 +63,19 @@
     color: $dark-yellow;
   }
 }
+
+// preview
+.preview-bar {
+  display: none;
+}
+
+.preview {
+
+  .preview-bar {
+    display: block;
+  }
+
+  .sandbox-bar {
+    display: none;
+  }
+}

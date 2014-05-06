@@ -1,17 +1,17 @@
 <section class="status-bar">
   <div class="container">
     <div class="row">
-      {{#if previewmode}}
-        <button class="purple" type="button">Update Dockerfiles</button>
+      <div class="preview-bar">
         <button class="silver" type="button">Exit Preview</button>
         <p>
-          You've made changes to your container that need to be updated in your dockerfile. Your changes will appear once you update your dockerfile.
-      {{else}}
+          If you've made changes to your container, you'll need to update your dockerfile.
+      </div>
+      <div class="sandbox-bar">
         {{view "preview_button"}}
         <p>
           <strong>You're in <b>Edit Mode</b>!</strong>
           <span> Preview it to see what the public sees.</span>
-      {{/if}}
+      </div>
     </div><!--/.row-->
   </div><!--/.container-->
   {{view "publish_loader" model=model}}
