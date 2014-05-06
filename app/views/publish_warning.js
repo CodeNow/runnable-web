@@ -6,10 +6,10 @@ var modalHelpers = require('../helpers/modals');
 module.exports = BaseView.extend({
   previewmode: false,
   events: {
-    'click button[data-view="preview_button"]': 'click_preview',
-    'click button[data-action="exit"]':         'click_preview',
-    'click #pubwarn-new-button' :               'publishNew',
-    'click #pubwarn-back-button':               'publishBack'
+    'click #preview-button'      : 'click_preview',
+    'click #exit-preview-button' : 'click_preview',
+    'click #pubwarn-new-button'  : 'publishNew',
+    'click #pubwarn-back-button' : 'publishBack'
   },
   className: 'status-bar',
   postHydrate: function () {
@@ -36,6 +36,9 @@ module.exports = BaseView.extend({
 
     // changes status bar text
     $('#runnable').toggleClass('preview');
+
+    // hides/shows build loader
+    $('#project').toggleClass('out');
 
     //this.render();
   },

@@ -2,15 +2,14 @@
   <div class="container">
     <div class="row">
       <div class="preview-bar">
-        <button data-action="exit" class="silver" type="button">Exit Preview</button>
+        <button id="exit-preview-button" class="purple" type="button"><span class="glyphicons unshare"></span>Exit Preview</button>
         <p>
           If you've made changes to your container, you'll need to update your dockerfile.
       </div>
       <div class="sandbox-bar">
-        {{view "preview_button"}}
+        <button id="preview-button" class="purple" type="button"><span class="glyphicons imac"></span> Public Preview</button>
         <p>
-          <strong>You're in <b>Edit Mode</b>!</strong>
-          <span> Preview it to see what the public sees.</span>
+          Preview will show you what the public sees.
       </div>
     </div><!--/.row-->
   </div><!--/.container-->

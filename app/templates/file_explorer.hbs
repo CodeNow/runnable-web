@@ -25,10 +25,7 @@
   <h6>
     BUILD FILES
     {{#if editmode}}
-    <div class="btn-group">
-      <button id="rebuild" type="button" class="silver btn-sm">Rebuild</button>
-      <button type="button" class="silver btn-sm glyphicons plus"></button>
-    </div>
+    <button type="button" class="silver btn-sm glyphicons plus"></button>
     {{/if}}
   </h6>
   {{!--demo data--}}
@@ -60,7 +57,14 @@
   <a></a>
   <h6>
     CONTAINER
+    {{#if editmode}}
+    <div class="btn-group">
+      <button id="rebuild" type="button" class="silver btn-sm">Rebuild</button>
+      <button type="button" class="silver btn-sm glyphicons plus"></button>
+    </div>
+    {{else}}
     <button type="button" class="silver btn-sm glyphicons plus"></button>
+    {{/if}}
   </h6>
   <ul class="nav nav-pills nav-stacked">
     {{view "file_tree" model=rootDir editmode=editmode}}

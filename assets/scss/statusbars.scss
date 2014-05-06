@@ -73,6 +73,10 @@
 
   .preview-bar {
     display: block;
+
+    .unshare {
+      margin-left: -4px;
+    }
   }
 
   .sandbox-bar {
