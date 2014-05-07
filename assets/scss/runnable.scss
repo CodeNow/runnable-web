@@ -67,8 +67,8 @@
     > span {
       display: block;
       float: left;
-      margin-right: 15px;
-      max-width: calc(100% - 134px);
+      margin-right: 10px;
+      max-width: calc(100% - 125px);
       text-overflow: ellipsis;
 
       @include media(sm) {

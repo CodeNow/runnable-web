@@ -33,7 +33,7 @@ var aceScripts = [
   'public/vendor/ace-bundle/*.js'
 ];
 var frontendScripts = [
-  'public/vendor/bower/jquery/jquery.js',
+  'public/vendor/bower/jquery/dist/jquery.js',
   'public/vendor/jquery-ui-custom/js/jquery-ui-1.10.3.custom.min.js',
   'public/vendor/modernizr/modernizr.custom.64268.js',
   'public/vendor/*.js', //include jquery plugins, must be after jquery

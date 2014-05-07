@@ -35,6 +35,12 @@
   display: block;
   height: 30px;
   margin: 0 auto;
+  pointer-events: none;
   position: relative;
   width: 30px;
+
+  &.filetypes {
+    height: 14px;
+    width: 14px;
+  }
 }
