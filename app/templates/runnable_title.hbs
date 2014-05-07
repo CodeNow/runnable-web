@@ -1,7 +1,34 @@
 {{#if canedit}}
   <form>
     <input class="form-control" name="name" placeholder="Give your code example a title" value="{{model.attributes.name}}" maxlength="2000" required>
+    <div class="dropdown">
+      <select>
+        <option disabled>Select Branch
+        <option selected>Master
+        <option>Branch 1
+        <option>Branch 2
+        <option>Branch 3
+      </select>
+      <button id="select-branch-button" type="button" class="silver">
+        <span class="glyphicons git-branch"></span>
+        Master
+      </button>
+    </div>
+    <button id="add-branch-button" type="button" class="silver glyphicons plus"></button>
   </form>
 {{else}}
   <span>{{model.virtual.nameWithTags}}</span>
+  <div class="dropdown">
+    <select>
+      <option disabled>Select Branch
+      <option selected>Master
+      <option>Branch 1
+      <option>Branch 2
+      <option>Branch 3
+    </select>
+    <button id="select-branch-button" type="button" class="silver">
+      <span class="glyphicons git-branch"></span>
+      Master
+    </button>
+  </div>
 {{/if}}
