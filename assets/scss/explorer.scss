@@ -74,6 +74,23 @@
         color: #aaa;
         pointer-events: none;
       }
+
+      .git {
+        padding-left: 42px;
+
+        > span {
+          color: $gray-dark;
+          font-size: 11px;
+          max-width: 200px;
+          overflow: hidden;
+          padding: 3px 0;
+          text-overflow: ellipsis;
+        }
+
+        &::before {
+          display: none;
+        }
+      }
     }
 
     a,
