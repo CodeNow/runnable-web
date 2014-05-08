@@ -94,7 +94,10 @@ module.exports = BaseView.extend({
         self.showError(err);
       }
     }
-    // success handles redirect within publishLoader
+    else {
+      //redirect
+      window.location = window.location;
+    }
   },
   showRenameModal: function () {
     var self = this;
