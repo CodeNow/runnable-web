@@ -114,6 +114,7 @@ module.exports = BaseView.extend({
 
       if ($form[0].checkValidity()) {
         var opts = utils.cbOpts(callback);
+        opts.patch = true;
         container.save({
           name: $form.find('input').val()
         }, opts);
