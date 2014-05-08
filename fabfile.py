@@ -17,7 +17,7 @@ def staging():
   env.requireNote = False;
   env.settings = 'staging'
   env.hosts = [
-    'web-rep_int',
+    'stage-web',
   ]
 
 def runnable3():
@@ -37,7 +37,7 @@ def production():
   env.requireNote = True;
   env.settings = 'production'
   env.hosts = [
-    'web',
+    'prod-web',
     # 'web1',
     # 'web2'
   ]
@@ -50,7 +50,7 @@ def integration():
   env.requireNote = False;
   env.settings = 'integration'
   env.hosts = [
-    'web-int'
+    'int-web'
   ]
 
 """
@@ -129,7 +129,7 @@ def track_deployment():
         -d "deployment[changelog]=' + note + '" \
         -d "deployment[user]=' + author + '" \
         https://api.newrelic.com/deployments.xml'
-      run(cmd) 
+      run(cmd)
 
 def checkout_latest():
   """
