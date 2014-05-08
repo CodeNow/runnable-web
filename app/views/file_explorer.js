@@ -27,13 +27,16 @@ module.exports = BaseView.extend({
     this.adjustTreeHeight();
   },
   adjustTreeHeight: function () {
-    var thisHeight = this.$el.height();
-    var buildHeight = this.$('#build-files').height();
+    var self = this;
+    var thisHeight = self.$el.height();
+    var buildHeight = self.$('#build-files .fs-list')[0].offsetHeight + 28;
+    var subTree = self.$('.sub-tree');
 
     if (buildHeight > thisHeight/2) {
-      this.$('.sub-tree').css('max-height','50%');
+      subTree.css('height','50%');
     }
     else {
+      subTree.css('height','')
       this.$('#container-files').height(thisHeight - buildHeight);
     }
   },
