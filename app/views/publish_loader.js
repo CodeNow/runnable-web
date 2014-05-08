@@ -33,8 +33,8 @@ module.exports = BaseView.extend({
     this.$el.addClass('loading');
     this.model.save(data, opts);
     function callback (err, model) {
-      this.$el.removeClass('loading');
       if (err) {
+        this.$el.removeClass('loading');
         cb(err);
       } else {
         cb();
