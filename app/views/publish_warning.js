@@ -110,7 +110,10 @@ module.exports = BaseView.extend({
         self.showError(err);
       }
     }
-    // success handles redirect within publishLoader
+    else {
+      //redirect
+      window.location = window.location;
+    }
   },
   showRenameModal: function () {
     var self = this;
@@ -127,6 +130,7 @@ module.exports = BaseView.extend({
 
       if ($form[0].checkValidity()) {
         var opts = utils.cbOpts(callback);
+        opts.patch = true;
         container.save({
           name: $form.find('input').val()
         }, opts);

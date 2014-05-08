@@ -30,17 +30,14 @@ module.exports = BaseView.extend({
     var data = {
       status: 'Committing ' + type
     };
+    this.$el.addClass('loading');
     this.model.save(data, opts);
     function callback (err, model) {
       if (err) {
+        this.$el.removeClass('loading');
         cb(err);
       } else {
-        if (model.get('status') === 'Finished') { // meta publish occurred
-          this.progress('Finished');
-        }
-        else {
-          this.$el.addClass('loading');
-        }
+        cb();
       }
     }
   },
@@ -53,12 +50,9 @@ module.exports = BaseView.extend({
       'Stopping Virtual Machine': 1,
       'Saving Changes': 2,
       'Optimizing': 3,
-      'Distributing Project': 4,
-      'Finished': 'end'
+      'Distributing Project': 4
     }[name];
-    if (step === 'end') {
-      window.location = window.location;
-    } else if (step) {
+    if (step) {
       this.$('h1.in').prop('class','out');
       this.$('h1:nth-child(' + step + ')').addClass('in');
     }
