@@ -9,7 +9,7 @@ module.exports = BaseView.extend({
     'click .dark-theme'              : 'setDarkTheme',
     'click .light-theme'             : 'setLightTheme',
     'click .open-context-menu'       : 'showFileMenu',
-    'click .plus'                    : 'showFileMenu',
+    'click .cogwheel'                    : 'showFileMenu',
     'contextmenu .open-context-menu' : 'showFileMenu',
     'click [data-action="download"]' : 'showDownloadDialog',
     // 'drop #drop-to-add'              : 'uploadToRoot',

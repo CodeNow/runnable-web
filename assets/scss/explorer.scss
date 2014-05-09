@@ -306,13 +306,12 @@
     padding: 10px 0 5px 24px;
     text-transform: uppercase;
 
-    > .btn-group,
     > button {
       position: absolute;
         top: 6px;
     }
 
-    > .btn-group,
+    > .branch-switcher,
     > #rebuild,
     > #tip {
       right: 36px;
@@ -325,24 +324,14 @@
 }
 
 .branch-switcher {
+  text-align: left;
+  width: 80px;
 
-  button {
-
-    &:first-child {
-      text-align: left;
-      width: 80px;
-    }
-
-    &:last-child {
-      margin-left: -1px;
-    }
-
-    &::after {
-      @extend .arrow-down;
-      content: '';
-      right: 4px;
-      top: 7px;
-    }
+  &::after {
+    @extend .arrow-down;
+    content: '';
+    right: 4px;
+    top: 7px;
   }
 
   .glyphicons {

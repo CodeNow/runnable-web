@@ -25,26 +25,20 @@
   <h6>
     BUILD FILES
     {{#if editmode}}
-    <div class="btn-group branch-switcher">
-      <button type="button" class="silver btn-sm dropdown">
-        <select>
-          <option disabled>Select Branch
-          <option selected>Master
-          <option>Feature Branch
-          <option>Other Branch
-          <option>Olive Branch
-        </select>
-        <span class="glyphicons git-branch"></span>
-        Master
-      </button>
-      <button type="button" class="silver btn-sm glyphicons cogwheel"></button>
-      {{!--
-        options to delete this branch or create a new branch
-      --}}
-    </div>
-    <button type="button" class="silver btn-sm glyphicons plus"></button>
+    <button type="button" class="silver btn-sm dropdown branch-switcher">
+      <select>
+        <option disabled>Select Branch
+        <option selected>Master
+        <option>Feature Branch
+        <option>Other Branch
+        <option>Olive Branch
+      </select>
+      <span class="glyphicons git-branch"></span>
+      Master
+    </button>
+    <button type="button" class="silver btn-sm glyphicons cogwheel"></button>
     {{!--
-      options to create new files, folders, or add git repo
+      options to create new files, folders, add git repo, delete this branch, and create new branch
     --}}
     {{/if}}
   </h6>
@@ -112,9 +106,9 @@
     <button id="rebuild" type="button" class="silver btn-sm">Rebuild</button>
     <button id="tip" type="button" class="silver btn-sm glyphicons warning-sign"></button>
     {{view "preview_popover"}}
-    <button type="button" class="silver btn-sm glyphicons plus"></button>
+    <button type="button" class="silver btn-sm glyphicons cogwheel"></button>
     {{else}}
-    <button type="button" class="silver btn-sm glyphicons plus"></button>
+    <button type="button" class="silver btn-sm glyphicons cogwheel"></button>
     {{/if}}
   </h6>
   <ul class="nav nav-pills nav-stacked">
