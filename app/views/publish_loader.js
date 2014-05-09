@@ -50,7 +50,7 @@ module.exports = BaseView.extend({
       'Stopping Virtual Machine': 1,
       'Saving Changes': 2,
       'Optimizing': 3,
-      'Distributing Project': 4
+      'Distributing': 4
     }[name];
     if (step) {
       this.$('h1.in').prop('class','out');
