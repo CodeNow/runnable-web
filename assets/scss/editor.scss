@@ -192,7 +192,7 @@
     left: 36px;
     z-index: 1;
   user-select: none;
-  width: 204px;
+  width: 219px;
 
   li {
     color: $gray-dark;
@@ -389,7 +389,7 @@
 
   // readme icon
   #show-readme {
-    transform: translate3d(204px,0,0);
+    transform: translate3d(219px,0,0);
   }
 
   // file explorer
@@ -400,15 +400,15 @@
 
   // tabs
   #project-editor-tabs-wrapper {
-    transform: translate3d(204px,0,0);
-    width: calc(100% - 348px);
+    transform: translate3d(219px,0,0);
+    width: calc(100% - 363px);
   }
 
   // ace editor
   #project-editor-container {
-    transform: translate3d(240px,0,0);
+    transform: translate3d(255px,0,0);
     transition: all .2s ease-in-out;
-    width: calc(100% - 240px);
+    width: calc(100% - 255px);
   }
 }
 

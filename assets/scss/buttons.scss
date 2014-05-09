@@ -140,6 +140,19 @@ button,
     box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(0,0,0,.01);
     color: lighten($gray-dark,20);
   }
+
+  &.no-states {
+
+    &:hover,
+    &:active {
+      background-color: $gray-lighter;
+      background-image: linear-gradient(rgba($gray-lighter,0),$gray-lighter);
+      border-color: rgba(0,0,0,.1);
+      box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(0,0,0,.01);
+      color: $gray-dark;
+      cursor: default;
+    }
+  }
 }
 
 .orange {

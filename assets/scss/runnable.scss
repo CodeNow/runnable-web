@@ -86,52 +86,6 @@
         width: 115px;
       }
     }
-
-    form {
-
-      input {
-        border-radius: 3px 0 0 3px;
-        border-right-color: transparent;
-        width: calc(100% - 140px);
-
-        &:hover {
-          border-right-color: transparent;
-        }
-
-        &:focus:hover {
-          border-right-color: $orange;
-        }
-      }
-
-      .dropdown {
-        position: absolute;
-          top: 0;
-          right: 29px;
-        width: 127px;
-      }
-
-      #select-branch-button {
-        border-color: rgba(0,0,0,.1);
-        border-radius: 0;
-        padding: 0 12px;
-
-        &::before,
-        &::after {
-          display: none;
-        }
-      }
-
-      #add-branch-button {
-        border-color: rgba(0,0,0,.1);
-        border-radius: 0 3px 3px 0;
-        font-weight: 400;
-        line-height: 1;
-        padding: 0;
-        position: absolute;
-          right: 0;
-        width: 30px;
-      }
-    }
   }
 }
 

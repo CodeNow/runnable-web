@@ -5,9 +5,9 @@
   height: calc(100% - 36px);
   position: absolute;
     top: 36px;
-  transform: translate3d(-240px,0,0);
+  transform: translate3d(-255px,0,0);
   transition: transform .2s ease-in-out, width 0s ease-in-out;
-  width: 240px;
+  width: 255px;
 
   // file tree
   .nav {
@@ -309,9 +309,44 @@
     > .btn-group,
     > button {
       position: absolute;
-        top: 5px;
-        right: 5px;
+        top: 6px;
     }
+
+    > .btn-group,
+    > #rebuild,
+    > #tip {
+      right: 36px;
+    }
+
+    > button {
+      right: 5px;
+    }
+  }
+}
+
+.branch-switcher {
+
+  button {
+
+    &:first-child {
+      text-align: left;
+      width: 80px;
+    }
+
+    &:last-child {
+      margin-left: -1px;
+    }
+
+    &::after {
+      @extend .arrow-down;
+      content: '';
+      right: 4px;
+      top: 7px;
+    }
+  }
+
+  .glyphicons {
+    margin: 0;
   }
 }
 
