@@ -59,12 +59,13 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     autoprefixer: {
-      options: {
-        browsers: ['last 2 versions']
-      },
-      single_file: {
-        src: 'public/styles/index.css',
-        dest: 'public/styles/index.css'
+      dist: {
+        options: {
+          browsers: ['last 2 versions']
+        },
+        files: {
+          'public/styles/index.css' : 'public/styles/index.css'
+        }
       }
     },
 
@@ -184,7 +185,7 @@ module.exports = function(grunt) {
       },
       stylesheets: {
         files: _.without([sassDir + '/**/*.{scss,sass}'].concat(minCSS), compiledCSS),
-        tasks: ['sass', 'concat:dev'],
+        tasks: ['sass', 'concat:dev', 'autoprefixer'],
         options: {
           // livereload: true,
           interrupt: true
