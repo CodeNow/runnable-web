@@ -1,5 +1,24 @@
+<<<<<<< HEAD
+$terminal-color:#383734;
+$dropzone-height:75px;
+
+pre {
+  margin:0;
+}
+
+#project-editor-container{
+  height:auto;
+  min-height: 350px; /*same as pre.code*/
+}
+
+pre.code{
+  min-height: 350px;
+}
+
+=======
 $terminal-color: #383734;
 $dropzone-height: 75px;
+>>>>>>> 10468aa... remove compass mixins
 $tree-padding:15px;
 
 //page-title
@@ -115,8 +134,26 @@ button.btn-sm,
   width: 100%;
 }
 
+<<<<<<< HEAD
+#runnable-tags-edit {
+
+  .form-control {
+    display:inline-block;
+    width: calc(100% - 95px);
+  }
+
+  button {
+    float: right;
+    min-width: 85px;
+  }
+}
+
+#output #primary .form-control {
+  width: 600px;
+=======
 #output-results-container .loader {
   color: #000;
+>>>>>>> 10468aa... remove compass mixins
 }
 
 .nprogress .bar {

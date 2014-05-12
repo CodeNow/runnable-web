@@ -12,12 +12,9 @@
  *
 */
 
-// compass
-@import "compass/css3";
-@import "compass/layout/sticky-footer";
-
 // global
 @import "mixins";
+@import "reset";
 @import "ie";
 @import "print";
 @import "var";

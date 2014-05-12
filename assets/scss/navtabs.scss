@@ -1,5 +1,6 @@
 #dashboard,
 #tags-details {
+
   .nav-tabs {
     border-bottom: 0;
     position: relative;
@@ -8,23 +9,22 @@
     li {
       margin-bottom: -2px;
 
-      &:hover {
-        span {
-          border: 1px solid #452759;
-          color: #452759;
-        }
+      &:hover span {
+        border: 1px solid #452759;
+        color: #452759;
       }
 
       &.active {
+
         a {
           background: #fff;
           border: 1px solid transparent;
-          @include box-shadow(0 2px 5px rgba(0,0,0,.1));
+          box-shadow: 0 2px 5px rgba(0,0,0,.1);
         }
 
         span {
-          border: 1px solid #333;
-          color: #333;
+          border: 1px solid $gray-darkest;
+          color: $gray-darkest;
         }
       }
 
@@ -36,7 +36,7 @@
 
       span {
         border: 1px solid #6e3e8e;
-        @include border-radius(50%);
+        border-radius: 50%;
         color: #6e3e8e;
         display: inline-block;
         font-size: 10px;
