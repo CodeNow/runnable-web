@@ -47,7 +47,9 @@
     "rollbar": "*",
     "sitemap": "~0.6.0",
     "underscore": "~1.4.4",
-    "underscore.string": "~2.3.3"
+    "underscore.string": "~2.3.3",
+    "passport": "~0.2.0",
+    "passport-github": "~0.1.5"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
