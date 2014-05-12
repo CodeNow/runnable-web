@@ -86,9 +86,20 @@ def install_requirements():
   """
   Install the required packages using npm.
   """
+<<<<<<< HEAD
   sudo('apt-get install -y curl redis-server');
   sudo('curl -s https://get.docker.io/ubuntu/ | sudo sh')
   sudo('sudo docker run ubuntu ls')
+=======
+  sudo('npm install pm2 grunt-cli bower -g')
+  sudo('rm -rf ~/tmp')
+  with cd('runnable-web'):
+    run('npm install')
+
+def bower():
+  with cd('runnable-web'):
+    run('bower install')
+>>>>>>> d5c9840... remove compass install from fabfile
 
 def track_deployment(image, container):
   """
@@ -108,44 +119,6 @@ def track_deployment(image, container):
       -d "deployment[user]=' + author + '" \
       https://api.newrelic.com/deployments.xml'
     run(cmd)
-
-def checkout_latest():
-  """
-  Pull the latest code on the specified branch.
-  """
-  with cd('runnable-web'):
-    run('git config --global credential.helper cache')
-    run('git fetch --all')
-    run('git reset --hard origin/%(branch)s' % env)
-    run('git checkout -f %(branch)s' % env)
-    run('git pull origin %(branch)s' % env)
-
-def install_requirements():
-  """
-  Install the required packages using npm.
-  """
-  sudo('npm install pm2 grunt-cli bower -g')
-  sudo('rm -rf ~/tmp')
-  with cd('runnable-web'):
-    run('npm install')
-
-def bower():
-  with cd('runnable-web'):
-    run('bower install')
-
-def grunt():
-  """
-  Run grunt
-  """
-  with cd('runnable-web'):
-    run('grunt')
-
-def boot():
-  """
-  Start process with pm2
-  """
-  with cd('runnable-web'):
-    run('NODE_ENV=%(settings)s pm2 start index.js -n runnable-web' % env)
 
 def validateNote(input):
   """
