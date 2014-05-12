@@ -9,7 +9,19 @@
         <h4 class="modal-title">{{header}}</h4>
       </div>
       <div class="modal-body">
-        <p>{{messageBody}}</p>
+
+        {{#if userAuthenticated}}
+          <input type="text" class="form-control" name="username" placeholder="Email or Username" autocapitalize="off" autofocus required>
+          <input type="password" class="form-control" name="password" placeholder="Password" required>
+          <button type="submit" class="orange col-sm-12">Log In</button>
+          <p>Not Registered? <a class="signup-link" href="javascript:void(0);">Sign up for a free account.</a></p>
+        {{else}}
+          <input type="text" class="form-control" name="username" placeholder="Username" autocapitalize="off" required autofocus>
+          <input type="email" class="form-control" name="email" placeholder="Email" required>
+          <input type="password" class="form-control" name="password" placeholder="Password" required>
+          <button type="submit" class="orange col-sm-12">Sign Up</button>
+        {{/if}}
+
       </div>
     </div><!-- /.modal-content -->
   </form><!-- /.modal-dialog -->
