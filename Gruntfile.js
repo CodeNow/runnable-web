@@ -6,22 +6,20 @@ var sassDir   = 'assets/scss';
 var sassIndex = path.join(sassDir, 'index.scss');
 var fontsDir;//'assets/stylesheets/assets/fonts';
 // out
-var layoutPath = 'app/templates/__layout_editable.hbs';
-var verLayoutPath = 'app/templates/__layout.hbs';
-var imagesDir       = 'public/images';
-var javascriptsDir  = 'public';
-var cssDir          = 'public/styles';
-var mergedAssetsPath= "public/mergedAssets.js";
-var minAssetsPath   = "public/mergedAssets.min.js";
-var rendrDir        = 'node_modules/rendr';
-var compassCSS      = 'public/styles/index.css';
-var mergedCSSPath   = 'public/styles/index.css';
-var minCSS = [
+var layoutPath       = 'app/templates/__layout_editable.hbs';
+var verLayoutPath    = 'app/templates/__layout.hbs';
+var imagesDir        = 'public/images';
+var javascriptsDir   = 'public';
+var cssDir           = 'public/styles';
+var mergedAssetsPath = "public/mergedAssets.js";
+var minAssetsPath    = "public/mergedAssets.min.js";
+var rendrDir         = 'node_modules/rendr';
+var compassCSS       = 'public/styles/index.css';
+var mergedCSSPath    = 'public/styles/index.css';
+var minCSS           = [
   'public/vendor/bootstrap/bootstrap.min.css', // custom
   'public/vendor/bootstrap/bootstrap-theme.min.css', // custom
-  'public/vendor/bower/bootstrap-select/bootstrap-select.min.css',
   'public/vendor/typeahead.js-bootstrap.css',
-  'public/vendor/bower/textillate/assets/animate.css',
   'public/vendor/bower/autocompletejs/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
   'public/vendor/glyphicons.css',
@@ -38,8 +36,6 @@ var frontendScripts = [
   'public/vendor/modernizr/modernizr.custom.64268.js',
   'public/vendor/*.js', //include jquery plugins, must be after jquery
   'public/vendor/bower/sockjs/sockjs.js',
-  'public/vendor/bower/es5-shim/es5-shim.js',
-  'public/vendor/bower/es5-shim/es5-sham.js',
   'public/vendor/bower/bootstrap/js/collapse.js',
   'public/vendor/bower/bootstrap/js/dropdown.js',
   'public/vendor/bower/bootstrap/js/tab.js',
@@ -48,9 +44,6 @@ var frontendScripts = [
   'public/vendor/bower/bootstrap/js/modal.js',
   'public/vendor/bower/bootstrap/js/transition.js',
   'public/vendor/bower/typeahead.js/dist/typeahead.min.js',
-  'public/vendor/bower/bootstrap-select/bootstrap-select.min.js',
-  'public/vendor/bower/textillate/assets/jquery.lettering.js',
-  'public/vendor/bower/textillate/jquery.textillate.js',
   'public/vendor/bower/jquery.stellar/jquery.stellar.min.js',
   'public/vendor/bower/frontend-track/frontend-track.js',
   'public/vendor/bower/autocompletejs/js/autocomplete.js',

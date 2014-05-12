@@ -6,6 +6,10 @@
     "frontend-track": "git://github.com/CodeNow/frontend-track.git#0.2.4",
     "autocompletejs": "~0.2.1",
     "bootstrap": "~3.0.0",
+<<<<<<< HEAD
+    "bootstrap-select": "~1.2.0",
+=======
+>>>>>>> bb458e6... grunt/bower cleanup
     "jquery.stellar": "~0.6.2",
     "typeahead.js": "~0.9.3",
     "sockjs": "~0.3.4",
