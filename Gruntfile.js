@@ -94,7 +94,16 @@ module.exports = function(grunt) {
     },
 
     sass: {
-      dist: {
+
+      compile: {
+        options: {
+          style: 'compressed'
+        },
+        files: {
+          'public/styles/index.css' : sassIndex
+        }
+      },
+      dev: {
         options: {
           lineNumbers: true,
           style: 'expanded'
@@ -185,7 +194,7 @@ module.exports = function(grunt) {
       },
       stylesheets: {
         files: _.without([sassDir + '/**/*.{scss,sass}'].concat(minCSS), compiledCSS),
-        tasks: ['sass', 'concat:dev', 'autoprefixer'],
+        tasks: ['sass:dev', 'concat:dev', 'autoprefixer'],
         options: {
           // livereload: true,
           interrupt: true
