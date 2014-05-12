@@ -149,18 +149,18 @@ Router.prototype.navigate = function (fragment) {
   }
 
   // pushState retina.js logic
-  if (window.Retina.isRetina() && !checkingRetina) {
-    checkingRetina = true;
-    this.listenTo(this.app, 'change:loading', function (app, loading) {
-      if (!loading) {
-        var context = {};
-        window.Retina.init(context);
-        utils.allImagesLoaded($('img'), function () {
-          context.onload();
-        });
-      }
-    });
-  }
+  // if (window.Retina.isRetina() && !checkingRetina) {
+  //   checkingRetina = true;
+  //   this.listenTo(this.app, 'change:loading', function (app, loading) {
+  //     if (!loading) {
+  //       var context = {};
+  //       window.Retina.init(context);
+  //       utils.allImagesLoaded($('img'), function () {
+  //         context.onload();
+  //       });
+  //     }
+  //   });
+  // }
   // modal fix - not sure if this is still necessary
   $('body').removeClass('modal-open');
   // navigate fix - (query params -> no query params fix)
