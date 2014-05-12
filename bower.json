@@ -6,7 +6,6 @@
     "frontend-track": "git://github.com/CodeNow/frontend-track.git#0.2.4",
     "autocompletejs": "~0.2.1",
     "bootstrap": "~3.0.0",
-    "textillate": "*",
     "jquery.stellar": "~0.6.2",
     "typeahead.js": "~0.10.2",
     "sockjs": "~0.3.4",
