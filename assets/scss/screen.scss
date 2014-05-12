@@ -263,7 +263,7 @@ progress {
 .tags {
 
   .widget-title {
-    @extend .clearfix !optional;
+    @extend .clearfix;
 
     .edit-tags {
       background-image: url(../images/sprite-edit-tag.png);

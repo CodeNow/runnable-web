@@ -14,7 +14,7 @@ var cssDir           = 'public/styles';
 var mergedAssetsPath = "public/mergedAssets.js";
 var minAssetsPath    = "public/mergedAssets.min.js";
 var rendrDir         = 'node_modules/rendr';
-var compassCSS       = 'public/styles/index.css';
+var compiledCSS      = 'public/styles/index.css';
 var mergedCSSPath    = 'public/styles/index.css';
 var minCSS           = [
   'public/vendor/bootstrap/bootstrap.min.css', // custom
@@ -23,7 +23,7 @@ var minCSS           = [
   'public/vendor/bower/autocompletejs/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
   'public/vendor/glyphicons.css',
-  compassCSS // must be last
+  compiledCSS // must be last
 ];
 //stitch
 var aceScripts = [
@@ -92,29 +92,14 @@ module.exports = function(grunt) {
       }
     },
 
-    compass: {
-      compile: {
+    sass: {
+      dist: {
         options: {
-          sassDir: sassDir,
-          specify: [sassIndex],
-          cssDir: cssDir,
-          imagesDir: imagesDir,
-          javascriptsDir: javascriptsDir,
-          fontsDir: fontsDir,
-          outputStyle: 'compress'
-        }
-      },
-      server: {
-        options: {
-          sassDir: sassDir,
-          specify: [sassIndex],
-          cssDir: cssDir,
-          imagesDir: imagesDir,
-          javascriptsDir: javascriptsDir,
-          fontsDir: fontsDir
-          // relativeAssets: true
-          // debugInfo: true
-          // outputStyle: 'compact'
+          lineNumbers: true,
+          style: 'expanded'
+        },
+        files: {
+          'public/styles/index.css' : sassIndex
         }
       }
     },
@@ -198,20 +183,20 @@ module.exports = function(grunt) {
         }
       },
       stylesheets: {
-        files: _.without([sassDir + '/**/*.{scss,sass}'].concat(minCSS), compassCSS),
-        tasks: ['compass:server', 'concat:dev'],
+        files: _.without([sassDir + '/**/*.{scss,sass}'].concat(minCSS), compiledCSS),
+        tasks: ['sass', 'concat:dev'],
         options: {
-          livereload: true,
+          // livereload: true,
           interrupt: true
         }
-      },
-      livereload: {
-        files: [mergedCSSPath, 'public/mergedAssets.min.js', 'public/images/*'],
-        tasks: ['noop'],
-        options: {
-          interrupt: true,
-          livereload: 35371
-        }
+      // },
+      // livereload: {
+      //   files: [mergedCSSPath, 'public/mergedAssets.min.js', 'public/images/*'],
+      //   tasks: ['noop'],
+      //   options: {
+      //     interrupt: true,
+      //     livereload: 35371
+      //   }
       }
     },
 
@@ -258,7 +243,7 @@ module.exports = function(grunt) {
   gruntConfig.concat.dev.files[mergedCSSPath] = minCSS; //concats css for dev
   grunt.initConfig(gruntConfig);
 
-  grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -353,7 +338,7 @@ module.exports = function(grunt) {
   // jslint
   grunt.registerTask('jshint', ['jshint:all']);
   // Compile - shared tasks for all
-  grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'commit-hash-file', 'rendr_stitch', 'compass']);
+  grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'commit-hash-file', 'rendr_stitch', 'sass']);
   // Shared tasks for server and debug
   grunt.registerTask('dev', ['compile', 'concat', 'copy', 'autoprefixer']);
   // Run the server and watch for file changes
