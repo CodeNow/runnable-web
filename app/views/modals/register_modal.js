@@ -5,7 +5,7 @@ var Super = ModalView.prototype;
 module.exports = ModalView.extend({
   id: 'register-modal',
   events: {
-    'click a' : 'flip'
+    'click .flip-link' : 'flip'
   },
   postInitialize: function () {
     this.options.header = this.options.header || this.defaultHeader;

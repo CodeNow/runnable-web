@@ -108,6 +108,20 @@
     font-weight: normal;
     z-index: 1050;
   }
+
+  a {
+    color: $purple;
+    display: inline-block;
+    font-weight: 700;
+
+    &:hover {
+      color: $purple-dark;
+    }
+
+    &:active {
+      transform: translate3d(0,1px,0);
+    }
+  }
 }
 
 .modal-backdrop {
@@ -117,17 +131,6 @@
   &.in {
     animation: fadeIn .2s forwards;
     opacity: 1;
-  }
-}
-
-// publish request modal
-#publish-request-modal {
-
-  a {
-    color: $purple;
-    display: table;
-    font-weight: 700;
-    margin: 20px auto 0;
   }
 }
 
@@ -185,6 +188,7 @@ body.modal-open,
   }
 
   .purple {
+    color: #fff;
     margin: 20px 20px 10px;
     text-indent: 28px;
     width: calc(100% - 40px);
@@ -222,6 +226,12 @@ body.modal-open,
     padding: 10px 20px 69px;
   }
 
+  .reset-link {
+    display: table;
+    font-size: 13px;
+    margin: 15px auto 0;
+  }
+
   p {
     background: $gray-light;
     border-radius: 0 0 3px 3px;
@@ -235,20 +245,6 @@ body.modal-open,
       bottom: 0;
     text-align: center;
     width: 100%;
-
-    > a {
-      color: $purple;
-      display: inline-block;
-      font-weight: 700;
-
-      &:hover {
-        color: $purple-dark;
-      }
-
-      &:active {
-        transform: translate3d(0,1px,0);
-      }
-    }
   }
 }
 
