@@ -1,6 +1,8 @@
 #logo {
   display: inline-block;
   height: 54px;
+  position: relative;
+    z-index: $z-show;
   user-select: none;
 
   &:hover {
@@ -11,7 +13,6 @@
   &:active > span {
     background-position: 0 100%;
   }
-
   > span {
     background: url(../images/sprite-runnable-logo-2.png) no-repeat;
     display: inline-block;

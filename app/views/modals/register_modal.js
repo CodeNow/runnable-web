@@ -17,8 +17,9 @@ module.exports = ModalView.extend({
     Super.postRender.apply(this, arguments);
   },
   remove: function () {
-    if(this.onClose)
+    if (this.onClose) {
       this.onClose();
+    }
     Super.remove.apply(this, arguments);
   },
   flip: function () {
@@ -32,7 +33,6 @@ module.exports = ModalView.extend({
     else {
       $login.find('input')[0].focus();
     }
-
     $self.toggleClass('flip');
   },
   show_error: function (errorMsg) {
