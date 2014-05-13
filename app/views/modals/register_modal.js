@@ -6,8 +6,8 @@ module.exports = ModalView.extend({
   id: 'register-modal',
   events: {
     'click a[data-action="flip"]': 'flip',
-    'submit form#login_form':      'submit_login',
-    'submit form#register_form':   'submit_register'
+    'submit form#login-form':      'submitLogin',
+    'submit form#register-form':   'submitRegister'
   },
   postInitialize: function () {
     this.options.header = this.options.header || this.defaultHeader;
@@ -35,43 +35,43 @@ module.exports = ModalView.extend({
     }
     $self.toggleClass('flip');
   },
-  show_error: function (errorMsg) {
+  showError: function (errorMsg) {
     alert(errorMsg);
     return; //TODO
   },
-  submit_login: function (evt) {
+  submitLogin: function (evt) {
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
     this.app.user.login(formData.username, formData.password, function (err) {
       if (err) {
-        this.show_error(err);
+        this.showError(err);
       }
       else {
         this.close();
       }
     }.bind(this));
   },
-  submit_register: function (evt) {
+  submitRegister: function (evt) {
     evt.preventDefault();
     //disable button
     //this.$el.find('form#login_form button[type="submit"]').attr('disabled', 'disabled');
     var formData = $(evt.currentTarget).serializeObject();
     if (!formData.username) {
-      this.show_error('Username is required');
+      this.showError('Username is required');
     }
     else if (/\s/g.test(formData.username)) {
-      this.show_error('Whitespace is not allowed in the username.');
+      this.showError('Whitespace is not allowed in the username.');
     }
     else if (!formData.email) {
-      this.show_error('Email is required');
+      this.showError('Email is required');
     }
     else if (!formData.password) {
-      this.show_error('Password is required');
+      this.showError('Password is required');
     }
     else {
       this.app.user.register(formData.email, formData.username, formData.password, function (err) {
         if (err) {
-          this.show_error(err);
+          this.showError(err);
         }
         else {
           this.close();
