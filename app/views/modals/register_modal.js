@@ -3,11 +3,9 @@ var _ = require('underscore');
 var Super = ModalView.prototype;
 
 module.exports = ModalView.extend({
-  id: 'register',
-  defaultHeader: 'Register Default Header',
-  getTemplateData: function () {
-    this.options.messageBody = 'Default message body';
-    return this.options;
+  id: 'register-modal',
+  events: {
+    'click a' : 'flip'
   },
   postInitialize: function () {
     this.options.header = this.options.header || this.defaultHeader;
@@ -20,6 +18,9 @@ module.exports = ModalView.extend({
     if(this.onClose)
       this.onClose();
     Super.remove.apply(this, arguments);
+  },
+  flip: function () {
+    this.$el.toggleClass('flip');
   }
 });
 

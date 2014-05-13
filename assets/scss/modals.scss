@@ -1,12 +1,7 @@
 .modal {
-  opacity: 0;
-  transform: scale3d(.7,.7,1);
-
-  &.in {
-    animation: modalIn .2s forwards;
-  }
 
   .modal-dialog {
+    animation: modalIn .2s forwards;
     width: 30%;
       max-width: 460px;
       min-width: 320px;
@@ -28,7 +23,7 @@
 
     h4 {
       font-size: 14px;
-      font-weight: bold;
+      font-weight: 700;
       height: 40px;
       line-height: 40px;
       overflow: hidden;
@@ -90,7 +85,7 @@
       a {
         color: $purple;
         font-size: 14px;
-        font-weight: bold;
+        font-weight: 700;
         text-shadow: 0 1px 0 #fff;
       }
     }
@@ -128,16 +123,8 @@
   a {
     color: $purple;
     display: table;
-    font-weight: bold;
+    font-weight: 700;
     margin: 20px auto 0;
-  }
-}
-
-#signup,
-#login {
-
-  p {
-    margin: 20px 0 0;
   }
 }
 
@@ -161,6 +148,48 @@ body.modal-open,
   margin-right: 0;
 }
 
+// registration modals
+#register-modal {
+
+  .modal-dialog {
+    perspective: 1000px;
+    transform-origin: 50% 250%;
+  }
+
+  &.flip {
+
+    #register {
+      transform: rotate3d(0,1,0,180deg);
+    }
+
+    #login {
+      transform: rotate3d(0,1,0,0);
+    }
+  }
+
+  p {
+    margin: 20px 0 0;
+  }
+}
+
+#register,
+#login {
+  backface-visibility: hidden;
+  height: 400px;
+  position: absolute;
+  transition: transform .3s ease-in-out;
+  width: 100%;
+}
+
+#register {
+  z-index: 1;
+}
+
+#login {
+  transform: rotate3d(0,1,0,-180deg);
+  z-index: 2;
+}
+
 // .spec-modals
 .modal .spec-modal {
   width: 50%;
@@ -178,7 +207,7 @@ body.modal-open,
     }
 
     p {
-      font-weight: bold;
+      font-weight: 700;
       text-align: left;
     }
 
@@ -322,7 +351,7 @@ body.modal-open,
       padding: 20px;
 
       > p {
-        font-weight: bold;
+        font-weight: 700;
       }
 
       > button {
@@ -459,7 +488,7 @@ body.modal-open,
     }
 
     textarea {
-      border-radius: 0 2px 2px 2px;
+      border-radius: 0 2px 2px;
       position: relative;
         z-index: 1;
       resize: vertical;
@@ -506,7 +535,7 @@ body.modal-open,
   }
 
   h3 {
-    font-weight: bold;
+    font-weight: 700;
     margin-top: 10px;
     text-align: center;
   }
