@@ -154,11 +154,20 @@ body.modal-open,
   .modal-dialog {
     perspective: 1000px;
     transform-origin: 50% 250%;
+    width: 300px;
+  }
+
+  object {
+    height: 20px;
+    margin: 7px 0 0 -28px;
+    pointer-events: none;
+    position: absolute;
+    width: 20px;
   }
 
   &.flip {
 
-    #register {
+    #signup {
       transform: rotate3d(0,1,0,180deg);
     }
 
@@ -172,16 +181,16 @@ body.modal-open,
   }
 }
 
-#register,
+#signup,
 #login {
   backface-visibility: hidden;
-  height: 400px;
+  height: 340px;
   position: absolute;
   transition: transform .3s ease-in-out;
   width: 100%;
 }
 
-#register {
+#signup {
   z-index: 1;
 }
 
