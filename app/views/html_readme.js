@@ -109,6 +109,14 @@ module.exports = BaseView.extend({
     }
     return opts;
   },
+  postRender: function () {
+    this.$el.find('a').each(function () {
+      var el = $(this);
+      if (el.is('[target]'))
+        return;
+      el.attr('target', 'new');
+    });
+  },
   preRender: function () {
 
     if (this.collection.length === 0) {
