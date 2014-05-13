@@ -114,7 +114,7 @@ module.exports = BaseView.extend({
       var el = $(this);
       if (el.is('[target]'))
         return;
-      el.attr('target', 'new');
+      el.attr('target', '_blank');
     });
   },
   preRender: function () {
