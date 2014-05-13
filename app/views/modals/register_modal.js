@@ -5,7 +5,9 @@ var Super = ModalView.prototype;
 module.exports = ModalView.extend({
   id: 'register-modal',
   events: {
-    'click a#signup_link' : 'flip'
+    'click a#signup_link' :      'flip',
+    'submit form#login_form':    'submit_login',
+    'submit form#register_form': 'submit_register'
   },
   postInitialize: function () {
     this.options.header = this.options.header || this.defaultHeader;
@@ -32,6 +34,42 @@ module.exports = ModalView.extend({
     }
 
     $self.toggleClass('flip');
+  },
+  show_error: function (errorMsg) {
+    alert(errorMsg);
+    return; //TODO
+  },
+  submit_login: function (evt) {
+    evt.preventDefault();
+    //disable button
+    //this.$el.find('form#login_form button[type="submit"]').attr('disabled', 'disabled');
+    var formData = $(evt.currentTarget).serializeObject();
+    if (!formData.username) {
+      this.show_error('Username is required');
+    }
+    else if (/\s/g.test(formData.username)) {
+      this.show_error('Whitespace is not allowed in the username.');
+    }
+    else if (!formData.email) {
+      this.show_error('Email is required');
+    }
+    else if (!formData.password) {
+      this.show_error('Password is required');
+    }
+    else {
+      this.app.user.register(formData.email, formData.username, formData.password, function (err) {
+        if (err) {
+          this.show_error(err);
+        }
+        else {
+          this.close();
+        }
+      }.bind(this));
+    }
+  },
+  submit_register: function (evt) {
+    evt.preventDefault();
+
   }
 });
 
