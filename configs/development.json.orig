@@ -35,11 +35,15 @@
       "id": "UA-36631837-2"
     },
     "pageSize" : 25,
+<<<<<<< HEAD
+    "domain": "runnable.pw"
+=======
     "domain": "runnable2.net"
   },
   "GitHub": {
     "clientId": "f8160c773a0574fd21af",
     "clientSecret": "c317f72b783809f4ff2951d012f28c5e972f8b41",
     "callbackURL": "http://localhost:3000/auth/github/callback"
+>>>>>>> 119d8fa... GitHub Auth client side
   }
 }

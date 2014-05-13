@@ -31,5 +31,10 @@
       "app_id": "980118989fd561bd1dce4ba4c7f8cb32da859c16"
     },
     "domain": "runnable.com"
+  },
+  "GitHub": {
+    "clientId": "f9113e7fa3d326bfc855",
+    "clientSecret": "bd2e566fde0e788ebad4270c57a12f32d84db385",
+    "callbackURL": "http://runnable.com/auth/github/callback"
   }
 }
