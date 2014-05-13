@@ -1,34 +1,29 @@
 .modal {
-  opacity: 0;
-  transform: scale3d(.7,.7,1);
-
-  &.in {
-    animation: modalIn .2s forwards;
-  }
 
   .modal-dialog {
+    animation: modalIn .2s forwards;
     width: 30%;
       max-width: 460px;
       min-width: 320px;
   }
 
   .modal-content {
-    background: #f6f6f6;
+    background: $gray-lighter;
     border: 0;
-    @include border-radius(3px);
+    border-radius: 3px;
   }
 
   .modal-header {
     background: $purple-light;
-    @include border-radius(3px 3px 0 0);
-    @include box-shadow(inset 0 1px 0 rgba(255,255,255,.25));
+    border-radius: 3px 3px 0 0;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
     color: #fff;
     height: 40px;
     padding: 0 20px;
 
     h4 {
       font-size: 14px;
-      font-weight: bold;
+      font-weight: 700;
       height: 40px;
       line-height: 40px;
       overflow: hidden;
@@ -38,7 +33,7 @@
     }
 
     .close {
-      @include box-shadow(none);
+      box-shadow: none;
       color: rgba(0,0,0,.5);
       height: 36px;
       opacity: .8;
@@ -90,7 +85,7 @@
       a {
         color: $purple;
         font-size: 14px;
-        font-weight: bold;
+        font-weight: 700;
         text-shadow: 0 1px 0 #fff;
       }
     }
@@ -128,16 +123,8 @@
   a {
     color: $purple;
     display: table;
-    font-weight: bold;
+    font-weight: 700;
     margin: 20px auto 0;
-  }
-}
-
-#signup,
-#login {
-
-  p {
-    margin: 20px 0 0;
   }
 }
 
@@ -161,6 +148,57 @@ body.modal-open,
   margin-right: 0;
 }
 
+// registration modals
+#register-modal {
+
+  .modal-dialog {
+    perspective: 1000px;
+    transform-origin: 50% 250%;
+    width: 300px;
+  }
+
+  object {
+    height: 20px;
+    margin: 7px 0 0 -28px;
+    pointer-events: none;
+    position: absolute;
+    width: 20px;
+  }
+
+  &.flip {
+
+    #signup {
+      transform: rotate3d(0,1,0,180deg);
+    }
+
+    #login {
+      transform: rotate3d(0,1,0,0);
+    }
+  }
+
+  p {
+    margin: 20px 0 0;
+  }
+}
+
+#signup,
+#login {
+  backface-visibility: hidden;
+  height: 340px;
+  position: absolute;
+  transition: transform .3s ease-in-out;
+  width: 100%;
+}
+
+#signup {
+  z-index: 1;
+}
+
+#login {
+  transform: rotate3d(0,1,0,-180deg);
+  z-index: 2;
+}
+
 // .spec-modals
 .modal .spec-modal {
   width: 50%;
@@ -178,7 +216,7 @@ body.modal-open,
     }
 
     p {
-      font-weight: bold;
+      font-weight: 700;
       text-align: left;
     }
 
@@ -232,8 +270,8 @@ body.modal-open,
 
     ul {
       background: #fff;
-      @include border-radius(5px);
-      @include box-shadow(0 2px 5px rgba(0,0,0,.1));
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,.1);
       margin: 0 0 20px;
       overflow: hidden;
       padding: 0;
@@ -245,15 +283,15 @@ body.modal-open,
       line-height: 40px;
       list-style: none;
       margin: 0;
-      @include transition(background .2s ease-in-out);
+      transition: background .2s ease-in-out;
       width: 100%;
 
       &:hover {
-        background: #FCF7FF;
+        background: #fcf7ff;
       }
 
       > .existing {
-        color: #333;
+        color: $gray-darkest;
         display: block;
         font-weight: 700;
         height: 100%;
@@ -322,7 +360,7 @@ body.modal-open,
       padding: 20px;
 
       > p {
-        font-weight: bold;
+        font-weight: 700;
       }
 
       > button {
@@ -403,7 +441,7 @@ body.modal-open,
       button {
         border: 0;
         border-left: 1px solid #cdcdcd;
-        @include border-radius(0 3px 3px 0);
+        border-radius: 0 3px 3px 0;
         height: 34px;
         line-height: 34px;
         position: absolute;
@@ -459,7 +497,7 @@ body.modal-open,
     }
 
     textarea {
-      @include border-radius(0 2px 2px 2px);
+      border-radius: 0 2px 2px;
       position: relative;
         z-index: 1;
       resize: vertical;
@@ -479,7 +517,7 @@ body.modal-open,
     background: #fcf8e3;
     background-image: linear-gradient(45deg,desaturate(darken(#fcf8e3,5),10) 25%,transparent 25%,transparent 50%,desaturate(darken(#fcf8e3,5),10) 50%,desaturate(darken(#fcf8e3,5),10) 75%,transparent 75%,transparent);
     background-size: 40px 40px;
-    @include border-radius(3px);
+    border-radius: 3px;
     box-shadow: 0 3px 3px rgba(0,0,0,.3);
     color: #8a6d3b;
     padding: 10px;
@@ -492,7 +530,7 @@ body.modal-open,
   }
 
   .modal-body {
-    @include border-radius(3px 3px 0 0);
+    border-radius: 3px 3px 0 0;
 
     input {
       margin: 20px 0 0;
@@ -501,12 +539,12 @@ body.modal-open,
 
   .modal-footer {
     border-top: 0;
-    @include border-radius(0 0 3px 3px);
+    border-radius: 0 0 3px 3px;
     margin-top: 0;
   }
 
   h3 {
-    font-weight: bold;
+    font-weight: 700;
     margin-top: 10px;
     text-align: center;
   }

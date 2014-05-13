@@ -6,26 +6,24 @@ var sassDir   = 'assets/scss';
 var sassIndex = path.join(sassDir, 'index.scss');
 var fontsDir;//'assets/stylesheets/assets/fonts';
 // out
-var layoutPath = 'app/templates/__layout_editable.hbs';
-var verLayoutPath = 'app/templates/__layout.hbs';
-var imagesDir       = 'public/images';
-var javascriptsDir  = 'public';
-var cssDir          = 'public/styles';
-var mergedAssetsPath= "public/mergedAssets.js";
-var minAssetsPath   = "public/mergedAssets.min.js";
-var rendrDir        = 'node_modules/rendr';
-var compassCSS      = 'public/styles/index.css';
-var mergedCSSPath   = 'public/styles/index.css';
-var minCSS = [
+var layoutPath       = 'app/templates/__layout_editable.hbs';
+var verLayoutPath    = 'app/templates/__layout.hbs';
+var imagesDir        = 'public/images';
+var javascriptsDir   = 'public';
+var cssDir           = 'public/styles';
+var mergedAssetsPath = "public/mergedAssets.js";
+var minAssetsPath    = "public/mergedAssets.min.js";
+var rendrDir         = 'node_modules/rendr';
+var compiledCSS      = 'public/styles/index.css';
+var mergedCSSPath    = 'public/styles/index.css';
+var minCSS           = [
   'public/vendor/bootstrap/bootstrap.min.css', // custom
   'public/vendor/bootstrap/bootstrap-theme.min.css', // custom
-  'public/vendor/bower/bootstrap-select/bootstrap-select.min.css',
   'public/vendor/typeahead.js-bootstrap.css',
-  'public/vendor/bower/textillate/assets/animate.css',
   'public/vendor/bower/autocompletejs/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
   'public/vendor/glyphicons.css',
-  compassCSS // must be last
+  compiledCSS // must be last
 ];
 //stitch
 var aceScripts = [
@@ -38,8 +36,6 @@ var frontendScripts = [
   'public/vendor/modernizr/modernizr.custom.64268.js',
   'public/vendor/*.js', //include jquery plugins, must be after jquery
   'public/vendor/bower/sockjs/sockjs.js',
-  'public/vendor/bower/es5-shim/es5-shim.js',
-  'public/vendor/bower/es5-shim/es5-sham.js',
   'public/vendor/bower/bootstrap/js/collapse.js',
   'public/vendor/bower/bootstrap/js/dropdown.js',
   'public/vendor/bower/bootstrap/js/tab.js',
@@ -48,9 +44,6 @@ var frontendScripts = [
   'public/vendor/bower/bootstrap/js/modal.js',
   'public/vendor/bower/bootstrap/js/transition.js',
   'public/vendor/bower/typeahead.js/dist/typeahead.min.js',
-  'public/vendor/bower/bootstrap-select/bootstrap-select.min.js',
-  'public/vendor/bower/textillate/assets/jquery.lettering.js',
-  'public/vendor/bower/textillate/jquery.textillate.js',
   'public/vendor/bower/jquery.stellar/jquery.stellar.min.js',
   'public/vendor/bower/frontend-track/frontend-track.js',
   'public/vendor/bower/autocompletejs/js/autocomplete.js',
@@ -66,12 +59,13 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     autoprefixer: {
-      options: {
-        browsers: ['last 2 versions']
-      },
-      single_file: {
-        src: 'public/styles/index.css',
-        dest: 'public/styles/index.css'
+      dist: {
+        options: {
+          browsers: ['last 2 versions']
+        },
+        files: {
+          'public/styles/index.css' : 'public/styles/index.css'
+        }
       }
     },
 
@@ -99,29 +93,23 @@ module.exports = function(grunt) {
       }
     },
 
-    compass: {
+    sass: {
+
       compile: {
         options: {
-          sassDir: sassDir,
-          specify: [sassIndex],
-          cssDir: cssDir,
-          imagesDir: imagesDir,
-          javascriptsDir: javascriptsDir,
-          fontsDir: fontsDir,
-          outputStyle: 'compress'
+          style: 'compressed'
+        },
+        files: {
+          'public/styles/index.css' : sassIndex
         }
       },
-      server: {
+      dev: {
         options: {
-          sassDir: sassDir,
-          specify: [sassIndex],
-          cssDir: cssDir,
-          imagesDir: imagesDir,
-          javascriptsDir: javascriptsDir,
-          fontsDir: fontsDir
-          // relativeAssets: true
-          // debugInfo: true
-          // outputStyle: 'compact'
+          lineNumbers: true,
+          style: 'expanded'
+        },
+        files: {
+          'public/styles/index.css' : sassIndex
         }
       }
     },
@@ -205,20 +193,20 @@ module.exports = function(grunt) {
         }
       },
       stylesheets: {
-        files: _.without([sassDir + '/**/*.{scss,sass}'].concat(minCSS), compassCSS),
-        tasks: ['compass:server', 'concat:dev'],
+        files: _.without([sassDir + '/**/*.{scss,sass}'].concat(minCSS), compiledCSS),
+        tasks: ['sass:dev', 'concat:dev', 'autoprefixer'],
         options: {
-          livereload: true,
+          // livereload: true,
           interrupt: true
         }
-      },
-      livereload: {
-        files: [mergedCSSPath, 'public/mergedAssets.min.js', 'public/images/*'],
-        tasks: ['noop'],
-        options: {
-          interrupt: true,
-          livereload: 35371
-        }
+      // },
+      // livereload: {
+      //   files: [mergedCSSPath, 'public/mergedAssets.min.js', 'public/images/*'],
+      //   tasks: ['noop'],
+      //   options: {
+      //     interrupt: true,
+      //     livereload: 35371
+      //   }
       }
     },
 
@@ -265,7 +253,7 @@ module.exports = function(grunt) {
   gruntConfig.concat.dev.files[mergedCSSPath] = minCSS; //concats css for dev
   grunt.initConfig(gruntConfig);
 
-  grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -360,7 +348,7 @@ module.exports = function(grunt) {
   // jslint
   grunt.registerTask('jshint', ['jshint:all']);
   // Compile - shared tasks for all
-  grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'commit-hash-file', 'rendr_stitch', 'compass']);
+  grunt.registerTask('compile', ['handlebars', 'channel-images-hash', 'commit-hash-file', 'rendr_stitch', 'sass']);
   // Shared tasks for server and debug
   grunt.registerTask('dev', ['compile', 'concat', 'copy', 'autoprefixer']);
   // Run the server and watch for file changes

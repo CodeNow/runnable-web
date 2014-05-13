@@ -1,26 +1,3 @@
-// Welcome to Compass.
-// In this file you should write your main styles. (or centralize your imports)
-// Import this file using the following HTML or equivalent:
-// <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
-
-// @import "compass/reset";
-@import "compass/css3/images";
-@import "compass/css3/transition";
-@import "compass/css3/border-radius";
-@import "compass/css3/box-shadow";
-@import "compass/css3/transform";
-@import "compass/css3/background-size";
-@import "compass/utilities/general/clearfix";
-
-$cursive-font: 'Shadows Into Light Two', cursive;
-
-// Ugly hack to get rid of the blue focus on inputs
-textarea:focus, input:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus { @include box-shadow(none) }
-
-a::-moz-focus-inner, button::-moz-focus-inner,  {
-  border: 0;
-}
-
 // Responsive Mixins
 @mixin breakpoint($point) {
   @if $point == screen-lg {
@@ -149,78 +126,79 @@ $prefix-for-spec:      true !default; // required for keyframe mixin
 
 // UI KIT
 progress {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-      appearance: none;
-        border: none;
+  appearance: none;
+  background-color: #b9b9b9;
+  border: none;
 
-    background-color: #B9B9B9;
+  // Reset the default appearance
+  background-image: linear-gradient(#b1b1b1,#ccc);
+  border: solid 1px #a9a9a9;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3) inset;
+  // For IE10
+  color: $purple;
 
-    /* Reset the default appearance */
-    @include border-radius(7px);
-    @include background-image(linear-gradient(#B1B1B1,#CCC));
-    @include border-radius(7px);
-    border: solid 1px #A9A9A9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.30) inset;
-    /* For IE10 */
-    color: $purple;
+  width: 100%;
+  height: 14px;
 
-    width: 100%;
-    height: 14px;
   &[value] {
+
     &::-webkit-progress-bar {
-      @include background-image(linear-gradient(#B1B1B1,#CCC));
-      @include border-radius(7px);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.30) inset;
+      background-image: linear-gradient(#b1b1b1,#ccc);
+      border-radius: 7px;
+      box-shadow: 0 2px 5px rgba(0,0,0,.3) inset;
       overflow: hidden;
     }
+
     &::-webkit-progress-value {
-      @include background-image(linear-gradient(#9958BA,#6D419C));
-      @include border-radius(7px);
-      border: solid 1px #70429C;
-      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.30) inset;
+      background-image: linear-gradient(#9958ba,#6d419c);
+      border: solid 1px #70429c;
+      border-radius: 7px;
+      box-shadow: 0 1px 0 rgba(255,255,255,.3) inset;
       width: 100%;
     }
   }
+
   &::-moz-progress-bar {
-    @include background-image(linear-gradient(#9958BA,#6D419C));
-    @include border-radius(7px);
-    border: solid 1px #70429C;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.30) inset;
+    background-image: linear-gradient(#9958ba,#6d419c);
+    border: solid 1px #70429c;
+    border-radius: 7px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.3) inset;
   }
 }
 
 .progress-bar {
-  background-color: #B9B9B9;
-  @include border-radius(7px);
-  @include background-image(linear-gradient(#B1B1B1,#CCC));
-  @include border-radius(7px);
-  border: solid 1px #A9A9A9;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.30) inset;
-  width: 100%;
+  background-color: #b9b9b9;
+  background-image: linear-gradient(#b1b1b1,#ccc);
+  border: solid 1px #a9a9a9;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3) inset;
   height: 14px;
-  position: relative;
   margin-bottom: 15px;
   overflow: hidden;
+  position: relative;
+  width: 100%;
+
   .progress-bar-fill {
-    position: absolute;
+    background-image: linear-gradient(#9958BA,#6D419C);
+    border: solid 1px #70429c;
+    border-radius: 7px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.3) inset;
     height: 12px;
-    @include background-image(linear-gradient(#9958BA,#6D419C));
-    @include border-radius(7px);
-    border: solid 1px #70429C;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.30) inset;
+    position: absolute;
     width: 100%;
   }
 }
 
 .step-progress-bar {
-  background: #DEDEDE;
-  position: relative;
+  background: #dedede;
+  border-radius: 5px;
   height: 11px;
   margin: 25px 0;
   padding: 0;
-  z-index: 10;
-  @include border-radius(5px);
+  position: relative;
+    z-index: 10;
+
   &.steps-2 li { width: 100% }
   &.steps-3 li { width: 50% }
   &.steps-4 li { width: 33.3% }
@@ -230,46 +208,52 @@ progress {
   &.steps-8 li { width: 14.27% }
   &.steps-9 li { width: 12.5% }
   &.steps-10 li { width: 11.1% }
+
   li {
-    margin: 2px 0 0 0;
-    padding: 0;
     float: left;
-    position: relative;
     height: 6px;
     list-style: none;
+    margin: 2px 0 0;
+    padding: 0;
+    position: relative;
+
     &:before {
+      background: #dedede;
+      border-radius: 50%;
+      color: #fff;
       content: attr(data-step);
-      width: 22px;
-      line-height: 22px;
       display: block;
       font-size: 10px;
-      font-weight: bold;
-      color: #fff;
-      background: #DEDEDE;
-      @include border-radius(50%);
-      text-align: center;
+      font-weight: 700;
+      line-height: 22px;
       position: absolute;
-      right: -11px;
-      top: -8px;
-      z-index: 100;
+        top: -8px;
+        right: -11px;
+        z-index: 100;
+      text-align: center;
+      width: 22px;
     }
+
     &.active {
-      background-color: #81B638;
-      @include background-image(linear-gradient(#81B638, #589427));
-      @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.3), 0 1px 0 rgba(0,0,0,0.5));
-      text-shadow: 0 -1px 0 #4F7C20;
+      background-color: #81b638;
+      background-image: linear-gradient(#81B638, #589427);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 1px 0 rgba(0,0,0,.5);
       color: #fff;
+      text-shadow: 0 -1px 0 #4f7c20;
+
       &:before {
-        @include background-image(linear-gradient(#81B638, #589427));
-        @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.3), 0 1px 0 rgba(0,0,0,0.5));
-        text-shadow: 0 -1px 0 #4F7C20;
+        background-image: linear-gradient(#81b638, #589427);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 1px 0 rgba(0,0,0,.5);
         color: #fff;
+        text-shadow: 0 -1px 0 #4f7c20;
       }
     }
+
     &:first-child {
-      width: 0;
       left: 10px;
+      width: 0;
     }
+
     &:last-child {
       right: 10px;
     }
@@ -277,26 +261,31 @@ progress {
 }
 
 .tags {
-  h3.widget-title {
-    @extend .clearfix !optional;
-    a.edit-tags {
-      float: right;
-      height: 15px;
-      width: 15px;
+
+  .widget-title {
+    @extend .clearfix;
+
+    .edit-tags {
       background-image: url(../images/sprite-edit-tag.png);
       @include background-image-retina('../images/sprite-edit-tag@2x.png');
       background-size: 15px auto;
+      float: right;
+      height: 15px;
+      width: 15px;
+
       &:hover {
         background-position: 0 -15px;
       }
     }
   }
+
   ul {
     margin: 0;
     padding: 0;
+
     li {
-      list-style: none;
       float: left;
+      list-style: none;
       margin: 0 9px 9px 0;
       padding: 0;
     }
@@ -304,31 +293,35 @@ progress {
 }
 
 .icon {
-  display: inline-block;
-  overflow: hidden;
   background: #bbb;
-  width: 48px;
-  height: 48px;
-  text-align: center;
-  background-repeat: no-repeat;
   background-position: center center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 48px;
+  overflow: hidden;
+  text-align: center;
+  width: 48px;
+
   &.play {
-    background-image: url('../images/icon-play.png');
+    background-image: url(../images/icon-play.png);
     @include background-image-retina('../images/icon-play@2x.png');
     background-size: 20px 25px;
   }
+
   &.arrow-left {
-    background-image: url('../images/icon-arrow-left.png');
+    background-image: url(../images/icon-arrow-left.png);
     @include background-image-retina('../images/icon-arrow-left@2x.png');
     background-size: 24px 22px;
   }
+
   &.two-arrow {
-    background-image: url('../images/icon-two-arrow.png');
+    background-image: url(../images/icon-two-arrow.png);
     @include background-image-retina('../images/icon-two-arrow@2x.png');
     background-size: 30px 22px;
   }
+
   &.folder {
-    background-image: url('../images/icon-folder.png');
+    background-image: url(../images/icon-folder.png);
     @include background-image-retina('../images/icon-folder@2x.png');
     background-size: 40px 28px;
   }
@@ -336,29 +329,33 @@ progress {
 
 .info-box {
   background: #fff;
-  @include border-radius(3px);
-  @include box-shadow(0 1px 3px rgba(0,0,0,0.3));
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
   overflow: hidden;
+
   h3 {
-    margin: 0;
     background: $purple-light;
+    border-radius: 3px 3px 0 0;
     color: #fff;
-    @include border-radius(3px 3px 0 0);
     font-size: 16px;
+    margin: 0;
     padding: 6px 12px;
+
     span {
-      font-size: 12px;
       float: right;
+      font-size: 12px;
       margin-top: 3px;
     }
   }
+
   .info-box-content {
+    font-weight: 700;
     padding: 12px;
-    font-weight: bold;
+
     p {
       font-size: 12px;
-      padding: 0;
       margin: 0;
+      padding: 0;
     }
   }
 }
@@ -366,66 +363,86 @@ progress {
 .expandable {
   display: none;
   opacity: 0;
+
   &.expanded {
-    opacity: 1;
     display: inline;
+    opacity: 1;
   }
 }
 
 .bootstrap-select {
-  margin-left: 10px;
-  display: inline-block;
   background: none;
-  vertical-align: middle;
+  display: inline-block;
+  margin-left: 10px;
   margin-top: 14px;
+  vertical-align: middle;
+
   .btn {
     box-shadow: none;
     border-color: #bbb;
     color: #bbb;
     font-size: 12px;
-    font-weight: bold;
-    .caret { border-top-color: #bbb; float: right; margin-top: 7px; }
+    font-weight: 700;
+
+    .caret {
+      border-top-color: #bbb;
+      float: right;
+      margin-top: 7px;
+    }
   }
+
   &.open {
+
     .btn {
       background: #ccc;
+      border: solid 1px #999;
       color: #fff;
       text-shadow: none;
-      border: solid 1px #999;
-      .caret { border-top-color: #fff }
+
+      .caret {
+        border-top-color: #fff;
+      }
+
       &:focus {
         outline: none !important;
       }
     }
   }
-  .dropdown-menu > li > a { padding: 3px 14px }
-  .dropdown-menu li a:hover { background: $orange }
+
+  .dropdown-menu > li > a {
+    padding: 3px 14px;
+  }
+
+  .dropdown-menu li a:hover {
+    background: $orange;
+  }
 }
-
-
-
 
 .ui-helper-hidden-accessible {
   display: none;
 }
+
 .ui-autocomplete {
-  top: 5px;
   background: #fff;
-  z-index: 100000;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
   margin: 0;
-  padding: 0;
   overflow: hidden;
-  @include border-radius(0 0 3px 3px);
-  @include box-shadow(0 1px 3px rgba(0,0,0,0.1));
+  padding: 0;
+  top: 5px;
+  z-index: 100000;
+
   li {
     list-style: none;
     margin: 0;
+
     a {
-      color: #333;
+      color: $gray-darkest;
       display: block;
+      font-size: 13px;
       padding: 8px 10px !important;
       text-decoration: none;
-      font-size: 13px;
+
       &.ui-state-focus {
         background: $orange;
         color: #fff;
@@ -435,87 +452,97 @@ progress {
 }
 
 a.terminal-popout {
-  margin-bottom: -2px;
-  display: inline-block;
-  height: 11px;
-  width: 11px;
   background-image: url(../images/sprite-popout.png);
   @include background-image-retina('../images/sprite-popout@2x.png');
   background-size: 11px auto;
+  display: inline-block;
+  height: 11px;
+  margin-bottom: -2px;
+  width: 11px;
+
   &:hover {
     background-position: 0 -11px;
   }
 }
 
-div#output-terminal-container,
-div.terminal-view {
+#output-terminal-container,
+.terminal-view {
+
   .terminal-loader {
-    z-index:3;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    box-sizing: content-box;
+    display: none;
     margin-top: 51px;
+    position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index:3;
     white-space: normal;
-    display:none;
-    @include box-sizing(content-box);
+
     .terminal-loader-icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: -26px 0 0 -35px;
-      width: 70px;
       height: 54px;
+      margin: -26px 0 0 -35px;
+      position: absolute;
+        top: 50%;
+        left: 50%;
       text-align: center;
+      width: 70px;
+
       img {
-        opacity: .6;
         margin-right: 4px;
+        opacity: .6;
       }
+
       .dot {
-        position: absolute;
-        height: 8px;
-        width: 8px;
         background-color: #999;
-        @include border-radius(50%);
+        border-radius: 50%;
+        height: 8px;
         opacity: 0;
-        bottom: 0;
+        position: absolute;
+          bottom: 0;
+        width: 8px;
+
         &.dot-1 {
+          animation: spin 1s linear -.5s infinite;
           left: 0;
           margin: 0 0 0 -4px;
-          animation: spin 1s linear -.5s infinite;
         }
+
         &.dot-2 {
+          animation: spin 1s linear -.375s infinite;
           left: 25%;
           margin: 0 0 0 -4px;
-          animation: spin 1s linear -.375s infinite;
         }
+
         &.dot-3 {
+          animation: spin 1s linear -.25s infinite;
           left: 50%;
           margin: 0 0 0 -4px;
-          animation: spin 1s linear -.25s infinite;
         }
+
         &.dot-4 {
+          animation: spin 1s linear -.125s infinite;
           left: 75%;
           margin: 0 0 0 -4px;
-          animation: spin 1s linear -.125s infinite;
         }
+
         &.dot-5 {
-          right: 0;
-          margin: 0 -4px 0 0;
           animation: spin 1s linear 0 infinite;
+          margin: 0 -4px 0 0;
+          right: 0;
         }
       }
     }
   }
-  &.loading .terminal-loader{
-    display:block;
+
+  &.loading .terminal-loader {
+    display: block;
   }
 }
-#output-terminal-container{
-  .terminal-loader{
-    margin-top: 0;
-  }
+
+#output-terminal-container .terminal-loader{
+  margin-top: 0;
 }
 
 #disqus_thread {
@@ -530,7 +557,7 @@ div.terminal-view {
     @extend .clearfix;
     color: $gray-darker;
     font-size: 34px;
-    font-weight: bold;
+    font-weight: 700;
     margin: 0 0 15px;
 
     @include media(xs) {
@@ -559,34 +586,42 @@ div.terminal-view {
   }
 }
 
-#contact-header, .basic-page {
+#contact-header,
+.basic-page {
   text-align: center;
-  #contact-mid, .basic-page-mid {
+
+  #contact-mid,
+  .basic-page-mid {
     background-color: $purple;
     color: #fff;
     height: 200px;
+
     h2 {
-      margin: 0;
       font-size: 36px;
-      font-weight: bold;
-      padding: 40px 0 10px 0;
+      font-weight: 700;
+      margin: 0;
+      padding: 40px 0 10px;
     }
+
     p {
       color: #c49cdf;
       font-size: 18px;
     }
   }
-  #contact-body, .basic-page-body {
-    margin-top: -45px;
+
+  #contact-body,
+  .basic-page-body {
     background-color: #fff;
-    text-align: left;
-    @include border-radius(3px);
+    border-radius: 3px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 2px 7px rgba(0,0,0,.1);
     margin-bottom: 40px;
+    margin-top: -45px;
     padding-bottom: 30px;
-    @include box-shadow(inset 0 1px 0 rgba(255,255,255,0.3), 0 2px 7px rgba(0,0,0,0.1));
+    text-align: left;
   }
+
   #contact-body {
-    background-image: url('../images/contact-body.jpg');
+    background-image: url(../images/contact-body.jpg);
     @include background-image-retina('../images/contact-body@2x.jpg');
   }
 }
@@ -595,6 +630,7 @@ div.terminal-view {
   background: $orange;
   color: #fff;
   font-size: 12px;
+
   p {
     margin: 0;
     padding: 7px 0;

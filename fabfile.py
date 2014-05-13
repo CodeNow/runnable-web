@@ -147,8 +147,6 @@ def install_requirements():
   Install the required packages using npm.
   """
   sudo('npm install pm2 grunt-cli bower -g')
-  sudo('apt-get install -y rubygems')
-  sudo('gem install compass')
   sudo('rm -rf ~/tmp')
   with cd('runnable-web'):
     run('npm install')
