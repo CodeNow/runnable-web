@@ -5,9 +5,9 @@ var Super = ModalView.prototype;
 module.exports = ModalView.extend({
   id: 'register-modal',
   events: {
-    'click a#signup_link' :      'flip',
-    'submit form#login_form':    'submit_login',
-    'submit form#register_form': 'submit_register'
+    'click a[data-action="flip"]': 'flip',
+    'submit form#login_form':      'submit_login',
+    'submit form#register_form':   'submit_register'
   },
   postInitialize: function () {
     this.options.header = this.options.header || this.defaultHeader;
@@ -41,6 +41,18 @@ module.exports = ModalView.extend({
   },
   submit_login: function (evt) {
     evt.preventDefault();
+    var formData = $(evt.currentTarget).serializeObject();
+    this.app.user.login(formData.username, formData.password, function (err) {
+      if (err) {
+        this.show_error(err);
+      }
+      else {
+        this.close();
+      }
+    }.bind(this));
+  },
+  submit_register: function (evt) {
+    evt.preventDefault();
     //disable button
     //this.$el.find('form#login_form button[type="submit"]').attr('disabled', 'disabled');
     var formData = $(evt.currentTarget).serializeObject();
@@ -66,10 +78,6 @@ module.exports = ModalView.extend({
         }
       }.bind(this));
     }
-  },
-  submit_register: function (evt) {
-    evt.preventDefault();
-
   }
 });
 
