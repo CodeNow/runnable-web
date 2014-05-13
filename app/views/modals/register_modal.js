@@ -5,9 +5,9 @@ var Super = ModalView.prototype;
 module.exports = ModalView.extend({
   id: 'register-modal',
   events: {
-    'click a[data-action="flip"]': 'flip',
-    'submit form#login-form':      'submitLogin',
-    'submit form#register-form':   'submitRegister'
+    'click .flip-link'              : 'flip',
+    'submit #login-form'            : 'submitLogin',
+    'submit #signup-form'           : 'submitRegister'
   },
   postInitialize: function () {
     this.options.header = this.options.header || this.defaultHeader;
@@ -78,6 +78,12 @@ module.exports = ModalView.extend({
         }
       }.bind(this));
     }
+  },
+  github: function (evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    var $el = $(evt.currentTarget);
+    window.location.href = $el.attr('href');
   }
 });
 
