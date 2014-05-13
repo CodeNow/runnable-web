@@ -20,7 +20,18 @@ module.exports = ModalView.extend({
     Super.remove.apply(this, arguments);
   },
   flip: function () {
-    this.$el.toggleClass('flip');
+    var $self = this.$el;
+    var $signUp = this.$('#signup');
+    var $login = this.$('#login');
+
+    if ($self.hasClass('flip')) {
+      $signUp.find('input')[0].focus();
+    }
+    else {
+      $login.find('input')[0].focus();
+    }
+
+    $self.toggleClass('flip');
   }
 });
 
