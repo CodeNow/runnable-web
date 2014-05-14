@@ -19,10 +19,9 @@ var mergedCSSPath    = 'public/styles/index.css';
 var minCSS           = [
   'public/vendor/bootstrap/bootstrap.min.css', // custom
   'public/vendor/bootstrap/bootstrap-theme.min.css', // custom
-  'public/vendor/typeahead.js-bootstrap.css',
-  'public/vendor/bower/autocompletejs/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
   'public/vendor/glyphicons.css',
+  'public/vendor/jquery-ui-custom/css/notheme/jquery-ui-1.10.4.custom.css',
   compiledCSS // must be last
 ];
 //stitch
@@ -32,7 +31,7 @@ var aceScripts = [
 ];
 var frontendScripts = [
   'public/vendor/bower/jquery/dist/jquery.js',
-  'public/vendor/jquery-ui-custom/js/jquery-ui-1.10.3.custom.min.js',
+  'public/vendor/jquery-ui-custom/js/jquery-ui-1.10.4.custom.js',
   'public/vendor/modernizr/modernizr.custom.64268.js',
   'public/vendor/*.js', //include jquery plugins, must be after jquery
   'public/vendor/bower/sockjs/sockjs.js',
@@ -43,10 +42,8 @@ var frontendScripts = [
   'public/vendor/bower/bootstrap/js/popover.js',
   'public/vendor/bower/bootstrap/js/modal.js',
   'public/vendor/bower/bootstrap/js/transition.js',
-  'public/vendor/bower/typeahead.js/dist/typeahead.min.js',
   'public/vendor/bower/jquery.stellar/jquery.stellar.min.js',
   'public/vendor/bower/frontend-track/frontend-track.js',
-  'public/vendor/bower/autocompletejs/js/autocomplete.js',
   'public/vendor/bootstrap/bootstrap-dialog.js', // https://github.com/nakupanda/bootstrap3-dialog
   'public/vendor/bower/fastclick/lib/fastclick.js'
 ]

@@ -17,6 +17,41 @@ module.exports = BaseView.extend({
     };
   },
   postRender: function () {
+
+    var datalist = [
+      'Apache Example',
+      'BASIC Example',
+      'C++ Example',
+      'Django Example Tho',
+      'express Example',
+      'Firebase Example',
+      'Google Authentication Example',
+      'Honeycomb Example',
+      'Internet Example',
+      'Javascript Example',
+      'Keylime Pie Example',
+      'Loop Example',
+      'Mapping Example',
+      'Napping Example',
+      'OAuth Example',
+      'Private Example',
+      'Query Example',
+      'Render Example',
+      'Scala Example',
+      'Time/date Example',
+      'Universal Example',
+      'Vagrant Example',
+      'Windows Example',
+      'X Example',
+      'Yeoman Example',
+      'Zebra Striped Table Example'
+    ];
+
+    this.$('input').autocomplete({
+      appendTo: this.$el,
+      source: datalist
+    });
+
     // var engine = {
     //   compile: function (template) {
     //     var compiled = _.template(template);
