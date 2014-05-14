@@ -77,7 +77,6 @@ function initMiddleware() {
   hbs.registerHelper('json', function() { return ''; });
   hbs.registerHelper('if_eq', function() { return ''; });
   app.engine('hbs', hbs.__express);
-  app.use(require('passport').initialize());
 
   // set the middleware stack
   var maxAge = 0;
