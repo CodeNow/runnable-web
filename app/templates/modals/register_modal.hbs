@@ -7,7 +7,7 @@
     <div id="signup" class="modal-content">
       <a data-pass-thru href="/auth/github" class="btn purple">
         <object data="/images/icons/icons-git.svg" type="image/svg+xml"></object>
-        Sign up with Github
+        Log in with Github
       </a>
       <small>or</small>
       <form id="signup-form" class="modal-body">
@@ -16,21 +16,28 @@
         <input type="password" class="form-control" name="password" placeholder="Password" required>
         <button class="orange col-sm-12">Sign Up</button>
       </form>
-      <p>Already have an account? <a class="flip-link">Log In</a></p>
+      <p>Already have an account? <a class="flip-link">Log In</a>
     </div>
     <div id="login" class="modal-content">
-      <a data-pass-thru href="/auth/github" class="btn purple">
-        <object data="/images/icons/icons-git.svg" type="image/svg+xml"></object>
-        Log in with Github
-      </a>
-      <small>or</small>
       <form id="login-form" class="modal-body">
         <input class="form-control" name="username" placeholder="Email or Username" autocapitalize="off" autofocus required>
         <input type="password" class="form-control" name="password" placeholder="Password" required>
         <button class="orange col-sm-12">Log In</button>
         <a class="reset-link">Reset Password</a>
       </form>
-      <p>Don't have an account yet? <a class="flip-link">Sign Up</a></p>
+      <form id="reset-form" class="modal-body">
+        <p>It happens to the best of us.<br>We'll send you an email to confirm.</p>
+        <input class="form-control" placeholder="Email or Username" required>
+        <button class="orange col-sm-12">Reset Password</button>
+      </form>
+      <div id="confirm-reset" class="modal-body">
+        <p>It's happening.<br>Check [your@email] to reset your password.</p>
+        <div class="plane-container">
+          <object data="/images/icons/icons-plane.svg" type="image/svg+xml"></object>
+        </div>
+      </div>
+      <p>Don't have an account yet? <a class="flip-link">Sign Up</a>
+      <p class="alt-link"><a>Back to Log In</a></p>
     </div>
   </div>
 

@@ -225,6 +225,27 @@
   }
 }
 
+@keyframes planeRotate {
+  0% {
+    transform: rotate(0);
+  }
+  40% {
+    transform: rotate(15deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  60% {
+    transform: rotate(-10deg);
+  }
+  70% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
 @keyframes pulsate {
   0% {
     opacity: .5;

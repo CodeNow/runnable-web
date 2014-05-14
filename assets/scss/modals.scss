@@ -111,15 +111,10 @@
 
   a {
     color: $purple;
-    display: inline-block;
     font-weight: 700;
 
     &:hover {
       color: $purple-dark;
-    }
-
-    &:active {
-      transform: translate3d(0,1px,0);
     }
   }
 }
@@ -168,7 +163,7 @@ body.modal-open,
     }
   }
 
-  object {
+  a > object {
     height: 20px;
     margin: 7px 0 0 -28px;
     pointer-events: none;
@@ -189,7 +184,7 @@ body.modal-open,
 
   .purple {
     color: #fff;
-    margin: 20px 20px 10px;
+    margin: 20px;
     text-indent: 28px;
     width: calc(100% - 40px);
   }
@@ -223,16 +218,10 @@ body.modal-open,
   }
 
   form {
-    padding: 10px 20px 69px;
+    padding: 20px 20px 60px;
   }
 
-  .reset-link {
-    display: table;
-    font-size: 13px;
-    margin: 15px auto 0;
-  }
-
-  p {
+  .modal-content > p {
     background: $gray-light;
     border-radius: 0 0 3px 3px;
     border-top: 1px solid rgba(0,0,0,.1);
@@ -243,26 +232,127 @@ body.modal-open,
     padding: 15px 20px;
     position: absolute;
       bottom: 0;
+      z-index: 10;
     text-align: center;
     width: 100%;
   }
 }
 
+.alt-link {
+  display: none;
+}
+
 #signup,
 #login {
   backface-visibility: hidden;
+  overflow: hidden;
   position: absolute;
   transition: transform .3s ease-in-out;
   width: 100%;
 }
 
 #signup {
-  z-index: 1;
+  z-index: 2;
 }
 
 #login {
+  height: 251px;
   transform: rotate3d(0,1,0,-180deg);
-  z-index: 2;
+  transition: transform .3s ease-in-out, height .6s ease-in-out;
+  z-index: 1;
+}
+
+// reset form
+.reset-link {
+  display: table;
+  font-size: 13px;
+  margin: 15px auto 0;
+
+  &.in {
+    font-size: 16px;
+  }
+}
+
+#login-form,
+#reset-form,
+#confirm-reset {
+  position: absolute;
+    z-index: 10;
+  transition: transform .6s ease-in-out, opacity .5s ease-in-out;
+  width: 100%;
+}
+
+#reset-form,
+#confirm-reset {
+  opacity: 0;
+  transform: translate3d(0,251px,0);
+
+  > p {
+    color: $gray-dark;
+    font-size: 13px;
+  }
+
+  .plane-container {
+    display: none;
+    position: relative;
+      top: 15px;
+  }
+
+  object {
+    animation: planeRotate 4s forwards infinite ease-in-out;
+    display: block;
+    height: 100px;
+    margin: 0 auto;
+    position: absolute;
+      right: 0;
+      left: 0;
+    width: 100px;
+  }
+}
+
+#login.show-reset,
+#login.show-confirmation {
+
+  #login-form {
+    opacity: 0;
+    transform: translate3d(0,-100%,0);
+  }
+
+  > p {
+    display: none;
+  }
+
+  > .alt-link {
+    display: block;
+  }
+}
+
+#login.show-reset {
+  height: 213px;
+
+  #reset-form {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+}
+
+#login.show-confirmation {
+
+  #reset-form {
+    opacity: 0;
+    transform: translate3d(0,-251px,0);
+  }
+
+  #confirm-reset {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+
+  .plane-container {
+    display: block;
+    height: 200px;
+    width: 200px;
+  }
 }
 
 // .spec-modals
