@@ -5,15 +5,12 @@ var Super = ModalView.prototype;
 module.exports = ModalView.extend({
   id: 'register-modal',
   events: {
-<<<<<<< HEAD
-    'click a[data-action="flip"]': 'flip',
-    'submit form#login-form':      'submitLogin',
-    'submit form#register-form':   'submitRegister'
-=======
-    'click .flip-link'              : 'flip',
-    'submit #login-form'            : 'submitLogin',
-    'submit #signup-form'           : 'submitRegister'
->>>>>>> 8ad2ba5... sync
+    'click .flip-link'    : 'flip',
+    'click .reset-link'   : 'showResetForm',
+    'click .alt-link'     : 'hideResetForm',
+    'submit #login-form'  : 'submitLogin',
+    'submit #signup-form' : 'submitRegister',
+    'submit #reset-form'  : 'submitReset'
   },
   postInitialize: function () {
     this.options.header = this.options.header || this.defaultHeader;
@@ -27,6 +24,7 @@ module.exports = ModalView.extend({
       this.onClose();
     }
     Super.remove.apply(this, arguments);
+    this.unbindMouse();
   },
   flip: function () {
     var $self = this.$el;
@@ -41,6 +39,13 @@ module.exports = ModalView.extend({
     }
     $self.toggleClass('flip');
   },
+  showResetForm: function () {
+    this.$('#login').addClass('show-reset');
+  },
+  hideResetForm: function () {
+    this.$('#login').removeClass('show-reset show-confirmation');
+    this.unbindMouse(); // unbind when confirmation is hidden
+  },
   showError: function (errorMsg) {
     alert(errorMsg);
     return; //TODO
@@ -50,6 +55,9 @@ module.exports = ModalView.extend({
     var formData = $(evt.currentTarget).serializeObject();
     this.app.user.login(formData.username, formData.password, function (err) {
       if (err) {
+        if (err === 'invalid password') {
+          this.$('.reset-link').addClass('in');
+        }
         this.showError(err);
       }
       else {
@@ -85,11 +93,37 @@ module.exports = ModalView.extend({
       }.bind(this));
     }
   },
+  submitReset: function (evt) {
+    evt.preventDefault();
+
+    this.$('#login')
+      .removeClass('show-reset')
+      .addClass('show-confirmation');
+
+    $(window).on('mousemove',{thisView : this}, this.bindMouse);
+  },
+<<<<<<< HEAD
   github: function (evt) {
     evt.preventDefault();
     evt.stopPropagation();
     var $el = $(evt.currentTarget);
     window.location.href = $el.attr('href');
+  },
+  bindMouse: function (evt) {
+=======
+  mouseMoveHandler: function (evt) {
+>>>>>>> 87c7690... removing github auth code, moving it to API-Server
+    var xAxis;
+    var yAxis;
+    var $planeContainer = $('.plane-container');
+
+    xAxis = evt.pageX/32 * -1;
+    yAxis = evt.pageY/16 * -1;
+
+    $planeContainer.css('transform','translate3d(' + xAxis + 'px,' + yAxis + 'px,0');
+  },
+  unbindMouse: function () {
+    $(window).off('mousemove', this.bindMouse);
   }
 });
 
