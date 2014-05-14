@@ -18,6 +18,7 @@ module.exports = BaseView.extend({
   },
   postRender: function () {
 
+    // made up data
     var datalist = [
       'Apache Example',
       'BASIC Example',
@@ -50,7 +51,10 @@ module.exports = BaseView.extend({
     this.$('input').autocomplete({
       appendTo: this.$el,
       source: datalist
+      // limit results to 15
     });
+
+    // old stuff from typeahead:
 
     // var engine = {
     //   compile: function (template) {
