@@ -6,7 +6,7 @@ module.exports = BaseView.extend({
   id: 'header-actions',
   className: 'col-sm-4',
   events: {
-    'click #header-signup-link' :     'openSignup'
+    'click #header-signup-link' : 'openSignup'
   },
   postHydrate: function () {
     this.listenTo(this.model, 'change:username', this.render.bind(this));

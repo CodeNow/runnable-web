@@ -5,9 +5,12 @@ var Super = ModalView.prototype;
 module.exports = ModalView.extend({
   id: 'register-modal',
   events: {
-    'click .flip-link'              : 'flip',
-    'submit #login-form'            : 'submitLogin',
-    'submit #signup-form'           : 'submitRegister'
+    'click .flip-link'    : 'flip',
+    'click .reset-link'   : 'showResetForm',
+    'click .alt-link'     : 'hideResetForm',
+    'submit #login-form'  : 'submitLogin',
+    'submit #signup-form' : 'submitRegister',
+    'submit #reset-form'  : 'submitReset'
   },
   postInitialize: function () {
     this.options.header = this.options.header || this.defaultHeader;
@@ -21,6 +24,7 @@ module.exports = ModalView.extend({
       this.onClose();
     }
     Super.remove.apply(this, arguments);
+    $(window).off('mousemove', this.mouseMoveHandler);
   },
   flip: function () {
     var $self = this.$el;
@@ -35,6 +39,13 @@ module.exports = ModalView.extend({
     }
     $self.toggleClass('flip');
   },
+  showResetForm: function () {
+    this.$('#login').addClass('show-reset');
+  },
+  hideResetForm: function () {
+    this.$('#login').removeClass('show-reset show-confirmation');
+    $(window).off('mousemove', this.mouseMoveHandler); // unbind when confirmation is hidden
+  },
   showError: function (errorMsg) {
     alert(errorMsg);
     return; //TODO
@@ -44,6 +55,9 @@ module.exports = ModalView.extend({
     var formData = $(evt.currentTarget).serializeObject();
     this.app.user.login(formData.username, formData.password, function (err) {
       if (err) {
+        if (err === 'invalid password') {
+          this.$('.reset-link').addClass('in');
+        }
         this.showError(err);
       }
       else {
@@ -79,11 +93,29 @@ module.exports = ModalView.extend({
       }.bind(this));
     }
   },
+  submitReset: function (evt) {
+    evt.preventDefault();
+
+    this.$('#login')
+      .removeClass('show-reset')
+      .addClass('show-confirmation');
+
+    $(window).on('mousemove',{thisView : this}, this.mouseMoveHandler);
+  },
   github: function (evt) {
     evt.preventDefault();
     evt.stopPropagation();
     var $el = $(evt.currentTarget);
     window.location.href = $el.attr('href');
+  },
+  mouseMoveHandler: function (evt) {
+    var xAxis;
+    var yAxis;
+    var $planeContainer = $('.plane-container');
+    xAxis = (evt.pageX/16 - 75) * -1;
+    yAxis = (evt.pageY/8 - 25) * -1;
+    console.log('boo'); // boos developer
+    $planeContainer.css('transform','translate3d(' + xAxis + 'px,' + yAxis + 'px,0');
   }
 });
 
