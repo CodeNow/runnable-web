@@ -24,7 +24,7 @@ module.exports = ModalView.extend({
       this.onClose();
     }
     Super.remove.apply(this, arguments);
-    $(window).off('mousemove', this.mouseMoveHandler);
+    this.unbindMouse();
   },
   flip: function () {
     var $self = this.$el;
@@ -44,7 +44,7 @@ module.exports = ModalView.extend({
   },
   hideResetForm: function () {
     this.$('#login').removeClass('show-reset show-confirmation');
-    $(window).off('mousemove', this.mouseMoveHandler); // unbind when confirmation is hidden
+    this.unbindMouse(); // unbind when confirmation is hidden
   },
   showError: function (errorMsg) {
     alert(errorMsg);
@@ -100,7 +100,7 @@ module.exports = ModalView.extend({
       .removeClass('show-reset')
       .addClass('show-confirmation');
 
-    $(window).on('mousemove',{thisView : this}, this.mouseMoveHandler);
+    $(window).on('mousemove',{thisView : this}, this.bindMouse);
   },
   github: function (evt) {
     evt.preventDefault();
@@ -108,14 +108,18 @@ module.exports = ModalView.extend({
     var $el = $(evt.currentTarget);
     window.location.href = $el.attr('href');
   },
-  mouseMoveHandler: function (evt) {
+  bindMouse: function (evt) {
     var xAxis;
     var yAxis;
     var $planeContainer = $('.plane-container');
-    xAxis = (evt.pageX/16 - 75) * -1;
-    yAxis = (evt.pageY/8 - 25) * -1;
-    console.log('boo'); // boos developer
+
+    xAxis = evt.pageX/32 * -1;
+    yAxis = evt.pageY/16 * -1;
+
     $planeContainer.css('transform','translate3d(' + xAxis + 'px,' + yAxis + 'px,0');
+  },
+  unbindMouse: function () {
+    $(window).off('mousemove', this.bindMouse);
   }
 });
 
