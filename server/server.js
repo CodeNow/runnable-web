@@ -13,7 +13,6 @@ var express = require('express'),
     rollbar = require("rollbar"),
     sitemap = require('./lib/sitemap'),
     Dogstatsyware = require('dogstatsyware'),
-    githubAuth = require('./lib/github_auth'),
     app;
 var path = require('path');
 var config = require('./lib/env').current;
@@ -181,7 +180,6 @@ function buildApiRoutes(app) {
 function buildRendrRoutes(app) {
   var routes, path, definition, fnChain;
   // attach Rendr routes to our Express app.
-  githubAuth(app);
   routes = rendrServer.router.buildRoutes();
   routes.forEach(function(args) {
     path = args.shift();

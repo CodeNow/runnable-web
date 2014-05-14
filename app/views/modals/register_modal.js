@@ -102,12 +102,6 @@ module.exports = ModalView.extend({
 
     $(window).on('mousemove',{thisView : this}, this.mouseMoveHandler);
   },
-  github: function (evt) {
-    evt.preventDefault();
-    evt.stopPropagation();
-    var $el = $(evt.currentTarget);
-    window.location.href = $el.attr('href');
-  },
   mouseMoveHandler: function (evt) {
     var xAxis;
     var yAxis;
