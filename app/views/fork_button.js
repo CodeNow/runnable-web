@@ -3,7 +3,8 @@ var Super = EditorButtonView.prototype;
 var utils = require('../utils');
 var async = require('async');
 // var router = require('../router');
-var SignupModal = require('./signup_modal');
+//var SignupModal = require('./signup_modal');
+var RegisterModal = require('./modals/register_modal');
 
 module.exports = EditorButtonView.extend({
   tagName: 'button',
@@ -25,12 +26,12 @@ module.exports = EditorButtonView.extend({
       this.saveAndRedirect();
     }
     else {
-      var signupModal = new SignupModal({
+      var registerModal = new RegisterModal({
         app    : this.app,
         onClose: this.stopListening.bind(this, user)
       });
       this.listenToOnce(user, 'auth', this.saveAndRedirect.bind(this));
-      signupModal.open();
+      registerModal.open();
     }
   },
   saveAndRedirect: function () {

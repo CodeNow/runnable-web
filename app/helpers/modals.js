@@ -1,4 +1,4 @@
-var SignupModal = require('../views/signup_modal');
+var RegisterModal = require('../views/modals/register_modal');
 var DownloadMsgModal = require('../views/download_message_modal');
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
 
     var user = this.app.user;
 
-    var signupModal = new SignupModal({
+    var registerModal = new RegisterModal({
       app:     this.app,
       onClose: callback
     });
