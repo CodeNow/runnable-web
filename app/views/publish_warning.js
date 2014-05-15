@@ -6,8 +6,6 @@ var modalHelpers = require('../helpers/modals');
 module.exports = BaseView.extend({
   previewmode: false,
   events: {
-    'click #preview-button'      : 'click_preview',
-    'click #exit-preview-button' : 'click_preview',
     'click #pubwarn-new-button'  : 'publishNew',
     'click #pubwarn-back-button' : 'publishBack'
   },
@@ -29,18 +27,6 @@ module.exports = BaseView.extend({
   postRender: function () {
     this.$pubNew = $('#pubwarn-new-button');
     this.$pubBack = $('#pubwarn-back-button');
-  },
-  click_preview: function (evt) {
-    this.previewmode = !this.previewmode;
-    this.app.dispatch.trigger('toggle:preview', this.previewmode);
-
-    // changes status bar text
-    $('#runnable').toggleClass('preview');
-
-    // hides/shows build loader
-    $('#project').toggleClass('out');
-
-    //this.render();
   },
   publishNew: function () {
     var self = this;

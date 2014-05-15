@@ -63,23 +63,3 @@
     color: $dark-yellow;
   }
 }
-
-// preview
-.preview-bar {
-  display: none;
-}
-
-.preview {
-
-  .preview-bar {
-    display: block;
-
-    .unshare {
-      margin-left: -4px;
-    }
-  }
-
-  .sandbox-bar {
-    display: none;
-  }
-}
