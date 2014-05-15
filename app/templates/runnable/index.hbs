@@ -29,24 +29,5 @@
     {{view "rebuild_loader"}}
   </section>
 
-  {{!--
-  <section class="container">
-    <div class="row">
-      <ul id="sidebar" class="col-sm-12">
-        {{#if related.length}}
-        <li class="related-code">
-          <h3>Related Code</h3>
-          <ul>
-            {{#each related.models}}
-            {{view "runnable_item_small" model=.}}
-            {{/each}}
-          </ul>
-        </li>
-        {{/if}}
-      </ul>
-    </div>
-  </section>
-  --}}
-
 </main>
 {{view "footer_view" model=user context=.}}

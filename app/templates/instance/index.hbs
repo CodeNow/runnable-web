@@ -13,11 +13,11 @@
           {{view "project_tags" model=container edit=true}}
         </div>
         <div class="main-controls">
-          {{view "instance_button"}}
           {{view "save_button" collection=defaultFiles}}
           {{view "public_toggle" model=container}}
         </div>
       </div>
+      {{view "project_url" model=image}}
     </div>
 
   </section>
