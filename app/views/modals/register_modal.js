@@ -41,9 +41,17 @@ module.exports = ModalView.extend({
   },
   showResetForm: function () {
     this.$('#login').addClass('show-reset');
+
+    // focus doesn't work without the delay due to 300ms height transition
+    setTimeout(function() {
+      this.$('#reset-form > input').focus();
+    },301)
   },
   hideResetForm: function () {
-    this.$('#login').removeClass('show-reset show-confirmation');
+    this.$('#login')
+      .removeClass('show-reset show-confirmation')
+      .find('input')[0].focus();
+
     this.unbindMouse(); // unbind when confirmation is hidden
   },
   showError: function (errorMsg) {
