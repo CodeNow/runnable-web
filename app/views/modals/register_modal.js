@@ -116,7 +116,7 @@ module.exports = ModalView.extend({
     var $el = $(evt.currentTarget);
     window.location.href = $el.attr('href');
   },
-  mouseMoveHandler: function (evt) {
+  bindMouse: function (evt) {
     var xAxis;
     var yAxis;
     var $planeContainer = $('.plane-container');
