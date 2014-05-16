@@ -155,17 +155,38 @@ header {
     }
 
     input {
-      background: $purple-dark;
-      box-shadow: inset 0 1px 0 rgba(0,0,0,.1), 0 1px 0 rgba(255,255,255,.15);
+      background: rgba(0,0,0,.1);
+      box-shadow: 0 1px 0 rgba(255,255,255,.15);
+      color: lighten($purple-light,15%);
       height: 34px;
+      padding-right: 24px;
+      text-overflow: ellipsis;
       transition: background .1s, width .3s cubic-bezier(.19,1,.22,1);
-      width: 180px;
+      width: 165px;
+
+      &::placeholder {
+        color: lighten($purple-light,15%);
+      }
 
       &:focus {
         background: #fff;
+        border-color: transparent;
+        color: $gray-darker;
 
         @include media(sm) {
           width: 300px;
+        }
+
+        &::placeholder {
+          color: $gray-dark;
+        }
+
+        & ~ button {
+          color: $gray-dark;
+
+          &:hover {
+            color: $gray-darker;
+          }
         }
       }
 
@@ -176,8 +197,11 @@ header {
 
     button {
       background: transparent;
+      color: lighten($purple-light,15%);
+      font-size: 11px;
       height: 32px;
       right: 0;
+      width: 36px;
     }
   }
 }
