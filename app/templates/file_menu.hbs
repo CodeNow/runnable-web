@@ -1,51 +1,18 @@
 {{#unless createOnly}}
-  <li>
-    <a class="rename">
-      <i class="glyphicon glyphicon-pencil"></i>
-      Rename
-    </a>
-  <li>
-    <a class="delete">
-      <i class="glyphicon glyphicon-trash"></i>
-      Delete
-    </a>
+  <li><a class="rename">Rename</a>
+  <li><a class="delete">Delete</a>
+  {{!--
   {{#if showDefault}}
     {{#if isFile}}
       {{#if model.attributes.default}}
-      <li>
-        <a class="undefault">
-          <i class="glyphicon glyphicon-star-empty"></i>
-          Set: Closed by Default
-        </a>
+      <li><a class="undefault">Set: Closed by Default</a>
       {{else}}
-      <li>
-        <a class="default">
-          <i class="glyphicon glyphicon-star"></i>
-          Set: Opened by Default
-        </a>
+      <li><a class="default">Set: Opened by Default</a>
       {{/if}}
     {{/if}}
   {{/if}}
+  --}}
   <li class="divider">
 {{/unless}}
-<li>
-  <a class="create-file">
-    <i class="glyphicon glyphicon-file"></i>
-    New file
-  </a>
-<li>
-  <a class="create-dir">
-    <i class="glyphicon glyphicon-folder-close"></i>
-    New folder
-  </a>
-{{!--
-<li>
-  <a class="upload">
-    <i class="glyphicon glyphicon-upload"></i>
-    Upload
-  </a>
-<li>
-  <a href="javascript:void(0)" class="download" href="{{fsJSON.downloadUrl}}" data-bypass>
-    <i class="icon-download-alt"></i> Download {{fsJSON.niceType}}
-  </a>
- --}}
+<li><a class="create-file">New File</a>
+<li><a class="create-dir">New Folder</a>
