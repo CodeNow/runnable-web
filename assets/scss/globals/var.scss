@@ -25,6 +25,8 @@ $purple-light:   lighten($purple,14);
 $purple-dark:    darken($purple,14);
 $purple-darker:  darken($purple,17);
 
+$purple-logo:    lighten($purple-light,20%);
+
 $orange:         #fd7022;
 $orange-lighter: lighten($orange,13);
 $orange-light:   lighten($orange,5);
