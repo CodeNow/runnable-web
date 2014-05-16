@@ -107,10 +107,12 @@ module.exports = ModalView.extend({
     var yAxis;
     var $planeContainer = $('.plane-container');
 
-    xAxis = evt.pageX/32 * -1;
-    yAxis = evt.pageY/16 * -1;
+    window.requestAnimationFrame(function () {
+      xAxis = Math.round(evt.pageX/32 * -1);
+      yAxis = Math.round(evt.pageY/16 * -1);
 
-    $planeContainer.css('transform','translate3d(' + xAxis + 'px,' + yAxis + 'px,0');
+      $planeContainer.css('transform','translate3d(' + xAxis + 'px,' + yAxis + 'px,0');
+    });
   },
   unbindMouse: function () {
     $(window).off('mousemove', this.bindMouse);

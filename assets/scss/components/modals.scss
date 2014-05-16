@@ -294,10 +294,11 @@ body.modal-open,
 
   .plane-container {
     display: none;
-    position: relative;
-      top: 15px;
-      left: 50px;
+    position: absolute;
+      top: 100px;
+      left: 75px;
       z-index: -1;
+    transform: translate3d(0,0,0);
   }
 
   object {
