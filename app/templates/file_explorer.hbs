@@ -107,9 +107,9 @@
     <button id="rebuild" type="button" class="silver btn-sm">Rebuild</button>
     <button id="tip" type="button" class="silver btn-sm glyphicons warning-sign"></button>
     {{view "preview_popover"}}
-    <button type="button" class="silver btn-sm glyphicons cogwheel"></button>
+    {{view "file_explorer_menu"}}
     {{else}}
-    <button type="button" class="silver btn-sm glyphicons cogwheel"></button>
+    {{view "file_explorer_menu"}}
     {{/if}}
   </h6>
   <ul class="nav nav-pills nav-stacked">
