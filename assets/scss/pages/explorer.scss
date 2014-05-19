@@ -124,7 +124,7 @@
   }
 
   // icons
-  object {
+  .nav object {
     float: left;
     margin: 2px 6px 0 0;
   }
@@ -351,5 +351,27 @@
 
   #tip {
     display: block;
+  }
+}
+
+// popovers
+.file-explorer-menu {
+  width: 26px;
+
+  .glyphicons {
+    margin: 0;
+  }
+
+  .popover {
+    height: 90px;
+    // margin-left: 36px;
+    left: -19px;
+    top: -4px;
+    transform-origin: 24px 0;
+    width: 300px;
+  }
+
+  .popover.bottom > .arrow {
+    left: 24px;
   }
 }

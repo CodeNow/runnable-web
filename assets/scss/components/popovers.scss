@@ -7,7 +7,11 @@
   opacity: 0;
   pointer-events: none;
   transform: scale3d(0,0,1);
-  transition: opacity .2s, transform .15s;
+  transition:
+    height .2s,
+    opacity .2s,
+    transform .15s,
+    width .2s ease-in-out;
   z-index: -1;
 
   &.bottom > .arrow:after {
@@ -31,6 +35,61 @@
     pointer-events: auto;
     transform: scale3d(1,1,1);
     z-index: $zpopover;
+  }
+
+  &.menu {
+    cursor: default;
+    height: 90px;
+    width: 300px;
+
+    .popover-content {
+      height: 86px;
+      overflow: hidden;
+      padding: 7px;
+      transition: height .2s;
+    }
+
+    ul {
+      @extend .clearfix;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.1);
+      border-radius: 3px;
+      box-shadow: 0 1px 0 #fff;
+    }
+
+    li {
+      border-left: 1px solid rgba(0,0,0,.1);
+      cursor: pointer;
+      float: left;
+      height: 100%;
+      text-align: center;
+      width: calc(100% / 3);
+
+      > a {
+        color: $gray-dark;
+        display: block;
+        font-size: 13px;
+        line-height: 2;
+        padding: 12px 0 2px;
+        user-select: none;
+
+        .glyphicons {
+          color: $purple;
+          display: block;
+          font-size: 32px;
+          height: 30px;
+        }
+
+        &:active,
+        &:active .glyphicons {
+          transform: translate3d(0,1px,0);
+        }
+      }
+
+      &:first-child {
+        border-left: 0;
+      }
+    }
   }
 }
 
@@ -137,19 +196,10 @@
 
 // shortcut popover
 #add-tab .popover {
-  cursor: default;
-  display: block;
-  height: 90px;
   left: auto;
-  right: -6px;
-  top: 32px;
+  right: 234px;
+  top: -4px;
   transform-origin: 250px -15px;
-  transition:
-    height .2s,
-    opacity .2s,
-    transform .15s,
-    width .2s ease-in-out;
-  width: 300px;
 
   .arrow {
     left: auto;
@@ -165,58 +215,10 @@
     }
   }
 
-  .popover-content {
-    height: 86px;
-    overflow: hidden;
-    padding: 7px;
-    transition: height .2s;
-  }
-
   .popover-footer {
 
     button {
       width: 100%;
-    }
-  }
-
-  ul {
-    @extend .clearfix;
-    background: #fff;
-    border: 1px solid rgba(0,0,0,.1);
-    border-radius: 3px;
-    box-shadow: 0 1px 0 #fff;
-  }
-
-  li {
-    border-left: 1px solid rgba(0,0,0,.1);
-    cursor: pointer;
-    float: left;
-    text-align: center;
-    width: calc(100% / 3);
-
-    > a {
-      color: $gray-dark;
-      display: block;
-      font-size: 13px;
-      line-height: 2;
-      padding: 12px 0 2px;
-      user-select: none;
-
-      .glyphicons {
-        color: $purple;
-        display: block;
-        font-size: 32px;
-        height: 30px;
-      }
-
-      &:active,
-      &:active .glyphicons {
-        transform: translate3d(0,1px,0);
-      }
-    }
-
-    &:first-child {
-      border-left: 0;
     }
   }
 
@@ -321,7 +323,7 @@
           }
 
           &:last-child {
-            right: 6px;
+            right: 1px;
             top: 3px;
             transition: transform .25s ease-in-out;
           }

@@ -9,7 +9,6 @@ module.exports = BaseView.extend({
     'click .dark-theme'              : 'setDarkTheme',
     'click .light-theme'             : 'setLightTheme',
     'click .open-context-menu'       : 'showFileMenu',
-    'click .cogwheel'                : 'showFileMenu',
     'contextmenu .open-context-menu' : 'showFileMenu',
     'click [data-action="download"]' : 'showDownloadDialog',
     // 'drop #drop-to-add'              : 'uploadToRoot',
@@ -39,6 +38,9 @@ module.exports = BaseView.extend({
       subTree.css('height','')
       this.$('#container-files').height(thisHeight - buildHeight);
     }
+  },
+  showFileMenuPopover: function () {
+    $('#file-menu-popover')
   },
   showFileMenu: function (evt) {
     evt.preventDefault();
