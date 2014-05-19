@@ -17,6 +17,8 @@ var express = require('express'),
 var path = require('path');
 var config = require('./lib/env').current;
 var hbs = require('hbs');
+var httpProxy = require('http-proxy');
+var proxy = httpProxy.createProxyServer();
 
 if (config.newrelic) {
   require('newrelic');
@@ -169,11 +171,21 @@ var preRendrMiddleware = [
 ];
 
 function buildApiRoutes(app) {
-  rendrMw.apiProxy(app, preRendrMiddleware);
-  // var fnChain = preRendrMiddleware.concat(rendrMw.apiProxy());
-  // fnChain.forEach(function(fn) {
-  //   app.use('/api', fn);
-  // });
+  preRendrMiddleware.forEach(function (mw) {
+    app.use(mw);
+  });
+  //API proxy pass-through
+  var apiPrefix = new RegExp('^/api/-');
+  //NOTE: regarding any kind of manipulation of HTTP response codes before
+  // returning to browser.
+  // http://stackoverflow.com/a/9826701/480807
+  app.all('/api/*', function(req, res, next) {
+    req.headers['runnable-token'] = req.session.access_token;
+    req.url = req.url.replace(apiPrefix, '');
+    proxy.web(req, res, {
+      target: config.api.default.protocol + '://' + config.api.default.host
+    });
+  });
 }
 
 function buildRendrRoutes(app) {

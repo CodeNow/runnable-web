@@ -6,10 +6,9 @@ var utils = require('rendr/server/utils'),
     env = require('./env'),
     debug = require('debug')('app:DataAdapter'),
     rollbar = require("rollbar"),
-    inspect = require('util').inspect;
+    inspect = require('util').inspect,
+    request = require('request');
 
-var httpProxy = require('http-proxy');
-var proxy = new httpProxy.RoutingProxy();
 var split = env.current.api['default'].host.split(':');
 var apiHost = split[0];
 var apiPort = split[1] ? parseInt(split[1], 10) : 80;
@@ -28,22 +27,7 @@ function DataAdapter(options) {
 // `callback`: Callback.
 //
 DataAdapter.prototype.request = function(req, api, options, callback, res) {
-  if (~(req.header('content-type') || '').indexOf('form-data')) {
-    // true proxy.. for form-data requests
-    req.url = api.path;
-    req.headers.host = apiHost;
-    req.headers['runnable-token'] = req.session.access_token;
-    console.log("Access Token: " + req.session.access_token);
-    // dont worry about setting the access token here, we can assume a multipart request will never be the
-    // first request to the server
-    proxy.proxyRequest(req, res, {
-      host: apiHost,
-      port: apiPort
-    });
-  }
-  else {
-    this._request.apply(this, arguments);
-  }
+  this._request.apply(this, arguments);
 };
 
 DataAdapter.prototype._request = function (req, api, options, callback) {
@@ -58,7 +42,6 @@ DataAdapter.prototype._request = function (req, api, options, callback) {
     convertErrorCode: true,
     allow4xx: false
   });
-;
   api = this.apiDefaults(api);
   api.timeout = 900000;
 

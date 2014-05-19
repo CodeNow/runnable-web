@@ -1,6 +1,4 @@
 /*jshint strict:false */
-if (process.env.NODE_ENV === 'development')
-  require('time-require');
 require('console-trace')({ always:true, right:true });
 var os = require('os');
 var config = require('./server/lib/env').current;
