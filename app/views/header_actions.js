@@ -1,5 +1,4 @@
 var BaseView = require('./base_view');
-var PublishRequestModal = require('./publish_request_modal');
 var RegisterModal = require('./modals/register_modal');
 
 module.exports = BaseView.extend({
