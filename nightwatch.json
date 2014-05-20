@@ -14,13 +14,31 @@
   },
 
   "test_settings" : {
-    "default" : {
+    "chrome" : {
       "launch_url" : "http://localhost:3000",
       "selenium_port"  : 4444,
       "selenium_host"  : "localhost",
       "silent": true,
       "firefox_profile": false,
       "chrome_driver": "./tests/lib/chromedriver",
+      "ie_driver": "",
+      "screenshots" : {
+        "enabled" : true,
+        "path" : "./tests/logs/screenshots/"
+      },
+      "desiredCapabilities": {
+        "browserName": "firefox",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true
+      }
+    },
+    "firefox" : {
+      "launch_url" : "http://localhost:3000",
+      "selenium_port"  : 4444,
+      "selenium_host"  : "localhost",
+      "silent": true,
+      "firefox_profile": true,
+      "chrome_driver": "",
       "ie_driver": "",
       "screenshots" : {
         "enabled" : true,
