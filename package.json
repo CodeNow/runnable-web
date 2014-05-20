@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --ui bdd --reporter spec",
+    "test": "java -jar ./tests/lib/selenium-server-standalone-2.41.0.jar && ./nightwatch",
     "start": "DEBUG=app:* node index.js",
     "postinstall": "node postInstall.js; bower install;",
     "build": "grunt",
