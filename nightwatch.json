@@ -1,5 +1,5 @@
 {
-  "src_folders" : ["tests"],
+  "src_folders" : ["tests/groups"],
   "output_folder" : "tests/reports",
   "custom_commands_path" : "",
   "custom_assertions_path" : "",
@@ -20,11 +20,11 @@
       "selenium_host"  : "localhost",
       "silent": true,
       "firefox_profile": false,
-      "chrome_driver": "",
+      "chrome_driver": "./tests/lib/chromedriver",
       "ie_driver": "",
       "screenshots" : {
-        "enabled" : false,
-        "path" : ""
+        "enabled" : true,
+        "path" : "./tests/logs/screenshots/"
       },
       "desiredCapabilities": {
         "browserName": "firefox",
