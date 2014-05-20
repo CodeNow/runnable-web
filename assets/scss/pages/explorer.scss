@@ -369,6 +369,18 @@
     top: -4px;
     transform-origin: 24px 0;
     width: 300px;
+
+    &.no-git {
+      width: 200px;
+
+      li {
+        width: 50%;
+
+        &:last-child {
+          display: none;
+        }
+      }
+    }
   }
 
   .popover.bottom > .arrow {
