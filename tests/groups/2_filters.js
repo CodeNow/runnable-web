@@ -5,10 +5,21 @@ module.exports = {
   tearDown: function (callback) {
     callback();
   },
-  "filtering by category works": function (browser) {
+  "GET /?orderBy=popular": function (browser) {
     browser
-      .url(browser.globals.host)
+      .url(browser.globals.host + '?orderBy=popular')
       .waitForElementVisible('body', browser.globals.defaultTimeout)
+      .assert.elementNotPresent('main.container#error')
       .end();
+  },
+  "GET /?orderBy=trending": function (browser) {
+    browser
+      .url(browser.globals.host + '?orderBy=trending')
+      .waitForElementVisible('body', browser.globals.defaultTimeout)
+      .assert.elementNotPresent('main.container#error')
+      .end();
+  },
+  "GET /?orderBy=trending&filter=jQuery&page=1": function (browser) {
+    
   }
 };

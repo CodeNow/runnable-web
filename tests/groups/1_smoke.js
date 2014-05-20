@@ -1,23 +1,31 @@
+function testLoadOk (browser, path) {
+  browser
+    .url(browser.globals.host)
+    .waitForElementVisible('body', browser.globals.defaultTimeout)
+    .assert.elementNotPresent('main.container#error')
+    .end();
+}
+
 module.exports = {
   "GET /": function (browser) {
-    browser
-      .url(browser.globals.host)
-      .waitForElementVisible('body', browser.globals.defaultTimeout)
-      .assert.elementNotPresent('main.container#error')
-      .end();
+    testLoadOk(browser, '');
   },
-  "GET /?orderBy=popular": function (browser) {
-    browser
-      .url(browser.globals.host + '?orderBy=popular')
-      .waitForElementVisible('body', browser.globals.defaultTimeout)
-      .assert.elementNotPresent('main.container#error')
-      .end();
+  "GET /new": function (browser) {
+    testLoadOk(browser, 'new');
   },
-  "GET /?orderBy=trending": function (browser) {
-    browser
-      .url(browser.globals.host + '?orderBy=trending')
-      .waitForElementVisible('body', browser.globals.defaultTimeout)
-      .assert.elementNotPresent('main.container#error')
-      .end();
-  }
+  "GET /new/PHP": function (browser) {
+    testLoadOk(browser, 'new/php');
+  },
+  "GET /publish": function (browser) {
+    testLoadOk(browser, 'publish');
+  },
+  "GET /about": function (browser) {
+    testLoadOk(browser, 'about');
+  },
+  "GET /jobs": function (browser) {
+    testLoadOk(browser, 'jobs');
+  },
+  "GET /privacy": function (browser) {
+    testLoadOk(browser, 'privacy');
+  },
 };
