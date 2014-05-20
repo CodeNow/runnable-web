@@ -39,9 +39,6 @@ module.exports = BaseView.extend({
       this.$('#container-files').height(thisHeight - buildHeight);
     }
   },
-  showFileMenuPopover: function () {
-    $('#file-menu-popover')
-  },
   showFileMenu: function (evt) {
     evt.preventDefault();
     // fragile, but I dont want to duplicate the file menu.. and it needs the rootDir

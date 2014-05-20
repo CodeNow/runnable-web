@@ -1,25 +1,76 @@
 <span class="glyphicons cogwheel"></span>
+
 <div class="popover fade bottom menu {{#unless git}}no-git{{/unless}}">
   <div class="arrow"></div>
   <div class="popover-content">
-    <div id="file-explorer-menu-options">
-      <ul class="popover-body">
+
+    <ul id="file-explorer-options" class="popover-body">
+      <li>
+        <a>
+          <object class="iconnables" data="/images/icons/icons-new-file.svg" type="image/svg+xml"></object>
+          New File
+        </a>
+      <li>
+        <a>
+          <object class="iconnables" data="/images/icons/icons-new-folder.svg" type="image/svg+xml"></object>
+          New Folder
+        </a>
+      <li>
+        <a id="add-repo-link">
+          <object class="iconnables" data="/images/icons/icons-octocat.svg" type="image/svg+xml"></object>
+          Add Repo
+        </a>
+    </ul>
+
+    <div id="add-repo">
+      {{!--<button> doesn't work here, handlebars bug?--}}
+      <form>
+        <input type="search" class="form-control" placeholder="Filter">
+      </form>
+      <ul>
         <li>
-          <a>
-            <object class="iconnables" data="/images/icons/icons-new-file.svg" type="image/svg+xml"></object>
-            New File
-          </a>
+          Repo 1
+          <a class="btn silver glyphicons cogwheel"></a>
+          <form>
+            <input class="form-control" placeholder="Branch or SHA" required>
+            <a class="btn orange">Add Repository</a>
+          </form>
+        </li>
         <li>
-          <a>
-            <object class="iconnables" data="/images/icons/icons-new-folder.svg" type="image/svg+xml"></object>
-            New Folder
-          </a>
+          Repo 2
+          <a class="btn silver glyphicons cogwheel"></a>
+          <form>
+            <input class="form-control" placeholder="Branch or SHA" required>
+            <a class="btn orange">Add Repository</a>
+          </form>
+        </li>
         <li>
-          <a>
-            <object class="iconnables" data="/images/icons/icons-octocat.svg" type="image/svg+xml"></object>
-            Add Repo
-          </a>
+          Repo 3
+          <a class="btn silver glyphicons cogwheel"></a>
+          <form>
+            <input class="form-control" placeholder="Branch or SHA" required>
+            <a class="btn orange">Add Repository</a>
+          </form>
+        </li>
+        <li>
+          Repo 4
+          <a class="btn silver glyphicons cogwheel"></a>
+          <form>
+            <input class="form-control" placeholder="Branch or SHA" required>
+            <a class="btn orange">Add Repository</a>
+          </form>
+        </li>
+        <li>
+          Repo 5
+          <a class="btn silver glyphicons cogwheel"></a>
+          <form>
+            <input class="form-control" placeholder="Branch or SHA" required>
+            <a class="btn orange">Add Repository</a>
+          </form>
+        </li>
       </ul>
     </div>
+
+
   </div>
 </div>

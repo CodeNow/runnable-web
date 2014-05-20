@@ -381,9 +381,44 @@
         }
       }
     }
+
+    // add repo form
+    &.show-add-repo {
+      height: 300px;
+
+      #file-explorer-options {
+        display: none;
+      }
+
+      #add-repo {
+        display: block;
+      }
+    }
   }
 
   .popover.bottom > .arrow {
     left: 24px;
+  }
+
+  #add-repo {
+    display: none;
+
+    form {
+      position: relative;
+
+      &::after {
+        content: '\E028';
+        display: block;
+        font-family: 'Glyphicons Regular';
+        font-size: 11px;
+        height: 36px;
+        line-height: 36px;
+        position: absolute;
+          top: 0;
+          right: 0;
+        text-align: center;
+        width: 36px;
+      }
+    }
   }
 }
