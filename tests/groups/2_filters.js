@@ -7,7 +7,8 @@ module.exports = {
   },
   "filtering by category works": function (browser) {
     browser
-      .url('http://localhost:3000')
-      .waitForElementVisible('body', 1000);
+      .url(browser.globals.host)
+      .waitForElementVisible('body', browser.globals.defaultTimeout)
+      .end();
   }
 };
