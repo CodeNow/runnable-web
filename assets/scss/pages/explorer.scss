@@ -363,7 +363,7 @@
   }
 
   .popover {
-    height: 90px;
+    max-height: 90px;
     // margin-left: 36px;
     left: -19px;
     top: -4px;
@@ -384,7 +384,11 @@
 
     // add repo form
     &.show-add-repo {
-      height: 300px;
+      max-height: 300px;
+
+      .popover-content {
+        max-height: 300px;
+      }
 
       #file-explorer-options {
         display: none;
@@ -419,6 +423,44 @@
         text-align: center;
         width: 36px;
       }
+    }
+
+    ul {
+      margin: 10px 0 0;
+    }
+
+    li {
+      border-top: 1px solid rgba(0,0,0,.1);
+      height: 36px;
+      overflow: hidden;
+      transition: height .2s;
+
+      > form {
+        display: none;
+        position: absolute;
+          bottom: 0;
+      }
+
+      &:first-child {
+        border-top: 0;
+      }
+
+      &.show-form {
+        height: 108px;
+
+        form {
+          display: block;
+        }
+      }
+    }
+
+    .cogwheel {
+      font-size: 11px;
+      line-height: 20px;
+      position: absolute;
+        top: 8px;
+        right: 6px;
+      width: 26px;
     }
   }
 }

@@ -9,11 +9,14 @@ module.exports = BaseView.extend({
   },
   events: {
     'click'                : 'togglePopover',
-    'click #add-repo-link' : 'addRepo'
+    'click #add-repo-link' : 'addRepo',
+    'click .cogwheel'      : 'showRepoForm'
   },
-  togglePopover: function () {
+  togglePopover: function (evt) {
     var $self = this.$el;
     var $popover = this.$('.popover');
+
+    this.stopPropagation(evt);
 
     if ($self.hasClass('active')) {
       $self.removeClass('active');
@@ -25,7 +28,7 @@ module.exports = BaseView.extend({
     }
   },
   addRepo: function (evt) {
-    evt.stopPropagation();
+    this.stopPropagation(evt);
 
     var $popover = this.$('.popover');
     var gitConnected = true; // warning: pseudo code
@@ -37,6 +40,15 @@ module.exports = BaseView.extend({
     else {
       $popover.addClass('show-add-repo');
     }
+  },
+  showRepoForm: function (evt) {
+    this.$(evt.currentTarget)
+      .closest('li')
+      .addClass('show-form');
+
+  },
+  stopPropagation: function (evt) {
+    evt.stopPropagation();
   }
 });
 

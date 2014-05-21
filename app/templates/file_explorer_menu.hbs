@@ -4,7 +4,7 @@
   <div class="arrow"></div>
   <div class="popover-content">
 
-    <ul id="file-explorer-options" class="popover-body">
+    <ul id="file-explorer-options" class="popover-body col-popover-3">
       <li>
         <a>
           <object class="iconnables" data="/images/icons/icons-new-file.svg" type="image/svg+xml"></object>
@@ -22,52 +22,57 @@
         </a>
     </ul>
 
-    <div id="add-repo">
+    <div id="add-repo" class="popover-body">
       {{!--<button> doesn't work here, handlebars bug?--}}
       <form>
-        <input type="search" class="form-control" placeholder="Filter">
+        <input type="search" class="form-control" placeholder="Filter Repositories">
       </form>
-      <ul>
+      <ul class="popover-list">
         <li>
-          Repo 1
-          <a class="btn silver glyphicons cogwheel"></a>
+          <a>
+            Repo 1
+            <a class="btn btn-sm silver glyphicons cogwheel"></a>
+          </a>
           <form>
             <input class="form-control" placeholder="Branch or SHA" required>
             <a class="btn orange">Add Repository</a>
           </form>
-        </li>
         <li>
-          Repo 2
-          <a class="btn silver glyphicons cogwheel"></a>
+          <a>
+            Repo 2
+            <a class="btn btn-sm silver glyphicons cogwheel"></a>
+          </a>
           <form>
             <input class="form-control" placeholder="Branch or SHA" required>
             <a class="btn orange">Add Repository</a>
           </form>
-        </li>
         <li>
-          Repo 3
-          <a class="btn silver glyphicons cogwheel"></a>
+          <a>
+            Repo 3
+            <a class="btn btn-sm silver glyphicons cogwheel"></a>
+          </a>
           <form>
             <input class="form-control" placeholder="Branch or SHA" required>
             <a class="btn orange">Add Repository</a>
           </form>
-        </li>
         <li>
-          Repo 4
-          <a class="btn silver glyphicons cogwheel"></a>
+          <a>
+            Repo 4
+            <a class="btn btn-sm silver glyphicons cogwheel"></a>
+          </a>
           <form>
             <input class="form-control" placeholder="Branch or SHA" required>
             <a class="btn orange">Add Repository</a>
           </form>
-        </li>
         <li>
-          Repo 5
-          <a class="btn silver glyphicons cogwheel"></a>
+          <a>
+            Repo 5
+            <a class="btn btn-sm silver glyphicons cogwheel"></a>
+          </a>
           <form>
             <input class="form-control" placeholder="Branch or SHA" required>
             <a class="btn orange">Add Repository</a>
           </form>
-        </li>
       </ul>
     </div>
 
