@@ -1,0 +1,31 @@
+function testLoadOk (browser, path) {
+  browser
+    .url(browser.globals.host)
+    .waitForElementVisible('body', browser.globals.defaultTimeout)
+    .assert.elementNotPresent('main.container#error')
+    .end();
+}
+
+module.exports = {
+  "GET /": function (browser) {
+    testLoadOk(browser, '');
+  },
+  "GET /new": function (browser) {
+    testLoadOk(browser, 'new');
+  },
+  "GET /new/PHP": function (browser) {
+    testLoadOk(browser, 'new/php');
+  },
+  "GET /publish": function (browser) {
+    testLoadOk(browser, 'publish');
+  },
+  "GET /about": function (browser) {
+    testLoadOk(browser, 'about');
+  },
+  "GET /jobs": function (browser) {
+    testLoadOk(browser, 'jobs');
+  },
+  "GET /privacy": function (browser) {
+    testLoadOk(browser, 'privacy');
+  },
+};

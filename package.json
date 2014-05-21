@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --ui bdd --reporter spec",
+    "test": "java -jar ./tests/lib/selenium-server-standalone-2.41.0.jar && ./nightwatch",
     "start": "DEBUG=app:* node index.js",
     "postinstall": "node postInstall.js; bower install;",
     "build": "grunt",
@@ -71,7 +71,8 @@
     "grunt-contrib-copy": "~0.4.1",
     "grunt-autoprefixer": "~0.6.5",
     "time-require": "~0.1.1",
-    "grunt-contrib-sass": "~0.7.3"
+    "grunt-contrib-sass": "~0.7.3",
+    "nightwatch": "~0.4.16"
   },
   "engines": {
     "node": ">=0.8"
