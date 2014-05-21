@@ -9,18 +9,20 @@ module.exports = BaseView.extend({
   },
   events: {
     'click'                : 'togglePopover',
+    'click .popover'       : 'stopPropagation',
     'click #add-repo-link' : 'addRepo',
-    'click .cogwheel'      : 'showRepoForm'
+    'click .select-branch' : 'toggleRepoForm'
   },
   togglePopover: function (evt) {
     var $self = this.$el;
     var $popover = this.$('.popover');
+    var $addRepo = this.$('#add-repo')
 
     this.stopPropagation(evt);
 
     if ($self.hasClass('active')) {
       $self.removeClass('active');
-      $popover.removeClass('show-add-repo');
+      $popover.removeClass('show-add-repo show-form');
     }
     else {
       $self.addClass('active');
@@ -41,11 +43,20 @@ module.exports = BaseView.extend({
       $popover.addClass('show-add-repo');
     }
   },
-  showRepoForm: function (evt) {
-    this.$(evt.currentTarget)
-      .closest('li')
-      .addClass('show-form');
+  toggleRepoForm: function (evt) {
+    var $repoList = this.$('#add-repo').find('li');
+    var $currentTarget = this.$(evt.currentTarget).closest('li');
+    var $popover = this.$('.popover');
 
+    if ($popover.hasClass('show-form')) {
+      $repoList.removeClass('in');
+      $popover.removeClass('show-form');
+    }
+    else {
+      // $addRepoItem.removeClass('show-form');
+      $currentTarget.addClass('in');
+      $popover.addClass('show-form');
+    }
   },
   stopPropagation: function (evt) {
     evt.stopPropagation();
