@@ -1,6 +1,6 @@
 function testLoadOk (browser, path) {
   browser
-    .url(browser.globals.host)
+    .url(browser.globals.host + path)
     .waitForElementVisible('body', browser.globals.defaultTimeout)
     .assert.elementNotPresent('main.container#error')
     .end();
@@ -27,5 +27,8 @@ module.exports = {
   },
   "GET /privacy": function (browser) {
     testLoadOk(browser, 'privacy');
+  },
+  "GET /UXczcazDrMMiAAGl/how-to-do-ajax-in-codeigniter": function (browser) {
+    testLoadOk(browser, 'UXczcazDrMMiAAGl/how-to-do-ajax-in-codeigniter');
   },
 };

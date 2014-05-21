@@ -5,6 +5,9 @@ module.exports = {
   tearDown: function (callback) {
     callback();
   },
+  "Default sorts by 'popular'": function (browser) {
+
+  },
   "GET /?orderBy=popular": function (browser) {
     browser
       .url(browser.globals.host + '?orderBy=popular')
@@ -20,6 +23,7 @@ module.exports = {
       .end();
   },
   "GET /?orderBy=trending&filter=jQuery&page=1": function (browser) {
-    
+    browser
+      .url(browser.globals.host + '?order')
   }
 };
