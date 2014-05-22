@@ -16,7 +16,7 @@ module.exports = BaseView.extend({
 
     if ($self.hasClass('active')) {
       $('.btn-popover').removeClass('active');
-      $popover.removeClass('in show-shortcuts show-new-shortcut');
+      $popover.removeClass('in show-new-shortcut');
     }
     else {
       $self.addClass('active');
