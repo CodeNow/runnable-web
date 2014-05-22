@@ -3,7 +3,7 @@ var GitModal = require('./modals/git_connect_modal');
 
 module.exports = BaseView.extend({
   tagName: 'button',
-  className: "silver btn-sm file-explorer-menu",
+  className: "silver btn-sm btn-popover file-explorer-menu",
   attributes: {
     'type' : 'button'
   },
@@ -13,20 +13,33 @@ module.exports = BaseView.extend({
     'click #add-repo-link' : 'addRepo',
     'click .select-branch' : 'toggleRepoForm'
   },
+  hideRepoPopover: function () {
+    $('.file-explorer-menu').removeClass('active');
+    $('.popover').removeClass('show-add-repo show-form in');
+  },
   togglePopover: function (evt) {
+    var $body = $('body');
     var $self = this.$el;
     var $popover = this.$('.popover');
     var $addRepo = this.$('#add-repo')
 
     this.stopPropagation(evt);
 
+    $('.popover').removeClass('in');
+
     if ($self.hasClass('active')) {
-      $self.removeClass('active');
-      $popover.removeClass('show-add-repo show-form');
+      $('.btn-popover').removeClass('active');
+      this.hideRepoPopover();
+
+      // unbind when popover is closed
+      $body.off('click', this.hideRepoPopover);
     }
     else {
       $self.addClass('active');
       $popover.addClass('in');
+
+      // bind when popover is open
+      $body.on('click',{thisView : this}, this.hideRepoPopover);
     }
   },
   addRepo: function (evt) {
@@ -53,7 +66,6 @@ module.exports = BaseView.extend({
       $popover.removeClass('show-form');
     }
     else {
-      // $addRepoItem.removeClass('show-form');
       $currentTarget.addClass('in');
       $popover.addClass('show-form');
     }

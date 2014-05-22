@@ -21,10 +21,13 @@ module.exports = BaseView.extend({
   thumbsUp: function (evt) {
     this.app.thumbsDirection = "UP";
 
+    $('.popover').removeClass('in');
+
     var thumbsUp = this.$('.thumbs-up');
     var thumbsDown = this.$('.thumbs-down');
 
     if (thumbsUp.hasClass('active')) {
+      $('.btn-popover').removeClass('active');
       this.popover.hide();
     } else {
       this.popover.show();
@@ -38,6 +41,8 @@ module.exports = BaseView.extend({
 
     var thumbsUp = this.$('.thumbs-up');
     var thumbsDown = this.$('.thumbs-down');
+
+    $('.popover').removeClass('in');
 
     if (thumbsDown.hasClass('active')) {
       this.popover.hide();
