@@ -15,7 +15,7 @@ module.exports = BaseView.extend({
   },
   hidePopover: function () {
     $('.btn-popover').removeClass('active');
-    $('.popover').removeClass('show-add-repo show-form in');
+    $('.popover').removeClass('show-add-repo show-form show-new-shortcut in');
 
     // unbind when popover is closed
     $('body').off('click', this.hidePopover);
