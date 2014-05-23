@@ -5,7 +5,7 @@
     <ol class="popover-body col-popover-3">
       <li>
         <a>
-          <object class="iconnables" data="/images/icons/icons-shortcut.svg" type="image/svg+xml"></object>
+          <object class="iconnables" data="/images/icons/icons-web.svg" type="image/svg+xml"></object>
           Web View
         </a>
       <li>
@@ -69,7 +69,6 @@
   <form id="new-shortcut">
     <input class="form-control" placeholder="Shortcut Name" required>
     <input class="form-control" placeholder="Shortcut CMD" required>
-    {{!-- {{#if model=container}} --}}
     <div class="form-group toggle-group">
       <label{{#unless model.attributes.output_format}} class="active"{{/unless}}>
         <div class="sprite-icons-output"></div>
@@ -87,7 +86,6 @@
         <input type="radio" name="output_format" value="terminal"{{#if_eq model.attributes.output_format compare="terminal"}} checked{{/if_eq}}>
       </label>
     </div>
-    {{!-- {{/if}} --}}
     <button class="orange">Create New Shortcut</button>
   </form>
 </div>
