@@ -13,9 +13,12 @@ module.exports = BaseView.extend({
     'click #add-repo-link' : 'addRepo',
     'click .select-branch' : 'toggleRepoForm'
   },
-  hideRepoPopover: function () {
-    $('.file-explorer-menu').removeClass('active');
+  hidePopover: function () {
+    $('.btn-popover').removeClass('active');
     $('.popover').removeClass('show-add-repo show-form in');
+
+    // unbind when popover is closed
+    $('body').off('click', this.hidePopover);
   },
   togglePopover: function (evt) {
     var $body = $('body');
@@ -29,17 +32,18 @@ module.exports = BaseView.extend({
 
     if ($self.hasClass('active')) {
       $('.btn-popover').removeClass('active');
-      this.hideRepoPopover();
+      this.hidePopover();
 
       // unbind when popover is closed
-      $body.off('click', this.hideRepoPopover);
+      $body.off('click', this.hidePopover);
     }
     else {
+      this.hidePopover();
       $self.addClass('active');
       $popover.addClass('in');
 
       // bind when popover is open
-      $body.on('click',{thisView : this}, this.hideRepoPopover);
+      $body.on('click',{thisView : this}, this.hidePopover);
     }
   },
   addRepo: function (evt) {
