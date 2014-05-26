@@ -25,6 +25,12 @@ var fetchLeaderBadges = helpers.fetchLeaderBadges;
 var keypather = require('keypather')();
 
 module.exports = {
+
+  project: function (params, callback) {
+    
+  },
+
+
   index: function(params, callback) {
     // Force arguments absolute paths
     params.file = helpers.forceParamToArray(params.file).map(function (item) {
