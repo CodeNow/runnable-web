@@ -2,14 +2,16 @@ var queryString = require('query-string');
 var _ = require('underscore');
 var globals;
 
-function testCanonical (opts) {
+function testCanonical (opts, altHost) {
+  var base = 'http://runnable.com/?';
+  if(typeof altHost !== 'undefined')
+    base = altHost + '?';
   var defaults = _.extend({
     orderBy: 'trending',
     filter: [],
     page: 1
   }, opts);
   if (defaults.filter.length === 0) delete defaults.filter;
-  var base = 'http://runnable.com/?';
   base += queryString.stringify(defaults);
   return base;
 }
@@ -118,6 +120,11 @@ module.exports = {
           'jQuery'
         ]
       }))
+
+      .assert.attributeEquals('section#filters li[data-name="jQuery"] a', 'href', testCanonical({
+        page: 1,
+        orderBy: 'trending'
+      }, 'http://localhost:3000/'))
 
       .assert.cssClassNotPresent('a#popular', 'active')
       .assert.cssClassPresent('a#trending', 'active')

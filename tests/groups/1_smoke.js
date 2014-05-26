@@ -31,4 +31,11 @@ module.exports = {
   "GET /UXczcazDrMMiAAGl/how-to-do-ajax-in-codeigniter": function (browser) {
     testLoadOk(browser, 'UXczcazDrMMiAAGl/how-to-do-ajax-in-codeigniter');
   },
+  "GET /A404Route": function (browser) {
+    browser
+      .url(browser.globals.host + 'A404Route')
+      .waitForElementVisible('body', browser.globals.defaultTimeout)
+      .assert.elementPresent('main.container#error')
+      .end();
+  }
 };
