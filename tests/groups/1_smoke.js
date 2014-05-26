@@ -28,9 +28,6 @@ module.exports = {
   "GET /privacy": function (browser) {
     testLoadOk(browser, 'privacy');
   },
-  "GET /UXczcazDrMMiAAGl/how-to-do-ajax-in-codeigniter": function (browser) {
-    testLoadOk(browser, 'UXczcazDrMMiAAGl/how-to-do-ajax-in-codeigniter');
-  },
   "GET /A404Route": function (browser) {
     browser
       .url(browser.globals.host + 'A404Route')
