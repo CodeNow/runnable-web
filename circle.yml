@@ -4,7 +4,7 @@ machine:
 dependencies:
   override:
     - java -jar ./tests/lib/selenium-server-standalone-2.41.0.jar:
-      background: true
+        background: true
     - nvm install 0.10.25
     - nvm alias default 0.10.25
     - npm install
@@ -12,7 +12,7 @@ dependencies:
     - ./node_modules/.bin/bower install
     - ./node_modules/.bin/grunt build
     - node ./index.js:
-      background: true
+        background: true
 test:
   override:
     - ./nightwatch
