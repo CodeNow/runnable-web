@@ -403,64 +403,275 @@
   .popover.bottom > .arrow {
     left: 24px;
   }
+}
 
-  #add-repo {
-    display: none;
+// add repo form
+#add-repo {
+  display: none;
 
-    form {
-      position: relative;
+  form {
+    position: relative;
+    transition: transform .2s;
+  }
 
-      &::after {
-        content: '\E028';
-        display: block;
-        font-family: 'Glyphicons Regular';
-        font-size: 11px;
-        height: 36px;
-        line-height: 36px;
-        position: absolute;
-          top: 0;
-          right: 0;
-        text-align: center;
-        width: 36px;
-      }
+  > form::after {
+    content: '\E028';
+    display: block;
+    font-family: 'Glyphicons Regular';
+    font-size: 11px;
+    height: 36px;
+    line-height: 36px;
+    position: absolute;
+      top: 0;
+      right: 0;
+    text-align: center;
+    width: 36px;
+  }
+
+  ul {
+    margin: 10px 0 0;
+    max-height: 236px;
+    overflow: scroll;
+    transition: transform .2s;
+  }
+
+  li {
+    border-top: 1px solid rgba(0,0,0,.1);
+    height: 36px;
+    overflow: hidden;
+    transition: height .2s, opacity .2s;
+
+    &:first-child {
+      border-top: 0;
+    }
+  }
+
+  .select-repo {
+    background: #fff;
+    height: 36px;
+    position: relative;
+      z-index: 2;
+  }
+
+  .cogwheel {
+    font-size: 11px;
+    height: 20px;
+    line-height: 20px;
+    position: absolute;
+      top: 8px;
+      right: 10px;
+      z-index: 3;
+    width: 26px;
+  }
+}
+
+.add-repo-form {
+    position: absolute;
+      bottom: 0;
+
+    input {
+      margin-bottom: 10px;
+      width: 100%;
     }
 
-    ul {
-      margin: 10px 0 0;
+    .orange {
+      width: 100%;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+.show-form {
+  max-height: 154px !important;
+
+  #add-repo {
+
+    > form {
+      transform: translate3d(0,-56px,0);
+    }
+
+    > ul {
+      max-height: 138px !important;
+      overflow: hidden;
+      transform: translate3d(0,-46px,0);
     }
 
     li {
-      border-top: 1px solid rgba(0,0,0,.1);
-      height: 36px;
-      overflow: hidden;
-      transition: height .2s;
+      height: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
 
-      > form {
-        display: none;
-        position: absolute;
-          bottom: 0;
+      .select-repo {
+        pointer-events: none;
       }
 
-      &:first-child {
+      &.in {
         border-top: 0;
+        display: block;
+        height: 138px !important;
+        opacity: 1;
+        pointer-events: auto;
+        position: relative;
+
+        .cogwheel {
+          pointer-events: auto;
+        }
+
+      }
+    }
+  }
+
+  .add-repo-form {
+    background: $gray-lighter;
+    border-top: 1px solid rgba(0,0,0,.05);
+    padding: 10px;
+  }
+}
+
+// shortcut popover
+#add-tab .popover {
+  left: auto;
+  max-height: 450px;
+  right: 234px;
+  top: -4px;
+  transform-origin: 250px -15px;
+
+  .arrow {
+    left: auto;
+    right: 12px;
+  }
+
+  .popover-content {
+    max-height: 450px;
+  }
+
+  #add-tab-options > ol {
+    margin-bottom: 10px;
+
+    &.col-popover-3 {
+      overflow: hidden;
+    }
+  }
+
+  .popover-footer {
+
+    button {
+      width: 100%;
+    }
+  }
+
+  // shortcuts
+  #new-shortcut {
+    display: none;
+  }
+
+  &.show-new-shortcut {
+
+    #add-tab-options {
+      display: none;
+    }
+
+    button {
+      margin: 10px 0 0;
+      width: 100%;
+    }
+  }
+
+  &.show-new-shortcut {
+    max-height: 309px;
+
+    .popover-content {
+      max-height: 305px;
+    }
+
+    #new-shortcut {
+      display: block;
+    }
+
+    input:first-child {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+#shortcuts  {
+  max-height: 290px;
+  overflow: scroll;
+
+  li {
+    float: none;
+    height: 36px;
+    position: relative;
+    text-align: left;
+    width: 100%;
+
+    &:first-child {
+      border-top: 0;
+    }
+  }
+
+  // delete
+  .delete {
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
+    color: rgba($gray-dark,.5);
+    height: 20px;
+    line-height: 19px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+      top: 8px;
+      right: 4px;
+    text-shadow: none;
+    transition: all .25s cubic-bezier(.19,1,.22,1);
+    width: 22px;
+    white-space: nowrap;
+
+    @include media(xs) {
+      top: 24px;
+    }
+
+    &:hover {
+      background: $orange;
+      border: 1px solid rgba(0,0,0,.1);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+      color: #fff;
+      width: 72px;
+
+      > span:first-child {
+        opacity: 1;
       }
 
-      &.show-form {
-        height: 108px;
-
-        form {
-          display: block;
-        }
+      > span:last-child {
+        transform: rotate3d(0,0,1,90deg);
       }
     }
 
-    .cogwheel {
-      font-size: 11px;
-      line-height: 20px;
+    &:active {
+      box-shadow: none;
+      transform: translate3d(0,1px,0);
+    }
+
+    > span {
       position: absolute;
-        top: 8px;
-        right: 6px;
-      width: 26px;
+
+      &:first-child {
+        left: 6px;
+        opacity: 0;
+        top: 0;
+        transition: opacity .25s cubic-bezier(.19,1,.22,1);
+      }
+
+      &:last-child {
+        right: 1px;
+        top: 3px;
+        transition: transform .25s ease-in-out;
+      }
     }
   }
 }

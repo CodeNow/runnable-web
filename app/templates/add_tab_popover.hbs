@@ -1,50 +1,74 @@
 <div class="arrow"></div>
 <div class="popover-content">
 
-  <ul id="add-tab-options" class="popover-body col-popover-3">
-    <li id="shortcut">
-      <a>
-        <object class="iconnables" data="/images/icons/icons-shortcut.svg" type="image/svg+xml"></object>
-        Shortcut
-      </a>
-    <li>
-      <a>
-        <object class="iconnables" data="/images/icons/icons-terminal.svg" type="image/svg+xml"></object>
-        Terminal
-      </a>
-    <li>
-      <a>
-        <object class="iconnables" data="/images/icons/icons-logs.svg" type="image/svg+xml"></object>
-        Run Log
-      </a>
-  </ul>
-
-  <div id="shortcuts">
-    <ul class="popover-body popover-list">
+  <div id="add-tab-options">
+    <ol class="popover-body col-popover-3">
       <li>
-        Shortcut 1
-        {{!-- {{#if isOwner}} --}}
+        <a>
+          <object class="iconnables" data="/images/icons/icons-web.svg" type="image/svg+xml"></object>
+          Web View
+        </a>
+      <li>
+        <a>
+          <object class="iconnables" data="/images/icons/icons-terminal.svg" type="image/svg+xml"></object>
+          Terminal
+        </a>
+      <li>
+        <a>
+          <object class="iconnables" data="/images/icons/icons-logs.svg" type="image/svg+xml"></object>
+          Run Log
+        </a>
+    </ol>
+
+    <ol id="shortcuts" class="popover-body popover-list">
+      <li>
+        <a>
+          Shortcut 1
+          {{!-- {{#if isOwner}} --}}
           <button class="delete" type="button">
             <span>Delete</span>
             <span class="glyphicons circle-remove"></span>
           </button>
-        {{!-- {{/if}} --}}
+          {{!-- {{/if}} --}}
+        </a>
       <li>
-        Shortcut 2
-        {{!-- {{#if isOwner}} --}}
-        <button class="delete" type="button">
-          <span>Delete</span>
-          <span class="glyphicons circle-remove"></span>
-        </button>
-      {{!-- {{/if}} --}}
-    </ul>
-    <button id="new-shortcut-button" class="orange" type="button">New Shortcut</button>
+        <a>
+          Shortcut 2
+          {{!-- {{#if isOwner}} --}}
+          <button class="delete" type="button">
+            <span>Delete</span>
+            <span class="glyphicons circle-remove"></span>
+          </button>
+          {{!-- {{/if}} --}}
+        </a>
+      <li>
+        <a>
+          Shortcut 3
+          {{!-- {{#if isOwner}} --}}
+          <button class="delete" type="button">
+            <span>Delete</span>
+            <span class="glyphicons circle-remove"></span>
+          </button>
+          {{!-- {{/if}} --}}
+        </a>
+      <li>
+        <a>
+          Shortcut 4
+          {{!-- {{#if isOwner}} --}}
+          <button class="delete" type="button">
+            <span>Delete</span>
+            <span class="glyphicons circle-remove"></span>
+          </button>
+          {{!-- {{/if}} --}}
+        </a>
+    </ol>
+
+    <button id="new-shortcut-button" class="silver btn-block" type="button">New Shortcut</button>
   </div>
 
   <form id="new-shortcut">
     <input class="form-control" placeholder="Shortcut Name" required>
     <input class="form-control" placeholder="Shortcut CMD" required>
-    {{!-- {{#if model=container}} --}}
     <div class="form-group toggle-group">
       <label{{#unless model.attributes.output_format}} class="active"{{/unless}}>
         <div class="sprite-icons-output"></div>
@@ -62,7 +86,6 @@
         <input type="radio" name="output_format" value="terminal"{{#if_eq model.attributes.output_format compare="terminal"}} checked{{/if_eq}}>
       </label>
     </div>
-    {{!-- {{/if}} --}}
     <button class="orange">Create New Shortcut</button>
   </form>
 </div>

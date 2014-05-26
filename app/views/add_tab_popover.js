@@ -4,22 +4,13 @@ module.exports = BaseView.extend({
   className: 'popover fade bottom menu',
   events: {
     'click'                      : 'stopPropagation',
-    'click #shortcut'            : 'openShortcuts',
     'click #new-shortcut-button' : 'openNewShortcut',
     'click label'                : 'toggleOutputViews',
     'submit form'                : 'createNewShortcut'
   },
-  openShortcuts: function (evt) {
-    this.stopPropagation(evt);
-    this.$el
-      .removeClass('show-new-shortcut')
-      .addClass('show-shortcuts');
-  },
   openNewShortcut: function (evt) {
     this.stopPropagation(evt);
-    this.$el
-      .removeClass('show-shortcuts')
-      .addClass('show-new-shortcut');
+    this.$el.addClass('show-new-shortcut');
   },
   createNewShortcut: function (evt) {
     this.stopPropagation(evt);
