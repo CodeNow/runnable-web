@@ -11,7 +11,7 @@ module.exports = BaseView.extend({
     'click'                : 'togglePopover',
     'click .popover'       : 'stopPropagation',
     'click #add-repo-link' : 'addRepo',
-    'click .select-branch' : 'toggleRepoForm'
+    'click .select-repo'   : 'toggleRepoForm'
   },
   hidePopover: function () {
     $('.btn-popover').removeClass('active');
