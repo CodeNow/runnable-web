@@ -9,17 +9,13 @@
       <div class="col-sm-9">
         <div class="page-title">
           {{view "runnable_title" model=image}}
-          {{view "runnable_stats" model=image}}
-          {{#if image.attributes.tags.length}}
-          {{view "project_tags" model=container edit=false}}
-          {{/if}}
         </div>
         <div class="main-controls">
           {{view "fork_button" collection=defaultFiles model=container}}
+          {{view "save_button" collection=defaultFiles}}
           {{view "improve_button"}}
         </div>
       </div>
-      {{view "runnable_owner" model=image.owner model_id=image.owner.id model_name='user' created=image.attributes.created image=image context=.}}
     </div>
   </section>
 

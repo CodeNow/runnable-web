@@ -187,7 +187,7 @@
 
 // edit title and description
 #project-details {
-  height: 173px;
+  height: 94px;
   overflow: visible;
 
   > .row,
@@ -382,8 +382,6 @@
 // main-controls
 .main-controls {
   @extend .clearfix;
-  position: absolute;
-    bottom: 30px;
 
   > .btn-group,
   > button {
@@ -542,7 +540,7 @@
 // #project
 #project {
   border-top: 1px solid rgba(0,0,0,.1);
-  height: calc(100% - 173px);
+  height: calc(100% - 94px);
   position: relative;
 }
 
