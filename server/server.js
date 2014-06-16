@@ -179,12 +179,16 @@ function buildApiRoutes(app) {
   //NOTE: regarding any kind of manipulation of HTTP response codes before
   // returning to browser.
   // http://stackoverflow.com/a/9826701/480807
-  app.all('/api/*', function(req, res, next) {
+  app.all('/api/-/auth/*', function(req, res, next) {
+
     req.headers['runnable-token'] = req.session.access_token;
     req.url = req.url.replace(apiPrefix, '');
+    console.log(req.url);
+    console.log(config.api.default.protocol + '://' + config.api.default.host);
     proxy.web(req, res, {
       target: config.api.default.protocol + '://' + config.api.default.host
     });
+
   });
 }
 
