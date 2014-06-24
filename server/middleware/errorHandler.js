@@ -6,6 +6,7 @@ var path = require('path');
 //
 module.exports = function() {
   return function errorHandler(err, req, res, next) {
+    console.error("ERROR sendIf400Error", res.code, err, err.msg, err.stack);
     if (err.status === 401) {
       res.redirect('/login');
     } else if (err.status === 404 || err.status === 403) { //permission denied as 404 for now
