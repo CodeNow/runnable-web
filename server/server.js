@@ -69,7 +69,6 @@ exports.start = function start(options, cb) {
 //
 function initMiddleware() {
   // set up views
-  app.use(express.responseTime());
   app.set('views', __dirname + '/../app/views');
   app.set('view engine', 'js');
   app.engine('js', viewEngine);
@@ -110,7 +109,7 @@ function initMiddleware() {
       maxAge: env.current.cookieExpires
     }
   }));
-  app.use(express.logger());
+  app.use(express.logger(':remote-addr - :response-time ms - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'));
   app.use(function (req, res, next) {
     if (~(req.header('content-type') || '').indexOf('form-data')) {
       next();
