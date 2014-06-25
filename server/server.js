@@ -69,6 +69,7 @@ exports.start = function start(options, cb) {
 //
 function initMiddleware() {
   // set up views
+  app.use(express.responseTime());
   app.set('views', __dirname + '/../app/views');
   app.set('view engine', 'js');
   app.engine('js', viewEngine);
