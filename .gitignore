@@ -21,6 +21,7 @@ public/mergedAssets.min.*.js
 public/styles/index.*.css
 app/templates/__layout.hbs
 tests/logs/
+tests/reports/
 assets/bower
 
 *.rdb
