@@ -69,7 +69,9 @@
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-autoprefixer": "~0.6.5"
+    "grunt-autoprefixer": "~0.6.5",
+    "grunt-contrib-sass": "~0.7.3",
+    "nightwatch": "~0.4.16"
   },
   "engines": {
     "node": ">=0.8"
