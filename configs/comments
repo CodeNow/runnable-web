@@ -1,8 +1,9 @@
 {
+  // port this app listens on
   "port": 3000,
   "redis": {
     "port": 6379,
-    "host": "10.0.1.125"
+    "host": "127.0.0.1"
   },
 
   "cookieKey": "runnable.sid",
@@ -20,19 +21,23 @@
   "rollbar": "bbbd8090514a4b40a0ec53fbed32d882",
   "api": {
     "default": {
-      "host": "api.runnable.pw",
+      "host": "10.0.1.54:3000",
       "protocol": "http"
     }
   },
+  "newrelic": {
+    "name": "web-production",
+    "key": "338516e0826451c297d44dc60aeaf0a0ca4bfead"
+  },
   "statsd": {
-    "name": "web.staging.",
+    "name": "web.production.",
     "host": "ec2-54-241-57-94.us-west-1.compute.amazonaws.com"
   },
   "rendrApp": {
     "env" : "production",
     "commitHash": "{COMMIT_HASH}",
     "mixpanel" : {
-      "key": "de848319a0091fb3a5876184d81a40ec"
+      "key": "8790acfcca0cab43adebbc796f1d4f96"
     },
     "googleAnalytics" : {
       "id": "UA-36631837-1"
@@ -41,6 +46,6 @@
       "app_id": "980118989fd561bd1dce4ba4c7f8cb32da859c16"
     },
     "pageSize" : 25,
-    "domain": "runnable.pw"
+    "domain": "runnable.com"
   }
 }
