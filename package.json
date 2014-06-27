@@ -74,6 +74,8 @@
     "nightwatch": "~0.4.16"
   },
   "engines": {
-    "node": ">=0.8"
-  }
+    "node": "~0.10.28",
+    "npm": "~1.4.4"
+  },
+  "engineStrict": true
 }
