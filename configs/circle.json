@@ -7,7 +7,6 @@
   "cookieKey": "runnable.sid",
   "cookieSecret": "$up3r,$3<r3t",
   "cookieExpires": "1 year",
-
   "rollbar": "b0588f56be9845c0911078fd66bed8f0",
   "api": {
     "default": {
@@ -15,7 +14,6 @@
       "protocol": "http"
     }
   },
-
   "rendrApp": {
     "env" : "development",
     "commitHash": "{COMMIT_HASH}",
@@ -25,7 +23,6 @@
     "googleAnalytics" : {
       "id": "UA-36631837-2"
     },
-    "pageSize" : 25,
     "domain": "runnable.pw"
   }
 }
