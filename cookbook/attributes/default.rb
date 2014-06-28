@@ -1,7 +1,6 @@
 default['runnable_web']['deploy_path'] = '/opt/runnable-web'
 default['runnable_web']['config'] = {
   'port' => 3000,
-  'ipaddress'		=> node.ipaddress,
   'cookieKey'		=> "runnable.sid",
   'cookieSecret'	=> "$up3r,$3<r3t",
   'cookieExpires' 	=> "1 year",
@@ -12,14 +11,6 @@ default['runnable_web']['config'] = {
       'protocol' => 'http'
     }
   },
-  'assets' 			=> {
-    'minify' => true,
-    'cdn'	 => {
-      'protocol' => 'http',
-      'cnames' => ['localhost'],
-      'pathPrefix' => ''
-    }
-  },
   'redis' => {
     'port' => 6379,
     'host' => 'redis_server'
@@ -27,7 +18,6 @@ default['runnable_web']['config'] = {
   'rendrApp' => {
     'commitHash' => '{COMMIT_HASH}',
     'intercom' => {'app_id' => '980118989fd561bd1dce4ba4c7f8cb32da859c16'},
-    'pageSize' => 25
   }
 }
 
