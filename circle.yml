@@ -13,15 +13,15 @@ dependencies:
     - ./node_modules/.bin/grunt build
     - node ./index.js:
         background: true
-    - bash -c 'echo "$CIRCLE_BRANCH" | grep -q -w -P "(.*chef.*)|(master)"; if [ $? -eq 0 ]; then (bundle check --path=vendor/bundle || bundle install --path=vendor/bundle  --clean); fi':
+    - 'echo "$CIRCLE_BRANCH" | grep -q -w -P "(.*chef.*)|(master)"; if [ $? -eq 0 ]; then (bundle check --path=vendor/bundle || bundle install --path=vendor/bundle  --clean); fi':
         pwd: cookbook
         timeout: 99999
-    - bash -c 'echo "$CIRCLE_BRANCH" | grep -q -w -P "(.*chef.*)|(master)"; if [ $? -eq 0 ]; then bundle exec berks install; fi':
+    - 'echo "$CIRCLE_BRANCH" | grep -q -w -P "(.*chef.*)|(master)"; if [ $? -eq 0 ]; then bundle exec berks install; fi':
         pwd: cookbook
 
 test:
   override:
     - ./nightwatch
-    - bash -c 'echo "$CIRCLE_BRANCH" | grep -q -w -P "(.*chef.*)|(master)"; if [ $? -eq 0 ]; then bundle exec rake test; fi':
+    - 'echo "$CIRCLE_BRANCH" | grep -q -w -P "(.*chef.*)|(master)"; if [ $? -eq 0 ]; then bundle exec rake test; fi':
     pwd: cookbook
     timeout: 99999
