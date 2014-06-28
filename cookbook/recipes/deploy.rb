@@ -22,7 +22,7 @@ deploy node['runnable_web']['deploy_path'] do
 end
 
 file 'runnable-web_config' do
-  path "#{node['runnable_docklet']['deploy']['deploy_path']}/current/configs/#{node.chef_environment}.json"
+  path "#{node['runnable_web']['deploy_path']}/current/configs/#{node.chef_environment}.json"
   content JSON.pretty_generate node['runnable_web']['config']
   action :nothing
   notifies :run, 'execute[npm install]', :immediately
@@ -37,10 +37,10 @@ end
 execute 'bower install' do
   cwd "#{node['runnable_web']['deploy_path']}/current"
   action :nothing
-  notifies :run, 'execute[grunt]', :immediately
+  notifies :run, 'execute[grunt build]', :immediately
 end
 
-execute 'grunt' do  
+execute 'grunt build' do  
   cwd "#{node['runnable_web']['deploy_path']}/current"
   action :nothing
   notifies :restart, 'service[runnable-web', :immediately
