@@ -1,3 +1,5 @@
+redis_server = search(:node, "chef_environment:#{node.chef_environment} AND recipes:runnable\:\:redis_server_web").first
+
 default['runnable_web']['deploy_path'] = '/opt/runnable-web'
 default['runnable_web']['config'] = {
   'port' => 3000,
@@ -13,7 +15,7 @@ default['runnable_web']['config'] = {
   },
   'redis' => {
     'port' => 6379,
-    'host' => 'redis_server'
+    'host' => redis_server.ipaddress
   },
   'rendrApp' => {
     'commitHash' => '{COMMIT_HASH}',
