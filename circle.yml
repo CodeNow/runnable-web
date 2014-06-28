@@ -22,6 +22,7 @@ dependencies:
 test:
   override:
     - ./nightwatch
+    - ruby -e 'if ENV[CIRCLE_BRANCH] =~ /(.*chef.*)|(master)/ exec "bundle exec rake test"': 
     - 'echo "$CIRCLE_BRANCH" | grep -q -w -P "(.*chef.*)|(master)"; if [ $? -eq 0 ]; then bundle exec rake test; fi':
     pwd: cookbook
     timeout: 99999
