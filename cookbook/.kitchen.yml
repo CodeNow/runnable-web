@@ -25,7 +25,6 @@ suites:
       solo_rb:
         environment: integration
     run_list:
-      - recipe[runnable_base::default]
-      - recipe[runnable_::default]
+      - recipe[runnable_web::default]
       - recipe[minitest-handler]
     attributes:
