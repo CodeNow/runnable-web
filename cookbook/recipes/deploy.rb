@@ -43,7 +43,7 @@ end
 execute 'grunt build' do  
   cwd "#{node['runnable_web']['deploy_path']}/current"
   action :nothing
-  notifies :restart, 'service[runnable-web', :immediately
+  notifies :restart, 'service[runnable-web]', :immediately
 end
 
 service 'runnable-web' do
