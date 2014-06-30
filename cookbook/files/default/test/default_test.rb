@@ -11,8 +11,10 @@ describe_recipe 'runnable_web::default' do
     assert shell_out('lsof -n -i :3000').exitstatus == 0
   end
 
-  it 'generates json configuration' do
-    assert_includes_content("#{node['runnable_web']['deploy_path']}/current/configs/#{node.chef_environment}.json", node['runnable_web']['config'].to_json)
+   it 'generates json configuration' do
+    node['runnable_web']['config'].each do |k,v|
+      file("#{node['runnable_web']['deploy_path']}/current/configs/#{node.chef_environment}.json").must_include k
+    end
   end
 
   it 'passes deployment smoke test' do
