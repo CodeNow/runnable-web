@@ -49,7 +49,7 @@ end
 service 'runnable-web' do
   action :start
   stop_command 'pm2 stop runnable-web'
-  start_command "bash -c 'NODE_ENV=#{node.chef_environment} pm2 start #{node['runnable_docklet']['deploy_path']}/current/lib/index.js -n runnable-web'"
+  start_command "NODE_ENV=#{node.chef_environment} pm2 start #{node['runnable_web']['deploy_path']}/current/lib/index.js -n runnable-docklet"
   status_command 'pm2 status | grep runnable-web | grep online'
   restart_command 'pm2 restart runnable-web'
   supports :start => true, :stop => true, :status => true, :restart => true
