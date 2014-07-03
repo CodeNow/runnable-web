@@ -3,7 +3,7 @@
 #
 #
 # Pull base image.
-FROM 54.193.225.22:5000/web_base
+FROM 54.176.97.94:5000/web_base
 # Download Runnable-web Repo
 RUN eval $(ssh-agent) > /dev/null && ssh-add /.ssh/id_rsa && git clone git@github.com:CodeNow/runnable-web.git 
 

@@ -109,7 +109,7 @@ function initMiddleware() {
       maxAge: env.current.cookieExpires
     }
   }));
-  app.use(express.logger());
+  app.use(express.logger(':remote-addr - :response-time ms - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'));
   app.use(function (req, res, next) {
     if (~(req.header('content-type') || '').indexOf('form-data')) {
       next();
