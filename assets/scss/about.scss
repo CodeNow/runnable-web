@@ -21,10 +21,10 @@
 }
 
 #about-header {
-  background-image: url(../images/about-header-plx.jpg);
-  @include background-image-retina('../images/about-header-plx@2x.jpg');
+  background-image: url(../images/about-header.jpg);
+  @include background-image-retina('../images/about-header@2x.jpg');
   color: #fff;
-  text-shadow: 0 3px 20px rgba(0,0,0,.75);
+  text-shadow: 0 3px 20px #000;
 
   h2 {
     margin-top: 225px;
