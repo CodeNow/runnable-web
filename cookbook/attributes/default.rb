@@ -7,6 +7,7 @@ default['runnable_web']['config'] = {
   'rollbar'			=> 'bbbd8090514a4b40a0ec53fbed32d882',
   'api'				=> {
     'default' => {
+      'host' => '127.0.0.1:3000',
       'protocol' => 'http'
     }
   },
