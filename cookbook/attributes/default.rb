@@ -15,6 +15,6 @@ default['runnable_web']['config'] = {
   },
   'rendrApp' => {
     'commitHash' => '{COMMIT_HASH}',
-    'intercom' => {'app_id' => '980118989fd561bd1dce4ba4c7f8cb32da859c16'},
+    'intercom' => {'app_id' => '980118989fd561bd1dce4ba4c7f8cb32da859c16'}
   }
 }
