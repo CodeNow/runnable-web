@@ -48,7 +48,8 @@ execute 'npm install' do
   notifies :run, 'execute[bower install]', :immediately
 end
 
-execute 'bower install --allow-root' do
+execute 'bower install' do
+  command 'bower install --allow-root'
   cwd "#{node['runnable_web']['deploy_path']}/current"
   action :nothing
   notifies :run, 'execute[grunt build]', :immediately
