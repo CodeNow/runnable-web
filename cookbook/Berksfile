@@ -5,7 +5,7 @@ metadata
 cookbook 'runnable_nodejs', git: 'git@github.com:CodeNow/runnable_nodejs-cookbook.git'
 
 group :integration do
-  cookbook 'build-essential', github: 'opscode-cookbooks/build-essential'
+  cookbook 'build-essential', github: 'opscode-cookbooks/build-essential', tag: 'v2.0.4'
   cookbook 'chef-solo-search', github: 'edelight/chef-solo-search'
   cookbook 'minitest-handler', github: 'btm/minitest-handler-cookbook'
 end
