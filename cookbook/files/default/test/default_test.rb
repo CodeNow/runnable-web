@@ -17,6 +17,13 @@ describe_recipe 'runnable_web::default' do
     end
   end
 
+  it 'starts the runnable-web service' do
+    r = Chef::Resource::Service.new("runnable-web", @run_context)
+    r.provider Chef::Provider::Service::Upstart
+    current_resource = r.provider_for_action(:start).load_current_resource
+    current_resource.running.must_equal true
+  end
+
   it 'passes deployment smoke test' do
   	assert false
   end

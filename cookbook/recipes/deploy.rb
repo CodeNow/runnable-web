@@ -19,6 +19,7 @@ deploy node['runnable_web']['deploy_path'] do
   symlinks({})
   action :deploy
   notifies :create, 'file[runnable-web_config]', :immediately
+  notifies :create, 'template[/etc/init/runnable-web.conf'], :immediately
 end
 
 file 'runnable-web_config' do
@@ -28,13 +29,26 @@ file 'runnable-web_config' do
   notifies :run, 'execute[npm install]', :immediately
 end
 
+template '/etc/init/runnable-web.conf' do
+  source 'upstart.conf.erb'
+  variables({
+    :name     => 'runnable-web',
+    :deploy_path  => "#{node['runnable_web']['deploy_path']}/current",
+    :log_file   => '/var/log/runnable-web.log',
+    :start_command => "node #{node['runnable_web']['deploy_path']}/current/lib/index.js",
+    :node_env     => node.chef_environment
+  })
+  action :create
+  notifies :restart, 'service[containerGauge]', :delayed
+end
+
 execute 'npm install' do
   cwd "#{node['runnable_web']['deploy_path']}/current"
   action :nothing
   notifies :run, 'execute[bower install]', :immediately
 end
 
-execute 'bower install' do
+execute 'bower install --allow-root' do
   cwd "#{node['runnable_web']['deploy_path']}/current"
   action :nothing
   notifies :run, 'execute[grunt build]', :immediately
@@ -47,10 +61,6 @@ execute 'grunt build' do
 end
 
 service 'runnable-web' do
-  action :start
-  stop_command 'pm2 stop runnable-web'
-  start_command "NODE_ENV=#{node.chef_environment} pm2 start #{node['runnable_web']['deploy_path']}/current/lib/index.js -n runnable-docklet"
-  status_command 'pm2 status | grep runnable-web | grep online'
-  restart_command 'pm2 restart runnable-web'
-  supports :start => true, :stop => true, :status => true, :restart => true
+  provider Chef::Provider::Service::Upstart
+  action :nothing
 end
