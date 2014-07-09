@@ -19,7 +19,7 @@ deploy node['runnable_web']['deploy_path'] do
   symlinks({})
   action :deploy
   notifies :create, 'file[runnable-web_config]', :immediately
-  notifies :create, 'template[/etc/init/runnable-web.conf'], :immediately
+  notifies :create, 'template[/etc/init/runnable-web.conf]', :immediately
 end
 
 file 'runnable-web_config' do
@@ -39,7 +39,7 @@ template '/etc/init/runnable-web.conf' do
     :node_env     => node.chef_environment
   })
   action :create
-  notifies :restart, 'service[containerGauge]', :delayed
+  notifies :restart, 'service[runnable-web]', :delayed
 end
 
 execute 'npm install' do
