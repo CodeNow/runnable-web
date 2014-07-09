@@ -19,7 +19,6 @@ deploy node['runnable_web']['deploy_path'] do
   symlinks({})
   action :deploy
   notifies :create, 'file[runnable-web_config]', :immediately
-  notifies :create, 'template[/etc/init/runnable-web.conf]', :immediately
 end
 
 file 'runnable-web_config' do
@@ -27,19 +26,6 @@ file 'runnable-web_config' do
   content JSON.pretty_generate node['runnable_web']['config']
   action :nothing
   notifies :run, 'execute[npm install]', :immediately
-end
-
-template '/etc/init/runnable-web.conf' do
-  source 'upstart.conf.erb'
-  variables({
-    :name     => 'runnable-web',
-    :deploy_path  => "#{node['runnable_web']['deploy_path']}/current",
-    :log_file   => '/var/log/runnable-web.log',
-    :start_command => "node #{node['runnable_web']['deploy_path']}/current/lib/index.js",
-    :node_env     => node.chef_environment
-  })
-  action :create
-  notifies :restart, 'service[runnable-web]', :delayed
 end
 
 execute 'npm install' do
@@ -58,6 +44,19 @@ end
 execute 'grunt build' do  
   cwd "#{node['runnable_web']['deploy_path']}/current"
   action :nothing
+  notifies :create, 'template[/etc/init/runnable-web.conf]', :immediately
+end
+
+template '/etc/init/runnable-web.conf' do
+  source 'upstart.conf.erb'
+  variables({
+    :name     => 'runnable-web',
+    :deploy_path  => "#{node['runnable_web']['deploy_path']}/current",
+    :log_file   => '/var/log/runnable-web.log',
+    :start_command => "node #{node['runnable_web']['deploy_path']}/current/lib/index.js",
+    :node_env     => node.chef_environment
+  })
+  action :create
   notifies :restart, 'service[runnable-web]', :immediately
 end
 
