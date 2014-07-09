@@ -24,7 +24,4 @@ describe_recipe 'runnable_web::default' do
     current_resource.running.must_equal true
   end
 
-  it 'passes deployment smoke test' do
-    shell_out('wget -q -O /dev/null http://localhost:3000/').exitstatus.must_equal 0
-  end
 end
