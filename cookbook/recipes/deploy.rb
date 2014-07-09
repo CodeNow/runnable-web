@@ -53,7 +53,7 @@ template '/etc/init/runnable-web.conf' do
     :name     => 'runnable-web',
     :deploy_path  => "#{node['runnable_web']['deploy_path']}/current",
     :log_file   => '/var/log/runnable-web.log',
-    :start_command => "node #{node['runnable_web']['deploy_path']}/current/lib/index.js",
+    :start_command => "node #{node['runnable_web']['deploy_path']}/current/index.js",
     :node_env     => node.chef_environment
   })
   action :create
