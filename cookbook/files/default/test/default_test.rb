@@ -25,6 +25,6 @@ describe_recipe 'runnable_web::default' do
   end
 
   it 'passes deployment smoke test' do
-  	assert false
+    shell_out('wget -q -O /dev/null http://localhost:3000/').exitstatus.must_equal 0
   end
 end
