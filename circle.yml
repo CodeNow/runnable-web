@@ -2,6 +2,9 @@ machine:
   environment:
     NODE_ENV: circle
 dependencies:
+  cache_directories:
+    - "cookbook/vendor/bundle"
+    - "node_modules"
   override:
     - java -jar ./tests/lib/selenium-server-standalone-2.41.0.jar:
         background: true
