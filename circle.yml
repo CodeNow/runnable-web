@@ -6,6 +6,11 @@ dependencies:
     - "cookbook/vendor/bundle"
     - "node_modules"
   override:
+    - ruby -e 'if ENV["CIRCLE_BRANCH"] =~ /(.*chef.*)|(master)/ then exec "bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --clean" end':
+        pwd: cookbook
+        timeout: 99999
+    - ruby -e 'if ENV["CIRCLE_BRANCH"] =~ /(.*chef.*)|(master)/ then exec "bundle exec berks install" end': 
+        pwd: cookbook
     - java -jar ./tests/lib/selenium-server-standalone-2.41.0.jar:
         background: true
     - nvm install 0.10.25
@@ -16,12 +21,6 @@ dependencies:
     - ./node_modules/.bin/grunt build
     - node ./index.js:
         background: true
-    - ruby -e 'if ENV["CIRCLE_BRANCH"] =~ /(.*chef.*)|(master)/ then exec "bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --clean" end':
-        pwd: cookbook
-        timeout: 99999
-    - ruby -e 'if ENV["CIRCLE_BRANCH"] =~ /(.*chef.*)|(master)/ then exec "bundle exec berks install" end': 
-        pwd: cookbook
-
 test:
   override:
     - ./nightwatch
