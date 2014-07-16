@@ -41,7 +41,8 @@ execute 'bower install' do
   notifies :run, 'execute[npm run build]', :immediately
 end
 
-execute 'npm run build' do  
+execute 'npm run build' do
+  command 'npm run build | grep "Done, without errors."' 
   cwd "#{node['runnable_web']['deploy_path']}/current"
   creates "#{node['runnable_web']['deploy_path']}/current/public/styles/index.css"
   action :nothing
