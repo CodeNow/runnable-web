@@ -45,6 +45,7 @@ execute 'grunt build' do
   cwd "#{node['runnable_web']['deploy_path']}/current"
   action :nothing
   notifies :create, 'template[/etc/init/runnable-web.conf]', :immediately
+  notifies :restart, 'service[runnable-web]', :delayed
 end
 
 template '/etc/init/runnable-web.conf' do
