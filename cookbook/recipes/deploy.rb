@@ -38,10 +38,10 @@ execute 'bower install' do
   command 'bower install --allow-root'
   cwd "#{node['runnable_web']['deploy_path']}/current"
   action :nothing
-  notifies :run, 'execute[grunt build]', :immediately
+  notifies :run, 'execute[npm run build]', :immediately
 end
 
-execute 'grunt build' do  
+execute 'npm run build' do  
   cwd "#{node['runnable_web']['deploy_path']}/current"
   action :nothing
   notifies :create, 'template[/etc/init/runnable-web.conf]', :immediately
