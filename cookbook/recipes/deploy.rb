@@ -43,7 +43,7 @@ end
 
 execute 'npm run build' do
   command 'npm run build'
-  environment({'PATH' => 'PATH:/opt/chef/embedded/bin'})
+  environment({'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/chef/embedded/bin'})
   cwd "#{node['runnable_web']['deploy_path']}/current"
   creates "#{node['runnable_web']['deploy_path']}/current/public/styles/index.css"
   action :nothing
