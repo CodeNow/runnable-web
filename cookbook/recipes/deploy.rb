@@ -43,6 +43,7 @@ end
 
 execute 'npm run build' do  
   cwd "#{node['runnable_web']['deploy_path']}/current"
+  creates "#{node['runnable_web']['deploy_path']}/current/public/styles/index.css"
   action :nothing
   notifies :create, 'template[/etc/init/runnable-web.conf]', :immediately
   notifies :restart, 'service[runnable-web]', :delayed
