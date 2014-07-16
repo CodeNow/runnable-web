@@ -24,4 +24,8 @@ describe_recipe 'runnable_web::default' do
     current_resource.running.must_equal true
   end
 
+  it 'runs grunt build successfully' do
+    file('/opt/runnable-web/current/public/styles/index.css').must_exist
+  end
+
 end
