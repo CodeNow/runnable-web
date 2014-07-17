@@ -16,5 +16,5 @@ gem_package 'compass' do
   action :install
 end
 
-node.set['runnable_nodejs']['version'] = '0.10.25'
+node.set['runnable_nodejs']['version'] = '0.10.28'
 include_recipe 'runnable_nodejs'
