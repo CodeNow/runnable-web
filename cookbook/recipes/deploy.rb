@@ -10,7 +10,7 @@
 deploy node['runnable_web']['deploy_path'] do
   repo 'git@github.com:CodeNow/runnable-web.git'
   git_ssh_wrapper '/tmp/git_sshwrapper.sh'
-  branch 'master'
+  branch node['runnable_web']['deploy_branch']
   deploy_to node['runnable_web']['deploy_path']
   migrate false
   create_dirs_before_symlink []
