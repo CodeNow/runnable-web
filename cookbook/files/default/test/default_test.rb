@@ -15,7 +15,11 @@ describe_recipe 'runnable_web::default' do
     shell_out('gem list|grep "^compass (0.12.2)$"').exitstatus.must_equal 0
   end
 
-   it 'generates json configuration' do
+  it 'installs sass gem version 3.2.9' do
+    shell_out('gem list|grep "^sass (3.2.9)$"').exitstatus.must_equal 0
+  end
+
+  it 'generates json configuration' do
     node['runnable_web']['config'].each do |k,v|
       file("#{node['runnable_web']['deploy_path']}/current/configs/#{node.chef_environment}.json").must_include k
     end

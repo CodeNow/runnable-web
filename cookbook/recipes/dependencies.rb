@@ -11,6 +11,11 @@ include_recipe 'build-essential'
 
 package 'git'
 
+gem_package 'sass' do
+  version '3.2.9'
+  action :install
+end
+
 gem_package 'compass' do
   version '0.12.2'
   action :install
