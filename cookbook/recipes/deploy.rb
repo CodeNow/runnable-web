@@ -54,7 +54,7 @@ deploy node['runnable_web']['deploy_path'] do
       source 'upstart.conf.erb'
       variables({
         :name     => 'runnable-web',
-        :deploy_path  => "#{release_path}",
+        :deploy_path  => release_path,
         :log_file   => '/var/log/runnable-web.log',
         :start_command => "node #{release_path}/index.js",
         :node_env     => node.chef_environment
