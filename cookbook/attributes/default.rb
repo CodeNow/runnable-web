@@ -1,3 +1,4 @@
+default['runnable_web']['deploy_branch'] = 'master'
 default['runnable_web']['deploy_path'] = '/opt/runnable-web'
 default['runnable_web']['config'] = {
   'port' => 3000,
