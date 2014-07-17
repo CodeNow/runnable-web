@@ -11,6 +11,10 @@ describe_recipe 'runnable_web::default' do
     assert shell_out('lsof -n -i :3000').exitstatus == 0
   end
 
+  it 'installs compass gem version 0.12.2' do
+    shell_out('gem list|grep "^compass (0.12.2)$"').exitstatus.must_equal 0
+  end
+
    it 'generates json configuration' do
     node['runnable_web']['config'].each do |k,v|
       file("#{node['runnable_web']['deploy_path']}/current/configs/#{node.chef_environment}.json").must_include k
