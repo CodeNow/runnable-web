@@ -11,7 +11,10 @@ include_recipe 'build-essential'
 
 package 'git'
 
-gem_package 'compass'
+gem_package 'compass' do
+  version '0.12.2'
+  action :install
+end
 
 node.set['runnable_nodejs']['version'] = '0.10.28'
 include_recipe 'runnable_nodejs'
