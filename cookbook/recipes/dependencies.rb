@@ -18,8 +18,3 @@ end
 
 node.set['runnable_nodejs']['version'] = '0.10.28'
 include_recipe 'runnable_nodejs'
-
-execute 'npm install bower -g' do
-  action :run
-  not_if 'npm list -g bower'
-end
