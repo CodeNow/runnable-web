@@ -26,7 +26,7 @@ describe_recipe 'runnable_web::default' do
 
   it 'executes npm run build successfully' do
     assert Dir["#{node['runnable_web']['deploy_path']}/current/public/styles/index.*.css"].count > 0
-    assert Dir["#{node['runnable_web']['deploy_path']}/current/public/"].count > 0
+    assert Dir["#{node['runnable_web']['deploy_path']}/current/public/assets/mergedAssets.min.*.js"].count > 0
   end
 
 end
