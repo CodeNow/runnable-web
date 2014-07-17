@@ -22,14 +22,14 @@ deploy node['runnable_web']['deploy_path'] do
     end
 
     execute 'npm install' do
-      cwd "#{release_path}"
+      cwd release_path
       action :nothing
       notifies :run, 'execute[bower install]', :immediately
     end
     
     execute 'bower install' do
       command 'bower install --allow-root'
-      cwd "#{release_path}"
+      cwd release_path
       action :nothing
       notifies :run, 'bash[npm run build]', :immediately
     end
@@ -49,7 +49,7 @@ deploy node['runnable_web']['deploy_path'] do
         rm $log
       EOM
       environment({'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/chef/embedded/bin'})
-      cwd "#{release_path}"
+      cwd release_path
       action :nothing
     end
   end
