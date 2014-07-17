@@ -35,7 +35,9 @@ deploy node['runnable_web']['deploy_path'] do
     end
 
     execute 'npm run build' do
-      command 'npm run build'
+      command <<-EOM
+        log=`mktemp grunt.log.XXXXXXXX` ; npm run build &> $log ; ret=$? ; echo "npm run build returned $ret" >> $log ; if [ `grep -q -i error /tmp/grunt.log` ] ; then cat /tmp/grunt.log ; exit 1 ; else exit $ret ; fi
+      EOM
       environment({'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/chef/embedded/bin'})
       cwd "#{release_path}"
       action :nothing
