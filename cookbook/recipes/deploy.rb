@@ -13,58 +13,60 @@ deploy node['runnable_web']['deploy_path'] do
   branch node['runnable_web']['deploy_branch']
   deploy_to node['runnable_web']['deploy_path']
   migrate false
+  before_migrate do
+    file 'runnable-web_config' do
+      path "#{release_path}/configs/#{node.chef_environment}.json"
+      content JSON.pretty_generate node['runnable_web']['config']
+      action :create
+      notifies :run, 'execute[npm install]', :immediately
+    end
+
+    execute 'npm install' do
+      cwd "#{release_path}"
+      action :nothing
+      notifies :run, 'execute[bower install]', :immediately
+    end
+    
+    execute 'bower install' do
+      command 'bower install --allow-root'
+      cwd "#{release_path}"
+      action :nothing
+      notifies :run, 'execute[npm run build]', :immediately
+    end
+
+    execute 'npm run build' do
+      command 'npm run build'
+      environment({'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/chef/embedded/bin'})
+      cwd "#{release_path}"
+      action :nothing
+    end
+  end
+  before_restart do
+    template '/etc/init/runnable-web.conf' do
+      source 'upstart.conf.erb'
+      variables({
+        :name     => 'runnable-web',
+        :deploy_path  => "#{release_path}",
+        :log_file   => '/var/log/runnable-web.log',
+        :start_command => "node #{release_path}/index.js",
+        :node_env     => node.chef_environment
+      })
+      action :create
+    end    
+  end
+  restart_command do
+    service 'runnable-web' do
+      provider Chef::Provider::Service::Upstart
+      supports :restart => true, :start => true, :stop => true
+      action [:enable, :restart]
+    end
+  end
   create_dirs_before_symlink []
   purge_before_symlink []
   symlink_before_migrate({})
   symlinks({})
+  rollback_on_error true
   action :deploy
-  notifies :create, 'file[runnable-web_config]', :immediately
 end
 
-file 'runnable-web_config' do
-  path "#{node['runnable_web']['deploy_path']}/current/configs/#{node.chef_environment}.json"
-  content JSON.pretty_generate node['runnable_web']['config']
-  action :nothing
-  notifies :run, 'execute[npm install]', :immediately
-end
 
-execute 'npm install' do
-  cwd "#{node['runnable_web']['deploy_path']}/current"
-  action :nothing
-  notifies :run, 'execute[bower install]', :immediately
-end
-
-execute 'bower install' do
-  command 'bower install --allow-root'
-  cwd "#{node['runnable_web']['deploy_path']}/current"
-  action :nothing
-  notifies :run, 'execute[npm run build]', :immediately
-end
-
-execute 'npm run build' do
-  command 'npm run build'
-  environment({'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/chef/embedded/bin'})
-  cwd "#{node['runnable_web']['deploy_path']}/current"
-  creates "#{node['runnable_web']['deploy_path']}/current/public/styles/index.css"
-  action :nothing
-  notifies :create, 'template[/etc/init/runnable-web.conf]', :immediately
-  notifies :restart, 'service[runnable-web]', :delayed
-end
-
-template '/etc/init/runnable-web.conf' do
-  source 'upstart.conf.erb'
-  variables({
-    :name     => 'runnable-web',
-    :deploy_path  => "#{node['runnable_web']['deploy_path']}/current",
-    :log_file   => '/var/log/runnable-web.log',
-    :start_command => "node #{node['runnable_web']['deploy_path']}/current/index.js",
-    :node_env     => node.chef_environment
-  })
-  action :create
-  notifies :restart, 'service[runnable-web]', :immediately
-end
-
-service 'runnable-web' do
-  provider Chef::Provider::Service::Upstart
-  action :nothing
-end
