@@ -36,17 +36,13 @@ deploy node['runnable_web']['deploy_path'] do
 
     bash 'npm run build' do
       code <<-EOM
-        log=`mktemp grunt.log.XXXXXXXX`
+        log=`mktemp /tmp/grunt.log.XXXXXXXX`
         npm run build &> $log
         ret=$?
         echo "npm run build returned $ret" >> $log
         cat $log
-        if [ `grep -q -i -e warn -e error $log` ] ; then 
-          exit 1
-        else
-          exit $ret
-        fi
-        rm $log
+        grep -q -i -e warn -e error $log && exit 1
+        exit $ret
       EOM
       environment({'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/chef/embedded/bin'})
       cwd release_path
