@@ -227,11 +227,11 @@ module.exports = function(grunt) {
         options: {
           dependencies: frontendScripts,
           npmDependencies: {
-            underscore: '../rendr/node_modules/underscore/underscore.js',
+            underscore: '../underscore/underscore.js',
             'underscore.string': '../underscore.string/lib/underscore.string.js',
             backbone: '../rendr/node_modules/backbone/backbone.js',
             handlebars: '../rendr/node_modules/handlebars/dist/handlebars.runtime.js',
-            async: '../rendr/node_modules/async/lib/async.js',
+            async: '../async/lib/async.js',
             moment: '../moment/moment.js',
             marked: '../marked/lib/marked.js',
             'node-uuid': '../node-uuid/uuid.js',
