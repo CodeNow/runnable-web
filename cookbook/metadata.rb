@@ -9,6 +9,7 @@ version          '0.1.1'
 supports 'ubuntu'
 
 %w{
+  apt
   build-essential
   runnable_nodejs
 }.each do |cb|
