@@ -28,7 +28,7 @@ deploy node['runnable_web']['deploy_path'] do
     end
     
     execute 'bower install' do
-      command 'bower install --allow-root'
+      command './node_modules/.bin/bower install --allow-root'
       cwd release_path
       action :nothing
       notifies :run, 'bash[npm run build]', :immediately
