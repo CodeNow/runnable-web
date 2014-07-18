@@ -40,11 +40,16 @@ deploy node['runnable_web']['deploy_path'] do
         npm run build &> $log
         ret=$?
         echo "npm run build returned $ret" >> $log
+        echo "env output: `env`" >> $log
+        echo "locale output: `locale`" >> $log
         cat $log
-        grep -q -i -e warn -e error $log && exit 1
+        grep -v "Done, without errors." $log | grep -q -i -e warn -e error && exit 1
         exit $ret
       EOM
-      environment({'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/chef/embedded/bin'})
+      environment({
+        'LC_ALL' => 'en_US.UTF-8',
+        'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/chef/embedded/bin'
+      })
       cwd release_path
       action :nothing
     end
