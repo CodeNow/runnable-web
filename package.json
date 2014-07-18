@@ -51,7 +51,7 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.9",
-    "bower": "~1.3.5",
+    "bower": "~1.3.8",
     "grunt-contrib-compass": "0.1.3",
     "grunt-contrib-cssmin": "0.6.1",
     "grunt-contrib-handlebars": "git://github.com/CodeNow/grunt-contrib-handlebars#09ed807b1f243fc837ea2f1cd4195be2fc8194f3",
