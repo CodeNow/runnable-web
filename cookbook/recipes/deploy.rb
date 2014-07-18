@@ -13,7 +13,7 @@ deploy node['runnable_web']['deploy_path'] do
   branch node['runnable_web']['deploy_branch']
   deploy_to node['runnable_web']['deploy_path']
   migrate false
-  before_symlink do
+  before_migrate do
     file 'runnable-web_config' do
       path "#{release_path}/configs/#{node.chef_environment}.json"
       content JSON.pretty_generate node['runnable_web']['config']
@@ -60,7 +60,7 @@ deploy node['runnable_web']['deploy_path'] do
         :node_env     => node.chef_environment
       })
       action :create
-    end 
+    end    
   end
   restart_command do
     service 'runnable-web' do
@@ -76,3 +76,5 @@ deploy node['runnable_web']['deploy_path'] do
   rollback_on_error true
   action :deploy
 end
+
+
