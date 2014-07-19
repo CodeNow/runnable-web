@@ -1,19 +1,23 @@
 #
 # web_main Dockerfile
+# used to install deps and starting application
+# nothing here can be cached
 #
-#
-# Pull base image.
-FROM sandipsingh/web_base
-# Download Runnable-web Repo
-RUN eval $(ssh-agent) > /dev/null && ssh-add /.ssh/id_rsa && git clone git@github.com:CodeNow/runnable-web.git 
 
-WORKDIR runnable-web 
-RUN npm install 
-RUN bower install  --allow-root
-RUN grunt --force
+FROM registry.runnable.com/runnable/web_base:latest
+
+# Download Runnable-web Repo
+WORKDIR /
+
+RUN git clone git@github.com:CodeNow/runnable-web.git
+
+WORKDIR /runnable-web
+RUN npm install
+# hack for grunt not running as post install
+RUN ./node_modules/.bin/grunt
 
 # Expose port to Host
 EXPOSE 3000
-# Define default command.
-CMD ["NODE_ENV=staging pm2 start server.js -n Runnable-web", "pm2 logs"]
 
+# Define default command.
+CMD ["/usr/local/bin/npm", "start"]
