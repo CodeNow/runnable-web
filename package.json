@@ -9,7 +9,7 @@
     "start": "DEBUG=app:* node index.js",
     "build": "grunt",
     "server": "grunt server",
-    "postinstall": "npm run bowerInstall",
+    "postinstall": "npm run bowerInstall && npm run build",
     "bowerInstall": "bower install  --allow-root"
   },
   "repository": {
@@ -30,6 +30,7 @@
     "eson": "0.4.1",
     "exists": "~1.0.0",
     "express": "~>3",
+    "grunt": "~0.4.1",
     "hbs": "~2.4.0",
     "http-proxy": "~0.10.3",
     "keypather": "~1.3.2",
@@ -51,7 +52,6 @@
     "underscore.string": "~2.3.3"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
     "grunt-cli": "~0.1.9",
     "grunt-contrib-compass": "0.1.3",
     "grunt-contrib-cssmin": "0.6.1",
