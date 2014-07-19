@@ -90,7 +90,6 @@ def setup():
   track_deployment()
   # checkout_latest()
   install_requirements()
-  grunt()
   boot()
 
 def install_node():
@@ -145,19 +144,12 @@ def install_requirements():
   """
   Install the required packages using npm.
   """
-  sudo('npm install pm2 grunt-cli -g')
+  sudo('npm install pm2 -g')
   sudo('apt-get install -y rubygems')
   sudo('gem install compass')
   sudo('rm -rf ~/tmp')
   with cd('runnable-web'):
     run('npm install')
-
-def grunt():
-  """
-  Run grunt
-  """
-  with cd('runnable-web'):
-    run('grunt')
 
 def boot():
   """
@@ -198,7 +190,6 @@ def deploy():
   checkout_latest()
   track_deployment()
   install_requirements()
-  grunt()
   reboot()
 
 def reboot():
