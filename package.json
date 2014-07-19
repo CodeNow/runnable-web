@@ -8,7 +8,8 @@
     "test": "./node_modules/.bin/mocha --ui bdd --reporter spec",
     "start": "DEBUG=app:* node index.js",
     "build": "grunt",
-    "server": "grunt server"
+    "server": "grunt server",
+    "bowerInstall": "bower install  --allow-root"
   },
   "repository": {
     "type": "git",
@@ -46,12 +47,12 @@
     "rollbar": "*",
     "sitemap": "~0.6.0",
     "underscore": "~1.4.4",
+    "bower": "1.3.8",
     "underscore.string": "~2.3.3"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.9",
-    "bower": "~1.3.5",
     "grunt-contrib-compass": "0.1.3",
     "grunt-contrib-cssmin": "0.6.1",
     "grunt-contrib-handlebars": "git://github.com/CodeNow/grunt-contrib-handlebars#09ed807b1f243fc837ea2f1cd4195be2fc8194f3",
