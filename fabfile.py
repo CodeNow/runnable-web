@@ -90,7 +90,6 @@ def setup():
   track_deployment()
   # checkout_latest()
   install_requirements()
-  bower()
   grunt()
   boot()
 
@@ -153,10 +152,6 @@ def install_requirements():
   with cd('runnable-web'):
     run('npm install')
 
-def bower():
-  with cd('runnable-web'):
-    run('npm run bowerInstall')
-
 def grunt():
   """
   Run grunt
@@ -203,7 +198,6 @@ def deploy():
   checkout_latest()
   track_deployment()
   install_requirements()
-  bower()
   grunt()
   reboot()
 
