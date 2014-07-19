@@ -155,7 +155,7 @@ def install_requirements():
 
 def bower():
   with cd('runnable-web'):
-    run('npm bowerInstall')
+    run('npm run bowerInstall')
 
 def grunt():
   """
