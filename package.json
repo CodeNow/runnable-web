@@ -9,7 +9,6 @@
     "start": "DEBUG=app:* node index.js",
     "build": "grunt",
     "server": "grunt server",
-    "postinstall": "npm run bowerInstall && npm run build",
     "bowerInstall": "bower install  --allow-root"
   },
   "repository": {
