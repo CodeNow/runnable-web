@@ -7,8 +7,8 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --ui bdd --reporter spec",
     "start": "DEBUG=app:* node index.js",
-    "build": "grunt",
-    "server": "grunt server",
+    "build": "./node_modules/.bin/grunt",
+    "server": "./node_modules/.bin/grunt server",
     "bowerInstall": "bower install  --allow-root"
   },
   "repository": {
