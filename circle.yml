@@ -5,8 +5,8 @@ dependencies:
   override:
     - java -jar ./tests/lib/selenium-server-standalone-2.41.0.jar:
         background: true
-    - nvm install 0.10.25
-    - nvm alias default 0.10.25
+    - nvm install 0.10.28
+    - nvm alias default 0.10.28
     - npm install
     - gem install compass
     - npm run bowerInstall
