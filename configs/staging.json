@@ -10,7 +10,7 @@
   "rollbar": "bbbd8090514a4b40a0ec53fbed32d882",
   "api": {
     "default": {
-      "host": "api.runnable.pw",
+      "host": "10.0.1.93:3000",
       "protocol": "http"
     }
   },
