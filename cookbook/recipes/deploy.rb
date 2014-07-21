@@ -18,6 +18,11 @@ deploy node['runnable_web']['deploy_path'] do
       path "#{release_path}/configs/#{node.chef_environment}.json"
       content JSON.pretty_generate node['runnable_web']['config']
       action :create
+      notifies :run, 'execute[npm cache clean]', :immediately
+    end
+
+    execute 'npm cache clean' do
+      action :nothing
       notifies :run, 'execute[npm install]', :immediately
     end
 
