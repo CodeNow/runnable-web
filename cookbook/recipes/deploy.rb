@@ -12,7 +12,6 @@ deploy node['runnable_web']['deploy_path'] do
   git_ssh_wrapper '/tmp/git_sshwrapper.sh'
   branch node['runnable_web']['deploy_branch']
   deploy_to node['runnable_web']['deploy_path']
-  environment 'NODE_ENV' => node.chef_environment
   migrate false
   before_migrate do
     file 'runnable-web_config' do
