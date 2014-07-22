@@ -13,7 +13,7 @@ user 'runnable-web' do
 end
 
 file '/tmp/git_sshwrapper.sh' do
-  content "#!/usr/bin/env bash\n/usr/bin/env ssh -o 'StrictHostKeyChecking=no' -i '/runnable-web/.ssh/runnable_web-id_rsa' $1 $2\n"
+  content "#!/usr/bin/env bash\n/usr/bin/env ssh -o 'StrictHostKeyChecking=no' -i '/opt/runnable-web/.ssh/runnable_web-id_rsa' $1 $2\n"
   owner 'runnable-web'
   group 'runnable-web'
   mode 0755
