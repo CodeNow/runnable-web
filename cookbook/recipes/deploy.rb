@@ -27,13 +27,14 @@ deploy node['runnable_web']['deploy_path'] do
     end
 
     execute 'npm install' do
+      command "NODE_ENV=#{node.chef_environment} npm install"
       cwd release_path
       action :nothing
       notifies :run, 'execute[bower install]', :immediately
     end
     
     execute 'bower install' do
-      command './node_modules/.bin/bower install --allow-root'
+      command "NODE_ENV=#{node.chef_environment} ./node_modules/.bin/bower install --allow-root"
       cwd release_path
       action :nothing
       notifies :run, 'bash[npm run build]', :immediately
@@ -42,7 +43,7 @@ deploy node['runnable_web']['deploy_path'] do
     bash 'npm run build' do
       code <<-EOM
         log=`mktemp /tmp/grunt.log.XXXXXXXX`
-        npm run build &> $log
+        NODE_ENV=#{node.chef_environment} npm run build &> $log
         ret=$?
         echo "npm run build returned $ret" >> $log
         echo "env output: `env`" >> $log
