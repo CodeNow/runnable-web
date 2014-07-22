@@ -18,16 +18,19 @@ deploy node['runnable_web']['deploy_path'] do
     file 'runnable-web_config' do
       path "#{release_path}/configs/#{node.chef_environment}.json"
       content JSON.pretty_generate node['runnable_web']['config']
+      owner 'runnable-web'    
       action :create
       notifies :run, 'execute[npm cache clean]', :immediately
     end
 
     execute 'npm cache clean' do
+      user 'runnable-web'
       action :nothing
       notifies :run, 'execute[npm install]', :immediately
     end
 
     execute 'npm install' do
+      user 'runnable-web'
       cwd release_path
       environment({'NODE_ENV' => node.chef_environment})
       action :nothing
@@ -35,6 +38,7 @@ deploy node['runnable_web']['deploy_path'] do
     end
     
     execute 'bower install' do
+      user 'runnable-web'
       command './node_modules/.bin/bower install'
       cwd release_path
       environment({'NODE_ENV' => node.chef_environment})
@@ -60,6 +64,7 @@ deploy node['runnable_web']['deploy_path'] do
         'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/chef/embedded/bin'
       })
       cwd release_path
+      user 'runnable-web'
       action :nothing
     end
   end
