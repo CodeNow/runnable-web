@@ -25,8 +25,8 @@ directory '/opt/runnable-web/.ssh' do
   group 'runnable-web'
   mode 0700
   action :create
-  notifies :create, 'cookbook_file[/runnable-web/.ssh/runnable_web-id_rsa]', :immediately
-  notifies :create, 'cookbook_file[/runnable-web/.ssh/runnable_web-id_rsa.pub]', :immediately
+  notifies :create, 'cookbook_file[/opt/runnable-web/.ssh/runnable_web-id_rsa]', :immediately
+  notifies :create, 'cookbook_file[/opt/runnable-web/.ssh/runnable_web-id_rsa.pub]', :immediately
 end
 
 cookbook_file '/opt/runnable-web/.ssh/runnable_web-id_rsa' do
@@ -36,7 +36,7 @@ cookbook_file '/opt/runnable-web/.ssh/runnable_web-id_rsa' do
   mode 0600
   action :create
   notifies :deploy, "deploy[#{node['runnable_web']['deploy_path']}]", :delayed
-  notifies :create, 'cookbook_file[/runnable-web/.ssh/runnable_web-id_rsa.pub]', :immediately
+  notifies :create, 'cookbook_file[/opt/runnable-web/.ssh/runnable_web-id_rsa.pub]', :immediately
 end
 
 cookbook_file '/opt/runnable-web/.ssh/runnable_web-id_rsa.pub' do
