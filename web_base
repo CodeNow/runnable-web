@@ -1,28 +1,23 @@
 #
 # web_base Dockerfile
+# used to install external deps.
 #
-#
-# Pull base image.
-FROM sandipsingh/runnable_ubuntu
-RUN apt-get update 
-RUN apt-get install -y software-properties-common
-# Installing Node.js
-RUN wget http://nodejs.org/dist/v0.10.23/node-v0.10.23.tar.gz 
-RUN tar xvf node-v*.tar.gz 
-WORKDIR node-v0.10.23/
-RUN ./configure 
-RUN make -j4 
-RUN make install
-# Installing PM2
-RUN npm install pm2 -g
-# Installing Bower
-RUN npm install bower -g
-# Installing Grunt-cli
-RUN npm install grunt-cli -g
-# Installing HTTP-PROXY
-RUN npm install http-proxy -g
 
-# Installing Gems
-RUN apt-get install -y rubygems
-# Installing Compass
-RUN gem install compass
+# Pull base image.
+FROM registry.runnable.com/runnable/base:latest
+RUN apt-get update
+
+# install deps
+RUN apt-get install -y ruby-compass
+
+# Installing Node.js
+RUN wget http://nodejs.org/dist/v0.10.23/node-v0.10.23.tar.gz
+RUN tar xvf node-v*.tar.gz
+WORKDIR node-v0.10.23/
+RUN ./configure
+RUN make -j16
+RUN make install
+
+#hacks for compass
+RUN locale-gen en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
