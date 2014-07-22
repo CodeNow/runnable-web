@@ -7,11 +7,16 @@
 # All rights reserved - Do Not Redistribute
 #
 
+user 'runnable-web' do
+  action :create
+end
+
 deploy node['runnable_web']['deploy_path'] do
   repo 'git@github.com:CodeNow/runnable-web.git'
   git_ssh_wrapper '/tmp/git_sshwrapper.sh'
   branch node['runnable_web']['deploy_branch']
   deploy_to node['runnable_web']['deploy_path']
+  user 'runnable-web'
   migrate false
   before_migrate do
     file 'runnable-web_config' do
@@ -34,7 +39,7 @@ deploy node['runnable_web']['deploy_path'] do
     end
     
     execute 'bower install' do
-      command './node_modules/.bin/bower install --allow-root'
+      command './node_modules/.bin/bower install'
       cwd release_path
       environment({'NODE_ENV' => node.chef_environment})
       action :nothing
