@@ -12,6 +12,11 @@ user 'runnable-web' do
   action :create
 end
 
+directory '/opt/runnable-web' do
+  owner 'runnable-web'
+  action :create
+end
+
 file '/tmp/git_sshwrapper.sh' do
   content "#!/usr/bin/env bash\n/usr/bin/env ssh -o 'StrictHostKeyChecking=no' -i '/opt/runnable-web/.ssh/runnable_web-id_rsa' $1 $2\n"
   owner 'runnable-web'
