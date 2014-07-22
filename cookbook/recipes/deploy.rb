@@ -28,6 +28,7 @@ deploy node['runnable_web']['deploy_path'] do
 
     execute 'npm install' do
       cwd release_path
+      environment({'NODE_ENV' => node.chef_environment})
       action :nothing
       notifies :run, 'execute[bower install]', :immediately
     end
@@ -35,6 +36,7 @@ deploy node['runnable_web']['deploy_path'] do
     execute 'bower install' do
       command './node_modules/.bin/bower install --allow-root'
       cwd release_path
+      environment({'NODE_ENV' => node.chef_environment})
       action :nothing
       notifies :run, 'bash[npm run build]', :immediately
     end
@@ -52,6 +54,7 @@ deploy node['runnable_web']['deploy_path'] do
         exit $ret
       EOM
       environment({
+        'NODE_ENV' => node.chef_environment,
         'LC_ALL' => 'en_US.UTF-8',
         'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/chef/embedded/bin'
       })
