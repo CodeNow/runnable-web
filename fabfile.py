@@ -1,33 +1,39 @@
 #!/usr/bin/env python
 
 from fabric.api import *
+import json
 
 env.user = "ubuntu"
 env.use_ssh_config = True
 env.note = ""
 env.newrelic_application_id = ""
-
 """
 Environments
 """
+def integration():
+  """
+  Work on integration environment
+  """
+  env.requireNote = False;
+  env.settings = 'integration'
+  env.redisHost = '10.0.1.14'
+  env.redisKey = 'frontend:cloudcosmos.com'
+  env.webHostIp = '10.0.1.150'
+  env.hosts = [
+    'int-web'
+  ]
+
 def staging():
   """
   Work on staging environment
   """
   env.requireNote = False;
   env.settings = 'staging'
+  env.redisHost = '10.0.1.125'
+  env.redisKey = 'frontend:runnable.pw'
+  env.webHostIp = '10.0.1.55'
   env.hosts = [
-    'stage-web',
-  ]
-
-def runnable3():
-  """
-  Work on staging environment
-  """
-  env.requireNote = False;
-  env.settings = 'runnable3'
-  env.hosts = [
-    'runnable3.net'
+    'stage-web'
   ]
 
 def production():
@@ -36,21 +42,12 @@ def production():
   """
   env.requireNote = True;
   env.settings = 'production'
-  env.hosts = [
-    'prod-web',
-    # 'web1',
-    # 'web2'
-  ]
+  env.redisHost = '10.0.1.20'
+  env.redisKey = 'frontend:runnable.com'
+  env.webHostIp = '10.0.1.42'
   env.newrelic_application_id = "3904226"
-
-def integration():
-  """
-  Work on integration environment
-  """
-  env.requireNote = False;
-  env.settings = 'integration'
   env.hosts = [
-    'int-web'
+    'prod-web'
   ]
 
 """
@@ -80,83 +77,37 @@ Commands - setup
 """
 def setup():
   """
-  Install and start the server.
+  Install server
   """
   require('settings', provided_by=[production, integration, staging])
-  require('branch', provided_by=[stable, master, branch])
-
-  install_node()
-  clone_repo()
-  track_deployment()
-  # checkout_latest()
   install_requirements()
-  boot()
-
-def install_node():
-  """
-  Install Node.js stable
-  """
-  sudo('apt-get update')
-  sudo('apt-get install -y python-software-properties python g++ make')
-  sudo('FORCE_ADD_APT_REPOSITORY=1 add-apt-repository ppa:chris-lea/node.js')
-  sudo('apt-get update')
-  sudo('apt-get install -y nodejs git')
-
-def clone_repo():
-  """
-  Do initial clone of the git repository.
-  """
-  if run('[ -d runnable-web ] && echo True || echo False') == 'False':
-    run('git clone https://github.com/CodeNow/runnable-web.git')
-
-def track_deployment():
-  """
-  Update deployments for tracking
-  """
-  if env.newrelic_application_id:
-    with cd('runnable-web'):
-      branch = run('git rev-parse --abbrev-ref HEAD')
-      commit = run('git rev-parse HEAD');
-      project = 'harbourmaster'
-      author = env.author
-      note = env.note
-      cmd = 'curl -H "x-api-key:b04ef0fa7d124e606c0c480ac9207a85b78787bda4bfead" \
-        -d "deployment[application_id]=' + env.newrelic_application_id+'\" \
-        -d "deployment[description]=branch:'+branch+'" \
-        -d "deployment[revision]=' + commit + '" \
-        -d "deployment[changelog]=' + note + '" \
-        -d "deployment[user]=' + author + '" \
-        https://api.newrelic.com/deployments.xml'
-      run(cmd)
-
-def checkout_latest():
-  """
-  Pull the latest code on the specified branch.
-  """
-  with cd('runnable-web'):
-    run('git config --global credential.helper cache')
-    run('git fetch --all')
-    run('git reset --hard origin/%(branch)s' % env)
-    run('git checkout -f %(branch)s' % env)
-    run('git pull origin %(branch)s' % env)
 
 def install_requirements():
   """
   Install the required packages using npm.
   """
-  sudo('npm install pm2 -g')
-  sudo('apt-get install -y rubygems')
-  sudo('gem install compass')
-  sudo('rm -rf ~/tmp')
-  with cd('runnable-web'):
-    run('npm install')
+  sudo('apt-get install -y curl redis-server');
+  sudo('curl -s https://get.docker.io/ubuntu/ | sudo sh')
+  sudo('sudo docker run ubuntu ls')
 
-def boot():
+def track_deployment(image, container):
   """
-  Start process with pm2
+  Update deployments for tracking
   """
-  with cd('runnable-web'):
-    run('NODE_ENV=%(settings)s pm2 start index.js -n runnable-web' % env)
+  if env.newrelic_application_id:
+    containerId = container;
+    commit = image;
+    project = 'web'
+    author = env.author
+    note = env.note
+    cmd = 'curl -H "x-api-key:b04ef0fa7d124e606c0c480ac9207a85b78787bda4bfead" \
+      -d "deployment[application_id]=' + env.newrelic_application_id+'\" \
+      -d "deployment[description]=container:'+containerId+'" \
+      -d "deployment[revision]=' + commit + '" \
+      -d "deployment[changelog]=' + note + '" \
+      -d "deployment[user]=' + author + '" \
+      https://api.newrelic.com/deployments.xml'
+    run(cmd)
 
 def validateNote(input):
   """
@@ -178,59 +129,63 @@ def addNote():
 """
 Commands - deployment
 """
-def deploy():
+def deploy(image):
   """
   Deploy the latest version of the site to the server.
   """
-  require('settings', provided_by=[production, integration, staging, runnable3])
-  require('branch', provided_by=[stable, master, branch])
+  require('settings', provided_by=[production, integration, staging])
 
   prompt("your name please: ", "author")
   addNote()
-  checkout_latest()
-  track_deployment()
-  install_requirements()
-  reboot()
+  pullImage(image);
+  prevContainerId = getPrevContainerId();
+  containerId = startNewContainer(image);
+  port = getPortOfContainer(containerId);
+  addContainerToRedis(port)
+  stopPrevContainer(prevContainerId);
+  track_deployment(image, containerId)
 
-def reboot():
+def getPrevContainerId():
   """
-  Restart the server.
+  return container id of currently running container
   """
-  run('pm2 kill')
-  boot()
+  return run("sudo docker ps -q --no-trunc");
 
-"""
-Commands - rollback
-"""
-def rollback(commit_id):
+def pullImage(image):
   """
-  Rolls back to specified git commit hash or tag.
+  pull down current image
+  """
+  run("sudo docker pull registry.runnable.com/runnable/" + image);
 
-  There is NO guarantee we have committed a valid dataset for an arbitrary
-  commit hash.
+def startNewContainer(image):
   """
-  require('settings', provided_by=[production, integration, staging, runnable3])
-  require('branch', provided_by=[stable, master, branch])
+  start container and return id
+  """
+  return run('sudo docker run -d -P -e "NODE_ENV='+env.settings+'" registry.runnable.com/runnable/' + image);
 
-  checkout_latest()
-  git_reset(commit_id)
-  install_requirements()
-  make()
-  reboot()
+def getPortOfContainer(containerId):
+  """
+  get port of a container
+  """
+  info = run('sleep 1 && sudo docker inspect ' + containerId);
+  infoObj = json.loads(info);
+  try:
+    port = infoObj[0]['NetworkSettings']['Ports']['3000/tcp'][0]['HostPort'];
+  except KeyError:
+    print 'ERROR GETTING CONTAINER PORT';
+    exit();
 
-def git_reset(commit_id):
-  """
-  Reset the git repository to an arbitrary commit hash or tag.
-  """
-  env.commit_id = commit_id
-  run("cd runnable-web; git reset --hard %(commit_id)s" % env)
+  print 'container running on port', port
+  return port
 
-"""
-Deaths, destroyers of worlds
-"""
-def shiva_the_destroyer():
+def addContainerToRedis(port):
   """
-  Death Destruction Chaos.
+  add key into redis to register this backend
   """
-  run('pm2 stop index.js')
-  run('rm -Rf runnable-web')
+  run('redis-cli -h ' + env.redisHost + ' lset ' + env.redisKey + ' 1 http://' + env.webHostIp + ':' + port);
+
+def stopPrevContainer(containerId):
+  """
+  stop old container
+  """
+  run("sudo docker kill " + containerId);
