@@ -138,18 +138,11 @@ def deploy(image):
   prompt("your name please: ", "author")
   addNote()
   pullImage(image);
-  prevContainerId = getPrevContainerId();
   containerId = startNewContainer(image);
   port = getPortOfContainer(containerId);
   addContainerToRedis(port)
-  stopPrevContainer(prevContainerId);
+  stopPrevContainer(containerId);
   track_deployment(image, containerId)
-
-def getPrevContainerId():
-  """
-  return container id of currently running container
-  """
-  return run("sudo docker ps -q --no-trunc");
 
 def pullImage(image):
   """
@@ -188,4 +181,4 @@ def stopPrevContainer(containerId):
   """
   stop old container
   """
-  run("sudo docker kill " + containerId);
+  run("sudo docker kill `sudo docker ps --no-trunc -q | grep -v "+containerId+"`");
