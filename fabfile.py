@@ -49,7 +49,6 @@ def production():
   env.hosts = [
     'prod-web'
   ]
-  env.image = 'production'
 
 """
 Branches
@@ -145,15 +144,14 @@ def deploy(image):
   stopPrevContainer(containerId);
   track_deployment(image, containerId)
 
-def redeploy(deployHost):
+@hosts('localhost')
+def redeploy(image):
   """
   Deploy the latest version of the site to the server.
   """
   require('settings', provided_by=[production, integration, staging])
-  env.hosts = [
-    deployHost
-  ]
 
+  env.image = image
   env.author = "ubuntu"
   env.note = "redeploy"
   containerId = startNewContainer(env.image);
