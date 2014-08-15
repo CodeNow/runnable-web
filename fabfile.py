@@ -44,7 +44,7 @@ def production():
   env.settings = 'production'
   env.redisHost = '10.0.1.20'
   env.redisKey = 'frontend:runnable.com'
-  env.webHostIp = '10.0.1.42'
+  env.webHostIp = '10.0.1.4'
   env.newrelic_application_id = "3904226"
   env.hosts = [
     'prod-web'
@@ -138,18 +138,27 @@ def deploy(image):
   prompt("your name please: ", "author")
   addNote()
   pullImage(image);
-  prevContainerId = getPrevContainerId();
   containerId = startNewContainer(image);
   port = getPortOfContainer(containerId);
   addContainerToRedis(port)
-  stopPrevContainer(prevContainerId);
+  stopPrevContainer(containerId);
   track_deployment(image, containerId)
 
-def getPrevContainerId():
+@hosts('localhost')
+def redeploy(image):
   """
-  return container id of currently running container
+  Deploy the latest version of the site to the server.
   """
-  return run("sudo docker ps -q --no-trunc");
+  require('settings', provided_by=[production, integration, staging])
+
+  env.image = image
+  env.author = "ubuntu"
+  env.note = "redeploy"
+  containerId = startNewContainer(env.image);
+  port = getPortOfContainer(containerId);
+  addContainerToRedis(port)
+  stopPrevContainer(containerId);
+  track_deployment(env.image, containerId)
 
 def pullImage(image):
   """
@@ -188,4 +197,4 @@ def stopPrevContainer(containerId):
   """
   stop old container
   """
-  run("sudo docker kill " + containerId);
+  run("sudo docker kill `sudo docker ps --no-trunc -q | grep -v "+containerId+"`");

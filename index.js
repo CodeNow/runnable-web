@@ -13,13 +13,11 @@ var workers;
 var numWorkers = config.numWorkers || 2;
 if (cluster.isMaster) {
   workers = [];
-  startMonitoring();
   os.cpus().forEach(function () {
     for(var i=0; i<numWorkers; i++){ // create (config.numWorkers || 2) workers per core..
       createWorker();
     }
   });
-  memoryLeakPatch();
   handleWorkerExits();
 }
 else {
@@ -41,34 +39,6 @@ function createWorker () {
   workers.push(worker);
   console.log('Creating new worker', worker.id);
   return worker;
-}
-
-function killWorker (w, code) {
-  if (!w) return;
-  code = exists(code) ? code : 0;
-  var maxDrainTime = 30 * 1000;
-  console.log('Kill old worker', w.id);
-  setTimeout(w.kill.bind(w, code), maxDrainTime);
-  w.disconnect();
-  w.on('error', console.error.bind(console));
-}
-
-function startMonitoring () {
-  if (process.env.NODE_ENV === 'production' && config.nodetime) {
-    var nodetime = require('nodetime');
-    nodetime.profile(config.nodetime);
-  }
-}
-
-function memoryLeakPatch () {
-  // memory leak patch! - start restart timeout
-  var restartTime  = 4 * 60 * 60 *1000;
-  setInterval(killAndStartNewWorker, restartTime/numWorkers);
-  function killAndStartNewWorker (message) {
-    var w = workers.shift();
-    createWorker();
-    killWorker(w);
-  }
 }
 
 function handleWorkerExits () {
