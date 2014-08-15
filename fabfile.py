@@ -44,11 +44,12 @@ def production():
   env.settings = 'production'
   env.redisHost = '10.0.1.20'
   env.redisKey = 'frontend:runnable.com'
-  env.webHostIp = '10.0.1.42'
+  env.webHostIp = '10.0.1.4'
   env.newrelic_application_id = "3904226"
   env.hosts = [
     'prod-web'
   ]
+  env.image = 'production'
 
 """
 Branches
@@ -143,6 +144,23 @@ def deploy(image):
   addContainerToRedis(port)
   stopPrevContainer(containerId);
   track_deployment(image, containerId)
+
+def redeploy(deployHost):
+  """
+  Deploy the latest version of the site to the server.
+  """
+  require('settings', provided_by=[production, integration, staging])
+  env.hosts = [
+    deployHost
+  ]
+
+  env.author = "ubuntu"
+  env.note = "redeploy"
+  containerId = startNewContainer(env.image);
+  port = getPortOfContainer(containerId);
+  addContainerToRedis(port)
+  stopPrevContainer(containerId);
+  track_deployment(env.image, containerId)
 
 def pullImage(image):
   """
