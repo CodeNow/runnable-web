@@ -44,7 +44,7 @@ def production():
   env.settings = 'production'
   env.redisHost = '10.0.1.20'
   env.redisKey = 'frontend:runnable.com'
-  env.webHostIp = '10.0.1.4'
+  env.webHostIp = '10.0.1.42'
   env.newrelic_application_id = "3904226"
   env.hosts = [
     'prod-web'
