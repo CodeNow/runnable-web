@@ -1,6 +1,6 @@
 #!/bin/bash
 CURR_MEM_USED=0
-MEM_LIMIT=5900000
+MEM_LIMIT=14000000
 while true
 do
   CURR_MEM_USED=`free | awk '/^Mem:/{print $3}'`
