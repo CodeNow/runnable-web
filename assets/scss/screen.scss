@@ -642,7 +642,7 @@ a.terminal-popout {
   background-image: linear-gradient(45deg,$purple-lighter 25%,transparent 25%,transparent 50%,$purple-lighter 50%,$purple-lighter 75%,transparent 75%,transparent);
   background-size: 40px 40px;
   border-bottom: 1px solid lighten($purple,40);
-  @include box-shadow(0 1px 2px rgba(0,0,0,0.02));
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
   color: $purple;
   font-size: 14px;
   height: 54px;
