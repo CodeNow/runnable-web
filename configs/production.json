@@ -21,6 +21,10 @@
   "rendrApp": {
     "env" : "production",
     "commitHash": "{COMMIT_HASH}",
+    "message" : {
+      "text" : "<b>Warning!</b> Runnable project pages are down due to connectivity issues",
+      "status" : "warning"
+    },
     "mixpanel" : {
       "key": "8790acfcca0cab43adebbc796f1d4f96"
     },
