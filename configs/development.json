@@ -20,7 +20,7 @@
   "rollbar": "b0588f56be9845c0911078fd66bed8f0",
   "api": {
     "default": {
-      "host": "api.runnable.pw",
+      "host": "api.runnable.com",
       "protocol": "http"
     }
   },
@@ -35,6 +35,6 @@
       "id": "UA-36631837-2"
     },
     "pageSize" : 25,
-    "domain": "runnable.pw"
+    "domain": "runnable.com"
   }
 }
