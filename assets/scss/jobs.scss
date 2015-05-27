@@ -89,25 +89,33 @@
     border-bottom: solid 1px $gray-light;
     list-style: none;
     margin: 0;
-    padding: 0 2.5%;
+    padding: 15px 21px 21px;
   }
 
-  h4,
-  p,
   div {
+    float: left;
+  }
+
+  h4 {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  p {
     font-size: 14px;
-    line-height: 81px;
     margin: 0;
     padding: 0;
   }
 
-  h4 {
-    float: left;
-    font-weight: 600;
-  }
-
-  p {
+  a {
     float: right;
+    margin: 10px 0;
+
+    &:hover,
+    &:active,
+    &:visited {
+      color: #fff;
+    }
   }
 }
 
@@ -149,7 +157,7 @@
   span {
     color: darken($gray,10%);
     font-size: 24px;
+    left: 15px;
     position: absolute;
-      left: 15px;
   }
 }
