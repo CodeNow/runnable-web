@@ -15,7 +15,7 @@ module.exports = BaseView.extend({
     this.onPostMessage = this.onPostMessage.bind(this);
   },
   postRender: function () {
-    this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('domain');
+    this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('userContentDomain');
     this.options.termurl = this.options.boxurl + '/static/term.html';
     this.loading(true);
     this.listenToPostMessages();
@@ -24,7 +24,7 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     this.options.isUserVerified = this.app.user.isVerified();
-    this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('domain');
+    this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('userContentDomain');
     this.options.termurl = this.options.boxurl + '/static/term.html';
     return this.options;
   },
