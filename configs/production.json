@@ -30,6 +30,7 @@
     "intercom" : {
       "app_id": "980118989fd561bd1dce4ba4c7f8cb32da859c16"
     },
-    "domain": "runnable.com"
+    "domain": "code.runnable.com",
+    "userContentDomain": "runnablecodesnippets.com"
   }
 }
