@@ -15,7 +15,7 @@ module.exports = Base.extend({
     Super.constructor.apply(this, arguments);
   },
   appUrl: function () {
-    return ["http://", this.get("subdomain"), ".", this.app.get('domain')].join('');
+    return ["http://", this.get("subdomain"), ".", this.app.get('userContentDomain')].join('');
   },
   isComplete: function (specification) {
     return specification?

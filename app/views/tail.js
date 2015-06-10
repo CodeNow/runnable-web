@@ -15,7 +15,7 @@ module.exports = BaseView.extend({
     }
   },
   postRender: function () {
-    this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('domain');
+    this.options.boxurl  = "http://" + this.model.get("servicesToken") + "." + this.app.get('userContentDomain');
     this.options.tailurl = this.options.boxurl + "/static/log.html";
     this.loading(true);
     this.listenToPostMessages();

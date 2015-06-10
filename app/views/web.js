@@ -13,7 +13,7 @@ module.exports = BaseView.extend({
     }
   },
   getTemplateData: function () {
-    this.options.baseurl = "http://" + this.model.get("webToken") + "." + this.app.get('domain');
+    this.options.baseurl = "http://" + this.model.get("webToken") + "." + this.app.get('userContentDomain');
     return this.options;
   },
   postHydrate: function () {
