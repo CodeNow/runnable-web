@@ -20,7 +20,7 @@
   "rollbar": "b0588f56be9845c0911078fd66bed8f0",
   "api": {
     "default": {
-      "host": "api.runnable.com",
+      "host": "api.code.runnable.com",
       "protocol": "http"
     }
   },
