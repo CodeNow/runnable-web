@@ -20,7 +20,7 @@
   "rollbar": "b0588f56be9845c0911078fd66bed8f0",
   "api": {
     "default": {
-      "host": "api.runnable.pw",
+      "host": "api.code.runnable.com",
       "protocol": "http"
     }
   },
@@ -36,14 +36,14 @@
     },
     "pageSize" : 25,
 <<<<<<< HEAD
-    "domain": "runnable.pw"
-=======
     "domain": "runnable2.net"
   },
   "GitHub": {
     "clientId": "f8160c773a0574fd21af",
     "clientSecret": "c317f72b783809f4ff2951d012f28c5e972f8b41",
     "callbackURL": "http://localhost:3000/auth/github/callback"
->>>>>>> 119d8fa... GitHub Auth client side
+=======
+    "domain": "runnable.com"
+>>>>>>> e46e402215d8d96b9af01d08744a6a628aa44dc0
   }
 }

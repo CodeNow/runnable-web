@@ -2,7 +2,10 @@
   display: inline-block;
   height: 54px;
   position: relative;
+<<<<<<< HEAD
     z-index: $z-show;
+=======
+>>>>>>> e46e402215d8d96b9af01d08744a6a628aa44dc0
   user-select: none;
 
   &:hover {

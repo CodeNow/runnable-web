@@ -8,7 +8,7 @@ module.exports = BaseView.extend({
     'submit form'          : 'enter'
   },
   getTemplateData: function () {
-    this.options.currenturl = this.options.currenturl || "http://" + this.model.get("webToken") + "." + this.app.get('domain');
+    this.options.currenturl = this.options.currenturl || "http://" + this.model.get("webToken") + "." + this.app.get('userContentDomain');
     return this.options;
   },
   postHydrate: function () {

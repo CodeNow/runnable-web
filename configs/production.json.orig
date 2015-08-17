@@ -30,12 +30,16 @@
     "intercom" : {
       "app_id": "980118989fd561bd1dce4ba4c7f8cb32da859c16"
     },
-    "domain": "code.runnable.com",
-    "userContentDomain": "runnablecodesnippets.com"
+<<<<<<< HEAD
+    "domain": "runnable.com"
   },
   "GitHub": {
     "clientId": "f9113e7fa3d326bfc855",
     "clientSecret": "bd2e566fde0e788ebad4270c57a12f32d84db385",
     "callbackURL": "http://runnable.com/auth/github/callback"
+=======
+    "domain": "code.runnable.com",
+    "userContentDomain": "runnablecodesnippets.com"
+>>>>>>> e46e402215d8d96b9af01d08744a6a628aa44dc0
   }
 }

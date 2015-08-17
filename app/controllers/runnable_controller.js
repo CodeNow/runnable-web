@@ -348,7 +348,7 @@ module.exports = {
       else {
         var token = utils.getQueryParam(self.app, 'token');
         var path = utils.getQueryParam(self.app, 'path');
-        var url = "http://" + results.container.get(token) + "." + self.app.get('domain');
+        var url = "http://" + results.container.get(token) + "." + self.app.get('userContentDomain');
         if (path) {
           url += path;
         }
