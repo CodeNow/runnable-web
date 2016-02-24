@@ -1,7 +1,8 @@
 var lock = require('./lock');
 
 module.exports = function(match) {
-  match('',                     'channel#category');
+  // match('',                     'channel#category');
+  match('',                     'home#maintenance');
   // match('',                     'home#press');
   // match('login',                'home#login');
   match('signup',               'home#signup');

@@ -40,6 +40,19 @@ module.exports = {
     // });
   },
 
+  maintenance: function (params, callback) {
+    var self = this;
+      var err = null;
+      var results = {};
+      callback(err, !err && _.extend(results, {
+        page: {
+          title: formatTitle('Maintenance Mode'),
+          canonical: canonical.call(self)
+        }
+      }));
+    // });
+  },
+
   about: function (params, callback) {
     var self = this;
     var spec = {
