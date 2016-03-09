@@ -2,7 +2,12 @@
   <li>
     <h2 class="col-sm-12"><a href="{{attributes.appUrl}}">{{attributes.name}}</a></h2>
     <div class="col-sm-12 clearfix">
-      <data><span class="glyphicons play-button"></span><b>{{attributes.runs}}</b> Runs</data>
+      <data>
+      <span class="glyphicons play-button"></span><b>{{attributes.runs}}</b> Runs
+      <span class="glyphicons eye-open"></span><b>{{attributes.views}}</b> Views
+      <span class="glyphicons notes-2"></span><b>{{attributes.copies}}</b> Forks
+      <span class="glyphicons thumbs-up"></span><b>{{attributes.votes}}</b> Votes
+      </data>
       <ul>
         {{#each attributes.tags}}
           {{#if this.display}}
