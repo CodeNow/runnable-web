@@ -26,6 +26,10 @@
   ~ #feed {
     transition: transform .4s cubic-bezier(.19,1,.22,1);
     transform: translate3d(0,-240px,0);
+
+    @media (max-width: 700px) {
+      transform: translate3d(0,-210px,0);
+    }
   }
 
   &.inner ~ #feed {

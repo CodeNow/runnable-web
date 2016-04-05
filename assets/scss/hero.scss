@@ -125,8 +125,8 @@
     user-select: none;
     width: 36px;
 
-    @media (max-width: 500px) {
-      bottom: 250px;
+    @media (max-width: 700px) {
+      bottom: 230px;
     }
 
     &:hover {
@@ -148,6 +148,10 @@
 
 #home-header.inner > .chevron-right {
   transform: translate3d(0,230px,0);
+
+  @media (max-width: 700px) {
+    transform: translate3d(0,210px,0);
+  }
 
   &:before {
     transform: rotate3d(0,0,1,-90deg);
@@ -521,19 +525,18 @@ $channel-container: ($channel-width*6) + 45px;
   margin: 40px auto 0;
   padding: 0;
   position: relative;
-    z-index: 1;
   width: $channel-container; // 465px
+  z-index: 1;
 
   @media (max-width: 700px) {
-    height: 200px;
+    height: 210px;
     margin-top: 20px;
     overflow: hidden;
   }
 
   @media (max-width: 500px) {
-    height: 210px;
+    max-width: 450px;
     width: 100%;
-      max-width: 450px;
   }
 
   .inner & {
