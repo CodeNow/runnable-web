@@ -9,22 +9,20 @@
   margin-right: auto;
   overflow: hidden;
   position: relative;
+  white-space: nowrap;
 
   @media (min-width: 992px) {
     padding: 15px 45px;
   }
 
   @media (max-width: 992px) {
-    padding: 15px 30px;
-  }
-
-  @media (max-width: 768px) {
     padding: 15px;
   }
 
   @media (max-width: 700px) {
     line-height: 1.4;
     padding: 15px;
+    white-space: normal;
   }
 
   .new {
@@ -45,17 +43,21 @@
     color: rgba($purple-lighter,.75);
     display: inline;
     font-size: 18px;
-    margin: 0 15px;
+    margin: 0 15px 0 9px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       font-size: 16px;
+    }
+
+    @media(max-width: 768px) {
+      font-size: 14px;
     }
 
     @media (max-width: 700px) {
       display: block;
       font-size: 18px;
       margin: 9px 0;
-      max-width: 280px;
+      max-width: 330px;
     }
   }
 
