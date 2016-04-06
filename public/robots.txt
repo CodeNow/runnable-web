@@ -5,4 +5,4 @@ Sitemap: http://runnable.com/sitemap.xml
 User-agent: *
 Disallow: /me/
 Disallow: /api/-/
-
+Disallow: /blog/
