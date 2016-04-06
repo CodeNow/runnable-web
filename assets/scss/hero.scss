@@ -1,8 +1,12 @@
 .hero {
   background: $purple-darker;
-  color: #fff;
+  color: $white;
   position: relative;
   text-align: center;
+
+  .global-well {
+    margin-top: 30px;
+  }
 
   img {
     height: 190px;
@@ -84,51 +88,54 @@
 
 // home header
 #home-header {
-  height: 620px;
+  height: 700px;
   overflow: hidden;
   width: 100%;
+
+  @media (max-width: 700px) {
+    height: 820px;
+  }
 
   h1 {
     font-size: 40px;
     font-weight: bold;
-    margin-top: 60px;
-
-    @media (max-width: 700px) {
-      margin-top: 30px;
-    }
+    margin-top: 30px;
 
     @media (max-width: 500px) {
       font-size: 26px;
-      margin-top: 40px;
     }
   }
 
   h2 {
-    font-size: 18px;
     color: rgba($purple-lighter,.5);
+    font-size: 18px;
     margin: 0;
   }
 
-  > .chevron-right {
+  .chevron-right {
     background: linear-gradient(to bottom,lighten($purple-light,5%),rgba($purple-light,.75)) 0 100%;
     border-radius: 50%;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.3);
-    color: rgba(0,0,0,.2);
+    bottom: 270px;
+    box-shadow: inset 0 1px 0 rgba($white,.3);
+    color: rgba($black,.2);
     cursor: pointer;
     display: inline-block;
     font-size: 28px;
     height: 36px;
+    left: 0;
     line-height: 36px;
     margin: 0 auto;
     opacity: .5;
     position: absolute;
-      top: auto;
-      right: 0;
-      bottom: 250px;
-      left: 0;
+    right: 0;
+    top: auto;
     transition: opacity .1s, transform .4s cubic-bezier(.19,1,.22,1);
     user-select: none;
     width: 36px;
+
+    @media (max-width: 700px) {
+      bottom: 250px;
+    }
 
     &:hover {
       opacity: .9;
@@ -141,8 +148,8 @@
 
     &:before {
       display: block;
-      transition: transform .5s ease-in-out;
       transform: rotate3d(0,0,1,90deg);
+      transition: transform .5s ease-in-out;
     }
   }
 }
@@ -160,10 +167,18 @@
   margin-top: -240px;
   transition: margin 0s .2s;
 
+  @media (max-width: 700px) {
+    margin-top: -180px;
+  }
+
+  @media (max-width: 500px) {
+    margin-top: -210px;
+  }
+
   > .container {
+    left: 0;
     position: absolute;
-      right: 0;
-      left: 0;
+    right: 0;
   }
 }
 
@@ -209,6 +224,10 @@
   &._0 {
     width: 88px;
 
+    @media (max-width: 500px) {
+      width: 68px;
+    }
+
     > li {
       animation: alertOut .2s linear forwards;
     }
@@ -222,6 +241,10 @@
   // dart
   &._1 {
     width: 84px;
+
+    @media (max-width: 500px) {
+      width: 64px;
+    }
 
     > li {
       animation: alertOut .2s linear forwards;
@@ -237,6 +260,10 @@
   &._2 {
     width: 72px;
 
+    @media (max-width: 500px) {
+      width: 52px;
+    }
+
     > li {
       animation: alertOut .2s linear forwards;
     }
@@ -250,6 +277,10 @@
   // java
   &._3 {
     width: 78px;
+
+    @media (max-width: 500px) {
+      width: 58px;
+    }
 
     > li {
       animation: alertOut .2s linear forwards;
@@ -265,6 +296,10 @@
   &._4 {
     width: 94px;
 
+    @media (max-width: 500px) {
+      width: 74px;
+    }
+
     > li {
       animation: alertOut .2s linear forwards;
     }
@@ -278,6 +313,10 @@
   // node.js
   &._5 {
     width: 140px;
+
+    @media (max-width: 500px) {
+      width: 110px;
+    }
 
     > li {
       animation: alertOut .2s linear forwards;
@@ -293,6 +332,10 @@
   &._6 {
     width: 78px;
 
+    @media (max-width: 500px) {
+      width: 58px;
+    }
+
     > li {
       animation: alertOut .2s linear forwards;
     }
@@ -306,6 +349,10 @@
   // jquery
   &._7 {
     width: 126px;
+
+    @media (max-width: 500px) {
+      width: 86px;
+    }
 
     > li {
       animation: alertOut .2s linear forwards;
@@ -321,6 +368,10 @@
   &._8 {
     width: 98px;
 
+    @media (max-width: 500px) {
+      width: 78px;
+    }
+
     > li {
       animation: alertOut .2s linear forwards;
     }
@@ -334,6 +385,10 @@
   // django
   &._9 {
     width: 136px;
+
+    @media (max-width: 500px) {
+      width: 96px;
+    }
 
     > li {
       animation: alertOut .2s linear forwards;
@@ -349,6 +404,10 @@
   &._10 {
     width: 148px;
 
+    @media (max-width: 500px) {
+      width: 108px;
+    }
+
     > li {
       animation: alertOut .2s linear forwards;
     }
@@ -362,6 +421,10 @@
   // python
   &._11 {
     width: 134px;
+
+    @media (max-width: 500px) {
+      width: 104px;
+    }
 
     > li {
       animation: alertOut .2s linear forwards;
@@ -377,6 +440,10 @@
   &._12 {
     width: 224px;
 
+    @media (max-width: 500px) {
+      width: 144px;
+    }
+
     > li {
       animation: alertOut .2s linear forwards;
     }
@@ -390,6 +457,10 @@
   // .net
   &._13 {
     width: 86px;
+
+    @media (max-width: 500px) {
+      width: 66px;
+    }
 
     > li {
       animation: alertOut .2s linear forwards;
@@ -405,6 +476,10 @@
   &._14 {
     width: 100px;
 
+    @media (max-width: 500px) {
+      width: 80px;
+    }
+
     > li {
       animation: alertOut .2s linear forwards;
     }
@@ -419,6 +494,10 @@
   &._15 {
     width: 172px;
 
+    @media (max-width: 500px) {
+      width: 122px;
+    }
+
     > li {
       animation: alertOut .2s linear forwards;
     }
@@ -432,6 +511,10 @@
   // bash
   &._16 {
     width: 92px;
+
+    @media (max-width: 500px) {
+      width: 72px;
+    }
 
     > li {
       animation: alertOut .2s linear forwards;
@@ -454,8 +537,8 @@ $channel-container: ($channel-width*6) + 45px;
   margin: 40px auto 0;
   padding: 0;
   position: relative;
-    z-index: 1;
   width: $channel-container; // 465px
+  z-index: 1;
 
   @media (max-width: 700px) {
     height: 200px;
@@ -465,8 +548,8 @@ $channel-container: ($channel-width*6) + 45px;
 
   @media (max-width: 500px) {
     height: 210px;
+    max-width: 450px;
     width: 100%;
-      max-width: 450px;
   }
 
   .inner & {

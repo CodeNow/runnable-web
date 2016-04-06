@@ -3,28 +3,19 @@
   height: 54px;
   position: relative;
   user-select: none;
+  white-space: nowrap;
 
   &:hover {
     text-decoration: none;
   }
 
-  &:hover > span,
-  &:active > span {
-    background-position: 0 100%;
-  }
-
   > span {
-    background: url(../images/sprite-runnable-logo-2.png) no-repeat;
+    background: url(../images/runnable-logo.svg) no-repeat;
     display: inline-block;
     height: 22px;
     margin: 16px 0 0;
     padding: 0;
     width: 140px;
-
-    @include retina() {
-      background: url(../images/sprite-runnable-logo-2@2x.png) no-repeat;
-      background-size: 100%;
-    }
   }
 
   > sup {
