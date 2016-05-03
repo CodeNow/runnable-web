@@ -1,0 +1,47 @@
+<div class="modal fade" id="mdSessionWarning" tabindex="-1" role="dialog" aria-labelledby="sessionWarningModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Session Expiration Warning</h4>
+            </div>
+            <div class="modal-body">
+                <p>Inactive session closes in 60 seconds. Total time for guest session is 30 minutes. Please Sign Up for longer session.</p>
+                <p>Your session will expire in <span class="bold" id="sessionSecondsRemaining">60</span> seconds.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="extendSession" type="button" class="btn btn-default btn-success" data-dismiss="modal">Stay Online</button>
+                <!--<button id="logoutSession" type="button" class="btn btn-default" data-dismiss="modal" onclick="session.logout(getContainerID);">Logout</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="mdlLoggedOut" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Inactive Guest Session Expired</h4>
+            </div>
+            <div class="modal-body">
+                <p>Inactive session closes in 60 seconds. Total time for guest session is 30 minutes. Please Sign Up for longer session.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="homeButton" type="button" class="btn btn-default btn-success" data-dismiss="modal" onclick="window.location = '/';">Take me Home</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="mdlSessionExceed" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Guest Session time exhausted</h4>
+            </div>
+            <div class="modal-body">
+                <p>Inactive session closes in 60 seconds. Total time for guest session is 30 minutes. Please Sign Up for longer session.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="homeButton" type="button" class="btn btn-default btn-success" data-dismiss="modal" onclick="window.location = '/';">Take me Home</button>
+            </div>
+        </div>
+    </div>
+</div>
