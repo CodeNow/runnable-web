@@ -13,7 +13,7 @@ module.exports = BaseView.extend({
     });
   },
   postRender: function () {
-    $.idleTimer(userSession.inactiveTimeout);
+    
     this.childViewContainer = _.findWhere(this.childViews, {name: 'terminal'}).model;
     
     // Set User Session values
@@ -21,12 +21,14 @@ module.exports = BaseView.extend({
     var userSessionConfigs = this.app.get('userSession');
 
     userSession.containerID = container.id;
-    userSession.inactiveTimeout = userSessionConfigs.inactiveTimeout,
-    userSession.warningTimeout = userSessionConfigs.warningTimeout,
-    userSession.minWarning = userSessionConfigs.minWarning,
-    userSession.maxSessionTimer = userSessionConfigs.maxSessionTimer,
-    userSession.keepaliveUrl = userSessionConfigs.keepaliveUrl,
-    userSession.keepaliveInterval = userSessionConfigs.keepaliveInterval,
+    userSession.inactiveTimeout = userSessionConfigs.inactiveTimeout;
+    userSession.warningTimeout = userSessionConfigs.warningTimeout;
+    userSession.minWarning = userSessionConfigs.minWarning;
+    userSession.maxSessionTimer = userSessionConfigs.maxSessionTimer;
+    userSession.keepaliveUrl = userSessionConfigs.keepaliveUrl;
+    userSession.keepaliveInterval = userSessionConfigs.keepaliveInterval;
+
+    $.idleTimer(userSession.inactiveTimeout);
 
     userSession.keepaliveTimer = setInterval(function () {
         userSession.keepAlive();
