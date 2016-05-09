@@ -28,6 +28,9 @@ module.exports = BaseView.extend({
     userSession.keepaliveUrl = userSessionConfigs.keepaliveUrl;
     userSession.keepaliveInterval = userSessionConfigs.keepaliveInterval;
 
+    $('#inactiveSessionLimit').html(userSessionConfigs.inactiveTimeout/1000/60);
+    $('#maxGuestSessionLimit').html(userSessionConfigs.maxSessionTimer/1000/60);
+
     $.idleTimer(userSession.inactiveTimeout);
 
     userSession.keepaliveTimer = setInterval(function () {
