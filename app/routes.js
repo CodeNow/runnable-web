@@ -4,6 +4,8 @@ module.exports = function(match) {
   match('',                     'channel#category');
   // match('',                     'home#press');
   // match('login',                'home#login');
+  match('oauth',                'user#oauth');
+  match('oauth/oauthorize',     'user#oauthorize');
   match('signup',               'home#signup');
   match('search',               'runnable#search');
   match('all',                  'channel#all');
