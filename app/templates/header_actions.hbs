@@ -20,4 +20,9 @@
 <a id="header-signup-link">Sign Up</a>
 {{/if_result}}
 
+{{#unless nocreate}}
 {{view "create_new_button" model=model}}
+{{/unless}}
+{{#if forumLink}}
+{{view "forum_link_button" model=model}}
+{{/if}}

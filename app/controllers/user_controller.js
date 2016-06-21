@@ -8,6 +8,7 @@ var formatTitle = helpers.formatTitle;
 var canonical = helpers.canonical;
 var utils = require('../utils');
 var helpers = require('./helpers');
+var crypto = require('crypto');
 
 var fetchPopUserAffectedChannels = helpers.fetchPopUserAffectedChannels;
 
@@ -70,6 +71,54 @@ function fetchProfileInfo (username, cb) {
 }
 
 module.exports = {
+  oauth: function (params, callback) {
+    var self = this;
+    var spec = {
+      user: { model:'User', params:{_id: 'me'} }
+    };
+    fetch.call(this, spec, function (err, results) {
+      callback(err, !err && _.extend(results, {
+        page: {
+          title: formatTitle('Oauthorize'),
+          description: formatTitle('Authorizing oauth request'),
+          canonical: canonical.call(self)
+        }
+      }));
+    });
+  },
+  oauthorize: function (params, callback) {
+    var self = this;
+    var forumAuthURL = self.app.get('forumAuthURL');
+    var forumURL = self.app.get('forumURL');
+    var redirectUri = forumURL;
+
+    async.waterfall([
+      fetchUser.bind(this),
+      function (results, cb) {
+        var currentUsername = (results.user.get('username') || '').toLowerCase();
+        if ( results.user.isRegistered() ) {
+          var clientSSO = new Buffer(params.sso, 'base64').toString('utf8');
+          var clientNonce = clientSSO.substring(clientSSO.search('nonce=')+6,clientSSO.indexOf("&"));
+
+          var payload = 'nonce=' + clientNonce + '&username=' + results.user.get('lower_username') + '&email=' + results.user.get('email') + '&external_id=' + results.user.get('id') + '&moderator=' + results.user.isModerator() + '&admin=' + results.user.isAdmin();
+          var encodedPayLoad = new Buffer(payload).toString('base64');
+          var signature = crypto.createHmac('sha256', '1234')
+                           .update(encodedPayLoad)
+                           .digest('hex');
+          redirectUri = forumAuthURL + '?sso='+encodedPayLoad+'&sig='+signature; 
+          cb();
+        } else {
+          redirectUri = forumURL;
+          cb();
+        } 
+      },
+      function (cb) {
+        self.redirectTo(redirectUri);
+        cb();
+      }
+    ])
+    
+  },
   profile: function (params, callback) {
     var self = this;
     async.waterfall([
