@@ -1,15 +1,35 @@
 var BaseView = require('../base_view');
+var modalHelpers = require('../../helpers/modals');
+var utils = require('../../utils');
+
 
 module.exports = BaseView.extend({
-  id:'jobs',
-  events: {
-    'click .front-learn': 'learnMoreFrontend',
-    'click .view-positions': 'scrollToJobs'
-  },
+  id:'oauth',
   postRender: function () {
-    setTimeout(function () {
-      $.stellar();
-    }, 100); // timeout for clientside hit, else doesnt work..
+    var self = this;
+    if(self.app.user.isRegistered()){
+      self.$('#oauthMsgTitle').html("Hang on tight..");
+      self.$('#oauthMsg').html("We're looking for an Intruder.");
+    }
+    this.login();
+  },
+  login: function () {
+    var self = this;
+
+    if(self.app.user.isRegistered()){
+      self.redirectToAuth();
+    } else {
+      modalHelpers.login.call(self, function(){
+        if(self.app.user.isRegistered()){
+          self.redirectToAuth();
+        }
+      });
+    }
+  },
+  redirectToAuth: function () {
+    var clientSSO = utils.getQueryParam(this.app, 'sso');
+    var clientSig = utils.getQueryParam(this.app, 'sig');
+    window.location.href = "/oauth/oauthorize?sso=" + clientSSO + "&sig=" + clientSig;
   }
 });
 

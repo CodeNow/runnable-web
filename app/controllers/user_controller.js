@@ -98,9 +98,9 @@ module.exports = {
         var currentUsername = (results.user.get('username') || '').toLowerCase();
         if ( results.user.isRegistered() ) {
           var clientSSO = new Buffer(params.sso, 'base64').toString('utf8');
-          var clientNonce= clientSSO.substring(clientSSO.search('nonce=')+6,clientSSO.indexOf("&"));
+          var clientNonce = clientSSO.substring(clientSSO.search('nonce=')+6,clientSSO.indexOf("&"));
 
-          var payload = 'nonce=' + clientNonce + '&username=' + results.user.get('lower_username') + '&email=' + results.user.get('email') + '&external_id=' + results.user.get('id');
+          var payload = 'nonce=' + clientNonce + '&username=' + results.user.get('lower_username') + '&email=' + results.user.get('email') + '&external_id=' + results.user.get('id') + '&moderator=' + results.user.isModerator() + '&admin=' + results.user.isAdmin();
           var encodedPayLoad = new Buffer(payload).toString('base64');
           var signature = crypto.createHmac('sha256', '1234')
                            .update(encodedPayLoad)
