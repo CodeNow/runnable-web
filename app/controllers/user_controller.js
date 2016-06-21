@@ -88,8 +88,8 @@ module.exports = {
   },
   oauthorize: function (params, callback) {
     var self = this;
-    var forumAuthURL = 'http://192.168.0.161:3000/session/sso_login';
-    var forumURL = 'http://192.168.0.161:3000';
+    var forumAuthURL = self.app.get('forumAuthURL');
+    var forumURL = self.app.get('forumURL');
     var redirectUri = forumURL;
 
     async.waterfall([

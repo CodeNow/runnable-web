@@ -10,7 +10,7 @@
     {{view "searchbar" classname="col-sm-4" inputclass="form-control" placeholder="Search for code"}}
     {{/unless}}
     {{#unless noactions}}
-    {{view "header_actions" model=model}}
+    {{view "header_actions" model=model forumLink=forumLink nocreate=nocreate}}
     {{/unless}}
   </nav>
 </div>
