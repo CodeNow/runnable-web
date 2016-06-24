@@ -64,6 +64,7 @@ DataAdapter.prototype._request = function (req, api, options, callback) {
 
   if (req.session && req.session.access_token) {
     api.headers['runnable-token'] = req.session.access_token;
+    api.headers['x-real-ip'] = req.headers['x-real-ip'];
     console.log("Access Token: " + req.session.access_token);
   }
 
