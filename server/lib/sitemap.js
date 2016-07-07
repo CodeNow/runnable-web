@@ -27,7 +27,7 @@ module.exports.init = function(app) {
           }
           channels.forEach(function (channel) {
             urls.push({
-              url: 'http://runnable.com/' + channel.name,
+              url: 'http://code.runnable.com/' + channel.name,
               changefreq: 'daily',
               priority: 0.5
             });
@@ -46,7 +46,7 @@ module.exports.init = function(app) {
           projects.forEach(function (project) {
             var model = new imageModel(project);
             urls.push({
-              url: 'http://runnable.com' + model.appURL(),
+              url: 'http://code.runnable.com' + model.appURL(),
               changefreq: 'weekly',
               priority: 0.6
             });
@@ -60,7 +60,7 @@ module.exports.init = function(app) {
       } else {
         res.header('Content-Type', 'application/xml');
         res.send(sitemap.createSitemap({
-          hostname: 'http://runnable.com',
+          hostname: 'http://code.runnable.com',
           cacheTime: 600000,
           urls: urls
         }).toString());
