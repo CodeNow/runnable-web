@@ -1,6 +1,6 @@
 # robotstxt.org/
 
-Sitemap: http://runnable.com/sitemap.xml
+Sitemap: http://code.runnable.com/sitemap.xml
 
 User-agent: *
 Disallow: /me/
