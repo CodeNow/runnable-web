@@ -1,0 +1,21 @@
+{{#if fullpage}}
+{{view 'header_view' nosearch=true noactions=true}}
+<div class="modal-page">
+{{/if}}
+<form class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title">{{header}}</h4>
+    </div>
+    <div class="modal-body">
+      <p>You must verify your email to continue testing your code at our plateform.</p>
+      <button id="send-verifiymail-btn" type="button" class="orange col-sm-12">Resend Verification Mail</button>
+      <p>In case your email address in our platform is invalid <a class="login-link" href="javascript:void(0);">Change your Email Here</a></p>
+    </div>
+  </div><!-- /.modal-content -->
+</form><!-- /.modal-dialog -->
+{{#if fullpage}}
+</div>
+{{view 'footer_view'}}
+{{/if}}
