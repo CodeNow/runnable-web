@@ -73,6 +73,34 @@ var User = module.exports = Base.extend({
       }
     }
   },
+  changePass: function(password, passwordNew, cb) {
+    cb = cb || function () {};
+    var self = this;
+    var cbOpts = utils.cbOpts(cb);
+    if (!password) {
+      cb('Old Password is required');
+    }
+    else if (!passwordNew) {
+      cb('New Password is required');
+    }
+    else {
+      this.save({
+        password: password,
+        passwordNew: passwordNew
+      }, {
+        wait: true,
+        method: 'POST',
+        url   : '/users/changepass',
+        success: success,
+        error  : cbOpts.error
+      });
+      function success () {
+        cbOpts.success.apply(this, arguments);
+        self.trigger('auth');
+      }
+    }
+
+  },
   login: function (emailUsername, password, cb) {
     cb = cb || function () {};
     var self=this, app=this.app, auth, data, opts;

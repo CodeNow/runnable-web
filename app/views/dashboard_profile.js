@@ -1,4 +1,5 @@
 var BaseView = require('./base_view');
+var ChangePassModal = require('./change_pass_modal');
 var utils = require('../utils');
 
 module.exports = BaseView.extend({
@@ -8,7 +9,13 @@ module.exports = BaseView.extend({
   events: {
     'click .menu a' : 'permissionToggle',
     'change input'  : 'updateAttr',
-    'submit form'   : 'preventDefault'
+    'submit form'   : 'preventDefault',
+    'click #change-pass' : 'openChangePass'
+  },
+  openChangePass: function (evt) {
+    evt.preventDefault();
+    var changePassModal = new ChangePassModal({ app:this.app });
+    changePassModal.open();
   },
   permissionToggle: function (evt) {
     var $menuItem = this.$(evt.currentTarget);

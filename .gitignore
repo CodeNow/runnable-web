@@ -8,6 +8,7 @@ npm-debug.log
 *.pyc
 *.log
 configs/local.json
+configs/dev.json
 configs/commitHash.js
 configs/prevCommitHash.js
 public/vendor/bower

@@ -8,7 +8,6 @@ var formatTitle = helpers.formatTitle;
 var canonical = helpers.canonical;
 var utils = require('../utils');
 var helpers = require('./helpers');
-var crypto = require('crypto');
 
 var fetchPopUserAffectedChannels = helpers.fetchPopUserAffectedChannels;
 
@@ -102,7 +101,7 @@ module.exports = {
 
           var payload = 'nonce=' + clientNonce + '&username=' + results.user.get('lower_username') + '&email=' + results.user.get('email') + '&external_id=' + results.user.get('id') + '&moderator=' + results.user.isModerator() + '&admin=' + results.user.isAdmin();
           var encodedPayLoad = new Buffer(payload).toString('base64');
-          var signature = crypto.createHmac('sha256', '1234')
+          var signature = require('crypto').createHmac('sha256', '1234')
                            .update(encodedPayLoad)
                            .digest('hex');
           redirectUri = forumAuthURL + '?sso='+encodedPayLoad+'&sig='+signature; 
