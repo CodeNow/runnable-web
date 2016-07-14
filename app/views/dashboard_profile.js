@@ -1,5 +1,6 @@
 var BaseView = require('./base_view');
 var ChangePassModal = require('./change_pass_modal');
+var ChangeEmailModal = require('./change_email_modal');
 var utils = require('../utils');
 
 module.exports = BaseView.extend({
@@ -10,12 +11,18 @@ module.exports = BaseView.extend({
     'click .menu a' : 'permissionToggle',
     'change input'  : 'updateAttr',
     'submit form'   : 'preventDefault',
-    'click #change-pass' : 'openChangePass'
+    'click #change-pass' : 'openChangePass',
+    'click #change-email' : 'openChangeEmail'
   },
   openChangePass: function (evt) {
     evt.preventDefault();
     var changePassModal = new ChangePassModal({ app:this.app });
     changePassModal.open();
+  },
+  openChangeEmail: function (evt) {
+    evt.preventDefault();
+    var changeEmailModal = new ChangeEmailModal({ app:this.app });
+    changeEmailModal.open();
   },
   permissionToggle: function (evt) {
     var $menuItem = this.$(evt.currentTarget);
