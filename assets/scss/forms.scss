@@ -249,6 +249,27 @@ form.inline {
       }
     }
   }
+
+  .second {
+    right: 22px;
+  }
+
+  .editpop {
+    position: absolute;
+      top: 0;
+      right: 0;
+
+    > a {
+      color: $gray-dark;
+      padding: 11px;
+    }
+
+    .glyphicons.edit {
+      color: #888888;
+      padding: 7px;
+      font-size: 18px;
+    }
+  }
 }
 
 // contact modal

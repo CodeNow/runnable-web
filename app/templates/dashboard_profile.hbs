@@ -35,7 +35,7 @@
   <form class="inline">
     <span class="glyphicons send"></span>
     <input value="{{email}}" placeholder="Email" disabled>
-    <div class="menu">
+    <div class="menu second">
       <a class="glyphicons {{#if show_email}}unlock{{else}}lock{{/if}}" data-toggle="dropdown"></a>
       <ul>
         <li>
@@ -49,6 +49,16 @@
             Only Me
           </a>
       </ul>
+    </div>
+    <div class="editpop">
+      <a id="change-email" class="glyphicons edit"></a>
+    </div>
+  </form>
+  <form class="inline">
+    <span class="glyphicons keys"></span>
+    <input value="password" disabled="" type="password">
+    <div class="editpop">
+      <a id="change-pass" class="glyphicons edit"></a>
     </div>
   </form>
   {{/with}}
