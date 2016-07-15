@@ -11,6 +11,11 @@ module.exports = ModalView.extend({
   },
   events: {
     'click #send-verifiymail-btn': 'sendVerifyMail',
+    'click #change-email-link': 'redirectProfilePage',
+  },
+  redirectProfilePage: function() {
+    var username = this.app.user.get("username");
+    window.location.href = "/u/" + username;
   },
   sendVerifyMail: function() {
     var user = this.app.user;
