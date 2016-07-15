@@ -1,6 +1,7 @@
 var ModalView = require('./modal_view');
 var _ = require('underscore');
 var Super = ModalView.prototype;
+var UserVerificationModal = require('./user_verification_modal');
 
 module.exports = ModalView.extend({
   id:'login',
@@ -25,6 +26,7 @@ module.exports = ModalView.extend({
     signupModal.open();
   },
   login: function (evt) {
+    var self = this;
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
     this.app.user.login(formData.username, formData.password, function (err) {
@@ -33,8 +35,15 @@ module.exports = ModalView.extend({
       }
       else {
         this.close();
+        self.checkUserVerification();
       }
     }.bind(this));
+  },
+  checkUserVerification: function(evt) {
+    if(!this.app.user.isVerified()) {
+      var userVerificationModal = new UserVerificationModal({ app:this.app });
+      userVerificationModal.open();
+    }
   },
   showError: function (err) {
     alert(err);
