@@ -1,6 +1,7 @@
 var lock = require('./lock');
 
 module.exports = function(match) {
+
   match('',                           'channel#category');
   // match('',                        'home#press');
   // match('login',                   'home#login');
@@ -20,6 +21,7 @@ module.exports = function(match) {
   match('new/:from',                  'runnable#newFrom');
   match('u/:username',                'user#profile');
   match('u/verify/:username/:vtoken',  'user#verify');
+  match('u/verifymail/:username/:etoken',  'user#verifymail');
   // match('me',                      'user#dashboard');
   // match('me/drafts',               'user#dashboard');
   // match('me/published',            'user#dashboard');

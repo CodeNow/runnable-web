@@ -101,6 +101,30 @@ var User = module.exports = Base.extend({
     }
 
   },
+  changeEmailReq: function(emailNew, cb) {
+    cb = cb || function () {};
+    var self = this;
+    var cbOpts = utils.cbOpts(cb);
+    if (!emailNew) {
+      cb('New Email is required');
+    }
+    else {
+      this.save({
+        email_new: emailNew,
+      }, {
+        wait: true,
+        method: 'POST',
+        url   : '/users/changemailreq',
+        success: success,
+        error  : cbOpts.error
+      });
+      function success () {
+        cbOpts.success.apply(this, arguments);
+        self.trigger('auth');
+      }
+    }
+
+  },
   login: function (emailUsername, password, cb) {
     cb = cb || function () {};
     var self=this, app=this.app, auth, data, opts;
@@ -194,6 +218,30 @@ var User = module.exports = Base.extend({
         cb();
       }
     }
+  },
+  verifyUserEmail: function(username, verificationCode, cb) {
+    cb = cb || function () {};
+    var self = this;
+    var cbOpts = utils.cbOpts(cb);
+
+    cb = cb || function () {};
+    var self = this;
+    var cbOpts = utils.cbOpts(cb);
+
+    this.save({
+      username: username,
+      email_change_token: verificationCode
+    }, {
+      wait: true,
+      method: 'POST',
+      url   : '/users/changemail',
+      success: success,
+      error  : cbOpts.error
+    });
+    function success () {
+      cbOpts.success.apply(this, arguments);
+    }
+
   },
   // hasVoted: function (project, cb) {
   //   var self = this;

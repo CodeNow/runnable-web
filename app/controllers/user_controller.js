@@ -91,6 +91,27 @@ module.exports = {
       }));
     });
   },
+  verifymail: function (params, callback) {
+    var self = this;
+    var spec = {
+    user: { model:'User', 
+            params: {
+                      _id: 'me',
+                      username: params.username,
+                      etoken: params.etoken
+                      }
+            }
+    };
+    fetch.call(this, spec, function (err, results) {
+      callback(err, !err && _.extend(results, {
+        page: {
+          title: formatTitle('Verify Email'),
+          description: formatTitle('Verifying New Email'),
+          canonical: canonical.call(self)
+        }
+      }));
+    });
+  },
   oauth: function (params, callback) {
     var self = this;
     var spec = {
