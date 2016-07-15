@@ -70,11 +70,32 @@ function fetchProfileInfo (username, cb) {
 }
 
 module.exports = {
-  verifymail: function (params, callback) {
+  verify: function (params, callback) {
     var self = this;
     var spec = {
       user: { model:'User', 
               params: {
+                      _id: 'me',
+                      username: params.username,
+                      vtoken: params.vtoken
+                      }
+            }
+    };
+    fetch.call(this, spec, function (err, results) {
+      callback(err, !err && _.extend(results, {
+        page: {
+          title: formatTitle('Verify'),
+          description: formatTitle('Verifying user'),
+          canonical: canonical.call(self)
+        }
+      }));
+    });
+  },
+  verifymail: function (params, callback) {
+    var self = this;
+    var spec = {
+    user: { model:'User', 
+            params: {
                       _id: 'me',
                       username: params.username,
                       etoken: params.etoken

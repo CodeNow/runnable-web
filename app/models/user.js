@@ -28,7 +28,7 @@ var User = module.exports = Base.extend({
     return this.get('permission_level') >= 1;
   },
   isVerified : function () {
-    return this.get('permission_level') >= 1;
+    return this.get('permission_level') >= 2;
   },
   isModerator : function () {
     return this.get('permission_level') >= 5;
@@ -153,6 +153,46 @@ var User = module.exports = Base.extend({
         meOpts.success.apply(this, arguments);
         self.trigger('auth');
       }
+    }
+  },
+  verifyUser: function(username, verificationCode, cb) {
+    cb = cb || function () {};
+    var self = this;
+    var cbOpts = utils.cbOpts(cb);
+
+    cb = cb || function () {};
+    var self = this;
+    var cbOpts = utils.cbOpts(cb);
+
+    this.save({
+      username: username,
+      verification_token: verificationCode,
+      test: 'test123'
+    }, {
+      wait: true,
+      method: 'POST',
+      url   : '/users/verify',
+      success: success,
+      error  : cbOpts.error
+    });
+    function success () {
+      cbOpts.success.apply(this, arguments);
+    }
+
+  },
+  sendVerificationMail: function(cb) {
+    cb = cb || function () {};
+    var self=this, app=this.app, auth, data, opts;
+    var cbOpts = utils.cbOpts(cb);
+
+    self.fetch({
+      url: '/users/' + this.id + '/sendVerificationMail',
+      success: success,
+      error: cbOpts.error
+    });
+
+    function success () {
+      cbOpts.success.apply(this, arguments);
     }
   },
   vote: function (image, cb) {
