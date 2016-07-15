@@ -19,6 +19,7 @@ module.exports = function(match) {
   match('new',                  'runnable#new');
   match('new/:from',            'runnable#newFrom');
   match('u/:username',          'user#profile');
+  match('u/verifymail/:username/:etoken',  'user#verifymail');
   // match('me',                   'user#dashboard');
   // match('me/drafts',            'user#dashboard');
   // match('me/published',         'user#dashboard');

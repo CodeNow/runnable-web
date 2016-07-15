@@ -1,0 +1,14 @@
+{{view "app_user" model=user}}
+{{view "header_view" model=user context=. nosearch=true nocreate=true}}
+{{view "global_message"}}
+
+<div id="oauth-header" class="jumbotron" data-stellar-background-ratio=".5">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 id='verifyMsgTitle'>Hang on tight..</h2>
+        <p id='verifyMsg'>We're verifying the authenticity.</p>
+      </div>
+    </div>
+  </div>
+</div>
