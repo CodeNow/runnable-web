@@ -18,14 +18,9 @@ module.exports = BaseView.extend({
         this.showError('We are not able to verify your request. Verify the link is correct or try to resend confirmation mail by logging in into your account.');
       }
       else {
-        window.location.href = "/";
+        window.location.href = "/?notify=email-verified";
       }
     }.bind(this));
-  },
-  redirectToAuth: function () {
-    var clientSSO = utils.getQueryParam(this.app, 'sso');
-    var clientSig = utils.getQueryParam(this.app, 'sig');
-    window.location.href = "/oauth/oauthorize?sso=" + clientSSO + "&sig=" + clientSig;
   }
 });
 

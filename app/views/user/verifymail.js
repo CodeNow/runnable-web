@@ -17,7 +17,7 @@ module.exports = BaseView.extend({
         this.showError('We are not able to verify your request. Verify the link is correct or try again.');
       }
       else {
-        window.location.href = "/";
+        window.location.href = "/?notify=email-changed";
       }
     }.bind(this));
   }

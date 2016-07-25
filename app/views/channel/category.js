@@ -1,6 +1,7 @@
 var BaseView = require('../base_view');
 var utils = require('../../utils');
 var _ = require('underscore');
+var SetPassModal = require('../set_pass_modal');
 var Super = BaseView.prototype;
 var delay = 50;
 var cycleTime = 2000;
@@ -105,11 +106,56 @@ module.exports = BaseView.extend({
       title: 'Bash',
       name:  'Bash'
     }];
-    //console.log('opts', opts);
     return opts;
   },
   postRender: function () {
     this.imageTile();
+    var notifyString = utils.getQueryParam(this.app, 'notify');
+    var action = utils.getQueryParam(this.app, 'action');
+
+    switch(action) {    
+      case 'setpassword':
+        var username = utils.getQueryParam(this.app, 'username');
+        var token = utils.getQueryParam(this.app, 'token');
+        
+        this.app.user.validateToken(username, token, 'setpassword', function (err) {
+          if (err) {
+            this.showNotification('Sorry! Your password reset link is either used, or expired.');
+          }
+          else {
+            var setPassModal = new SetPassModal({ app:this.app });
+            setPassModal.open(); 
+          }
+        }.bind(this));
+
+        break;
+    }
+
+    switch(notifyString) {
+      case 'email-changed':
+          var notifyMsg = 'Your email has been changed successfully.';
+          break;
+      case 'email-verified':
+          var notifyMsg = 'Your email has been verified successfully.';
+          break;
+    }
+    if (notifyMsg!=undefined) {
+      this.showNotification(notifyMsg);
+    }
+  },
+  showNotification: function (notifyMsg) {
+    setTimeout( function() {
+      // create the notification
+      var notification = new NotificationFx({
+        message : '<span class="glyphicons bullhorn"></span><span><p class="notificationMsg">' + notifyMsg + '</p></span>',
+        layout : 'bar',
+        effect : 'slidetop',
+        ttl : 8000,
+        type : 'notice' // notice, warning or error
+      });
+      // show the notification
+      notification.show();
+    }, 1000 );
   },
   imageTile: function () {
     var $bubbles = this.$('.bubbles');

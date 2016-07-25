@@ -155,19 +155,32 @@ var User = module.exports = Base.extend({
       }
     }
   },
-  verifyUser: function(username, verificationCode, cb) {
+  passResetReq: function(emailUsername, cb) {
     cb = cb || function () {};
     var self = this;
     var cbOpts = utils.cbOpts(cb);
 
+    this.save({
+      email   : emailUsername
+    }, {
+      wait: true,
+      method: 'POST',
+      url   : '/users/passResetReq',
+      success: success,
+      error  : cbOpts.error
+    });
+    function success () {
+      cbOpts.success.apply(this, arguments);
+    }
+  },
+  verifyUser: function(username, verificationCode, cb) {
     cb = cb || function () {};
     var self = this;
     var cbOpts = utils.cbOpts(cb);
 
     this.save({
       username: username,
-      verification_token: verificationCode,
-      test: 'test123'
+      verification_token: verificationCode
     }, {
       wait: true,
       method: 'POST',
@@ -224,10 +237,6 @@ var User = module.exports = Base.extend({
     var self = this;
     var cbOpts = utils.cbOpts(cb);
 
-    cb = cb || function () {};
-    var self = this;
-    var cbOpts = utils.cbOpts(cb);
-
     this.save({
       username: username,
       email_change_token: verificationCode
@@ -241,7 +250,46 @@ var User = module.exports = Base.extend({
     function success () {
       cbOpts.success.apply(this, arguments);
     }
+  },
+  setPass: function(username, token, newPass, cb) {
+    cb = cb || function () {};
+    var self = this;
+    var cbOpts = utils.cbOpts(cb);
 
+    this.save({
+      username: username,
+      new_pass: newPass,
+      pass_reset_token: token
+    }, {
+      wait: true,
+      method: 'POST',
+      url   : '/users/setpass',
+      success: success,
+      error  : cbOpts.error
+    });
+    function success () {
+      cbOpts.success.apply(this, arguments);
+    }
+  },
+  validateToken:  function(username, token, tokenType, cb) {
+    cb = cb || function () {};
+    var self = this;
+    var cbOpts = utils.cbOpts(cb);
+
+    this.save({
+      username: username,
+      token: token,
+      token_type: tokenType
+    }, {
+      wait: true,
+      method: 'POST',
+      url   : '/users/validateToken',
+      success: success,
+      error  : cbOpts.error
+    });
+    function success () {
+      cbOpts.success.apply(this, arguments);
+    }
   },
   // hasVoted: function (project, cb) {
   //   var self = this;

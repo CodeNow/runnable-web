@@ -25,6 +25,8 @@ var minCSS = [
   'public/vendor/bower/autocompletejs/css/autocomplete.css',
   'node_modules/nprogress/nprogress.css',
   'public/vendor/glyphicons.css',
+  'public/vendor/notifications/css/ns-default.css',
+  'public/vendor/notifications/css/ns-style-bar.css',
   compassCSS // must be last
 ];
 //stitch
@@ -57,6 +59,7 @@ var frontendScripts = [
   'public/vendor/bootstrap/bootstrap-dialog.js', // https://github.com/nakupanda/bootstrap3-dialog
   'public/vendor/bower/fastclick/lib/fastclick.js',
   'public/vendor/jquery-idle/jquery.idle.js',
+  'public/vendor/notifications/js/*.js',
 ]
 .concat(aceScripts);
 
