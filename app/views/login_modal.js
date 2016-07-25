@@ -2,6 +2,7 @@ var ModalView = require('./modal_view');
 var _ = require('underscore');
 var Super = ModalView.prototype;
 var UserVerificationModal = require('./user_verification_modal');
+var RestPassModal = require('./reset_pass_modal');
 
 module.exports = ModalView.extend({
   id:'login',
@@ -11,8 +12,9 @@ module.exports = ModalView.extend({
     this.onClose = this.options.onClose;
   },
   events: {
-    'click .signup-link' : 'openSignup',
-    'submit form'        : 'login'
+    'click .signup-link'      : 'openSignup',
+    'submit form'             : 'login',
+    'click .forgotpass-link'  : 'openResetPass'
   },
   postRender: function () {
     Super.postRender.apply(this, arguments);
@@ -24,6 +26,13 @@ module.exports = ModalView.extend({
     var SignupModal = require('./signup_modal');
     var signupModal = new SignupModal({ app:this.app, onClose:this.onClose });
     signupModal.open();
+  },
+  openResetPass: function (evt) {
+    evt.preventDefault();
+    this.openedResetPass = true;
+    this.close();
+    var resetPassModal = new RestPassModal({ app:this.app, onClose:this.onClose });
+    resetPassModal.open();
   },
   login: function (evt) {
     var self = this;
