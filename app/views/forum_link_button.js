@@ -7,7 +7,7 @@ module.exports = BaseView.extend({
     href: ''
   },
   postRender: function () {
-    this.el.href = 'http://google.com';
+    this.el.href = this.app.get('forumURL');
   }
 });
 
