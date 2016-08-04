@@ -1,5 +1,5 @@
 {{view "app_user" model=user}}
-{{view "header_view" model=user context=.}}
+{{view "header_view" model=user context=. nocreate=true forumLink=true}}
 {{view "global_message"}}
 {{view "publish_warning" model=container parentid=image.attributes._id parentowner=image.attributes.owner}}
 
