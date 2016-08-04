@@ -4,7 +4,7 @@ var Super = ModalView.prototype;
 
 module.exports = ModalView.extend({
   id: 'signup',
-  defaultHeader: "Sign up for Runnable",
+  defaultHeader: "Sign up for Code Snippets",
   postInitialize: function () {
     this.options.header = this.options.header || this.defaultHeader;
     this.onClose = this.options.onClose;

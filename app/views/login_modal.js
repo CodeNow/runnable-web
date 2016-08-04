@@ -6,7 +6,7 @@ var RestPassModal = require('./reset_pass_modal');
 
 module.exports = ModalView.extend({
   id:'login',
-  defaultHeader: "Log in to Runnable",
+  defaultHeader: "Log in to Code Snippets",
   postInitialize: function () {
     this.options.header = this.options.header || this.defaultHeader;
     this.onClose = this.options.onClose;
