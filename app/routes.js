@@ -22,6 +22,7 @@ module.exports = function(match) {
   match('u/:username',                'user#profile');
   match('u/verify/:username/:vtoken',  'user#verify');
   match('u/verifymail/:username/:etoken',  'user#verifymail');
+  match('admin',                      'admin#dashboard');
   // match('me',                      'user#dashboard');
   // match('me/drafts',               'user#dashboard');
   // match('me/published',            'user#dashboard');
