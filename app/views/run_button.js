@@ -26,6 +26,7 @@ module.exports = EditorButtonView.extend({
     var dispatch = this.app.dispatch;
     if (dispatch) {
       this.listenTo(dispatch, 'unsaved:files', this.onChangeUnsaved.bind(this));
+      this.listenTo(dispatch, 'unsaved:unverifiedUser', this.onChangeUnverified.bind(this));
     }
     this.listenTo(this.model, 'change:specification', this.setImplementLinkModel.bind(this));
   },
@@ -109,6 +110,10 @@ module.exports = EditorButtonView.extend({
     else {
       greenText.innerHTML = 'Run';
     }
+  },
+  onChangeUnverified: function (bool) {
+    var self = this;
+    this.showError('You must register and verify your account to test your changes.');
   },
   setImplementLinkModel: function () {
     //hack

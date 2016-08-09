@@ -15,8 +15,12 @@ module.exports = BaseView.extend({
     this.onPostMessage = this.onPostMessage.bind(this);
   },
   postRender: function () {
-    this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('userContentDomain');
-    this.options.termurl = this.options.boxurl + '/static/term.html';
+    if (this.app.user.get('isVerified')) {
+      this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('userContentDomain');
+      this.options.termurl = this.options.boxurl + '/static/term.html';
+    } else {
+      this.options.termurl = 'http://' + this.app.get('domain') + '/images/term.png';
+    }
     this.loading(true);
     this.listenToPostMessages();
     this.$('iframe').attr('src', this.options.termurl);
@@ -24,8 +28,12 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     this.options.isUserVerified = this.app.user.isVerified();
-    this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('userContentDomain');
-    this.options.termurl = this.options.boxurl + '/static/term.html';
+    if (this.app.user.get('isVerified')) {
+      this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('userContentDomain');
+      this.options.termurl = this.options.boxurl + '/static/term.html';
+    } else {
+      this.options.termurl = 'http://' + this.app.get('domain') + '/images/term.png';
+    }
     return this.options;
   },
   popIntercom: function(evt) {

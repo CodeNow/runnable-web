@@ -64,7 +64,13 @@ module.exports = Base.extend({
       var prevUnsaved = this._unsaved;
       if (prevUnsaved != bool) {
         this._unsaved = bool; //set
-        this.trigger('unsaved:content', bool);
+        if (this.app.user.get('isVerified')) {
+          this.trigger('unsaved:content', bool);
+        }
+        else {
+          this.app.dispatch.trigger('unsaved:unverifiedUser', bool);
+          this.trigger('unsaved:unverifiedUser', bool);
+        }
       }
     }
     else {
