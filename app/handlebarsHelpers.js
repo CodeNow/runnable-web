@@ -103,6 +103,14 @@ module.exports.add = function (Handlebars) {
     return result.join('');
   });
 
+  Handlebars.registerHelper('substr', function(length, context, options) {
+   if ( context.length > length ) {
+    return context.substring(0, length) + "...";
+   } else {
+    return context;
+   }
+  });
+
   function add (thing, options) {
     var opts = options.hash;
     var args = _.values(options.hash);

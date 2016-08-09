@@ -28,6 +28,20 @@ var Container = module.exports = Runnable.extend({
     opts.url = utils.pathJoin('/api/-', this.urlRoot, 'import/github') +
       utils.toQueryString(query);
     this.save({}, opts);
+  },
+  killContainer: function(containerID, cb) {
+    cb = cb || function () {};
+    var self=this, app=this.app, auth, data, opts;
+    var cbOpts = utils.cbOpts(cb);
+    self.fetch({
+      url: '/users/me/runnables/' + containerID + 'killMe',
+      success: success,
+      error: cbOpts.error
+    });
+
+    function success () {
+      cbOpts.success.apply(this, arguments);
+    }
   }
 });
 

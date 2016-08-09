@@ -1,0 +1,33 @@
+{{view "app_user" model=user}}
+{{view "header_view" model=user nocreate=true nosearch=true context=.}}
+{{view "global_message"}}
+
+<div id="active-users">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-9 col-sm-8">
+        <h3>Active Users</h3>
+          {{view "active_user_feed"      collection=activeRunnables orderByParam=orderByParam}}
+      </div>
+
+      <div id="admin-stats" class="col-md-3 col-sm-4">
+        <h3>Statistics</h3>
+        <ul id="admin-stats-list">
+          <li class="row">
+            <span class="glyphicons user"></span>
+            <!-- <a href="mailto:support@runnable.com" target="_blank">support@runnable.com</a> -->
+            <b>Active Users:</b> 110
+          <li class="row">
+            <span class="glyphicons play"></span>
+            <b>Active containers: 154</b>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{{view "footer_view" model=user context=.}}
+
+
