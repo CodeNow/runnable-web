@@ -192,6 +192,10 @@ form.inline {
       left: 10px;
   }
 
+  > span.colorRed {
+    color: red;
+  }
+
   > input {
     -webkit-appearance: none;
     background: transparent;

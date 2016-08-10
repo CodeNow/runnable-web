@@ -33,8 +33,8 @@
     <input value="{{company}}" placeholder="Company" name="company">
   </form>
   <form class="inline">
-    <span class="glyphicons send"></span>
-    <input value="{{email}}" placeholder="Email" disabled>
+    <span class="glyphicons send {{#unless isVerified}} colorRed blink_me {{/unless}}"></span>
+    <input class="{{#unless isVerified}} blink_me {{/unless}}" value="{{email}}" placeholder="Email" disabled>
     <div class="menu second">
       <a class="glyphicons {{#if show_email}}unlock{{else}}lock{{/if}}" data-toggle="dropdown"></a>
       <ul>
