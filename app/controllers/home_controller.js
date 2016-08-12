@@ -78,7 +78,7 @@ module.exports = {
     }
     else {
       this.app.req.session.destroy();
-      this.redirectTo('/');
+      this.redirectTo(302, '/');
     }
   }
 
