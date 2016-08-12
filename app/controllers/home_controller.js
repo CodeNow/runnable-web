@@ -74,7 +74,7 @@ module.exports = {
     if (!isServer) {
       // force serverside hit for clientside (pushstate)
       // so that session can be destroyed
-      window.location = '/logout';
+      window.location = '/logmeout';
     }
     else {
       this.app.req.session.destroy();

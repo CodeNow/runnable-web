@@ -15,7 +15,7 @@ module.exports = function(match) {
   match('about',                      'home#about');
   match('jobs',                       'home#jobs');
   match('privacy',                    'home#privacy');
-  match('logout',                     'home#logout');
+  match('logmeout',                   'home#logout');
   // match('blob',                    'home#blob');
   match('new',                        'runnable#new');
   match('new/:from',                  'runnable#newFrom');
