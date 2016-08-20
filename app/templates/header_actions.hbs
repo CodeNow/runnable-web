@@ -23,6 +23,6 @@
 {{#unless nocreate}}
 {{view "create_new_button" model=model}}
 {{/unless}}
-{{#if forumLink}}
+{{#unless forumLink==false}}
 {{view "forum_link_button" model=model}}
 {{/if}}
