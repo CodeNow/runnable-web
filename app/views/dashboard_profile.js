@@ -1,7 +1,6 @@
 var BaseView = require('./base_view');
 var ChangePassModal = require('./change_pass_modal');
 var ChangeEmailModal = require('./change_email_modal');
-var UserVerificationModal = require('./user_verification_modal');
 var utils = require('../utils');
 
 module.exports = BaseView.extend({
@@ -16,7 +15,7 @@ module.exports = BaseView.extend({
     'click #change-email' : 'openChangeEmail'
   },
   postRender: function () {
-    this.checkUserVerification();
+    
   },
   openChangePass: function (evt) {
     evt.preventDefault();
@@ -27,12 +26,6 @@ module.exports = BaseView.extend({
     evt.preventDefault();
     var changeEmailModal = new ChangeEmailModal({ app:this.app });
     changeEmailModal.open();
-  },
-  checkUserVerification: function() {
-    if(!this.app.user.isVerified()) {
-      var userVerificationModal = new UserVerificationModal({ app:this.app });
-      userVerificationModal.open();
-    }
   },
   permissionToggle: function (evt) {
     var $menuItem = this.$(evt.currentTarget);
