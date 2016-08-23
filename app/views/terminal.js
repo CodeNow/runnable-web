@@ -12,14 +12,16 @@ module.exports = BaseView.extend({
     'click iframe'      : 'terminalTimeout'
   },
   postHydrate: function () {
+    var user = this.app.user;
     this.onPostMessage = this.onPostMessage.bind(this);
+    this.listenToOnce(user, 'auth', this.render.bind(this));
   },
   postRender: function () {
     if (this.app.user.get('isVerified')) {
       this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('userContentDomain');
       this.options.termurl = this.options.boxurl + '/static/term.html';
     } else {
-      this.options.termurl = 'http://' + this.app.get('domain') + '/images/term.png';
+      // this.options.termurl = 'http://' + this.app.get('domain') + '/images/term.png';
     }
     this.loading(true);
     this.listenToPostMessages();
@@ -28,11 +30,12 @@ module.exports = BaseView.extend({
   },
   getTemplateData: function () {
     this.options.isUserVerified = this.app.user.isVerified();
+    this.options.isUserRegistered = this.app.user.isRegistered();
     if (this.app.user.get('isVerified')) {
       this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('userContentDomain');
       this.options.termurl = this.options.boxurl + '/static/term.html';
     } else {
-      this.options.termurl = 'http://' + this.app.get('domain') + '/images/term.png';
+      // this.options.termurl = 'http://' + this.app.get('domain') + '/images/term.png';
     }
     return this.options;
   },
