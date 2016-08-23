@@ -5,9 +5,11 @@
 <main class="container">
   <div class="row">
     {{view "dashboard_profile" model=profileuser editmode=editmode leaderBadges=leaderBadges}}
-    <section id="dashboardTop" class="col-xl-8 col-sm-9">
-      <p class='dashboardNotice'>For full functionality, please verify link sent in your email. <a id='sendVerification'>Press here to re-send link</a>. <span id='removeNotice' class="glyphicons remove-2 colorRed"></span> </p>
-    </section>
+    {{#unless verifiedUser}}
+      <section id="dashboardTop" class="col-xl-8 col-sm-9">
+        <p class='dashboardNotice'>For full functionality, please verify link sent in your email. <a id='sendVerification'>Press here to re-send link</a>. <span id='removeNotice' class="glyphicons remove-2 colorRed"></span> </p>
+      </section>
+    {{/unless}}
     <section id="dashboard" class="col-xl-8 col-sm-9">
     {{#if editmode}}
       <div class="btn-group toggles">
