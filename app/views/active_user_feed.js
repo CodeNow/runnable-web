@@ -13,10 +13,10 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     this.options.isUserVerified = this.app.user.isVerified();
     this.options.userContentDomain = this.app.get('userContentDomain');
+    this.options.domain = this.app.get('domain');
     return this.options;
   },
   killContainer: function (evt) {
-    console.log('@@@@@', this);
     var self = this;
     evt.preventDefault();
 
