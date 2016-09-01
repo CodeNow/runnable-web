@@ -9,23 +9,19 @@
             <a class="project-name" href="/me/{{_id}}" target="_blank">{{name}} <span class="glyphicons new-window-alt"></span></a>
           </span>
         </li>
-        <li class='first'>
-          <span class="glyphicons orangeGliphy google-maps"></span><b>{{create_ip}}</b>
-        </li>
-        <li>
+        <li class="first">
           <!-- <span class="glyphicons orangeGliphy circle-info"></span><b>ID: {{ substr "12" containerId }}</b> -->
           <span class="glyphicons orangeGliphy circle-info"></span><b>ID: {{ containerId }}</b>
         </li>
         <li>
+          <span class="glyphicons orangeGliphy google-maps"></span><b>{{create_ip}}</b>
           <span class="glyphicons orangeGliphy circle-info"></span><b>Host: {{host}}</b>
-        </li>
-        <li>
-          <span class="glyphicons orangeGliphy circle-info"></span><b>Status: {{status}} </b> 
+          <span class="glyphicons orangeGliphy circle-info"></span><b>Status: {{status}} </b>
+          <span class="glyphicons orangeGliphy circle-info"></span><b>Started {{dateAgo created}}</b>
         </li>
     </div>
-    <a href="/api/-/users/me/runnables/{{_id}}/killMe" class="btn orange killBtn" target="_blank">Kill</a>
-    <a href="http://{{servicesToken}}.runnablecodesnippets.runnable.biz/static/term.html" target="_blank" class="btn orange termBtn"><span class="glyphicons new-window-alt"></span> Terminal</a>
-
+    <a href="/api/-/users/me/runnables/{{_id}}/killMe" class="btn orange killBtn" target="_blank">Destory</a>
+    <a href="http://{{servicesToken}}.{{../../userContentDomain}}/static/term.html" target="_blank" class="btn orange termBtn"><span class="glyphicons new-window-alt"></span> Terminal</a>
   </li>
 {{/with}}
 {{/each}}

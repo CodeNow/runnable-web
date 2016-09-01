@@ -92,9 +92,17 @@
 }
 
 ul.active-runnable-info {
+  
   li.first {
     margin-top: 30px;
   }
+
+  li {
+    b {
+        margin: 0 6px;
+    }
+  }
+
 }
 
 .project-name {

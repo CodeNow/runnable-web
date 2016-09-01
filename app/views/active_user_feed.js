@@ -7,16 +7,12 @@ module.exports = BaseView.extend({
     // 'click .killBtn'      : 'killContainer'
   },
   postRender: function () {
-    // this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('userContentDomain');
-    this.options.boxurl  = 'http://' + 'servicesToken' + '.' + this.app.get('userContentDomain');
-    this.options.termurl = this.options.boxurl + '/static/term.html';
     this.loading(true);
     // this.$('a.termBtn').attr('href', this.options.termurl);
   },
   getTemplateData: function () {
     this.options.isUserVerified = this.app.user.isVerified();
-    this.options.boxurl  = 'http://' + 'testToken' + '.' + this.app.get('userContentDomain');
-    this.options.termurl = this.options.boxurl + '/static/term.html';
+    this.options.userContentDomain = this.app.get('userContentDomain');
     return this.options;
   },
   killContainer: function (evt) {
