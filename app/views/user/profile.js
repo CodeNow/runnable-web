@@ -45,7 +45,7 @@ module.exports = BaseView.extend({
         message : '<span class="glyphicons bullhorn"></span><span><p class="notificationMsg">' + notifyMsg + '</p></span>',
         layout : 'bar',
         effect : 'slidetop',
-        ttl : 80000,
+        ttl : 8000,
         type : 'notice' // notice, warning or error
       });
       // show the notification
