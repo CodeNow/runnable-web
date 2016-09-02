@@ -287,8 +287,8 @@ module.exports = {
 
       if (params.category.toLowerCase() == 'featured') {
         results.page = {
-          title:     ((params.filter.length) ? (utils.tagsToString(params.filter) + ' - ') : '') + 'Runnable - Discover Everything through Code',
-          canonical: 'http://runnable.com/' + qs2
+          title:     ((params.filter.length) ? (utils.tagsToString(params.filter) + ' - ') : '') + 'Runnable CodeSnippets - Discover Everything through Code',
+          canonical: 'http://code.runnable.com/' + qs2
         };
       }
       else {

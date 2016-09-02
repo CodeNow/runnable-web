@@ -49,10 +49,10 @@ function formatTitle () {
 // CONTEXT must be controller
 function canonical (url) {
   if (isServer) {
-    return 'http://runnable.com' + ((url || (this.app && this.app.req && this.app.req.url)) || '');
+    return 'http://code.runnable.com' + ((url || (this.app && this.app.req && this.app.req.url)) || '');
   }
   else {
-    return 'http://runnable.com/' + Backbone.history.fragment;
+    return 'http://code.runnable.com/' + Backbone.history.fragment;
   }
 }
 // spec, [options], callback
