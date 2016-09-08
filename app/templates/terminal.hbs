@@ -17,7 +17,9 @@
     {{/if}}
   {{/unless}}
 </div>
+
 <h3 class="terminal-title">
+{{#if isUserVerified}}
   Terminal
   <a href="{{termurl}}" target="_blank" class="glyphicons new-window-alt"></a>
   <aside id="terminal-help">
@@ -34,6 +36,7 @@
     </a>
     {{/if}}
   </aside>
+{{/if}}
 </h3>
 <iframe id="terminal-window" class="terminal-iframe" src="" frameborder="0" height='100%' width='100%'>
 </iframe>
