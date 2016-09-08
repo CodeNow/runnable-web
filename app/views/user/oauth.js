@@ -9,7 +9,7 @@ module.exports = BaseView.extend({
     var self = this;
     if(self.app.user.isRegistered()){
       self.$('#oauthMsgTitle').html("Hang on tight..");
-      self.$('#oauthMsg').html("We're looking for an Intruder.");
+      self.$('#oauthMsg').html("Authenticating your account.");
     }
     this.login();
   },
