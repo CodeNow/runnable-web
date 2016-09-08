@@ -10,6 +10,7 @@ module.exports = BaseView.extend({
   events: {
     'click .menu a' : 'permissionToggle',
     'change input'  : 'updateAttr',
+    'keyup input'   : 'loseFocus',
     'submit form'   : 'preventDefault',
     'click #change-pass' : 'openChangePass',
     'click #change-email' : 'openChangeEmail'
@@ -36,6 +37,12 @@ module.exports = BaseView.extend({
     } else {
       $menuStatus.prop('class','glyphicons lock');
       this.save('show_email', false);
+    }
+  },
+  loseFocus:  function (evt) {
+    var $input = $(evt.currentTarget);
+    if (evt.keyCode == 13) {
+      $input.blur();
     }
   },
   updateAttr: function (evt) {
