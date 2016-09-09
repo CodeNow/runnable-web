@@ -28,7 +28,7 @@ module.exports = ModalView.extend({
       }
       else {
         this.close();
-        this.showNotification('Password has been reset successfully.');
+        window.location.href = '/?notifyMsg=password-set';
       }
     }.bind(this));
   },

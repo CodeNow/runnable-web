@@ -138,6 +138,9 @@ module.exports = BaseView.extend({
       case 'email-verified':
           var notifyMsg = 'Your email has been verified successfully.';
           break;
+      case 'password-set':
+          var notifyMsg = 'The new password has been set successfully.';
+          break;
     }
     if (notifyMsg!=undefined) {
       this.showNotification(notifyMsg);
