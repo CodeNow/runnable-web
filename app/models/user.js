@@ -90,7 +90,7 @@ var User = module.exports = Base.extend({
       }, {
         wait: true,
         method: 'POST',
-        url   : '/users/changepass',
+        url   : '/users/me/changepass',
         success: success,
         error  : cbOpts.error
       });
@@ -110,11 +110,11 @@ var User = module.exports = Base.extend({
     }
     else {
       this.save({
-        email_new: emailNew,
+        email_new: emailNew
       }, {
         wait: true,
         method: 'POST',
-        url   : '/users/changemailreq',
+        url   : '/users/me/changemailreq',
         success: success,
         error  : cbOpts.error
       });
