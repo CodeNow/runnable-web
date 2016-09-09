@@ -144,6 +144,7 @@ module.exports = BaseView.extend({
     }
     if (notifyMsg!=undefined) {
       this.showNotification(notifyMsg);
+      history.pushState('', 'New Page Title', '/');
     }
   },
   showNotification: function (notifyMsg) {
