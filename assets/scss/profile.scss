@@ -104,6 +104,14 @@
     @include media(md) {
       font-size: 36px;
     }
+
+    .modBadge {
+      color: #c0c0c0;
+    }
+
+    .adminBadge {
+      color: #daa520;
+    }
   }
 
   > p {

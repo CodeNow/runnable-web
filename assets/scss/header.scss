@@ -27,6 +27,15 @@ nav > div {
     float: right;
   }
 
+  > span > span.userBadge {
+    right: -6px;
+    top: 7px;
+    position: absolute;
+    font-size: 16px;
+    color: #ccadd2;
+    z-index: 1;
+  }
+
   > a {
     font-size: 13px;
 

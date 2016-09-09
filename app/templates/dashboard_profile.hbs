@@ -6,7 +6,16 @@
         <a href="https://en.gravatar.com/site/login" target="_blank" class="glyphicons edit"></a>
         <span class="reputation reputation-lg tooltip" data-title="{{taggedImagesCount}} published Runnables">{{taggedImagesCount}}</span>
       </div>
-      <h1>{{username}}</h1>
+      <h1>
+      {{#if isAdmin}}
+        <span class="glyphicons shield userBadge adminBadge" ></span>
+      {{else}}
+        {{#if isModerator}}
+          <span class="glyphicons shield userBadge modBadge" ></span>
+        {{/if}}
+      {{/if}}
+      {{username}}
+      </h1>
       <p>Started running {{dateAgo created}}.</p>
     </div>
   {{/with}}

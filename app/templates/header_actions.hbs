@@ -1,6 +1,9 @@
 {{#if_result model method="isRegistered"}}
 <span id="user" class="menu">
   {{#with model.attributes}}
+  {{#if isModerator}}
+    <span class="glyphicons shield userBadge" ></span>
+  {{/if}}
   <a><img src="{{gravitar}}?s=64" alt="{{username}}" height="36" width="36"></a>
   <ul>
     <li>
