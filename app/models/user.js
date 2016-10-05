@@ -125,7 +125,7 @@ var User = module.exports = Base.extend({
     }
 
   },
-  login: function (emailUsername, password, cb) {
+  login: function (emailUsername, password, containerId, cb) {
     cb = cb || function () {};
     var self=this, app=this.app, auth, data, opts;
 
@@ -134,6 +134,11 @@ var User = module.exports = Base.extend({
       email   : emailUsername,
       password: password
     };
+
+    if (containerId!=null) {
+      data['containerId']=containerId;
+    }
+
     opts = utils.cbOpts(saveCallback);
 
     auth.save(data, opts);

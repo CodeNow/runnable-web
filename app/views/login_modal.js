@@ -38,7 +38,8 @@ module.exports = ModalView.extend({
     var self = this;
     evt.preventDefault();
     var formData = $(evt.currentTarget).serializeObject();
-    this.app.user.login(formData.username, formData.password, function (err) {
+
+    this.app.user.login(formData.username, formData.password, userSession.containerID, function (err) {
       if (err) {
         this.showError(err);
       }
