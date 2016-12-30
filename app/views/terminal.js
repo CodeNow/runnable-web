@@ -19,7 +19,7 @@ module.exports = BaseView.extend({
   postRender: function () {
     if (this.app.user.get('isVerified')) {
       this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('userContentDomain');
-      this.options.termurl = this.options.boxurl + '/static/term.html';
+      this.options.termurl = this.options.boxurl + '/static/term.html?rid=' + this.model.id;
     } else {
       // this.options.termurl = 'http://' + this.app.get('domain') + '/images/term.png';
     }
@@ -33,7 +33,7 @@ module.exports = BaseView.extend({
     this.options.isUserRegistered = this.app.user.isRegistered();
     if (this.app.user.get('isVerified')) {
       this.options.boxurl  = 'http://' + this.model.get('servicesToken') + '.' + this.app.get('userContentDomain');
-      this.options.termurl = this.options.boxurl + '/static/term.html';
+      this.options.termurl = this.options.boxurl + '/static/term.html?rid=' + this.model.id;
     } else {
       // this.options.termurl = 'http://' + this.app.get('domain') + '/images/term.png';
     }
