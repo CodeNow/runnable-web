@@ -140,6 +140,22 @@ function initLibs(callback) {
   rendrServer.init(options, callback);
 }
 
+
+// Request Limiter //
+var redisClient = require('redis').createClient(config.redis.port, config.redis.host);
+var limiter = require('express-limiter')(app, redisClient);
+
+limiter({
+  path: '*',
+  method: 'all',
+  lookup: ['headers.x-forwarded-for'],
+  // 150 requests per hour 
+  total: 150,
+  expire: 1000 * 60 * 60
+})
+// Request Limiter //
+
+
 //
 // Routes & middleware
 //

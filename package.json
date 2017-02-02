@@ -29,6 +29,7 @@
     "eson": "0.4.1",
     "exists": "~1.0.0",
     "express": "~>3",
+    "express-limiter": "^1.6.0",
     "grunt": "~0.4.1",
     "hbs": "~2.4.0",
     "http-proxy": "~0.10.3",
