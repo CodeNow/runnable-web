@@ -2,6 +2,12 @@
 
 Sitemap: http://code.runnable.com/sitemap.xml
 
+User-agent: Yandex
+Crawl-delay: 2
+Disallow: /me/
+Disallow: /api/-/
+Disallow: /blog/
+
 User-agent: *
 Disallow: /me/
 Disallow: /api/-/
