@@ -58,7 +58,6 @@ var frontendScripts = [
   'public/vendor/bower/autocompletejs/js/autocomplete.js',
   'public/vendor/bootstrap/bootstrap-dialog.js', // https://github.com/nakupanda/bootstrap3-dialog
   'public/vendor/bower/fastclick/lib/fastclick.js',
-  'public/vendor/jquery-idle/jquery.idle.js',
   'public/vendor/notifications/js/*.js',
 ]
 .concat(aceScripts);
@@ -226,6 +225,10 @@ module.exports = function(grunt) {
       }
     },
 
+    clean: {
+      build: ['public/styles/index.css']
+    },
+
     rendr_stitch: {
       compile: {
         options: {
@@ -265,6 +268,8 @@ module.exports = function(grunt) {
       all: ['app/**/*.js']
     }
   };
+
+
   gruntConfig.cssmin.build.files[mergedCSSPath] = minCSS; //minifies css for prod
   gruntConfig.concat.dev.files[mergedCSSPath] = minCSS; //concats css for dev
   grunt.initConfig(gruntConfig);
@@ -279,6 +284,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bg-shell');
   grunt.loadNpmTasks('grunt-rendr-stitch');
   grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.registerTask('noop', 'noop', function () {});
   // copy ace files top public
   grunt.registerTask('copy-ace-files', 'Copy ace editor files to public');
@@ -376,4 +382,6 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['compile', 'cssmin', 'autoprefixer', 'uglify', 'version']);
   // Default task(s).
   grunt.registerTask('default', ['build']);
+
+  grunt.registerTask('cleandebug', ['clean', 'debug']);
 };
