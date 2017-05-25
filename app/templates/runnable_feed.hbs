@@ -1,17 +1,4 @@
 {{#each collection.models}}
-  <li>
-    <h2 class="col-sm-12"><a href="{{attributes.appUrl}}">{{attributes.name}}</a></h2>
-    <div class="col-sm-12 clearfix">
-      <data><span class="glyphicons play-button"></span><b>{{attributes.runs}}</b> Runs</data>
-      <ul>
-        {{#each attributes.tags}}
-          {{#if this.display}}
-            <li class="tag {{#if this.isActiveFilter}}active{{/if}}">
-              <a href="/{{this.name}}">{{this.name}}</a>
-          {{/if}}
-        {{/each}}
-      </ul>
-    </div>
-    <time>{{dateAgo attributes.created}}</time>
-    {{view 'user_image' model=owner}}
+{{view 'runnable_feed_item' model=. owner=owner}}
+
 {{/each}}
