@@ -83,13 +83,13 @@ module.exports = Runnable.extend({
       cbOpts.success.apply(this, arguments);
     }
   },
-  reportSpam: function(cb) {
+  reportAbuse: function(cb) {
     cb = cb || function () {};
     var self=this;
     var cbOpts = utils.cbOpts(cb);
 
     self.fetch({
-      url: '/images/' + this.id + '/reportspam',
+      url: '/images/' + this.id + '/reportabuse',
       method: 'PATCH',
       success: success,
       error: cbOpts.error

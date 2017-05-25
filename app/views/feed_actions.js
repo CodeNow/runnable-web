@@ -4,7 +4,7 @@ var BaseView = require('./base_view');
 module.exports = BaseView.extend({
   events: {
     'click .soft-delete': 'softDeleteRunnable',
-    'click .report-spam': 'reportSpam'
+    'click .report-abuse': 'reportAbuse'
   },
   postRender: function () {
   },
@@ -35,19 +35,19 @@ module.exports = BaseView.extend({
       actionHandler: actionHandler
     });
   },
-  reportSpam: function () {
+  reportAbuse: function () {
     var self = this;
     var actionHandler = function(dialogItself){
 
       var opts = utils.cbOpts(self.showIfError, self);
-      self.model.reportSpam();
+      self.model.reportAbuse();
 
       dialogItself.close();
     };
 
     this.showPrompt({
       message:
-        '<h3>Confirm Report Spam</h3><p>'+this.model.get('name'),
+        '<h3>Confirm Report Abuse</h3><p>'+this.model.get('name'),
       actionLabel: 'Report',
       actionHandler: actionHandler
     });
