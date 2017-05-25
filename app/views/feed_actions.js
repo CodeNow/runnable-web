@@ -48,7 +48,7 @@ module.exports = BaseView.extend({
     this.showPrompt({
       message:
         '<h3>Confirm Report Spam</h3><p>'+this.model.get('name'),
-      actionLabel: 'Delete',
+      actionLabel: 'Report',
       actionHandler: actionHandler
     });
   },
