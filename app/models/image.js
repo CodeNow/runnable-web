@@ -82,6 +82,21 @@ module.exports = Runnable.extend({
     function success () {
       cbOpts.success.apply(this, arguments);
     }
+  },
+  reportSpam: function(cb) {
+    cb = cb || function () {};
+    var self=this;
+    var cbOpts = utils.cbOpts(cb);
+
+    self.fetch({
+      url: '/images/' + this.id + '/reportspam',
+      method: 'PATCH',
+      success: success,
+      error: cbOpts.error
+    });
+    function success () {
+      cbOpts.success.apply(this, arguments);
+    }
   }
 });
 
