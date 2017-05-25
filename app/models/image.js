@@ -67,6 +67,21 @@ module.exports = Runnable.extend({
     active.sort(lowerCaseCompare);
     inactive.sort(lowerCaseCompare);
     this.attributes.tags = active.concat(inactive);
+  },
+  softDelete: function(cb) {
+    cb = cb || function () {};
+    var self=this;
+    var cbOpts = utils.cbOpts(cb);
+
+    self.fetch({
+      url: '/images/' + this.id + '/softdelete',
+      method: 'DELETE',
+      success: success,
+      error: cbOpts.error
+    });
+    function success () {
+      cbOpts.success.apply(this, arguments);
+    }
   }
 });
 
