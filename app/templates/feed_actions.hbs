@@ -1,0 +1,14 @@
+{{#if moderatormode}}
+<button class="soft-delete" type="button">
+  <span>Soft Delete</span>
+  <span class="glyphicons circle-remove"></span>
+</button>
+{{/if}}
+{{#unless moderatormode}}
+  {{#if ../userverified}}
+  <a class="report-spam">
+    <span>Report Spam</span>
+    <span class="glyphicons glyphicons circle-exclamation-mark"></span>
+  </a>
+  {{/if}}
+{{/unless}}
