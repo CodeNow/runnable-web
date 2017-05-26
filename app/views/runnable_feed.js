@@ -6,7 +6,8 @@ module.exports = BaseView.extend({
   className: 'col-md-10 col-sm-9 runnable-feed',
   events: {
   },
-  postRender: function () {
+  postHydrate: function () {
+    this.listenTo(this.app.user, 'change:username', this.render.bind(this));
   },
   getTemplateData: function () {
     return this.options;
