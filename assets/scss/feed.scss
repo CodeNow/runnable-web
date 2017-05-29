@@ -295,4 +295,24 @@
       }
     }
   }
+
+  .soft-delete {
+    @extend .delete;
+    &:hover {
+      width: 105px;
+    }
+  }
+
+  .report-abuse {
+    @extend .delete;
+    &:hover {
+      width: 118px;
+
+      > span:last-child {
+        transform: rotate3d(0,0,1,360deg);
+      }
+
+    }
+  }
+
 }

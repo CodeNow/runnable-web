@@ -1,13 +1,18 @@
-<h2 class="col-sm-12">convert numbers to string (spanish) / convertir de numeros a</h2>
+<h2 class="col-sm-12"><a href="{{model.attributes.appUrl}}">{{model.attributes.name}}</a></h2>
 <div class="col-sm-12 clearfix">
+  <data><span class="glyphicons play-button"></span><b>{{model.attributes.runs}}</b> Runs</data>
   <ul>
-    <li class="tag">
-      <a>Python</a>
-    <li class="tag">
-      <a>Java</a>
-    <li class="tag">
-      <a>Bootstrap</a>
+    {{#each model.attributes.tags}}
+      {{#if this.display}}
+        <li class="tag {{#if this.isActiveFilter}}active{{/if}}">
+          <a href="/{{this.name}}">{{this.name}}</a>
+      {{/if}}
+    {{/each}}
   </ul>
-  <span>33s ago by <a>Runnable</a></span>
-  <span>300 runs</span>
 </div>
+{{view 'feed_actions' model=model}}
+
+
+<time>{{dateAgo attributes.created}}</time>
+{{view 'user_image' model=owner}}
+
