@@ -17,6 +17,7 @@ module.exports = BaseView.extend({
   getTemplateData: function () {
     var opts = this.options;
     opts.verifiedUser = opts.user.isVerified();
+    opts.registeredUser = opts.user.isRegistered();
     if (opts.editmode) {
       opts.draftsActive    = !opts.verifiedUser || this.options.published.length === 0;
       opts.publishedActive = !opts.draftsActive;
