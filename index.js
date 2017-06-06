@@ -6,8 +6,6 @@ var pluck = require('map-utils').pluck;
 var cluster = require('cluster');
 var exists = require('exists');
 var config = require('./server/lib/env').current;
-var rollbar = require("rollbar");
-rollbar.init(config.rollbar);
 
 var workers;
 var numWorkers = config.numWorkers || 2;

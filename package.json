@@ -45,7 +45,6 @@
     "rendr": "git://github.com/CodeNow/rendr#9498081785a47aa1ba122a475c657b719b166ac4",
     "request": "~2.16",
     "rimraf": "~2.2.1",
-    "rollbar": "*",
     "sitemap": "~0.6.0",
     "underscore": "~1.4.4",
     "underscore.string": "~2.3.3"

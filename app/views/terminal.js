@@ -132,7 +132,6 @@ module.exports = BaseView.extend({
       // data sent for error tracking
       var data = {model_id:self.model.id, user:self.app.user.id};
       if (!didTermErr) {
-        _rollbar.push({level: 'error', msg: "dockworker did not finish loading (hide:loader message not seen)", errMsg: data});
         didTermErr = true;
         self.trackEvent('Error Encountered', {
           errMsg: "dockworker did not finish loading"
@@ -145,14 +144,12 @@ module.exports = BaseView.extend({
             // 404 usualy means the model is deleted
             self.$('.overlay-loader').addClass('loading');
             $('body').addClass('modal-open');
-            _rollbar.push({level: 'error', msg: "model could not be fetched (resp.status=404)", errMsg: data});
             self.trackEvent('Error Encountered', {
               errMsg: "model could not be fetched (resp.status=404)"
             });
           }
           else if (resp.status === 500) {
             // dockworker has not responded. internet might be disconnected
-            _rollbar.push({level: 'error', msg: "model could not be fetched (resp.status=500)", errMsg: data});
             self.trackEvent('Error Encountered', {
               errMsg: "model could not be fetched (resp.status=500)"
             });
