@@ -5,7 +5,6 @@ var utils = require('rendr/server/utils'),
     request = require('request'),
     env = require('./env'),
     debug = require('debug')('app:DataAdapter'),
-    rollbar = require("rollbar"),
     inspect = require('util').inspect;
 
 var httpProxy = require('http-proxy');
@@ -73,7 +72,6 @@ DataAdapter.prototype._request = function (req, api, options, callback) {
   request(api, function(err, response, body) {
     if (err) {
       console.log("API Error: " + err.code + " while " + api.method + " to " + api.path, "error", body);
-      rollbar.reportMessage("API Error: " + err.code + " while " + api.method + " to " + api.path, "error", req);
       return callback(err);
     }
 

@@ -10,7 +10,6 @@ var express = require('express'),
     rendrMw = require('rendr/server/middleware'),
     viewEngine = require('rendr/server/viewEngine'),
     Handlebars = viewEngine.Handlebars,
-    rollbar = require("rollbar"),
     sitemap = require('./lib/sitemap'),
     Dogstatsyware = require('dogstatsyware'),
     app;
@@ -124,7 +123,6 @@ function initMiddleware() {
   }));
 
   app.use(app.router);
-  app.use(rollbar.errorHandler());
   app.use(mw.errorHandler());
 }
 
